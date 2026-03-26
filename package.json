@@ -1,0 +1,30 @@
+{
+  "name": "xiuxian-game",
+  "version": "1.0.0",
+  "description": "一款网页版文字修仙模拟游戏，基于 React + JavaScript 开发，部署在 Azure Static Web Apps 上。",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szylover/xiuxian-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/szylover/xiuxian-game/issues"
+  },
+  "homepage": "https://github.com/szylover/xiuxian-game#readme",
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.1",
+    "vite": "^8.0.3"
+  }
+}

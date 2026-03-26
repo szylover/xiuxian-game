@@ -1,0 +1,314 @@
+/* ============================================================
+   App.css — 修仙之路 全局样式
+   ============================================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  background: #0a0e1a;
+  color: #d4d4d4;
+  min-height: 100vh;
+}
+
+/* ── 开始界面 ── */
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 1rem;
+}
+
+.game-title {
+  font-size: 3rem;
+  background: linear-gradient(135deg, #ffd700, #ff6b35);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  color: #888;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.start-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.start-form input {
+  background: #1a1e2e;
+  border: 1px solid #333;
+  color: #d4d4d4;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  width: 250px;
+  text-align: center;
+}
+
+.start-form input:focus {
+  outline: none;
+  border-color: #ffd700;
+}
+
+/* ── 按钮 ── */
+.btn {
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.15s;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ffd700, #ff8c00);
+  color: #1a1a1a;
+  font-weight: bold;
+}
+.btn-primary:hover:not(:disabled) { filter: brightness(1.1); }
+
+.btn-secondary {
+  background: #2a2e3e;
+  color: #ccc;
+  border: 1px solid #444;
+}
+.btn-secondary:hover:not(:disabled) { background: #3a3e4e; }
+
+/* ── 游戏容器 ── */
+.game-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0.5rem;
+}
+
+/* ── 状态栏 ── */
+.status-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  background: #12162a;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  border: 1px solid #222;
+}
+
+.status-item {
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.exp-bar {
+  position: relative;
+  width: 100%;
+  height: 18px;
+  background: #1a1e2e;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 0.3rem;
+}
+
+.exp-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50, #8BC34A);
+  transition: width 0.3s;
+}
+
+.exp-bar-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  color: #eee;
+  text-shadow: 0 0 3px #000;
+}
+
+/* ── 状态面板 ── */
+.status-panel {
+  margin-bottom: 0.5rem;
+}
+
+.panel-toggle {
+  background: #1a1e2e;
+  color: #aaa;
+  border: 1px solid #333;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  width: 100%;
+}
+.panel-toggle:hover { background: #252a3e; }
+
+.panel-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .panel-content { grid-template-columns: 1fr; }
+}
+
+.panel-section {
+  background: #12162a;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 0.6rem;
+}
+
+.panel-section h3 {
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  color: #ffd700;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  min-width: 72px;
+  color: #aaa;
+}
+
+.stat-value {
+  min-width: 48px;
+  text-align: right;
+  color: #eee;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-bar {
+  flex: 1;
+  height: 8px;
+  background: #1a1e2e;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+
+/* ── 操作面板 ── */
+.action-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.btn-action {
+  flex: 1;
+  min-width: 100px;
+  background: #1a2a1a;
+  color: #8BC34A;
+  border: 1px solid #2a3a2a;
+  font-size: 0.9rem;
+  padding: 0.7rem 0.5rem;
+}
+.btn-action:hover:not(:disabled) { background: #2a3a2a; }
+
+.btn-danger {
+  background: #2a1a1a;
+  color: #ef5350;
+  border-color: #3a2a2a;
+}
+.btn-danger:hover:not(:disabled) { background: #3a2a2a; }
+
+.btn-rest {
+  background: #1a1a2a;
+  color: #64B5F6;
+  border-color: #2a2a3a;
+}
+.btn-rest:hover:not(:disabled) { background: #2a2a3a; }
+
+.btn-break {
+  background: linear-gradient(135deg, #1a1a2a, #2a1a2a);
+  color: #ffd700;
+  border-color: #ffd700;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(255, 215, 0, 0.3); }
+  50% { box-shadow: 0 0 12px rgba(255, 215, 0, 0.6); }
+}
+
+/* ── 日志面板 ── */
+.game-log {
+  background: #0e1020;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 0.6rem;
+}
+
+.game-log h3 {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 0.4rem;
+}
+
+.log-list {
+  max-height: 300px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #333 #0e1020;
+}
+
+.log-entry {
+  font-size: 0.82rem;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid #151525;
+  line-height: 1.5;
+}
+
+.log-empty {
+  color: #555;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* ── 游戏结束 ── */
+.game-over {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.game-over h2 {
+  font-size: 2rem;
+  color: #ef5350;
+  margin-bottom: 1rem;
+}
+
+.game-over p {
+  color: #888;
+  margin-bottom: 1.5rem;
+}

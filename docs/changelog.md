@@ -2,6 +2,18 @@
 
 ## 2026-03-26
 
+### Milestone A: 核心循环实现
+- **项目搭建**：Vite + React 项目初始化（`package.json`, `vite.config.js`, `index.html`）
+- **A-1 属性系统**：`src/game/player.js` — 四类属性（基础/战斗/先天/资质），资质品级加权生成，灵根品级评定
+- **A-1 数据表**：`src/game/data.js` — 8 境界、10 妖兽、6 丹药、操作消耗/时间表
+- **A-2 修炼系统**：悟性/灵根/心情三重乘数影响经验获取，精力消耗限制操作
+- **A-3 战斗系统 v2**：`src/game/combat.js` — 减防→暴击→闪避伤害公式，speed 先手规则
+- **A-4 境界突破**：悟性+幸运影响成功率，失败损失 10% 修为
+- **A-5 寿命系统**：操作推进时间，寿元耗尽→游戏结束
+- **A-6 状态面板 v2**：四栏属性展示 + 进度条可视化
+- **存档系统**：localStorage 自动存档/读档
+- **随机事件**：`src/game/events.js` — 6 个探索事件（luck 加权）
+
 ### 项目初始化
 - 创建项目骨架：`src/index.html`, `style.css`, `main.js`, `game/*.js`
 - 配置 Azure Static Web Apps：`staticwebapp.config.json`
