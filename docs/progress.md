@@ -21,6 +21,7 @@
 | [T0039](tasks/todo/T0039-tutorial.md) | 新手引导 | T0001 ✅ | — | ⬜ |
 | [T0040](tasks/todo/T0040-death-system.md) | 死亡与复活系统 | T0001 ✅, T0003 ✅, T0012 ✅ | [spec](specs/T0040-death-system.md) | ⬜ |
 | [T0041](tasks/todo/T0041-ui-layout-revamp.md) | 界面布局改版（三栏 + 头像） | T0006 ✅ | [spec](specs/T0041-ui-layout-revamp.md) | 📐 |
+| [T0042](tasks/todo/T0042-calendar-system.md) | 年月历法系统 | T0001 ✅, T0005 ✅ | [spec](specs/T0042-calendar-system.md) | 📐 |
 
 ## 最近完成
 

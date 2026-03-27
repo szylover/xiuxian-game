@@ -38,6 +38,7 @@ export interface PlayerTracking {
 
 export interface Player {
   name: string;
+  avatar: string;
   realmIndex: number;
   exp: number;
   age: number;

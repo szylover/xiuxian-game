@@ -5,27 +5,19 @@
 
 import { getSpiritRootGrade } from '../../game/player';
 import type { Player } from '../../game/player';
-import { CollapsiblePanel, StatRow, AptitudeBar } from '../shared';
+import { StatRow, AptitudeBar } from '../shared';
 
 interface StatusPanelProps {
   player: Player;
-  isOpen: boolean;
-  onToggle: () => void;
 }
 
-export default function StatusPanel({ player, isOpen, onToggle }: StatusPanelProps) {
+export default function StatusPanel({ player }: StatusPanelProps) {
   if (!player) return null;
 
   const rootGrade = getSpiritRootGrade(player.aptitudes);
 
   return (
-    <CollapsiblePanel
-      className={`status-panel ${isOpen ? 'open' : ''}`}
-      isOpen={isOpen}
-      onToggle={onToggle}
-      openLabel="📋 收起状态"
-      closedLabel="📋 展开状态"
-    >
+    <div className="status-panel-content">
       <div className="panel-content">
         {/* ── 基础属性 ── */}
         <div className="panel-section">
@@ -71,6 +63,6 @@ export default function StatusPanel({ player, isOpen, onToggle }: StatusPanelPro
           <AptitudeBar label="🌿 木" value={player.aptitudes.wood} />
         </div>
       </div>
-    </CollapsiblePanel>
+    </div>
   );
 }

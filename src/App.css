@@ -13,6 +13,7 @@ body {
   background: #0a0e1a;
   color: #d4d4d4;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 /* ── 开始界面 ── */
@@ -91,11 +92,432 @@ body {
 }
 .btn-secondary:hover:not(:disabled) { background: #3a3e4e; }
 
-/* ── 游戏容器 ── */
-.game-container {
-  max-width: 720px;
+/* ── 游戏容器（三栏布局） ── */
+.game-layout-wrapper {
+  max-width: 1200px;
   margin: 0 auto;
+  padding-top: 8vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.game-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr 280px;
+  gap: 0.5rem;
+  flex: 1;
+  padding: 0 0.5rem 0.5rem;
+  min-height: 0;
+}
+
+/* ── 左栏 ── */
+.left-panel {
+  background: #12162a;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  height: fit-content;
+  max-height: calc(100vh - 6vh);
+  scrollbar-width: thin;
+  scrollbar-color: #333 #12162a;
+}
+
+.left-avatar-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.avatar-frame {
+  border: 3px solid #9E9E9E;
+  border-radius: 12px;
+  background: #0a0e1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+}
+
+.avatar-img {
+  display: block;
+  object-fit: contain;
+}
+
+.left-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffd700;
+  text-align: center;
+}
+
+.left-realm {
+  font-size: 0.85rem;
+  color: #aaa;
+  text-align: center;
+}
+
+.left-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.left-stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: #aaa;
+}
+
+.left-stat-row span:last-child {
+  color: #eee;
+  font-variant-numeric: tabular-nums;
+}
+
+.gold-value {
+  color: #ffd700 !important;
+}
+
+.left-exp-bar {
+  height: 6px;
+  background: #1a1e2e;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 0.1rem;
+}
+
+.left-exp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50, #8BC34A);
+  transition: width 0.3s;
+}
+
+.left-detail-btn {
+  width: 100%;
+  background: #1a1e2e;
+  color: #aaa;
+  border: 1px solid #333;
+  padding: 0.4rem;
+  font-size: 0.82rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: auto;
+}
+.left-detail-btn:hover { background: #252a3e; color: #ffd700; }
+
+.left-section {
+  border-top: 1px solid #1e2235;
+  padding-top: 0.4rem;
+}
+
+.left-section-title {
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 0.2rem;
+}
+
+.left-section .stat-row {
+  font-size: 0.72rem;
+}
+
+.left-section .stat-label {
+  min-width: 52px;
+  font-size: 0.72rem;
+}
+
+.left-section .stat-value {
+  min-width: 32px;
+  font-size: 0.72rem;
+}
+
+/* ── 中栏 ── */
+.center-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: calc(100vh - 16px);
+  min-height: 0;
+}
+
+.center-panel .game-log {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.center-panel .game-log .log-list {
+  flex: 1;
+  max-height: none;
+  overflow-y: auto;
+}
+
+/* ── 右栏 ── */
+.right-panel {
+  background: #12162a;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 0.6rem;
+  height: calc(100vh - 16px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #333 #12162a;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* 右栏按钮组 */
+.panel-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.panel-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.panel-btn-group-label {
+  font-size: 0.72rem;
+  color: #666;
+  padding-left: 0.2rem;
+}
+
+.panel-btn-row {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.panel-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: #0e1020;
+  border: 1px solid #1e2235;
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  color: #aaa;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex: 1;
+  min-width: 0;
+}
+
+.panel-btn:hover {
+  background: #1a1e2e;
+  color: #ddd;
+  border-color: #333;
+}
+
+.panel-btn-active {
+  background: #1a2030;
+  color: #ffd700;
+  border-color: #ffd700;
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.2);
+}
+
+.panel-btn-icon {
+  font-size: 1rem;
+}
+
+.panel-btn-label {
+  white-space: nowrap;
+}
+
+.panel-btn-badge {
+  margin-left: auto;
+  font-size: 0.65rem;
+  color: #888;
+  white-space: nowrap;
+}
+
+/* 右栏面板内容 */
+.right-panel-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #333 #0e1020;
+  background: #0e1020;
+  border: 1px solid #1e2235;
+  border-radius: 6px;
   padding: 0.5rem;
+}
+
+/* ── 浮动面板 ── */
+.floating-panel {
+  position: fixed;
+  z-index: 200;
+  background: #12162a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 1px rgba(255,215,0,0.15);
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+}
+
+.floating-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.7rem;
+  background: linear-gradient(135deg, #1a2040, #0e1530);
+  border-bottom: 1px solid #2a2e3e;
+  border-radius: 10px 10px 0 0;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.floating-panel-header:active {
+  cursor: grabbing;
+}
+
+.floating-panel-title {
+  font-size: 0.9rem;
+  color: #ffd700;
+  font-weight: 600;
+}
+
+.floating-panel-close {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+
+.floating-panel-close:hover {
+  color: #ef5350;
+  background: #2a1a1a;
+}
+
+.floating-panel-body {
+  padding: 0.5rem;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #333 #12162a;
+}
+
+/* 浮动面板内的子面板样式适配 */
+.floating-panel-body .panel-content {
+  grid-template-columns: 1fr;
+}
+
+.floating-panel-body .inventory-list,
+.floating-panel-body .shop-list,
+.floating-panel-body .recipe-list {
+  max-height: none;
+}
+
+.floating-panel-body .equip-slots {
+  grid-template-columns: 1fr;
+}
+
+.floating-panel-body .inventory-content,
+.floating-panel-body .shop-content,
+.floating-panel-body .alchemy-content,
+.floating-panel-body .equipment-content,
+.floating-panel-body .status-panel-content,
+.floating-panel-body .crafting-panel {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-top: 0;
+}
+
+/* ── 响应式适配 ── */
+@media (max-width: 959px) {
+  .game-layout {
+    grid-template-columns: 200px 1fr;
+  }
+  .right-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    max-height: 60vh;
+    border-radius: 12px 12px 0 0;
+    z-index: 100;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+  }
+}
+
+@media (max-width: 767px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+  .left-panel {
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0.5rem;
+    align-items: center;
+  }
+  .left-avatar-area {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  .avatar-frame {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  .avatar-emoji {
+    font-size: 1.5rem !important;
+  }
+  .left-stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.3rem 0.8rem;
+  }
+  .left-stat-row {
+    gap: 0.3rem;
+  }
+  .left-detail-btn {
+    margin-top: 0;
+    width: auto;
+    flex-shrink: 0;
+  }
+  .left-exp-bar {
+    display: none;
+  }
+  .capacity-bar-wrapper {
+    display: none;
+  }
+  .center-panel {
+    height: auto;
+  }
+  .right-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    max-height: 70vh;
+    border-radius: 12px 12px 0 0;
+    z-index: 100;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+  }
 }
 
 /* ── 状态栏 ── */

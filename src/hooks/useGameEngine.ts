@@ -26,6 +26,7 @@ function loadSave(): Player | null {
     if (!Array.isArray(p.inventory)) p.inventory = [];
     if (!p.inventoryCapacity) p.inventoryCapacity = 20 + (p.realmIndex || 0) * 5;
     if (!p.equipped) p.equipped = { weapon: null, helmet: null, armor: null, boots: null, accessory1: null, accessory2: null };
+    if (!p.avatar) p.avatar = 'default';
     return p;
   } catch { return null; }
 }

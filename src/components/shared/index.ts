@@ -6,6 +6,7 @@ export { default as CollapsiblePanel } from './CollapsiblePanel';
 export { default as CapacityBar } from './CapacityBar';
 export { default as TabBar } from './TabBar';
 export { default as StatusItem } from './StatusItem';
+export { default as FloatingPanel } from './FloatingPanel';
 export { StatRow, AptitudeBar } from './StatRow';
 export {
   RARITY_COLORS, RARITY_LABELS, STAT_CN,

@@ -6,30 +6,27 @@ import { useState } from 'react';
 import { useGameEngine } from './hooks/useGameEngine';
 import { useGameLog } from './hooks/useGameLog';
 import StartScreen from './components/screens/StartScreen';
-import StatusBar from './components/hud/StatusBar';
-import StatusPanel from './components/panels/StatusPanel';
-import InventoryPanel from './components/panels/InventoryPanel';
-import AlchemyPanel from './components/panels/AlchemyPanel';
-import EquipmentPanel from './components/panels/EquipmentPanel';
-import ShopPanel from './components/panels/ShopPanel';
-import SmithingPanel from './components/panels/SmithingPanel';
+import GameOverScreen from './components/screens/GameOverScreen';
+import GameLog from './components/hud/GameLog';
 import ActionPanel from './components/panels/ActionPanel';
 import DebugPanel from './components/debug/DebugPanel';
-import GameLog from './components/hud/GameLog';
-import GameOverScreen from './components/screens/GameOverScreen';
+import GameLayout from './components/layout/GameLayout';
+import LeftPanel from './components/layout/LeftPanel';
+import RightPanel from './components/layout/RightPanel';
+import type { PanelKey } from './components/layout/PanelButtons';
 import './App.css';
 
 export default function App() {
   const { logs, addLog, addLogs, clearLogs } = useGameLog();
   const engine = useGameEngine(addLog, addLogs);
-  const [panelOpen, setPanelOpen] = useState(false);
-  const [inventoryOpen, setInventoryOpen] = useState(false);
-  const [alchemyOpen, setAlchemyOpen] = useState(false);
-  const [equipmentOpen, setEquipmentOpen] = useState(false);
-  const [shopOpen, setShopOpen] = useState(false);
-  const [smithingOpen, setSmithingOpen] = useState(false);
+  const [activePanel, setActivePanel] = useState<PanelKey | null>(null);
 
   const hasSave = !!localStorage.getItem('xiuxian_save');
+
+  // 切换面板：点击已选中的按钮则收起
+  const handleSelectPanel = (key: PanelKey) => {
+    setActivePanel(prev => prev === key ? null : key);
+  };
 
   // 未开始游戏
   if (!engine.player) {
@@ -54,56 +51,41 @@ export default function App() {
   }
 
   return (
-    <div className="game-container">
-      <StatusBar player={engine.player} />
-      <StatusPanel
-        player={engine.player}
-        isOpen={panelOpen}
-        onToggle={() => setPanelOpen(!panelOpen)}
-      />
-      <InventoryPanel
-        player={engine.player}
-        isOpen={inventoryOpen}
-        onToggle={() => setInventoryOpen(!inventoryOpen)}
-        onUseItem={engine.useItem}
-      />
-      <AlchemyPanel
-        player={engine.player}
-        isOpen={alchemyOpen}
-        onToggle={() => setAlchemyOpen(!alchemyOpen)}
-        onCraft={engine.craft}
-      />
-      <EquipmentPanel
-        player={engine.player}
-        isOpen={equipmentOpen}
-        onToggle={() => setEquipmentOpen(!equipmentOpen)}
-        onEquip={engine.equip}
-        onUnequip={engine.unequip}
-      />
-      <ShopPanel
-        player={engine.player}
-        isOpen={shopOpen}
-        onToggle={() => setShopOpen(!shopOpen)}
-        onBuy={engine.buy}
-        onSell={engine.sell}
-      />
-      <SmithingPanel
-        player={engine.player}
-        isOpen={smithingOpen}
-        onToggle={() => setSmithingOpen(!smithingOpen)}
-        onSmith={engine.smith}
-      />
-      <ActionPanel
-        player={engine.player}
-        onCultivate={engine.cultivate}
-        onFight={engine.fight}
-        onExplore={engine.explore}
-        onRest={engine.rest}
-        onBreakthrough={engine.breakthrough}
-        gameOver={engine.gameOver}
-      />
-      <GameLog logs={logs} />
-      <DebugPanel player={engine.player} onUpdate={engine.debugSetPlayer} />
-    </div>
+    <GameLayout
+      left={
+        <LeftPanel
+          player={engine.player}
+        />
+      }
+      center={
+        <>
+          <ActionPanel
+            player={engine.player}
+            onCultivate={engine.cultivate}
+            onFight={engine.fight}
+            onExplore={engine.explore}
+            onRest={engine.rest}
+            onBreakthrough={engine.breakthrough}
+            gameOver={engine.gameOver}
+          />
+          <GameLog logs={logs} />
+        </>
+      }
+      right={
+        <RightPanel
+          player={engine.player}
+          activePanel={activePanel}
+          onSelectPanel={handleSelectPanel}
+          onUseItem={engine.useItem}
+          onCraft={engine.craft}
+          onSmith={engine.smith}
+          onEquip={engine.equip}
+          onUnequip={engine.unequip}
+          onBuy={engine.buy}
+          onSell={engine.sell}
+        />
+      }
+      debug={<DebugPanel player={engine.player} onUpdate={engine.debugSetPlayer} />}
+    />
   );
 }

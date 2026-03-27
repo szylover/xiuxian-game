@@ -53,6 +53,7 @@
 - **模块分离**：每个系统（属性/战斗/事件/炼丹/…）独立模块，通过 React 组件 + 自定义 Hook 暴露接口
 - **文件拆分**：`src/game/` 和 `src/components/` 下的文件过大时应拆分为子文件或子目录；文件夹内文件过多时应按功能分组为子目录。具体阈值由开发者自行判断，保持单文件职责清晰、可读性好
 - **组件最小化**：React 组件应尽可能小，禁止在一个 `return` 里写大段内联 JSX。重复出现的 UI 模式（折叠面板、标签栏、容量条、物品卡片等）必须抽成 `src/components/shared/` 下的独立组件复用；业务子组件按功能放入对应子目录（如 `inventory/`、`shop/`、`equipment/`）。常量（品质颜色、属性中文名等）统一放 `shared/constants.ts`，禁止在多个文件中重复定义
+- **SVG/图片资源外置**：SVG、图片等静态资源禁止内联在 TSX 组件中，必须存放为独立文件（`public/avatars/`、`public/icons/` 等），组件通过 `<img src="...">` 引用。保持组件代码与视觉资源分离
 - **纯前端**：零后端依赖，所有状态存 `localStorage`，可直接部署到 Azure Static Web Apps
 - **React + TypeScript**：使用 React（Vite 构建）开发，使用 TypeScript，构建产物部署到 Azure SWA
 - **渐进增强**：先跑通核心循环（修炼→战斗→突破），再叠加子系统

@@ -8,14 +8,12 @@ import type { Player } from '../../game/player';
 import { getItemDef } from '../../game/registry';
 import { getAllShopGoods, calcBuyPrice } from '../../game/shop';
 import { getInventoryEntries } from '../../game/inventory';
-import { CollapsiblePanel, TabBar } from '../shared';
+import { TabBar } from '../shared';
 import ShopBuyItem from './shop/ShopBuyItem';
 import ShopSellItem from './shop/ShopSellItem';
 
 interface ShopPanelProps {
   player: Player;
-  isOpen: boolean;
-  onToggle: () => void;
   onBuy: (itemId: string) => void;
   onSell: (itemId: string) => void;
 }
@@ -27,7 +25,7 @@ const SHOP_TABS = [
 
 type ShopTab = 'buy' | 'sell';
 
-export default function ShopPanel({ player, isOpen, onToggle, onBuy, onSell }: ShopPanelProps) {
+export default function ShopPanel({ player, onBuy, onSell }: ShopPanelProps) {
   const [tab, setTab] = useState<ShopTab>('buy');
 
   if (!player) return null;
@@ -36,22 +34,15 @@ export default function ShopPanel({ player, isOpen, onToggle, onBuy, onSell }: S
   const inventoryEntries = getInventoryEntries(player);
 
   return (
-    <CollapsiblePanel
-      className="shop-panel"
-      isOpen={isOpen}
-      onToggle={onToggle}
-      openLabel="🏪 收起商店"
-      closedLabel={`🏪 商店 (💰${player.gold})`}
-    >
-      <div className="shop-content">
-        <TabBar
-          tabs={SHOP_TABS}
-          activeKey={tab}
-          onChange={setTab}
-          className="shop-tabs"
-          tabClassName="shop-tab"
-          extra={<span className="shop-gold">💰 {player.gold} 灵石</span>}
-        />
+    <div className="shop-content">
+      <TabBar
+        tabs={SHOP_TABS}
+        activeKey={tab}
+        onChange={setTab}
+        className="shop-tabs"
+        tabClassName="shop-tab"
+        extra={<span className="shop-gold">💰 {player.gold} 灵石</span>}
+      />
 
         {/* 买入列表 */}
         {tab === 'buy' && (
@@ -91,7 +82,6 @@ export default function ShopPanel({ player, isOpen, onToggle, onBuy, onSell }: S
             )}
           </div>
         )}
-      </div>
-    </CollapsiblePanel>
+    </div>
   );
 }

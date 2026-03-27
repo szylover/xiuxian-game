@@ -1,0 +1,26 @@
+// ============================================================
+// layout/GameLayout.tsx — 三栏布局骨架（CSS Grid）
+// 左栏：头像+属性  中栏：操作+日志  右栏：功能面板
+// ============================================================
+
+import type { ReactNode } from 'react';
+
+interface GameLayoutProps {
+  left: ReactNode;
+  center: ReactNode;
+  right: ReactNode;
+  debug?: ReactNode;
+}
+
+export default function GameLayout({ left, center, right, debug }: GameLayoutProps) {
+  return (
+    <div className="game-layout-wrapper">
+      <div className="game-layout">
+        <aside className="left-panel">{left}</aside>
+        <main className="center-panel">{center}</main>
+        <aside className="right-panel">{right}</aside>
+      </div>
+      {debug}
+    </div>
+  );
+}

@@ -33,7 +33,7 @@ export function createPlayer(name: string = '无名散修'): Player {
   };
 
   return {
-    name, realmIndex: 0, exp: 0,
+    name, avatar: 'default', realmIndex: 0, exp: 0,
     age: 16, lifespan: 100, mood: 70, health: 100,
     stamina: 100, maxStamina: 100,
     hp: realm.hpBase, maxHp: realm.hpBase,
