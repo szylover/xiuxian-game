@@ -34,7 +34,7 @@ export default function StatusBar({ player }: StatusBarProps) {
         ⚡ {player.stamina}/{player.maxStamina}
       </span>
       <span className="status-item" title="灵石">
-        💎 {player.gold}
+        � {player.gold}
       </span>
       <span className="status-item" title={`年龄/寿限`}>
         📅 {player.age.toFixed(1)}/{player.lifespan === Infinity ? '∞' : player.lifespan}
