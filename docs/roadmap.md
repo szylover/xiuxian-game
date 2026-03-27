@@ -90,6 +90,12 @@
 | [T0033](tasks/todo/T0033-ascension.md) | 仙道境界（飞升） | T0029 | — | ⬜ |
 | [T0034](tasks/todo/T0034-honghuang-endgame.md) | 洪荒终局 | T0033 | — | ⬜ |
 
+### 🏷️ 界面与体验
+
+| ID | 任务 | 前置 | Spec | 状态 |
+|----|------|------|------|------|
+| [T0041](tasks/todo/T0041-ui-layout-revamp.md) | 界面布局改版（三栏 + 头像） | T0006 | [spec](specs/T0041-ui-layout-revamp.md) | ⬜ |
+
 ### 🏷️ 部署与体验
 
 | ID | 任务 | 前置 | Spec | 状态 |

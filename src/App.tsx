@@ -5,17 +5,18 @@
 import { useState } from 'react';
 import { useGameEngine } from './hooks/useGameEngine';
 import { useGameLog } from './hooks/useGameLog';
-import StartScreen from './components/StartScreen';
-import StatusBar from './components/StatusBar';
-import StatusPanel from './components/StatusPanel';
-import InventoryPanel from './components/InventoryPanel';
-import AlchemyPanel from './components/AlchemyPanel';
-import EquipmentPanel from './components/EquipmentPanel';
-import ShopPanel from './components/ShopPanel';
-import SmithingPanel from './components/SmithingPanel';
-import ActionPanel from './components/ActionPanel';
-import DebugPanel from './components/DebugPanel';
-import GameLog from './components/GameLog';
+import StartScreen from './components/screens/StartScreen';
+import StatusBar from './components/hud/StatusBar';
+import StatusPanel from './components/panels/StatusPanel';
+import InventoryPanel from './components/panels/InventoryPanel';
+import AlchemyPanel from './components/panels/AlchemyPanel';
+import EquipmentPanel from './components/panels/EquipmentPanel';
+import ShopPanel from './components/panels/ShopPanel';
+import SmithingPanel from './components/panels/SmithingPanel';
+import ActionPanel from './components/panels/ActionPanel';
+import DebugPanel from './components/debug/DebugPanel';
+import GameLog from './components/hud/GameLog';
+import GameOverScreen from './components/screens/GameOverScreen';
 import './App.css';
 
 export default function App() {
@@ -44,16 +45,11 @@ export default function App() {
   // 游戏结束
   if (engine.gameOver) {
     return (
-      <div className="game-container">
-        <div className="game-over">
-          <h2>💀 游戏结束</h2>
-          <p>{engine.gameOverReason}</p>
-          <button className="btn btn-primary" onClick={() => { clearLogs(); engine.deleteSave(); }}>
-            重新开始
-          </button>
-        </div>
-        <GameLog logs={logs} />
-      </div>
+      <GameOverScreen
+        reason={engine.gameOverReason}
+        logs={logs}
+        onRestart={() => { clearLogs(); engine.deleteSave(); }}
+      />
     );
   }
 

@@ -3,11 +3,12 @@
 // 配方列表 + 材料需求 + 成功率 + 炼丹按钮
 // ============================================================
 
-import type { Player } from '../game/player';
-import { getAllRecipes, getItemDef } from '../game/registry';
-import type { RecipeDef } from '../game/registry';
-import { canCraft, calcSuccessRate } from '../game/alchemy';
-import { getItemCount } from '../game/inventory';
+import type { Player } from '../../game/player';
+import { getAllRecipes, getItemDef } from '../../game/registry';
+import type { RecipeDef } from '../../game/registry';
+import { canCraft, calcSuccessRate } from '../../game/alchemy';
+import { getItemCount } from '../../game/inventory';
+import { CollapsiblePanel, CapacityBar } from '../shared';
 
 interface AlchemyPanelProps {
   player: Player;
@@ -61,36 +62,32 @@ export default function AlchemyPanel({ player, isOpen, onToggle, onCraft }: Alch
   const recipes = getAllRecipes().filter(r => player.realmIndex >= r.minRealm);
 
   return (
-    <div className="alchemy-panel">
-      <button className="panel-toggle" onClick={onToggle}>
-        {isOpen ? '🔥 收起炼丹' : `🔥 炼丹 (🧠${player.mentalPower}/${player.maxMentalPower})`}
-      </button>
-
-      {isOpen && (
-        <div className="alchemy-content">
-          <div className="alchemy-mental">
-            <span>念力 {player.mentalPower}/{player.maxMentalPower}</span>
-            <div className="capacity-bar">
-              <div
-                className="capacity-bar-fill"
-                style={{
-                  width: `${(player.mentalPower / player.maxMentalPower) * 100}%`,
-                  background: '#9C27B0',
-                }}
-              />
-            </div>
-          </div>
-          <div className="recipe-list">
-            {recipes.length === 0 ? (
-              <div className="inventory-empty">暂无可用配方…</div>
-            ) : (
-              recipes.map(r => (
-                <RecipeCard key={r.id} recipe={r} player={player} onCraft={onCraft} />
-              ))
-            )}
-          </div>
+    <CollapsiblePanel
+      className="alchemy-panel"
+      isOpen={isOpen}
+      onToggle={onToggle}
+      openLabel="🔥 收起炼丹"
+      closedLabel={`🔥 炼丹 (🧠${player.mentalPower}/${player.maxMentalPower})`}
+    >
+      <div className="alchemy-content">
+        <div className="alchemy-mental">
+          <CapacityBar
+            current={player.mentalPower}
+            max={player.maxMentalPower}
+            label="念力"
+            color="#9C27B0"
+          />
         </div>
-      )}
-    </div>
+        <div className="recipe-list">
+          {recipes.length === 0 ? (
+            <div className="inventory-empty">暂无可用配方…</div>
+          ) : (
+            recipes.map(r => (
+              <RecipeCard key={r.id} recipe={r} player={player} onCraft={onCraft} />
+            ))
+          )}
+        </div>
+      </div>
+    </CollapsiblePanel>
   );
 }

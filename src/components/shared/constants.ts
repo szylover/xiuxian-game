@@ -1,0 +1,60 @@
+// ============================================================
+// shared/constants.ts — 全局共享常量
+// 品质颜色、属性中文名、槽位信息等
+// ============================================================
+
+import type { ItemRarity, ItemCategory, EquipSlot } from '../../game/registry';
+
+// ── 品质颜色映射 ──
+export const RARITY_COLORS: Record<ItemRarity, string> = {
+  common:    '#9E9E9E',
+  uncommon:  '#4CAF50',
+  rare:      '#2196F3',
+  epic:      '#9C27B0',
+  legendary: '#FFD700',
+};
+
+// ── 品质中文标签 ──
+export const RARITY_LABELS: Record<ItemRarity, string> = {
+  common:    '白',
+  uncommon:  '绿',
+  rare:      '蓝',
+  epic:      '紫',
+  legendary: '橙',
+};
+
+// ── 战斗属性中文名 ──
+export const STAT_CN: Record<string, string> = {
+  atk: '攻击', def: '防御', speed: '速度', hp: '体力', mp: '灵力',
+  critRate: '暴击', critResist: '护心', moveSpeed: '移速',
+};
+
+// ── 装备槽位图标 ──
+export const SLOT_ICONS: Record<EquipSlot, string> = {
+  weapon:     '🗡️',
+  helmet:     '⛑️',
+  armor:      '🛡️',
+  boots:      '👢',
+  accessory1: '💎',
+  accessory2: '💍',
+};
+
+// ── 背包分类标签 ──
+export const CATEGORY_TABS: { key: 'all' | ItemCategory; label: string; icon: string }[] = [
+  { key: 'all',        label: '全部', icon: '📦' },
+  { key: 'weapon',     label: '武器', icon: '🗡️' },
+  { key: 'armor',      label: '防具', icon: '🛡️' },
+  { key: 'accessory',  label: '饰品', icon: '💎' },
+  { key: 'consumable', label: '丹药', icon: '💊' },
+  { key: 'material',   label: '材料', icon: '🪨' },
+  { key: 'technique',  label: '功法', icon: '📖' },
+  { key: 'misc',       label: '杂物', icon: '📜' },
+];
+
+// ── 属性统计转中文字符串 ──
+export function statsCN(stats: Record<string, number | undefined>): string {
+  return Object.entries(stats)
+    .filter(([, v]) => v)
+    .map(([k, v]) => `${STAT_CN[k] || k}+${v}`)
+    .join(' ');
+}

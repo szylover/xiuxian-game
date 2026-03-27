@@ -3,20 +3,21 @@
 // ============================================================
 
 import { useState } from 'react';
-import type { LogEntry, LogCategory } from '../hooks/useGameLog';
-import { LOG_COLORS } from '../hooks/useGameLog';
+import type { LogEntry, LogCategory } from '../../hooks/useGameLog';
+import { LOG_COLORS } from '../../hooks/useGameLog';
+import { TabBar } from '../shared';
 
 interface GameLogProps {
   logs: LogEntry[];
 }
 
-const FILTER_OPTIONS: { key: LogCategory | 'all'; label: string }[] = [
+const FILTER_TABS: { key: LogCategory | 'all'; label: string; icon?: string }[] = [
   { key: 'all',       label: '全部' },
-  { key: 'combat',    label: '⚔️ 战斗' },
-  { key: 'explore',   label: '🔍 探索' },
-  { key: 'adventure', label: '✨ 奇遇' },
-  { key: 'daily',     label: '📅 日常' },
-  { key: 'system',    label: '⚙️ 系统' },
+  { key: 'combat',    label: '战斗', icon: '⚔️' },
+  { key: 'explore',   label: '探索', icon: '🔍' },
+  { key: 'adventure', label: '奇遇', icon: '✨' },
+  { key: 'daily',     label: '日常', icon: '📅' },
+  { key: 'system',    label: '系统', icon: '⚙️' },
 ];
 
 export default function GameLog({ logs }: GameLogProps) {
@@ -28,17 +29,13 @@ export default function GameLog({ logs }: GameLogProps) {
     <div className="game-log">
       <div className="log-header">
         <h3>📜 日志</h3>
-        <div className="log-filters">
-          {FILTER_OPTIONS.map(opt => (
-            <button
-              key={opt.key}
-              className={`log-filter-btn ${filter === opt.key ? 'active' : ''}`}
-              onClick={() => setFilter(opt.key)}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
+        <TabBar
+          tabs={FILTER_TABS}
+          activeKey={filter}
+          onChange={setFilter}
+          className="log-filters"
+          tabClassName="log-filter-btn"
+        />
       </div>
       <div className="log-list">
         {filtered.length === 0 && <p className="log-empty">暂无日志…</p>}
