@@ -45,16 +45,16 @@ export function getEquippedDef(player: Player, slot: EquipSlot): EquipDef | null
 export function equipItem(player: Player, equipId: string): EquipResult {
   const def = getEquipDef(equipId);
   if (!def) {
-    return { player, success: false, message: '装备不存在。' };
+    return { player, success: false, message: `⚠️ 装备定义不存在（${equipId}），可能缺少注册。` };
   }
 
   if (player.realmIndex < def.minRealm) {
-    return { player, success: false, message: `境界不足，无法佩戴 ${def.name}。` };
+    const realmNames = ['凡人','炼气','筑基','金丹','元婴','化神','渡劫','大乘'];
+    return { player, success: false, message: `⚠️ 境界不足！${def.name} 需要 ${realmNames[def.minRealm] ?? ''}期。` };
   }
 
-  // 检查背包中是否有该装备
   if (!hasItem(player, equipId)) {
-    return { player, success: false, message: `背包中没有 ${def.name}。` };
+    return { player, success: false, message: `⚠️ 背包中没有 ${def.name}。` };
   }
 
   let p = { ...player, equipped: { ...player.equipped } };

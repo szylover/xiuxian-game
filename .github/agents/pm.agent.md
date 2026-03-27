@@ -85,13 +85,25 @@ tools: [read, edit, search, agent, todo]
 - 每个任务对应 `docs/tasks/<status>/T0XXX-name.md` 文件
 - 状态子目录：`done/` / `active/` / `todo/`
 - 任务状态变更时，移动文件到对应子目录，更新 roadmap.md 和 progress.md 的链接
+- 任务分为两类：**feat**（新功能）和 **bug**（缺陷修复）
 
-### 新建任务
+### 新建功能任务
 
 1. 分配下一个可用 ID
 2. 创建 `docs/tasks/todo/T0XXX-name.md`
 3. 在 `docs/roadmap.md` 对应分类表追加一行
 4. 如前置已满足，加入 `docs/progress.md` 当前可执行任务
+
+### 新建 Bug 任务
+
+1. 分配下一个可用 ID
+2. 创建 `docs/tasks/todo/T0XXX-fix-xxx.md`，内容包含：
+   - **现象**：用户看到的问题
+   - **预期**：正确行为应该是什么
+   - **原因**：初步分析根因
+   - **修复方案**：需要改哪些文件
+3. Bug 通常无前置依赖，直接加入 progress.md 可执行列表
+4. Bug 修复不需要设计文档（Spec），直接由 @Dev 实现
 
 ### 任务完成
 

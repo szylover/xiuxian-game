@@ -99,6 +99,7 @@ export default function EquipmentPanel({ player, isOpen, onToggle, onEquip, onUn
                 const equipDef = getEquipDef(slot.itemId);
                 if (!equipDef) return null;
                 const canEquip = player.realmIndex >= equipDef.minRealm;
+                const reason = !canEquip ? `需 ${['凡人','炼气','筑基','金丹','元婴','化神','渡劫','大乘'][equipDef.minRealm] ?? ''}期` : '';
                 return (
                   <div key={slot.itemId} className="equip-inv-item" style={{ borderLeftColor: RARITY_COLORS[def.rarity] }}>
                     <span className="equip-inv-name" style={{ color: RARITY_COLORS[def.rarity] }}>
@@ -111,9 +112,9 @@ export default function EquipmentPanel({ player, isOpen, onToggle, onEquip, onUn
                       className="btn btn-equip-action"
                       disabled={!canEquip}
                       onClick={() => onEquip(slot.itemId)}
-                      title={canEquip ? '装备' : '境界不足'}
+                      title={canEquip ? `装备到${getSlotName(equipDef.slot)}` : reason}
                     >
-                      装备
+                      {canEquip ? '装备' : reason}
                     </button>
                   </div>
                 );
