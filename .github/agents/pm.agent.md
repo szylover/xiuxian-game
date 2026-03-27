@@ -23,10 +23,13 @@ tools: [read, edit, search, agent, todo]
 
 ### 设计新功能
 
-1. **调研** — 阅读相关代码（`src/game/`）、任务列表（`docs/roadmap.md`）、已有设计文档
+**重要：任何任务在交给 @Dev 编码之前，必须先由 PM 产出 Design Spec 并获得用户确认。**
+
+1. **调研** — 阅读相关代码（`src/game/`）、任务列表（`docs/roadmap.md`）、已有设计文档，理解代码库现状
 2. **设计** — 定义数据结构、公式、UI 交互方式、验证标准
-3. **输出** — 按下方格式产出设计文档，保存到 `docs/specs/`
-4. **更新任务** — 在 roadmap.md 追加/更新任务，创建 task 文件，刷新 progress.md
+3. **输出** — 按下方格式产出设计文档，保存到 `docs/specs/<任务ID>-<简称>.md`
+4. **确认** — 将 spec 摘要告知用户，等待用户确认后再交给 @Dev
+5. **更新任务** — 在 roadmap.md 追加/更新任务，创建 task 文件，刷新 progress.md
 
 ### 查看进度
 

@@ -12,10 +12,13 @@
 
 ## 典型流程
 
+**重要：任何 task 的实现都必须先由 @PM 产出 Design Spec，确认后再交给 @Dev 编码。禁止跳过设计直接写代码。**
+
 ```
 用户: "实现战斗系统"
-1. @PM  → 输出 Design Spec + 创建任务 + 更新 roadmap & progress
-2. @Dev ║ @Designer  ← 并行消费同一份 spec
+1. @PM  → 调研代码库 + 输出 Design Spec 到 docs/specs/ + 创建任务 + 更新 roadmap & progress
+   ↓ 用户确认 spec 后
+2. @Dev ║ @Designer  ← 并行消费同一份 spec（Dev 必须先检查 spec 是否存在）
 3. /ship  → 检查清单 → commit → push → PR
 ```
 
