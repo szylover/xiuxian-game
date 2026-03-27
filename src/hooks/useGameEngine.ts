@@ -13,6 +13,7 @@ import { useItem as inventoryUseItem, addItem } from '../game/inventory';
 import { getItemDef } from '../game/registry';
 import { performAlchemy } from '../game/alchemy';
 import { equipItem, unequipItem } from '../game/equipment';
+import { buyItem, sellItem } from '../game/shop';
 import type { EquipSlot } from '../game/registry';
 import type { LogCategory } from './useGameLog';
 
@@ -382,6 +383,25 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     });
   }, [addLog]);
 
+  // ── T0015: 商店 ──
+  const buy = useCallback((itemId: string) => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = buyItem(prev, itemId);
+      addLog(result.message, 'system');
+      return result.player;
+    });
+  }, [addLog]);
+
+  const sell = useCallback((itemId: string) => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = sellItem(prev, itemId);
+      addLog(result.message, 'system');
+      return result.player;
+    });
+  }, [addLog]);
+
   return {
     player,
     gameOver,
@@ -399,5 +419,7 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     craft,
     equip,
     unequip,
+    buy,
+    sell,
   };
 }
