@@ -3,12 +3,13 @@
 // 行为逻辑已拆分至 useCoreActions.ts / useSystemActions.ts
 // ============================================================
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { createPlayer, getSpiritRootGrade } from '../game/player';
 import type { Player } from '../game/player';
 import { REALMS, ACTION_COSTS } from '../game/data';
 import { registerCoreEvents, triggerDailyEvent } from '../game/events';
 import type { LogCategory } from './useGameLog';
+import { useToast } from './useToast';
 import { useCoreActions } from './useCoreActions';
 import { useSystemActions } from './useSystemActions';
 
@@ -43,10 +44,36 @@ function writeSave(player: Player): void {
   localStorage.setItem(SAVE_KEY, JSON.stringify(player));
 }
 
-export function useGameEngine(addLog: (msg: string, category?: LogCategory) => void, addLogs: (msgs: string[], category?: LogCategory) => void) {
+export function useGameEngine(
+  rawAddLog: (msg: string, category?: LogCategory, gameYear?: number, gameMonth?: number) => void,
+  rawAddLogs: (msgs: string[], category?: LogCategory, gameYear?: number, gameMonth?: number) => void,
+) {
   const [player, setPlayer] = useState<Player | null>(null);
   const [gameOver, setGameOver] = useState(false);
   const [gameOverReason, setGameOverReason] = useState('');
+  const playerRef = useRef<Player | null>(null);
+  const { toasts, showToast, dismiss: dismissToast } = useToast();
+
+  // 同步 playerRef
+  useEffect(() => { playerRef.current = player; }, [player]);
+
+  // 包装 addLog：自动注入 gameYear/gameMonth + 发 Toast
+  // 以 ⚠️ 开头的消息只 Toast 不写日志（精力不足等即时提示）
+  const addLog = useCallback((msg: string, category: LogCategory = 'default') => {
+    showToast(msg, category);
+    if (msg.startsWith('⚠️')) return; // toast-only
+    const p = playerRef.current;
+    rawAddLog(msg, category, p?.gameYear ?? 1, p?.gameMonth ?? 1);
+  }, [rawAddLog, showToast]);
+
+  const addLogs = useCallback((msgs: string[], category: LogCategory = 'default') => {
+    const p = playerRef.current;
+    rawAddLogs(msgs, category, p?.gameYear ?? 1, p?.gameMonth ?? 1);
+    // 战斗多条日志：只 toast 最后一条摘要
+    if (msgs.length > 0) {
+      showToast(msgs[msgs.length - 1], category, msgs.length > 3 ? 4000 : 3000);
+    }
+  }, [rawAddLogs, showToast]);
 
   // ── 新游戏 ──
   const newGame = useCallback((name: string) => {
@@ -170,6 +197,8 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     learnTechnique,
     practiceTechnique,
     activateTechnique,
+    toasts,
+    dismissToast,
     // Debug: 直接修改 player（仅 debug 模式使用）
     debugSetPlayer: setPlayer,
   };

@@ -64,7 +64,27 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
     return { player, message: `⚠️ ${def.name} 已满级（${def.maxLevel}）` };
   }
 
-  const gain = calcTechniqueExpGain(player, def);
+  // 消耗精力 + 灵力
+  const staminaCost = 10;
+  const mpCost = 5;
+  if (player.stamina < staminaCost) {
+    return { player, message: `⚠️ 精力不足，无法修炼功法（需 ${staminaCost}）` };
+  }
+
+  let p = { ...player, stamina: player.stamina - staminaCost, mp: Math.max(0, player.mp - mpCost) };
+
+  // 消耗 1 个月时间
+  let newMonth = p.gameMonth + 1;
+  let newYear = p.gameYear;
+  if (newMonth > 12) {
+    newYear += Math.floor((newMonth - 1) / 12);
+    newMonth = ((newMonth - 1) % 12) + 1;
+  }
+  p.age = p.age + 1 / 12;
+  p.gameMonth = newMonth;
+  p.gameYear = newYear;
+
+  const gain = calcTechniqueExpGain(p, def);
   let newExp = slot.exp + gain;
   let newLevel = slot.level;
   let levelUpMsg = '';
@@ -76,12 +96,12 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
     levelUpMsg = ` 🎉 ${def.name} 升至 ${newLevel} 级！`;
   }
 
-  const newTechniques = [...player.techniques];
+  const newTechniques = [...p.techniques];
   newTechniques[idx] = { ...slot, level: newLevel, exp: newExp };
 
   return {
-    player: { ...player, techniques: newTechniques },
-    message: `🧘 修炼 ${def.name}，熟练度 +${gain}。${levelUpMsg}`,
+    player: { ...p, techniques: newTechniques },
+    message: `🧘 修炼 ${def.name}，熟练度 +${gain}（精力-${staminaCost} 灵力-${mpCost}）。${levelUpMsg}`,
   };
 }
 

@@ -5,6 +5,7 @@
 
 import type { Player } from './player';
 import type { Monster } from './data';
+import { getActiveTechniqueBonus } from './technique';
 
 // ── 战斗参与者（统一字段）──
 interface Combatant {
@@ -82,15 +83,35 @@ function calcDamage(attacker: Combatant, defender: Combatant): DamageResult {
 // 返回 { winner, playerHpLeft, logs, expGained, goldGained }
 export function runCombat(player: Player, monster: Monster): CombatResult {
   const logs: string[] = [];
-  // 复制 HP 避免直接修改原对象
-  let pHp = player.hp;
+
+  // 叠加功法加成
+  const techBonus = getActiveTechniqueBonus(player);
+  const buffedPlayer = {
+    ...player,
+    atk: player.atk + (techBonus.atk ?? 0),
+    def: player.def + (techBonus.def ?? 0),
+    speed: player.speed + (techBonus.speed ?? 0),
+    critRate: player.critRate + (techBonus.critRate ?? 0),
+    critDmgMultiplier: player.critDmgMultiplier + (techBonus.critDmgMultiplier ?? 0),
+    hp: player.hp,
+    maxHp: player.maxHp + (techBonus.hp ?? 0),
+  };
+
+  let pHp = buffedPlayer.hp;
   let mHp = monster.hp;
 
   logs.push(`⚔️ 遭遇 ${monster.name}（${mHp} HP）！`);
+  if (techBonus.atk || techBonus.def) {
+    const parts: string[] = [];
+    if (techBonus.atk) parts.push(`攻击+${techBonus.atk}`);
+    if (techBonus.def) parts.push(`防御+${techBonus.def}`);
+    if (techBonus.speed) parts.push(`速度+${techBonus.speed}`);
+    logs.push(`📖 功法加成：${parts.join(' ')}`);
+  }
 
   // 先手：speed 高的先攻
-  const playerFirst = player.speed > monster.speed
-    || (player.speed === monster.speed && Math.random() > 0.5);
+  const playerFirst = buffedPlayer.speed > monster.speed
+    || (buffedPlayer.speed === monster.speed && Math.random() > 0.5);
 
   if (playerFirst) {
     logs.push(`你的脚力更快，获得先手！`);
@@ -106,10 +127,10 @@ export function runCombat(player: Player, monster: Monster): CombatResult {
     logs.push(`── 第 ${round} 回合 ──`);
 
     const attackOrder = playerFirst
-      ? [{ atk: player, def: { ...monster, hp: mHp }, isPlayer: true },
-         { atk: monster, def: { ...player, hp: pHp }, isPlayer: false }]
-      : [{ atk: monster, def: { ...player, hp: pHp }, isPlayer: false },
-         { atk: player, def: { ...monster, hp: mHp }, isPlayer: true }];
+      ? [{ atk: buffedPlayer, def: { ...monster, hp: mHp }, isPlayer: true },
+         { atk: monster, def: { ...buffedPlayer, hp: pHp }, isPlayer: false }]
+      : [{ atk: monster, def: { ...buffedPlayer, hp: pHp }, isPlayer: false },
+         { atk: buffedPlayer, def: { ...monster, hp: mHp }, isPlayer: true }];
 
     for (const turn of attackOrder) {
       if (pHp <= 0 || mHp <= 0) break;

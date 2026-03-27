@@ -21,12 +21,12 @@
 | [T0038](tasks/todo/T0038-multi-save.md) | 多存档 | — | — | ⬜ |
 | [T0039](tasks/todo/T0039-tutorial.md) | 新手引导 | T0001 ✅ | — | ⬜ |
 | [T0040](tasks/todo/T0040-death-system.md) | 死亡与复活系统 | T0001 ✅, T0003 ✅, T0012 ✅ | [spec](specs/T0040-death-system.md) | ⬜ |
-| [T0042](tasks/todo/T0042-calendar-system.md) | 年月历法系统 | T0001 ✅, T0005 ✅ | [spec](specs/T0042-calendar-system.md) | ✅ |
 
 ## 最近完成
 
 | ID | 任务 | 完成日期 |
 |----|------|----------|
+| T0043 | 日志系统改进（Toast + 时间线） | 2026-03-27 |
 | T0042 | 年月历法系统 | 2026-03-27 |
 | T0017 | 功法系统 | 2026-03-27 |
 | T0041 | 界面布局改版（三栏 + 头像） | 2026-03-27 |

@@ -684,7 +684,58 @@ body {
   50% { box-shadow: 0 0 12px rgba(255, 215, 0, 0.6); }
 }
 
-/* ── 日志面板 ── */
+/* ── Toast 即时反馈 ── */
+.toast-container {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  pointer-events: none;
+  max-width: 500px;
+  width: 90%;
+}
+
+.toast-item {
+  background: rgba(18, 22, 42, 0.95);
+  border: 1px solid #2a2e3e;
+  border-left: 3px solid #aaa;
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.82rem;
+  color: #ddd;
+  pointer-events: auto;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  animation: toastIn 0.3s ease-out;
+}
+
+.toast-item:hover {
+  background: rgba(26, 30, 46, 0.98);
+}
+
+.toast-fade-in {
+  animation: toastIn 0.3s ease-out;
+}
+
+.toast-fade-out {
+  animation: toastOut 0.3s ease-in forwards;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes toastOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-12px); }
+}
+
+/* ── 日志面板（时间线） ── */
 .game-log {
   background: #0e1020;
   border: 1px solid #222;
@@ -740,6 +791,70 @@ body {
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #333 #0e1020;
+}
+
+/* 时间线分组 */
+.log-timeline {
+  border-left: 2px solid #2a2e3e;
+  margin-left: 4px;
+  padding-left: 10px;
+  margin-bottom: 0.3rem;
+}
+
+.log-year-header {
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #ffd700;
+  padding: 0.2rem 0;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.log-year-header:hover { color: #ffe040; }
+
+.log-month-group {
+  margin-left: 0.5rem;
+}
+
+.log-month-header {
+  cursor: pointer;
+  font-size: 0.78rem;
+  color: #888;
+  padding: 0.15rem 0;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.log-month-header:hover { color: #bbb; }
+.log-month-header.log-month-current { color: #4CAF50; }
+
+.log-current-badge {
+  font-size: 0.6rem;
+  background: #1a3a1a;
+  color: #4CAF50;
+  padding: 0.05rem 0.3rem;
+  border-radius: 3px;
+  margin-left: 0.2rem;
+}
+
+.log-arrow {
+  font-size: 0.6rem;
+  width: 0.8rem;
+  display: inline-block;
+}
+
+.log-count {
+  font-size: 0.65rem;
+  color: #555;
+  margin-left: 0.2rem;
+}
+
+.log-month-entries {
+  margin-left: 0.6rem;
+  border-left: 1px solid #1e2235;
+  padding-left: 0.6rem;
 }
 
 .log-entry {

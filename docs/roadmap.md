@@ -96,6 +96,7 @@
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
 | [T0041](tasks/done/T0041-ui-layout-revamp.md) | 界面布局改版（三栏 + 头像） | T0006 | [spec](specs/T0041-ui-layout-revamp.md) | ✅ |
+| [T0043](tasks/done/T0043-log-revamp.md) | 日志系统改进（Toast + 时间线 + 功法增强） | T0011, T0042, T0017 | — | ✅ |
 
 ### 🏷️ 部署与体验
 

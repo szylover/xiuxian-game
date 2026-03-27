@@ -8,6 +8,7 @@ import { useGameLog } from './hooks/useGameLog';
 import StartScreen from './components/screens/StartScreen';
 import GameOverScreen from './components/screens/GameOverScreen';
 import GameLog from './components/hud/GameLog';
+import ToastContainer from './components/hud/ToastContainer';
 import ActionPanel from './components/panels/ActionPanel';
 import DebugPanel from './components/debug/DebugPanel';
 import GameLayout from './components/layout/GameLayout';
@@ -68,7 +69,7 @@ export default function App() {
             onBreakthrough={engine.breakthrough}
             gameOver={engine.gameOver}
           />
-          <GameLog logs={logs} />
+          <GameLog logs={logs} currentYear={engine.player.gameYear} currentMonth={engine.player.gameMonth} />
         </>
       }
       right={
@@ -88,7 +89,10 @@ export default function App() {
           onActivateTechnique={engine.activateTechnique}
         />
       }
-      debug={<DebugPanel player={engine.player} onUpdate={engine.debugSetPlayer} />}
+      debug={<>
+        <DebugPanel player={engine.player} onUpdate={engine.debugSetPlayer} />
+        <ToastContainer toasts={engine.toasts} onDismiss={engine.dismissToast} />
+      </>}
     />
   );
 }
