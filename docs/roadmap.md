@@ -55,7 +55,7 @@
 
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
-| [T0017](tasks/todo/T0017-technique-system.md) | 功法系统 | T0001 | — | ⬜ |
+| [T0017](tasks/done/T0017-technique-system.md) | 功法系统 | T0001 | — | ✅ |
 | [T0018](tasks/todo/T0018-skill-combat.md) | 技能战斗 | T0003, T0017 | — | ⬜ |
 | [T0019](tasks/todo/T0019-passive-effects.md) | 被动效果 | T0017 | — | ⬜ |
 | [T0020](tasks/todo/T0020-divine-arts.md) | 神通（元素体系） | T0017, T0018 | — | ⬜ |
@@ -95,7 +95,7 @@
 
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
-| [T0041](tasks/todo/T0041-ui-layout-revamp.md) | 界面布局改版（三栏 + 头像） | T0006 | [spec](specs/T0041-ui-layout-revamp.md) | ⬜ |
+| [T0041](tasks/done/T0041-ui-layout-revamp.md) | 界面布局改版（三栏 + 头像） | T0006 | [spec](specs/T0041-ui-layout-revamp.md) | ✅ |
 
 ### 🏷️ 部署与体验
 

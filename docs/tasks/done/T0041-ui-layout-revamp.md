@@ -1,18 +1,17 @@
 # T0041 — 界面布局改版（三栏布局 + 头像系统）
 
 - **类型**：feat
-- **状态**：⬜ 未开始
+- **状态**：✅ 已完成
 - **前置**：T0006 ✅
 - **Spec**：[docs/specs/T0041-ui-layout-revamp.md](../../specs/T0041-ui-layout-revamp.md)
-- **创建日期**：2026-03-27
+- **完成日期**：2026-03-27
 
-## 目标
+## 关键文件
 
-将现有单栏垂直布局改为三栏布局，提升操作效率和视觉体验：
-
-1. **左栏（固定）**：角色头像 + 核心属性 + "详细"按钮
-2. **中栏（主区域）**：操作按钮（2×2） + 游戏日志
-3. **右栏（可切换）**：功能面板按钮组（分组） + 对应面板内容
+- `src/components/layout/` — GameLayout, LeftPanel, RightPanel, PanelButtons, Avatar
+- `src/components/shared/FloatingPanel.tsx` — 可拖拽浮动窗口
+- `src/components/panels/CraftingPanel.tsx` — 炼丹+炼器合并面板
+- `public/avatars/default.svg` — 古风男性头像
 
 同时引入头像系统（初版 Emoji + CSS 边框）。
 

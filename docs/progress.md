@@ -9,7 +9,8 @@
 
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
-| [T0017](tasks/todo/T0017-technique-system.md) | 功法系统 | T0001 ✅ | — | ⬜ |
+| [T0018](tasks/todo/T0018-skill-combat.md) | 技能战斗 | T0003 ✅, T0017 ✅ | — | ⬜ |
+| [T0019](tasks/todo/T0019-passive-effects.md) | 被动效果 | T0017 ✅ | — | ⬜ |
 | [T0021](tasks/todo/T0021-map-system.md) | 地图系统 | T0001 ✅ | — | ⬜ |
 | [T0025](tasks/todo/T0025-npc-system.md) | NPC 系统 | T0001 ✅ | — | ⬜ |
 | [T0030](tasks/todo/T0030-reincarnation.md) | 转世重修 | T0029 ✅, T0040 | — | ⬜ |
@@ -20,13 +21,14 @@
 | [T0038](tasks/todo/T0038-multi-save.md) | 多存档 | — | — | ⬜ |
 | [T0039](tasks/todo/T0039-tutorial.md) | 新手引导 | T0001 ✅ | — | ⬜ |
 | [T0040](tasks/todo/T0040-death-system.md) | 死亡与复活系统 | T0001 ✅, T0003 ✅, T0012 ✅ | [spec](specs/T0040-death-system.md) | ⬜ |
-| [T0041](tasks/todo/T0041-ui-layout-revamp.md) | 界面布局改版（三栏 + 头像） | T0006 ✅ | [spec](specs/T0041-ui-layout-revamp.md) | 📐 |
 | [T0042](tasks/todo/T0042-calendar-system.md) | 年月历法系统 | T0001 ✅, T0005 ✅ | [spec](specs/T0042-calendar-system.md) | 📐 |
 
 ## 最近完成
 
 | ID | 任务 | 完成日期 |
 |----|------|----------|
+| T0017 | 功法系统 | 2026-03-27 |
+| T0041 | 界面布局改版（三栏 + 头像） | 2026-03-27 |
 | T0029 | 突破系统重构 + 渡劫 | 2026-03-27 |
 | T0016 | 炼器系统 | 2026-03-27 |
 | T0015 | 商店系统 | 2026-03-27 |
