@@ -18,6 +18,18 @@ interface EquipmentPanelProps {
 }
 
 const SLOTS: EquipSlot[] = ['weapon', 'helmet', 'armor', 'boots', 'accessory1', 'accessory2'];
+
+const STAT_CN: Record<string, string> = {
+  atk: '攻击', def: '防御', speed: '速度', hp: '体力', mp: '灵力',
+  critRate: '暴击', critResist: '护心', moveSpeed: '移速',
+};
+
+function statsCN(stats: Record<string, number | undefined>): string {
+  return Object.entries(stats)
+    .filter(([, v]) => v)
+    .map(([k, v]) => `${STAT_CN[k] || k}+${v}`)
+    .join(' ');
+}
 const SLOT_ICONS: Record<EquipSlot, string> = {
   weapon: '🗡️',
   helmet: '⛑️',
@@ -64,10 +76,7 @@ export default function EquipmentPanel({ player, isOpen, onToggle, onEquip, onUn
                           {def.name}
                         </span>
                         <span className="slot-stats">
-                          {Object.entries(def.stats)
-                            .filter(([, v]) => v)
-                            .map(([k, v]) => `${k}+${v}`)
-                            .join(' ')}
+                          {statsCN(def.stats as Record<string, number | undefined>)}
                         </span>
                       </>
                     ) : (
@@ -96,10 +105,7 @@ export default function EquipmentPanel({ player, isOpen, onToggle, onEquip, onUn
                       {SLOT_ICONS[equipDef.slot]} {def.name}
                     </span>
                     <span className="equip-inv-stats">
-                      {Object.entries(equipDef.stats)
-                        .filter(([, v]) => v)
-                        .map(([k, v]) => `${k}+${v}`)
-                        .join(' ')}
+                      {statsCN(equipDef.stats as Record<string, number | undefined>)}
                     </span>
                     <button
                       className="btn btn-equip-action"
