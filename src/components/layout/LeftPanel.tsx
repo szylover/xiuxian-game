@@ -4,7 +4,7 @@
 
 import { useState } from 'react';
 import type { Player } from '../../game/player';
-import { REALMS } from '../../game/data';
+import { REALMS, MONTH_NAMES } from '../../game/data';
 import { getNextRealm } from '../../game/player';
 import Avatar from './Avatar';
 import { CapacityBar, FloatingPanel } from '../shared';
@@ -55,7 +55,12 @@ export default function LeftPanel({ player }: LeftPanelProps) {
 
         <div className="left-stat-row">
           <span>📅 寿命</span>
-          <span>{player.age.toFixed(1)}/{player.lifespan === Infinity ? '∞' : player.lifespan}</span>
+          <span>{Math.floor(player.age)}岁/{player.lifespan === Infinity ? '∞' : player.lifespan}</span>
+        </div>
+
+        <div className="left-stat-row">
+          <span>🗓️ 历法</span>
+          <span>第{player.gameYear}年 {MONTH_NAMES[(player.gameMonth || 1) - 1]}</span>
         </div>
 
         <div className="left-stat-row">

@@ -1,5 +1,17 @@
 # T0042 — 年月历法系统
 
+- **状态**: ✅ 已完成
+- **前置**: T0001 ✅, T0005 ✅
+- **Spec**: [docs/specs/T0042-calendar-system.md](../../specs/T0042-calendar-system.md)
+- **完成日期**: 2026-03-27
+
+## 关键文件
+
+- `src/game/data.ts` — ACTION_COSTS 统一为月制 + MONTH_NAMES
+- `src/game/player/types.ts` — gameYear/gameMonth 字段
+- `src/hooks/useGameEngine.ts` — advanceTime 月份推进 + 旧存档兼容
+- `src/components/layout/LeftPanel.tsx` — 显示“第X年 X月”
+
 - **类型**：feat
 - **状态**：⬜ 未开始
 - **前置**：T0001 ✅, T0005 ✅

@@ -29,6 +29,12 @@ function loadSave(): Player | null {
     if (!p.avatar) p.avatar = 'default';
     if (!Array.isArray(p.techniques)) p.techniques = [];
     if (p.activeTechniqueId === undefined) p.activeTechniqueId = null;
+    // T0042: 历法向后兼容
+    if (!p.gameYear) {
+      const elapsed = p.age - 16;
+      p.gameYear = Math.max(1, Math.floor(elapsed) + 1);
+      p.gameMonth = Math.max(1, Math.min(12, Math.floor((elapsed - Math.floor(elapsed)) * 12) + 1));
+    }
     return p;
   } catch { return null; }
 }
@@ -75,11 +81,25 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     }
   }, [player, gameOver]);
 
-  // ── 通用：时间推进 + 寿元检测 (A-5) ──
+  // ── 通用：时间推进 + 寿元检测 (A-5 + T0042 历法) ──
   const advanceTime = useCallback((p: Player, actionKey: string): Player => {
     const cost = ACTION_COSTS[actionKey];
     if (!cost) return p;
-    let updated = { ...p, age: p.age + cost.time };
+
+    // T0042: 月份推进
+    let newMonth = p.gameMonth + cost.time;
+    let newYear = p.gameYear;
+    if (newMonth > 12) {
+      newYear += Math.floor((newMonth - 1) / 12);
+      newMonth = ((newMonth - 1) % 12) + 1;
+    }
+
+    let updated = {
+      ...p,
+      age: p.age + cost.time / 12,
+      gameYear: newYear,
+      gameMonth: newMonth,
+    };
 
     // 寿元耗尽检查
     if (updated.lifespan !== Infinity && updated.age >= updated.lifespan) {

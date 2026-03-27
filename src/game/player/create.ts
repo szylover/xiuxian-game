@@ -49,5 +49,6 @@ export function createPlayer(name: string = '无名散修'): Player {
     techniques: [], activeTechniqueId: null,
     items: {}, passives: {}, systems: {},
     tracking: { killCount: 0, bossKillCount: 0, consecutiveRests: 0, consecutiveCultivates: 0, hasBeenBelow10Hp: false, defeatedHigherRealm: false },
+    gameYear: 1, gameMonth: 1,
   };
 }

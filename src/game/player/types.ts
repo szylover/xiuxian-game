@@ -82,6 +82,8 @@ export interface Player {
   passives: Record<string, unknown>;
   systems: Record<string, unknown>;
   tracking: PlayerTracking;
+  gameYear: number;                        // 历法年份（从 1 开始）
+  gameMonth: number;                       // 当前月份（1-12）
 }
 
 export interface SpiritRootGrade {
