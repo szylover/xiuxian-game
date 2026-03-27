@@ -1,53 +1,45 @@
 // ============================================================
-// events.ts — 随机事件引擎（基础版）
-// 简单的探索随机事件，后续在 Milestone B 重构
+// events.ts — 事件内容注册（探索/奇遇/日常）
+// 所有事件数据存储在 JSON 中，此文件只负责加载和注册
 // ============================================================
 
 import type { Player } from './player';
+import { registerDLC, triggerEvent } from './registry';
+import { loadEventsFromJson } from './event-loader';
+import type { JsonEvent } from './event-loader';
+import coreEventsJson from '../data/core-events.json';
 
-interface ExploreEvent {
-  weight: number;
-  isGood: boolean;
-  name: string;
-  effect: (p: Player) => Player;
-  msg: string;
+// ── 注册 core DLC（从 JSON 加载全部事件）──
+export function registerCoreEvents(): void {
+  const pack = loadEventsFromJson(coreEventsJson as JsonEvent[], {
+    id: 'core',
+    name: '基础事件包',
+    description: '1036 个核心事件（探索/奇遇/日常）',
+    version: '1.0.0',
+  });
+  registerDLC(pack);
 }
 
-const EXPLORE_EVENTS: ExploreEvent[] = [
-  { weight: 30, isGood: true,  name: '发现灵石矿',   effect: (p) => ({ ...p, gold: p.gold + 20 }),                     msg: '💎 探索中发现一处灵石矿脉，获得 20 灵石！' },
-  { weight: 20, isGood: true,  name: '前辈指点',       effect: (p) => ({ ...p, exp: p.exp + 30 }),                       msg: '📖 偶遇一位隐世前辈，指点修炼，获得 30 修为！' },
-  { weight: 15, isGood: true,  name: '发现丹药',       effect: (p) => ({ ...p, hp: Math.min(p.maxHp, p.hp + 50) }),      msg: '🧪 在山洞中发现一瓶丹药，恢复 50 HP！' },
-  { weight: 10, isGood: true,  name: '灵泉',           effect: (p) => ({ ...p, mp: Math.min(p.maxMp, p.mp + 30), mood: Math.min(100, p.mood + 10) }), msg: '🌊 发现一处灵泉，恢复 30 MP，心情 +10！' },
-  { weight: 15, isGood: false, name: '妖兽拦路',       effect: (p) => ({ ...p, hp: Math.max(0, p.hp - 30), health: Math.max(0, p.health - 5) }),   msg: '🐺 被妖兽偷袭！HP -30，健康 -5。' },
-  { weight: 10, isGood: false, name: '迷失方向',       effect: (p) => ({ ...p, mood: Math.max(0, p.mood - 15) }),        msg: '🌫️ 在迷雾中迷失了方向，心情 -15。' },
-];
-
-// 按幸运值调整权重
-function adjustWeights(luck: number, events: ExploreEvent[]): ExploreEvent[] {
-  const luckFactor = luck / 50;
-  return events.map(e => ({
-    ...e,
-    weight: e.isGood
-      ? e.weight * (0.5 + luckFactor * 0.5)
-      : e.weight * (1.5 - luckFactor * 0.5),
-  }));
-}
-
-// 加权随机选取
-function weightedRandom(events: ExploreEvent[]): ExploreEvent {
-  const total = events.reduce((s, e) => s + e.weight, 0);
-  let roll = Math.random() * total;
-  for (const e of events) {
-    roll -= e.weight;
-    if (roll <= 0) return e;
-  }
-  return events[events.length - 1];
-}
-
-// ── 触发探索事件 ──
+// ── 探索入口 ──
 export function triggerExploreEvent(player: Player): { player: Player; message: string } {
-  const adjusted = adjustWeights(player.luck, EXPLORE_EVENTS);
-  const event = weightedRandom(adjusted);
-  const newPlayer = event.effect(player);
-  return { player: newPlayer, message: event.msg };
+  // 10% 概率触发奇遇代替普通探索
+  if (Math.random() < 0.10) {
+    const adventure = triggerEvent('adventure', player);
+    if (adventure) {
+      return { player: adventure.player, message: adventure.message };
+    }
+  }
+
+  const result = triggerEvent('explore', player);
+  if (!result) {
+    return { player, message: '🚶 四处探索了一番，未发现什么特别的东西。' };
+  }
+  return { player: result.player, message: result.message };
+}
+
+// ── 日常事件入口 ──
+export function triggerDailyEvent(player: Player): { player: Player; message: string } | null {
+  const result = triggerEvent('daily', player);
+  if (!result || !result.message) return null;
+  return { player: result.player, message: result.message };
 }

@@ -83,10 +83,14 @@ xiuxian-game/
     │   ├── StartScreen.tsx        #     开始界面
     │   └── StatusPanel.tsx        #     角色详细状态面板
     ├── game/                      #   游戏逻辑（纯 TS，不依赖 React）
+    │   ├── registry.ts            #     全局注册表（事件/妖兽/物品 DLC 扩展核心）
+    │   ├── event-loader.ts        #     JSON 事件加载器（纯数据 → GameEvent）
     │   ├── data.ts                #     数据表（境界/妖兽/丹药/事件/…）
     │   ├── player.ts              #     玩家角色 & 属性系统
     │   ├── combat.ts              #     战斗系统
-    │   └── events.ts              #     随机事件引擎
+    │   └── events.ts              #     事件内容注册（探索/奇遇/日常）
+    ├── data/                      #   游戏数据（JSON）
+    │   └── core-events.json       #     1036 个核心事件数据
     └── hooks/                     #   自定义 React Hooks
         ├── useGameEngine.ts       #     游戏引擎 Hook（状态管理 + 存档）
         └── useGameLog.ts          #     日志管理 Hook

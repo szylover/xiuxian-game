@@ -2,6 +2,17 @@
 
 ## 2026-03-27
 
+### Milestone B: 随机事件引擎
+- **B-1 事件注册表**：`src/game/registry.ts` — DLC 热插拔核心，`DLCPack` / `registerDLC()` / `unregisterDLC()` API
+- **B-2 探索事件池**：521 个探索事件（JSON 数据驱动）
+- **B-3 奇遇系统**：307 个奇遇事件（10% 概率替代普通探索，once/cooldown 机制）
+- **B-4 日常事件**：208 个日常事件，每次时间推进自动触发
+- **B-5 分类日志**：6 类日志颜色区分（system/combat/explore/adventure/daily/default）+ UI 筛选
+- **JSON 事件系统**：`src/data/core-events.json`（1036 个事件）+ `event-loader.ts` 加载器
+- 效果值格式扩展：支持 delta / `"max"` / `"=N"` / `"*N"` / `[min,max]` 随机范围
+- `events.ts` 精简为纯加载层（~45 行），所有事件数据存储在 JSON 中
+- 生成脚本：`scripts/generate-events.cjs` + `scripts/merge-handwritten.cjs`
+
 ### 路线图拆分 & DLC 扩展性规划
 - `docs/roadmap.md` 精简为索引文件（总览 + DLC 规划 + 扩展性约定）
 - 新增 `docs/roadmap/milestone-{a~h}.md`，每个 Milestone 独立文件

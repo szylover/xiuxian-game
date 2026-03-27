@@ -11,7 +11,7 @@
 | Milestone | 主题 | Stage 数 | 文件 | 状态 |
 |-----------|------|----------|------|------|
 | A | 核心循环 | 6 | [milestone-a.md](roadmap/milestone-a.md) | ✅ |
-| B | 随机事件引擎 | 5 | [milestone-b.md](roadmap/milestone-b.md) | ⬜ |
+| B | 随机事件引擎 | 5 | [milestone-b.md](roadmap/milestone-b.md) | ✅ |
 | C | 物品与经济 | 5 | [milestone-c.md](roadmap/milestone-c.md) | ⬜ |
 | D | 功法与技能 | 4 | [milestone-d.md](roadmap/milestone-d.md) | ⬜ |
 | E | 世界与地图 | 4 | [milestone-e.md](roadmap/milestone-e.md) | ⬜ |

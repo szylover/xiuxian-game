@@ -270,10 +270,47 @@ body {
   padding: 0.6rem;
 }
 
+.log-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
 .game-log h3 {
   font-size: 0.9rem;
   color: #888;
-  margin-bottom: 0.4rem;
+  margin: 0;
+}
+
+.log-filters {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.log-filter-btn {
+  background: #1a1e2e;
+  color: #777;
+  border: 1px solid #2a2e3e;
+  border-radius: 4px;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.log-filter-btn:hover {
+  background: #252a3e;
+  color: #aaa;
+}
+
+.log-filter-btn.active {
+  background: #2a3040;
+  color: #ffd700;
+  border-color: #ffd700;
 }
 
 .log-list {
