@@ -1,6 +1,6 @@
 // ============================================================
 // useGameEngine.ts — 游戏核心引擎 Hook
-// A-1~A-5 全部系统的状态管理 + 存档
+// A-1~A-5 + B-1~B-5 全部系统的状态管理 + 存档
 // ============================================================
 
 import { useState, useCallback, useEffect } from 'react';
@@ -8,7 +8,11 @@ import { createPlayer, recalcStats, getNextRealm, getSpiritRootGrade } from '../
 import type { Player } from '../game/player';
 import { REALMS, ACTION_COSTS, MONSTERS, BASE_CULTIVATE_EXP, BREAKTHROUGH_BASE_RATE, BREAKTHROUGH_COMP_BONUS, BREAKTHROUGH_LUCK_BONUS, BREAKTHROUGH_FAIL_EXP_LOSS } from '../game/data';
 import { runCombat } from '../game/combat';
-import { triggerExploreEvent } from '../game/events';
+import { registerCoreEvents, triggerExploreEvent, triggerDailyEvent } from '../game/events';
+import type { LogCategory } from './useGameLog';
+
+// 注册核心事件（模块加载时执行一次）
+registerCoreEvents();
 
 const SAVE_KEY = 'xiuxian_save';
 
@@ -23,7 +27,7 @@ function writeSave(player: Player): void {
   localStorage.setItem(SAVE_KEY, JSON.stringify(player));
 }
 
-export function useGameEngine(addLog: (msg: string) => void, addLogs: (msgs: string[]) => void) {
+export function useGameEngine(addLog: (msg: string, category?: LogCategory) => void, addLogs: (msgs: string[], category?: LogCategory) => void) {
   const [player, setPlayer] = useState<Player | null>(null);
   const [gameOver, setGameOver] = useState(false);
   const [gameOverReason, setGameOverReason] = useState('');
@@ -36,9 +40,9 @@ export function useGameEngine(addLog: (msg: string) => void, addLogs: (msgs: str
     setPlayer(p);
     setGameOver(false);
     setGameOverReason('');
-    addLog(`🌟 ${p.name} 踏上修仙之路！`);
-    addLog(`灵根品级：${root.grade}（修炼速度 ×${root.multiplier}）`);
-    addLog(`幸运: ${p.luck} | 悟性: ${p.comprehension} | 魅力: ${p.charisma}`);
+    addLog(`🌟 ${p.name} 踏上修仙之路！`, 'system');
+    addLog(`灵根品级：${root.grade}（修炼速度 ×${root.multiplier}）`, 'system');
+    addLog(`幸运: ${p.luck} | 悟性: ${p.comprehension} | 魅力: ${p.charisma}`, 'system');
   }, [addLog]);
 
   // ── 加载存档 ──
@@ -48,7 +52,7 @@ export function useGameEngine(addLog: (msg: string) => void, addLogs: (msgs: str
       setPlayer(saved);
       setGameOver(false);
       setGameOverReason('');
-      addLog(`📂 读取存档成功！${saved.name}，${REALMS[saved.realmIndex].name}期。`);
+      addLog(`📂 读取存档成功！${saved.name}，${REALMS[saved.realmIndex].name}期。`, 'system');
       return true;
     }
     return false;
@@ -71,7 +75,16 @@ export function useGameEngine(addLog: (msg: string) => void, addLogs: (msgs: str
     if (updated.lifespan !== Infinity && updated.age >= updated.lifespan) {
       setGameOver(true);
       setGameOverReason(`寿元耗尽，享年 ${Math.floor(updated.age)} 岁，${REALMS[updated.realmIndex].name}期。`);
-      addLog(`💀 寿元耗尽！享年 ${Math.floor(updated.age)} 岁。修仙之路到此为止…`);
+      addLog(`💀 寿元耗尽！享年 ${Math.floor(updated.age)} 岁。修仙之路到此为止…`, 'system');
+    }
+
+    // B-4: 日常事件（每次时间推进时有概率触发）
+    if (!gameOver) {
+      const daily = triggerDailyEvent(updated);
+      if (daily) {
+        updated = { ...daily.player };
+        addLog(daily.message, 'daily');
+      }
     }
     return updated;
   }, [addLog]);
@@ -86,7 +99,7 @@ export function useGameEngine(addLog: (msg: string) => void, addLogs: (msgs: str
   // ── A-2: 修炼 ──
   const cultivate = useCallback(() => {
     if (!canAct('cultivate')) {
-      addLog('⚠️ 精力不足，请先休息！');
+      addLog('⚠️ 精力不足，请先休息！', 'system');
       return;
     }
     setPlayer(prev => {
@@ -111,7 +124,7 @@ export function useGameEngine(addLog: (msg: string) => void, addLogs: (msgs: str
       // 推进时间
       p = advanceTime(p, 'cultivate');
 
-      addLog(`🧘 修炼一次，获得 ${expGain} 修为。（悟性×${compBonus.toFixed(1)} 灵根×${rootGrade.multiplier} 心情×${moodBonus.toFixed(1)}）`);
+      addLog(`🧘 修炼一次，获得 ${expGain} 修为。（悟性×${compBonus.toFixed(1)} 灵根×${rootGrade.multiplier} 心情×${moodBonus.toFixed(1)}）`, 'system');
       return p;
     });
   }, [canAct, advanceTime, addLog]);
@@ -119,7 +132,7 @@ export function useGameEngine(addLog: (msg: string) => void, addLogs: (msgs: str
   // ── A-3: 战斗 ──
   const fight = useCallback(() => {
     if (!canAct('combat')) {
-      addLog('⚠️ 精力不足，请先休息！');
+      addLog('⚠️ 精力不足，请先休息！', 'system');
       return;
     }
 
@@ -134,13 +147,13 @@ export function useGameEngine(addLog: (msg: string) => void, addLogs: (msgs: str
         m.realmIndex >= p.realmIndex - 1 && m.realmIndex <= p.realmIndex
       );
       if (eligible.length === 0) {
-        addLog('🔍 四周平静，没有发现妖兽。');
+        addLog('🔍 四周平静，没有发现妖兽。', 'combat');
         return p;
       }
       const monster = eligible[Math.floor(Math.random() * eligible.length)];
 
       const result = runCombat(p, monster);
-      addLogs(result.logs);
+      addLogs(result.logs, 'combat');
 
       p.hp = result.playerHpLeft;
       p.exp += result.expGained;
@@ -169,7 +182,7 @@ export function useGameEngine(addLog: (msg: string) => void, addLogs: (msgs: str
   // ── 探索 ──
   const explore = useCallback(() => {
     if (!canAct('explore')) {
-      addLog('⚠️ 精力不足，请先休息！');
+      addLog('⚠️ 精力不足，请先休息！', 'system');
       return;
     }
 
@@ -182,7 +195,7 @@ export function useGameEngine(addLog: (msg: string) => void, addLogs: (msgs: str
 
       const { player: updated, message } = triggerExploreEvent(p);
       p = { ...updated };
-      addLog(message);
+      addLog(message, message.includes('【奇遇】') ? 'adventure' : 'explore');
 
       p = advanceTime(p, 'explore');
       return p;
@@ -205,7 +218,7 @@ export function useGameEngine(addLog: (msg: string) => void, addLogs: (msgs: str
       p.tracking = { ...p.tracking, consecutiveRests: p.tracking.consecutiveRests + 1, consecutiveCultivates: 0 };
 
       p = advanceTime(p, 'rest');
-      addLog(`💤 休息片刻，恢复 ${staminaRecover} 精力，HP/MP/健康/心情少量恢复。`);
+      addLog(`💤 休息片刻，恢复 ${staminaRecover} 精力，HP/MP/健康/心情少量恢复。`, 'system');
       return p;
     });
   }, [advanceTime, addLog]);
@@ -215,11 +228,11 @@ export function useGameEngine(addLog: (msg: string) => void, addLogs: (msgs: str
     if (!player) return;
     const nextRealm = getNextRealm(player);
     if (!nextRealm) {
-      addLog('🏔️ 你已到达当前版本的最高境界！');
+      addLog('🏔️ 你已到达当前版本的最高境界！', 'system');
       return;
     }
     if (player.exp < nextRealm.expReq) {
-      addLog(`⚠️ 修为不足！突破 ${nextRealm.name} 需要 ${nextRealm.expReq} 修为（当前 ${player.exp}）。`);
+      addLog(`⚠️ 修为不足！突破 ${nextRealm.name} 需要 ${nextRealm.expReq} 修为（当前 ${player.exp}）。`, 'system');
       return;
     }
 
@@ -243,8 +256,8 @@ export function useGameEngine(addLog: (msg: string) => void, addLogs: (msgs: str
         p.stamina = p.maxStamina;
         p.mood = Math.min(100, p.mood + 20);
 
-        addLog(`🎆 突破成功！晋升 ${newRealm.name}期！`);
-        addLog(`寿限 +${newRealm.lifespanBonus}，属性全面提升！`);
+        addLog(`🎆 突破成功！晋升 ${newRealm.name}期！`, 'system');
+        addLog(`寿限 +${newRealm.lifespanBonus}，属性全面提升！`, 'system');
       } else {
         // 失败：损失 10% 修为
         const expLoss = Math.floor(p.exp * BREAKTHROUGH_FAIL_EXP_LOSS);
@@ -252,8 +265,8 @@ export function useGameEngine(addLog: (msg: string) => void, addLogs: (msgs: str
         p.mood = Math.max(0, p.mood - 20);
         p.health = Math.max(0, p.health - 10);
 
-        addLog(`💥 突破失败！损失 ${expLoss} 修为，心情 -20，健康 -10。`);
-        addLog(`（成功率 ${(successRate * 100).toFixed(1)}%，掷骰 ${(roll * 100).toFixed(1)}%）`);
+        addLog(`💥 突破失败！损失 ${expLoss} 修为，心情 -20，健康 -10。`, 'system');
+        addLog(`（成功率 ${(successRate * 100).toFixed(1)}%，掷骰 ${(roll * 100).toFixed(1)}%）`, 'system');
       }
       return p;
     });
@@ -264,7 +277,7 @@ export function useGameEngine(addLog: (msg: string) => void, addLogs: (msgs: str
     localStorage.removeItem(SAVE_KEY);
     setPlayer(null);
     setGameOver(false);
-    addLog('🗑️ 存档已删除。');
+    addLog('🗑️ 存档已删除。', 'system');
   }, [addLog]);
 
   return {
