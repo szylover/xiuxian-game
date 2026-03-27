@@ -5,23 +5,26 @@
 
 import type { Player } from './player';
 import { registerDLC, triggerEvent } from './registry';
+import type { RecipeDef } from './registry';
 import { loadEventsFromJson } from './event-loader';
 import { loadItemsFromJson } from './item-loader';
 import type { JsonEvent } from './event-loader';
 import type { JsonItem } from './item-loader';
 import coreEventsJson from '../data/core-events.json';
 import coreItemsJson from '../data/core-items.json';
+import coreRecipesJson from '../data/core-recipes.json';
 
-// ── 注册 core DLC（从 JSON 加载全部事件 + 物品）──
+// ── 注册 core DLC（从 JSON 加载全部事件 + 物品 + 配方）──
 export function registerCoreEvents(): void {
   const pack = loadEventsFromJson(coreEventsJson as JsonEvent[], {
     id: 'core',
     name: '基础事件包',
-    description: '核心事件 + 物品定义',
-    version: '1.1.0',
+    description: '核心事件 + 物品 + 配方',
+    version: '1.2.0',
   });
   const items = loadItemsFromJson(coreItemsJson as JsonItem[]);
-  registerDLC({ ...pack, items });
+  const recipes = coreRecipesJson as RecipeDef[];
+  registerDLC({ ...pack, items, recipes });
 }
 
 // ── 探索入口 ──

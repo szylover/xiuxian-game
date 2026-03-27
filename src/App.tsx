@@ -9,6 +9,7 @@ import StartScreen from './components/StartScreen';
 import StatusBar from './components/StatusBar';
 import StatusPanel from './components/StatusPanel';
 import InventoryPanel from './components/InventoryPanel';
+import AlchemyPanel from './components/AlchemyPanel';
 import ActionPanel from './components/ActionPanel';
 import GameLog from './components/GameLog';
 import './App.css';
@@ -18,6 +19,7 @@ export default function App() {
   const engine = useGameEngine(addLog, addLogs);
   const [panelOpen, setPanelOpen] = useState(false);
   const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [alchemyOpen, setAlchemyOpen] = useState(false);
 
   const hasSave = !!localStorage.getItem('xiuxian_save');
 
@@ -61,6 +63,12 @@ export default function App() {
         isOpen={inventoryOpen}
         onToggle={() => setInventoryOpen(!inventoryOpen)}
         onUseItem={engine.useItem}
+      />
+      <AlchemyPanel
+        player={engine.player}
+        isOpen={alchemyOpen}
+        onToggle={() => setAlchemyOpen(!alchemyOpen)}
+        onCraft={engine.craft}
       />
       <ActionPanel
         player={engine.player}

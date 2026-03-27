@@ -25,6 +25,23 @@ export interface ItemDef {
   sellPrice: number;                       // 售卖价格（灵石）
 }
 
+// ── 炼丹配方定义 ──
+
+export type RecipeQuality = 'normal' | 'good' | 'excellent';
+
+export interface RecipeDef {
+  id: string;                              // 命名空间 ID，如 core:recipe_hp_pill
+  name: string;                            // 配方名称
+  description: string;                     // 描述
+  inputs: { itemId: string; count: number }[]; // 输入材料
+  outputItemId: string;                    // 产出物品 ID
+  outputCount: number;                     // 基础产出数量
+  baseSuccessRate: number;                 // 基础成功率 (0~1)
+  mentalCost: number;                      // 念力消耗
+  minRealm: number;                        // 最低境界要求
+  qualityBonusMultipliers: Record<RecipeQuality, number>; // 品质倍率
+}
+
 // ── 事件类型定义 ──
 
 export type EventCategory = 'explore' | 'adventure' | 'daily';
@@ -52,6 +69,7 @@ export interface DLCPack {
   version: string;                         // 版本号
   events?: GameEvent[];                    // 该 DLC 提供的事件
   items?: ItemDef[];                       // 该 DLC 提供的物品定义
+  recipes?: RecipeDef[];                   // 该 DLC 提供的炼丹配方
 }
 
 // ── 注册表存储 ──
@@ -59,6 +77,7 @@ export interface DLCPack {
 const dlcRegistry = new Map<string, DLCPack>();       // DLC 包注册表
 const eventRegistry = new Map<string, GameEvent>();
 const itemDefRegistry = new Map<string, ItemDef>();    // 物品定义注册表
+const recipeRegistry = new Map<string, RecipeDef>();   // 配方注册表
 const triggeredOnce = new Set<string>();              // 已触发的 once 事件
 const cooldowns = new Map<string, number>();           // eventId → 上次触发时的 age
 
@@ -76,6 +95,11 @@ export function registerDLC(pack: DLCPack): void {
       itemDefRegistry.set(item.id, item);
     }
   }
+  if (pack.recipes) {
+    for (const recipe of pack.recipes) {
+      recipeRegistry.set(recipe.id, recipe);
+    }
+  }
 }
 
 export function unregisterDLC(packId: string): void {
@@ -89,6 +113,11 @@ export function unregisterDLC(packId: string): void {
   if (pack.items) {
     for (const item of pack.items) {
       itemDefRegistry.delete(item.id);
+    }
+  }
+  if (pack.recipes) {
+    for (const recipe of pack.recipes) {
+      recipeRegistry.delete(recipe.id);
     }
   }
   dlcRegistry.delete(packId);
@@ -126,6 +155,16 @@ export function getItemDefsByCategory(category: ItemCategory): ItemDef[] {
 
 export function getAllItemDefs(): ItemDef[] {
   return Array.from(itemDefRegistry.values());
+}
+
+// ── 配方查询 ──
+
+export function getRecipe(id: string): RecipeDef | undefined {
+  return recipeRegistry.get(id);
+}
+
+export function getAllRecipes(): RecipeDef[] {
+  return Array.from(recipeRegistry.values());
 }
 
 // ── 查询 ──

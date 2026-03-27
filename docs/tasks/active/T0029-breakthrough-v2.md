@@ -3,7 +3,7 @@
 - **状态**: 📐 设计完成
 - **分类**: 进阶机制
 - **前置**: T0004, T0012
-- **Spec**: [G-1-breakthrough-tribulation.md](../specs/G-1-breakthrough-tribulation.md)
+- **Spec**: [T0029-breakthrough-tribulation.md](../specs/T0029-breakthrough-tribulation.md)
 
 ## 描述
 
