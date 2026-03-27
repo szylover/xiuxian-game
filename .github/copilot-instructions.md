@@ -1,12 +1,13 @@
 # Agent 工作流
 
-本项目使用 3 个 Agent + 1 个 Prompt 协作：
+本项目使用 4 个 Agent + 1 个 Prompt 协作：
 
 | 角色 | 文件 | 职责 | 工具 |
 |------|------|------|------|
 | **@PM** | `.github/agents/pm.agent.md` | 需求分析、设计文档、任务管理、进度追踪 | read, edit, search |
 | **@Dev** | `.github/agents/dev.agent.md` | 实现 `src/` 下的 React + TS 代码 | read, edit, search, execute |
 | **@Designer** | `.github/agents/designer.agent.md` | UI/UX 设计、CSS 美化、像素风资源 | read, edit, search |
+| **@Content** | `.github/agents/content.agent.md` | 物品/装备/丹药/配方/妖兽数值设计、查漏补缺 | read, edit, search |
 | **/ship** | `.github/prompts/ship.prompt.md` | Merge 检查清单 + Git 工作流 | read, edit, search, execute |
 
 ## 典型流程
