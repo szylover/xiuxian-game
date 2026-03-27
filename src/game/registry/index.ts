@@ -1,0 +1,28 @@
+// ============================================================
+// registry/index.ts — 全局注册表 barrel re-export
+// 所有外部模块通过 import from '../game/registry' 访问
+// ============================================================
+
+export type {
+  ItemCategory, ItemRarity, ItemDef,
+  RecipeQuality, EquipSlot, EquipStatBonus, EquipDef,
+  RecipeDef, SmithingRecipeDef,
+  BreakthroughItemCost, BreakthroughCondition, BreakthroughReqDef,
+  TribulationWave, TribulationDef,
+  EventCategory, EventTone, GameEvent,
+  DLCPack,
+} from '../types';
+
+export { registerDLC, unregisterDLC, getDLC, getAllDLCs } from './dlc';
+export {
+  registerEvent, registerEvents, getEvent, getEventsByCategory,
+  getItemDef, getItemDefsByCategory, getAllItemDefs,
+  getRecipe, getAllRecipes,
+  getEquipDef, getAllEquipDefs,
+  getSmithingRecipe, getAllSmithingRecipes,
+  getBreakthroughReq, getTribulationDef,
+} from './queries';
+export {
+  triggerEvent, resetRuntimeState, saveEventState, loadEventState,
+} from './event-engine';
+export type { EventResult, EventRuntimeState } from './event-engine';
