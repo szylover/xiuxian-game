@@ -1,30 +1,109 @@
 # Roadmap — 修仙小游戏
 
-> 从最小可玩原型到完整修仙世界的阶段规划。
-> 每个 Milestone 拆分为独立文件，详见 `docs/roadmap/` 目录。
-> 小说奇遇事件（DLC）将在基础壳子完成后按"一本小说一个 Milestone"的方式追加。
+> 以任务（Task）为原子单位的开发看板。
+> 每个任务声明前置依赖 + 索引设计文档，形成 DAG 依赖图。
+> 任务 ID 范围 T0001–T9999（10000 个槽位），新任务可随时追加到任意分类。
+> 每个任务对应 `docs/tasks/T0001-xxx.md` 独立文件。
 
 ---
 
-## 总览
+## 状态图例
 
-| Milestone | 主题 | Stage 数 | 文件 | 状态 |
-|-----------|------|----------|------|------|
-| A | 核心循环 | 6 | [milestone-a.md](roadmap/milestone-a.md) | ✅ |
-| B | 随机事件引擎 | 5 | [milestone-b.md](roadmap/milestone-b.md) | ✅ |
-| C | 物品与经济 | 5 | [milestone-c.md](roadmap/milestone-c.md) | ⬜ |
-| D | 功法与技能 | 4 | [milestone-d.md](roadmap/milestone-d.md) | ⬜ |
-| E | 世界与地图 | 4 | [milestone-e.md](roadmap/milestone-e.md) | ⬜ |
-| F | 社交与NPC | 4 | [milestone-f.md](roadmap/milestone-f.md) | ⬜ |
-| G | 进阶机制 | 6 | [milestone-g.md](roadmap/milestone-g.md) | ⬜ |
-| H | 部署与体验优化 | 5 | [milestone-h.md](roadmap/milestone-h.md) | ⬜ |
-| **合计** | | **39** | | |
+| 图标 | 含义 |
+|------|------|
+| ✅ | 已完成 |
+| 📐 | 设计完成，待实现 |
+| 🔨 | 开发中 |
+| ⬜ | 未开始 |
 
-## DLC 规划（基础壳子完成后追加）
+---
 
-> 小说奇遇事件以 DLC 形式加入，一本小说 = 一个 Milestone。
-> 设计文档见 `docs/specs/design-novel-events.md`。
-> 所有系统在设计时须预留**事件注册、被动注册、物品注册**扩展点，方便 DLC 插入。
+## 任务列表
+
+### 🏷️ 核心循环
+
+| ID | 任务 | 前置 | Spec | 状态 |
+|----|------|------|------|------|
+| [T0001](tasks/done/T0001-attribute-system.md) | 属性系统（四类属性） | — | [spec](specs/design-attribute-system.md) | ✅ |
+| [T0002](tasks/done/T0002-cultivation.md) | 修炼系统 | T0001 | — | ✅ |
+| [T0003](tasks/done/T0003-combat-v2.md) | 战斗系统 v2 | T0001 | — | ✅ |
+| [T0004](tasks/done/T0004-breakthrough-v1.md) | 境界突破 v1 | T0002 | — | ✅ |
+| [T0005](tasks/done/T0005-lifespan.md) | 寿命系统 | T0001 | — | ✅ |
+| [T0006](tasks/done/T0006-status-panel.md) | 状态面板 v2 | T0001 | — | ✅ |
+
+### 🏷️ 事件系统
+
+| ID | 任务 | 前置 | Spec | 状态 |
+|----|------|------|------|------|
+| [T0007](tasks/done/T0007-event-engine.md) | 事件引擎（luck 加权随机） | T0001 | — | ✅ |
+| [T0008](tasks/done/T0008-explore-events.md) | 探索事件池（20+） | T0007 | — | ✅ |
+| [T0009](tasks/done/T0009-adventure-system.md) | 奇遇系统 | T0007 | [spec](specs/design-novel-events.md) | ✅ |
+| [T0010](tasks/done/T0010-daily-events.md) | 日常事件 | T0007 | — | ✅ |
+| [T0011](tasks/done/T0011-event-log.md) | 事件日志（分类/颜色/回溯） | T0007 | — | ✅ |
+
+### 🏷️ 物品与经济
+
+| ID | 任务 | 前置 | Spec | 状态 |
+|----|------|------|------|------|
+| [T0012](tasks/done/T0012-inventory.md) | 背包系统 | T0001 | — | ✅ |
+| [T0013](tasks/todo/T0013-alchemy-v2.md) | 丹药系统 v2（炼丹） | T0012 | — | ⬜ |
+| [T0014](tasks/todo/T0014-equipment.md) | 装备系统 | T0012 | — | ⬜ |
+| [T0015](tasks/todo/T0015-shop.md) | 商店系统 | T0012 | — | ⬜ |
+| [T0016](tasks/todo/T0016-smithing.md) | 炼器系统 | T0012, T0014 | — | ⬜ |
+
+### 🏷️ 功法与技能
+
+| ID | 任务 | 前置 | Spec | 状态 |
+|----|------|------|------|------|
+| [T0017](tasks/todo/T0017-technique-system.md) | 功法系统 | T0001 | — | ⬜ |
+| [T0018](tasks/todo/T0018-skill-combat.md) | 技能战斗 | T0003, T0017 | — | ⬜ |
+| [T0019](tasks/todo/T0019-passive-effects.md) | 被动效果 | T0017 | — | ⬜ |
+| [T0020](tasks/todo/T0020-divine-arts.md) | 神通（元素体系） | T0017, T0018 | — | ⬜ |
+
+### 🏷️ 世界与地图
+
+| ID | 任务 | 前置 | Spec | 状态 |
+|----|------|------|------|------|
+| [T0021](tasks/todo/T0021-map-system.md) | 地图系统（多区域） | T0001 | — | ⬜ |
+| [T0022](tasks/todo/T0022-region-events.md) | 区域事件 | T0007, T0021 | — | ⬜ |
+| [T0023](tasks/todo/T0023-dungeon.md) | 秘境探索（限时副本） | T0021, T0003 | — | ⬜ |
+| [T0024](tasks/todo/T0024-fengshui-mining.md) | 风水采矿 | T0021, T0012 | — | ⬜ |
+
+### 🏷️ 社交与NPC
+
+| ID | 任务 | 前置 | Spec | 状态 |
+|----|------|------|------|------|
+| [T0025](tasks/todo/T0025-npc-system.md) | NPC 系统 | T0001 | — | ⬜ |
+| [T0026](tasks/todo/T0026-dialogue.md) | 对话系统 | T0025 | — | ⬜ |
+| [T0027](tasks/todo/T0027-sect.md) | 门派系统 | T0025, T0017 | — | ⬜ |
+| [T0028](tasks/todo/T0028-pvp.md) | PvP 切磋 | T0025, T0003 | — | ⬜ |
+
+### 🏷️ 进阶机制
+
+| ID | 任务 | 前置 | Spec | 状态 |
+|----|------|------|------|------|
+| [T0029](tasks/active/T0029-breakthrough-v2.md) | 突破系统重构 + 渡劫 | T0004, T0012 | [spec](specs/G-1-breakthrough-tribulation.md) | 📐 |
+| [T0030](tasks/todo/T0030-reincarnation.md) | 转世重修 | T0029 | — | ⬜ |
+| [T0031](tasks/todo/T0031-achievement.md) | 成就系统 | T0001 | — | ⬜ |
+| [T0032](tasks/todo/T0032-leaderboard.md) | 排行榜 | T0031 | — | ⬜ |
+| [T0033](tasks/todo/T0033-ascension.md) | 仙道境界（飞升） | T0029 | — | ⬜ |
+| [T0034](tasks/todo/T0034-honghuang-endgame.md) | 洪荒终局 | T0033 | — | ⬜ |
+
+### 🏷️ 部署与体验
+
+| ID | 任务 | 前置 | Spec | 状态 |
+|----|------|------|------|------|
+| [T0035](tasks/todo/T0035-azure-cicd.md) | Azure SWA CI/CD | — | — | ⬜ |
+| [T0036](tasks/todo/T0036-pwa.md) | PWA 支持 | T0035 | — | ⬜ |
+| [T0037](tasks/todo/T0037-audio.md) | 音效系统 | — | — | ⬜ |
+| [T0038](tasks/todo/T0038-multi-save.md) | 多存档 | — | — | ⬜ |
+| [T0039](tasks/todo/T0039-tutorial.md) | 新手引导 | T0001 | — | ⬜ |
+
+---
+
+## DLC 规划
+
+> 所有系统须预留 `registerDLC()` 扩展点。DLC 任务在基础壳子完成后追加到上方任务列表。
 
 | DLC | 小说流派 | 内容示例 | 状态 |
 |-----|----------|----------|------|
