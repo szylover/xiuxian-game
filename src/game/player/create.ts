@@ -33,7 +33,7 @@ export function createPlayer(name: string = '无名散修'): Player {
   };
 
   return {
-    name, realmIndex: 0, exp: 0,
+    name, avatar: 'default', realmIndex: 0, exp: 0,
     age: 16, lifespan: 100, mood: 70, health: 100,
     stamina: 100, maxStamina: 100,
     hp: realm.hpBase, maxHp: realm.hpBase,
@@ -46,7 +46,9 @@ export function createPlayer(name: string = '无名散修'): Player {
     aptitudes,
     gold: 0, inventory: [], inventoryCapacity: 20,
     equipped: { weapon: null, helmet: null, armor: null, boots: null, accessory1: null, accessory2: null },
+    techniques: [], activeTechniqueId: null,
     items: {}, passives: {}, systems: {},
     tracking: { killCount: 0, bossKillCount: 0, consecutiveRests: 0, consecutiveCultivates: 0, hasBeenBelow10Hp: false, defeatedHigherRealm: false },
+    gameYear: 1, gameMonth: 1,
   };
 }

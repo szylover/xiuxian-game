@@ -3,12 +3,13 @@
 // 行为逻辑已拆分至 useCoreActions.ts / useSystemActions.ts
 // ============================================================
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { createPlayer, getSpiritRootGrade } from '../game/player';
 import type { Player } from '../game/player';
 import { REALMS, ACTION_COSTS } from '../game/data';
 import { registerCoreEvents, triggerDailyEvent } from '../game/events';
 import type { LogCategory } from './useGameLog';
+import { useToast } from './useToast';
 import { useCoreActions } from './useCoreActions';
 import { useSystemActions } from './useSystemActions';
 
@@ -26,6 +27,15 @@ function loadSave(): Player | null {
     if (!Array.isArray(p.inventory)) p.inventory = [];
     if (!p.inventoryCapacity) p.inventoryCapacity = 20 + (p.realmIndex || 0) * 5;
     if (!p.equipped) p.equipped = { weapon: null, helmet: null, armor: null, boots: null, accessory1: null, accessory2: null };
+    if (!p.avatar) p.avatar = 'default';
+    if (!Array.isArray(p.techniques)) p.techniques = [];
+    if (p.activeTechniqueId === undefined) p.activeTechniqueId = null;
+    // T0042: 历法向后兼容
+    if (!p.gameYear) {
+      const elapsed = p.age - 16;
+      p.gameYear = Math.max(1, Math.floor(elapsed) + 1);
+      p.gameMonth = Math.max(1, Math.min(12, Math.floor((elapsed - Math.floor(elapsed)) * 12) + 1));
+    }
     return p;
   } catch { return null; }
 }
@@ -34,10 +44,36 @@ function writeSave(player: Player): void {
   localStorage.setItem(SAVE_KEY, JSON.stringify(player));
 }
 
-export function useGameEngine(addLog: (msg: string, category?: LogCategory) => void, addLogs: (msgs: string[], category?: LogCategory) => void) {
+export function useGameEngine(
+  rawAddLog: (msg: string, category?: LogCategory, gameYear?: number, gameMonth?: number) => void,
+  rawAddLogs: (msgs: string[], category?: LogCategory, gameYear?: number, gameMonth?: number) => void,
+) {
   const [player, setPlayer] = useState<Player | null>(null);
   const [gameOver, setGameOver] = useState(false);
   const [gameOverReason, setGameOverReason] = useState('');
+  const playerRef = useRef<Player | null>(null);
+  const { toasts, showToast, dismiss: dismissToast } = useToast();
+
+  // 同步 playerRef
+  useEffect(() => { playerRef.current = player; }, [player]);
+
+  // 包装 addLog：自动注入 gameYear/gameMonth + 发 Toast
+  // 以 ⚠️ 开头的消息只 Toast 不写日志（精力不足等即时提示）
+  const addLog = useCallback((msg: string, category: LogCategory = 'default') => {
+    showToast(msg, category);
+    if (msg.startsWith('⚠️')) return; // toast-only
+    const p = playerRef.current;
+    rawAddLog(msg, category, p?.gameYear ?? 1, p?.gameMonth ?? 1);
+  }, [rawAddLog, showToast]);
+
+  const addLogs = useCallback((msgs: string[], category: LogCategory = 'default') => {
+    const p = playerRef.current;
+    rawAddLogs(msgs, category, p?.gameYear ?? 1, p?.gameMonth ?? 1);
+    // 战斗多条日志：只 toast 最后一条摘要
+    if (msgs.length > 0) {
+      showToast(msgs[msgs.length - 1], category, msgs.length > 3 ? 4000 : 3000);
+    }
+  }, [rawAddLogs, showToast]);
 
   // ── 新游戏 ──
   const newGame = useCallback((name: string) => {
@@ -72,11 +108,25 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     }
   }, [player, gameOver]);
 
-  // ── 通用：时间推进 + 寿元检测 (A-5) ──
+  // ── 通用：时间推进 + 寿元检测 (A-5 + T0042 历法) ──
   const advanceTime = useCallback((p: Player, actionKey: string): Player => {
     const cost = ACTION_COSTS[actionKey];
     if (!cost) return p;
-    let updated = { ...p, age: p.age + cost.time };
+
+    // T0042: 月份推进
+    let newMonth = p.gameMonth + cost.time;
+    let newYear = p.gameYear;
+    if (newMonth > 12) {
+      newYear += Math.floor((newMonth - 1) / 12);
+      newMonth = ((newMonth - 1) % 12) + 1;
+    }
+
+    let updated = {
+      ...p,
+      age: p.age + cost.time / 12,
+      gameYear: newYear,
+      gameMonth: newMonth,
+    };
 
     // 寿元耗尽检查
     if (updated.lifespan !== Infinity && updated.age >= updated.lifespan) {
@@ -108,8 +158,11 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     addLog, addLogs, setPlayer, advanceTime, canAct,
   });
 
-  // ── 子 Hook：系统行为（炼丹/炼器/装备/商店/背包/突破）──
-  const { useItem, craft, equip, unequip, buy, sell, smith, breakthrough } = useSystemActions({
+  // ── 子 Hook：系统行为（炼丹/炼器/装备/商店/背包/突破/功法）──
+  const {
+    useItem, craft, equip, unequip, buy, sell, smith, breakthrough,
+    learnTechnique, practiceTechnique, activateTechnique,
+  } = useSystemActions({
     player, addLog, setPlayer, setGameOver, setGameOverReason,
   });
 
@@ -141,6 +194,11 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     buy,
     sell,
     smith,
+    learnTechnique,
+    practiceTechnique,
+    activateTechnique,
+    toasts,
+    dismissToast,
     // Debug: 直接修改 player（仅 debug 模式使用）
     debugSetPlayer: setPlayer,
   };

@@ -5,7 +5,7 @@
 
 import type { Player } from './player';
 import { registerDLC, triggerEvent } from './registry';
-import type { RecipeDef, EquipDef, SmithingRecipeDef } from './registry';
+import type { RecipeDef, EquipDef, SmithingRecipeDef, TechniqueDef } from './registry';
 import { loadEventsFromJson } from './event-loader';
 import { loadItemsFromJson } from './item-loader';
 import type { JsonEvent } from './event-loader';
@@ -16,6 +16,7 @@ import coreRecipesJson from '../data/core-recipes.json';
 import coreEquipsJson from '../data/core-equips.json';
 import coreShopJson from '../data/core-shop.json';
 import coreSmithingJson from '../data/core-smithing.json';
+import coreTechniquesJson from '../data/core-techniques.json';
 import { CORE_BREAKTHROUGH_REQS, CORE_TRIBULATIONS } from '../data/core-breakthrough';
 import { registerShopGoods } from './shop';
 import type { ShopGoodsDef } from './shop';
@@ -32,6 +33,7 @@ export function registerCoreEvents(): void {
   const recipes = coreRecipesJson as RecipeDef[];
   const equips = coreEquipsJson as EquipDef[];
   const smithingRecipes = coreSmithingJson as SmithingRecipeDef[];
+  const techniques = coreTechniquesJson as TechniqueDef[];
   registerDLC({
     ...pack,
     items,
@@ -40,6 +42,7 @@ export function registerCoreEvents(): void {
     smithingRecipes,
     breakthroughReqs: CORE_BREAKTHROUGH_REQS,
     tribulations: CORE_TRIBULATIONS,
+    techniques,
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }

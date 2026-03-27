@@ -19,7 +19,7 @@ export interface Realm {
 
 export interface ActionCost {
   stamina: number;
-  time: number;
+  time: number;      // 单位：月（1 月 = 1/12 年）
 }
 
 export interface Monster {
@@ -65,14 +65,20 @@ export const REALMS: Realm[] = [
   { name: '大乘',   index: 7,  expReq: 500000, lifespanBonus: 5000,  hpBase: 35000,mpBase: 12000,atkBase: 2000,defBase: 1100,speedBase: 100, mentalBase: 2500},
 ];
 
-// ── 操作消耗 & 时间推进 ──
+// ── 操作消耗 & 时间推进（time 单位：月） ──
 export const ACTION_COSTS: Record<string, ActionCost> = {
-  cultivate: { stamina: 10, time: 0.1 },
-  explore:   { stamina: 15, time: 0.05 },
-  combat:    { stamina: 20, time: 0.02 },
-  alchemy:   { stamina: 10, time: 0.05 },
-  rest:      { stamina: 0,  time: 0.01 },
+  cultivate: { stamina: 10, time: 1 },
+  explore:   { stamina: 15, time: 1 },
+  combat:    { stamina: 20, time: 1 },
+  alchemy:   { stamina: 10, time: 1 },
+  rest:      { stamina: 0,  time: 1 },
 };
+
+// ── 月份名称 ──
+export const MONTH_NAMES = [
+  '一月','二月','三月','四月','五月','六月',
+  '七月','八月','九月','十月','十一月','十二月',
+];
 
 // ── 妖兽表（按境界分级）──
 export const MONSTERS: Monster[] = [

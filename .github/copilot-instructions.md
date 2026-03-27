@@ -12,10 +12,13 @@
 
 ## 典型流程
 
+**重要：任何 task 的实现都必须先由 @PM 产出 Design Spec，确认后再交给 @Dev 编码。禁止跳过设计直接写代码。**
+
 ```
 用户: "实现战斗系统"
-1. @PM  → 输出 Design Spec + 创建任务 + 更新 roadmap & progress
-2. @Dev ║ @Designer  ← 并行消费同一份 spec
+1. @PM  → 调研代码库 + 输出 Design Spec 到 docs/specs/ + 创建任务 + 更新 roadmap & progress
+   ↓ 用户确认 spec 后
+2. @Dev ║ @Designer  ← 并行消费同一份 spec（Dev 必须先检查 spec 是否存在）
 3. /ship  → 检查清单 → commit → push → PR
 ```
 
@@ -52,6 +55,8 @@
 - **系统 ≠ 内容**：系统是纯逻辑壳子（背包/炼丹/装备/商店/战斗…），所有具体内容（物品/丹药/装备/妖兽/功法/配方/商品…）通过 `registerDLC()` 挂载到全局注册表，核心包也是 DLC（namespace: `core`）。详见 `docs/roadmap.md` 扩展性约定
 - **模块分离**：每个系统（属性/战斗/事件/炼丹/…）独立模块，通过 React 组件 + 自定义 Hook 暴露接口
 - **文件拆分**：`src/game/` 和 `src/components/` 下的文件过大时应拆分为子文件或子目录；文件夹内文件过多时应按功能分组为子目录。具体阈值由开发者自行判断，保持单文件职责清晰、可读性好
+- **组件最小化**：React 组件应尽可能小，禁止在一个 `return` 里写大段内联 JSX。重复出现的 UI 模式（折叠面板、标签栏、容量条、物品卡片等）必须抽成 `src/components/shared/` 下的独立组件复用；业务子组件按功能放入对应子目录（如 `inventory/`、`shop/`、`equipment/`）。常量（品质颜色、属性中文名等）统一放 `shared/constants.ts`，禁止在多个文件中重复定义
+- **SVG/图片资源外置**：SVG、图片等静态资源禁止内联在 TSX 组件中，必须存放为独立文件（`public/avatars/`、`public/icons/` 等），组件通过 `<img src="...">` 引用。保持组件代码与视觉资源分离
 - **纯前端**：零后端依赖，所有状态存 `localStorage`，可直接部署到 Azure Static Web Apps
 - **React + TypeScript**：使用 React（Vite 构建）开发，使用 TypeScript，构建产物部署到 Azure SWA
 - **渐进增强**：先跑通核心循环（修炼→战斗→突破），再叠加子系统
@@ -93,13 +98,37 @@ xiuxian-game/
     ├── main.tsx                   #   React 入口（挂载 <App />）
     ├── App.tsx                    #   根组件（路由/界面切换）
     ├── App.css                    #   全局样式
-    ├── components/                #   UI 组件
-    │   ├── StatusBar.tsx          #     顶部状态栏
-    │   ├── GameLog.tsx            #     游戏日志面板
-    │   ├── ActionPanel.tsx        #     操作按钮面板
-    │   ├── InventoryPanel.tsx     #     背包面板（分类标签 + 物品列表）
-    │   ├── StartScreen.tsx        #     开始界面
-    │   └── StatusPanel.tsx        #     角色详细状态面板
+    ├── components/                #   UI 组件（按功能分目录）
+    │   ├── hud/                   #     常驻 HUD 组件
+    │   │   ├── StatusBar.tsx      #       顶部状态栏
+    │   │   └── GameLog.tsx        #       游戏日志面板
+    │   ├── panels/                #     可折叠面板组件
+    │   │   ├── ActionPanel.tsx    #       操作按钮面板
+    │   │   ├── StatusPanel.tsx    #       角色详细状态面板
+    │   │   ├── InventoryPanel.tsx #       背包面板
+    │   │   ├── AlchemyPanel.tsx   #       炼丹面板
+    │   │   ├── EquipmentPanel.tsx #       装备面板
+    │   │   ├── ShopPanel.tsx      #       商店面板
+    │   │   ├── SmithingPanel.tsx  #       炼器面板
+    │   │   ├── inventory/         #       背包子组件
+    │   │   ├── shop/              #       商店子组件
+    │   │   └── equipment/         #       装备子组件
+    │   ├── screens/               #     全屏页面
+    │   │   ├── StartScreen.tsx    #       开始界面
+    │   │   └── GameOverScreen.tsx #       游戏结束画面
+    │   ├── debug/                 #     调试面板及子组件
+    │   │   ├── DebugPanel.tsx     #       调试面板入口
+    │   │   ├── DebugStatsTab.tsx  #       数值修改标签页
+    │   │   ├── DebugItemsTab.tsx  #       物品添加标签页
+    │   │   └── DebugItemRow.tsx   #       物品行组件
+    │   └── shared/                #     共享通用组件
+    │       ├── index.ts           #       barrel re-export
+    │       ├── constants.ts       #       品质颜色/属性中文名/图标常量
+    │       ├── CollapsiblePanel.tsx #     可折叠面板
+    │       ├── TabBar.tsx         #       标签栏
+    │       ├── CapacityBar.tsx    #       容量/进度条
+    │       ├── StatRow.tsx        #       属性行 + 灵根资质条
+    │       └── StatusItem.tsx     #       状态栏单项
     ├── game/                      #   游戏逻辑（纯 TS，不依赖 React）
     │   ├── registry.ts            #     全局注册表（事件/物品/妖兽 DLC 扩展核心）
     │   ├── event-loader.ts        #     JSON 事件加载器（纯数据 → GameEvent）

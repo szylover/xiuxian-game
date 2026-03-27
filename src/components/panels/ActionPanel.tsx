@@ -2,10 +2,10 @@
 // ActionPanel.tsx — 操作按钮面板
 // ============================================================
 
-import { getNextRealm } from '../game/player';
-import type { Player } from '../game/player';
-import { ACTION_COSTS } from '../game/data';
-import { getBreakthroughStatus } from '../game/breakthrough';
+import { getNextRealm } from '../../game/player';
+import type { Player } from '../../game/player';
+import { ACTION_COSTS } from '../../game/data';
+import { getBreakthroughStatus } from '../../game/breakthrough';
 
 interface ActionPanelProps {
   player: Player;

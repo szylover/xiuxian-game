@@ -9,6 +9,7 @@ export type {
   RecipeDef, SmithingRecipeDef,
   BreakthroughItemCost, BreakthroughCondition, BreakthroughReqDef,
   TribulationWave, TribulationDef,
+  TechniqueType, TechniqueRarity, TechniqueStatBonus, TechniqueDef,
   EventCategory, EventTone, GameEvent,
   DLCPack,
 } from '../types';
@@ -21,6 +22,7 @@ export {
   getEquipDef, getAllEquipDefs,
   getSmithingRecipe, getAllSmithingRecipes,
   getBreakthroughReq, getTribulationDef,
+  getTechniqueDef, getAllTechniqueDefs,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

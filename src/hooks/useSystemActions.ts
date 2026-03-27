@@ -12,6 +12,7 @@ import { buyItem, sellItem } from '../game/shop';
 import { performSmithing } from '../game/smithing';
 import { attemptBreakthrough as attemptBreakthroughFn } from '../game/breakthrough';
 import { runTribulation as runTribulationFn } from '../game/tribulation';
+import { learnTechnique, practiceTechnique, activateTechnique } from '../game/technique';
 import type { EquipSlot } from '../game/registry';
 import type { LogCategory } from './useGameLog';
 
@@ -26,106 +27,92 @@ export interface SystemActionDeps {
 export function useSystemActions(deps: SystemActionDeps) {
   const { player, addLog, setPlayer, setGameOver, setGameOverReason } = deps;
 
+  // ── 通用模式：执行操作 → 更新 player → 写日志 ──
+  const execAction = useCallback(
+    (action: (p: Player) => { player: Player; message: string }, category: LogCategory = 'system') => {
+      let msg = '';
+      setPlayer(prev => {
+        if (!prev) return prev;
+        const result = action(prev);
+        msg = result.message;
+        return result.player;
+      });
+      if (msg) addLog(msg, category);
+    },
+    [addLog, setPlayer],
+  );
+
   // ── C-1: 使用物品 ──
   const useItemAction = useCallback((itemId: string) => {
-    setPlayer(prev => {
-      if (!prev) return prev;
-      const result = inventoryUseItem(prev, itemId);
-      addLog(result.message, result.success ? 'system' : 'system');
-      return result.player;
-    });
-  }, [addLog, setPlayer]);
+    execAction(p => inventoryUseItem(p, itemId));
+  }, [execAction]);
 
   // ── T0013: 炼丹 ──
   const craft = useCallback((recipeId: string) => {
-    setPlayer(prev => {
-      if (!prev) return prev;
-      const result = performAlchemy(prev, recipeId);
-      addLog(result.message, 'system');
-      return result.player;
-    });
-  }, [addLog, setPlayer]);
+    execAction(p => performAlchemy(p, recipeId));
+  }, [execAction]);
 
   // ── T0014: 装备 ──
   const equip = useCallback((equipId: string) => {
-    setPlayer(prev => {
-      if (!prev) return prev;
-      const result = equipItem(prev, equipId);
-      addLog(result.message, 'system');
-      return result.player;
-    });
-  }, [addLog, setPlayer]);
+    execAction(p => equipItem(p, equipId));
+  }, [execAction]);
 
   const unequip = useCallback((slot: EquipSlot) => {
-    setPlayer(prev => {
-      if (!prev) return prev;
-      const result = unequipItem(prev, slot);
-      addLog(result.message, 'system');
-      return result.player;
-    });
-  }, [addLog, setPlayer]);
+    execAction(p => unequipItem(p, slot));
+  }, [execAction]);
 
   // ── T0015: 商店 ──
   const buy = useCallback((itemId: string) => {
-    setPlayer(prev => {
-      if (!prev) return prev;
-      const result = buyItem(prev, itemId);
-      addLog(result.message, 'system');
-      return result.player;
-    });
-  }, [addLog, setPlayer]);
+    execAction(p => buyItem(p, itemId));
+  }, [execAction]);
 
   const sell = useCallback((itemId: string) => {
-    setPlayer(prev => {
-      if (!prev) return prev;
-      const result = sellItem(prev, itemId);
-      addLog(result.message, 'system');
-      return result.player;
-    });
-  }, [addLog, setPlayer]);
+    execAction(p => sellItem(p, itemId));
+  }, [execAction]);
 
   // ── T0016: 炼器 ──
   const smith = useCallback((recipeId: string) => {
-    setPlayer(prev => {
-      if (!prev) return prev;
-      const result = performSmithing(prev, recipeId);
-      addLog(result.message, 'system');
-      return result.player;
-    });
-  }, [addLog, setPlayer]);
+    execAction(p => performSmithing(p, recipeId));
+  }, [execAction]);
 
   // ── T0029: 突破系统重构 ──
   const breakthrough = useCallback(() => {
     if (!player) return;
 
-    setPlayer(prev => {
-      if (!prev) return prev;
+    // 直接基于当前 player 计算结果，不使用 updater 函数
+    const btResult = attemptBreakthroughFn(player);
+    let finalPlayer = btResult.player;
+    const allLogs = [...btResult.logs];
 
-      // 先尝试普通突破
-      const btResult = attemptBreakthroughFn(prev);
-      for (const log of btResult.logs) {
-        addLog(log, 'system');
+    if (btResult.triggerTribulation) {
+      const tribResult = runTribulationFn(finalPlayer);
+      finalPlayer = tribResult.player;
+      allLogs.push(...tribResult.logs);
+
+      if (!tribResult.success && finalPlayer.hp <= 0) {
+        setGameOver(true);
+        setGameOverReason('渡劫失败，形神俱灭！');
       }
+    }
 
-      if (btResult.triggerTribulation) {
-        // 需要渡劫
-        const tribResult = runTribulationFn(btResult.player);
-        for (const log of tribResult.logs) {
-          addLog(log, 'system');
-        }
-
-        if (!tribResult.success && tribResult.player.hp <= 0) {
-          // 渡劫失败且判定为死亡
-          setGameOver(true);
-          setGameOverReason('渡劫失败，形神俱灭！');
-        }
-
-        return tribResult.player;
-      }
-
-      return btResult.player;
-    });
+    setPlayer(finalPlayer);
+    for (const log of allLogs) {
+      addLog(log, 'system');
+    }
   }, [player, addLog, setPlayer, setGameOver, setGameOverReason]);
+
+  // ── T0017: 功法 ──
+  const learn = useCallback((techniqueId: string) => {
+    execAction(p => learnTechnique(p, techniqueId));
+  }, [execAction]);
+
+  const practice = useCallback((techniqueId: string) => {
+    execAction(p => practiceTechnique(p, techniqueId));
+  }, [execAction]);
+
+  const activate = useCallback((techniqueId: string) => {
+    execAction(p => activateTechnique(p, techniqueId));
+  }, [execAction]);
 
   return {
     useItem: useItemAction,
@@ -136,5 +123,8 @@ export function useSystemActions(deps: SystemActionDeps) {
     sell,
     smith,
     breakthrough,
+    learnTechnique: learn,
+    practiceTechnique: practice,
+    activateTechnique: activate,
   };
 }

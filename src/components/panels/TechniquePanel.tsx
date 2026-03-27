@@ -1,0 +1,132 @@
+// ============================================================
+// panels/TechniquePanel.tsx — 功法面板
+// 已学功法列表 + 修炼 + 激活 + 可学功法
+// ============================================================
+
+import type { Player } from '../../game/player';
+import { getTechniqueDef } from '../../game/registry';
+import type { TechniqueDef } from '../../game/registry';
+import { getLearnableTechniques, calcTechniqueExpGain } from '../../game/technique';
+import { RARITY_COLORS } from '../shared';
+import type { TechniqueRarity } from '../../game/registry';
+
+const TECHNIQUE_TYPE_CN: Record<string, string> = {
+  sword: '剑法', blade: '刀法', fist: '拳法',
+  palm: '掌法', finger: '指法', spear: '枪法',
+};
+
+interface TechniquePanelProps {
+  player: Player;
+  onLearn: (techniqueId: string) => void;
+  onPractice: (techniqueId: string) => void;
+  onActivate: (techniqueId: string) => void;
+}
+
+export default function TechniquePanel({ player, onLearn, onPractice, onActivate }: TechniquePanelProps) {
+  const learnable = getLearnableTechniques(player);
+
+  return (
+    <div className="technique-panel">
+      {/* 已学功法 */}
+      <div className="technique-section-title">📖 已学功法</div>
+      {player.techniques.length === 0 ? (
+        <div className="inventory-empty">尚未习得任何功法…</div>
+      ) : (
+        <div className="technique-list">
+          {player.techniques.map(slot => {
+            const def = getTechniqueDef(slot.techniqueId);
+            if (!def) return null;
+            const isActive = player.activeTechniqueId === slot.techniqueId;
+            const isMaxLevel = slot.level >= def.maxLevel;
+            const expGain = calcTechniqueExpGain(player, def);
+            return (
+              <div
+                key={slot.techniqueId}
+                className={`technique-card ${isActive ? 'technique-active' : ''}`}
+                style={{ borderLeftColor: RARITY_COLORS[def.rarity as TechniqueRarity] || '#9E9E9E' }}
+              >
+                <div className="technique-header">
+                  <span className="technique-name" style={{ color: RARITY_COLORS[def.rarity as TechniqueRarity] }}>
+                    {def.name}
+                  </span>
+                  <span className="technique-type">{TECHNIQUE_TYPE_CN[def.type] ?? def.type}</span>
+                </div>
+                <div className="technique-level">
+                  Lv.{slot.level}/{def.maxLevel}
+                  {!isMaxLevel && (
+                    <span className="technique-exp"> ({slot.exp}/{def.expPerLevel})</span>
+                  )}
+                  {isActive && <span className="technique-active-badge">⚔️ 激活</span>}
+                </div>
+                {!isMaxLevel && (
+                  <div className="technique-progress">
+                    <div className="technique-progress-fill" style={{ width: `${(slot.exp / def.expPerLevel) * 100}%` }} />
+                  </div>
+                )}
+                <div className="technique-desc">{def.description}</div>
+                <div className="technique-bonus">
+                  每级：{formatBonus(def)}
+                </div>
+                <div className="technique-actions">
+                  {!isMaxLevel && (
+                    <button className="btn btn-technique" onClick={() => onPractice(slot.techniqueId)}>
+                      🧘 修炼 (+{expGain})
+                    </button>
+                  )}
+                  {!isActive && (
+                    <button className="btn btn-technique-activate" onClick={() => onActivate(slot.techniqueId)}>
+                      ⚔️ 激活
+                    </button>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* 可学功法 */}
+      {learnable.length > 0 && (
+        <>
+          <div className="technique-section-title" style={{ marginTop: '0.6rem' }}>📚 可学功法</div>
+          <div className="technique-list">
+            {learnable.map(def => (
+              <div
+                key={def.id}
+                className="technique-card technique-learnable"
+                style={{ borderLeftColor: RARITY_COLORS[def.rarity as TechniqueRarity] || '#9E9E9E' }}
+              >
+                <div className="technique-header">
+                  <span className="technique-name" style={{ color: RARITY_COLORS[def.rarity as TechniqueRarity] }}>
+                    {def.name}
+                  </span>
+                  <span className="technique-type">{TECHNIQUE_TYPE_CN[def.type] ?? def.type}</span>
+                </div>
+                <div className="technique-desc">{def.description}</div>
+                <div className="technique-bonus">
+                  每级：{formatBonus(def)} ・ 最大 Lv.{def.maxLevel}
+                </div>
+                <button className="btn btn-technique-learn" onClick={() => onLearn(def.id)}>
+                  📖 学习
+                </button>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+function formatBonus(def: TechniqueDef): string {
+  const b = def.statBonusPerLevel;
+  const parts: string[] = [];
+  if (b.atk) parts.push(`攻击+${b.atk}`);
+  if (b.def) parts.push(`防御+${b.def}`);
+  if (b.speed) parts.push(`速度+${b.speed}`);
+  if (b.critRate) parts.push(`暴击+${b.critRate}%`);
+  if (b.critDmgMultiplier) parts.push(`暴伤+${(b.critDmgMultiplier * 100).toFixed(0)}%`);
+  if (b.hp) parts.push(`体力+${b.hp}`);
+  if (b.mp) parts.push(`灵力+${b.mp}`);
+  return parts.join(' ') || '无';
+}

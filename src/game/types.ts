@@ -139,6 +139,34 @@ export interface TribulationDef {
   failureDescription: string;
 }
 
+// ── 功法类型定义 ──
+
+export type TechniqueType = 'sword' | 'blade' | 'fist' | 'palm' | 'finger' | 'spear';
+export type TechniqueRarity = 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
+
+export interface TechniqueStatBonus {
+  atk?: number;
+  def?: number;
+  speed?: number;
+  critRate?: number;
+  critDmgMultiplier?: number;
+  hp?: number;
+  mp?: number;
+}
+
+export interface TechniqueDef {
+  id: string;                              // 命名空间 ID，如 core:basic_sword
+  name: string;                            // 显示名称
+  type: TechniqueType;                     // 功法类型（对应资质）
+  rarity: TechniqueRarity;                 // 品质
+  description: string;                     // 描述
+  minRealm: number;                        // 最低修炼境界
+  maxLevel: number;                        // 最大等级
+  expPerLevel: number;                     // 每级所需熟练度
+  statBonusPerLevel: TechniqueStatBonus;   // 每级属性加成
+  aptitudeKey: keyof import('./player').Aptitudes; // 对应资质字段
+}
+
 // ── 事件类型定义 ──
 
 export type EventCategory = 'explore' | 'adventure' | 'daily';
@@ -171,4 +199,5 @@ export interface DLCPack {
   smithingRecipes?: SmithingRecipeDef[];   // 该 DLC 提供的炼器配方
   breakthroughReqs?: BreakthroughReqDef[]; // 该 DLC 提供的突破需求
   tribulations?: TribulationDef[];         // 该 DLC 提供的天劫定义
+  techniques?: TechniqueDef[];             // 该 DLC 提供的功法定义
 }

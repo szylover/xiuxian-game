@@ -36,8 +36,15 @@ export interface PlayerTracking {
   defeatedHigherRealm: boolean;
 }
 
+export interface TechniqueSlot {
+  techniqueId: string;       // 功法定义 ID
+  level: number;             // 当前等级（1 起步）
+  exp: number;               // 当前熟练度（升级后清零）
+}
+
 export interface Player {
   name: string;
+  avatar: string;
   realmIndex: number;
   exp: number;
   age: number;
@@ -69,10 +76,14 @@ export interface Player {
   inventory: InventorySlot[];
   inventoryCapacity: number;
   equipped: EquippedSlots;
+  techniques: TechniqueSlot[];             // 已学功法列表
+  activeTechniqueId: string | null;        // 当前激活功法 ID
   items: Record<string, unknown>;
   passives: Record<string, unknown>;
   systems: Record<string, unknown>;
   tracking: PlayerTracking;
+  gameYear: number;                        // 历法年份（从 1 开始）
+  gameMonth: number;                       // 当前月份（1-12）
 }
 
 export interface SpiritRootGrade {

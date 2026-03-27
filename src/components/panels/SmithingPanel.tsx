@@ -3,16 +3,15 @@
 // 炼器配方列表 + 材料需求 + 成功率 + 炼器按钮
 // ============================================================
 
-import type { Player } from '../game/player';
-import type { SmithingRecipeDef } from '../game/registry';
-import { getAllSmithingRecipes, getItemDef, getEquipDef } from '../game/registry';
-import { canSmith, calcSmithingSuccessRate } from '../game/smithing';
-import { getItemCount } from '../game/inventory';
+import type { Player } from '../../game/player';
+import type { SmithingRecipeDef } from '../../game/registry';
+import { getAllSmithingRecipes, getItemDef, getEquipDef } from '../../game/registry';
+import { canSmith, calcSmithingSuccessRate } from '../../game/smithing';
+import { getItemCount } from '../../game/inventory';
+import { CapacityBar } from '../shared';
 
 interface SmithingPanelProps {
   player: Player;
-  isOpen: boolean;
-  onToggle: () => void;
   onSmith: (recipeId: string) => void;
 }
 
@@ -58,42 +57,30 @@ function SmithingCard({ recipe, player, onSmith }: { recipe: SmithingRecipeDef; 
   );
 }
 
-export default function SmithingPanel({ player, isOpen, onToggle, onSmith }: SmithingPanelProps) {
+export default function SmithingPanel({ player, onSmith }: SmithingPanelProps) {
   if (!player) return null;
 
   const recipes = getAllSmithingRecipes().filter(r => player.realmIndex >= r.minRealm);
 
   return (
-    <div className="smithing-panel">
-      <button className="panel-toggle" onClick={onToggle}>
-        {isOpen ? '⚒️ 收起炼器' : `⚒️ 炼器 (🧠${player.mentalPower}/${player.maxMentalPower})`}
-      </button>
-
-      {isOpen && (
-        <div className="alchemy-content">
-          <div className="alchemy-mental">
-            <span>念力 {player.mentalPower}/{player.maxMentalPower}</span>
-            <div className="capacity-bar">
-              <div
-                className="capacity-bar-fill"
-                style={{
-                  width: `${(player.mentalPower / player.maxMentalPower) * 100}%`,
-                  background: '#FF9800',
-                }}
-              />
-            </div>
-          </div>
-          <div className="recipe-list">
-            {recipes.length === 0 ? (
-              <div className="inventory-empty">暂无可用炼器配方…</div>
-            ) : (
-              recipes.map(r => (
-                <SmithingCard key={r.id} recipe={r} player={player} onSmith={onSmith} />
-              ))
-            )}
-          </div>
-        </div>
-      )}
+    <div className="alchemy-content">
+      <div className="alchemy-mental">
+        <CapacityBar
+          current={player.mentalPower}
+          max={player.maxMentalPower}
+          label="念力"
+          color="#FF9800"
+        />
+      </div>
+      <div className="recipe-list">
+        {recipes.length === 0 ? (
+          <div className="inventory-empty">暂无可用炼器配方…</div>
+        ) : (
+          recipes.map(r => (
+            <SmithingCard key={r.id} recipe={r} player={player} onSmith={onSmith} />
+          ))
+        )}
+      </div>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import type { ItemCategory, GameEvent, EventCategory } from '../types';
 import {
   eventRegistry, itemDefRegistry, recipeRegistry,
   equipRegistry, smithingRecipeRegistry, breakthroughReqRegistry, tribulationRegistry,
+  techniqueRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -44,3 +45,8 @@ export function getAllSmithingRecipes() { return Array.from(smithingRecipeRegist
 
 export function getBreakthroughReq(fromRealmIndex: number) { return breakthroughReqRegistry.get(fromRealmIndex); }
 export function getTribulationDef(forRealmIndex: number) { return tribulationRegistry.get(forRealmIndex); }
+
+// ── 功法 ──
+
+export function getTechniqueDef(id: string) { return techniqueRegistry.get(id); }
+export function getAllTechniqueDefs() { return Array.from(techniqueRegistry.values()); }
