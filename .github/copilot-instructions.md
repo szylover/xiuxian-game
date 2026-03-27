@@ -1,30 +1,37 @@
 # Agent 工作流
 
-本项目使用 4 个 Agent + 1 个 Prompt 协作：
+本项目使用 3 个 Agent + 1 个 Prompt 协作：
 
 | 角色 | 文件 | 职责 | 工具 |
 |------|------|------|------|
-| **@Architect** | `.github/agents/architect.agent.md` | 设计系统、输出 Design Spec（只读） | read, search |
+| **@PM** | `.github/agents/pm.agent.md` | 需求分析、设计文档、任务管理、进度追踪 | read, edit, search |
 | **@Dev** | `.github/agents/dev.agent.md` | 实现 `src/` 下的 React + TS 代码 | read, edit, search, execute |
 | **@Designer** | `.github/agents/designer.agent.md` | UI/UX 设计、CSS 美化、像素风资源 | read, edit, search |
-| **@Progress** | `.github/agents/progress.agent.md` | 维护进度看板 `docs/progress.md` | read, edit, search |
 | **/ship** | `.github/prompts/ship.prompt.md` | Merge 检查清单 + Git 工作流 | read, edit, search, execute |
 
 ## 典型流程
 
 ```
 用户: "实现战斗系统"
-1. @Architect  → 输出 Design Spec → 更新 progress.md
-2. @Dev ║ @Designer  ← 并行消费同一份 spec → 各自更新 progress.md
-3. /ship  → 检查清单（含 progress.md）→ commit → push → PR
+1. @PM  → 输出 Design Spec + 创建任务 + 更新 roadmap & progress
+2. @Dev ║ @Designer  ← 并行消费同一份 spec
+3. /ship  → 检查清单 → commit → push → PR
 ```
 
 ### 新会话恢复
 
 ```
 用户: "我上次做到哪了" / "下一步做什么"
-→ 读 docs/progress.md → 快速定位当前状态
+→ 读 docs/roadmap.md（任务列表 + 依赖图）+ docs/progress.md（当前可执行任务）
 ```
+
+## 任务管理
+
+- **`docs/roadmap.md`** 是任务的单一数据源（Single Source of Truth）
+- 每个任务有唯一 ID（T0001–T9999，4 位编号，10000 个槽位），声明前置依赖和设计文档索引
+- 每个任务对应 `docs/tasks/` 下独立文件，按状态归入 `done/` / `active/` / `todo/` 子目录
+- 任务按分类分组，但任意分类可随时追加新任务
+- `docs/progress.md` 是 roadmap 的视图：只列出当前可执行的任务和最近完成记录
 
 ## 设计原则
 
@@ -45,10 +52,9 @@ xiuxian-game/
 ├── .github/
 │   ├── copilot-instructions.md   # 本文件 — Agent 工作流 + 项目结构
 │   ├── agents/
-│   │   ├── architect.agent.md    #   只读架构师，输出设计文档
-│   │   ├── dev.agent.md          #   前端开发，实现 src/ 下代码
-│   │   ├── designer.agent.md     #   UI/UX 设计师
-│   │   └── progress.agent.md     #   进度看板维护（docs/progress.md）
+│   │   ├── pm.agent.md            #   PM：需求分析+设计+任务管理+进度
+│   │   ├── dev.agent.md           #   前端开发，实现 src/ 下代码
+│   │   └── designer.agent.md      #   UI/UX 设计师
 │   └── prompts/
 │       └── ship.prompt.md        #   合并检查清单 + Git 工作流
 ├── package.json                   # 项目依赖 & 脚本
@@ -59,20 +65,16 @@ xiuxian-game/
 ├── README.md
 ├── docs/                          # 项目文档
 │   ├── progress.md                #   实时进度看板（@Progress 维护）
-│   ├── roadmap.md                 #   路线图索引（总览 + DLC 规划 + 扩展性约定）
-│   ├── roadmap/                   #   各 Milestone 详细路线图
-│   │   ├── milestone-a.md         #     A: 核心循环 ✅
-│   │   ├── milestone-b.md         #     B: 随机事件引擎
-│   │   ├── milestone-c.md         #     C: 物品与经济
-│   │   ├── milestone-d.md         #     D: 功法与技能
-│   │   ├── milestone-e.md         #     E: 世界与地图
-│   │   ├── milestone-f.md         #     F: 社交与NPC
-│   │   ├── milestone-g.md         #     G: 进阶机制
-│   │   └── milestone-h.md         #     H: 部署与体验优化
+│   ├── roadmap.md                 #   任务列表（DAG 依赖图 + DLC 规划 + 扩展性约定）
+│   ├── tasks/                     #   每个任务的独立文件（T0001–T9999）
+│   │   ├── done/                  #     已完成的任务
+│   │   ├── active/                #     进行中的任务
+│   │   └── todo/                  #     未开始的任务
 │   ├── changelog.md               #   变更日志
 │   └── specs/                     #   设计文档存放目录
-        ├── design-attribute-system.md  # 属性系统设计文档
-        └── design-novel-events.md      # 小说奇遇事件设计文档（5类14个）
+│       ├── design-attribute-system.md
+│       ├── design-novel-events.md
+│       └── G-1-breakthrough-tribulation.md
 └── src/                           # React 源码
     ├── main.tsx                   #   React 入口（挂载 <App />）
     ├── App.tsx                    #   根组件（路由/界面切换）
