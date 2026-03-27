@@ -47,8 +47,8 @@
 |----|------|------|------|------|
 | [T0012](tasks/done/T0012-inventory.md) | 背包系统 | T0001 | — | ✅ |
 | [T0013](tasks/done/T0013-alchemy-v2.md) | 丹药系统 v2（炼丹） | T0012 | — | ✅ |
-| [T0014](tasks/todo/T0014-equipment.md) | 装备系统 | T0012 | — | ⬜ |
-| [T0015](tasks/todo/T0015-shop.md) | 商店系统 | T0012 | — | ⬜ |
+| [T0014](tasks/done/T0014-equipment.md) | 装备系统 | T0012 | — | ✅ |
+| [T0015](tasks/done/T0015-shop.md) | 商店系统 | T0012 | — | ✅ |
 | [T0016](tasks/todo/T0016-smithing.md) | 炼器系统 | T0012, T0014 | — | ⬜ |
 
 ### 🏷️ 功法与技能
