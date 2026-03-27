@@ -1029,3 +1029,63 @@ body {
 }
 
 .debug-item-btn:hover { background: #2a2a3a; color: #fff; }
+
+.debug-input {
+  background: #1a1a2a;
+  border: 1px solid #333;
+  color: #eee;
+  width: 90px;
+  padding: 0.15rem 0.3rem;
+  border-radius: 3px;
+  font-size: 0.72rem;
+  text-align: right;
+}
+
+.debug-input:focus { outline: none; border-color: #ef5350; }
+
+.debug-item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.debug-item-row {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0;
+}
+
+.debug-item-name {
+  flex: 1;
+  font-size: 0.72rem;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.debug-qty-input {
+  background: #1a1a2a;
+  border: 1px solid #333;
+  color: #eee;
+  width: 45px;
+  padding: 0.1rem 0.2rem;
+  border-radius: 3px;
+  font-size: 0.68rem;
+  text-align: center;
+}
+
+.debug-qty-input:focus { outline: none; border-color: #ef5350; }
+
+.debug-item-add {
+  background: #1a2a1a;
+  color: #8BC34A;
+  border: 1px solid #2a3a2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.debug-item-add:hover { background: #2a3a2a; }
