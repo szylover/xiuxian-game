@@ -16,6 +16,7 @@ import coreRecipesJson from '../data/core-recipes.json';
 import coreEquipsJson from '../data/core-equips.json';
 import coreShopJson from '../data/core-shop.json';
 import coreSmithingJson from '../data/core-smithing.json';
+import { CORE_BREAKTHROUGH_REQS, CORE_TRIBULATIONS } from '../data/core-breakthrough';
 import { registerShopGoods } from './shop';
 import type { ShopGoodsDef } from './shop';
 
@@ -23,15 +24,23 @@ import type { ShopGoodsDef } from './shop';
 export function registerCoreEvents(): void {
   const pack = loadEventsFromJson(coreEventsJson as JsonEvent[], {
     id: 'core',
-    name: '基础事件包',
-    description: '核心事件 + 物品 + 配方 + 装备 + 商店 + 炼器',
-    version: '1.5.0',
+    name: '基础内容包',
+    description: '核心事件 + 物品 + 配方 + 装备 + 炼器 + 突破 + 天劫',
+    version: '2.0.0',
   });
   const items = loadItemsFromJson(coreItemsJson as JsonItem[]);
   const recipes = coreRecipesJson as RecipeDef[];
   const equips = coreEquipsJson as EquipDef[];
   const smithingRecipes = coreSmithingJson as SmithingRecipeDef[];
-  registerDLC({ ...pack, items, recipes, equips, smithingRecipes });
+  registerDLC({
+    ...pack,
+    items,
+    recipes,
+    equips,
+    smithingRecipes,
+    breakthroughReqs: CORE_BREAKTHROUGH_REQS,
+    tribulations: CORE_TRIBULATIONS,
+  });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }
 
