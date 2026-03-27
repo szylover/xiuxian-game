@@ -82,7 +82,7 @@
 
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
-| [T0029](tasks/active/T0029-breakthrough-v2.md) | 突破系统重构 + 渡劫 | T0004, T0012 | [spec](specs/T0029-breakthrough-tribulation.md) | 📐 |
+| [T0029](tasks/done/T0029-breakthrough-v2.md) | 突破系统重构 + 渡劫 | T0004, T0012 | [spec](specs/T0029-breakthrough-tribulation.md) | ✅ |
 | [T0030](tasks/todo/T0030-reincarnation.md) | 转世重修 | T0029, T0040 | — | ⬜ |
 | [T0040](tasks/todo/T0040-death-system.md) | 死亡与复活系统 | T0001, T0003, T0012 | [spec](specs/T0040-death-system.md) | ⬜ |
 | [T0031](tasks/todo/T0031-achievement.md) | 成就系统 | T0001 | — | ⬜ |

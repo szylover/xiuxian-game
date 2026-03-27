@@ -12,8 +12,9 @@
 | [T0017](tasks/todo/T0017-technique-system.md) | 功法系统 | T0001 ✅ | — | ⬜ |
 | [T0021](tasks/todo/T0021-map-system.md) | 地图系统 | T0001 ✅ | — | ⬜ |
 | [T0025](tasks/todo/T0025-npc-system.md) | NPC 系统 | T0001 ✅ | — | ⬜ |
-| [T0029](tasks/active/T0029-breakthrough-v2.md) | 突破系统重构 + 渡劫 | T0004 ✅, T0012 ✅ | [spec](specs/T0029-breakthrough-tribulation.md) | 📐 |
+| [T0030](tasks/todo/T0030-reincarnation.md) | 转世重修 | T0029 ✅, T0040 | — | ⬜ |
 | [T0031](tasks/todo/T0031-achievement.md) | 成就系统 | T0001 ✅ | — | ⬜ |
+| [T0033](tasks/todo/T0033-ascension.md) | 仙道境界（飞升） | T0029 ✅ | — | ⬜ |
 | [T0035](tasks/todo/T0035-azure-cicd.md) | Azure SWA CI/CD | — | — | ⬜ |
 | [T0037](tasks/todo/T0037-audio.md) | 音效系统 | — | — | ⬜ |
 | [T0038](tasks/todo/T0038-multi-save.md) | 多存档 | — | — | ⬜ |
@@ -24,6 +25,7 @@
 
 | ID | 任务 | 完成日期 |
 |----|------|----------|
+| T0029 | 突破系统重构 + 渡劫 | 2026-03-27 |
 | T0016 | 炼器系统 | 2026-03-27 |
 | T0015 | 商店系统 | 2026-03-27 |
 | T0014 | 装备系统 | 2026-03-27 |

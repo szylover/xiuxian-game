@@ -6,7 +6,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { createPlayer, recalcStats, getNextRealm, getSpiritRootGrade } from '../game/player';
 import type { Player } from '../game/player';
-import { REALMS, ACTION_COSTS, MONSTERS, BASE_CULTIVATE_EXP, BREAKTHROUGH_BASE_RATE, BREAKTHROUGH_COMP_BONUS, BREAKTHROUGH_LUCK_BONUS, BREAKTHROUGH_FAIL_EXP_LOSS } from '../game/data';
+import { REALMS, ACTION_COSTS, MONSTERS, BASE_CULTIVATE_EXP } from '../game/data';
 import { runCombat } from '../game/combat';
 import { registerCoreEvents, triggerExploreEvent, triggerDailyEvent } from '../game/events';
 import { useItem as inventoryUseItem, addItem } from '../game/inventory';
@@ -15,6 +15,8 @@ import { performAlchemy } from '../game/alchemy';
 import { equipItem, unequipItem } from '../game/equipment';
 import { buyItem, sellItem } from '../game/shop';
 import { performSmithing } from '../game/smithing';
+import { attemptBreakthrough as attemptBreakthroughFn } from '../game/breakthrough';
+import { runTribulation as runTribulationFn } from '../game/tribulation';
 import type { EquipSlot } from '../game/registry';
 import type { LogCategory } from './useGameLog';
 
@@ -288,52 +290,36 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     });
   }, [advanceTime, addLog]);
 
-  // ── A-4: 境界突破 ──
+  // ── T0029: 突破系统重构 ──
   const breakthrough = useCallback(() => {
     if (!player) return;
-    const nextRealm = getNextRealm(player);
-    if (!nextRealm) {
-      addLog('🏔️ 你已到达当前版本的最高境界！', 'system');
-      return;
-    }
-    if (player.exp < nextRealm.expReq) {
-      addLog(`⚠️ 修为不足！突破 ${nextRealm.name} 需要 ${nextRealm.expReq} 修为（当前 ${player.exp}）。`, 'system');
-      return;
-    }
 
     setPlayer(prev => {
       if (!prev) return prev;
-      let p: Player = { ...prev };
-      const successRate = Math.min(0.95,
-        BREAKTHROUGH_BASE_RATE + p.comprehension * BREAKTHROUGH_COMP_BONUS + p.luck * BREAKTHROUGH_LUCK_BONUS
-      );
 
-      const roll = Math.random();
-      if (roll < successRate) {
-        // 成功
-        p.realmIndex += 1;
-        const newRealm = REALMS[p.realmIndex];
-        p.lifespan += newRealm.lifespanBonus;
-        p = recalcStats(p);
-        // 突破后满血满蓝
-        p.hp = p.maxHp;
-        p.mp = p.maxMp;
-        p.stamina = p.maxStamina;
-        p.mood = Math.min(100, p.mood + 20);
-
-        addLog(`🎆 突破成功！晋升 ${newRealm.name}期！`, 'system');
-        addLog(`寿限 +${newRealm.lifespanBonus}，属性全面提升！`, 'system');
-      } else {
-        // 失败：损失 10% 修为
-        const expLoss = Math.floor(p.exp * BREAKTHROUGH_FAIL_EXP_LOSS);
-        p.exp -= expLoss;
-        p.mood = Math.max(0, p.mood - 20);
-        p.health = Math.max(0, p.health - 10);
-
-        addLog(`💥 突破失败！损失 ${expLoss} 修为，心情 -20，健康 -10。`, 'system');
-        addLog(`（成功率 ${(successRate * 100).toFixed(1)}%，掷骰 ${(roll * 100).toFixed(1)}%）`, 'system');
+      // 先尝试普通突破
+      const btResult = attemptBreakthroughFn(prev);
+      for (const log of btResult.logs) {
+        addLog(log, 'system');
       }
-      return p;
+
+      if (btResult.triggerTribulation) {
+        // 需要渡劫
+        const tribResult = runTribulationFn(btResult.player);
+        for (const log of tribResult.logs) {
+          addLog(log, 'system');
+        }
+
+        if (!tribResult.success && tribResult.player.hp <= 0) {
+          // 渡劫失败且判定为死亡
+          setGameOver(true);
+          setGameOverReason('渡劫失败，形神俱灭！');
+        }
+
+        return tribResult.player;
+      }
+
+      return btResult.player;
     });
   }, [player, addLog]);
 

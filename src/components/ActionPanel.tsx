@@ -5,6 +5,7 @@
 import { getNextRealm } from '../game/player';
 import type { Player } from '../game/player';
 import { ACTION_COSTS } from '../game/data';
+import { getBreakthroughStatus } from '../game/breakthrough';
 
 interface ActionPanelProps {
   player: Player;
@@ -20,9 +21,23 @@ export default function ActionPanel({ player, onCultivate, onFight, onExplore, o
   if (!player || gameOver) return null;
 
   const nextRealm = getNextRealm(player);
-  const canBreak = nextRealm && player.exp >= nextRealm.expReq;
+  const btStatus = getBreakthroughStatus(player);
 
   const staminaOk = (key: string) => player.stamina >= ACTION_COSTS[key].stamina;
+
+  // 突破按钮提示
+  let breakTitle = '';
+  if (nextRealm) {
+    if (!btStatus.expReady) breakTitle = `修为不足（需 ${nextRealm.expReq}）`;
+    else if (!btStatus.canAttempt) {
+      const missing = [
+        ...btStatus.itemsReady.filter(i => !i.ready).map(i => `${i.name} ×${i.required}`),
+        ...btStatus.conditionsReady.filter(c => !c.ready).map(c => c.description),
+      ];
+      breakTitle = `条件不足：${missing.join('，')}`;
+    } else if (btStatus.requiresTribulation) breakTitle = `突破至 ${nextRealm.name}（需渡劫）`;
+    else breakTitle = `突破至 ${nextRealm.name}（成功率 ${(btStatus.successRate * 100).toFixed(0)}%）`;
+  }
 
   return (
     <div className="action-panel">
@@ -57,13 +72,16 @@ export default function ActionPanel({ player, onCultivate, onFight, onExplore, o
       >
         💤 休息
       </button>
-      {canBreak && (
+      {nextRealm && btStatus.expReady && (
         <button
           className="btn btn-action btn-break"
           onClick={onBreakthrough}
-          title={`突破至 ${nextRealm.name}`}
+          disabled={!btStatus.canAttempt}
+          title={breakTitle}
         >
-          🎆 突破 → {nextRealm.name}
+          {btStatus.requiresTribulation ? '⛈️' : '🎆'} 突破 → {nextRealm.name}
+          {btStatus.canAttempt && !btStatus.requiresTribulation && ` (${(btStatus.successRate * 100).toFixed(0)}%)`}
+          {btStatus.requiresTribulation && ' (渡劫)'}
         </button>
       )}
     </div>

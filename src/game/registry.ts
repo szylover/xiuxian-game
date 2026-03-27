@@ -82,6 +82,64 @@ export interface SmithingRecipeDef {
   minRealm: number;                        // 最低境界要求
 }
 
+// ── 突破需求定义 ──
+
+export interface BreakthroughItemCost {
+  itemId: string;
+  count: number;
+}
+
+export interface BreakthroughCondition {
+  id: string;
+  description: string;
+  check: (p: Player) => boolean;
+}
+
+export interface BreakthroughReqDef {
+  id: string;
+  fromRealmIndex: number;
+  toRealmIndex: number;
+  itemCosts: BreakthroughItemCost[];
+  conditions: BreakthroughCondition[];
+  requiresTribulation: boolean;
+  baseSuccessRate?: number;
+  failurePenalty?: {
+    expLossRate?: number;
+    moodLoss?: number;
+    healthLoss?: number;
+  };
+  description?: string;
+}
+
+// ── 天劫定义 ──
+
+export interface TribulationWave {
+  name: string;
+  hp: number;
+  atk: number;
+  def: number;
+  speed: number;
+  specialEffect?: {
+    type: 'dot' | 'debuff_def' | 'debuff_atk' | 'heal_block';
+    value: number;
+    description: string;
+  };
+}
+
+export interface TribulationDef {
+  id: string;
+  name: string;
+  description: string;
+  forRealmIndex: number;
+  waves: TribulationWave[];
+  rewards: {
+    bonusExp: number;
+    items: Array<{ itemId: string; count: number }>;
+  };
+  failureType: 'realm_drop' | 'become_loose_immortal' | 'death';
+  failureDescription: string;
+}
+
 // ── 事件类型定义 ──
 
 export type EventCategory = 'explore' | 'adventure' | 'daily';
@@ -112,6 +170,8 @@ export interface DLCPack {
   recipes?: RecipeDef[];                   // 该 DLC 提供的炼丹配方
   equips?: EquipDef[];                     // 该 DLC 提供的装备定义
   smithingRecipes?: SmithingRecipeDef[];   // 该 DLC 提供的炼器配方
+  breakthroughReqs?: BreakthroughReqDef[]; // 该 DLC 提供的突破需求
+  tribulations?: TribulationDef[];         // 该 DLC 提供的天劫定义
 }
 
 // ── 注册表存储 ──
@@ -122,6 +182,8 @@ const itemDefRegistry = new Map<string, ItemDef>();    // 物品定义注册表
 const recipeRegistry = new Map<string, RecipeDef>();   // 配方注册表
 const equipRegistry = new Map<string, EquipDef>();     // 装备定义注册表
 const smithingRecipeRegistry = new Map<string, SmithingRecipeDef>(); // 炼器配方注册表
+const breakthroughReqRegistry = new Map<number, BreakthroughReqDef>(); // 突破需求（key=fromRealmIndex）
+const tribulationRegistry = new Map<number, TribulationDef>();         // 天劫定义（key=forRealmIndex）
 const triggeredOnce = new Set<string>();              // 已触发的 once 事件
 const cooldowns = new Map<string, number>();           // eventId → 上次触发时的 age
 
@@ -154,6 +216,16 @@ export function registerDLC(pack: DLCPack): void {
       smithingRecipeRegistry.set(sr.id, sr);
     }
   }
+  if (pack.breakthroughReqs) {
+    for (const br of pack.breakthroughReqs) {
+      breakthroughReqRegistry.set(br.fromRealmIndex, br);
+    }
+  }
+  if (pack.tribulations) {
+    for (const t of pack.tribulations) {
+      tribulationRegistry.set(t.forRealmIndex, t);
+    }
+  }
 }
 
 export function unregisterDLC(packId: string): void {
@@ -182,6 +254,16 @@ export function unregisterDLC(packId: string): void {
   if (pack.smithingRecipes) {
     for (const sr of pack.smithingRecipes) {
       smithingRecipeRegistry.delete(sr.id);
+    }
+  }
+  if (pack.breakthroughReqs) {
+    for (const br of pack.breakthroughReqs) {
+      breakthroughReqRegistry.delete(br.fromRealmIndex);
+    }
+  }
+  if (pack.tribulations) {
+    for (const t of pack.tribulations) {
+      tribulationRegistry.delete(t.forRealmIndex);
     }
   }
   dlcRegistry.delete(packId);
@@ -249,6 +331,18 @@ export function getSmithingRecipe(id: string): SmithingRecipeDef | undefined {
 
 export function getAllSmithingRecipes(): SmithingRecipeDef[] {
   return Array.from(smithingRecipeRegistry.values());
+}
+
+// ── 突破需求查询 ──
+
+export function getBreakthroughReq(fromRealmIndex: number): BreakthroughReqDef | undefined {
+  return breakthroughReqRegistry.get(fromRealmIndex);
+}
+
+// ── 天劫查询 ──
+
+export function getTribulationDef(forRealmIndex: number): TribulationDef | undefined {
+  return tribulationRegistry.get(forRealmIndex);
 }
 
 // ── 查询 ──

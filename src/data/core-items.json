@@ -392,5 +392,115 @@
     "maxStack": 1,
     "usable": false,
     "sellPrice": 160
+  },
+  {
+    "id": "core:breakthrough_lianqi",
+    "name": "练气散",
+    "category": "consumable",
+    "rarity": "common",
+    "description": "引导灵气入体的散剂，突破炼气期必需",
+    "stackable": true,
+    "maxStack": 10,
+    "usable": false,
+    "sellPrice": 5
+  },
+  {
+    "id": "core:foundation_pill",
+    "name": "筑基丹（突破）",
+    "category": "consumable",
+    "rarity": "uncommon",
+    "description": "凝聚筑基所需的丹药",
+    "stackable": true,
+    "maxStack": 10,
+    "usable": false,
+    "sellPrice": 30
+  },
+  {
+    "id": "core:golden_core_stone",
+    "name": "金丹凝结石",
+    "category": "material",
+    "rarity": "rare",
+    "description": "蕴含天地精华的奇石，助金丹成形",
+    "stackable": true,
+    "maxStack": 10,
+    "usable": false,
+    "sellPrice": 100
+  },
+  {
+    "id": "core:nascent_soul_pill",
+    "name": "元婴化形丹",
+    "category": "consumable",
+    "rarity": "rare",
+    "description": "引导元婴化形的珍贵丹药",
+    "stackable": true,
+    "maxStack": 5,
+    "usable": false,
+    "sellPrice": 200
+  },
+  {
+    "id": "core:spirit_transform_dew",
+    "name": "化神仙露",
+    "category": "consumable",
+    "rarity": "epic",
+    "description": "传说中的仙家露水，可助化神",
+    "stackable": true,
+    "maxStack": 3,
+    "usable": false,
+    "sellPrice": 500
+  },
+  {
+    "id": "core:millennium_lingzhi",
+    "name": "千年灵芝",
+    "category": "material",
+    "rarity": "epic",
+    "description": "生长千年的灵芝，灵气充沛",
+    "stackable": true,
+    "maxStack": 5,
+    "usable": false,
+    "sellPrice": 400
+  },
+  {
+    "id": "core:tribulation_pill",
+    "name": "渡劫丹",
+    "category": "consumable",
+    "rarity": "epic",
+    "description": "渡劫前服用，增强抗雷体质",
+    "stackable": true,
+    "maxStack": 3,
+    "usable": false,
+    "sellPrice": 600
+  },
+  {
+    "id": "core:thunder_lure",
+    "name": "天雷引",
+    "category": "material",
+    "rarity": "epic",
+    "description": "引动天劫降下的特殊法器",
+    "stackable": true,
+    "maxStack": 3,
+    "usable": false,
+    "sellPrice": 500
+  },
+  {
+    "id": "core:mahayana_scroll",
+    "name": "大乘心法残卷",
+    "category": "material",
+    "rarity": "legendary",
+    "description": "记载大乘奥义的残卷",
+    "stackable": true,
+    "maxStack": 5,
+    "usable": false,
+    "sellPrice": 1000
+  },
+  {
+    "id": "core:chaos_stone",
+    "name": "混沌精石",
+    "category": "material",
+    "rarity": "legendary",
+    "description": "混沌之力凝结的奇石，蕴含创世之力",
+    "stackable": true,
+    "maxStack": 3,
+    "usable": false,
+    "sellPrice": 2000
   }
 ]
