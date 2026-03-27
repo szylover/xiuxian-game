@@ -68,6 +68,20 @@ export interface RecipeDef {
   qualityBonusMultipliers: Record<RecipeQuality, number>; // 品质倍率
 }
 
+// ── 炼器配方定义 ──
+
+export interface SmithingRecipeDef {
+  id: string;                              // 命名空间 ID，如 core:smith_iron_sword
+  name: string;                            // 配方名称
+  description: string;                     // 描述
+  inputs: { itemId: string; count: number }[]; // 输入材料
+  goldCost: number;                        // 灵石消耗
+  outputItemId: string;                    // 产出装备 ID
+  baseSuccessRate: number;                 // 基础成功率 (0~1)
+  mentalCost: number;                      // 念力消耗
+  minRealm: number;                        // 最低境界要求
+}
+
 // ── 事件类型定义 ──
 
 export type EventCategory = 'explore' | 'adventure' | 'daily';
@@ -97,6 +111,7 @@ export interface DLCPack {
   items?: ItemDef[];                       // 该 DLC 提供的物品定义
   recipes?: RecipeDef[];                   // 该 DLC 提供的炼丹配方
   equips?: EquipDef[];                     // 该 DLC 提供的装备定义
+  smithingRecipes?: SmithingRecipeDef[];   // 该 DLC 提供的炼器配方
 }
 
 // ── 注册表存储 ──
@@ -106,6 +121,7 @@ const eventRegistry = new Map<string, GameEvent>();
 const itemDefRegistry = new Map<string, ItemDef>();    // 物品定义注册表
 const recipeRegistry = new Map<string, RecipeDef>();   // 配方注册表
 const equipRegistry = new Map<string, EquipDef>();     // 装备定义注册表
+const smithingRecipeRegistry = new Map<string, SmithingRecipeDef>(); // 炼器配方注册表
 const triggeredOnce = new Set<string>();              // 已触发的 once 事件
 const cooldowns = new Map<string, number>();           // eventId → 上次触发时的 age
 
@@ -133,6 +149,11 @@ export function registerDLC(pack: DLCPack): void {
       equipRegistry.set(equip.id, equip);
     }
   }
+  if (pack.smithingRecipes) {
+    for (const sr of pack.smithingRecipes) {
+      smithingRecipeRegistry.set(sr.id, sr);
+    }
+  }
 }
 
 export function unregisterDLC(packId: string): void {
@@ -156,6 +177,11 @@ export function unregisterDLC(packId: string): void {
   if (pack.equips) {
     for (const equip of pack.equips) {
       equipRegistry.delete(equip.id);
+    }
+  }
+  if (pack.smithingRecipes) {
+    for (const sr of pack.smithingRecipes) {
+      smithingRecipeRegistry.delete(sr.id);
     }
   }
   dlcRegistry.delete(packId);
@@ -213,6 +239,16 @@ export function getEquipDef(id: string): EquipDef | undefined {
 
 export function getAllEquipDefs(): EquipDef[] {
   return Array.from(equipRegistry.values());
+}
+
+// ── 炼器配方查询 ──
+
+export function getSmithingRecipe(id: string): SmithingRecipeDef | undefined {
+  return smithingRecipeRegistry.get(id);
+}
+
+export function getAllSmithingRecipes(): SmithingRecipeDef[] {
+  return Array.from(smithingRecipeRegistry.values());
 }
 
 // ── 查询 ──

@@ -889,3 +889,22 @@ body {
 }
 
 .btn-shop-sell:hover { background: #3a3a2a; }
+
+/* ── 炼器面板 ── */
+.smithing-panel {
+  margin-bottom: 0.5rem;
+}
+
+.btn-smith {
+  background: #2a1a0a;
+  color: #FFB74D;
+  border: 1px solid #3a2a1a;
+  border-radius: 4px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-smith:hover:not(:disabled) { background: #3a2a1a; }
+.btn-smith:disabled { opacity: 0.4; cursor: not-allowed; }
