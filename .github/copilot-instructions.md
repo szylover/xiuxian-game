@@ -5,7 +5,7 @@
 | 角色 | 文件 | 职责 | 工具 |
 |------|------|------|------|
 | **@Architect** | `.github/agents/architect.agent.md` | 设计系统、输出 Design Spec（只读） | read, search |
-| **@Dev** | `.github/agents/dev.agent.md` | 实现 `src/` 下的 React + JS 代码 | read, edit, search, execute |
+| **@Dev** | `.github/agents/dev.agent.md` | 实现 `src/` 下的 React + TS 代码 | read, edit, search, execute |
 | **@Designer** | `.github/agents/designer.agent.md` | UI/UX 设计、CSS 美化、像素风资源 | read, edit, search |
 | **@Progress** | `.github/agents/progress.agent.md` | 维护进度看板 `docs/progress.md` | read, edit, search |
 | **/ship** | `.github/prompts/ship.prompt.md` | Merge 检查清单 + Git 工作流 | read, edit, search, execute |
@@ -31,7 +31,7 @@
 - **数据驱动**：所有游戏数值集中在 `src/data/` 下，逻辑层通过数据表驱动行为
 - **模块分离**：每个系统（属性/战斗/事件/炼丹/…）独立模块，通过 React 组件 + 自定义 Hook 暴露接口
 - **纯前端**：零后端依赖，所有状态存 `localStorage`，可直接部署到 Azure Static Web Apps
-- **React + JS**：使用 React（Vite 构建）开发，不使用 TypeScript，构建产物部署到 Azure SWA
+- **React + TypeScript**：使用 React（Vite 构建）开发，使用 TypeScript，构建产物部署到 Azure SWA
 - **渐进增强**：先跑通核心循环（修炼→战斗→突破），再叠加子系统
 
 ---
@@ -50,7 +50,9 @@ xiuxian-game/
 │   └── prompts/
 │       └── ship.prompt.md        #   合并检查清单 + Git 工作流
 ├── package.json                   # 项目依赖 & 脚本
-├── vite.config.js                 # Vite 构建配置
+├── tsconfig.json                  # TypeScript 配置
+├── vite.config.ts                 # Vite 构建配置
+├── vite-env.d.ts                  # Vite 环境类型声明
 ├── index.html                     # Vite 入口 HTML
 ├── README.md
 ├── docs/                          # 项目文档
@@ -61,21 +63,21 @@ xiuxian-game/
         ├── design-attribute-system.md  # 属性系统设计文档
         └── design-novel-events.md      # 小说奇遇事件设计文档（5类14个）
 └── src/                           # React 源码
-    ├── main.jsx                   #   React 入口（挂载 <App />）
-    ├── App.jsx                    #   根组件（路由/界面切换）
+    ├── main.tsx                   #   React 入口（挂载 <App />）
+    ├── App.tsx                    #   根组件（路由/界面切换）
     ├── App.css                    #   全局样式
     ├── components/                #   UI 组件
-    │   ├── StatusBar.jsx          #     顶部状态栏
-    │   ├── GameLog.jsx            #     游戏日志面板
-    │   ├── ActionPanel.jsx        #     操作按钮面板
-    │   ├── StartScreen.jsx        #     开始界面
-    │   └── StatusPanel.jsx        #     角色详细状态面板
-    ├── game/                      #   游戏逻辑（纯 JS，不依赖 React）
-    │   ├── data.js                #     数据表（境界/妖兽/丹药/事件/…）
-    │   ├── player.js              #     玩家角色 & 属性系统
-    │   ├── combat.js              #     战斗系统
-    │   └── events.js              #     随机事件引擎
+    │   ├── StatusBar.tsx          #     顶部状态栏
+    │   ├── GameLog.tsx            #     游戏日志面板
+    │   ├── ActionPanel.tsx        #     操作按钮面板
+    │   ├── StartScreen.tsx        #     开始界面
+    │   └── StatusPanel.tsx        #     角色详细状态面板
+    ├── game/                      #   游戏逻辑（纯 TS，不依赖 React）
+    │   ├── data.ts                #     数据表（境界/妖兽/丹药/事件/…）
+    │   ├── player.ts              #     玩家角色 & 属性系统
+    │   ├── combat.ts              #     战斗系统
+    │   └── events.ts              #     随机事件引擎
     └── hooks/                     #   自定义 React Hooks
-        ├── useGameEngine.js       #     游戏引擎 Hook（状态管理 + 存档）
-        └── useGameLog.js          #     日志管理 Hook
+        ├── useGameEngine.ts       #     游戏引擎 Hook（状态管理 + 存档）
+        └── useGameLog.ts          #     日志管理 Hook
 ```

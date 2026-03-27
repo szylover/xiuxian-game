@@ -1,8 +1,14 @@
 // ============================================================
-// GameLog.jsx — 游戏日志面板
+// GameLog.tsx — 游戏日志面板
 // ============================================================
 
-export default function GameLog({ logs }) {
+import type { LogEntry } from '../hooks/useGameLog';
+
+interface GameLogProps {
+  logs: LogEntry[];
+}
+
+export default function GameLog({ logs }: GameLogProps) {
   return (
     <div className="game-log">
       <h3>📜 日志</h3>

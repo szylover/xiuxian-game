@@ -1,16 +1,47 @@
 // ============================================================
-// combat.js — 战斗系统 v2
+// combat.ts — 战斗系统 v2
 // A-3: 伤害公式（减防→暴击→抗性→闪避），先手规则
 // ============================================================
 
+import type { Player } from './player';
+import type { Monster } from './data';
+
+// ── 战斗参与者（统一字段）──
+interface Combatant {
+  name: string;
+  hp: number;
+  atk: number;
+  def: number;
+  speed: number;
+  moveSpeed: number;
+  critRate: number;
+  critDmgMultiplier?: number;
+  critResist: number;
+}
+
+interface DamageResult {
+  damage: number;
+  isCrit: boolean;
+  isDodge: boolean;
+  log: string[];
+}
+
+export interface CombatResult {
+  winner: 'player' | 'monster' | 'draw';
+  playerHpLeft: number;
+  logs: string[];
+  expGained: number;
+  goldGained: number;
+}
+
 // ── 随机浮点 ──
-function rand(min, max) {
+function rand(min: number, max: number): number {
   return min + Math.random() * (max - min);
 }
 
 // ── 单次攻击计算 ──
-function calcDamage(attacker, defender) {
-  const log = [];
+function calcDamage(attacker: Combatant, defender: Combatant): DamageResult {
+  const log: string[] = [];
 
   // 1. 基础伤害（±15% 浮动）
   const baseDmg = attacker.atk * rand(0.85, 1.15);
@@ -49,8 +80,8 @@ function calcDamage(attacker, defender) {
 
 // ── 战斗主循环（回合制）──
 // 返回 { winner, playerHpLeft, logs, expGained, goldGained }
-export function runCombat(player, monster) {
-  const logs = [];
+export function runCombat(player: Player, monster: Monster): CombatResult {
+  const logs: string[] = [];
   // 复制 HP 避免直接修改原对象
   let pHp = player.hp;
   let mHp = monster.hp;

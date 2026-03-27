@@ -1,17 +1,28 @@
 // ============================================================
-// ActionPanel.jsx — 操作按钮面板
+// ActionPanel.tsx — 操作按钮面板
 // ============================================================
 
-import { getNextRealm } from '../game/player.js';
-import { ACTION_COSTS } from '../game/data.js';
+import { getNextRealm } from '../game/player';
+import type { Player } from '../game/player';
+import { ACTION_COSTS } from '../game/data';
 
-export default function ActionPanel({ player, onCultivate, onFight, onExplore, onRest, onBreakthrough, gameOver }) {
+interface ActionPanelProps {
+  player: Player;
+  onCultivate: () => void;
+  onFight: () => void;
+  onExplore: () => void;
+  onRest: () => void;
+  onBreakthrough: () => void;
+  gameOver: boolean;
+}
+
+export default function ActionPanel({ player, onCultivate, onFight, onExplore, onRest, onBreakthrough, gameOver }: ActionPanelProps) {
   if (!player || gameOver) return null;
 
   const nextRealm = getNextRealm(player);
   const canBreak = nextRealm && player.exp >= nextRealm.expReq;
 
-  const staminaOk = (key) => player.stamina >= ACTION_COSTS[key].stamina;
+  const staminaOk = (key: string) => player.stamina >= ACTION_COSTS[key].stamina;
 
   return (
     <div className="action-panel">

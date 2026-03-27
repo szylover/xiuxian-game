@@ -13,10 +13,10 @@
 |---|------|------|------|
 | 1 | 属性系统设计文档 | ✅ | `docs/specs/design-attribute-system.md` |
 | 2 | 小说奇遇事件设计文档 | ✅ | `docs/specs/design-novel-events.md` |
-| 3 | Player 类重构（四类属性） | ✅ | `src/game/player.js` |
-| 4 | data.js 数据表扩展 | ✅ | `src/game/data.js`（8 境界 + 10 妖兽 + 丹药表） |
-| 5 | 修炼系统 | ✅ | `useGameEngine.js` — 悟性/灵根/心情乘数 |
-| 6 | 战斗系统 v2 | ✅ | `src/game/combat.js` — 减防→暴击→闪避，先手规则 |
+| 3 | Player 类重构（四类属性） | ✅ | `src/game/player.ts` |
+| 4 | data.ts 数据表扩展 | ✅ | `src/game/data.ts`（8 境界 + 10 妖兽 + 丹药表） |
+| 5 | 修炼系统 | ✅ | `useGameEngine.ts` — 悟性/灵根/心情乘数 |
+| 6 | 战斗系统 v2 | ✅ | `src/game/combat.ts` — 减防→暴击→闪避，先手规则 |
 | 7 | 境界突破 | ✅ | 悟性+幸运影响成功率，失败损失 10% 修为 |
 | 8 | 寿命系统 | ✅ | 操作推进时间，寿元耗尽→游戏结束 |
 | 9 | 状态面板 UI | ✅ | 四栏属性展示 + 进度条可视化 |
@@ -27,6 +27,7 @@
 | 阶段 | 日期 | 关键产出 |
 |------|------|----------|
 | Milestone A: 核心循环 | 2026-03-26 | 属性系统 + 修炼 + 战斗v2 + 突破 + 寿命 + 状态面板 |
+| TypeScript 迁移 | 2026-03-27 | 全量 JS→TS，完整类型定义，tsconfig + vite-env.d.ts |
 | _(项目初始化)_ | 2026-03-26 | 项目骨架 + Azure SWA 配置 + Agent 工作流 |
 
 ## 阻塞 / 待定事项

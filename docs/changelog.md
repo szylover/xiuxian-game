@@ -1,5 +1,17 @@
 # 变更日志
 
+## 2026-03-27
+
+### TypeScript 迁移
+- **全量迁移**：项目从 React + JavaScript 迁移至 React + TypeScript
+- 添加 `tsconfig.json`、`vite-env.d.ts`
+- 所有 `.jsx`→`.tsx`、`.js`→`.ts`（含 `vite.config.ts`）
+- 游戏逻辑层完整类型定义：`Player`、`Aptitudes`、`Realm`、`Monster`、`CombatResult` 等接口
+- React 组件全部添加 Props 接口
+- 新增 dev 依赖：`typescript`、`@types/react`、`@types/react-dom`
+- 构建脚本更新为 `tsc && vite build`
+- `copilot-instructions.md` 同步更新文件结构
+
 ## 2026-03-26
 
 ### Milestone A: 核心循环实现

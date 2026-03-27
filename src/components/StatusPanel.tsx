@@ -1,12 +1,21 @@
 // ============================================================
-// StatusPanel.jsx — 角色详细状态面板 (A-6)
+// StatusPanel.tsx — 角色详细状态面板 (A-6)
 // 四栏展示：基础 / 战斗 / 先天 / 灵根资质
 // ============================================================
 
-import { getSpiritRootGrade } from '../game/player.js';
+import { getSpiritRootGrade } from '../game/player';
+import type { Player } from '../game/player';
 
-function StatRow({ icon, label, value, max, color }) {
-  const pct = max ? Math.min(100, (value / max) * 100) : null;
+interface StatRowProps {
+  icon: string;
+  label: string;
+  value: number | string;
+  max?: number;
+  color?: string;
+}
+
+function StatRow({ icon, label, value, max, color }: StatRowProps) {
+  const pct = max ? Math.min(100, (Number(value) / max) * 100) : null;
   return (
     <div className="stat-row">
       <span className="stat-label">{icon} {label}</span>
@@ -20,7 +29,12 @@ function StatRow({ icon, label, value, max, color }) {
   );
 }
 
-function AptitudeBar({ label, value }) {
+interface AptitudeBarProps {
+  label: string;
+  value: number;
+}
+
+function AptitudeBar({ label, value }: AptitudeBarProps) {
   let color = '#9E9E9E';
   if (value > 95) color = '#FFD700';
   else if (value > 80) color = '#9C27B0';
@@ -38,7 +52,13 @@ function AptitudeBar({ label, value }) {
   );
 }
 
-export default function StatusPanel({ player, isOpen, onToggle }) {
+interface StatusPanelProps {
+  player: Player;
+  isOpen: boolean;
+  onToggle: () => void;
+}
+
+export default function StatusPanel({ player, isOpen, onToggle }: StatusPanelProps) {
   if (!player) return null;
 
   const rootGrade = getSpiritRootGrade(player.aptitudes);
