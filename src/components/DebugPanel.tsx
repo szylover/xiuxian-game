@@ -23,17 +23,23 @@ const RARITY_COLORS: Record<ItemRarity, string> = {
   legendary: '#FFD700',
 };
 
-// 可编辑数值输入行
-function StatEditor({ label, value, onChange }: { label: string; value: number; onChange: (v: number) => void }) {
+// 可编辑数值行：显示当前值 + 快捷递增按钮
+function StatEditor({ label, value, deltas, onChange }: { label: string; value: number; deltas: number[]; onChange: (v: number) => void }) {
   return (
     <div className="debug-row">
-      <span className="debug-label">{label}</span>
-      <input
-        type="number"
-        className="debug-input"
-        value={value}
-        onChange={e => onChange(Number(e.target.value) || 0)}
-      />
+      <span className="debug-label">{label}: <strong>{value}</strong></span>
+      <div className="debug-btns">
+        {deltas.map(d => (
+          <button key={d} className="btn debug-btn" onClick={() => onChange(value + d)}>+{d}</button>
+        ))}
+        <input
+          type="number"
+          className="debug-input-sm"
+          placeholder="="
+          onKeyDown={e => { if (e.key === 'Enter') onChange(Number((e.target as HTMLInputElement).value) || 0); }}
+          onBlur={e => { const v = Number(e.target.value); if (v || v === 0) onChange(v); }}
+        />
+      </div>
     </div>
   );
 }
@@ -69,32 +75,32 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
   const getQty = (id: string) => itemQty[id] || 1;
   const setQty = (id: string, v: number) => setItemQty(prev => ({ ...prev, [id]: Math.max(1, v) }));
 
-  // 所有可编辑属性
-  const statFields: { label: string; key: string }[] = [
-    { label: '💰 灵石', key: 'gold' },
-    { label: '📈 修为', key: 'exp' },
-    { label: '❤️ HP', key: 'hp' },
-    { label: '❤️ MaxHP', key: 'maxHp' },
-    { label: '🔮 MP', key: 'mp' },
-    { label: '🔮 MaxMP', key: 'maxMp' },
-    { label: '⚡ 精力', key: 'stamina' },
-    { label: '⚡ Max精力', key: 'maxStamina' },
-    { label: '🧠 念力', key: 'mentalPower' },
-    { label: '🧠 Max念力', key: 'maxMentalPower' },
-    { label: '😊 心情', key: 'mood' },
-    { label: '💚 健康', key: 'health' },
-    { label: '🗡️ 攻击', key: 'atk' },
-    { label: '🛡️ 防御', key: 'def' },
-    { label: '👟 速度', key: 'speed' },
-    { label: '💨 移速', key: 'moveSpeed' },
-    { label: '💥 暴击率', key: 'critRate' },
-    { label: '🛑 暴击抗', key: 'critResist' },
-    { label: '🍀 幸运', key: 'luck' },
-    { label: '🧠 悟性', key: 'comprehension' },
-    { label: '💫 魅力', key: 'charisma' },
-    { label: '📅 年龄', key: 'age' },
-    { label: '📅 寿限', key: 'lifespan' },
-    { label: '🎒 背包容量', key: 'inventoryCapacity' },
+  // 所有可编辑属性 + 快捷递增值
+  const statFields: { label: string; key: string; deltas: number[] }[] = [
+    { label: '💰 灵石', key: 'gold', deltas: [100, 1000, 10000] },
+    { label: '📈 修为', key: 'exp', deltas: [500, 5000, 50000] },
+    { label: '❤️ HP', key: 'hp', deltas: [100, 500] },
+    { label: '❤️ MaxHP', key: 'maxHp', deltas: [100, 500] },
+    { label: '🔮 MP', key: 'mp', deltas: [50, 200] },
+    { label: '🔮 MaxMP', key: 'maxMp', deltas: [50, 200] },
+    { label: '⚡ 精力', key: 'stamina', deltas: [30, 100] },
+    { label: '⚡ Max精力', key: 'maxStamina', deltas: [30, 100] },
+    { label: '🧠 念力', key: 'mentalPower', deltas: [20, 100] },
+    { label: '🧠 Max念力', key: 'maxMentalPower', deltas: [20, 100] },
+    { label: '😊 心情', key: 'mood', deltas: [20, 50] },
+    { label: '💚 健康', key: 'health', deltas: [20, 50] },
+    { label: '🗡️ 攻击', key: 'atk', deltas: [10, 50, 200] },
+    { label: '🛡️ 防御', key: 'def', deltas: [10, 50, 200] },
+    { label: '👟 速度', key: 'speed', deltas: [5, 20] },
+    { label: '💨 移速', key: 'moveSpeed', deltas: [5, 20] },
+    { label: '💥 暴击率', key: 'critRate', deltas: [5, 10] },
+    { label: '🛑 暴击抗', key: 'critResist', deltas: [5, 10] },
+    { label: '🍀 幸运', key: 'luck', deltas: [10, 30] },
+    { label: '🧠 悟性', key: 'comprehension', deltas: [10, 30] },
+    { label: '💫 魅力', key: 'charisma', deltas: [10, 30] },
+    { label: '📅 年龄', key: 'age', deltas: [10, 50] },
+    { label: '📅 寿限', key: 'lifespan', deltas: [100, 500, 2000] },
+    { label: '🎒 背包容量', key: 'inventoryCapacity', deltas: [5, 20, 50] },
   ];
 
   return (
@@ -148,11 +154,12 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
               </div>
 
               {/* 所有数值 */}
-              {statFields.map(({ label, key }) => (
+              {statFields.map(({ label, key, deltas }) => (
                 <StatEditor
                   key={key}
                   label={label}
                   value={(player as unknown as Record<string, number>)[key] ?? 0}
+                  deltas={deltas}
                   onChange={v => setStat(key, v)}
                 />
               ))}

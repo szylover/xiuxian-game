@@ -1043,6 +1043,19 @@ body {
 
 .debug-input:focus { outline: none; border-color: #ef5350; }
 
+.debug-input-sm {
+  background: #1a1a2a;
+  border: 1px solid #333;
+  color: #eee;
+  width: 55px;
+  padding: 0.12rem 0.2rem;
+  border-radius: 3px;
+  font-size: 0.68rem;
+  text-align: center;
+}
+
+.debug-input-sm:focus { outline: none; border-color: #ef5350; }
+
 .debug-item-list {
   display: flex;
   flex-direction: column;
