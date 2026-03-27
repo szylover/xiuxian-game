@@ -22,6 +22,12 @@
 3. /ship  → 检查清单 → commit → push → PR
 ```
 
+### Git 规则
+
+- **禁止直接 push 到 main**。所有代码必须通过创建分支 + PR 合并的方式进入 main。
+- 分支命名：`feat/T0XXX-简要描述`、`fix/简要描述`、`chore/简要描述`
+- PR 合并策略：squash merge
+
 ### 新会话恢复
 
 ```

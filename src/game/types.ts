@@ -154,6 +154,23 @@ export interface TechniqueStatBonus {
   mp?: number;
 }
 
+/** 功法主动技能定义 */
+export interface TechniqueActiveSkill {
+  name: string;                     // 技能名称，如"疾风三剑"
+  description: string;              // 技能描述
+  mpCost: number;                   // 基础灵力消耗
+  staminaCost: number;              // 基础精力消耗（每次释放额外扣精力）
+  dmgMultiplier: number;            // 伤害倍率（相对普通攻击，如 1.5 = 150%）
+  hitCount: number;                 // 攻击段数（多段攻击，每段独立判定暴击/闪避）
+  cooldown: number;                 // 冷却回合数（0 = 无冷却）
+  triggerRate: number;              // AI 随机释放概率（0~1，Phase 1 使用）
+  effect?: {                        // 附加效果（可选）
+    type: 'dot' | 'debuff_def' | 'debuff_atk' | 'heal_self';
+    value: number;                  // 效果值（dot=每回合伤害, debuff=减少值, heal=恢复量）
+    duration: number;               // 持续回合数
+  };
+}
+
 export interface TechniqueDef {
   id: string;                              // 命名空间 ID，如 core:basic_sword
   name: string;                            // 显示名称
@@ -165,6 +182,7 @@ export interface TechniqueDef {
   expPerLevel: number;                     // 每级所需熟练度
   statBonusPerLevel: TechniqueStatBonus;   // 每级属性加成
   aptitudeKey: keyof import('./player').Aptitudes; // 对应资质字段
+  activeSkill?: TechniqueActiveSkill;      // 主动技能定义（无则该功法只有被动加成）
 }
 
 // ── 事件类型定义 ──
@@ -186,6 +204,9 @@ export interface GameEvent {
 }
 
 // ── DLC 包定义 ──
+
+// 预留，Phase 1 不实现
+export type SkillStrategy = 'random' | 'smart';
 
 export interface DLCPack {
   id: string;                              // DLC 标识，如 'core', 'dlc-1'

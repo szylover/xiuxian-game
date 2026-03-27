@@ -14,6 +14,7 @@ import DebugPanel from './components/debug/DebugPanel';
 import GameLayout from './components/layout/GameLayout';
 import LeftPanel from './components/layout/LeftPanel';
 import RightPanel from './components/layout/RightPanel';
+import CombatModal from './components/shared/CombatModal';
 import type { PanelKey } from './components/layout/PanelButtons';
 import './App.css';
 
@@ -92,6 +93,13 @@ export default function App() {
       debug={<>
         <DebugPanel player={engine.player} onUpdate={engine.debugSetPlayer} />
         <ToastContainer toasts={engine.toasts} onDismiss={engine.dismissToast} />
+        {engine.combatModal && (
+          <CombatModal
+            state={engine.combatModal}
+            onNext={engine.handleCombatNext}
+            onClose={engine.handleCombatClose}
+          />
+        )}
       </>}
     />
   );
