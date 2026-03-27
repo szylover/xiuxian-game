@@ -11,6 +11,7 @@ import { runCombat } from '../game/combat';
 import { registerCoreEvents, triggerExploreEvent, triggerDailyEvent } from '../game/events';
 import { useItem as inventoryUseItem, addItem } from '../game/inventory';
 import { getItemDef } from '../game/registry';
+import { performAlchemy } from '../game/alchemy';
 import type { LogCategory } from './useGameLog';
 
 // 注册核心事件（模块加载时执行一次）
@@ -330,6 +331,16 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     });
   }, [addLog]);
 
+  // ── T0013: 炼丹 ──
+  const craft = useCallback((recipeId: string) => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = performAlchemy(prev, recipeId);
+      addLog(result.message, 'system');
+      return result.player;
+    });
+  }, [addLog]);
+
   return {
     player,
     gameOver,
@@ -344,5 +355,6 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     deleteSave,
     canAct,
     useItem: useItemAction,
+    craft,
   };
 }

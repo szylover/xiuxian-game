@@ -46,7 +46,7 @@
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
 | [T0012](tasks/done/T0012-inventory.md) | 背包系统 | T0001 | — | ✅ |
-| [T0013](tasks/todo/T0013-alchemy-v2.md) | 丹药系统 v2（炼丹） | T0012 | — | ⬜ |
+| [T0013](tasks/done/T0013-alchemy-v2.md) | 丹药系统 v2（炼丹） | T0012 | — | ✅ |
 | [T0014](tasks/todo/T0014-equipment.md) | 装备系统 | T0012 | — | ⬜ |
 | [T0015](tasks/todo/T0015-shop.md) | 商店系统 | T0012 | — | ⬜ |
 | [T0016](tasks/todo/T0016-smithing.md) | 炼器系统 | T0012, T0014 | — | ⬜ |
@@ -82,7 +82,7 @@
 
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
-| [T0029](tasks/active/T0029-breakthrough-v2.md) | 突破系统重构 + 渡劫 | T0004, T0012 | [spec](specs/G-1-breakthrough-tribulation.md) | 📐 |
+| [T0029](tasks/active/T0029-breakthrough-v2.md) | 突破系统重构 + 渡劫 | T0004, T0012 | [spec](specs/T0029-breakthrough-tribulation.md) | 📐 |
 | [T0030](tasks/todo/T0030-reincarnation.md) | 转世重修 | T0029 | — | ⬜ |
 | [T0031](tasks/todo/T0031-achievement.md) | 成就系统 | T0001 | — | ⬜ |
 | [T0032](tasks/todo/T0032-leaderboard.md) | 排行榜 | T0031 | — | ⬜ |

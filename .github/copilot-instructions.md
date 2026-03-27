@@ -74,7 +74,7 @@ xiuxian-game/
 │   └── specs/                     #   设计文档存放目录
 │       ├── design-attribute-system.md
 │       ├── design-novel-events.md
-│       └── G-1-breakthrough-tribulation.md
+│       └── T0029-breakthrough-tribulation.md
 └── src/                           # React 源码
     ├── main.tsx                   #   React 入口（挂载 <App />）
     ├── App.tsx                    #   根组件（路由/界面切换）

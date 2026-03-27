@@ -1,0 +1,111 @@
+[
+  {
+    "id": "core:recipe_hp_pill",
+    "name": "回血丹配方",
+    "description": "灵芝草炼制回血丹",
+    "inputs": [{ "itemId": "core:herb_lingzhi", "count": 2 }],
+    "outputItemId": "core:hp_pill",
+    "outputCount": 2,
+    "baseSuccessRate": 0.7,
+    "mentalCost": 5,
+    "minRealm": 0,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "core:recipe_mp_pill",
+    "name": "回灵丹配方",
+    "description": "灵芝草 + 灵石碎片炼制回灵丹",
+    "inputs": [
+      { "itemId": "core:herb_lingzhi", "count": 1 },
+      { "itemId": "core:spirit_stone_shard", "count": 3 }
+    ],
+    "outputItemId": "core:mp_pill",
+    "outputCount": 2,
+    "baseSuccessRate": 0.65,
+    "mentalCost": 8,
+    "minRealm": 0,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "core:recipe_stamina_pill",
+    "name": "聚气丹配方",
+    "description": "灵芝草炼制聚气丹",
+    "inputs": [{ "itemId": "core:herb_lingzhi", "count": 1 }],
+    "outputItemId": "core:stamina_pill",
+    "outputCount": 2,
+    "baseSuccessRate": 0.75,
+    "mentalCost": 5,
+    "minRealm": 0,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "core:recipe_exp_pill",
+    "name": "筑基丹配方",
+    "description": "雪莲花 + 妖丹炼制筑基丹",
+    "inputs": [
+      { "itemId": "core:herb_snow_lotus", "count": 1 },
+      { "itemId": "core:monster_core", "count": 1 }
+    ],
+    "outputItemId": "core:exp_pill",
+    "outputCount": 1,
+    "baseSuccessRate": 0.5,
+    "mentalCost": 15,
+    "minRealm": 1,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "core:recipe_mood_pill",
+    "name": "静心丹配方",
+    "description": "灵芝草 + 灵石碎片炼制静心丹",
+    "inputs": [
+      { "itemId": "core:herb_lingzhi", "count": 1 },
+      { "itemId": "core:spirit_stone_shard", "count": 2 }
+    ],
+    "outputItemId": "core:mood_pill",
+    "outputCount": 2,
+    "baseSuccessRate": 0.7,
+    "mentalCost": 5,
+    "minRealm": 0,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "core:recipe_health_pill",
+    "name": "养生丹配方",
+    "description": "灵芝草炼制养生丹",
+    "inputs": [{ "itemId": "core:herb_lingzhi", "count": 2 }],
+    "outputItemId": "core:health_pill",
+    "outputCount": 2,
+    "baseSuccessRate": 0.7,
+    "mentalCost": 5,
+    "minRealm": 0,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "core:recipe_spirit_water",
+    "name": "灵泉水配方",
+    "description": "灵石碎片提纯灵泉水",
+    "inputs": [{ "itemId": "core:spirit_stone_shard", "count": 5 }],
+    "outputItemId": "core:spirit_water",
+    "outputCount": 2,
+    "baseSuccessRate": 0.6,
+    "mentalCost": 10,
+    "minRealm": 1,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "core:recipe_full_restore",
+    "name": "九转还魂丹配方",
+    "description": "雪莲花 + 妖丹 + 灵芝草炼制终极丹药",
+    "inputs": [
+      { "itemId": "core:herb_snow_lotus", "count": 3 },
+      { "itemId": "core:monster_core", "count": 2 },
+      { "itemId": "core:herb_lingzhi", "count": 3 }
+    ],
+    "outputItemId": "core:full_restore_pill",
+    "outputCount": 1,
+    "baseSuccessRate": 0.3,
+    "mentalCost": 30,
+    "minRealm": 3,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1, "excellent": 2 }
+  }
+]
