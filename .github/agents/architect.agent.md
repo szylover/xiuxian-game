@@ -78,4 +78,8 @@ tools: [read, edit, search, agent, todo]
 
 ## 进度更新（必做）
 
-After saving the Design Spec, **update `docs/progress.md`**: mark "Design Spec" as ✅ with the spec file path.
+设计文档保存后，**必须同步更新以下文件**：
+
+1. **`docs/progress.md`** — 在当前阶段任务拆解表中，标记对应设计文档为 ✅，备注 spec 文件路径
+2. **`docs/roadmap/milestone-X.md`** — 在对应 Milestone 文件中，若该功能是新增的（不在原表中），则追加一行；若已存在则更新状态说明
+3. **`docs/roadmap.md`** — 如果新功能影响了 Milestone 总览（如新增 Stage、状态变更），同步更新总览表
