@@ -908,3 +908,124 @@ body {
 
 .btn-smith:hover:not(:disabled) { background: #3a2a1a; }
 .btn-smith:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── 调试面板 ── */
+.debug-panel {
+  position: fixed;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 999;
+  max-width: 360px;
+}
+
+.debug-toggle {
+  background: #2a0a0a;
+  color: #ef5350;
+  border: 1px solid #ef5350;
+  border-radius: 6px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  float: right;
+}
+
+.debug-toggle:hover { background: #3a1a1a; }
+
+.debug-content {
+  clear: both;
+  margin-top: 0.3rem;
+  background: #0a0a1a;
+  border: 1px solid #ef5350;
+  border-radius: 8px;
+  padding: 0.6rem;
+  max-height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.debug-warning {
+  text-align: center;
+  color: #ef5350;
+  font-size: 0.72rem;
+  margin-bottom: 0.4rem;
+  padding: 0.2rem;
+  background: #1a0a0a;
+  border-radius: 4px;
+}
+
+.debug-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.debug-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.debug-label {
+  font-size: 0.75rem;
+  color: #aaa;
+  min-width: 100px;
+}
+
+.debug-btns {
+  display: flex;
+  gap: 0.2rem;
+  flex-wrap: wrap;
+}
+
+.debug-btn {
+  background: #1a1a2a;
+  color: #aaa;
+  border: 1px solid #333;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.68rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.debug-btn:hover { background: #2a2a3a; color: #fff; }
+.debug-btn.debug-active { background: #2a1a2a; color: #ffd700; border-color: #ffd700; }
+
+.debug-full {
+  background: #1a2a1a;
+  color: #8BC34A;
+  border-color: #4CAF50;
+  padding: 0.3rem 1rem;
+  font-size: 0.75rem;
+}
+
+.debug-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.debug-section-title {
+  font-size: 0.75rem;
+  color: #888;
+  border-bottom: 1px solid #222;
+  padding-bottom: 0.2rem;
+}
+
+.debug-item-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+
+.debug-item-btn {
+  background: #1a1a2a;
+  color: #aaa;
+  border: 1px solid #333;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.65rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.debug-item-btn:hover { background: #2a2a3a; color: #fff; }

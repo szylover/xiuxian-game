@@ -433,5 +433,7 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     buy,
     sell,
     smith,
+    // Debug: 直接修改 player（仅 debug 模式使用）
+    debugSetPlayer: setPlayer,
   };
 }
