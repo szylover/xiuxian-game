@@ -9,8 +9,9 @@
 
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
-| [T0018](tasks/todo/T0018-skill-combat.md) | 技能战斗 | T0003 ✅, T0017 ✅ | — | ⬜ |
+
 | [T0019](tasks/todo/T0019-passive-effects.md) | 被动效果 | T0017 ✅ | — | ⬜ |
+| [T0020](tasks/todo/T0020-divine-arts.md) | 神通（元素体系） | T0017 ✅, T0018 ✅ | — | ⬜ |
 | [T0021](tasks/todo/T0021-map-system.md) | 地图系统 | T0001 ✅ | — | ⬜ |
 | [T0025](tasks/todo/T0025-npc-system.md) | NPC 系统 | T0001 ✅ | — | ⬜ |
 | [T0030](tasks/todo/T0030-reincarnation.md) | 转世重修 | T0029 ✅, T0040 | — | ⬜ |
@@ -22,10 +23,13 @@
 | [T0039](tasks/todo/T0039-tutorial.md) | 新手引导 | T0001 ✅ | — | ⬜ |
 | [T0040](tasks/todo/T0040-death-system.md) | 死亡与复活系统 | T0001 ✅, T0003 ✅, T0012 ✅ | [spec](specs/T0040-death-system.md) | ⬜ |
 
+
 ## 最近完成
 
 | ID | 任务 | 完成日期 |
 |----|------|----------|
+| T0044 | 战斗弹窗 + 日志精简 | 2026-03-27 |
+| T0018 | 技能战斗 | 2026-03-27 |
 | T0043 | 日志系统改进（Toast + 时间线） | 2026-03-27 |
 | T0042 | 年月历法系统 | 2026-03-27 |
 | T0017 | 功法系统 | 2026-03-27 |

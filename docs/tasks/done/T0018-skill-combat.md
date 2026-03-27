@@ -1,9 +1,10 @@
 # T0018 — 技能战斗
 
-- **状态**: ⬜ 未开始
+- **状态**: ✅ 已完成（2026-03-27）
 - **分类**: 功法与技能
 - **前置**: T0003, T0017
-- **Spec**: —
+- **Spec**: [T0018-skill-combat.md](../../specs/T0018-skill-combat.md)
+- **关键文件**: `src/game/combat/`、`src/game/technique.ts`、`src/game/types.ts`、`src/data/core-techniques.json`、`src/hooks/useCoreActions.ts`
 
 ## 描述
 

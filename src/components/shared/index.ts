@@ -7,6 +7,7 @@ export { default as CapacityBar } from './CapacityBar';
 export { default as TabBar } from './TabBar';
 export { default as StatusItem } from './StatusItem';
 export { default as FloatingPanel } from './FloatingPanel';
+export { default as CombatModal } from './CombatModal';
 export { StatRow, AptitudeBar } from './StatRow';
 export {
   RARITY_COLORS, RARITY_LABELS, STAT_CN,

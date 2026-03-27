@@ -53,6 +53,24 @@ export default function GameLog({ logs, currentYear = 1, currentMonth = 1 }: Gam
     });
   };
 
+  // 折叠全部 / 展开全部
+  const collapseAll = () => {
+    setExpandedYears(new Set());
+    setExpandedMonths(new Set());
+  };
+
+  const expandAll = () => {
+    const allYears = new Set(grouped.keys());
+    const allMonths = new Set<string>();
+    for (const [year, monthMap] of grouped) {
+      for (const month of monthMap.keys()) {
+        allMonths.add(`${year}-${month}`);
+      }
+    }
+    setExpandedYears(allYears);
+    setExpandedMonths(allMonths);
+  };
+
   // 按年降序排列
   const years = Array.from(grouped.keys()).sort((a, b) => b - a);
 
@@ -67,6 +85,10 @@ export default function GameLog({ logs, currentYear = 1, currentMonth = 1 }: Gam
           className="log-filters"
           tabClassName="log-filter-btn"
         />
+        <div className="log-header-actions">
+          <button className="log-collapse-btn" onClick={expandAll} title="展开全部">🔽</button>
+          <button className="log-collapse-btn" onClick={collapseAll} title="折叠全部">🔼</button>
+        </div>
       </div>
       <div className="log-list">
         {years.length === 0 && <p className="log-empty">暂无日志…</p>}

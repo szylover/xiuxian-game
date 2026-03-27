@@ -9,7 +9,17 @@
     "maxLevel": 10,
     "expPerLevel": 50,
     "statBonusPerLevel": { "atk": 3, "speed": 1 },
-    "aptitudeKey": "sword"
+    "aptitudeKey": "sword",
+    "activeSkill": {
+      "name": "三才剑诀",
+      "description": "剑走三才，一击破敌。",
+      "mpCost": 8,
+      "staminaCost": 3,
+      "dmgMultiplier": 1.3,
+      "hitCount": 1,
+      "cooldown": 0,
+      "triggerRate": 0.35
+    }
   },
   {
     "id": "core:basic_blade",
@@ -21,7 +31,17 @@
     "maxLevel": 10,
     "expPerLevel": 50,
     "statBonusPerLevel": { "atk": 4 },
-    "aptitudeKey": "blade"
+    "aptitudeKey": "blade",
+    "activeSkill": {
+      "name": "劈山斩",
+      "description": "大开大合，一刀劈山。",
+      "mpCost": 10,
+      "staminaCost": 4,
+      "dmgMultiplier": 1.5,
+      "hitCount": 1,
+      "cooldown": 1,
+      "triggerRate": 0.30
+    }
   },
   {
     "id": "core:basic_fist",
@@ -33,7 +53,17 @@
     "maxLevel": 10,
     "expPerLevel": 50,
     "statBonusPerLevel": { "atk": 2, "hp": 10 },
-    "aptitudeKey": "fist"
+    "aptitudeKey": "fist",
+    "activeSkill": {
+      "name": "连环拳",
+      "description": "拳拳相连，伤害可观。",
+      "mpCost": 8,
+      "staminaCost": 3,
+      "dmgMultiplier": 1.0,
+      "hitCount": 3,
+      "cooldown": 1,
+      "triggerRate": 0.30
+    }
   },
   {
     "id": "core:basic_palm",
@@ -45,7 +75,18 @@
     "maxLevel": 10,
     "expPerLevel": 50,
     "statBonusPerLevel": { "atk": 2, "def": 2 },
-    "aptitudeKey": "palm"
+    "aptitudeKey": "palm",
+    "activeSkill": {
+      "name": "柔云掌",
+      "description": "掌势柔和，伤敌的同时回复自身。",
+      "mpCost": 8,
+      "staminaCost": 3,
+      "dmgMultiplier": 1.2,
+      "hitCount": 1,
+      "cooldown": 0,
+      "triggerRate": 0.35,
+      "effect": { "type": "heal_self", "value": 15, "duration": 1 }
+    }
   },
   {
     "id": "core:basic_finger",
@@ -57,7 +98,17 @@
     "maxLevel": 10,
     "expPerLevel": 50,
     "statBonusPerLevel": { "atk": 2, "critRate": 1 },
-    "aptitudeKey": "finger"
+    "aptitudeKey": "finger",
+    "activeSkill": {
+      "name": "一阳指",
+      "description": "一指点出，精准致命。",
+      "mpCost": 10,
+      "staminaCost": 3,
+      "dmgMultiplier": 1.4,
+      "hitCount": 1,
+      "cooldown": 1,
+      "triggerRate": 0.30
+    }
   },
   {
     "id": "core:basic_spear",
@@ -69,7 +120,18 @@
     "maxLevel": 10,
     "expPerLevel": 50,
     "statBonusPerLevel": { "atk": 3, "def": 1 },
-    "aptitudeKey": "spear"
+    "aptitudeKey": "spear",
+    "activeSkill": {
+      "name": "破阵枪",
+      "description": "枪势凌厉，破敌防御。",
+      "mpCost": 10,
+      "staminaCost": 4,
+      "dmgMultiplier": 1.4,
+      "hitCount": 1,
+      "cooldown": 0,
+      "triggerRate": 0.30,
+      "effect": { "type": "debuff_def", "value": 3, "duration": 2 }
+    }
   },
   {
     "id": "core:swift_sword",
@@ -81,7 +143,17 @@
     "maxLevel": 15,
     "expPerLevel": 80,
     "statBonusPerLevel": { "atk": 4, "speed": 2, "critRate": 1 },
-    "aptitudeKey": "sword"
+    "aptitudeKey": "sword",
+    "activeSkill": {
+      "name": "疾风三剑",
+      "description": "剑如疾风，三剑连出。",
+      "mpCost": 15,
+      "staminaCost": 5,
+      "dmgMultiplier": 1.2,
+      "hitCount": 3,
+      "cooldown": 2,
+      "triggerRate": 0.35
+    }
   },
   {
     "id": "core:iron_fist",
@@ -93,7 +165,18 @@
     "maxLevel": 15,
     "expPerLevel": 80,
     "statBonusPerLevel": { "atk": 3, "def": 2, "hp": 15 },
-    "aptitudeKey": "fist"
+    "aptitudeKey": "fist",
+    "activeSkill": {
+      "name": "崩山拳",
+      "description": "一拳崩山，碎裂敌甲。",
+      "mpCost": 15,
+      "staminaCost": 5,
+      "dmgMultiplier": 1.8,
+      "hitCount": 1,
+      "cooldown": 2,
+      "triggerRate": 0.30,
+      "effect": { "type": "debuff_def", "value": 5, "duration": 2 }
+    }
   },
   {
     "id": "core:thunder_blade",
@@ -105,7 +188,18 @@
     "maxLevel": 20,
     "expPerLevel": 120,
     "statBonusPerLevel": { "atk": 6, "critRate": 2, "critDmgMultiplier": 0.05 },
-    "aptitudeKey": "blade"
+    "aptitudeKey": "blade",
+    "activeSkill": {
+      "name": "天雷斩",
+      "description": "引天雷入刀，雷火灼烧。",
+      "mpCost": 25,
+      "staminaCost": 8,
+      "dmgMultiplier": 2.0,
+      "hitCount": 1,
+      "cooldown": 3,
+      "triggerRate": 0.25,
+      "effect": { "type": "dot", "value": 30, "duration": 3 }
+    }
   },
   {
     "id": "core:phantom_palm",
@@ -117,7 +211,17 @@
     "maxLevel": 20,
     "expPerLevel": 120,
     "statBonusPerLevel": { "atk": 4, "speed": 3, "def": 2 },
-    "aptitudeKey": "palm"
+    "aptitudeKey": "palm",
+    "activeSkill": {
+      "name": "幻影连击",
+      "description": "掌影重重，虚实难辨，连击五次。",
+      "mpCost": 20,
+      "staminaCost": 6,
+      "dmgMultiplier": 1.0,
+      "hitCount": 5,
+      "cooldown": 3,
+      "triggerRate": 0.25
+    }
   },
   {
     "id": "core:heaven_sword",
@@ -129,7 +233,18 @@
     "maxLevel": 25,
     "expPerLevel": 200,
     "statBonusPerLevel": { "atk": 8, "speed": 3, "critRate": 2, "mp": 10 },
-    "aptitudeKey": "sword"
+    "aptitudeKey": "sword",
+    "activeSkill": {
+      "name": "万剑归宗",
+      "description": "万剑齐发，剑气灼烧。",
+      "mpCost": 40,
+      "staminaCost": 12,
+      "dmgMultiplier": 1.5,
+      "hitCount": 4,
+      "cooldown": 4,
+      "triggerRate": 0.20,
+      "effect": { "type": "dot", "value": 50, "duration": 3 }
+    }
   },
   {
     "id": "core:dragon_spear",
@@ -141,6 +256,17 @@
     "maxLevel": 25,
     "expPerLevel": 200,
     "statBonusPerLevel": { "atk": 7, "def": 3, "speed": 2, "hp": 20 },
-    "aptitudeKey": "spear"
+    "aptitudeKey": "spear",
+    "activeSkill": {
+      "name": "龙吟贯日",
+      "description": "枪势如龙，震慑敌人削弱攻击。",
+      "mpCost": 35,
+      "staminaCost": 10,
+      "dmgMultiplier": 2.5,
+      "hitCount": 1,
+      "cooldown": 4,
+      "triggerRate": 0.20,
+      "effect": { "type": "debuff_atk", "value": 20, "duration": 3 }
+    }
   }
 ]

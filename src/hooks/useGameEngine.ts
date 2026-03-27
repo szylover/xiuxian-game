@@ -11,10 +11,19 @@ import { registerCoreEvents, triggerDailyEvent } from '../game/events';
 import type { LogCategory } from './useGameLog';
 import { useToast } from './useToast';
 import { useCoreActions } from './useCoreActions';
+import type { LootEntry } from './useCoreActions';
 import { useSystemActions } from './useSystemActions';
+import type { CombatResult } from '../game/combat';
 
 // 注册核心事件（模块加载时执行一次）
 registerCoreEvents();
+
+export interface CombatModalState {
+  phase: 'battle' | 'loot';
+  monsterName: string;
+  result: CombatResult;
+  loot: LootEntry[];
+}
 
 const SAVE_KEY = 'xiuxian_save';
 
@@ -51,6 +60,7 @@ export function useGameEngine(
   const [player, setPlayer] = useState<Player | null>(null);
   const [gameOver, setGameOver] = useState(false);
   const [gameOverReason, setGameOverReason] = useState('');
+  const [combatModal, setCombatModal] = useState<CombatModalState | null>(null);
   const playerRef = useRef<Player | null>(null);
   const { toasts, showToast, dismiss: dismissToast } = useToast();
 
@@ -153,9 +163,37 @@ export function useGameEngine(
     return player.stamina >= cost.stamina;
   }, [player, gameOver]);
 
+  // ── 战斗弹窗回调（T0044）──
+  const onCombatResult = useCallback((monsterName: string, result: CombatResult, loot: LootEntry[]) => {
+    setCombatModal({ phase: 'battle', monsterName, result, loot });
+  }, []);
+
+  const handleCombatNext = useCallback(() => {
+    setCombatModal(prev => prev ? { ...prev, phase: 'loot' } : null);
+  }, []);
+
+  const combatModalRef = useRef<CombatModalState | null>(null);
+  useEffect(() => { combatModalRef.current = combatModal; }, [combatModal]);
+
+  const handleCombatClose = useCallback(() => {
+    const modal = combatModalRef.current;
+    if (!modal) return;
+    const { monsterName, result, loot } = modal;
+    if (result.winner === 'player') {
+      const parts = [`⚔️ 击败 ${monsterName} → +${result.expGained}修为 +${result.goldGained}灵石`];
+      for (const l of loot) parts.push(`${l.name}×${l.amount}`);
+      addLog(parts.join(' '), 'combat');
+    } else if (result.winner === 'monster') {
+      addLog(`💀 败于 ${monsterName}，身受重伤`, 'combat');
+    } else {
+      addLog(`⚔️ 与 ${monsterName} 战斗超时，双方脱战`, 'combat');
+    }
+    setCombatModal(null);
+  }, [addLog]);
+
   // ── 子 Hook：核心行为（修炼/战斗/探索/休息）──
   const { cultivate, fight, explore, rest } = useCoreActions({
-    addLog, addLogs, setPlayer, advanceTime, canAct,
+    addLog, addLogs, setPlayer, advanceTime, canAct, onCombatResult,
   });
 
   // ── 子 Hook：系统行为（炼丹/炼器/装备/商店/背包/突破/功法）──
@@ -199,6 +237,9 @@ export function useGameEngine(
     activateTechnique,
     toasts,
     dismissToast,
+    combatModal,
+    handleCombatNext,
+    handleCombatClose,
     // Debug: 直接修改 player（仅 debug 模式使用）
     debugSetPlayer: setPlayer,
   };

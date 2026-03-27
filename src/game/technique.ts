@@ -4,7 +4,7 @@
 // ============================================================
 
 import type { Player } from './player';
-import type { TechniqueDef, TechniqueStatBonus } from './types';
+import type { TechniqueDef, TechniqueStatBonus, TechniqueActiveSkill } from './types';
 import type { TechniqueSlot } from './player/types';
 import { getTechniqueDef, getAllTechniqueDefs } from './registry';
 
@@ -154,4 +154,24 @@ export function getLearnableTechniques(player: Player): TechniqueDef[] {
   return getAllTechniqueDefs().filter(
     def => player.realmIndex >= def.minRealm && !learned.has(def.id)
   );
+}
+
+// ── 获取当前激活功法的主动技能信息 ──
+export function getActiveSkillInfo(player: Player): { def: TechniqueDef; slot: TechniqueSlot; skill: TechniqueActiveSkill } | null {
+  if (!player.activeTechniqueId) return null;
+
+  const slot = player.techniques.find(t => t.techniqueId === player.activeTechniqueId);
+  if (!slot) return null;
+
+  const def = getTechniqueDef(slot.techniqueId);
+  if (!def || !def.activeSkill) return null;
+
+  return { def, slot, skill: def.activeSkill };
+}
+
+// ── 计算资质加成系数（1.0~1.5）──
+export function calcAptitudeBonus(player: Player, def: TechniqueDef): number {
+  const aptKey = TYPE_APTITUDE_MAP[def.type] ?? 'sword';
+  const aptitude = player.aptitudes[aptKey] ?? 0;
+  return 1.0 + aptitude / 200;
 }

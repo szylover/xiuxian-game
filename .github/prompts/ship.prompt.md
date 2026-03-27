@@ -16,8 +16,8 @@ tools: [read, edit, search, execute]
    - [ ] `docs/changelog.md` — 如果功能/行为有变化，追加今天的条目
    - [ ] `.github/copilot-instructions.md` 项目目录树 — 如果目录结构变了就更新
    - [ ] `staticwebapp.config.json` — 如有需要则更新
-3. **Git 工作流**：
-   - 从 `main` 创建分支：`stage-N/简要描述`
+3. **Git 工作流**（禁止直接 push 到 main，必须走 PR）：
+   - 从 `main` 创建分支：`feat/T0XXX-简要描述`、`fix/简要描述`、`chore/简要描述`
    - `git add -A && git commit -m "stage N: 简要描述"`
    - `git push -u origin <分支名>`
    - `gh pr create --base main --head <分支名> --title "同提交信息" --body "改动要点"`

@@ -8,10 +8,17 @@ import type { Player } from '../game/player';
 import { getSpiritRootGrade } from '../game/player';
 import { ACTION_COSTS, MONSTERS, BASE_CULTIVATE_EXP } from '../game/data';
 import { runCombat } from '../game/combat';
+import type { CombatResult } from '../game/combat';
 import { triggerExploreEvent } from '../game/events';
 import { addItem } from '../game/inventory';
 import { getItemDef } from '../game/registry';
 import type { LogCategory } from './useGameLog';
+
+export interface LootEntry {
+  icon: string;
+  name: string;
+  amount: number;
+}
 
 export interface CoreActionDeps {
   addLog: (msg: string, category?: LogCategory) => void;
@@ -19,12 +26,15 @@ export interface CoreActionDeps {
   setPlayer: React.Dispatch<React.SetStateAction<Player | null>>;
   advanceTime: (p: Player, actionKey: string) => Player;
   canAct: (actionKey: string) => boolean;
+  onCombatResult: (monsterName: string, result: CombatResult, loot: LootEntry[]) => void;
 }
 
 export function useCoreActions(deps: CoreActionDeps) {
-  const { addLog, addLogs, setPlayer, advanceTime, canAct } = deps;
+  const { addLog, addLogs, setPlayer, advanceTime, canAct, onCombatResult } = deps;
   // 收集日志用 ref，避免 React strict mode 重复
   const pendingRef = useRef<{ msgs: string[]; categories: LogCategory[] }>({ msgs: [], categories: [] });
+  // 战斗结果暂存（setPlayer回调内收集，setTimeout中消费）
+  const combatResultRef = useRef<{ monsterName: string; result: CombatResult; loot: LootEntry[] } | null>(null);
 
   const flushLogs = () => {
     const { msgs, categories } = pendingRef.current;
@@ -81,6 +91,7 @@ export function useCoreActions(deps: CoreActionDeps) {
       return;
     }
     pendingRef.current = { msgs: [], categories: [] };
+    combatResultRef.current = null;
     setPlayer(prev => {
       if (!prev) return prev;
       let p: Player = { ...prev };
@@ -98,12 +109,17 @@ export function useCoreActions(deps: CoreActionDeps) {
       const monster = eligible[Math.floor(Math.random() * eligible.length)];
       const result = runCombat(p, monster);
 
-      pendingRef.current = { msgs: [], categories: [] };
-      queueLogs(result.logs, 'combat');
+      // 收集战利品用于弹窗展示
+      const loot: LootEntry[] = [];
 
       p.hp = result.playerHpLeft;
       p.exp += result.expGained;
       p.gold += result.goldGained;
+
+      // 扣减战斗中消耗的灵力
+      if (result.mpUsed > 0) {
+        p.mp = Math.max(0, p.mp - result.mpUsed);
+      }
 
       if (result.winner === 'player') {
         p.tracking = { ...p.tracking, killCount: p.tracking.killCount + 1, consecutiveRests: 0, consecutiveCultivates: 0 };
@@ -113,12 +129,12 @@ export function useCoreActions(deps: CoreActionDeps) {
         if (Math.random() < 0.3) {
           const { player: p2, added } = addItem(p, 'core:monster_fang', 1);
           p = p2;
-          if (added > 0) queueLog('🦴 获得 妖兽獠牙 ×1', 'combat');
+          if (added > 0) loot.push({ icon: '🦴', name: '妖兽獠牙', amount: 1 });
         }
         if (Math.random() < 0.1) {
           const { player: p2, added } = addItem(p, 'core:monster_core', 1);
           p = p2;
-          if (added > 0) queueLog('💎 获得 妖丹 ×1', 'combat');
+          if (added > 0) loot.push({ icon: '💎', name: '妖丹', amount: 1 });
         }
         if (Math.random() < 0.05) {
           const equipDrops: Record<number, string[]> = {
@@ -134,7 +150,7 @@ export function useCoreActions(deps: CoreActionDeps) {
           if (added > 0) {
             p = p2;
             const eDef = getItemDef(dropId);
-            queueLog(`⚔️ 获得装备 ${eDef?.name ?? dropId}！`, 'combat');
+            loot.push({ icon: '⚔️', name: eDef?.name ?? dropId, amount: 1 });
           }
         }
       } else if (result.winner === 'monster') {
@@ -145,11 +161,22 @@ export function useCoreActions(deps: CoreActionDeps) {
         }
       }
 
+      // 暂存战斗结果，不写日志
+      combatResultRef.current = { monsterName: monster.name, result, loot };
+
       p = advanceTime(p, 'combat');
       return p;
     });
-    setTimeout(flushLogs, 0);
-  }, [canAct, advanceTime, addLog, addLogs, setPlayer]);
+    setTimeout(() => {
+      if (combatResultRef.current) {
+        const { monsterName, result, loot } = combatResultRef.current;
+        onCombatResult(monsterName, result, loot);
+        combatResultRef.current = null;
+      } else {
+        flushLogs();
+      }
+    }, 0);
+  }, [canAct, advanceTime, addLog, setPlayer, onCombatResult]);
 
   // ── 探索 ──
   const explore = useCallback(() => {
