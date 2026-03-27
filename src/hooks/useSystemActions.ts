@@ -12,6 +12,7 @@ import { buyItem, sellItem } from '../game/shop';
 import { performSmithing } from '../game/smithing';
 import { attemptBreakthrough as attemptBreakthroughFn } from '../game/breakthrough';
 import { runTribulation as runTribulationFn } from '../game/tribulation';
+import { learnTechnique, practiceTechnique, activateTechnique } from '../game/technique';
 import type { EquipSlot } from '../game/registry';
 import type { LogCategory } from './useGameLog';
 
@@ -127,6 +128,34 @@ export function useSystemActions(deps: SystemActionDeps) {
     });
   }, [player, addLog, setPlayer, setGameOver, setGameOverReason]);
 
+  // ── T0017: 功法 ──
+  const learn = useCallback((techniqueId: string) => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = learnTechnique(prev, techniqueId);
+      addLog(result.message, 'system');
+      return result.player;
+    });
+  }, [addLog, setPlayer]);
+
+  const practice = useCallback((techniqueId: string) => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = practiceTechnique(prev, techniqueId);
+      addLog(result.message, 'system');
+      return result.player;
+    });
+  }, [addLog, setPlayer]);
+
+  const activate = useCallback((techniqueId: string) => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = activateTechnique(prev, techniqueId);
+      addLog(result.message, 'system');
+      return result.player;
+    });
+  }, [addLog, setPlayer]);
+
   return {
     useItem: useItemAction,
     craft,
@@ -136,5 +165,8 @@ export function useSystemActions(deps: SystemActionDeps) {
     sell,
     smith,
     breakthrough,
+    learnTechnique: learn,
+    practiceTechnique: practice,
+    activateTechnique: activate,
   };
 }

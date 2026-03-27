@@ -6,6 +6,7 @@ import type { DLCPack } from '../types';
 import {
   dlcRegistry, eventRegistry, itemDefRegistry, recipeRegistry,
   equipRegistry, smithingRecipeRegistry, breakthroughReqRegistry, tribulationRegistry,
+  techniqueRegistry,
 } from './stores';
 
 export function registerDLC(pack: DLCPack): void {
@@ -17,6 +18,7 @@ export function registerDLC(pack: DLCPack): void {
   if (pack.smithingRecipes) for (const sr of pack.smithingRecipes) smithingRecipeRegistry.set(sr.id, sr);
   if (pack.breakthroughReqs) for (const br of pack.breakthroughReqs) breakthroughReqRegistry.set(br.fromRealmIndex, br);
   if (pack.tribulations) for (const t of pack.tribulations) tribulationRegistry.set(t.forRealmIndex, t);
+  if (pack.techniques) for (const tech of pack.techniques) techniqueRegistry.set(tech.id, tech);
 }
 
 export function unregisterDLC(packId: string): void {
@@ -29,6 +31,7 @@ export function unregisterDLC(packId: string): void {
   if (pack.smithingRecipes) for (const sr of pack.smithingRecipes) smithingRecipeRegistry.delete(sr.id);
   if (pack.breakthroughReqs) for (const br of pack.breakthroughReqs) breakthroughReqRegistry.delete(br.fromRealmIndex);
   if (pack.tribulations) for (const t of pack.tribulations) tribulationRegistry.delete(t.forRealmIndex);
+  if (pack.techniques) for (const tech of pack.techniques) techniqueRegistry.delete(tech.id);
   dlcRegistry.delete(packId);
 }
 

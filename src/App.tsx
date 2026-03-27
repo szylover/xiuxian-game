@@ -83,6 +83,9 @@ export default function App() {
           onUnequip={engine.unequip}
           onBuy={engine.buy}
           onSell={engine.sell}
+          onLearnTechnique={engine.learnTechnique}
+          onPracticeTechnique={engine.practiceTechnique}
+          onActivateTechnique={engine.activateTechnique}
         />
       }
       debug={<DebugPanel player={engine.player} onUpdate={engine.debugSetPlayer} />}

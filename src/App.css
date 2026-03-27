@@ -1331,6 +1331,144 @@ body {
 .btn-smith:hover:not(:disabled) { background: #3a2a1a; }
 .btn-smith:disabled { opacity: 0.4; cursor: not-allowed; }
 
+/* ── 功法面板 ── */
+.technique-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.technique-section-title {
+  font-size: 0.8rem;
+  color: #888;
+  border-bottom: 1px solid #1e2235;
+  padding-bottom: 0.2rem;
+}
+
+.technique-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.technique-card {
+  background: #0e1020;
+  border: 1px solid #1e2235;
+  border-left: 3px solid #9E9E9E;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+.technique-card.technique-active {
+  border-color: #ffd700;
+  background: #12182a;
+}
+
+.technique-card.technique-learnable {
+  opacity: 0.85;
+}
+
+.technique-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.2rem;
+}
+
+.technique-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.technique-type {
+  font-size: 0.7rem;
+  color: #666;
+  background: #1a1e2e;
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+}
+
+.technique-level {
+  font-size: 0.75rem;
+  color: #aaa;
+  margin-bottom: 0.2rem;
+}
+
+.technique-exp {
+  color: #666;
+}
+
+.technique-active-badge {
+  margin-left: 0.4rem;
+  color: #ffd700;
+  font-size: 0.7rem;
+}
+
+.technique-progress {
+  height: 4px;
+  background: #1a1e2e;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 0.2rem;
+}
+
+.technique-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50, #8BC34A);
+  transition: width 0.3s;
+}
+
+.technique-desc {
+  font-size: 0.72rem;
+  color: #777;
+  margin-bottom: 0.2rem;
+}
+
+.technique-bonus {
+  font-size: 0.7rem;
+  color: #8BC34A;
+  margin-bottom: 0.3rem;
+}
+
+.technique-actions {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.btn-technique {
+  background: #1a2a1a;
+  color: #8BC34A;
+  border: 1px solid #2a3a2a;
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+.btn-technique:hover { background: #2a3a2a; }
+
+.btn-technique-activate {
+  background: #1a1a2a;
+  color: #ffd700;
+  border: 1px solid #2a2a3a;
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+.btn-technique-activate:hover { background: #2a2a3a; }
+
+.btn-technique-learn {
+  background: #1a2a2a;
+  color: #64B5F6;
+  border: 1px solid #2a3a3a;
+  border-radius: 4px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  margin-top: 0.2rem;
+}
+.btn-technique-learn:hover { background: #2a3a3a; }
+
 /* ── 调试面板 ── */
 .debug-panel {
   position: fixed;

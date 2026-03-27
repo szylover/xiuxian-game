@@ -12,10 +12,12 @@ import InventoryPanel from '../panels/InventoryPanel';
 import ShopPanel from '../panels/ShopPanel';
 import CraftingPanel from '../panels/CraftingPanel';
 import EquipmentPanel from '../panels/EquipmentPanel';
+import TechniquePanel from '../panels/TechniquePanel';
 
 const PANEL_CONFIG: Record<PanelKey, { title: string; icon: string; width?: number }> = {
   inventory: { title: '背包', icon: '🎒', width: 380 },
   shop:      { title: '商店', icon: '🏪', width: 380 },
+  technique: { title: '功法', icon: '📖', width: 400 },
   crafting:  { title: '炼制', icon: '🔥', width: 380 },
   equipment: { title: '装备', icon: '⚔️', width: 380 },
 };
@@ -31,11 +33,15 @@ interface RightPanelProps {
   onUnequip: (slot: EquipSlot) => void;
   onBuy: (itemId: string) => void;
   onSell: (itemId: string) => void;
+  onLearnTechnique: (techniqueId: string) => void;
+  onPracticeTechnique: (techniqueId: string) => void;
+  onActivateTechnique: (techniqueId: string) => void;
 }
 
 export default function RightPanel({
   player, activePanel, onSelectPanel,
   onUseItem, onCraft, onSmith, onEquip, onUnequip, onBuy, onSell,
+  onLearnTechnique, onPracticeTechnique, onActivateTechnique,
 }: RightPanelProps) {
   const closePanel = () => onSelectPanel(activePanel!);
   const config = activePanel ? PANEL_CONFIG[activePanel] : null;
@@ -53,6 +59,7 @@ export default function RightPanel({
         >
           {activePanel === 'inventory' && <InventoryPanel player={player} onUseItem={onUseItem} />}
           {activePanel === 'shop' && <ShopPanel player={player} onBuy={onBuy} onSell={onSell} />}
+          {activePanel === 'technique' && <TechniquePanel player={player} onLearn={onLearnTechnique} onPractice={onPracticeTechnique} onActivate={onActivateTechnique} />}
           {activePanel === 'crafting' && <CraftingPanel player={player} onCraft={onCraft} onSmith={onSmith} />}
           {activePanel === 'equipment' && <EquipmentPanel player={player} onEquip={onEquip} onUnequip={onUnequip} />}
         </FloatingPanel>

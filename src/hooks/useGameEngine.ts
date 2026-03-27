@@ -27,6 +27,8 @@ function loadSave(): Player | null {
     if (!p.inventoryCapacity) p.inventoryCapacity = 20 + (p.realmIndex || 0) * 5;
     if (!p.equipped) p.equipped = { weapon: null, helmet: null, armor: null, boots: null, accessory1: null, accessory2: null };
     if (!p.avatar) p.avatar = 'default';
+    if (!Array.isArray(p.techniques)) p.techniques = [];
+    if (p.activeTechniqueId === undefined) p.activeTechniqueId = null;
     return p;
   } catch { return null; }
 }
@@ -109,8 +111,11 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     addLog, addLogs, setPlayer, advanceTime, canAct,
   });
 
-  // ── 子 Hook：系统行为（炼丹/炼器/装备/商店/背包/突破）──
-  const { useItem, craft, equip, unequip, buy, sell, smith, breakthrough } = useSystemActions({
+  // ── 子 Hook：系统行为（炼丹/炼器/装备/商店/背包/突破/功法）──
+  const {
+    useItem, craft, equip, unequip, buy, sell, smith, breakthrough,
+    learnTechnique, practiceTechnique, activateTechnique,
+  } = useSystemActions({
     player, addLog, setPlayer, setGameOver, setGameOverReason,
   });
 
@@ -142,6 +147,9 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     buy,
     sell,
     smith,
+    learnTechnique,
+    practiceTechnique,
+    activateTechnique,
     // Debug: 直接修改 player（仅 debug 模式使用）
     debugSetPlayer: setPlayer,
   };

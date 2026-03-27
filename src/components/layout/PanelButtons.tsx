@@ -5,7 +5,7 @@
 import type { Player } from '../../game/player';
 import { getInventoryEntries } from '../../game/inventory';
 
-export type PanelKey = 'inventory' | 'shop' | 'crafting' | 'equipment';
+export type PanelKey = 'inventory' | 'shop' | 'crafting' | 'equipment' | 'technique';
 
 interface PanelDef {
   key: PanelKey;
@@ -34,8 +34,12 @@ const PANEL_GROUPS: PanelGroup[] = [
     ],
   },
   {
-    label: '🔥 炼制 & 装备',
+    label: '⚔️ 修行',
     panels: [
+      {
+        key: 'technique', icon: '📖', label: '功法',
+        badge: (p) => p.techniques.length > 0 ? `${p.techniques.length}` : null,
+      },
       {
         key: 'crafting', icon: '🔥', label: '炼制',
         badge: (p) => `🧠${p.mentalPower}`,
