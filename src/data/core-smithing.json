@@ -1,0 +1,132 @@
+[
+  {
+    "id": "core:smith_iron_sword",
+    "name": "锻造铁剑",
+    "description": "铁矿石锻造普通铁剑",
+    "inputs": [{ "itemId": "core:iron_ore", "count": 5 }],
+    "goldCost": 10,
+    "outputItemId": "core:iron_sword",
+    "baseSuccessRate": 0.7,
+    "mentalCost": 5,
+    "minRealm": 0
+  },
+  {
+    "id": "core:smith_cloth_hat",
+    "name": "缝制布帽",
+    "description": "简单的布帽",
+    "inputs": [{ "itemId": "core:iron_ore", "count": 2 }],
+    "goldCost": 5,
+    "outputItemId": "core:cloth_hat",
+    "baseSuccessRate": 0.8,
+    "mentalCost": 3,
+    "minRealm": 0
+  },
+  {
+    "id": "core:smith_linen_robe",
+    "name": "缝制麻衣",
+    "description": "散修常用的粗布衣",
+    "inputs": [{ "itemId": "core:iron_ore", "count": 3 }],
+    "goldCost": 8,
+    "outputItemId": "core:linen_robe",
+    "baseSuccessRate": 0.75,
+    "mentalCost": 3,
+    "minRealm": 0
+  },
+  {
+    "id": "core:smith_straw_shoes",
+    "name": "编织草鞋",
+    "description": "轻便草编鞋",
+    "inputs": [{ "itemId": "core:iron_ore", "count": 2 }],
+    "goldCost": 4,
+    "outputItemId": "core:straw_shoes",
+    "baseSuccessRate": 0.8,
+    "mentalCost": 2,
+    "minRealm": 0
+  },
+  {
+    "id": "core:smith_spirit_sword",
+    "name": "锻造灵纹剑",
+    "description": "铁矿石 + 妖兽獠牙锻造灵纹剑",
+    "inputs": [
+      { "itemId": "core:iron_ore", "count": 8 },
+      { "itemId": "core:monster_fang", "count": 3 }
+    ],
+    "goldCost": 30,
+    "outputItemId": "core:spirit_sword",
+    "baseSuccessRate": 0.5,
+    "mentalCost": 10,
+    "minRealm": 1
+  },
+  {
+    "id": "core:smith_spirit_crown",
+    "name": "锻造灵冠",
+    "description": "灵石碎片镶嵌的冠冕",
+    "inputs": [
+      { "itemId": "core:iron_ore", "count": 5 },
+      { "itemId": "core:spirit_stone_shard", "count": 8 }
+    ],
+    "goldCost": 25,
+    "outputItemId": "core:spirit_crown",
+    "baseSuccessRate": 0.5,
+    "mentalCost": 10,
+    "minRealm": 1
+  },
+  {
+    "id": "core:smith_wind_boots",
+    "name": "锻造踏风靴",
+    "description": "附风灵阵的轻便靴",
+    "inputs": [
+      { "itemId": "core:iron_ore", "count": 5 },
+      { "itemId": "core:monster_fang", "count": 2 }
+    ],
+    "goldCost": 25,
+    "outputItemId": "core:wind_boots",
+    "baseSuccessRate": 0.5,
+    "mentalCost": 10,
+    "minRealm": 1
+  },
+  {
+    "id": "core:smith_flame_blade",
+    "name": "锻造赤焰刀",
+    "description": "妖兽材料锻造的烈焰之刃",
+    "inputs": [
+      { "itemId": "core:iron_ore", "count": 12 },
+      { "itemId": "core:monster_fang", "count": 5 },
+      { "itemId": "core:monster_core", "count": 2 }
+    ],
+    "goldCost": 80,
+    "outputItemId": "core:flame_blade",
+    "baseSuccessRate": 0.35,
+    "mentalCost": 20,
+    "minRealm": 2
+  },
+  {
+    "id": "core:smith_golden_armor",
+    "name": "锻造金鳞甲",
+    "description": "蛟龙鳞锻造的重铠",
+    "inputs": [
+      { "itemId": "core:iron_ore", "count": 15 },
+      { "itemId": "core:monster_core", "count": 3 }
+    ],
+    "goldCost": 100,
+    "outputItemId": "core:golden_armor",
+    "baseSuccessRate": 0.3,
+    "mentalCost": 20,
+    "minRealm": 2
+  },
+  {
+    "id": "core:smith_thunder_spear",
+    "name": "锻造雷霆枪",
+    "description": "终极战枪，蕴含雷电之力",
+    "inputs": [
+      { "itemId": "core:iron_ore", "count": 20 },
+      { "itemId": "core:monster_fang", "count": 8 },
+      { "itemId": "core:monster_core", "count": 5 }
+    ],
+    "goldCost": 250,
+    "outputItemId": "core:thunder_spear",
+    "baseSuccessRate": 0.2,
+    "mentalCost": 30,
+    "minRealm": 3
+  }
+]

@@ -5,7 +5,7 @@
 
 import type { Player } from './player';
 import { registerDLC, triggerEvent } from './registry';
-import type { RecipeDef, EquipDef } from './registry';
+import type { RecipeDef, EquipDef, SmithingRecipeDef } from './registry';
 import { loadEventsFromJson } from './event-loader';
 import { loadItemsFromJson } from './item-loader';
 import type { JsonEvent } from './event-loader';
@@ -15,21 +15,23 @@ import coreItemsJson from '../data/core-items.json';
 import coreRecipesJson from '../data/core-recipes.json';
 import coreEquipsJson from '../data/core-equips.json';
 import coreShopJson from '../data/core-shop.json';
+import coreSmithingJson from '../data/core-smithing.json';
 import { registerShopGoods } from './shop';
 import type { ShopGoodsDef } from './shop';
 
-// ── 注册 core DLC（从 JSON 加载全部事件 + 物品 + 配方 + 装备 + 商店）──
+// ── 注册 core DLC ──
 export function registerCoreEvents(): void {
   const pack = loadEventsFromJson(coreEventsJson as JsonEvent[], {
     id: 'core',
     name: '基础事件包',
-    description: '核心事件 + 物品 + 配方 + 装备 + 商店',
-    version: '1.4.0',
+    description: '核心事件 + 物品 + 配方 + 装备 + 商店 + 炼器',
+    version: '1.5.0',
   });
   const items = loadItemsFromJson(coreItemsJson as JsonItem[]);
   const recipes = coreRecipesJson as RecipeDef[];
   const equips = coreEquipsJson as EquipDef[];
-  registerDLC({ ...pack, items, recipes, equips });
+  const smithingRecipes = coreSmithingJson as SmithingRecipeDef[];
+  registerDLC({ ...pack, items, recipes, equips, smithingRecipes });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }
 

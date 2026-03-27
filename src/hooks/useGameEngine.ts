@@ -14,6 +14,7 @@ import { getItemDef } from '../game/registry';
 import { performAlchemy } from '../game/alchemy';
 import { equipItem, unequipItem } from '../game/equipment';
 import { buyItem, sellItem } from '../game/shop';
+import { performSmithing } from '../game/smithing';
 import type { EquipSlot } from '../game/registry';
 import type { LogCategory } from './useGameLog';
 
@@ -402,6 +403,16 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     });
   }, [addLog]);
 
+  // ── T0016: 炼器 ──
+  const smith = useCallback((recipeId: string) => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = performSmithing(prev, recipeId);
+      addLog(result.message, 'system');
+      return result.player;
+    });
+  }, [addLog]);
+
   return {
     player,
     gameOver,
@@ -421,5 +432,6 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     unequip,
     buy,
     sell,
+    smith,
   };
 }

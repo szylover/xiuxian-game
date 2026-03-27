@@ -12,6 +12,7 @@ import InventoryPanel from './components/InventoryPanel';
 import AlchemyPanel from './components/AlchemyPanel';
 import EquipmentPanel from './components/EquipmentPanel';
 import ShopPanel from './components/ShopPanel';
+import SmithingPanel from './components/SmithingPanel';
 import ActionPanel from './components/ActionPanel';
 import GameLog from './components/GameLog';
 import './App.css';
@@ -24,6 +25,7 @@ export default function App() {
   const [alchemyOpen, setAlchemyOpen] = useState(false);
   const [equipmentOpen, setEquipmentOpen] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
+  const [smithingOpen, setSmithingOpen] = useState(false);
 
   const hasSave = !!localStorage.getItem('xiuxian_save');
 
@@ -87,6 +89,12 @@ export default function App() {
         onToggle={() => setShopOpen(!shopOpen)}
         onBuy={engine.buy}
         onSell={engine.sell}
+      />
+      <SmithingPanel
+        player={engine.player}
+        isOpen={smithingOpen}
+        onToggle={() => setSmithingOpen(!smithingOpen)}
+        onSmith={engine.smith}
       />
       <ActionPanel
         player={engine.player}
