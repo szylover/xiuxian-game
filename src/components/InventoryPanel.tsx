@@ -17,9 +17,12 @@ interface InventoryPanelProps {
 
 const CATEGORY_TABS: { key: 'all' | ItemCategory; label: string; icon: string }[] = [
   { key: 'all',        label: '全部', icon: '📦' },
+  { key: 'weapon',     label: '武器', icon: '🗡️' },
+  { key: 'armor',      label: '防具', icon: '🛡️' },
+  { key: 'accessory',  label: '饰品', icon: '💎' },
   { key: 'consumable', label: '丹药', icon: '💊' },
   { key: 'material',   label: '材料', icon: '🪨' },
-  { key: 'equipment',  label: '装备', icon: '⚔️' },
+  { key: 'technique',  label: '功法', icon: '📖' },
   { key: 'misc',       label: '杂物', icon: '📜' },
 ];
 

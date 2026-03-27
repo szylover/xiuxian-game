@@ -8,7 +8,9 @@
     "stackable": true,
     "maxStack": 99,
     "usable": true,
-    "effects": { "hp": 50 },
+    "effects": {
+      "hp": 50
+    },
     "effectMessage": "💊 服下回血丹，恢复 50 HP。",
     "sellPrice": 10
   },
@@ -21,7 +23,9 @@
     "stackable": true,
     "maxStack": 99,
     "usable": true,
-    "effects": { "mp": 30 },
+    "effects": {
+      "mp": 30
+    },
     "effectMessage": "💊 服下回灵丹，恢复 30 MP。",
     "sellPrice": 10
   },
@@ -34,7 +38,9 @@
     "stackable": true,
     "maxStack": 99,
     "usable": true,
-    "effects": { "stamina": 30 },
+    "effects": {
+      "stamina": 30
+    },
     "effectMessage": "💊 服下聚气丹，恢复 30 精力。",
     "sellPrice": 8
   },
@@ -47,7 +53,9 @@
     "stackable": true,
     "maxStack": 99,
     "usable": true,
-    "effects": { "exp": 50 },
+    "effects": {
+      "exp": 50
+    },
     "effectMessage": "💊 服下筑基丹，修为增长 50。",
     "sellPrice": 30
   },
@@ -60,7 +68,9 @@
     "stackable": true,
     "maxStack": 99,
     "usable": true,
-    "effects": { "mood": 20 },
+    "effects": {
+      "mood": 20
+    },
     "effectMessage": "💊 服下静心丹，心情舒畅。",
     "sellPrice": 8
   },
@@ -73,7 +83,9 @@
     "stackable": true,
     "maxStack": 99,
     "usable": true,
-    "effects": { "health": 20 },
+    "effects": {
+      "health": 20
+    },
     "effectMessage": "💊 服下养生丹，身体舒适。",
     "sellPrice": 8
   },
@@ -86,7 +98,11 @@
     "stackable": true,
     "maxStack": 10,
     "usable": true,
-    "effects": { "hp": "max", "mp": "max", "stamina": "max" },
+    "effects": {
+      "hp": "max",
+      "mp": "max",
+      "stamina": "max"
+    },
     "effectMessage": "🌟 服下九转还魂丹，全身伤势尽数恢复！",
     "sellPrice": 500
   },
@@ -165,7 +181,12 @@
     "stackable": true,
     "maxStack": 99,
     "usable": true,
-    "effects": { "exp": [20, 60] },
+    "effects": {
+      "exp": [
+        20,
+        60
+      ]
+    },
     "effectMessage": "📜 研读玉简上的心得，领悟颇多。",
     "sellPrice": 20
   },
@@ -189,8 +210,187 @@
     "stackable": true,
     "maxStack": 99,
     "usable": true,
-    "effects": { "hp": 20, "mp": 20 },
+    "effects": {
+      "hp": 20,
+      "mp": 20
+    },
     "effectMessage": "💧 饮下灵泉水，身心舒畅。",
     "sellPrice": 15
+  },
+  {
+    "id": "core:iron_sword",
+    "name": "铁剑",
+    "category": "weapon",
+    "rarity": "common",
+    "description": "普通铁器铸造的长剑",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 15
+  },
+  {
+    "id": "core:spirit_sword",
+    "name": "灵纹剑",
+    "category": "weapon",
+    "rarity": "uncommon",
+    "description": "刻有灵纹的精钢剑",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 50
+  },
+  {
+    "id": "core:flame_blade",
+    "name": "赤焰刀",
+    "category": "weapon",
+    "rarity": "rare",
+    "description": "以赤焰蟒之牙锻造",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 150
+  },
+  {
+    "id": "core:thunder_spear",
+    "name": "雷霆枪",
+    "category": "weapon",
+    "rarity": "epic",
+    "description": "蕴含雷电之力的战枪",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 500
+  },
+  {
+    "id": "core:cloth_hat",
+    "name": "布帽",
+    "category": "armor",
+    "rarity": "common",
+    "description": "普通布帽",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 8
+  },
+  {
+    "id": "core:spirit_crown",
+    "name": "灵冠",
+    "category": "armor",
+    "rarity": "uncommon",
+    "description": "灵石镶嵌的冠冕",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 40
+  },
+  {
+    "id": "core:ice_helm",
+    "name": "玄冰盔",
+    "category": "armor",
+    "rarity": "rare",
+    "description": "玄冰蛛丝编织而成",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 120
+  },
+  {
+    "id": "core:linen_robe",
+    "name": "麻衣",
+    "category": "armor",
+    "rarity": "common",
+    "description": "散修常见的粗布衣",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 10
+  },
+  {
+    "id": "core:spirit_robe",
+    "name": "灵纹袍",
+    "category": "armor",
+    "rarity": "uncommon",
+    "description": "绣有灵纹的法袍",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 55
+  },
+  {
+    "id": "core:golden_armor",
+    "name": "金鳞甲",
+    "category": "armor",
+    "rarity": "rare",
+    "description": "蛟龙鳞片锻造的重铠",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 180
+  },
+  {
+    "id": "core:straw_shoes",
+    "name": "草鞋",
+    "category": "armor",
+    "rarity": "common",
+    "description": "结实的草编鞋",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 6
+  },
+  {
+    "id": "core:wind_boots",
+    "name": "踏风靴",
+    "category": "armor",
+    "rarity": "uncommon",
+    "description": "附有风灵阵的轻便靴子",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 45
+  },
+  {
+    "id": "core:shadow_boots",
+    "name": "幻影靴",
+    "category": "armor",
+    "rarity": "rare",
+    "description": "移动如影的轻功靴",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 130
+  },
+  {
+    "id": "core:jade_pendant",
+    "name": "玉佩",
+    "category": "accessory",
+    "rarity": "common",
+    "description": "温润的玉佩",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 12
+  },
+  {
+    "id": "core:spirit_ring",
+    "name": "聚灵戒",
+    "category": "accessory",
+    "rarity": "uncommon",
+    "description": "加速灵力恢复的戒指",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 50
+  },
+  {
+    "id": "core:dragon_amulet",
+    "name": "蛟龙护符",
+    "category": "accessory",
+    "rarity": "rare",
+    "description": "蛟龙之骨磨制的护符",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 160
   }
 ]

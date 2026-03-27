@@ -4,6 +4,8 @@
 // ============================================================
 
 import { REALMS } from './data';
+import { getEquipDef } from './registry';
+import type { EquipStatBonus } from './registry';
 
 // ── 类型定义 ──
 export interface Aptitudes {
@@ -20,6 +22,15 @@ export interface Aptitudes {
 export interface InventorySlot {
   itemId: string;
   count: number;
+}
+
+export interface EquippedSlots {
+  weapon: string | null;
+  helmet: string | null;
+  armor: string | null;
+  boots: string | null;
+  accessory1: string | null;
+  accessory2: string | null;
 }
 
 export interface PlayerTracking {
@@ -63,6 +74,7 @@ export interface Player {
   gold: number;
   inventory: InventorySlot[];
   inventoryCapacity: number;
+  equipped: EquippedSlots;
   items: Record<string, unknown>;
   passives: Record<string, unknown>;
   systems: Record<string, unknown>;
@@ -168,6 +180,14 @@ export function createPlayer(name: string = '无名散修'): Player {
     gold: 0,   // 灵石
     inventory: [],
     inventoryCapacity: 20,
+    equipped: {
+      weapon: null,
+      helmet: null,
+      armor: null,
+      boots: null,
+      accessory1: null,
+      accessory2: null,
+    },
 
     // ── 小说事件扩展 ──
     items: {},
@@ -198,6 +218,25 @@ export function recalcStats(player: Player): Player {
   p.atk = realm.atkBase;
   p.def = realm.defBase;
   p.speed = realm.speedBase;
+
+  // 装备属性加成
+  if (p.equipped) {
+    const slots = Object.values(p.equipped).filter(Boolean) as string[];
+    for (const equipId of slots) {
+      const def = getEquipDef(equipId);
+      if (def) {
+        const s: EquipStatBonus = def.stats;
+        if (s.atk) p.atk += s.atk;
+        if (s.def) p.def += s.def;
+        if (s.speed) p.speed += s.speed;
+        if (s.hp) p.maxHp += s.hp;
+        if (s.mp) p.maxMp += s.mp;
+        if (s.critRate) p.critRate += s.critRate;
+        if (s.critResist) p.critResist += s.critResist;
+        if (s.moveSpeed) p.moveSpeed += s.moveSpeed;
+      }
+    }
+  }
 
   // 确保当前值不超过上限
   p.hp = Math.min(p.hp, p.maxHp);

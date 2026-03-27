@@ -12,6 +12,8 @@ import { registerCoreEvents, triggerExploreEvent, triggerDailyEvent } from '../g
 import { useItem as inventoryUseItem, addItem } from '../game/inventory';
 import { getItemDef } from '../game/registry';
 import { performAlchemy } from '../game/alchemy';
+import { equipItem, unequipItem } from '../game/equipment';
+import type { EquipSlot } from '../game/registry';
 import type { LogCategory } from './useGameLog';
 
 // 注册核心事件（模块加载时执行一次）
@@ -24,9 +26,10 @@ function loadSave(): Player | null {
     const raw = localStorage.getItem(SAVE_KEY);
     if (!raw) return null;
     const p = JSON.parse(raw) as Player;
-    // 向后兼容：旧存档缺少 inventory 字段
+    // 向后兼容：旧存档缺少 inventory/equipped 字段
     if (!Array.isArray(p.inventory)) p.inventory = [];
     if (!p.inventoryCapacity) p.inventoryCapacity = 20 + (p.realmIndex || 0) * 5;
+    if (!p.equipped) p.equipped = { weapon: null, helmet: null, armor: null, boots: null, accessory1: null, accessory2: null };
     return p;
   } catch { return null; }
 }
@@ -183,6 +186,24 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
           const { player: p2, added } = addItem(p, 'core:monster_core', 1);
           p = p2;
           if (added > 0) addLog('💎 获得 妖丹 ×1', 'combat');
+        }
+        // T0014: 战斗掉落装备（5% 按境界）
+        if (Math.random() < 0.05) {
+          const equipDrops: Record<number, string[]> = {
+            0: ['core:iron_sword', 'core:cloth_hat', 'core:linen_robe', 'core:straw_shoes', 'core:jade_pendant'],
+            1: ['core:spirit_sword', 'core:spirit_crown', 'core:spirit_robe', 'core:wind_boots', 'core:spirit_ring'],
+            2: ['core:flame_blade', 'core:ice_helm', 'core:golden_armor', 'core:shadow_boots', 'core:dragon_amulet'],
+            3: ['core:thunder_spear'],
+          };
+          const tier = Math.min(monster.realmIndex, 3);
+          const pool = equipDrops[tier] || equipDrops[0];
+          const dropId = pool[Math.floor(Math.random() * pool.length)];
+          const { player: p2, added } = addItem(p, dropId, 1);
+          if (added > 0) {
+            p = p2;
+            const eDef = getItemDef(dropId);
+            addLog(`⚔️ 获得装备 ${eDef?.name ?? dropId}！`, 'combat');
+          }
         }
       } else if (result.winner === 'monster') {
         // 战斗失败：健康 -20，重伤恢复少量 HP
@@ -342,6 +363,25 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     });
   }, [addLog]);
 
+  // ── T0014: 装备 ──
+  const equip = useCallback((equipId: string) => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = equipItem(prev, equipId);
+      addLog(result.message, 'system');
+      return result.player;
+    });
+  }, [addLog]);
+
+  const unequip = useCallback((slot: EquipSlot) => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = unequipItem(prev, slot);
+      addLog(result.message, 'system');
+      return result.player;
+    });
+  }, [addLog]);
+
   return {
     player,
     gameOver,
@@ -357,5 +397,7 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     canAct,
     useItem: useItemAction,
     craft,
+    equip,
+    unequip,
   };
 }

@@ -1,0 +1,162 @@
+[
+  {
+    "id": "core:iron_sword",
+    "name": "铁剑",
+    "slot": "weapon",
+    "rarity": "common",
+    "description": "普通铁器铸造的长剑",
+    "stats": { "atk": 5 },
+    "minRealm": 0,
+    "sellPrice": 15
+  },
+  {
+    "id": "core:spirit_sword",
+    "name": "灵纹剑",
+    "slot": "weapon",
+    "rarity": "uncommon",
+    "description": "刻有灵纹的精钢剑，锋利异常",
+    "stats": { "atk": 12, "speed": 2 },
+    "minRealm": 1,
+    "sellPrice": 50
+  },
+  {
+    "id": "core:flame_blade",
+    "name": "赤焰刀",
+    "slot": "weapon",
+    "rarity": "rare",
+    "description": "以赤焰蟒之牙锻造，附带灼热",
+    "stats": { "atk": 28, "critRate": 3 },
+    "minRealm": 2,
+    "sellPrice": 150
+  },
+  {
+    "id": "core:thunder_spear",
+    "name": "雷霆枪",
+    "slot": "weapon",
+    "rarity": "epic",
+    "description": "蕴含雷电之力的战枪",
+    "stats": { "atk": 60, "speed": 5, "critRate": 5 },
+    "minRealm": 3,
+    "sellPrice": 500
+  },
+  {
+    "id": "core:cloth_hat",
+    "name": "布帽",
+    "slot": "helmet",
+    "rarity": "common",
+    "description": "普通布帽，聊胜于无",
+    "stats": { "def": 2 },
+    "minRealm": 0,
+    "sellPrice": 8
+  },
+  {
+    "id": "core:spirit_crown",
+    "name": "灵冠",
+    "slot": "helmet",
+    "rarity": "uncommon",
+    "description": "灵石镶嵌的冠冕，提升灵力",
+    "stats": { "def": 5, "mp": 20 },
+    "minRealm": 1,
+    "sellPrice": 40
+  },
+  {
+    "id": "core:ice_helm",
+    "name": "玄冰盔",
+    "slot": "helmet",
+    "rarity": "rare",
+    "description": "玄冰蛛丝编织而成，寒气逼人",
+    "stats": { "def": 12, "critResist": 3, "mp": 40 },
+    "minRealm": 2,
+    "sellPrice": 120
+  },
+  {
+    "id": "core:linen_robe",
+    "name": "麻衣",
+    "slot": "armor",
+    "rarity": "common",
+    "description": "散修常见的粗布衣",
+    "stats": { "def": 3, "hp": 20 },
+    "minRealm": 0,
+    "sellPrice": 10
+  },
+  {
+    "id": "core:spirit_robe",
+    "name": "灵纹袍",
+    "slot": "armor",
+    "rarity": "uncommon",
+    "description": "绣有灵纹的法袍，防御灵气侵蚀",
+    "stats": { "def": 8, "hp": 50 },
+    "minRealm": 1,
+    "sellPrice": 55
+  },
+  {
+    "id": "core:golden_armor",
+    "name": "金鳞甲",
+    "slot": "armor",
+    "rarity": "rare",
+    "description": "银角蛟龙鳞片锻造的重铠",
+    "stats": { "def": 20, "hp": 150, "critResist": 2 },
+    "minRealm": 2,
+    "sellPrice": 180
+  },
+  {
+    "id": "core:straw_shoes",
+    "name": "草鞋",
+    "slot": "boots",
+    "rarity": "common",
+    "description": "结实的草编鞋，方便赶路",
+    "stats": { "speed": 2, "moveSpeed": 2 },
+    "minRealm": 0,
+    "sellPrice": 6
+  },
+  {
+    "id": "core:wind_boots",
+    "name": "踏风靴",
+    "slot": "boots",
+    "rarity": "uncommon",
+    "description": "附有风灵阵的轻便靴子",
+    "stats": { "speed": 5, "moveSpeed": 5 },
+    "minRealm": 1,
+    "sellPrice": 45
+  },
+  {
+    "id": "core:shadow_boots",
+    "name": "幻影靴",
+    "slot": "boots",
+    "rarity": "rare",
+    "description": "传说级轻功靴，移动如影",
+    "stats": { "speed": 10, "moveSpeed": 8, "critRate": 2 },
+    "minRealm": 2,
+    "sellPrice": 130
+  },
+  {
+    "id": "core:jade_pendant",
+    "name": "玉佩",
+    "slot": "accessory1",
+    "rarity": "common",
+    "description": "温润的玉佩，略有灵气",
+    "stats": { "hp": 15, "mp": 10 },
+    "minRealm": 0,
+    "sellPrice": 12
+  },
+  {
+    "id": "core:spirit_ring",
+    "name": "聚灵戒",
+    "slot": "accessory2",
+    "rarity": "uncommon",
+    "description": "加速灵力恢复的戒指",
+    "stats": { "mp": 30, "critRate": 2 },
+    "minRealm": 1,
+    "sellPrice": 50
+  },
+  {
+    "id": "core:dragon_amulet",
+    "name": "蛟龙护符",
+    "slot": "accessory1",
+    "rarity": "rare",
+    "description": "蛟龙之骨磨制的护符，气势惊人",
+    "stats": { "atk": 10, "def": 8, "hp": 80 },
+    "minRealm": 2,
+    "sellPrice": 160
+  }
+]
