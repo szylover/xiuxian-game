@@ -1,34 +1,35 @@
 // ============================================================
-// useGameEngine.js — 游戏核心引擎 Hook
+// useGameEngine.ts — 游戏核心引擎 Hook
 // A-1~A-5 全部系统的状态管理 + 存档
 // ============================================================
 
 import { useState, useCallback, useEffect } from 'react';
-import { createPlayer, recalcStats, getRealmInfo, getNextRealm, getSpiritRootGrade } from '../game/player.js';
-import { REALMS, ACTION_COSTS, MONSTERS, BASE_CULTIVATE_EXP, BREAKTHROUGH_BASE_RATE, BREAKTHROUGH_COMP_BONUS, BREAKTHROUGH_LUCK_BONUS, BREAKTHROUGH_FAIL_EXP_LOSS } from '../game/data.js';
-import { runCombat } from '../game/combat.js';
-import { triggerExploreEvent } from '../game/events.js';
+import { createPlayer, recalcStats, getNextRealm, getSpiritRootGrade } from '../game/player';
+import type { Player } from '../game/player';
+import { REALMS, ACTION_COSTS, MONSTERS, BASE_CULTIVATE_EXP, BREAKTHROUGH_BASE_RATE, BREAKTHROUGH_COMP_BONUS, BREAKTHROUGH_LUCK_BONUS, BREAKTHROUGH_FAIL_EXP_LOSS } from '../game/data';
+import { runCombat } from '../game/combat';
+import { triggerExploreEvent } from '../game/events';
 
 const SAVE_KEY = 'xiuxian_save';
 
-function loadSave() {
+function loadSave(): Player | null {
   try {
     const raw = localStorage.getItem(SAVE_KEY);
     return raw ? JSON.parse(raw) : null;
   } catch { return null; }
 }
 
-function writeSave(player) {
+function writeSave(player: Player): void {
   localStorage.setItem(SAVE_KEY, JSON.stringify(player));
 }
 
-export function useGameEngine(addLog, addLogs) {
-  const [player, setPlayer] = useState(null);
+export function useGameEngine(addLog: (msg: string) => void, addLogs: (msgs: string[]) => void) {
+  const [player, setPlayer] = useState<Player | null>(null);
   const [gameOver, setGameOver] = useState(false);
   const [gameOverReason, setGameOverReason] = useState('');
 
   // ── 新游戏 ──
-  const newGame = useCallback((name) => {
+  const newGame = useCallback((name: string) => {
     const p = createPlayer(name);
     const root = getSpiritRootGrade(p.aptitudes);
     writeSave(p);
@@ -61,7 +62,7 @@ export function useGameEngine(addLog, addLogs) {
   }, [player, gameOver]);
 
   // ── 通用：时间推进 + 寿元检测 (A-5) ──
-  const advanceTime = useCallback((p, actionKey) => {
+  const advanceTime = useCallback((p: Player, actionKey: string): Player => {
     const cost = ACTION_COSTS[actionKey];
     if (!cost) return p;
     let updated = { ...p, age: p.age + cost.time };
@@ -76,7 +77,7 @@ export function useGameEngine(addLog, addLogs) {
   }, [addLog]);
 
   // ── 精力检查 ──
-  const canAct = useCallback((actionKey) => {
+  const canAct = useCallback((actionKey: string): boolean => {
     if (!player || gameOver) return false;
     const cost = ACTION_COSTS[actionKey];
     return player.stamina >= cost.stamina;
@@ -89,7 +90,8 @@ export function useGameEngine(addLog, addLogs) {
       return;
     }
     setPlayer(prev => {
-      let p = { ...prev };
+      if (!prev) return prev;
+      let p: Player = { ...prev };
       const cost = ACTION_COSTS.cultivate;
 
       // 消耗精力
@@ -122,7 +124,8 @@ export function useGameEngine(addLog, addLogs) {
     }
 
     setPlayer(prev => {
-      let p = { ...prev };
+      if (!prev) return prev;
+      let p: Player = { ...prev };
       const cost = ACTION_COSTS.combat;
       p.stamina -= cost.stamina;
 
@@ -171,7 +174,8 @@ export function useGameEngine(addLog, addLogs) {
     }
 
     setPlayer(prev => {
-      let p = { ...prev };
+      if (!prev) return prev;
+      let p: Player = { ...prev };
       const cost = ACTION_COSTS.explore;
       p.stamina -= cost.stamina;
       p.tracking = { ...p.tracking, consecutiveRests: 0, consecutiveCultivates: 0 };
@@ -188,7 +192,8 @@ export function useGameEngine(addLog, addLogs) {
   // ── 休息 ──
   const rest = useCallback(() => {
     setPlayer(prev => {
-      let p = { ...prev };
+      if (!prev) return prev;
+      let p: Player = { ...prev };
       // 回复 30% 精力、少量 HP/MP
       const staminaRecover = Math.floor(p.maxStamina * 0.3);
       p.stamina = Math.min(p.maxStamina, p.stamina + staminaRecover);
@@ -219,8 +224,8 @@ export function useGameEngine(addLog, addLogs) {
     }
 
     setPlayer(prev => {
-      let p = { ...prev };
-      // 突破成功率 = 基础 + 悟性加成 + 幸运加成
+      if (!prev) return prev;
+      let p: Player = { ...prev };
       const successRate = Math.min(0.95,
         BREAKTHROUGH_BASE_RATE + p.comprehension * BREAKTHROUGH_COMP_BONUS + p.luck * BREAKTHROUGH_LUCK_BONUS
       );

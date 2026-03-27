@@ -1,16 +1,22 @@
 // ============================================================
-// useGameLog.js — 日志管理 Hook
+// useGameLog.ts — 日志管理 Hook
 // ============================================================
 
 import { useState, useCallback } from 'react';
 
 const MAX_LOGS = 200;
 
-export function useGameLog() {
-  const [logs, setLogs] = useState([]);
+export interface LogEntry {
+  id: number;
+  text: string;
+  time: string;
+}
 
-  const addLog = useCallback((msg) => {
-    const entry = {
+export function useGameLog() {
+  const [logs, setLogs] = useState<LogEntry[]>([]);
+
+  const addLog = useCallback((msg: string) => {
+    const entry: LogEntry = {
       id: Date.now() + Math.random(),
       text: msg,
       time: new Date().toLocaleTimeString(),
@@ -18,7 +24,7 @@ export function useGameLog() {
     setLogs(prev => [entry, ...prev].slice(0, MAX_LOGS));
   }, []);
 
-  const addLogs = useCallback((msgs) => {
+  const addLogs = useCallback((msgs: string[]) => {
     const entries = msgs.map((msg, i) => ({
       id: Date.now() + i + Math.random(),
       text: msg,

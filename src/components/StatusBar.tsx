@@ -1,11 +1,16 @@
 // ============================================================
-// StatusBar.jsx — 顶部状态栏（常驻）
+// StatusBar.tsx — 顶部状态栏（常驻）
 // ============================================================
 
-import { REALMS } from '../game/data.js';
-import { getNextRealm } from '../game/player.js';
+import { REALMS } from '../game/data';
+import { getNextRealm } from '../game/player';
+import type { Player } from '../game/player';
 
-export default function StatusBar({ player }) {
+interface StatusBarProps {
+  player: Player;
+}
+
+export default function StatusBar({ player }: StatusBarProps) {
   if (!player) return null;
 
   const realm = REALMS[player.realmIndex];

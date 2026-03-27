@@ -1,18 +1,81 @@
 // ============================================================
-// player.js — 玩家角色 & 属性系统
+// player.ts — 玩家角色 & 属性系统
 // A-1: 四类属性（基础/战斗/先天/资质）完整实现
 // ============================================================
 
-import { REALMS } from './data.js';
+import { REALMS } from './data';
+
+// ── 类型定义 ──
+export interface Aptitudes {
+  alchemy: number; smithing: number;
+  fengshui: number; mining: number;
+  blade: number; spear: number;
+  sword: number; fist: number;
+  palm: number; finger: number;
+  fire: number; water: number;
+  thunder: number; wind: number;
+  earth: number; wood: number;
+}
+
+export interface PlayerTracking {
+  killCount: number;
+  bossKillCount: number;
+  consecutiveRests: number;
+  consecutiveCultivates: number;
+  hasBeenBelow10Hp: boolean;
+  defeatedHigherRealm: boolean;
+}
+
+export interface Player {
+  name: string;
+  realmIndex: number;
+  exp: number;
+  age: number;
+  lifespan: number;
+  mood: number;
+  health: number;
+  stamina: number;
+  maxStamina: number;
+  hp: number;
+  maxHp: number;
+  mp: number;
+  maxMp: number;
+  mentalPower: number;
+  maxMentalPower: number;
+  atk: number;
+  def: number;
+  speed: number;
+  skillResist: number;
+  spellResist: number;
+  critRate: number;
+  critDmgMultiplier: number;
+  critResist: number;
+  moveSpeed: number;
+  luck: number;
+  comprehension: number;
+  charisma: number;
+  aptitudes: Aptitudes;
+  gold: number;
+  items: Record<string, unknown>;
+  passives: Record<string, unknown>;
+  systems: Record<string, unknown>;
+  tracking: PlayerTracking;
+}
+
+export interface SpiritRootGrade {
+  grade: string;
+  multiplier: number;
+  color: string;
+}
 
 // ── 工具函数 ──
-function randInt(min, max) {
+function randInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // 资质生成：分品级加权随机
 // 1-20 废灵根(40%)  21-50 普通(30%)  51-80 良好(20%)  81-95 优秀(8%)  96-100 天灵根(2%)
-function rollAptitude() {
+function rollAptitude(): number {
   const roll = Math.random() * 100;
   if (roll < 40) return randInt(1, 20);
   if (roll < 70) return randInt(21, 50);
@@ -22,7 +85,7 @@ function rollAptitude() {
 }
 
 // ── 灵根品级评定 ──
-export function getSpiritRootGrade(aptitudes) {
+export function getSpiritRootGrade(aptitudes: Aptitudes): SpiritRootGrade {
   const roots = [aptitudes.fire, aptitudes.water, aptitudes.thunder, aptitudes.wind, aptitudes.earth, aptitudes.wood];
   const avg = roots.reduce((s, v) => s + v, 0) / 6;
 
@@ -41,7 +104,7 @@ export function getSpiritRootGrade(aptitudes) {
 }
 
 // ── 创建新玩家 ──
-export function createPlayer(name = '无名散修') {
+export function createPlayer(name: string = '无名散修'): Player {
   const realm = REALMS[0];
   const aptitudes = {
     alchemy: rollAptitude(), smithing: rollAptitude(),
@@ -113,7 +176,7 @@ export function createPlayer(name = '无名散修') {
 }
 
 // ── 根据境界刷新派生属性 ──
-export function recalcStats(player) {
+export function recalcStats(player: Player): Player {
   const realm = REALMS[player.realmIndex];
   if (!realm) return player;
 
@@ -136,11 +199,11 @@ export function recalcStats(player) {
 }
 
 // ── 获取境界信息 ──
-export function getRealmInfo(player) {
+export function getRealmInfo(player: Player): typeof REALMS[number] {
   return REALMS[player.realmIndex] || REALMS[0];
 }
 
 // ── 获取下一个境界（如果有）──
-export function getNextRealm(player) {
+export function getNextRealm(player: Player): typeof REALMS[number] | null {
   return REALMS[player.realmIndex + 1] || null;
 }

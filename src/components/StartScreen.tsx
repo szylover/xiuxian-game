@@ -1,10 +1,16 @@
 // ============================================================
-// StartScreen.jsx — 开始界面
+// StartScreen.tsx — 开始界面
 // ============================================================
 
 import { useState } from 'react';
 
-export default function StartScreen({ onNewGame, onLoadGame, hasSave }) {
+interface StartScreenProps {
+  onNewGame: (name: string) => void;
+  onLoadGame: () => void;
+  hasSave: boolean;
+}
+
+export default function StartScreen({ onNewGame, onLoadGame, hasSave }: StartScreenProps) {
   const [name, setName] = useState('');
 
   const handleStart = () => {

@@ -1,9 +1,19 @@
 // ============================================================
-// events.js — 随机事件引擎（基础版）
+// events.ts — 随机事件引擎（基础版）
 // 简单的探索随机事件，后续在 Milestone B 重构
 // ============================================================
 
-const EXPLORE_EVENTS = [
+import type { Player } from './player';
+
+interface ExploreEvent {
+  weight: number;
+  isGood: boolean;
+  name: string;
+  effect: (p: Player) => Player;
+  msg: string;
+}
+
+const EXPLORE_EVENTS: ExploreEvent[] = [
   { weight: 30, isGood: true,  name: '发现灵石矿',   effect: (p) => ({ ...p, gold: p.gold + 20 }),                     msg: '💎 探索中发现一处灵石矿脉，获得 20 灵石！' },
   { weight: 20, isGood: true,  name: '前辈指点',       effect: (p) => ({ ...p, exp: p.exp + 30 }),                       msg: '📖 偶遇一位隐世前辈，指点修炼，获得 30 修为！' },
   { weight: 15, isGood: true,  name: '发现丹药',       effect: (p) => ({ ...p, hp: Math.min(p.maxHp, p.hp + 50) }),      msg: '🧪 在山洞中发现一瓶丹药，恢复 50 HP！' },
@@ -13,7 +23,7 @@ const EXPLORE_EVENTS = [
 ];
 
 // 按幸运值调整权重
-function adjustWeights(luck, events) {
+function adjustWeights(luck: number, events: ExploreEvent[]): ExploreEvent[] {
   const luckFactor = luck / 50;
   return events.map(e => ({
     ...e,
@@ -24,7 +34,7 @@ function adjustWeights(luck, events) {
 }
 
 // 加权随机选取
-function weightedRandom(events) {
+function weightedRandom(events: ExploreEvent[]): ExploreEvent {
   const total = events.reduce((s, e) => s + e.weight, 0);
   let roll = Math.random() * total;
   for (const e of events) {
@@ -35,7 +45,7 @@ function weightedRandom(events) {
 }
 
 // ── 触发探索事件 ──
-export function triggerExploreEvent(player) {
+export function triggerExploreEvent(player: Player): { player: Player; message: string } {
   const adjusted = adjustWeights(player.luck, EXPLORE_EVENTS);
   const event = weightedRandom(adjusted);
   const newPlayer = event.effect(player);

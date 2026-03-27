@@ -1,15 +1,15 @@
 // ============================================================
-// App.jsx — 根组件
+// App.tsx — 根组件
 // ============================================================
 
 import { useState } from 'react';
-import { useGameEngine } from './hooks/useGameEngine.js';
-import { useGameLog } from './hooks/useGameLog.js';
-import StartScreen from './components/StartScreen.jsx';
-import StatusBar from './components/StatusBar.jsx';
-import StatusPanel from './components/StatusPanel.jsx';
-import ActionPanel from './components/ActionPanel.jsx';
-import GameLog from './components/GameLog.jsx';
+import { useGameEngine } from './hooks/useGameEngine';
+import { useGameLog } from './hooks/useGameLog';
+import StartScreen from './components/StartScreen';
+import StatusBar from './components/StatusBar';
+import StatusPanel from './components/StatusPanel';
+import ActionPanel from './components/ActionPanel';
+import GameLog from './components/GameLog';
 import './App.css';
 
 export default function App() {
