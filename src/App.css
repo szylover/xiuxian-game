@@ -621,3 +621,138 @@ body {
   opacity: 0.4;
   cursor: not-allowed;
 }
+
+/* ── 装备面板 ── */
+.equipment-panel {
+  margin-bottom: 0.5rem;
+}
+
+.equipment-content {
+  margin-top: 0.5rem;
+  background: #12162a;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 0.6rem;
+}
+
+.equip-slots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 500px) {
+  .equip-slots { grid-template-columns: 1fr; }
+}
+
+.equip-slot {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #0e1020;
+  border: 1px solid #1e2235;
+  border-radius: 4px;
+  padding: 0.4rem;
+}
+
+.equip-slot.equipped {
+  border-left: 3px solid #4CAF50;
+}
+
+.equip-slot.empty {
+  border-left: 3px solid #333;
+}
+
+.slot-icon {
+  font-size: 1.1rem;
+}
+
+.slot-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.slot-label {
+  font-size: 0.7rem;
+  color: #666;
+}
+
+.slot-equip-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.slot-stats {
+  font-size: 0.68rem;
+  color: #8BC34A;
+}
+
+.slot-empty-text {
+  font-size: 0.75rem;
+  color: #444;
+}
+
+.btn-unequip {
+  background: #2a1a1a;
+  color: #ef5350;
+  border: 1px solid #3a2a2a;
+  border-radius: 4px;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-unequip:hover { background: #3a2a2a; }
+
+.equip-inventory {
+  border-top: 1px solid #222;
+  padding-top: 0.4rem;
+}
+
+.equip-inv-title {
+  font-size: 0.78rem;
+  color: #888;
+  margin-bottom: 0.3rem;
+}
+
+.equip-inv-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #0e1020;
+  border: 1px solid #1e2235;
+  border-left: 3px solid #9E9E9E;
+  border-radius: 4px;
+  padding: 0.35rem;
+  margin-bottom: 0.25rem;
+}
+
+.equip-inv-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.equip-inv-stats {
+  flex: 1;
+  font-size: 0.68rem;
+  color: #8BC34A;
+}
+
+.btn-equip-action {
+  background: #1a2a1a;
+  color: #8BC34A;
+  border: 1px solid #2a3a2a;
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-equip-action:hover:not(:disabled) { background: #2a3a2a; }
+.btn-equip-action:disabled { opacity: 0.4; cursor: not-allowed; }

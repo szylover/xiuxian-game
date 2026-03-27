@@ -8,7 +8,7 @@ import type { Player } from './player';
 
 // ── 物品类型定义 ──
 
-export type ItemCategory = 'consumable' | 'material' | 'equipment' | 'misc';
+export type ItemCategory = 'weapon' | 'armor' | 'accessory' | 'consumable' | 'material' | 'technique' | 'misc';
 export type ItemRarity = 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
 
 export interface ItemDef {
@@ -28,6 +28,32 @@ export interface ItemDef {
 // ── 炼丹配方定义 ──
 
 export type RecipeQuality = 'normal' | 'good' | 'excellent';
+
+// ── 装备定义 ──
+
+export type EquipSlot = 'weapon' | 'helmet' | 'armor' | 'boots' | 'accessory1' | 'accessory2';
+
+export interface EquipStatBonus {
+  atk?: number;
+  def?: number;
+  speed?: number;
+  hp?: number;
+  mp?: number;
+  critRate?: number;
+  critResist?: number;
+  moveSpeed?: number;
+}
+
+export interface EquipDef {
+  id: string;                              // 命名空间 ID，如 core:iron_sword
+  name: string;                            // 显示名称
+  slot: EquipSlot;                         // 装备槽位
+  rarity: ItemRarity;                      // 品质
+  description: string;                     // 描述
+  stats: EquipStatBonus;                   // 属性加成
+  minRealm: number;                        // 最低佩戴境界
+  sellPrice: number;                       // 售卖价格
+}
 
 export interface RecipeDef {
   id: string;                              // 命名空间 ID，如 core:recipe_hp_pill
@@ -70,6 +96,7 @@ export interface DLCPack {
   events?: GameEvent[];                    // 该 DLC 提供的事件
   items?: ItemDef[];                       // 该 DLC 提供的物品定义
   recipes?: RecipeDef[];                   // 该 DLC 提供的炼丹配方
+  equips?: EquipDef[];                     // 该 DLC 提供的装备定义
 }
 
 // ── 注册表存储 ──
@@ -78,6 +105,7 @@ const dlcRegistry = new Map<string, DLCPack>();       // DLC 包注册表
 const eventRegistry = new Map<string, GameEvent>();
 const itemDefRegistry = new Map<string, ItemDef>();    // 物品定义注册表
 const recipeRegistry = new Map<string, RecipeDef>();   // 配方注册表
+const equipRegistry = new Map<string, EquipDef>();     // 装备定义注册表
 const triggeredOnce = new Set<string>();              // 已触发的 once 事件
 const cooldowns = new Map<string, number>();           // eventId → 上次触发时的 age
 
@@ -100,6 +128,11 @@ export function registerDLC(pack: DLCPack): void {
       recipeRegistry.set(recipe.id, recipe);
     }
   }
+  if (pack.equips) {
+    for (const equip of pack.equips) {
+      equipRegistry.set(equip.id, equip);
+    }
+  }
 }
 
 export function unregisterDLC(packId: string): void {
@@ -118,6 +151,11 @@ export function unregisterDLC(packId: string): void {
   if (pack.recipes) {
     for (const recipe of pack.recipes) {
       recipeRegistry.delete(recipe.id);
+    }
+  }
+  if (pack.equips) {
+    for (const equip of pack.equips) {
+      equipRegistry.delete(equip.id);
     }
   }
   dlcRegistry.delete(packId);
@@ -165,6 +203,16 @@ export function getRecipe(id: string): RecipeDef | undefined {
 
 export function getAllRecipes(): RecipeDef[] {
   return Array.from(recipeRegistry.values());
+}
+
+// ── 装备定义查询 ──
+
+export function getEquipDef(id: string): EquipDef | undefined {
+  return equipRegistry.get(id);
+}
+
+export function getAllEquipDefs(): EquipDef[] {
+  return Array.from(equipRegistry.values());
 }
 
 // ── 查询 ──
