@@ -349,3 +349,151 @@ body {
   color: #888;
   margin-bottom: 1.5rem;
 }
+
+/* ── 背包面板 ── */
+.inventory-panel {
+  margin-bottom: 0.5rem;
+}
+
+.inventory-content {
+  margin-top: 0.5rem;
+  background: #12162a;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 0.6rem;
+}
+
+.inventory-tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.inventory-tab {
+  background: #1a1e2e;
+  color: #777;
+  border: 1px solid #2a2e3e;
+  border-radius: 4px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.inventory-tab:hover {
+  background: #252a3e;
+  color: #aaa;
+}
+
+.inventory-tab.active {
+  background: #2a3040;
+  color: #ffd700;
+  border-color: #ffd700;
+}
+
+.inventory-capacity {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.capacity-text {
+  font-size: 0.78rem;
+  color: #888;
+  white-space: nowrap;
+}
+
+.capacity-bar {
+  flex: 1;
+  height: 6px;
+  background: #1a1e2e;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.capacity-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+.inventory-list {
+  max-height: 300px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #333 #12162a;
+}
+
+.inventory-empty {
+  color: #555;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.inventory-item {
+  background: #0e1020;
+  border: 1px solid #1e2235;
+  border-left: 3px solid #9E9E9E;
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.item-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.15rem;
+}
+
+.item-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.item-rarity {
+  font-size: 0.7rem;
+  margin-left: 0.3rem;
+  opacity: 0.7;
+}
+
+.item-count {
+  font-size: 0.8rem;
+  color: #aaa;
+  font-variant-numeric: tabular-nums;
+}
+
+.item-desc {
+  font-size: 0.75rem;
+  color: #777;
+  margin-bottom: 0.3rem;
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-item-use {
+  background: #1a2a1a;
+  color: #8BC34A;
+  border: 1px solid #2a3a2a;
+  border-radius: 4px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-item-use:hover {
+  background: #2a3a2a;
+}
+
+.item-price {
+  font-size: 0.72rem;
+  color: #666;
+}

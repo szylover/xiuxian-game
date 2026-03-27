@@ -9,6 +9,8 @@ import type { Player } from '../game/player';
 import { REALMS, ACTION_COSTS, MONSTERS, BASE_CULTIVATE_EXP, BREAKTHROUGH_BASE_RATE, BREAKTHROUGH_COMP_BONUS, BREAKTHROUGH_LUCK_BONUS, BREAKTHROUGH_FAIL_EXP_LOSS } from '../game/data';
 import { runCombat } from '../game/combat';
 import { registerCoreEvents, triggerExploreEvent, triggerDailyEvent } from '../game/events';
+import { useItem as inventoryUseItem, addItem } from '../game/inventory';
+import { getItemDef } from '../game/registry';
 import type { LogCategory } from './useGameLog';
 
 // 注册核心事件（模块加载时执行一次）
@@ -19,7 +21,12 @@ const SAVE_KEY = 'xiuxian_save';
 function loadSave(): Player | null {
   try {
     const raw = localStorage.getItem(SAVE_KEY);
-    return raw ? JSON.parse(raw) : null;
+    if (!raw) return null;
+    const p = JSON.parse(raw) as Player;
+    // 向后兼容：旧存档缺少 inventory 字段
+    if (!Array.isArray(p.inventory)) p.inventory = [];
+    if (!p.inventoryCapacity) p.inventoryCapacity = 20 + (p.realmIndex || 0) * 5;
+    return p;
   } catch { return null; }
 }
 
@@ -165,6 +172,17 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
         if (monster.realmIndex > p.realmIndex) {
           p.tracking = { ...p.tracking, defeatedHigherRealm: true };
         }
+        // C-1: 战斗掉落物品（30% 獠牙，10% 妖丹）
+        if (Math.random() < 0.3) {
+          const { player: p2, added } = addItem(p, 'core:monster_fang', 1);
+          p = p2;
+          if (added > 0) addLog('🦴 获得 妖兽獠牙 ×1', 'combat');
+        }
+        if (Math.random() < 0.1) {
+          const { player: p2, added } = addItem(p, 'core:monster_core', 1);
+          p = p2;
+          if (added > 0) addLog('💎 获得 妖丹 ×1', 'combat');
+        }
       } else if (result.winner === 'monster') {
         // 战斗失败：健康 -20，重伤恢复少量 HP
         p.health = Math.max(0, p.health - 20);
@@ -196,6 +214,28 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
       const { player: updated, message } = triggerExploreEvent(p);
       p = { ...updated };
       addLog(message, message.includes('【奇遇】') ? 'adventure' : 'explore');
+
+      // C-1: 探索随机拾取物品
+      const exploreLoot: [string, number][] = [
+        ['core:iron_ore', 0.15],
+        ['core:spirit_stone_shard', 0.20],
+        ['core:herb_lingzhi', 0.08],
+        ['core:herb_snow_lotus', 0.03],
+        ['core:jade_slip', 0.05],
+        ['core:hp_pill', 0.10],
+        ['core:spirit_water', 0.06],
+      ];
+      for (const [itemId, chance] of exploreLoot) {
+        if (Math.random() < chance) {
+          const { player: p2, added } = addItem(p, itemId, 1);
+          if (added > 0) {
+            p = p2;
+            const def = getItemDef(itemId);
+            addLog(`🎁 拾取 ${def?.name ?? itemId} ×1`, 'explore');
+          }
+          break; // 每次探索最多捡一个物品
+        }
+      }
 
       p = advanceTime(p, 'explore');
       return p;
@@ -280,6 +320,16 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     addLog('🗑️ 存档已删除。', 'system');
   }, [addLog]);
 
+  // ── C-1: 使用物品 ──
+  const useItemAction = useCallback((itemId: string) => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = inventoryUseItem(prev, itemId);
+      addLog(result.message, result.success ? 'system' : 'system');
+      return result.player;
+    });
+  }, [addLog]);
+
   return {
     player,
     gameOver,
@@ -293,5 +343,6 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
     breakthrough,
     deleteSave,
     canAct,
+    useItem: useItemAction,
   };
 }

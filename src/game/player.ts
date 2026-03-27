@@ -17,6 +17,11 @@ export interface Aptitudes {
   earth: number; wood: number;
 }
 
+export interface InventorySlot {
+  itemId: string;
+  count: number;
+}
+
 export interface PlayerTracking {
   killCount: number;
   bossKillCount: number;
@@ -56,6 +61,8 @@ export interface Player {
   charisma: number;
   aptitudes: Aptitudes;
   gold: number;
+  inventory: InventorySlot[];
+  inventoryCapacity: number;
   items: Record<string, unknown>;
   passives: Record<string, unknown>;
   systems: Record<string, unknown>;
@@ -159,6 +166,8 @@ export function createPlayer(name: string = '无名散修'): Player {
 
     // ── 资源 ──
     gold: 0,   // 灵石
+    inventory: [],
+    inventoryCapacity: 20,
 
     // ── 小说事件扩展 ──
     items: {},
@@ -182,6 +191,7 @@ export function recalcStats(player: Player): Player {
 
   const p = { ...player };
   p.maxStamina = 100 + realm.index * 10;
+  p.inventoryCapacity = 20 + realm.index * 5;
   p.maxHp = realm.hpBase;
   p.maxMp = realm.mpBase;
   p.maxMentalPower = realm.mentalBase;

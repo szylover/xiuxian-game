@@ -29,11 +29,12 @@
 ## 设计原则
 
 - **数据驱动**：所有游戏数值集中在 `src/data/` 下，逻辑层通过数据表驱动行为
+- **系统 ≠ 内容**：系统是纯逻辑壳子（背包/炼丹/装备/商店/战斗…），所有具体内容（物品/丹药/装备/妖兽/功法/配方/商品…）通过 `registerDLC()` 挂载到全局注册表，核心包也是 DLC（namespace: `core`）。详见 `docs/roadmap.md` 扩展性约定
 - **模块分离**：每个系统（属性/战斗/事件/炼丹/…）独立模块，通过 React 组件 + 自定义 Hook 暴露接口
 - **纯前端**：零后端依赖，所有状态存 `localStorage`，可直接部署到 Azure Static Web Apps
 - **React + TypeScript**：使用 React（Vite 构建）开发，使用 TypeScript，构建产物部署到 Azure SWA
 - **渐进增强**：先跑通核心循环（修炼→战斗→突破），再叠加子系统
-- **DLC 扩展性**：事件/物品/功法均通过 `register()` 注册到全局表；ID 用命名空间（`core:xxx` / `dlc-N:xxx`）；触发条件为谓词函数 `(player) => boolean`
+- **DLC 扩展性**：事件/物品/丹药/装备/妖兽/功法/配方/商品均通过 `registerDLC()` 注册到全局表；ID 用命名空间（`core:xxx` / `dlc-N:xxx`）；触发条件为谓词函数 `(player) => boolean`
 
 ---
 
@@ -80,17 +81,21 @@ xiuxian-game/
     │   ├── StatusBar.tsx          #     顶部状态栏
     │   ├── GameLog.tsx            #     游戏日志面板
     │   ├── ActionPanel.tsx        #     操作按钮面板
+    │   ├── InventoryPanel.tsx     #     背包面板（分类标签 + 物品列表）
     │   ├── StartScreen.tsx        #     开始界面
     │   └── StatusPanel.tsx        #     角色详细状态面板
     ├── game/                      #   游戏逻辑（纯 TS，不依赖 React）
-    │   ├── registry.ts            #     全局注册表（事件/妖兽/物品 DLC 扩展核心）
+    │   ├── registry.ts            #     全局注册表（事件/物品/妖兽 DLC 扩展核心）
     │   ├── event-loader.ts        #     JSON 事件加载器（纯数据 → GameEvent）
+    │   ├── item-loader.ts         #     JSON 物品加载器（纯数据 → ItemDef）
+    │   ├── inventory.ts           #     背包系统（增删查用物品，容量管理）
     │   ├── data.ts                #     数据表（境界/妖兽/丹药/事件/…）
     │   ├── player.ts              #     玩家角色 & 属性系统
     │   ├── combat.ts              #     战斗系统
     │   └── events.ts              #     事件内容注册（探索/奇遇/日常）
     ├── data/                      #   游戏数据（JSON）
-    │   └── core-events.json       #     1036 个核心事件数据
+    │   ├── core-events.json       #     1036 个核心事件数据
+    │   └── core-items.json        #     核心物品定义（丹药/材料/杂物）
     └── hooks/                     #   自定义 React Hooks
         ├── useGameEngine.ts       #     游戏引擎 Hook（状态管理 + 存档）
         └── useGameLog.ts          #     日志管理 Hook

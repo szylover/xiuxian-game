@@ -6,18 +6,22 @@
 import type { Player } from './player';
 import { registerDLC, triggerEvent } from './registry';
 import { loadEventsFromJson } from './event-loader';
+import { loadItemsFromJson } from './item-loader';
 import type { JsonEvent } from './event-loader';
+import type { JsonItem } from './item-loader';
 import coreEventsJson from '../data/core-events.json';
+import coreItemsJson from '../data/core-items.json';
 
-// ── 注册 core DLC（从 JSON 加载全部事件）──
+// ── 注册 core DLC（从 JSON 加载全部事件 + 物品）──
 export function registerCoreEvents(): void {
   const pack = loadEventsFromJson(coreEventsJson as JsonEvent[], {
     id: 'core',
     name: '基础事件包',
-    description: '1036 个核心事件（探索/奇遇/日常）',
-    version: '1.0.0',
+    description: '核心事件 + 物品定义',
+    version: '1.1.0',
   });
-  registerDLC(pack);
+  const items = loadItemsFromJson(coreItemsJson as JsonItem[]);
+  registerDLC({ ...pack, items });
 }
 
 // ── 探索入口 ──

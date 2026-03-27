@@ -8,6 +8,7 @@ import { useGameLog } from './hooks/useGameLog';
 import StartScreen from './components/StartScreen';
 import StatusBar from './components/StatusBar';
 import StatusPanel from './components/StatusPanel';
+import InventoryPanel from './components/InventoryPanel';
 import ActionPanel from './components/ActionPanel';
 import GameLog from './components/GameLog';
 import './App.css';
@@ -16,6 +17,7 @@ export default function App() {
   const { logs, addLog, addLogs, clearLogs } = useGameLog();
   const engine = useGameEngine(addLog, addLogs);
   const [panelOpen, setPanelOpen] = useState(false);
+  const [inventoryOpen, setInventoryOpen] = useState(false);
 
   const hasSave = !!localStorage.getItem('xiuxian_save');
 
@@ -53,6 +55,12 @@ export default function App() {
         player={engine.player}
         isOpen={panelOpen}
         onToggle={() => setPanelOpen(!panelOpen)}
+      />
+      <InventoryPanel
+        player={engine.player}
+        isOpen={inventoryOpen}
+        onToggle={() => setInventoryOpen(!inventoryOpen)}
+        onUseItem={engine.useItem}
       />
       <ActionPanel
         player={engine.player}
