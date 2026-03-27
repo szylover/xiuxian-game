@@ -225,6 +225,7 @@ export function useGameEngine(addLog: (msg: string, category?: LogCategory) => v
         ['core:jade_slip', 0.05],
         ['core:hp_pill', 0.10],
         ['core:spirit_water', 0.06],
+        ['core:map_fragment', 0.02],
       ];
       for (const [itemId, chance] of exploreLoot) {
         if (Math.random() < chance) {
