@@ -14,6 +14,7 @@ import EquipmentPanel from './components/EquipmentPanel';
 import ShopPanel from './components/ShopPanel';
 import SmithingPanel from './components/SmithingPanel';
 import ActionPanel from './components/ActionPanel';
+import DebugPanel from './components/DebugPanel';
 import GameLog from './components/GameLog';
 import './App.css';
 
@@ -106,6 +107,7 @@ export default function App() {
         gameOver={engine.gameOver}
       />
       <GameLog logs={logs} />
+      <DebugPanel player={engine.player} onUpdate={engine.debugSetPlayer} />
     </div>
   );
 }
