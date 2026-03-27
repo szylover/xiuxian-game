@@ -2,6 +2,12 @@
 
 ## 2026-03-27
 
+### 路线图拆分 & DLC 扩展性规划
+- `docs/roadmap.md` 精简为索引文件（总览 + DLC 规划 + 扩展性约定）
+- 新增 `docs/roadmap/milestone-{a~h}.md`，每个 Milestone 独立文件
+- 小说奇遇事件从 Milestone B 移出，改为 DLC 形式（一本小说 = 一个 Milestone）
+- `copilot-instructions.md` 新增 DLC 扩展性设计原则和 roadmap 目录结构
+
 ### TypeScript 迁移
 - **全量迁移**：项目从 React + JavaScript 迁移至 React + TypeScript
 - 添加 `tsconfig.json`、`vite-env.d.ts`

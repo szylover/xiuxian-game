@@ -33,6 +33,7 @@
 - **纯前端**：零后端依赖，所有状态存 `localStorage`，可直接部署到 Azure Static Web Apps
 - **React + TypeScript**：使用 React（Vite 构建）开发，使用 TypeScript，构建产物部署到 Azure SWA
 - **渐进增强**：先跑通核心循环（修炼→战斗→突破），再叠加子系统
+- **DLC 扩展性**：事件/物品/功法均通过 `register()` 注册到全局表；ID 用命名空间（`core:xxx` / `dlc-N:xxx`）；触发条件为谓词函数 `(player) => boolean`
 
 ---
 
@@ -57,7 +58,16 @@ xiuxian-game/
 ├── README.md
 ├── docs/                          # 项目文档
 │   ├── progress.md                #   实时进度看板（@Progress 维护）
-│   ├── roadmap.md                 #   项目路线图（里程碑 + 阶段）
+│   ├── roadmap.md                 #   路线图索引（总览 + DLC 规划 + 扩展性约定）
+│   ├── roadmap/                   #   各 Milestone 详细路线图
+│   │   ├── milestone-a.md         #     A: 核心循环 ✅
+│   │   ├── milestone-b.md         #     B: 随机事件引擎
+│   │   ├── milestone-c.md         #     C: 物品与经济
+│   │   ├── milestone-d.md         #     D: 功法与技能
+│   │   ├── milestone-e.md         #     E: 世界与地图
+│   │   ├── milestone-f.md         #     F: 社交与NPC
+│   │   ├── milestone-g.md         #     G: 进阶机制
+│   │   └── milestone-h.md         #     H: 部署与体验优化
 │   ├── changelog.md               #   变更日志
 │   └── specs/                     #   设计文档存放目录
         ├── design-attribute-system.md  # 属性系统设计文档
