@@ -19,6 +19,7 @@
 | [T0037](tasks/todo/T0037-audio.md) | 音效系统 | — | — | ⬜ |
 | [T0038](tasks/todo/T0038-multi-save.md) | 多存档 | — | — | ⬜ |
 | [T0039](tasks/todo/T0039-tutorial.md) | 新手引导 | T0001 ✅ | — | ⬜ |
+| [T0046](tasks/todo/T0046-combat-ui-revamp.md) | 战斗弹窗 UI 重做（头像+血条+可视化） | T0003 ✅, T0044 ✅, T0041 ✅ | [spec](specs/T0046-combat-ui-revamp.md) | ⬜ |
 
 
 
