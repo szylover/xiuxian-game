@@ -38,6 +38,14 @@ export interface StatusEffect {
   sourceName: string;               // 来源技能名
 }
 
+/** 每回合结束时的 HP/MP 快照（用于 UI 逐回合驱动血条） */
+export interface RoundSnapshot {
+  round: number;       // 回合序号（0 = 战斗开始前，1+ = 回合结束后）
+  playerHp: number;
+  playerMp: number;
+  monsterHp: number;
+}
+
 export interface CombatResult {
   winner: 'player' | 'monster' | 'draw';
   playerHpLeft: number;
@@ -46,4 +54,8 @@ export interface CombatResult {
   goldGained: number;
   mpUsed: number;                   // 本场战斗消耗的灵力总量
   skillUseCount: number;            // 技能释放次数
+  snapshots: RoundSnapshot[];       // 每回合结束快照（含 round=0 初始状态）
+  monsterMaxHp: number;             // 怪物最大 HP（用于血条百分比）
+  playerMaxHp: number;              // 玩家最大 HP（含功法加成）
+  playerMaxMp: number;              // 玩家最大 MP（战斗开始时）
 }

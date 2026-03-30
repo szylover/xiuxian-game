@@ -3,13 +3,14 @@
 // ============================================================
 
 import type { Player } from '../player';
-import type { Monster } from '../data';
-import type { SkillState, StatusEffect, CombatResult } from './types';
+import type { MonsterDef } from '../types';
+import type { SkillState, StatusEffect, CombatResult, RoundSnapshot } from './types';
 import { calcDamage, tryUseSkill, calcSkillDamage } from './damage';
 import { getActiveTechniqueBonus, getActiveSkillInfo, calcAptitudeBonus } from '../technique';
 
-export function runCombat(player: Player, monster: Monster): CombatResult {
+export function runCombat(player: Player, monster: MonsterDef): CombatResult {
   const logs: string[] = [];
+  const snapshots: RoundSnapshot[] = [];
 
   // 叠加功法加成
   const techBonus = getActiveTechniqueBonus(player);
@@ -44,6 +45,9 @@ export function runCombat(player: Player, monster: Monster): CombatResult {
 
   let pHp = buffedPlayer.hp;
   let mHp = monster.hp;
+
+  // 初始快照（回合 0 = 战斗开始前）
+  snapshots.push({ round: 0, playerHp: pHp, playerMp: availableMp, monsterHp: mHp });
 
   // 怪物身上的持续效果
   const monsterEffects: StatusEffect[] = [];
@@ -200,11 +204,18 @@ export function runCombat(player: Player, monster: Monster): CombatResult {
     if (skillState.cooldownLeft > 0) {
       skillState.cooldownLeft--;
     }
+
+    // 回合结束快照
+    snapshots.push({ round, playerHp: Math.max(0, pHp), playerMp: availableMp, monsterHp: Math.max(0, mHp) });
   }
 
   if (round >= MAX_ROUNDS && pHp > 0 && mHp > 0) {
     logs.push(`战斗超时，双方脱战。`);
-    return { winner: 'draw', playerHpLeft: pHp, logs, expGained: 0, goldGained: 0, mpUsed: skillState.totalMpUsed, skillUseCount: skillState.useCount };
+    return {
+      winner: 'draw', playerHpLeft: pHp, logs, expGained: 0, goldGained: 0,
+      mpUsed: skillState.totalMpUsed, skillUseCount: skillState.useCount,
+      snapshots, monsterMaxHp: monster.hp, playerMaxHp: buffedPlayer.maxHp, playerMaxMp: player.mp,
+    };
   }
 
   const playerWon = pHp > 0;
@@ -228,5 +239,9 @@ export function runCombat(player: Player, monster: Monster): CombatResult {
     goldGained: playerWon ? monster.goldReward : 0,
     mpUsed: skillState.totalMpUsed,
     skillUseCount: skillState.useCount,
+    snapshots,
+    monsterMaxHp: monster.hp,
+    playerMaxHp: buffedPlayer.maxHp,
+    playerMaxMp: player.mp,
   };
 }

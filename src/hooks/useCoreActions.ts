@@ -6,12 +6,12 @@
 import { useCallback, useRef } from 'react';
 import type { Player } from '../game/player';
 import { getSpiritRootGrade } from '../game/player';
-import { ACTION_COSTS, MONSTERS, BASE_CULTIVATE_EXP } from '../game/data';
+import { ACTION_COSTS, BASE_CULTIVATE_EXP } from '../game/data';
 import { runCombat } from '../game/combat';
 import type { CombatResult } from '../game/combat';
 import { triggerExploreEvent } from '../game/events';
 import { addItem } from '../game/inventory';
-import { getItemDef } from '../game/registry';
+import { getItemDef, getAllMonsters } from '../game/registry';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
 import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef } from '../game/types';
 import type { LogCategory } from './useGameLog';
@@ -38,7 +38,7 @@ export interface CoreActionDeps {
   setPlayer: React.Dispatch<React.SetStateAction<Player | null>>;
   advanceTime: (p: Player, actionKey: string) => Player;
   canAct: (actionKey: string) => boolean;
-  onCombatResult: (monsterName: string, result: CombatResult, loot: LootEntry[], deathInfo?: CombatDeathInfo, hpBefore?: number, mpBefore?: number) => void;
+  onCombatResult: (monsterName: string, monsterEmoji: string, result: CombatResult, loot: LootEntry[], deathInfo?: CombatDeathInfo, hpBefore?: number, mpBefore?: number) => void;
 }
 
 export function useCoreActions(deps: CoreActionDeps) {
@@ -46,7 +46,7 @@ export function useCoreActions(deps: CoreActionDeps) {
   // 收集日志用 ref，避免 React strict mode 重复
   const pendingRef = useRef<{ msgs: string[]; categories: LogCategory[] }>({ msgs: [], categories: [] });
   // 战斗结果暂存（setPlayer回调内收集，setTimeout中消费）
-  const combatResultRef = useRef<{ monsterName: string; result: CombatResult; loot: LootEntry[]; deathInfo?: CombatDeathInfo; hpBefore: number; mpBefore: number } | null>(null);
+  const combatResultRef = useRef<{ monsterName: string; monsterEmoji: string; result: CombatResult; loot: LootEntry[]; deathInfo?: CombatDeathInfo; hpBefore: number; mpBefore: number } | null>(null);
 
   const flushLogs = () => {
     const { msgs, categories } = pendingRef.current;
@@ -110,7 +110,7 @@ export function useCoreActions(deps: CoreActionDeps) {
       const cost = ACTION_COSTS.combat;
       p.stamina -= cost.stamina;
 
-      const eligible = MONSTERS.filter(m =>
+      const eligible = getAllMonsters().filter(m =>
         m.realmIndex >= p.realmIndex - 1 && m.realmIndex <= p.realmIndex
       );
       if (eligible.length === 0) {
@@ -213,12 +213,12 @@ export function useCoreActions(deps: CoreActionDeps) {
         if (p.hp < p.maxHp * 0.1) {
           p.tracking = { ...p.tracking, hasBeenBelow10Hp: true };
         }
-        combatResultRef.current = { monsterName: monster.name, result, loot, deathInfo: localDeathInfo, hpBefore, mpBefore };
+        combatResultRef.current = { monsterName: monster.name, monsterEmoji: monster.emoji, result, loot, deathInfo: localDeathInfo, hpBefore, mpBefore };
       }
 
       // 暂存战斗结果（玩家胜利 / 平局时 deathInfo 为空）
       if (!combatResultRef.current) {
-        combatResultRef.current = { monsterName: monster.name, result, loot, hpBefore, mpBefore };
+        combatResultRef.current = { monsterName: monster.name, monsterEmoji: monster.emoji, result, loot, hpBefore, mpBefore };
       }
 
       p = advanceTime(p, 'combat');
@@ -226,8 +226,8 @@ export function useCoreActions(deps: CoreActionDeps) {
     });
     setTimeout(() => {
       if (combatResultRef.current) {
-        const { monsterName, result, loot, deathInfo, hpBefore, mpBefore } = combatResultRef.current;
-        onCombatResult(monsterName, result, loot, deathInfo, hpBefore, mpBefore);
+        const { monsterName, monsterEmoji, result, loot, deathInfo, hpBefore, mpBefore } = combatResultRef.current;
+        onCombatResult(monsterName, monsterEmoji, result, loot, deathInfo, hpBefore, mpBefore);
         combatResultRef.current = null;
       } else {
         flushLogs();

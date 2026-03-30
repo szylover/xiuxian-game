@@ -2,11 +2,12 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef } from '../types';
 import {
   eventRegistry, itemDefRegistry, recipeRegistry,
   equipRegistry, smithingRecipeRegistry, breakthroughReqRegistry, tribulationRegistry,
   techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
+  monsterRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -59,3 +60,11 @@ export function getLifeSaver(id: string) { return lifeSaverRegistry.get(id); }
 export function getAllLifeSavers() { return Array.from(lifeSaverRegistry.values()); }
 export function getRevivalMethod(id: string) { return revivalRegistry.get(id); }
 export function getAllRevivalMethods() { return Array.from(revivalRegistry.values()); }
+
+// ── 妖兽 ──
+
+export function getMonster(id: string): MonsterDef | undefined { return monsterRegistry.get(id); }
+export function getAllMonsters(): MonsterDef[] { return Array.from(monsterRegistry.values()); }
+export function getMonstersByRealm(realmIndex: number): MonsterDef[] {
+  return Array.from(monsterRegistry.values()).filter(m => m.realmIndex === realmIndex);
+}

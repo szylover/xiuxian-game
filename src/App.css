@@ -1913,8 +1913,8 @@ body {
 .cl-debuff   { color: #ab47bc; }
 
 .combat-modal-fixed {
-  height: 70vh;
-  max-height: 70vh;
+  height: 80vh;
+  max-height: 80vh;
   display: flex;
   flex-direction: column;
 }
@@ -2006,6 +2006,148 @@ body {
   text-align: center;
   color: #666;
   padding: 1rem;
+}
+
+/* ── T0046: HpBar 通用血条 ── */
+.hpbar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.hpbar-label {
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  width: 1.2em;
+  text-align: center;
+}
+
+.hpbar-track {
+  position: relative;
+  flex: 1;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 5px;
+  overflow: hidden;
+  min-width: 40px;
+}
+
+.hpbar-fill {
+  height: 100%;
+  border-radius: 5px;
+  min-width: 2px;
+}
+
+.hpbar-animate {
+  transition: width 0.5s ease;
+}
+
+.hpbar-red   { background: linear-gradient(90deg, #c62828, #ef5350); }
+.hpbar-blue  { background: linear-gradient(90deg, #4527a0, #7e57c2); }
+.hpbar-gray  { background: #444; }
+
+.hpbar-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: bold;
+  pointer-events: none;
+  white-space: nowrap;
+  text-shadow: 0 0 3px rgba(0,0,0,0.8);
+}
+
+/* ── T0046: CombatHeader 对阵区 ── */
+.combat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid #1e2235;
+  flex-shrink: 0;
+}
+
+.combat-header-side {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.combat-header-monster {
+  flex-direction: row-reverse;
+}
+
+.combat-header-avatar {
+  flex-shrink: 0;
+}
+
+.combat-header-emoji {
+  font-size: 2.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  border: 2px solid #444;
+}
+
+.combat-header-emoji-dead {
+  filter: grayscale(100%) opacity(0.5);
+}
+
+.combat-header-vs {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #d4a843;
+  flex-shrink: 0;
+  padding: 0 0.25rem;
+  text-shadow: 0 0 8px rgba(212, 168, 67, 0.5);
+  animation: vsGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes vsGlow {
+  from { text-shadow: 0 0 4px rgba(212, 168, 67, 0.3); }
+  to   { text-shadow: 0 0 12px rgba(212, 168, 67, 0.8); }
+}
+
+.combat-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.combat-header-info-right {
+  align-items: flex-end;
+}
+
+.combat-header-name {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #e0d5c0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.combat-header-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  width: 100%;
 }
 
 @keyframes combatFadeIn {
