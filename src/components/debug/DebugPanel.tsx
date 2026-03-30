@@ -6,9 +6,10 @@
 import { useState } from 'react';
 import type { Player } from '../../game/player';
 import { recalcStats } from '../../game/player';
-import { getAllItemDefs, getAllEquipDefs, getAllTechniqueDefs } from '../../game/registry';
+import { getAllItemDefs, getAllEquipDefs, getAllTechniqueDefs, getAllAchievementDefs } from '../../game/registry';
 import { addItem } from '../../game/inventory';
 import { getAllTechniquePassiveBonus } from '../../game/technique';
+import { getAchievementState, checkAchievements, ONCE_BONUS_KEYS } from '../../game/achievement/engine';
 import { CollapsiblePanel, TabBar } from '../shared';
 import DebugStatsTab from './DebugStatsTab';
 import DebugItemsTab from './DebugItemsTab';
@@ -22,11 +23,12 @@ const DEBUG_TABS = [
   { key: 'stats' as const, label: '数值', icon: '📊' },
   { key: 'items' as const, label: '物品', icon: '📦' },
   { key: 'technique' as const, label: '功法', icon: '✨' },
+  { key: 'achievement' as const, label: '成就', icon: '🏆' },
 ];
 
 export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [tab, setTab] = useState<'stats' | 'items' | 'technique'>('stats');
+  const [tab, setTab] = useState<'stats' | 'items' | 'technique' | 'achievement'>('stats');
   const [itemQty, setItemQty] = useState<Record<string, number>>({});
 
   if (!player || player.name !== 'Debug') return null;
@@ -90,6 +92,67 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
 
   const getQty = (id: string) => itemQty[id] || 1;
   const setQty = (id: string, v: number) => setItemQty(prev => ({ ...prev, [id]: Math.max(1, v) }));
+
+  // ── 成就调试操作 ──
+  const unlockAllAchievements = () => {
+    onUpdate(prev => {
+      if (!prev) return prev;
+      const allAchs = getAllAchievementDefs();
+      let p = { ...prev };
+      const state = getAchievementState(p);
+      const unlockedSet = new Set(state.unlockedIds);
+      for (const ach of allAchs) {
+        if (unlockedSet.has(ach.id)) continue;
+        unlockedSet.add(ach.id);
+        if (ach.bonusStats) {
+          for (const key of ONCE_BONUS_KEYS) {
+            const val = (ach.bonusStats as Record<string, number | undefined>)[key];
+            if (val) (p as unknown as Record<string, number>)[key] = ((p as unknown as Record<string, number>)[key] ?? 0) + val;
+          }
+        }
+      }
+      p = {
+        ...p,
+        systems: {
+          ...p.systems,
+          achievement: { unlockedIds: Array.from(unlockedSet), pendingToast: [] },
+        },
+      };
+      return recalcStats(p);
+    });
+  };
+
+  const clearAllAchievements = () => {
+    onUpdate(prev => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        systems: { ...prev.systems, achievement: { unlockedIds: [], pendingToast: [] } },
+      };
+    });
+  };
+
+  const triggerAchievementCheck = () => {
+    onUpdate(prev => {
+      if (!prev) return prev;
+      const { player: checked } = checkAchievements(prev);
+      return checked;
+    });
+  };
+
+  const setKillCount = (v: number) => {
+    onUpdate(prev => {
+      if (!prev) return prev;
+      return { ...prev, tracking: { ...prev.tracking, killCount: v } };
+    });
+  };
+
+  const setBossKillCount = (v: number) => {
+    onUpdate(prev => {
+      if (!prev) return prev;
+      return { ...prev, tracking: { ...prev.tracking, bossKillCount: v } };
+    });
+  };
 
   return (
     <CollapsiblePanel
@@ -189,6 +252,72 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
                   </div>
                 );
               })}
+            </div>
+          </div>
+        )}
+
+        {tab === 'achievement' && (
+          <div className="debug-stats">
+            {/* 已解锁列表 */}
+            <div className="debug-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.25rem' }}>
+              <span className="debug-label" style={{ fontWeight: 'bold' }}>🏆 已解锁成就</span>
+              <div style={{ fontSize: '0.72rem', color: '#FFD700', fontFamily: 'monospace', wordBreak: 'break-all' }}>
+                {getAchievementState(player).unlockedIds.join(', ') || '（无）'}
+              </div>
+              <div style={{ fontSize: '0.7rem', color: '#888', marginTop: '0.1rem' }}>
+                已解锁 {getAchievementState(player).unlockedIds.length} / {getAllAchievementDefs().length}
+              </div>
+            </div>
+
+            {/* 操作按钮 */}
+            <div className="debug-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.4rem', marginTop: '0.4rem' }}>
+              <span className="debug-label" style={{ fontWeight: 'bold' }}>🔧 成就操作</span>
+              <div className="debug-btns" style={{ flexWrap: 'wrap', gap: '0.4rem' }}>
+                <button className="btn debug-btn" onClick={unlockAllAchievements} title="解锁所有注册成就并叠加一次性加成">
+                  🌟 解锁全部成就
+                </button>
+                <button className="btn debug-btn" onClick={clearAllAchievements} title="清空已解锁列表（仅测试用）">
+                  🗑️ 清空所有成就
+                </button>
+                <button className="btn debug-btn" onClick={triggerAchievementCheck} title="立即检测当前 player 状态是否满足成就条件">
+                  🔍 手动触发检测
+                </button>
+              </div>
+            </div>
+
+            {/* killCount / bossKillCount 快速编辑 */}
+            <div className="debug-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.3rem', marginTop: '0.4rem' }}>
+              <span className="debug-label" style={{ fontWeight: 'bold' }}>⚔️ 战斗追踪</span>
+              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                <span style={{ fontSize: '0.75rem', color: '#aaa' }}>击杀: <strong>{player.tracking.killCount}</strong></span>
+                <div className="debug-btns">
+                  {[10, 50, 100].map(d => (
+                    <button key={d} className="btn debug-btn" onClick={() => setKillCount(player.tracking.killCount + d)}>+{d}</button>
+                  ))}
+                  <input
+                    type="number"
+                    className="debug-input-sm"
+                    placeholder="="
+                    onKeyDown={e => { if (e.key === 'Enter') setKillCount(Number((e.target as HTMLInputElement).value) || 0); }}
+                    onBlur={e => { const v = Number(e.target.value); if (v || v === 0) setKillCount(v); }}
+                  />
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                <span style={{ fontSize: '0.75rem', color: '#aaa' }}>Boss击杀: <strong>{player.tracking.bossKillCount}</strong></span>
+                <div className="debug-btns">
+                  {[5, 10].map(d => (
+                    <button key={d} className="btn debug-btn" onClick={() => setBossKillCount(player.tracking.bossKillCount + d)}>+{d}</button>
+                  ))}
+                  <input
+                    type="number"
+                    className="debug-input-sm"
+                    placeholder="="
+                    onKeyDown={e => { if (e.key === 'Enter') setBossKillCount(Number((e.target as HTMLInputElement).value) || 0); }}
+                    onBlur={e => { const v = Number(e.target.value); if (v || v === 0) setBossKillCount(v); }}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         )}

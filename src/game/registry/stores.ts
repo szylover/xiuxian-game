@@ -7,6 +7,7 @@ import type {
   SmithingRecipeDef, BreakthroughReqDef, TribulationDef, DLCPack, TechniqueDef,
   DeathTriggerDef, LifeSaverDef, RevivalMethodDef, MonsterDef,
 } from '../types';
+import type { AchievementDef } from '../achievement/types';
 
 export const dlcRegistry = new Map<string, DLCPack>();
 export const eventRegistry = new Map<string, GameEvent>();
@@ -21,5 +22,6 @@ export const deathTriggerRegistry = new Map<string, DeathTriggerDef>();
 export const lifeSaverRegistry = new Map<string, LifeSaverDef>();
 export const revivalRegistry = new Map<string, RevivalMethodDef>();
 export const monsterRegistry = new Map<string, MonsterDef>();
+export const achievementRegistry = new Map<string, AchievementDef>();
 export const triggeredOnce = new Set<string>();
 export const cooldowns = new Map<string, number>();

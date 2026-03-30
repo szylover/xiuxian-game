@@ -94,7 +94,7 @@
 | [T0029](tasks/done/T0029-breakthrough-v2.md) | 突破系统重构 + 渡劫 | T0004, T0012 | [spec](specs/T0029-breakthrough-tribulation.md) | ✅ |
 | [T0030](tasks/todo/T0030-reincarnation.md) | 转世重修 | T0029, T0040, T0056 | — | ⬜ |
 | [T0040](tasks/done/T0040-death-system.md) | 死亡与复活系统 | T0001, T0003, T0012, T0018, T0044 | [spec](specs/T0040-death-system.md) | ✅ |
-| [T0031](tasks/todo/T0031-achievement.md) | 成就系统 | T0001 | — | ⬜ |
+| [T0031](tasks/done/T0031-achievement.md) | 成就系统 | T0001 | [spec](specs/T0031-achievement.md) | ✅ |
 | [T0032](tasks/todo/T0032-leaderboard.md) | 排行榜 | T0031 | — | ⬜ |
 | [T0033](tasks/todo/T0033-ascension.md) | 仙道境界（飞升） | T0029, T0058 | — | ⬜ |
 | [T0058](tasks/todo/T0058-realm-dlc.md) | 境界表 DLC 化 | — | [spec](specs/T0058-realm-dlc.md) | ⬜ |

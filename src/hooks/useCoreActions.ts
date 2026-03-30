@@ -291,17 +291,16 @@ export function useCoreActions(deps: CoreActionDeps) {
     setPlayer(prev => {
       if (!prev) return prev;
       let p: Player = { ...prev };
-      const staminaRecover = Math.floor(p.maxStamina * 0.3);
-      p.stamina = Math.min(p.maxStamina, p.stamina + staminaRecover);
-      p.hp = Math.min(p.maxHp, p.hp + Math.floor(p.maxHp * 0.1));
-      p.mp = Math.min(p.maxMp, p.mp + Math.floor(p.maxMp * 0.1));
+      p.stamina = p.maxStamina;
+      p.hp = p.maxHp;
+      p.mp = p.maxMp;
       p.health = Math.min(100, p.health + 5);
       p.mood = Math.min(100, p.mood + 3);
       p.tracking = { ...p.tracking, consecutiveRests: p.tracking.consecutiveRests + 1, consecutiveCultivates: 0 };
       p = advanceTime(p, 'rest');
 
       pendingRef.current = { msgs: [], categories: [] };
-      queueLog(`💤 休息片刻，恢复 ${staminaRecover} 精力，HP/MP/健康/心情少量恢复。`, 'system');
+      queueLog(`💤 休息片刻，体力、灵力、精力完全恢复，健康/心情少量恢复。`, 'system');
       return p;
     });
     setTimeout(flushLogs, 0);

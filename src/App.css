@@ -2258,3 +2258,167 @@ body {
   padding: 20px;
   font-size: 0.95rem;
 }
+
+/* ============================================================
+   成就面板（T0031）
+   ============================================================ */
+
+.achievement-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  height: 100%;
+}
+
+.achievement-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid #1e2235;
+}
+
+.achievement-progress {
+  font-size: 0.8rem;
+  color: #FFD700;
+  font-weight: bold;
+}
+
+.achievement-tabs {
+  display: flex;
+  gap: 0.2rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #1e2235;
+}
+
+.achievement-tab {
+  background: #0e1020;
+  border: 1px solid #1e2235;
+  color: #888;
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.achievement-tab:hover {
+  border-color: #FFD700;
+  color: #FFD700;
+}
+
+.achievement-tab.active {
+  background: #1a1500;
+  border-color: #FFD700;
+  color: #FFD700;
+}
+
+.achievement-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding-right: 0.2rem;
+}
+
+.achievement-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #1e2235;
+  background: #0e1020;
+  transition: transform 0.15s;
+}
+
+.achievement-card:hover {
+  transform: scale(1.01);
+}
+
+.achievement-card.achievement-unlocked {
+  border-color: #FFD700;
+  background: #120f00;
+}
+
+.achievement-card.achievement-locked {
+  opacity: 0.7;
+}
+
+.achievement-card-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.achievement-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.achievement-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.15rem;
+}
+
+.achievement-card-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.achievement-card-status {
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.achievement-card-desc {
+  font-size: 0.72rem;
+  margin-bottom: 0.15rem;
+}
+
+.achievement-card-bonus {
+  font-size: 0.7rem;
+}
+
+.achievement-summary {
+  border-top: 1px solid #1e2235;
+  padding-top: 0.4rem;
+  flex-shrink: 0;
+}
+
+.achievement-summary-title {
+  font-size: 0.72rem;
+  color: #888;
+  margin-bottom: 0.25rem;
+}
+
+.achievement-summary-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.achievement-summary-item {
+  font-size: 0.72rem;
+  color: #8BC34A;
+  background: #0e1a0e;
+  border: 1px solid #1e3a1e;
+  border-radius: 3px;
+  padding: 0.1rem 0.35rem;
+}
+
+.achievement-summary-once {
+  color: #FFD700;
+  background: #1a1500;
+  border-color: #3a3000;
+}
+
+.achievement-summary-empty {
+  font-size: 0.72rem;
+  color: #555;
+}

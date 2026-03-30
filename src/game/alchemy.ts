@@ -107,6 +107,18 @@ export function performAlchemy(player: Player, recipeId: string): AlchemyResult 
   const { player: p2, added } = addItem(p, recipe.outputItemId, outputCount);
   p = p2;
 
+  // 追踪炼丹次数（T0031 成就系统）
+  const alchemyState = (p.systems?.alchemy as { totalCrafted?: number; excellentCount?: number } | undefined) ?? {};
+  const newTotalCrafted = (alchemyState.totalCrafted ?? 0) + 1;
+  const newExcellentCount = (alchemyState.excellentCount ?? 0) + (quality === 'excellent' ? 1 : 0);
+  p = {
+    ...p,
+    systems: {
+      ...p.systems,
+      alchemy: { ...alchemyState, totalCrafted: newTotalCrafted, excellentCount: newExcellentCount },
+    },
+  };
+
   const outputDef = getItemDef(recipe.outputItemId);
   const qualityLabel = quality === 'excellent' ? '✨极品' : quality === 'good' ? '🌟良品' : '普通';
 
