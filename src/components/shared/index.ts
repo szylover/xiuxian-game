@@ -11,6 +11,6 @@ export { default as CombatModal } from './CombatModal';
 export { default as DeathModal } from './DeathModal';
 export { StatRow, AptitudeBar } from './StatRow';
 export {
-  RARITY_COLORS, RARITY_LABELS, STAT_CN,
+  RARITY_COLORS, RARITY_LABELS, STAT_CN, STAT_COLORS,
   SLOT_ICONS, CATEGORY_TABS, statsCN,
 } from './constants';
