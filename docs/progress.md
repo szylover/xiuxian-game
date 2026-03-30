@@ -22,6 +22,7 @@
 | [T0049](tasks/todo/T0049-enlightenment.md) | 悟道顿悟系统 | T0002 ✅, T0017 ✅ | — | ⬜ |
 | [T0056](tasks/todo/T0056-initial-random-attributes.md) | 初始随机属性系统 | T0001 ✅ | — | ⬜ |
 | [T0058](tasks/todo/T0058-realm-dlc.md) | 境界表 DLC 化 | —（无前置） | [spec](specs/T0058-realm-dlc.md) | ⬜ |
+| [T0059](tasks/todo/T0059-body-cultivation.md) | 体修系统核心（体魄 · 体修境界 · 减伤） | T0001 ✅, T0003 ✅, T0017 ✅, T0019 ✅ | [spec](specs/T0059-body-cultivation.md) | 📐 |
 
 
 
