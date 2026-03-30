@@ -22,6 +22,7 @@ import { registerShopGoods } from './shop';
 import type { ShopGoodsDef } from './shop';
 import { getDeathSystemState } from './death';
 import { recalcStats } from './player';
+import { CORE_ACHIEVEMENTS } from './achievement/data';
 
 // ── 核心死亡触发条件 ──
 
@@ -261,6 +262,7 @@ export function registerCoreEvents(): void {
     lifeSavers: CORE_LIFE_SAVERS,
     revivalMethods: CORE_REVIVAL_METHODS,
     monsters: CORE_MONSTERS,
+    achievements: CORE_ACHIEVEMENTS,
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }

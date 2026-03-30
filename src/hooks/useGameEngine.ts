@@ -18,6 +18,7 @@ import type { RoundSnapshot } from '../game/combat/types';
 import { checkDeathTriggers, applyDeath, applyRevival, getDeathSystemState } from '../game/death';
 import type { DeathCheckResult, DeathResult } from '../game/death';
 import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef } from '../game/types';
+import { checkAchievements } from '../game/achievement/engine';
 
 // 注册核心事件（模块加载时执行一次）
 registerCoreEvents();
@@ -77,6 +78,11 @@ function loadSave(): Player | null {
     if (p.tracking) {
       if (p.tracking.lowMoodStreak === undefined) p.tracking.lowMoodStreak = 0;
       if (p.tracking.consecutiveBreakthroughFails === undefined) p.tracking.consecutiveBreakthroughFails = 0;
+    }
+    // T0031: achievement 向后兼容
+    if (!p.systems) p.systems = {};
+    if (!p.systems.achievement) {
+      p.systems.achievement = { unlockedIds: [], pendingToast: [] };
     }
     return p;
   } catch { return null; }
@@ -151,6 +157,32 @@ export function useGameEngine(
       writeSave(player);
     }
   }, [player, gameOver]);
+
+  // ── T0031: 成就检测副作用——每次 player 变化后自动检查并通知 ──
+  // 用 ref 标记本次 setPlayer 来源于成就检测，避免二次触发
+  const achPlayerRef = useRef<Player | null>(null);
+  useEffect(() => {
+    if (!player || gameOver) return;
+    // 若 player 是我们自己设置的，跳过（已检测完毕）
+    if (achPlayerRef.current === player) {
+      achPlayerRef.current = null;
+      return;
+    }
+    const { player: updated, newAchievements } = checkAchievements(player);
+    if (newAchievements.length === 0) return;
+    for (const ach of newAchievements) {
+      const bonus = ach.bonusDescription ? ` — ${ach.bonusDescription}` : '';
+      addLog(`🏆 解锁成就：${ach.name}${bonus}`, 'system');
+    }
+    // 清空 pendingToast 并持久化新状态
+    const achState = updated.systems?.achievement as { unlockedIds: string[]; pendingToast: string[] };
+    const newPlayer = {
+      ...updated,
+      systems: { ...updated.systems, achievement: { ...achState, pendingToast: [] } },
+    };
+    achPlayerRef.current = newPlayer;
+    setPlayer(newPlayer);
+  }, [player, gameOver, addLog]);
 
   // ── 通用：时间推进 + 死亡检测 (A-5 + T0042 历法 + T0040 死亡) ──
   const advanceTime = useCallback((p: Player, actionKey: string): Player => {

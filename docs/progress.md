@@ -13,7 +13,7 @@
 | [T0021](tasks/todo/T0021-map-system.md) | 地图系统 | T0001 ✅ | — | ⬜ |
 | [T0025](tasks/todo/T0025-npc-system.md) | NPC 系统 | T0001 ✅ | — | ⬜ |
 | [T0030](tasks/todo/T0030-reincarnation.md) | 转世重修 | T0029 ✅, T0040 ✅ | — | ⬜ |
-| [T0031](tasks/todo/T0031-achievement.md) | 成就系统 | T0001 ✅ | — | ⬜ |
+| [T0032](tasks/todo/T0032-leaderboard.md) | 排行榜 | T0031 ✅ | — | ⬜ |
 | [T0033](tasks/todo/T0033-ascension.md) | 仙道境界（飞升） | T0029 ✅ | — | ⬜ |
 | [T0035](tasks/todo/T0035-azure-cicd.md) | Azure SWA CI/CD | — | — | ⬜ |
 | [T0037](tasks/todo/T0037-audio.md) | 音效系统 | — | — | ⬜ |
@@ -27,6 +27,7 @@
 
 | ID | 任务 | 完成日期 |
 |----|------|----------|
+| T0031 | 成就系统 | 2026-03-30 |
 | T0046 | 战斗弹窗 UI 重做（头像+血条+可视化）+ 妖兽 DLC 化 | 2026-03-30 |
 | T0019 | 功法被动效果 | 2026-03-30 |
 | T0045 | Toast 降噪 + 战斗日志合并 | 2026-03-30 |
