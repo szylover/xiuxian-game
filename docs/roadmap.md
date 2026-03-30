@@ -57,7 +57,7 @@
 |----|------|------|------|------|
 | [T0017](tasks/done/T0017-technique-system.md) | 功法系统 | T0001 | — | ✅ |
 | [T0018](tasks/done/T0018-skill-combat.md) | 技能战斗 | T0003, T0017 | [Spec](specs/T0018-skill-combat.md) | ✅ |
-| [T0019](tasks/todo/T0019-passive-effects.md) | 被动效果 | T0017 | — | ⬜ |
+| [T0019](tasks/todo/T0019-passive-effects.md) | 被动效果 | T0017 | [spec](specs/T0019-passive-effects.md) | 📐 |
 | [T0020](tasks/todo/T0020-divine-arts.md) | 神通（元素体系） | T0017, T0018 | — | ⬜ |
 
 ### 🏷️ 世界与地图

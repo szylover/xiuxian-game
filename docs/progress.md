@@ -10,7 +10,7 @@
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
 
-| [T0019](tasks/todo/T0019-passive-effects.md) | 被动效果 | T0017 ✅ | — | ⬜ |
+| [T0019](tasks/todo/T0019-passive-effects.md) | 被动效果 | T0017 ✅ | [spec](specs/T0019-passive-effects.md) | 📐 |
 | [T0020](tasks/todo/T0020-divine-arts.md) | 神通（元素体系） | T0017 ✅, T0018 ✅ | — | ⬜ |
 | [T0021](tasks/todo/T0021-map-system.md) | 地图系统 | T0001 ✅ | — | ⬜ |
 | [T0025](tasks/todo/T0025-npc-system.md) | NPC 系统 | T0001 ✅ | — | ⬜ |
