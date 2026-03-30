@@ -7,11 +7,31 @@ import { rollSpiritRoots } from '../spirit-root';
 import type { PlayerSpiritRoots } from '../spirit-root';
 import type { Player, Aptitudes } from './types';
 
+/** 建角色时预先随机好的核心属性（可用于UI展示+重掷） */
+export interface PreviewRoll {
+  spiritRoots: PlayerSpiritRoots;
+  luck: number;
+  comprehension: number;
+  charisma: number;
+}
+
+/** 生成一套随机预览属性 */
+export function rollPreview(): PreviewRoll {
+  return {
+    spiritRoots: rollSpiritRoots(),
+    luck: rollInnateAttr(),
+    comprehension: rollInnateAttr(),
+    charisma: rollInnateAttr(),
+  };
+}
+
 export interface CreatePlayerOptions {
   name: string;
   gender: 'male' | 'female';
   appearance: number;
-  spiritRoots?: PlayerSpiritRoots; // 可选：允许外部传入（重掷灵根）
+  preview?: PreviewRoll; // 可选：允许外部传入预先随机好的属性
+  /** @deprecated use preview instead */
+  spiritRoots?: PlayerSpiritRoots;
 }
 
 function randInt(min: number, max: number): number {
@@ -53,8 +73,8 @@ export function createPlayer(options: CreatePlayerOptions): Player {
     earth: rollAptitude(), wood: rollAptitude(),
   };
 
-  // 决定灵根
-  const spiritRoots = options.spiritRoots ?? rollSpiritRoots();
+  // 决定灵根（优先使用预览中的值，兼容旧 spiritRoots 字段）
+  const spiritRoots = options.preview?.spiritRoots ?? options.spiritRoots ?? rollSpiritRoots();
 
   // 根据灵根对对应元素资质施加加成
   // metal → thunder + wind；其余直接对应
@@ -104,9 +124,9 @@ export function createPlayer(options: CreatePlayerOptions): Player {
     atk: realm.atkBase, def: realm.defBase, speed: realm.speedBase,
     skillResist: 0, spellResist: 0,
     critRate: 5, critDmgMultiplier: 1.5, critResist: 0, moveSpeed: 10,
-    luck:          rollInnateAttr(),
-    comprehension: rollInnateAttr(),
-    charisma:      rollInnateAttr(),
+    luck:          options.preview?.luck          ?? rollInnateAttr(),
+    comprehension: options.preview?.comprehension ?? rollInnateAttr(),
+    charisma:      options.preview?.charisma      ?? rollInnateAttr(),
     aptitudes,
     spiritRoots,
     gold: 0, inventory: [], inventoryCapacity: 20,

@@ -104,7 +104,99 @@ body {
 
 .avatar-option img { display: block; border-radius: 6px; }
 
-/* ── T0056: 灵根测算界面 ── */
+/* ── 单页建角色布局 ── */
+.create-char-form {
+  display: flex;
+  flex-direction: row;
+  gap: 1.6rem;
+  align-items: flex-start;
+  max-width: 760px;
+  width: 100%;
+  padding: 1rem;
+  background: #0d1120;
+  border: 1px solid #222;
+  border-radius: 12px;
+}
+
+.create-char-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 260px;
+}
+
+.create-char-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.talent-section-title {
+  color: #ffd700;
+  font-size: 0.95rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 0.1rem;
+}
+
+/* ── 先天属性条 ── */
+.innate-attrs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.6rem 0.8rem;
+  background: #12162a;
+  border: 1px solid #222;
+  border-radius: 10px;
+}
+
+.innate-title {
+  color: #aaa;
+  font-size: 0.8rem;
+  margin-bottom: 0.2rem;
+  letter-spacing: 1px;
+}
+
+.innate-row {
+  display: grid;
+  grid-template-columns: 36px 1fr 36px;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.innate-label {
+  color: #ccc;
+  font-size: 0.85rem;
+  text-align: right;
+}
+
+.innate-bar {
+  height: 6px;
+  background: #1a1e2e;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.innate-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+.innate-val {
+  font-size: 0.75rem;
+  color: #aaa;
+  text-align: right;
+}
+
+/* ── 单页操作按钮区 ── */
+.create-char-actions {
+  margin-top: 0.2rem;
+}
+
+/* ── T0056: 灵根测算界面（保留兼容旧样式） ── */
 .spirit-result { max-width: 400px; width: 100%; }
 
 .char-preview {
