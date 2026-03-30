@@ -5,7 +5,7 @@
 
 import { getSpiritRootGrade, getSpiritRootDisplay } from '../../game/player';
 import type { Player } from '../../game/player';
-import { StatRow, AptitudeBar } from '../shared';
+import { StatRow, AptitudeBar, STAT_COLORS } from '../shared';
 import { SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS } from '../shared/constants';
 
 interface StatusPanelProps {
@@ -25,13 +25,13 @@ export default function StatusPanel({ player }: StatusPanelProps) {
         {/* ── 基础属性 ── */}
         <div className="panel-section">
           <h3>📦 基础属性</h3>
-          <StatRow icon="📅" label="寿命" value={player.age.toFixed(1)} max={player.lifespan === Infinity ? undefined : player.lifespan} color="#FF9800" />
-          <StatRow icon="😊" label="心情" value={player.mood} max={100} color="#E91E63" />
-          <StatRow icon="💚" label="健康" value={player.health} max={100} color={player.health < 30 ? '#F44336' : '#4CAF50'} />
-          <StatRow icon="⚡" label="精力" value={player.stamina} max={player.maxStamina} color="#FFC107" />
-          <StatRow icon="❤️" label="体力" value={player.hp} max={player.maxHp} color="#F44336" />
-          <StatRow icon="🔮" label="灵力" value={player.mp} max={player.maxMp} color="#2196F3" />
-          <StatRow icon="🧠" label="念力" value={player.mentalPower} max={player.maxMentalPower} color="#9C27B0" />
+          <StatRow icon="📅" label="寿命" value={player.age.toFixed(1)} max={player.lifespan === Infinity ? undefined : player.lifespan} color={STAT_COLORS.lifespan} />
+          <StatRow icon="😊" label="心情" value={player.mood} max={100} color={STAT_COLORS.mood} />
+          <StatRow icon="💚" label="健康" value={player.health} max={100} color={player.health < 30 ? '#F44336' : STAT_COLORS.health} />
+          <StatRow icon="⚡" label="精力" value={player.stamina} max={player.maxStamina} color={STAT_COLORS.stamina} />
+          <StatRow icon="❤️" label="体力" value={player.hp} max={player.maxHp} color={STAT_COLORS.hp} />
+          <StatRow icon="🔮" label="灵力" value={player.mp} max={player.maxMp} color={STAT_COLORS.mp} />
+          <StatRow icon="🧠" label="念力" value={player.mentalPower} max={player.maxMentalPower} color={STAT_COLORS.mental} />
         </div>
 
         {/* ── 战斗属性 ── */}
@@ -50,9 +50,9 @@ export default function StatusPanel({ player }: StatusPanelProps) {
         {/* ── 先天属性 ── */}
         <div className="panel-section">
           <h3>🌟 先天属性</h3>
-          <StatRow icon="🍀" label="幸运" value={player.luck} max={100} color="#4CAF50" />
-          <StatRow icon="🧠" label="悟性" value={player.comprehension} max={100} color="#2196F3" />
-          <StatRow icon="💫" label="魅力" value={player.charisma} max={100} color="#E91E63" />
+          <StatRow icon="🍀" label="幸运" value={player.luck} max={100} color={STAT_COLORS.luck} />
+          <StatRow icon="🧠" label="悟性" value={player.comprehension} max={100} color={STAT_COLORS.comprehension} />
+          <StatRow icon="💫" label="魅力" value={player.charisma} max={100} color={STAT_COLORS.charisma} />
         </div>
 
         {/* ── 灵根资质 ── */}

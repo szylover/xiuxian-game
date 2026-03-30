@@ -3,11 +3,12 @@
 // ============================================================
 
 import type { ItemCategory, GameEvent, EventCategory, MonsterDef } from '../types';
+import type { AchievementDef } from '../achievement/types';
 import {
   eventRegistry, itemDefRegistry, recipeRegistry,
   equipRegistry, smithingRecipeRegistry, breakthroughReqRegistry, tribulationRegistry,
   techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
-  monsterRegistry,
+  monsterRegistry, achievementRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -68,3 +69,8 @@ export function getAllMonsters(): MonsterDef[] { return Array.from(monsterRegist
 export function getMonstersByRealm(realmIndex: number): MonsterDef[] {
   return Array.from(monsterRegistry.values()).filter(m => m.realmIndex === realmIndex);
 }
+
+// ── 成就 ──
+
+export function getAchievement(id: string): AchievementDef | undefined { return achievementRegistry.get(id); }
+export function getAllAchievementDefs(): AchievementDef[] { return Array.from(achievementRegistry.values()); }

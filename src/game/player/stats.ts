@@ -5,6 +5,7 @@
 import { REALMS } from '../data';
 import { getEquipDef } from '../registry';
 import { getAllTechniquePassiveBonus } from '../technique';
+import { getAchievementRecalcBonus } from '../achievement/engine';
 import type { EquipStatBonus } from '../registry';
 import type { Player, Aptitudes, SpiritRootGrade, PlayerSpiritRoots } from './types';
 import type { SpiritRootCombo } from '../spirit-root';
@@ -83,6 +84,19 @@ export function recalcStats(player: Player): Player {
   if (passiveBonus.mp)                p.maxMp += passiveBonus.mp;
   if (passiveBonus.critRate)          p.critRate += passiveBonus.critRate;
   if (passiveBonus.critDmgMultiplier) p.critDmgMultiplier += passiveBonus.critDmgMultiplier;
+
+  // 成就永久加成（T0031）——recalcStats 型
+  const achBonus = getAchievementRecalcBonus(p);
+  if (achBonus.atk)               p.atk += achBonus.atk;
+  if (achBonus.def)               p.def += achBonus.def;
+  if (achBonus.speed)             p.speed += achBonus.speed;
+  if (achBonus.hp)                p.maxHp += achBonus.hp;
+  if (achBonus.mp)                p.maxMp += achBonus.mp;
+  if (achBonus.mentalPower)       p.maxMentalPower += achBonus.mentalPower;
+  if (achBonus.critRate)          p.critRate += achBonus.critRate;
+  if (achBonus.critDmgMultiplier) p.critDmgMultiplier += achBonus.critDmgMultiplier;
+  if (achBonus.critResist)        p.critResist += achBonus.critResist;
+  if (achBonus.moveSpeed)         p.moveSpeed += achBonus.moveSpeed;
 
   p.hp = Math.min(p.hp, p.maxHp);
   p.mp = Math.min(p.mp, p.maxMp);
