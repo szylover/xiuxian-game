@@ -243,10 +243,22 @@ export function getActiveSkillInfo(player: Player): { def: TechniqueDef; slot: T
   return { def, slot, skill: def.activeSkill };
 }
 
-// ── 计算资质加成系数（1.0~1.5）──
+// ── 计算资质加成系数（T0056：1.0~2.0）──
+// 基础：资质（1.0~1.5） + 灵根亲和度（0~+0.5）= 最高 2.0x
+// 当功法有 spiritRootElement 且玩家拥有对应灵根时，亲和度越高攻击越强
 export function calcAptitudeBonus(player: Player, def: TechniqueDef): number {
   const aptKey = TYPE_APTITUDE_MAP[def.type] ?? 'sword';
   const aptitude = player.aptitudes[aptKey] ?? 0;
-  return 1.0 + aptitude / 200;
+  let bonus = 1.0 + aptitude / 200;
+
+  // T0056：灵根亲和度加成攻击强度（affinity/200 = 最高 +0.5）
+  if (def.spiritRootElement && player.spiritRoots) {
+    const matchRoot = player.spiritRoots.roots.find(r => r.type === def.spiritRootElement);
+    if (matchRoot) {
+      bonus += matchRoot.affinity / 200;
+    }
+  }
+
+  return bonus;
 }
 

@@ -6,7 +6,7 @@
 import type { Player } from '../../game/player';
 import { getTechniqueDef } from '../../game/registry';
 import type { TechniqueDef, PassiveEffect } from '../../game/registry';
-import { getLearnableTechniques, calcTechniqueExpGain, getEffectiveMaxLevel } from '../../game/technique';
+import { getLearnableTechniques, calcTechniqueExpGain, getEffectiveMaxLevel, calcAptitudeBonus } from '../../game/technique';
 import { RARITY_COLORS, SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS } from '../shared';
 import type { TechniqueRarity } from '../../game/registry';
 
@@ -67,6 +67,11 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
             const rootBoostText = matchRoot
               ? `×${(1 + matchRoot.affinity / 100).toFixed(1)}`
               : undefined;
+            // 技能攻击强度加成（资质 + 灵根亲和度的综合系数）
+            const atkBonus = calcAptitudeBonus(player, def);
+            const atkBonusText = (atkBonus > 1.01 && def.activeSkill)
+              ? `×${atkBonus.toFixed(2)}`
+              : undefined;
             return (
               <div
                 key={slot.techniqueId}
@@ -106,6 +111,11 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                   {rootBoostText && (
                     <span className="technique-root-speed" title="灵根亲和度修炼加速">
                       {' '}⚡{rootBoostText}速
+                    </span>
+                  )}
+                  {atkBonusText && (
+                    <span className="technique-atk-bonus" title="技能攻击强度（资质 + 灵根亲和度综合系数）">
+                      {' '}⚔️{atkBonusText}攻
                     </span>
                   )}
                   {isActive && <span className="technique-active-badge">⚔️ 激活</span>}

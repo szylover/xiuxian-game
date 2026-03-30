@@ -1874,6 +1874,11 @@ body {
   color: #4CAF50;
 }
 
+.technique-atk-bonus {
+  font-size: 0.65rem;
+  color: #FF7043;
+}
+
 .technique-card.technique-locked {
   opacity: 0.8;
 }
