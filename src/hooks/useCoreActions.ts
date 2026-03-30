@@ -82,15 +82,15 @@ export function useCoreActions(deps: CoreActionDeps) {
       p.stamina -= cost.stamina;
 
       const compBonus = 1 + p.comprehension / 50;
-      const rootGrade = getSpiritRootGrade(p.aptitudes);
+      const cultivationMult = p.spiritRoots?.cultivationMultiplier ?? getSpiritRootGrade(p.aptitudes).multiplier;
       const moodBonus = 0.5 + (p.mood / 100);
-      const expGain = Math.floor(BASE_CULTIVATE_EXP * compBonus * rootGrade.multiplier * moodBonus);
+      const expGain = Math.floor(BASE_CULTIVATE_EXP * compBonus * cultivationMult * moodBonus);
       p.exp += expGain;
       p.tracking = { ...p.tracking, consecutiveCultivates: p.tracking.consecutiveCultivates + 1, consecutiveRests: 0 };
       p = advanceTime(p, 'cultivate');
 
       pendingRef.current = { msgs: [], categories: [] };
-      queueLog(`🧘 修炼一次，获得 ${expGain} 修为。（悟性×${compBonus.toFixed(1)} 灵根×${rootGrade.multiplier} 心情×${moodBonus.toFixed(1)}）`, 'system');
+      queueLog(`🧘 修炼一次，获得 ${expGain} 修为。（悟性×${compBonus.toFixed(1)} 灵根×${cultivationMult} 心情×${moodBonus.toFixed(1)}）`, 'system');
       return p;
     });
     setTimeout(flushLogs, 0);

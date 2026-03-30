@@ -6,7 +6,8 @@ import { REALMS } from '../data';
 import { getEquipDef } from '../registry';
 import { getAllTechniquePassiveBonus } from '../technique';
 import type { EquipStatBonus } from '../registry';
-import type { Player, Aptitudes, SpiritRootGrade } from './types';
+import type { Player, Aptitudes, SpiritRootGrade, PlayerSpiritRoots } from './types';
+import type { SpiritRootCombo } from '../spirit-root';
 
 // ── 灵根品级评定 ──
 
@@ -22,6 +23,20 @@ export function getSpiritRootGrade(aptitudes: Aptitudes): SpiritRootGrade {
   if (avg > 40) return { grade: '灵根',   multiplier: 1.0, color: '#4CAF50' };
   if (avg > 20) return { grade: '杂灵根', multiplier: 0.7, color: '#FF9800' };
   return { grade: '废灵根', multiplier: 0.4, color: '#9E9E9E' };
+}
+
+// ── T0056: 根据 PlayerSpiritRoots 生成展示信息 ──
+export function getSpiritRootDisplay(spiritRoots: PlayerSpiritRoots): SpiritRootGrade {
+  const comboMap: Record<SpiritRootCombo, { grade: string; color: string }> = {
+    none:   { grade: '无灵根', color: '#9E9E9E' },
+    single: { grade: '单灵根', color: '#FFD700' },
+    dual:   { grade: '双灵根', color: '#FF5722' },
+    triple: { grade: '三灵根', color: '#9C27B0' },
+    quad:   { grade: '四灵根', color: '#4CAF50' },
+    penta:  { grade: '五灵根', color: '#607D8B' },
+  };
+  const { grade, color } = comboMap[spiritRoots.combo] ?? comboMap['penta'];
+  return { grade, multiplier: spiritRoots.cultivationMultiplier, color };
 }
 
 // ── 根据境界刷新派生属性（含装备加成）──

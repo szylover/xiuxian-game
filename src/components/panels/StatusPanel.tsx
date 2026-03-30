@@ -3,9 +3,10 @@
 // 四栏展示：基础 / 战斗 / 先天 / 灵根资质
 // ============================================================
 
-import { getSpiritRootGrade } from '../../game/player';
+import { getSpiritRootGrade, getSpiritRootDisplay } from '../../game/player';
 import type { Player } from '../../game/player';
 import { StatRow, AptitudeBar } from '../shared';
+import { SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS } from '../shared/constants';
 
 interface StatusPanelProps {
   player: Player;
@@ -14,7 +15,9 @@ interface StatusPanelProps {
 export default function StatusPanel({ player }: StatusPanelProps) {
   if (!player) return null;
 
-  const rootGrade = getSpiritRootGrade(player.aptitudes);
+  const rootGrade = player.spiritRoots
+    ? getSpiritRootDisplay(player.spiritRoots)
+    : getSpiritRootGrade(player.aptitudes);
 
   return (
     <div className="status-panel-content">
@@ -55,6 +58,22 @@ export default function StatusPanel({ player }: StatusPanelProps) {
         {/* ── 灵根资质 ── */}
         <div className="panel-section">
           <h3>🔥 灵根资质 <span style={{ color: rootGrade.color, fontSize: '0.9em' }}>【{rootGrade.grade} ×{rootGrade.multiplier}】</span></h3>
+
+          {/* T0056: 灵根详情 */}
+          {player.spiritRoots && (
+            <div className="spirit-roots-info">
+              {player.spiritRoots.roots.length === 0 ? (
+                <div className="root-tag" style={{ color: '#9E9E9E' }}>无灵根之体</div>
+              ) : (
+                player.spiritRoots.roots.map(root => (
+                  <div key={root.type} className="root-tag" style={{ color: SPIRIT_ROOT_COLORS[root.type] }}>
+                    {SPIRIT_ROOT_ICONS[root.type]} {SPIRIT_ROOT_CN[root.type]}灵根 {root.affinity}
+                  </div>
+                ))
+              )}
+            </div>
+          )}
+
           <AptitudeBar label="🔥 火" value={player.aptitudes.fire} />
           <AptitudeBar label="💧 水" value={player.aptitudes.water} />
           <AptitudeBar label="⚡ 雷" value={player.aptitudes.thunder} />
@@ -66,3 +85,4 @@ export default function StatusPanel({ player }: StatusPanelProps) {
     </div>
   );
 }
+
