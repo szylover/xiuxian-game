@@ -13,6 +13,7 @@ export type {
   EventCategory, EventTone, GameEvent,
   DLCPack,
   DeathSeverity, DeathTriggerDef, DeathPenaltyDef, LifeSaverDef, RevivalMethodDef, DeathSystemState,
+  MonsterDef,
 } from '../types';
 
 export { registerDLC, unregisterDLC, getDLC, getAllDLCs } from './dlc';
@@ -27,6 +28,7 @@ export {
   getDeathTrigger, getAllDeathTriggers,
   getLifeSaver, getAllLifeSavers,
   getRevivalMethod, getAllRevivalMethods,
+  getMonster, getAllMonsters, getMonstersByRealm,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

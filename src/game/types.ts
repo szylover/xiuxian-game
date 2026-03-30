@@ -212,6 +212,25 @@ export interface GameEvent {
   cooldown?: number;                       // 冷却（年）：触发后多久不再出现
 }
 
+// ── 妖兽定义（DLC 化） ──
+
+export interface MonsterDef {
+  id: string;                // 命名空间 ID，如 'core:wild_wolf'
+  name: string;
+  emoji: string;             // 显示用 emoji，如 '🐺'
+  realmIndex: number;
+  hp: number;
+  atk: number;
+  def: number;
+  speed: number;
+  moveSpeed: number;
+  critRate: number;
+  critResist: number;
+  critDmgMultiplier?: number;
+  expReward: number;
+  goldReward: number;
+}
+
 // ── DLC 包定义 ──
 
 // 预留，Phase 1 不实现
@@ -233,6 +252,7 @@ export interface DLCPack {
   deathTriggers?: DeathTriggerDef[];       // 该 DLC 提供的死亡触发条件
   lifeSavers?: LifeSaverDef[];             // 该 DLC 提供的护命道具定义
   revivalMethods?: RevivalMethodDef[];     // 该 DLC 提供的复活手段定义
+  monsters?: MonsterDef[];                 // 该 DLC 提供的妖兽定义
 }
 
 // ── 死亡系统类型定义 ──

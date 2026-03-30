@@ -19,9 +19,7 @@
 | [T0037](tasks/todo/T0037-audio.md) | 音效系统 | — | — | ⬜ |
 | [T0038](tasks/todo/T0038-multi-save.md) | 多存档 | — | — | ⬜ |
 | [T0039](tasks/todo/T0039-tutorial.md) | 新手引导 | T0001 ✅ | — | ⬜ |
-| [T0046](tasks/todo/T0046-combat-ui-revamp.md) | 战斗弹窗 UI 重做（头像+血条+可视化） | T0003 ✅, T0044 ✅, T0041 ✅ | [spec](specs/T0046-combat-ui-revamp.md) | ⬜ |
 | [T0056](tasks/todo/T0056-initial-random-attributes.md) | 初始随机属性系统 | T0001 ✅ | — | ⬜ |
-
 
 
 
@@ -29,6 +27,7 @@
 
 | ID | 任务 | 完成日期 |
 |----|------|----------|
+| T0046 | 战斗弹窗 UI 重做（头像+血条+可视化）+ 妖兽 DLC 化 | 2026-03-30 |
 | T0019 | 功法被动效果 | 2026-03-30 |
 | T0045 | Toast 降噪 + 战斗日志合并 | 2026-03-30 |
 | T0040 | 死亡与复活系统 | 2026-03-30 |

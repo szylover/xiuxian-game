@@ -22,19 +22,8 @@ export interface ActionCost {
   time: number;      // 单位：月（1 月 = 1/12 年）
 }
 
-export interface Monster {
-  name: string;
-  realmIndex: number;
-  hp: number;
-  atk: number;
-  def: number;
-  speed: number;
-  moveSpeed: number;
-  critRate: number;
-  critResist: number;
-  expReward: number;
-  goldReward: number;
-}
+// Monster 保留为向后兼容别名，实际定义已迁移到 types.ts（MonsterDef）
+export type Monster = import('./types').MonsterDef;
 
 export interface PillEffect {
   hp?: number;
@@ -78,20 +67,6 @@ export const ACTION_COSTS: Record<string, ActionCost> = {
 export const MONTH_NAMES = [
   '一月','二月','三月','四月','五月','六月',
   '七月','八月','九月','十月','十一月','十二月',
-];
-
-// ── 妖兽表（按境界分级）──
-export const MONSTERS: Monster[] = [
-  { name: '野狼',     realmIndex: 0, hp: 80,   atk: 7,   def: 2,  speed: 10, moveSpeed: 8,  critRate: 3,  critResist: 0, expReward: 15,  goldReward: 5   },
-  { name: '毒蛇',     realmIndex: 0, hp: 60,   atk: 10,  def: 1,  speed: 12, moveSpeed: 12, critRate: 8,  critResist: 0, expReward: 18,  goldReward: 8   },
-  { name: '铁背熊',   realmIndex: 1, hp: 250,  atk: 18,  def: 12, speed: 8,  moveSpeed: 5,  critRate: 5,  critResist: 2, expReward: 40,  goldReward: 15  },
-  { name: '赤焰蟒',   realmIndex: 1, hp: 200,  atk: 22,  def: 8,  speed: 14, moveSpeed: 10, critRate: 10, critResist: 0, expReward: 50,  goldReward: 20  },
-  { name: '玄冰蛛',   realmIndex: 2, hp: 600,  atk: 45,  def: 25, speed: 16, moveSpeed: 14, critRate: 12, critResist: 5, expReward: 120, goldReward: 50  },
-  { name: '噬魂鹰',   realmIndex: 2, hp: 500,  atk: 55,  def: 18, speed: 22, moveSpeed: 20, critRate: 15, critResist: 3, expReward: 140, goldReward: 60  },
-  { name: '地火蜥蜴', realmIndex: 3, hp: 1500, atk: 100, def: 55, speed: 20, moveSpeed: 12, critRate: 10, critResist: 8, expReward: 350, goldReward: 120 },
-  { name: '银角蛟龙', realmIndex: 3, hp: 1800, atk: 120, def: 65, speed: 28, moveSpeed: 18, critRate: 18, critResist: 10,expReward: 500, goldReward: 200 },
-  { name: '天煞虎',   realmIndex: 4, hp: 4000, atk: 250, def: 130,speed: 32, moveSpeed: 22, critRate: 15, critResist: 12,expReward: 1200,goldReward: 500 },
-  { name: '夔牛',     realmIndex: 5, hp: 9000, atk: 550, def: 280,speed: 45, moveSpeed: 30, critRate: 20, critResist: 15,expReward: 4000,goldReward: 1500},
 ];
 
 // ── 丹药表 ──

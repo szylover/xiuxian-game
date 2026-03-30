@@ -14,6 +14,7 @@ import { useCoreActions } from './useCoreActions';
 import type { LootEntry, CombatDeathInfo } from './useCoreActions';
 import { useSystemActions } from './useSystemActions';
 import type { CombatResult } from '../game/combat';
+import type { RoundSnapshot } from '../game/combat/types';
 import { checkDeathTriggers, applyDeath, applyRevival, getDeathSystemState } from '../game/death';
 import type { DeathCheckResult, DeathResult } from '../game/death';
 import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef } from '../game/types';
@@ -24,11 +25,19 @@ registerCoreEvents();
 export interface CombatModalState {
   phase: 'battle' | 'loot';
   monsterName: string;
+  monsterEmoji: string;
   result: CombatResult;
   loot: LootEntry[];
   deathInfo?: CombatDeathInfo;
   playerHpBefore: number;
   playerMpBefore: number;
+  playerAvatar: string;
+  playerName: string;
+  playerRealmIndex: number;
+  playerMaxHp: number;
+  playerMaxMp: number;
+  monsterMaxHp: number;
+  snapshots: RoundSnapshot[];
 }
 
 export interface DeathModalState {
@@ -273,8 +282,25 @@ export function useGameEngine(
   }, [player, gameOver]);
 
   // ── 战斗弹窗回调（T0044 + T0040）──
-  const onCombatResult = useCallback((monsterName: string, result: CombatResult, loot: LootEntry[], deathInfo?: CombatDeathInfo, hpBefore?: number, mpBefore?: number) => {
-    setCombatModal({ phase: 'battle', monsterName, result, loot, deathInfo, playerHpBefore: hpBefore ?? 0, playerMpBefore: mpBefore ?? 0 });
+  const onCombatResult = useCallback((monsterName: string, monsterEmoji: string, result: CombatResult, loot: LootEntry[], deathInfo?: CombatDeathInfo, hpBefore?: number, mpBefore?: number) => {
+    const p = playerRef.current;
+    setCombatModal({
+      phase: 'battle',
+      monsterName,
+      monsterEmoji,
+      result,
+      loot,
+      deathInfo,
+      playerHpBefore: hpBefore ?? 0,
+      playerMpBefore: mpBefore ?? 0,
+      playerAvatar: p?.avatar ?? 'default',
+      playerName: p?.name ?? '',
+      playerRealmIndex: p?.realmIndex ?? 0,
+      playerMaxHp: p?.maxHp ?? 100,
+      playerMaxMp: p?.maxMp ?? 30,
+      monsterMaxHp: result.monsterMaxHp,
+      snapshots: result.snapshots,
+    });
   }, []);
 
   const handleCombatNext = useCallback(() => {
