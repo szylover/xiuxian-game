@@ -4,8 +4,11 @@
 // ============================================================
 
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { createPlayer, getSpiritRootGrade } from '../game/player';
-import type { Player } from '../game/player';
+import { createPlayer, getSpiritRootGrade, getSpiritRootDisplay } from '../game/player';
+import type { Player, Aptitudes } from '../game/player';
+import type { CreatePlayerOptions } from '../game/player';
+import { rollSpiritRoots } from '../game/spirit-root';
+import type { PlayerSpiritRoots, SpiritRootType, SpiritRootCombo } from '../game/spirit-root';
 import { REALMS, ACTION_COSTS } from '../game/data';
 import { registerCoreEvents, triggerDailyEvent } from '../game/events';
 import type { LogCategory } from './useGameLog';
@@ -56,6 +59,32 @@ export interface DeathModalState {
 
 const SAVE_KEY = 'xiuxian_save';
 
+// ── T0056: 向后兼容——从旧资质推导灵根 ──
+function deriveCompatSpiritRoots(aptitudes: Aptitudes): PlayerSpiritRoots {
+  const grade = getSpiritRootGrade(aptitudes);
+  const gradeToCombo: Record<string, { combo: SpiritRootCombo; mult: number }> = {
+    '单灵根': { combo: 'single', mult: 3.0 },
+    '天灵根': { combo: 'dual',   mult: 2.0 },
+    '异灵根': { combo: 'triple', mult: 1.2 },
+    '灵根':   { combo: 'quad',   mult: 0.8 },
+    '杂灵根': { combo: 'penta',  mult: 0.5 },
+    '废灵根': { combo: 'none',   mult: 0.1 },
+  };
+  const mapping = gradeToCombo[grade.grade] ?? { combo: 'penta' as SpiritRootCombo, mult: 0.5 };
+  const elementMap: Array<{ type: SpiritRootType; val: number }> = [
+    { type: 'fire',  val: aptitudes.fire },
+    { type: 'water', val: aptitudes.water },
+    { type: 'earth', val: aptitudes.earth },
+    { type: 'wood',  val: aptitudes.wood },
+    { type: 'metal', val: (aptitudes.thunder + aptitudes.wind) / 2 },
+  ];
+  elementMap.sort((a, b) => b.val - a.val);
+  const comboCount: Record<SpiritRootCombo, number> = { none: 0, single: 1, dual: 2, triple: 3, quad: 4, penta: 5 };
+  const count = comboCount[mapping.combo];
+  const roots = elementMap.slice(0, count).map(e => ({ type: e.type, affinity: Math.min(100, Math.round(e.val)) }));
+  return { roots, combo: mapping.combo, cultivationMultiplier: mapping.mult };
+}
+
 function loadSave(): Player | null {
   try {
     const raw = localStorage.getItem(SAVE_KEY);
@@ -79,6 +108,12 @@ function loadSave(): Player | null {
       if (p.tracking.lowMoodStreak === undefined) p.tracking.lowMoodStreak = 0;
       if (p.tracking.consecutiveBreakthroughFails === undefined) p.tracking.consecutiveBreakthroughFails = 0;
     }
+    // T0056: 灵根 + 性别 + 外貌向后兼容
+    if (!p.spiritRoots) {
+      p.spiritRoots = deriveCompatSpiritRoots(p.aptitudes);
+    }
+    if (!p.gender) p.gender = 'male';
+    if (p.appearance === undefined) p.appearance = 0;
     // T0031: achievement 向后兼容
     if (!p.systems) p.systems = {};
     if (!p.systems.achievement) {
@@ -126,16 +161,21 @@ export function useGameEngine(
   }, [rawAddLogs, showToast]);
 
   // ── 新游戏 ──
-  const newGame = useCallback((name: string) => {
-    const p = createPlayer(name);
-    const root = getSpiritRootGrade(p.aptitudes);
+  const newGame = useCallback((options: CreatePlayerOptions) => {
+    const p = createPlayer(options);
+    const rootDisplay = getSpiritRootDisplay(p.spiritRoots);
     writeSave(p);
     setPlayer(p);
     setGameOver(false);
     setGameOverReason('');
     addLog(`🌟 ${p.name} 踏上修仙之路！`, 'system');
-    addLog(`灵根品级：${root.grade}（修炼速度 ×${root.multiplier}）`, 'system');
-    addLog(`幸运: ${p.luck} | 悟性: ${p.comprehension} | 魅力: ${p.charisma}`, 'system');
+    addLog(`灵根：${rootDisplay.grade}（修炼速度 ×${rootDisplay.multiplier}）`, 'system');
+    const rootList = p.spiritRoots.roots.map(r => {
+      const cn: Record<string, string> = { metal: '金', wood: '木', water: '水', fire: '火', earth: '土' };
+      return `${cn[r.type] ?? r.type}(${r.affinity})`;
+    }).join('、') || '无';
+    addLog(`灵根详情：${rootList}`, 'system');
+    addLog(`气运: ${p.luck} | 悟性: ${p.comprehension} | 魅力: ${p.charisma}`, 'system');
   }, [addLog]);
 
   // ── 加载存档 ──

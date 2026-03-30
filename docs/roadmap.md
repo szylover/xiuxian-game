@@ -31,7 +31,7 @@
 | [T0005](tasks/done/T0005-lifespan.md) | 寿命系统 | T0001 | — | ✅ |
 | [T0006](tasks/done/T0006-status-panel.md) | 状态面板 v2 | T0001 | — | ✅ |
 | [T0047](tasks/todo/T0047-talent-fate.md) | 命格天赋系统 | T0001 | — | ⬜ |
-| [T0056](tasks/todo/T0056-initial-random-attributes.md) | 初始随机属性系统 | T0001 | — | ⬜ |
+| [T0056](tasks/done/T0056-initial-random-attributes.md) | 初始随机属性系统 | T0001 | — | ✅ |
 
 ### 🏷️ 事件系统
 

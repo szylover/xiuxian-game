@@ -63,6 +63,181 @@ body {
   border-color: #ffd700;
 }
 
+/* ── T0056: 建角色 - 表单行 ── */
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 340px;
+}
+
+.form-row label {
+  min-width: 52px;
+  color: #aaa;
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.gender-row { align-items: center; }
+.gender-btns { display: flex; gap: 0.5rem; }
+.gender-btns .btn { padding: 0.4rem 1rem; font-size: 0.85rem; }
+
+/* ── 头像选择器 ── */
+.avatar-row { align-items: flex-start; }
+.avatar-selector { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+.avatar-option {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 4px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  background: #1a1e2e;
+}
+
+.avatar-option:hover { border-color: #888; }
+.avatar-option.selected {
+  border-color: #ffd700;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+.avatar-option img { display: block; border-radius: 6px; }
+
+/* ── T0056: 灵根测算界面 ── */
+.spirit-result { max-width: 400px; width: 100%; }
+
+.char-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.preview-avatar {
+  border: 2px solid #ffd700;
+  border-radius: 12px;
+  background: #0a0e1a;
+}
+
+.char-name {
+  color: #ffd700;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* ── 灵根组合展示 ── */
+.spirit-root-display {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem;
+  background: #12162a;
+  border: 1px solid #222;
+  border-radius: 10px;
+  margin-bottom: 0.6rem;
+}
+
+.combo-badge {
+  font-size: 1.3rem;
+  font-weight: bold;
+  border: 2px solid currentColor;
+  border-radius: 8px;
+  padding: 0.2rem 1rem;
+  letter-spacing: 2px;
+}
+
+.cultivation-mult {
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+.root-list-empty {
+  color: #666;
+  font-size: 0.85rem;
+  font-style: italic;
+  text-align: center;
+}
+
+.root-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.root-item {
+  display: grid;
+  grid-template-columns: 28px 70px 1fr 80px;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid;
+  border-radius: 6px;
+  background: rgba(0,0,0,0.2);
+}
+
+.root-icon { font-size: 1rem; text-align: center; }
+.root-name { font-size: 0.85rem; font-weight: bold; }
+
+.root-affinity-bar {
+  height: 6px;
+  background: #1a1e2e;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.root-affinity-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+.root-affinity-val {
+  font-size: 0.75rem;
+  color: #aaa;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ── 重掷区 ── */
+.reroll-area {
+  margin: 0.3rem 0;
+}
+
+.no-reroll {
+  color: #555;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+/* ── 底部操作按钮 ── */
+.form-actions {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  margin-top: 0.3rem;
+}
+
+/* ── StatusPanel 灵根信息 ── */
+.spirit-roots-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.root-tag {
+  font-size: 0.78rem;
+  padding: 0.2rem 0.5rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: 4px;
+  border: 1px solid currentColor;
+}
+
 /* ── 按钮 ── */
 .btn {
   padding: 0.6rem 1.4rem;
@@ -1658,6 +1833,61 @@ body {
   white-space: nowrap;
 }
 
+/* ── 灵根相关功法样式（T0056）── */
+.technique-root-tag {
+  font-size: 0.65rem;
+  padding: 0.05rem 0.3rem;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  margin-left: 0.25rem;
+}
+
+.technique-root-affinity {
+  font-size: 0.6rem;
+  opacity: 0.85;
+}
+
+.technique-root-req {
+  font-size: 0.72rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  margin: 0.2rem 0;
+}
+
+.technique-root-met {
+  color: #4CAF50;
+  background: rgba(76, 175, 80, 0.1);
+}
+
+.technique-root-unmet {
+  color: #FF9800;
+  background: rgba(255, 152, 0, 0.1);
+}
+
+.technique-max-bonus {
+  font-size: 0.65rem;
+  color: #FFD700;
+}
+
+.technique-root-speed {
+  font-size: 0.65rem;
+  color: #4CAF50;
+}
+
+.technique-atk-bonus {
+  font-size: 0.65rem;
+  color: #FF7043;
+}
+
+.technique-card.technique-locked {
+  opacity: 0.8;
+}
+
+.technique-card.technique-locked .btn-technique-learn {
+  background: #424242;
+  color: #9E9E9E;
+  cursor: not-allowed;
+}
 
 .debug-panel {
   position: fixed;
