@@ -53,7 +53,7 @@ export default function GameLog({ logs, currentYear = 1, currentMonth = 1 }: Gam
     });
   };
 
-  const [allExpanded, setAllExpanded] = useState(false);
+  const [allExpanded, setAllExpanded] = useState(true);
 
   const expandAll = () => {
     const allYears = new Set(grouped.keys());

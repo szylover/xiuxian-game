@@ -30,6 +30,8 @@
 | [T0004](tasks/done/T0004-breakthrough-v1.md) | 境界突破 v1 | T0002 | — | ✅ |
 | [T0005](tasks/done/T0005-lifespan.md) | 寿命系统 | T0001 | — | ✅ |
 | [T0006](tasks/done/T0006-status-panel.md) | 状态面板 v2 | T0001 | — | ✅ |
+| [T0047](tasks/todo/T0047-talent-fate.md) | 命格天赋系统 | T0001 | — | ⬜ |
+| [T0056](tasks/todo/T0056-initial-random-attributes.md) | 初始随机属性系统 | T0001 | — | ⬜ |
 
 ### 🏷️ 事件系统
 
@@ -50,6 +52,7 @@
 | [T0014](tasks/done/T0014-equipment.md) | 装备系统 | T0012 | — | ✅ |
 | [T0015](tasks/done/T0015-shop.md) | 商店系统 | T0012 | — | ✅ |
 | [T0016](tasks/done/T0016-smithing.md) | 炼器系统 | T0012, T0014 | — | ✅ |
+| [T0052](tasks/todo/T0052-auction-house.md) | 拍卖行 | T0025, T0015 | — | ⬜ |
 
 ### 🏷️ 功法与技能
 
@@ -68,6 +71,7 @@
 | [T0022](tasks/todo/T0022-region-events.md) | 区域事件 | T0007, T0021 | — | ⬜ |
 | [T0023](tasks/todo/T0023-dungeon.md) | 秘境探索（限时副本） | T0021, T0003 | — | ⬜ |
 | [T0024](tasks/todo/T0024-fengshui-mining.md) | 风水采矿 | T0021, T0012 | — | ⬜ |
+| [T0054](tasks/todo/T0054-bounty-quest.md) | 历练悬赏任务 | T0021, T0025 | — | ⬜ |
 
 ### 🏷️ 社交与NPC
 
@@ -77,6 +81,9 @@
 | [T0026](tasks/todo/T0026-dialogue.md) | 对话系统 | T0025 | — | ⬜ |
 | [T0027](tasks/todo/T0027-sect.md) | 门派系统 | T0025, T0017 | — | ⬜ |
 | [T0028](tasks/todo/T0028-pvp.md) | PvP 切磋 | T0025, T0003 | — | ⬜ |
+| [T0048](tasks/todo/T0048-romance-dual-cultivation.md) | 道侣双修系统 | T0025, T0026 | — | ⬜ |
+| [T0051](tasks/todo/T0051-npc-ai-ecology.md) | NPC AI 生态（世界模拟） | T0025, T0021 | — | ⬜ |
+| [T0053](tasks/todo/T0053-sect-management.md) | 宗门管理（自建宗门） | T0027, T0025, T0021 | — | ⬜ |
 
 ### 🏷️ 进阶机制
 
@@ -90,6 +97,8 @@
 | [T0033](tasks/todo/T0033-ascension.md) | 仙道境界（飞升） | T0029 | — | ⬜ |
 | [T0034](tasks/todo/T0034-honghuang-endgame.md) | 洪荒终局 | T0033 | — | ⬜ |
 | [T0042](tasks/done/T0042-calendar-system.md) | 年月历法系统 | T0001, T0005 | [spec](specs/T0042-calendar-system.md) | ✅ |
+| [T0050](tasks/todo/T0050-inner-demon.md) | 心魔系统 | T0029 | — | ⬜ |
+| [T0055](tasks/todo/T0055-heavenly-ranking.md) | 天机榜（天骄排行） | T0025, T0003, T0051 | — | ⬜ |
 
 ### 🏷️ 界面与体验
 

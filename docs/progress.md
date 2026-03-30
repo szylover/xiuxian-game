@@ -19,6 +19,7 @@
 | [T0037](tasks/todo/T0037-audio.md) | 音效系统 | — | — | ⬜ |
 | [T0038](tasks/todo/T0038-multi-save.md) | 多存档 | — | — | ⬜ |
 | [T0039](tasks/todo/T0039-tutorial.md) | 新手引导 | T0001 ✅ | — | ⬜ |
+| [T0056](tasks/todo/T0056-initial-random-attributes.md) | 初始随机属性系统 | T0001 ✅ | — | ⬜ |
 
 
 
