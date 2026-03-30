@@ -2258,3 +2258,77 @@ body {
   padding: 20px;
   font-size: 0.95rem;
 }
+
+/* ══════════════════════════════════════════════
+   T0020 神通（元素体系）样式
+   ══════════════════════════════════════════════ */
+
+/* 当前激活神通头部 */
+.divine-active-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 215, 0, 0.06);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.divine-active-label {
+  color: #9E9E9E;
+  flex-shrink: 0;
+}
+
+.divine-active-name {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.divine-active-element {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.divine-active-none {
+  color: #616161;
+  font-style: italic;
+}
+
+/* 资质显示行 */
+.divine-aptitude-row {
+  margin: 0.2rem 0;
+}
+
+/* 神通效果标签 */
+.divine-effects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0.25rem 0;
+}
+
+.divine-effect-tag {
+  font-size: 0.7rem;
+  padding: 0.1rem 0.4rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+  color: #b0b0b0;
+}
+
+/* 禁用按钮样式 */
+.btn-disabled {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  border: 1px solid #333;
+  background: rgba(50, 50, 50, 0.5);
+  color: #616161;
+  cursor: not-allowed;
+  text-align: center;
+}

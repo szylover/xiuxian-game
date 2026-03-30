@@ -2,12 +2,12 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory, MonsterDef } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef } from '../types';
 import {
   eventRegistry, itemDefRegistry, recipeRegistry,
   equipRegistry, smithingRecipeRegistry, breakthroughReqRegistry, tribulationRegistry,
   techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
-  monsterRegistry,
+  monsterRegistry, divineArtRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -67,4 +67,12 @@ export function getMonster(id: string): MonsterDef | undefined { return monsterR
 export function getAllMonsters(): MonsterDef[] { return Array.from(monsterRegistry.values()); }
 export function getMonstersByRealm(realmIndex: number): MonsterDef[] {
   return Array.from(monsterRegistry.values()).filter(m => m.realmIndex === realmIndex);
+}
+
+// ── 神通 ──
+
+export function getDivineArtDef(id: string): DivineArtDef | undefined { return divineArtRegistry.get(id); }
+export function getAllDivineArtDefs(): DivineArtDef[] { return Array.from(divineArtRegistry.values()); }
+export function getDivineArtsByElement(element: ElementType): DivineArtDef[] {
+  return Array.from(divineArtRegistry.values()).filter(a => a.element === element);
 }

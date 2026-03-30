@@ -18,6 +18,7 @@ import coreShopJson from '../data/core-shop.json';
 import coreSmithingJson from '../data/core-smithing.json';
 import coreTechniquesJson from '../data/core-techniques.json';
 import { CORE_BREAKTHROUGH_REQS, CORE_TRIBULATIONS } from '../data/core-breakthrough';
+import { CORE_DIVINE_ARTS } from '../data/core-divine-arts';
 import { registerShopGoods } from './shop';
 import type { ShopGoodsDef } from './shop';
 import { getDeathSystemState } from './death';
@@ -261,6 +262,7 @@ export function registerCoreEvents(): void {
     lifeSavers: CORE_LIFE_SAVERS,
     revivalMethods: CORE_REVIVAL_METHODS,
     monsters: CORE_MONSTERS,
+    divineArts: CORE_DIVINE_ARTS,
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }

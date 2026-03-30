@@ -32,7 +32,7 @@ export interface SkillState {
 
 /** 持续效果 */
 export interface StatusEffect {
-  type: 'dot' | 'debuff_def' | 'debuff_atk';
+  type: 'dot' | 'debuff_def' | 'debuff_atk' | 'shield_self';
   value: number;
   remainingRounds: number;
   sourceName: string;               // 来源技能名

@@ -14,6 +14,7 @@ export type {
   DLCPack,
   DeathSeverity, DeathTriggerDef, DeathPenaltyDef, LifeSaverDef, RevivalMethodDef, DeathSystemState,
   MonsterDef,
+  ElementType, DivineArtDef, DivineArtSkillEffect,
 } from '../types';
 
 export { registerDLC, unregisterDLC, getDLC, getAllDLCs } from './dlc';
@@ -29,6 +30,7 @@ export {
   getLifeSaver, getAllLifeSavers,
   getRevivalMethod, getAllRevivalMethods,
   getMonster, getAllMonsters, getMonstersByRealm,
+  getDivineArtDef, getAllDivineArtDefs, getDivineArtsByElement,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

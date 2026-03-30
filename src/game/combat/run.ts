@@ -7,6 +7,11 @@ import type { MonsterDef } from '../types';
 import type { SkillState, StatusEffect, CombatResult, RoundSnapshot } from './types';
 import { calcDamage, tryUseSkill, calcSkillDamage } from './damage';
 import { getActiveTechniqueBonus, getActiveSkillInfo, calcAptitudeBonus } from '../technique';
+import {
+  getDivineArtsState, calcDivineArtDamage, tryUseDivineArt,
+  ELEMENT_EMOJI, ELEMENT_CN,
+} from '../divine-arts';
+import { getDivineArtDef } from '../registry/queries';
 
 export function runCombat(player: Player, monster: MonsterDef): CombatResult {
   const logs: string[] = [];
@@ -39,6 +44,19 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
     useCount: 0,
   };
 
+  // ── 神通初始化 ──
+  const divineArtsState = getDivineArtsState(player);
+  const activeArt = divineArtsState.activeArtId
+    ? getDivineArtDef(divineArtsState.activeArtId)
+    : null;
+  const divineSkillState: SkillState = {
+    cooldownLeft: 0,
+    totalMpUsed: 0,
+    totalStaminaUsed: 0,
+    useCount: 0,
+  };
+  const playerEffects: StatusEffect[] = []; // 玩家身上的持续效果（如护盾）
+
   // 可用灵力/精力（战斗中实时递减，战斗结束后统一从玩家扣减）
   let availableMp = player.mp;
   let availableStamina = player.stamina;
@@ -65,6 +83,9 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
     if (techBonus.def) parts.push(`防御+${techBonus.def}`);
     if (techBonus.speed) parts.push(`速度+${techBonus.speed}`);
     logs.push(`📖 功法加成：${parts.join(' ')}`);
+  }
+  if (activeArt) {
+    logs.push(`✨ 激活神通：【${activeArt.name}】（${ELEMENT_EMOJI[activeArt.element]}${ELEMENT_CN[activeArt.element]}系）`);
   }
 
   // 先手：speed 高的先攻
@@ -100,7 +121,87 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
       if (pHp <= 0 || mHp <= 0) break;
 
       if (turn.isPlayer) {
-        // 玩家行动：尝试使用技能
+        // ── 玩家行动 ──
+
+        // 1. 神通独立触发（在功法技能之前判定）
+        if (activeArt && tryUseDivineArt(activeArt, divineSkillState, availableMp)) {
+          availableMp -= activeArt.mpCost;
+          divineSkillState.totalMpUsed += activeArt.mpCost;
+          divineSkillState.useCount++;
+          divineSkillState.cooldownLeft = activeArt.cooldown;
+
+          const { totalDamage, logs: artLogs } = calcDivineArtDamage(
+            buffedPlayer,
+            activeArt,
+            currentMonster,
+            mHp,
+          );
+          mHp -= totalDamage;
+
+          if (activeArt.hitCount > 1) {
+            logs.push(
+              `✨ 你施展【${activeArt.name}】（${ELEMENT_EMOJI[activeArt.element]} ${ELEMENT_CN[activeArt.element]}系），` +
+              `连击 ${activeArt.hitCount} 段，共造成 ${totalDamage} 点元素伤害！（灵力-${activeArt.mpCost}）`,
+            );
+          } else {
+            logs.push(
+              `✨ 你施展【${activeArt.name}】（${ELEMENT_EMOJI[activeArt.element]} ${ELEMENT_CN[activeArt.element]}系），` +
+              `造成 ${totalDamage} 点元素伤害！（灵力-${activeArt.mpCost}）`,
+            );
+          }
+          logs.push(...artLogs);
+
+          // 处理神通附加效果
+          for (const eff of activeArt.effects ?? []) {
+            if (mHp <= 0 && eff.type !== 'shield_self' && eff.type !== 'heal_self') continue;
+
+            if (eff.type === 'heal_self') {
+              const healAmt = Math.min(eff.value, buffedPlayer.maxHp - pHp);
+              pHp += healAmt;
+              if (healAmt > 0) {
+                logs.push(`💚 【${activeArt.name}】恢复 ${healAmt} 点生命！`);
+              }
+            } else if (eff.type === 'shield_self') {
+              playerEffects.push({
+                type: 'shield_self',
+                value: eff.value,
+                remainingRounds: eff.duration,
+                sourceName: activeArt.name,
+              });
+              logs.push(`🛡️ 你获得【${activeArt.name}】护盾，每次受击减免 ${eff.value} 点伤害（${eff.duration}回合）`);
+            } else if (eff.type === 'debuff_def') {
+              monsterEffects.push({
+                type: 'debuff_def',
+                value: eff.value,
+                remainingRounds: eff.duration,
+                sourceName: activeArt.name,
+              });
+              monsterCurrentDef = Math.max(0, monsterCurrentDef - eff.value);
+              logs.push(`🛡️ ${monster.name} 防御降低 ${eff.value}！（持续 ${eff.duration} 回合）`);
+            } else if (eff.type === 'debuff_atk') {
+              monsterEffects.push({
+                type: 'debuff_atk',
+                value: eff.value,
+                remainingRounds: eff.duration,
+                sourceName: activeArt.name,
+              });
+              monsterCurrentAtk = Math.max(0, monsterCurrentAtk - eff.value);
+              logs.push(`⚡ ${monster.name} 攻击降低 ${eff.value}！（持续 ${eff.duration} 回合）`);
+            } else if (eff.type === 'dot') {
+              monsterEffects.push({
+                type: 'dot',
+                value: eff.value,
+                remainingRounds: eff.duration,
+                sourceName: activeArt.name,
+              });
+              logs.push(`🔥 ${monster.name} 被附加元素灼伤！每回合 ${eff.value} 点伤害（持续 ${eff.duration} 回合）`);
+            }
+          }
+        }
+
+        if (mHp <= 0) break;
+
+        // 2. 功法主动技能（独立判定，与神通不互斥）
         let usedSkill = false;
 
         if (skill && tryUseSkill(skill, skillState, availableMp, availableStamina)) {
@@ -139,12 +240,15 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
               }
             } else {
               // dot / debuff_def / debuff_atk → 施加到怪物
-              monsterEffects.push({
-                type: eff.type,
-                value: eff.value,
-                remainingRounds: eff.duration,
-                sourceName: skill.name,
-              });
+              const effType = eff.type;
+              if (effType === 'dot' || effType === 'debuff_def' || effType === 'debuff_atk') {
+                monsterEffects.push({
+                  type: effType,
+                  value: eff.value,
+                  remainingRounds: eff.duration,
+                  sourceName: skill.name,
+                });
+              }
               if (eff.type === 'debuff_def') {
                 monsterCurrentDef = Math.max(0, monsterCurrentDef - eff.value);
                 logs.push(`🛡️ ${monster.name} 防御降低 ${eff.value}！（持续 ${eff.duration} 回合）`);
@@ -170,22 +274,39 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
           logs.push(...result.log);
         }
       } else {
-        // 怪物行动：普通攻击
+        // ── 怪物行动：普通攻击 ──
         const result = calcDamage(
           { ...currentMonster, name: monster.name },
           { ...buffedPlayer, hp: pHp, name: '你' },
         );
-        pHp -= result.damage;
+
+        // 先输出攻击日志
         logs.push(...result.log);
+
+        // 护盾减伤
+        let actualDamage = result.damage;
+        if (actualDamage > 0) {
+          for (const eff of playerEffects) {
+            if (eff.type === 'shield_self') {
+              const shieldAmt = Math.min(eff.value, actualDamage);
+              if (shieldAmt > 0) {
+                actualDamage = Math.max(0, actualDamage - shieldAmt);
+                logs.push(`🛡️ 【${eff.sourceName}】护盾抵挡 ${shieldAmt} 点伤害！`);
+              }
+            }
+          }
+        }
+
+        pHp -= actualDamage;
       }
     }
 
-    // 回合结束：处理持续效果
+    // 回合结束：处理怪物持续效果
     for (let i = monsterEffects.length - 1; i >= 0; i--) {
       const eff = monsterEffects[i];
       if (eff.type === 'dot' && mHp > 0) {
         mHp -= eff.value;
-        logs.push(`🔥 ${monster.name} 受到灼烧伤害 ${eff.value} 点！`);
+        logs.push(`🔥 ${monster.name} 受到持续伤害 ${eff.value} 点！`);
       }
 
       eff.remainingRounds--;
@@ -200,9 +321,22 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
       }
     }
 
+    // 回合结束：处理玩家持续效果（护盾倒计时）
+    for (let i = playerEffects.length - 1; i >= 0; i--) {
+      const eff = playerEffects[i];
+      eff.remainingRounds--;
+      if (eff.remainingRounds <= 0) {
+        logs.push(`🛡️ 【${eff.sourceName}】护盾效果结束。`);
+        playerEffects.splice(i, 1);
+      }
+    }
+
     // 冷却递减
     if (skillState.cooldownLeft > 0) {
       skillState.cooldownLeft--;
+    }
+    if (divineSkillState.cooldownLeft > 0) {
+      divineSkillState.cooldownLeft--;
     }
 
     // 回合结束快照
@@ -213,7 +347,8 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
     logs.push(`战斗超时，双方脱战。`);
     return {
       winner: 'draw', playerHpLeft: pHp, logs, expGained: 0, goldGained: 0,
-      mpUsed: skillState.totalMpUsed, skillUseCount: skillState.useCount,
+      mpUsed: skillState.totalMpUsed + divineSkillState.totalMpUsed,
+      skillUseCount: skillState.useCount,
       snapshots, monsterMaxHp: monster.hp, playerMaxHp: buffedPlayer.maxHp, playerMaxMp: player.mp,
     };
   }
@@ -224,7 +359,10 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
     logs.push(`🎉 你击败了 ${monster.name}！`);
     logs.push(`获得 ${monster.expReward} 修为，${monster.goldReward} 灵石。`);
     if (skillState.useCount > 0) {
-      logs.push(`📖 本场使用技能 ${skillState.useCount} 次，消耗灵力 ${skillState.totalMpUsed} 点。`);
+      logs.push(`📖 本场使用功法技能 ${skillState.useCount} 次，消耗灵力 ${skillState.totalMpUsed} 点。`);
+    }
+    if (divineSkillState.useCount > 0) {
+      logs.push(`✨ 本场施展神通 ${divineSkillState.useCount} 次，消耗灵力 ${divineSkillState.totalMpUsed} 点。`);
     }
   } else {
     logs.push(`💀 你被 ${monster.name} 击败了…`);
@@ -237,7 +375,7 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
     logs,
     expGained: playerWon ? monster.expReward : 0,
     goldGained: playerWon ? monster.goldReward : 0,
-    mpUsed: skillState.totalMpUsed,
+    mpUsed: skillState.totalMpUsed + divineSkillState.totalMpUsed,
     skillUseCount: skillState.useCount,
     snapshots,
     monsterMaxHp: monster.hp,
