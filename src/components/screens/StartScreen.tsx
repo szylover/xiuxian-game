@@ -12,6 +12,8 @@ interface StartScreenProps {
   onNewGame: (options: CreatePlayerOptions) => void;
   onLoadGame: () => void;
   hasSave: boolean;
+  dataReady: boolean;
+  dataError?: boolean;
 }
 
 const COMBO_COLORS: Record<string, string> = {
@@ -27,7 +29,7 @@ const MULT_MAP: Record<string, number> = {
   none: 0.1, single: 3.0, dual: 2.0, triple: 1.2, quad: 0.8, penta: 0.5,
 };
 
-export default function StartScreen({ onNewGame, onLoadGame, hasSave }: StartScreenProps) {
+export default function StartScreen({ onNewGame, onLoadGame, hasSave, dataReady, dataError }: StartScreenProps) {
   const [step, setStep] = useState<1 | 2>(1);
   const [name, setName] = useState('');
   const [gender, setGender] = useState<'male' | 'female'>('male');
@@ -51,6 +53,8 @@ export default function StartScreen({ onNewGame, onLoadGame, hasSave }: StartScr
     const finalName = name.trim() || '无名散修';
     onNewGame({ name: finalName, gender, appearance, spiritRoots });
   };
+
+  const startBtnLabel = dataError ? '⚠️ 数据加载失败' : dataReady ? '下一步：测算灵根 →' : '⏳ 加载中…';
 
   // ── 第一步：基本信息 ──
   if (step === 1) {
@@ -103,11 +107,11 @@ export default function StartScreen({ onNewGame, onLoadGame, hasSave }: StartScr
               ))}
             </div>
           </div>
-          <button className="btn btn-primary" onClick={() => setStep(2)}>
-            下一步：测算灵根 →
+          <button className="btn btn-primary" onClick={() => setStep(2)} disabled={!dataReady}>
+            {startBtnLabel}
           </button>
           {hasSave && (
-            <button className="btn btn-secondary" onClick={onLoadGame}>
+            <button className="btn btn-secondary" onClick={onLoadGame} disabled={!dataReady}>
               继续修炼
             </button>
           )}
@@ -196,7 +200,7 @@ export default function StartScreen({ onNewGame, onLoadGame, hasSave }: StartScr
           <button className="btn btn-secondary" onClick={() => setStep(1)}>
             ← 返回
           </button>
-          <button className="btn btn-primary" onClick={handleConfirm}>
+          <button className="btn btn-primary" onClick={handleConfirm} disabled={!dataReady}>
             ✨ 开始修炼
           </button>
         </div>

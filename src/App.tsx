@@ -39,6 +39,8 @@ export default function App() {
         onNewGame={(options: CreatePlayerOptions) => { clearLogs(); engine.newGame(options); }}
         onLoadGame={() => { clearLogs(); engine.loadGame(); }}
         hasSave={hasSave}
+        dataReady={engine.dataReady}
+        dataError={engine.dataError}
       />
     );
   }
