@@ -13,6 +13,7 @@ import ShopPanel from '../panels/ShopPanel';
 import CraftingPanel from '../panels/CraftingPanel';
 import EquipmentPanel from '../panels/EquipmentPanel';
 import TechniquePanel from '../panels/TechniquePanel';
+import AchievementPanel from '../panels/AchievementPanel';
 
 const PANEL_CONFIG: Record<PanelKey, { title: string; icon: string; width?: number }> = {
   inventory: { title: '背包', icon: '🎒', width: 380 },
@@ -20,6 +21,7 @@ const PANEL_CONFIG: Record<PanelKey, { title: string; icon: string; width?: numb
   technique: { title: '功法', icon: '📖', width: 400 },
   crafting:  { title: '炼制', icon: '🔥', width: 380 },
   equipment: { title: '装备', icon: '⚔️', width: 380 },
+  achievement: { title: '成就', icon: '🏆', width: 420 },
 };
 
 interface RightPanelProps {
@@ -62,6 +64,7 @@ export default function RightPanel({
           {activePanel === 'technique' && <TechniquePanel player={player} onLearn={onLearnTechnique} onPractice={onPracticeTechnique} onActivate={onActivateTechnique} />}
           {activePanel === 'crafting' && <CraftingPanel player={player} onCraft={onCraft} onSmith={onSmith} />}
           {activePanel === 'equipment' && <EquipmentPanel player={player} onEquip={onEquip} onUnequip={onUnequip} />}
+          {activePanel === 'achievement' && <AchievementPanel player={player} />}
         </FloatingPanel>
       )}
     </>

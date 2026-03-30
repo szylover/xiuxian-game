@@ -15,6 +15,10 @@ export type {
   DeathSeverity, DeathTriggerDef, DeathPenaltyDef, LifeSaverDef, RevivalMethodDef, DeathSystemState,
   MonsterDef,
 } from '../types';
+export type {
+  AchievementCategory, AchievementDef, AchievementBonusStats,
+  AchievementRecalcBonus, AchievementOnceBonus, AchievementSystemState,
+} from '../achievement/types';
 
 export { registerDLC, unregisterDLC, getDLC, getAllDLCs } from './dlc';
 export {
@@ -29,6 +33,7 @@ export {
   getLifeSaver, getAllLifeSavers,
   getRevivalMethod, getAllRevivalMethods,
   getMonster, getAllMonsters, getMonstersByRealm,
+  getAchievement, getAllAchievementDefs,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

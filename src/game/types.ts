@@ -253,6 +253,7 @@ export interface DLCPack {
   lifeSavers?: LifeSaverDef[];             // 该 DLC 提供的护命道具定义
   revivalMethods?: RevivalMethodDef[];     // 该 DLC 提供的复活手段定义
   monsters?: MonsterDef[];                 // 该 DLC 提供的妖兽定义
+  achievements?: import('./achievement/types').AchievementDef[]; // 该 DLC 提供的成就定义
 }
 
 // ── 死亡系统类型定义 ──
