@@ -9,9 +9,7 @@
 
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
-
-| [T0019](tasks/todo/T0019-passive-effects.md) | 被动效果 | T0017 ✅ | [spec](specs/T0019-passive-effects.md) | 📐 |
-| [T0020](tasks/todo/T0020-divine-arts.md) | 神通（元素体系） | T0017 ✅, T0018 ✅ | — | ⬜ |
+| [T0020](tasks/todo/T0020-divine-arts.md) | 神通（元素体系） | T0017 ✅, T0018 ✅, T0019 ✅ | — | ⬜ |
 | [T0021](tasks/todo/T0021-map-system.md) | 地图系统 | T0001 ✅ | — | ⬜ |
 | [T0025](tasks/todo/T0025-npc-system.md) | NPC 系统 | T0001 ✅ | — | ⬜ |
 | [T0030](tasks/todo/T0030-reincarnation.md) | 转世重修 | T0029 ✅, T0040 | — | ⬜ |
@@ -28,6 +26,7 @@
 
 | ID | 任务 | 完成日期 |
 |----|------|----------|
+| T0019 | 功法被动效果 | 2026-03-30 |
 | T0044 | 战斗弹窗 + 日志精简 | 2026-03-27 |
 | T0018 | 技能战斗 | 2026-03-27 |
 | T0043 | 日志系统改进（Toast + 时间线） | 2026-03-27 |
