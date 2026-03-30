@@ -6,8 +6,8 @@
 import type { Player } from '../../game/player';
 import { getTechniqueDef } from '../../game/registry';
 import type { TechniqueDef, PassiveEffect } from '../../game/registry';
-import { getLearnableTechniques, calcTechniqueExpGain } from '../../game/technique';
-import { RARITY_COLORS } from '../shared';
+import { getLearnableTechniques, calcTechniqueExpGain, getEffectiveMaxLevel } from '../../game/technique';
+import { RARITY_COLORS, SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS } from '../shared';
 import type { TechniqueRarity } from '../../game/registry';
 
 const TECHNIQUE_TYPE_CN: Record<string, string> = {
@@ -20,6 +20,23 @@ interface TechniquePanelProps {
   onLearn: (techniqueId: string) => void;
   onPractice: (techniqueId: string) => void;
   onActivate: (techniqueId: string) => void;
+}
+
+// ── 灵根标签（用于功法卡片）──
+function SpiritRootTag({ rootType, affinity }: { rootType: string; affinity?: number }) {
+  const color = SPIRIT_ROOT_COLORS[rootType] ?? '#9E9E9E';
+  const icon  = SPIRIT_ROOT_ICONS[rootType]  ?? '🔮';
+  const cn    = SPIRIT_ROOT_CN[rootType]     ?? rootType;
+  return (
+    <span
+      className="technique-root-tag"
+      style={{ color, borderColor: color }}
+      title={affinity !== undefined ? `${cn}灵根 亲和度 ${affinity}` : `${cn}灵根`}
+    >
+      {icon} {cn}
+      {affinity !== undefined && <span className="technique-root-affinity"> {affinity}</span>}
+    </span>
+  );
 }
 
 export default function TechniquePanel({ player, onLearn, onPractice, onActivate }: TechniquePanelProps) {
@@ -37,11 +54,19 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
             const def = getTechniqueDef(slot.techniqueId);
             if (!def) return null;
             const isActive = player.activeTechniqueId === slot.techniqueId;
-            const isMaxLevel = slot.level >= def.maxLevel;
+            const effectiveMax = getEffectiveMaxLevel(player, def);
+            const isMaxLevel = slot.level >= effectiveMax;
             const expGain = calcTechniqueExpGain(player, def);
             // 计算被动解锁角标
             const totalPassives = def.passiveEffects?.length ?? 0;
             const unlockedPassives = def.passiveEffects?.filter(pe => slot.level >= pe.minLevel).length ?? 0;
+            // 灵根匹配信息
+            const matchRoot = def.spiritRootElement
+              ? player.spiritRoots?.roots.find(r => r.type === def.spiritRootElement)
+              : undefined;
+            const rootBoostText = matchRoot
+              ? `×${(1 + matchRoot.affinity / 100).toFixed(1)}`
+              : undefined;
             return (
               <div
                 key={slot.techniqueId}
@@ -53,6 +78,12 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                     {def.name}
                   </span>
                   <span className="technique-type">{TECHNIQUE_TYPE_CN[def.type] ?? def.type}</span>
+                  {def.spiritRootElement && (
+                    <SpiritRootTag
+                      rootType={def.spiritRootElement}
+                      affinity={matchRoot?.affinity}
+                    />
+                  )}
                   {totalPassives > 0 && (
                     <span
                       className="technique-passive-badge"
@@ -63,9 +94,19 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                   )}
                 </div>
                 <div className="technique-level">
-                  Lv.{slot.level}/{def.maxLevel}
+                  Lv.{slot.level}/{effectiveMax}
+                  {effectiveMax !== def.maxLevel && (
+                    <span className="technique-max-bonus" title={`灵根亲和度提升了上限（基础 ${def.maxLevel}）`}>
+                      {' '}⬆{effectiveMax}
+                    </span>
+                  )}
                   {!isMaxLevel && (
                     <span className="technique-exp"> ({slot.exp}/{def.expPerLevel})</span>
+                  )}
+                  {rootBoostText && (
+                    <span className="technique-root-speed" title="灵根亲和度修炼加速">
+                      {' '}⚡{rootBoostText}速
+                    </span>
                   )}
                   {isActive && <span className="technique-active-badge">⚔️ 激活</span>}
                 </div>
@@ -114,41 +155,69 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
         <>
           <div className="technique-section-title" style={{ marginTop: '0.6rem' }}>📚 可学功法</div>
           <div className="technique-list">
-            {learnable.map(def => (
-              <div
-                key={def.id}
-                className="technique-card technique-learnable"
-                style={{ borderLeftColor: RARITY_COLORS[def.rarity as TechniqueRarity] || '#9E9E9E' }}
-              >
-                <div className="technique-header">
-                  <span className="technique-name" style={{ color: RARITY_COLORS[def.rarity as TechniqueRarity] }}>
-                    {def.name}
-                  </span>
-                  <span className="technique-type">{TECHNIQUE_TYPE_CN[def.type] ?? def.type}</span>
-                  {(def.passiveEffects?.length ?? 0) > 0 && (
-                    <span className="technique-passive-badge" title="含被动效果">
-                      ✨{def.passiveEffects?.length}
+            {learnable.map(def => {
+              const effectiveMax = getEffectiveMaxLevel(player, def);
+              const matchRoot = def.spiritRootElement
+                ? player.spiritRoots?.roots.find(r => r.type === def.spiritRootElement)
+                : undefined;
+              const hasRequired = !def.requiredSpiritRoot
+                || player.spiritRoots?.roots.some(r => r.type === def.requiredSpiritRoot);
+              return (
+                <div
+                  key={def.id}
+                  className={`technique-card technique-learnable ${!hasRequired ? 'technique-locked' : ''}`}
+                  style={{ borderLeftColor: RARITY_COLORS[def.rarity as TechniqueRarity] || '#9E9E9E' }}
+                >
+                  <div className="technique-header">
+                    <span className="technique-name" style={{ color: RARITY_COLORS[def.rarity as TechniqueRarity] }}>
+                      {def.name}
                     </span>
-                  )}
-                </div>
-                <div className="technique-desc">{def.description}</div>
-                <div className="technique-bonus">
-                  每级：{formatBonus(def)} ・ 最大 Lv.{def.maxLevel}
-                </div>
-                {/* 可学功法也显示被动预览 */}
-                {def.passiveEffects && def.passiveEffects.length > 0 && (
-                  <div className="technique-passive-section">
-                    <div className="technique-passive-title">✨ 熟练被动（预览）</div>
-                    {def.passiveEffects.map((pe, i) => (
-                      <PassiveEffectRow key={i} pe={pe} currentLevel={0} />
-                    ))}
+                    <span className="technique-type">{TECHNIQUE_TYPE_CN[def.type] ?? def.type}</span>
+                    {def.spiritRootElement && (
+                      <SpiritRootTag
+                        rootType={def.spiritRootElement}
+                        affinity={matchRoot?.affinity}
+                      />
+                    )}
+                    {(def.passiveEffects?.length ?? 0) > 0 && (
+                      <span className="technique-passive-badge" title="含被动效果">
+                        ✨{def.passiveEffects?.length}
+                      </span>
+                    )}
                   </div>
-                )}
-                <button className="btn btn-technique-learn" onClick={() => onLearn(def.id)}>
-                  📖 学习
-                </button>
-              </div>
-            ))}
+                  {/* 灵根门槛提示 */}
+                  {def.requiredSpiritRoot && (
+                    <div className={`technique-root-req ${hasRequired ? 'technique-root-met' : 'technique-root-unmet'}`}>
+                      {hasRequired ? '✅' : '🔒'} 需要{SPIRIT_ROOT_ICONS[def.requiredSpiritRoot]}{SPIRIT_ROOT_CN[def.requiredSpiritRoot]}灵根
+                    </div>
+                  )}
+                  <div className="technique-desc">{def.description}</div>
+                  <div className="technique-bonus">
+                    每级：{formatBonus(def)} ・ 最大 Lv.{effectiveMax}
+                    {effectiveMax !== def.maxLevel && (
+                      <span className="technique-max-bonus" title={`灵根亲和度可进一步提升上限，基础 ${def.maxLevel}`}> (基础{def.maxLevel})</span>
+                    )}
+                  </div>
+                  {/* 可学功法也显示被动预览 */}
+                  {def.passiveEffects && def.passiveEffects.length > 0 && (
+                    <div className="technique-passive-section">
+                      <div className="technique-passive-title">✨ 熟练被动（预览）</div>
+                      {def.passiveEffects.map((pe, i) => (
+                        <PassiveEffectRow key={i} pe={pe} currentLevel={0} />
+                      ))}
+                    </div>
+                  )}
+                  <button
+                    className="btn btn-technique-learn"
+                    onClick={() => onLearn(def.id)}
+                    disabled={!hasRequired}
+                    title={!hasRequired ? `需要${SPIRIT_ROOT_CN[def.requiredSpiritRoot!]}灵根才能学习` : undefined}
+                  >
+                    {hasRequired ? '📖 学习' : `🔒 需要${SPIRIT_ROOT_CN[def.requiredSpiritRoot!]}灵根`}
+                  </button>
+                </div>
+              );
+            })}
           </div>
         </>
       )}

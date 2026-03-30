@@ -151,11 +151,48 @@ interface CreatePlayerOptions {
 
 | 影响维度 | 说明 |
 |----------|------|
-| 修炼速度 | `cultivationMultiplier` 直接乘以基础修炼经验 |
-| 功法适性 | 灵根类型决定哪些系功法修炼有加成/减益（如火灵根学火系功法 ×1.5） |
+| 基础修炼速度 | `cultivationMultiplier` 直接乘以基础修炼经验（灵根组合决定，原有逻辑） |
+| **功法修炼速度** | `TechniqueDef.spiritRootElement` 字段标注功法的五行属性；玩家拥有对应灵根时，功法修炼速度 = 基础 × `(1 + affinity/100)`（亲和度越高倍率越高，最高 ×2.0） |
+| **功法上限（天花板）** | 灵根亲和度决定对应元素功法的有效最高等级（`effectiveMaxLevel`）。无对应灵根：基础最高等级的 50%；亲和 1–49：×1.0（基础上限）；亲和 50–79：×1.5；亲和 80+：×2.0。单灵根保底亲和 ≥ 80，故单灵根角色对应功法天花板是杂灵根的 4 倍 |
+| **功法门槛** | `TechniqueDef.requiredSpiritRoot` 字段设置必须拥有的灵根类型才能习得此功法（高阶/元素专属功法使用）；普通功法此字段为空，全系别可学 |
 | 突破概率 | 灵根品质影响突破成功率（目前 T0029 已有基础成功率，可叠加灵根修正） |
 | 事件触发 | 部分奇遇需要特定灵根类型作为前置条件 |
-| 战斗属性 | 灵根亲和度微量加成对应元素的攻防（后续系统消费，本任务只做数据层） |
+
+#### 8.1 `TechniqueDef` 新增字段
+
+```ts
+interface TechniqueDef {
+  // ...原有字段...
+  spiritRootElement?: SpiritRootType;   // 功法的五行属性，决定哪种灵根能加速修炼
+  requiredSpiritRoot?: SpiritRootType;  // 学习门槛：必须拥有此灵根才能习得（可选）
+}
+```
+
+#### 8.2 五行功法示例
+
+| 功法名 | 战斗类型 | 五行属性 | 必须灵根 | 说明 |
+|--------|----------|----------|---------|------|
+| 雷霆刀法 | blade | metal | 无 | 现有功法，金灵根加速修炼 |
+| 天罡剑诀 | sword | fire | 无 | 现有功法，火灵根加速修炼 |
+| 幻影掌 | palm | water | 无 | 现有功法，水灵根加速修炼 |
+| 烈焰拳法 | fist | fire | fire | 新增：需要火灵根才能学习 |
+| 流水剑法 | sword | water | water | 新增：需要水灵根才能学习 |
+| 厚土掌法 | palm | earth | earth | 新增：需要土灵根才能学习 |
+| 金煞刀法 | blade | metal | metal | 新增：需要金灵根才能学习 |
+| 翠木枪法 | spear | wood | wood | 新增：需要木灵根才能学习 |
+
+#### 8.3 有效最高等级公式
+
+```ts
+function getEffectiveMaxLevel(player: Player, def: TechniqueDef): number {
+  if (!def.spiritRootElement) return def.maxLevel; // 无元素属性：直接用基础上限
+  const root = player.spiritRoots?.roots.find(r => r.type === def.spiritRootElement);
+  if (!root) return Math.max(1, Math.floor(def.maxLevel * 0.5)); // 无对应灵根：50%上限
+  if (root.affinity >= 80) return def.maxLevel * 2;              // 高亲和：双倍上限
+  if (root.affinity >= 50) return Math.floor(def.maxLevel * 1.5); // 中亲和：1.5倍
+  return def.maxLevel;                                            // 低亲和：基础上限
+}
+```
 
 ### 9. 与现有系统的兼容
 

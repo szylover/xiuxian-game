@@ -18,12 +18,37 @@ const TYPE_APTITUDE_MAP: Record<string, keyof Player['aptitudes']> = {
   spear:  'spear',
 };
 
-// ── 计算修炼速度（悟性 + 资质 → 每次修炼获得的熟练度）──
+// ── 计算灵根对功法的有效最高等级（T0056）──
+// 有 spiritRootElement 的功法：灵根亲和度越高，可修炼的上限越高
+// - 无对应灵根：基础 maxLevel × 0.5（最少 1 级）
+// - 亲和 1–49 ：× 1.0（基础上限）
+// - 亲和 50–79：× 1.5（中等加成）
+// - 亲和 80+  ：× 2.0（高亲和，双倍上限）
+export function getEffectiveMaxLevel(player: Player, def: TechniqueDef): number {
+  if (!def.spiritRootElement) return def.maxLevel;
+  const matchRoot = player.spiritRoots?.roots.find(r => r.type === def.spiritRootElement);
+  if (!matchRoot) return Math.max(1, Math.floor(def.maxLevel * 0.5));
+  if (matchRoot.affinity >= 80) return def.maxLevel * 2;
+  if (matchRoot.affinity >= 50) return Math.floor(def.maxLevel * 1.5);
+  return def.maxLevel;
+}
+
+// ── 计算修炼速度（悟性 + 资质 + 灵根亲和度）──
 export function calcTechniqueExpGain(player: Player, def: TechniqueDef): number {
   const aptKey = TYPE_APTITUDE_MAP[def.type] ?? 'sword';
   const aptitude = player.aptitudes[aptKey] ?? 50;
-  // 基础 5 + 悟性/20 + 资质/10
-  return Math.floor(5 + player.comprehension / 20 + aptitude / 10);
+  // 基础：5 + 悟性/20 + 资质/10
+  let gain = 5 + player.comprehension / 20 + aptitude / 10;
+
+  // T0056：对应灵根亲和度加成（最高 ×2.0）
+  if (def.spiritRootElement && player.spiritRoots) {
+    const matchRoot = player.spiritRoots.roots.find(r => r.type === def.spiritRootElement);
+    if (matchRoot) {
+      gain *= (1 + matchRoot.affinity / 100);
+    }
+  }
+
+  return Math.floor(gain);
 }
 
 // ── 学习功法 ──
@@ -33,6 +58,15 @@ export function learnTechnique(player: Player, techniqueId: string): { player: P
 
   if (player.realmIndex < def.minRealm) {
     return { player, message: `❌ 境界不足，需达到更高境界才能修炼 ${def.name}` };
+  }
+
+  // T0056：检查灵根门槛
+  if (def.requiredSpiritRoot) {
+    const hasRoot = player.spiritRoots?.roots.some(r => r.type === def.requiredSpiritRoot);
+    if (!hasRoot) {
+      const rootCN: Record<string, string> = { fire: '火', water: '水', earth: '土', wood: '木', metal: '金' };
+      return { player, message: `❌ 此功法需要【${rootCN[def.requiredSpiritRoot] ?? def.requiredSpiritRoot}灵根】才能习得` };
+    }
   }
 
   const existing = player.techniques.find(t => t.techniqueId === techniqueId);
@@ -60,8 +94,12 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
   if (idx === -1) return { player, message: `❌ 尚未学会 ${def.name}` };
 
   const slot = player.techniques[idx];
-  if (slot.level >= def.maxLevel) {
-    return { player, message: `⚠️ ${def.name} 已满级（${def.maxLevel}）` };
+  const effectiveMax = getEffectiveMaxLevel(player, def);
+  if (slot.level >= effectiveMax) {
+    if (effectiveMax < def.maxLevel * 2) {
+      return { player, message: `⚠️ ${def.name} 已达灵根上限（${effectiveMax} 级），提升灵根亲和度可解锁更高等级` };
+    }
+    return { player, message: `⚠️ ${def.name} 已满级（${effectiveMax}）` };
   }
 
   // 消耗精力 + 灵力
@@ -89,8 +127,8 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
   let newLevel = slot.level;
   let levelUpMsg = '';
 
-  // 检测升级
-  while (newExp >= def.expPerLevel && newLevel < def.maxLevel) {
+  // 检测升级（使用有效上限）
+  while (newExp >= def.expPerLevel && newLevel < effectiveMax) {
     newExp -= def.expPerLevel;
     newLevel++;
     levelUpMsg = ` 🎉 ${def.name} 升至 ${newLevel} 级！`;

@@ -1833,6 +1833,56 @@ body {
   white-space: nowrap;
 }
 
+/* ── 灵根相关功法样式（T0056）── */
+.technique-root-tag {
+  font-size: 0.65rem;
+  padding: 0.05rem 0.3rem;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  margin-left: 0.25rem;
+}
+
+.technique-root-affinity {
+  font-size: 0.6rem;
+  opacity: 0.85;
+}
+
+.technique-root-req {
+  font-size: 0.72rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  margin: 0.2rem 0;
+}
+
+.technique-root-met {
+  color: #4CAF50;
+  background: rgba(76, 175, 80, 0.1);
+}
+
+.technique-root-unmet {
+  color: #FF9800;
+  background: rgba(255, 152, 0, 0.1);
+}
+
+.technique-max-bonus {
+  font-size: 0.65rem;
+  color: #FFD700;
+}
+
+.technique-root-speed {
+  font-size: 0.65rem;
+  color: #4CAF50;
+}
+
+.technique-card.technique-locked {
+  opacity: 0.8;
+}
+
+.technique-card.technique-locked .btn-technique-learn {
+  background: #424242;
+  color: #9E9E9E;
+  cursor: not-allowed;
+}
 
 .debug-panel {
   position: fixed;
