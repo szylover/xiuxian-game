@@ -7,7 +7,7 @@ import type { Player } from '../../game/player';
 import { REALMS, MONTH_NAMES } from '../../game/data';
 import { getNextRealm } from '../../game/player';
 import Avatar from './Avatar';
-import { CapacityBar, FloatingPanel } from '../shared';
+import { CapacityBar, FloatingPanel, STAT_COLORS } from '../shared';
 import StatusPanel from '../panels/StatusPanel';
 
 interface LeftPanelProps {
@@ -39,19 +39,19 @@ export default function LeftPanel({ player }: LeftPanelProps) {
           <span>❤️ 体力</span>
           <span>{player.hp}/{player.maxHp}</span>
         </div>
-        <CapacityBar current={player.hp} max={player.maxHp} color="#F44336" />
+        <CapacityBar current={player.hp} max={player.maxHp} color={STAT_COLORS.hp} />
 
         <div className="left-stat-row">
           <span>🔮 灵力</span>
           <span>{player.mp}/{player.maxMp}</span>
         </div>
-        <CapacityBar current={player.mp} max={player.maxMp} color="#2196F3" />
+        <CapacityBar current={player.mp} max={player.maxMp} color={STAT_COLORS.mp} />
 
         <div className="left-stat-row">
           <span>⚡ 精力</span>
           <span>{player.stamina}/{player.maxStamina}</span>
         </div>
-        <CapacityBar current={player.stamina} max={player.maxStamina} color="#FFC107" />
+        <CapacityBar current={player.stamina} max={player.maxStamina} color={STAT_COLORS.stamina} />
 
         <div className="left-stat-row">
           <span>📅 寿命</span>

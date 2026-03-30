@@ -9,17 +9,19 @@
 
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
-| [T0020](tasks/todo/T0020-divine-arts.md) | 神通（元素体系） | T0017 ✅, T0018 ✅, T0019 ✅ | — | ⬜ |
+| [T0020](tasks/todo/T0020-divine-arts.md) | 神通（元素体系） | T0017 ✅, T0018 ✅, **T0056 ⬜** | — | ⬜ 阻塞 |
 | [T0021](tasks/todo/T0021-map-system.md) | 地图系统 | T0001 ✅ | — | ⬜ |
 | [T0025](tasks/todo/T0025-npc-system.md) | NPC 系统 | T0001 ✅ | — | ⬜ |
-| [T0030](tasks/todo/T0030-reincarnation.md) | 转世重修 | T0029 ✅, T0040 ✅ | — | ⬜ |
+| [T0030](tasks/todo/T0030-reincarnation.md) | 转世重修 | T0029 ✅, T0040 ✅, **T0056 ⬜** | — | ⬜ 阻塞 |
 | [T0031](tasks/todo/T0031-achievement.md) | 成就系统 | T0001 ✅ | — | ⬜ |
-| [T0033](tasks/todo/T0033-ascension.md) | 仙道境界（飞升） | T0029 ✅ | — | ⬜ |
+| [T0033](tasks/todo/T0033-ascension.md) | 仙道境界（飞升） | T0029 ✅, **T0058 ⬜** | — | ⬜ 阻塞 |
 | [T0035](tasks/todo/T0035-azure-cicd.md) | Azure SWA CI/CD | — | — | ⬜ |
 | [T0037](tasks/todo/T0037-audio.md) | 音效系统 | — | — | ⬜ |
 | [T0038](tasks/todo/T0038-multi-save.md) | 多存档 | — | — | ⬜ |
 | [T0039](tasks/todo/T0039-tutorial.md) | 新手引导 | T0001 ✅ | — | ⬜ |
+| [T0049](tasks/todo/T0049-enlightenment.md) | 悟道顿悟系统 | T0002 ✅, T0017 ✅ | — | ⬜ |
 | [T0056](tasks/todo/T0056-initial-random-attributes.md) | 初始随机属性系统 | T0001 ✅ | — | ⬜ |
+| [T0058](tasks/todo/T0058-realm-dlc.md) | 境界表 DLC 化 | —（无前置） | [spec](specs/T0058-realm-dlc.md) | ⬜ |
 
 
 
