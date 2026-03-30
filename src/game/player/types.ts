@@ -34,6 +34,8 @@ export interface PlayerTracking {
   consecutiveCultivates: number;
   hasBeenBelow10Hp: boolean;
   defeatedHigherRealm: boolean;
+  lowMoodStreak: number;
+  consecutiveBreakthroughFails: number;
 }
 
 export interface TechniqueSlot {

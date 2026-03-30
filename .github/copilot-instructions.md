@@ -53,6 +53,11 @@
    - 从"当前可执行任务"表中移除已完成任务
    - 加入"最近完成"表（ID + 任务名 + 完成日期）
    - 检查是否有新任务的前置被满足，加入"当前可执行任务"表
+4. **更新 `docs/test-guide.md`**：
+   - 在对应分类下追加新功能的测试用例章节（至少 4 条用例）
+   - 如涉及调试面板变更，同步更新「附录 A：调试面板功能清单」
+   - 测试用例须覆盖：正常流程、边界条件、Debug 辅助验证
+5. **更新调试面板**：如新功能引入了需要手动测试的数值/物品/状态，同步更新 `src/components/debug/` 下的调试面板代码，确保 Debug 模式可快速验证新功能
 
 ## 设计原则
 
@@ -91,6 +96,7 @@ xiuxian-game/
 ├── docs/                          # 项目文档
 │   ├── progress.md                #   实时进度看板（@Progress 维护）
 │   ├── roadmap.md                 #   任务列表（DAG 依赖图 + DLC 规划 + 扩展性约定）
+│   ├── test-guide.md              #   功能测试手册（每个功能的测试用例）
 │   ├── tasks/                     #   每个任务的独立文件（T0001–T9999）
 │   │   ├── done/                  #     已完成的任务
 │   │   ├── active/                #     进行中的任务
@@ -99,7 +105,8 @@ xiuxian-game/
 │   └── specs/                     #   设计文档存放目录
 │       ├── design-attribute-system.md
 │       ├── design-novel-events.md
-│       └── T0029-breakthrough-tribulation.md
+│       ├── T0029-breakthrough-tribulation.md
+│       └── T0040-death-system.md
 └── src/                           # React 源码
     ├── main.tsx                   #   React 入口（挂载 <App />）
     ├── App.tsx                    #   根组件（路由/界面切换）
@@ -108,6 +115,10 @@ xiuxian-game/
     │   ├── hud/                   #     常驻 HUD 组件
     │   │   ├── StatusBar.tsx      #       顶部状态栏
     │   │   └── GameLog.tsx        #       游戏日志面板
+    │   ├── layout/                #     布局组件
+    │   │   ├── GameLayout.tsx     #       三栏游戏布局
+    │   │   ├── LeftPanel.tsx      #       左侧面板（头像+核心属性）
+    │   │   └── RightPanel.tsx     #       右侧面板（功能面板容器）
     │   ├── panels/                #     可折叠面板组件
     │   │   ├── ActionPanel.tsx    #       操作按钮面板
     │   │   ├── StatusPanel.tsx    #       角色详细状态面板
@@ -134,20 +145,47 @@ xiuxian-game/
     │       ├── TabBar.tsx         #       标签栏
     │       ├── CapacityBar.tsx    #       容量/进度条
     │       ├── StatRow.tsx        #       属性行 + 灵根资质条
-    │       └── StatusItem.tsx     #       状态栏单项
+    │       ├── StatusItem.tsx     #       状态栏单项
+    │       ├── CombatModal.tsx    #       战斗弹窗
+    │       ├── DeathModal.tsx     #       死亡弹窗（T0040）
+    │       └── FloatingPanel.tsx  #       浮动面板
     ├── game/                      #   游戏逻辑（纯 TS，不依赖 React）
-    │   ├── registry.ts            #     全局注册表（事件/物品/妖兽 DLC 扩展核心）
+    │   ├── types.ts               #     全局类型定义（DLC/装备/死亡等）
     │   ├── event-loader.ts        #     JSON 事件加载器（纯数据 → GameEvent）
     │   ├── item-loader.ts         #     JSON 物品加载器（纯数据 → ItemDef）
     │   ├── inventory.ts           #     背包系统（增删查用物品，容量管理）
     │   ├── data.ts                #     数据表（境界/妖兽/丹药/事件/…）
     │   ├── player.ts              #     玩家角色 & 属性系统
-    │   ├── combat.ts              #     战斗系统
-    │   └── events.ts              #     事件内容注册（探索/奇遇/日常）
-    ├── data/                      #   游戏数据（JSON）
+    │   ├── combat.ts              #     战斗系统入口
+    │   ├── death.ts               #     死亡系统（T0040）
+    │   ├── events.ts              #     事件内容注册（探索/奇遇/日常）
+    │   ├── alchemy.ts             #     炼丹系统
+    │   ├── equipment.ts           #     装备系统
+    │   ├── shop.ts                #     商店系统
+    │   ├── smithing.ts            #     炼器系统
+    │   ├── technique.ts           #     功法系统
+    │   ├── registry/              #     全局注册表（DLC 扩展核心）
+    │   │   ├── index.ts           #       barrel re-export
+    │   │   ├── stores.ts          #       注册表存储（Map）
+    │   │   ├── dlc.ts             #       DLC 注册/注销
+    │   │   └── queries.ts         #       注册表查询 API
+    │   ├── player/                #     玩家子模块
+    │   ├── combat/                #     战斗子模块
+    │   ├── breakthrough/          #     突破子模块
+    │   └── tribulation/           #     渡劫子模块
+    ├── data/                      #   游戏数据（JSON/TS）
     │   ├── core-events.json       #     1036 个核心事件数据
-    │   └── core-items.json        #     核心物品定义（丹药/材料/杂物）
+    │   ├── core-items.json        #     核心物品定义（丹药/材料/杂物/护命道具）
+    │   ├── core-equips.json       #     核心装备定义
+    │   ├── core-recipes.json      #     炼丹配方
+    │   ├── core-shop.json         #     商店商品
+    │   ├── core-smithing.json     #     炼器配方
+    │   ├── core-techniques.json   #     功法定义
+    │   └── core-breakthrough.ts   #     突破需求 + 渡劫定义
     └── hooks/                     #   自定义 React Hooks
         ├── useGameEngine.ts       #     游戏引擎 Hook（状态管理 + 存档）
-        └── useGameLog.ts          #     日志管理 Hook
+        ├── useCoreActions.ts      #     核心行为 Hook（修炼/战斗/探索/休息）
+        ├── useSystemActions.ts    #     系统行为 Hook（使用物品/炼丹/装备/商店/突破等）
+        ├── useGameLog.ts          #     日志管理 Hook
+        └── useToast.ts            #     Toast 通知 Hook
 ```

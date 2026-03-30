@@ -12,6 +12,7 @@ export type {
   TechniqueType, TechniqueRarity, TechniqueStatBonus, TechniqueDef,
   EventCategory, EventTone, GameEvent,
   DLCPack,
+  DeathSeverity, DeathTriggerDef, DeathPenaltyDef, LifeSaverDef, RevivalMethodDef, DeathSystemState,
 } from '../types';
 
 export { registerDLC, unregisterDLC, getDLC, getAllDLCs } from './dlc';
@@ -23,6 +24,9 @@ export {
   getSmithingRecipe, getAllSmithingRecipes,
   getBreakthroughReq, getTribulationDef,
   getTechniqueDef, getAllTechniqueDefs,
+  getDeathTrigger, getAllDeathTriggers,
+  getLifeSaver, getAllLifeSavers,
+  getRevivalMethod, getAllRevivalMethods,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

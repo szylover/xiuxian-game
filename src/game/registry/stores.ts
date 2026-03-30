@@ -5,6 +5,7 @@
 import type {
   GameEvent, ItemDef, RecipeDef, EquipDef,
   SmithingRecipeDef, BreakthroughReqDef, TribulationDef, DLCPack, TechniqueDef,
+  DeathTriggerDef, LifeSaverDef, RevivalMethodDef,
 } from '../types';
 
 export const dlcRegistry = new Map<string, DLCPack>();
@@ -16,5 +17,8 @@ export const smithingRecipeRegistry = new Map<string, SmithingRecipeDef>();
 export const breakthroughReqRegistry = new Map<number, BreakthroughReqDef>();
 export const tribulationRegistry = new Map<number, TribulationDef>();
 export const techniqueRegistry = new Map<string, TechniqueDef>();
+export const deathTriggerRegistry = new Map<string, DeathTriggerDef>();
+export const lifeSaverRegistry = new Map<string, LifeSaverDef>();
+export const revivalRegistry = new Map<string, RevivalMethodDef>();
 export const triggeredOnce = new Set<string>();
 export const cooldowns = new Map<string, number>();

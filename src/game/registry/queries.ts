@@ -6,7 +6,7 @@ import type { ItemCategory, GameEvent, EventCategory } from '../types';
 import {
   eventRegistry, itemDefRegistry, recipeRegistry,
   equipRegistry, smithingRecipeRegistry, breakthroughReqRegistry, tribulationRegistry,
-  techniqueRegistry,
+  techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -50,3 +50,12 @@ export function getTribulationDef(forRealmIndex: number) { return tribulationReg
 
 export function getTechniqueDef(id: string) { return techniqueRegistry.get(id); }
 export function getAllTechniqueDefs() { return Array.from(techniqueRegistry.values()); }
+
+// ── 死亡系统 ──
+
+export function getDeathTrigger(id: string) { return deathTriggerRegistry.get(id); }
+export function getAllDeathTriggers() { return Array.from(deathTriggerRegistry.values()); }
+export function getLifeSaver(id: string) { return lifeSaverRegistry.get(id); }
+export function getAllLifeSavers() { return Array.from(lifeSaverRegistry.values()); }
+export function getRevivalMethod(id: string) { return revivalRegistry.get(id); }
+export function getAllRevivalMethods() { return Array.from(revivalRegistry.values()); }
