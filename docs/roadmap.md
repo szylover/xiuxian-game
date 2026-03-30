@@ -42,6 +42,7 @@
 | [T0009](tasks/done/T0009-adventure-system.md) | 奇遇系统 | T0007 | [spec](specs/design-novel-events.md) | ✅ |
 | [T0010](tasks/done/T0010-daily-events.md) | 日常事件 | T0007 | — | ✅ |
 | [T0011](tasks/done/T0011-event-log.md) | 事件日志（分类/颜色/回溯） | T0007 | — | ✅ |
+| [T0057](tasks/todo/T0057-quest-chain.md) | 任务链系统（Quest Chain） | T0007, T0012, T0042, T0021 | — | ⬜ |
 
 ### 🏷️ 物品与经济
 
