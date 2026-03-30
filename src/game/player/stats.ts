@@ -4,6 +4,7 @@
 
 import { REALMS } from '../data';
 import { getEquipDef } from '../registry';
+import { getAllTechniquePassiveBonus } from '../technique';
 import type { EquipStatBonus } from '../registry';
 import type { Player, Aptitudes, SpiritRootGrade } from './types';
 
@@ -57,6 +58,16 @@ export function recalcStats(player: Player): Player {
       }
     }
   }
+
+  // 功法被动加成（T0019）——所有已学功法已解锁被动永久叠加，与激活状态无关
+  const passiveBonus = getAllTechniquePassiveBonus(p);
+  if (passiveBonus.atk)               p.atk += passiveBonus.atk;
+  if (passiveBonus.def)               p.def += passiveBonus.def;
+  if (passiveBonus.speed)             p.speed += passiveBonus.speed;
+  if (passiveBonus.hp)                p.maxHp += passiveBonus.hp;
+  if (passiveBonus.mp)                p.maxMp += passiveBonus.mp;
+  if (passiveBonus.critRate)          p.critRate += passiveBonus.critRate;
+  if (passiveBonus.critDmgMultiplier) p.critDmgMultiplier += passiveBonus.critDmgMultiplier;
 
   p.hp = Math.min(p.hp, p.maxHp);
   p.mp = Math.min(p.mp, p.maxMp);

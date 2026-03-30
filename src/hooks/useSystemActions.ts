@@ -13,6 +13,7 @@ import { performSmithing } from '../game/smithing';
 import { attemptBreakthrough as attemptBreakthroughFn } from '../game/breakthrough';
 import { runTribulation as runTribulationFn } from '../game/tribulation';
 import { learnTechnique, practiceTechnique, activateTechnique } from '../game/technique';
+import { recalcStats } from '../game/player';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
 import type { EquipSlot } from '../game/registry';
 import type { LogCategory } from './useGameLog';
@@ -110,7 +111,11 @@ export function useSystemActions(deps: SystemActionDeps) {
   }, [execAction]);
 
   const practice = useCallback((techniqueId: string) => {
-    execAction(p => practiceTechnique(p, techniqueId));
+    execAction(p => {
+      const result = practiceTechnique(p, techniqueId);
+      // 修炼后重算属性以应用被动加成（T0019）
+      return { player: recalcStats(result.player), message: result.message };
+    });
   }, [execAction]);
 
   const activate = useCallback((techniqueId: string) => {

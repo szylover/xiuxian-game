@@ -5,8 +5,10 @@
 
 import { useState } from 'react';
 import type { Player } from '../../game/player';
-import { getAllItemDefs, getAllEquipDefs } from '../../game/registry';
+import { recalcStats } from '../../game/player';
+import { getAllItemDefs, getAllEquipDefs, getAllTechniqueDefs } from '../../game/registry';
 import { addItem } from '../../game/inventory';
+import { getAllTechniquePassiveBonus } from '../../game/technique';
 import { CollapsiblePanel, TabBar } from '../shared';
 import DebugStatsTab from './DebugStatsTab';
 import DebugItemsTab from './DebugItemsTab';
@@ -19,11 +21,12 @@ interface DebugPanelProps {
 const DEBUG_TABS = [
   { key: 'stats' as const, label: '数值', icon: '📊' },
   { key: 'items' as const, label: '物品', icon: '📦' },
+  { key: 'technique' as const, label: '功法', icon: '✨' },
 ];
 
 export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [tab, setTab] = useState<'stats' | 'items'>('stats');
+  const [tab, setTab] = useState<'stats' | 'items' | 'technique'>('stats');
   const [itemQty, setItemQty] = useState<Record<string, number>>({});
 
   if (!player || player.name !== 'Debug') return null;
@@ -53,6 +56,35 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
       if (!prev) return prev;
       const { player: p } = addItem(prev, itemId, count);
       return p;
+    });
+  };
+
+  // ── 功法调试操作 ──
+  const forceUpgradeActiveTechnique = () => {
+    onUpdate(prev => {
+      if (!prev || !prev.activeTechniqueId) return prev;
+      const idx = prev.techniques.findIndex(t => t.techniqueId === prev.activeTechniqueId);
+      if (idx === -1) return prev;
+      const slot = prev.techniques[idx];
+      const allDefs = getAllTechniqueDefs();
+      const def = allDefs.find(d => d.id === slot.techniqueId);
+      if (!def || slot.level >= def.maxLevel) return prev;
+      const newTechniques = [...prev.techniques];
+      newTechniques[idx] = { ...slot, level: slot.level + 1, exp: 0 };
+      return recalcStats({ ...prev, techniques: newTechniques });
+    });
+  };
+
+  const forceMaxAllTechniques = () => {
+    onUpdate(prev => {
+      if (!prev) return prev;
+      const allDefs = getAllTechniqueDefs();
+      const defMap = new Map(allDefs.map(d => [d.id, d]));
+      const newTechniques = prev.techniques.map(slot => {
+        const def = defMap.get(slot.techniqueId);
+        return def ? { ...slot, level: def.maxLevel, exp: 0 } : slot;
+      });
+      return recalcStats({ ...prev, techniques: newTechniques });
     });
   };
 
@@ -92,7 +124,76 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
             onGive={giveItem}
           />
         )}
+
+        {tab === 'technique' && (
+          <div className="debug-stats">
+            <div className="debug-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.4rem' }}>
+              <span className="debug-label" style={{ fontWeight: 'bold' }}>🔮 功法被动调试</span>
+              <div className="debug-btns" style={{ flexWrap: 'wrap', gap: '0.4rem' }}>
+                <button
+                  className="btn debug-btn"
+                  onClick={forceUpgradeActiveTechnique}
+                  disabled={!player.activeTechniqueId}
+                  title="将当前激活功法等级 +1 并刷新属性"
+                >
+                  ⬆️ 激活功法 Lv+1
+                </button>
+                <button
+                  className="btn debug-btn"
+                  onClick={forceMaxAllTechniques}
+                  title="将所有已学功法设为最大等级，测试被动峰值"
+                >
+                  🌟 全部功法满级
+                </button>
+              </div>
+            </div>
+
+            {/* 当前被动加成汇总 */}
+            <div className="debug-row" style={{ flexDirection: 'column', alignItems: 'flex-start', marginTop: '0.6rem' }}>
+              <span className="debug-label" style={{ fontWeight: 'bold' }}>📊 当前被动加成汇总</span>
+              <div style={{ fontSize: '0.75rem', color: '#4CAF50', marginTop: '0.25rem', fontFamily: 'monospace' }}>
+                {Object.entries(getAllTechniquePassiveBonus(player))
+                  .filter(([, v]) => v)
+                  .map(([k, v]) => `${k}: +${v}`)
+                  .join('  ') || '（无被动加成）'}
+              </div>
+            </div>
+
+            {/* 各功法被动详情 */}
+            <div style={{ marginTop: '0.6rem' }}>
+              <span className="debug-label" style={{ fontWeight: 'bold' }}>📖 各功法被动状态</span>
+              {player.techniques.length === 0 && (
+                <div style={{ fontSize: '0.75rem', color: '#9E9E9E', marginTop: '0.25rem' }}>尚未习得任何功法</div>
+              )}
+              {player.techniques.map(slot => {
+                const allDefs = getAllTechniqueDefs();
+                const def = allDefs.find(d => d.id === slot.techniqueId);
+                if (!def?.passiveEffects?.length) return null;
+                const unlocked = def.passiveEffects.filter(pe => slot.level >= pe.minLevel);
+                return (
+                  <div key={slot.techniqueId} style={{ marginTop: '0.3rem', fontSize: '0.73rem', border: '1px solid #333', borderRadius: '4px', padding: '0.3rem 0.5rem' }}>
+                    <div style={{ color: '#ccc', marginBottom: '0.15rem' }}>
+                      {def.name} Lv.{slot.level}/{def.maxLevel}
+                      <span style={{ color: '#4CAF50', marginLeft: '0.5rem' }}>
+                        ({unlocked.length}/{def.passiveEffects.length} 已解锁)
+                      </span>
+                    </div>
+                    {def.passiveEffects.map((pe, i) => {
+                      const isUnlocked = slot.level >= pe.minLevel;
+                      return (
+                        <div key={i} style={{ color: isUnlocked ? '#81C784' : '#757575', paddingLeft: '0.5rem' }}>
+                          {isUnlocked ? '● ' : '○ '}Lv{pe.minLevel} {pe.description}
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </CollapsiblePanel>
   );
 }
+

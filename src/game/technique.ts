@@ -96,12 +96,25 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
     levelUpMsg = ` 🎉 ${def.name} 升至 ${newLevel} 级！`;
   }
 
+  // 检测本次新解锁的被动效果（T0019）
+  let passiveUnlockMsg = '';
+  if (def.passiveEffects && newLevel > slot.level) {
+    const oldLevel = slot.level;
+    const newlyUnlocked = def.passiveEffects.filter(
+      pe => pe.minLevel > oldLevel && pe.minLevel <= newLevel
+    );
+    if (newlyUnlocked.length > 0) {
+      passiveUnlockMsg = ' ✨ 解锁被动：' +
+        newlyUnlocked.map(pe => `${pe.description}`).join('、');
+    }
+  }
+
   const newTechniques = [...p.techniques];
   newTechniques[idx] = { ...slot, level: newLevel, exp: newExp };
 
   return {
     player: { ...p, techniques: newTechniques },
-    message: `🧘 修炼 ${def.name}，熟练度 +${gain}（精力-${staminaCost} 灵力-${mpCost}）。${levelUpMsg}`,
+    message: `🧘 修炼 ${def.name}，熟练度 +${gain}（精力-${staminaCost} 灵力-${mpCost}）。${levelUpMsg}${passiveUnlockMsg}`,
   };
 }
 
@@ -148,6 +161,29 @@ export function getActiveTechniqueBonus(player: Player): TechniqueStatBonus {
   return bonus;
 }
 
+// ── 获取所有已学功法的被动效果总加成（T0019）──
+// 无论是否激活，只要已学且等级达到阈值就生效
+export function getAllTechniquePassiveBonus(player: Player): TechniqueStatBonus {
+  const bonus: TechniqueStatBonus = {};
+
+  for (const slot of player.techniques) {
+    const def = getTechniqueDef(slot.techniqueId);
+    if (!def?.passiveEffects) continue;
+
+    for (const pe of def.passiveEffects) {
+      if (slot.level >= pe.minLevel) {
+        if (pe.stat === 'critDmgMultiplier') {
+          bonus.critDmgMultiplier = +((bonus.critDmgMultiplier ?? 0) + pe.value).toFixed(2);
+        } else {
+          (bonus[pe.stat] as number) = ((bonus[pe.stat] as number) ?? 0) + pe.value;
+        }
+      }
+    }
+  }
+
+  return bonus;
+}
+
 // ── 获取可学功法列表（按境界过滤，排除已学）──
 export function getLearnableTechniques(player: Player): TechniqueDef[] {
   const learned = new Set(player.techniques.map(t => t.techniqueId));
@@ -175,3 +211,4 @@ export function calcAptitudeBonus(player: Player, def: TechniqueDef): number {
   const aptitude = player.aptitudes[aptKey] ?? 0;
   return 1.0 + aptitude / 200;
 }
+

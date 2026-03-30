@@ -9,7 +9,7 @@ export type {
   RecipeDef, SmithingRecipeDef,
   BreakthroughItemCost, BreakthroughCondition, BreakthroughReqDef,
   TribulationWave, TribulationDef,
-  TechniqueType, TechniqueRarity, TechniqueStatBonus, TechniqueDef,
+  TechniqueType, TechniqueRarity, TechniqueStatBonus, TechniqueDef, PassiveEffect,
   EventCategory, EventTone, GameEvent,
   DLCPack,
   DeathSeverity, DeathTriggerDef, DeathPenaltyDef, LifeSaverDef, RevivalMethodDef, DeathSystemState,

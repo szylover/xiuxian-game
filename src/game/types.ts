@@ -171,6 +171,14 @@ export interface TechniqueActiveSkill {
   };
 }
 
+/** 单条被动效果——对应一个熟练度阈值解锁的永久加成（T0019）*/
+export interface PassiveEffect {
+  minLevel: number;                        // 解锁所需最低等级（含）
+  stat: keyof TechniqueStatBonus;          // 作用的属性字段
+  value: number;                           // 加成数值（flat 绝对值）
+  description: string;                     // 展示给玩家的描述
+}
+
 export interface TechniqueDef {
   id: string;                              // 命名空间 ID，如 core:basic_sword
   name: string;                            // 显示名称
@@ -183,6 +191,7 @@ export interface TechniqueDef {
   statBonusPerLevel: TechniqueStatBonus;   // 每级属性加成
   aptitudeKey: keyof import('./player').Aptitudes; // 对应资质字段
   activeSkill?: TechniqueActiveSkill;      // 主动技能定义（无则该功法只有被动加成）
+  passiveEffects?: PassiveEffect[];        // 多级被动效果，按 minLevel 升序排列（T0019）
 }
 
 // ── 事件类型定义 ──

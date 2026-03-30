@@ -1576,7 +1576,89 @@ body {
 }
 .btn-technique-learn:hover { background: #2a3a3a; }
 
-/* ── 调试面板 ── */
+/* ── 功法被动效果区块（T0019）── */
+.technique-passive-badge {
+  font-size: 0.65rem;
+  background: rgba(255, 215, 0, 0.15);
+  color: #FFD700;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 3px;
+  padding: 0.05rem 0.25rem;
+  margin-left: auto;
+}
+
+.technique-passive-section {
+  margin-top: 0.4rem;
+  border-top: 1px solid #2a2a2a;
+  padding-top: 0.35rem;
+}
+
+.technique-passive-title {
+  font-size: 0.7rem;
+  color: #FFD700;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.technique-passive-row {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  padding: 0.15rem 0.3rem;
+  border-radius: 3px;
+  margin-bottom: 0.1rem;
+  cursor: default;
+  transition: background 0.15s;
+}
+
+.technique-passive-row.technique-passive-unlocked {
+  background: rgba(76, 175, 80, 0.12);
+}
+
+.technique-passive-row.technique-passive-locked {
+  opacity: 0.7;
+}
+
+.technique-passive-icon {
+  font-size: 0.65rem;
+  min-width: 0.8rem;
+}
+
+.technique-passive-unlocked .technique-passive-icon {
+  color: #4CAF50;
+}
+
+.technique-passive-locked .technique-passive-icon {
+  color: #616161;
+}
+
+.technique-passive-level {
+  font-size: 0.65rem;
+  color: #888;
+  min-width: 2.2rem;
+}
+
+.technique-passive-desc {
+  flex: 1;
+  color: inherit;
+}
+
+.technique-passive-unlocked .technique-passive-desc {
+  color: #C8E6C9;
+}
+
+.technique-passive-locked .technique-passive-desc {
+  color: #757575;
+}
+
+.technique-passive-hint {
+  font-size: 0.63rem;
+  color: #616161;
+  white-space: nowrap;
+}
+
+
 .debug-panel {
   position: fixed;
   top: 0.5rem;

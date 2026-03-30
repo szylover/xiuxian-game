@@ -5,7 +5,7 @@
 
 import type { Player } from '../../game/player';
 import { getTechniqueDef } from '../../game/registry';
-import type { TechniqueDef } from '../../game/registry';
+import type { TechniqueDef, PassiveEffect } from '../../game/registry';
 import { getLearnableTechniques, calcTechniqueExpGain } from '../../game/technique';
 import { RARITY_COLORS } from '../shared';
 import type { TechniqueRarity } from '../../game/registry';
@@ -39,6 +39,9 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
             const isActive = player.activeTechniqueId === slot.techniqueId;
             const isMaxLevel = slot.level >= def.maxLevel;
             const expGain = calcTechniqueExpGain(player, def);
+            // 计算被动解锁角标
+            const totalPassives = def.passiveEffects?.length ?? 0;
+            const unlockedPassives = def.passiveEffects?.filter(pe => slot.level >= pe.minLevel).length ?? 0;
             return (
               <div
                 key={slot.techniqueId}
@@ -50,6 +53,14 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                     {def.name}
                   </span>
                   <span className="technique-type">{TECHNIQUE_TYPE_CN[def.type] ?? def.type}</span>
+                  {totalPassives > 0 && (
+                    <span
+                      className="technique-passive-badge"
+                      title={`已解锁 ${unlockedPassives}/${totalPassives} 条被动`}
+                    >
+                      ✨{unlockedPassives}/{totalPassives}
+                    </span>
+                  )}
                 </div>
                 <div className="technique-level">
                   Lv.{slot.level}/{def.maxLevel}
@@ -67,6 +78,19 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                 <div className="technique-bonus">
                   每级：{formatBonus(def)}
                 </div>
+                {/* 被动效果区块（T0019）*/}
+                {def.passiveEffects && def.passiveEffects.length > 0 && (
+                  <div className="technique-passive-section">
+                    <div className="technique-passive-title">✨ 熟练被动</div>
+                    {def.passiveEffects.map((pe, i) => (
+                      <PassiveEffectRow
+                        key={i}
+                        pe={pe}
+                        currentLevel={slot.level}
+                      />
+                    ))}
+                  </div>
+                )}
                 <div className="technique-actions">
                   {!isMaxLevel && (
                     <button className="btn btn-technique" onClick={() => onPractice(slot.techniqueId)}>
@@ -101,11 +125,25 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                     {def.name}
                   </span>
                   <span className="technique-type">{TECHNIQUE_TYPE_CN[def.type] ?? def.type}</span>
+                  {(def.passiveEffects?.length ?? 0) > 0 && (
+                    <span className="technique-passive-badge" title="含被动效果">
+                      ✨{def.passiveEffects?.length}
+                    </span>
+                  )}
                 </div>
                 <div className="technique-desc">{def.description}</div>
                 <div className="technique-bonus">
                   每级：{formatBonus(def)} ・ 最大 Lv.{def.maxLevel}
                 </div>
+                {/* 可学功法也显示被动预览 */}
+                {def.passiveEffects && def.passiveEffects.length > 0 && (
+                  <div className="technique-passive-section">
+                    <div className="technique-passive-title">✨ 熟练被动（预览）</div>
+                    {def.passiveEffects.map((pe, i) => (
+                      <PassiveEffectRow key={i} pe={pe} currentLevel={0} />
+                    ))}
+                  </div>
+                )}
                 <button className="btn btn-technique-learn" onClick={() => onLearn(def.id)}>
                   📖 学习
                 </button>
@@ -113,6 +151,24 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
             ))}
           </div>
         </>
+      )}
+    </div>
+  );
+}
+
+// ── 单条被动效果行 ──
+function PassiveEffectRow({ pe, currentLevel }: { pe: PassiveEffect; currentLevel: number }) {
+  const unlocked = currentLevel >= pe.minLevel;
+  return (
+    <div
+      className={`technique-passive-row ${unlocked ? 'technique-passive-unlocked' : 'technique-passive-locked'}`}
+      title={unlocked ? '已生效，当前叠加到属性中' : `还差 ${pe.minLevel - currentLevel} 级解锁`}
+    >
+      <span className="technique-passive-icon">{unlocked ? '●' : '○'}</span>
+      <span className="technique-passive-level">Lv{pe.minLevel}</span>
+      <span className="technique-passive-desc">{pe.description}</span>
+      {!unlocked && (
+        <span className="technique-passive-hint">（需 Lv{pe.minLevel}）</span>
       )}
     </div>
   );
@@ -130,3 +186,4 @@ function formatBonus(def: TechniqueDef): string {
   if (b.mp) parts.push(`灵力+${b.mp}`);
   return parts.join(' ') || '无';
 }
+
