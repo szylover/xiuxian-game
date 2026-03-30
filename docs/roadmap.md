@@ -99,6 +99,7 @@
 | [T0043](tasks/done/T0043-log-revamp.md) | 日志系统改进（Toast + 时间线 + 功法增强） | T0011, T0042, T0017 | — | ✅ |
 | [T0044](tasks/done/T0044-combat-modal-log.md) | 战斗弹窗 + 日志精简 | T0003, T0043 | [spec](specs/T0044-combat-modal-log.md) | ✅ |
 | [T0045](tasks/done/T0045-toast-combat-log-polish.md) | Toast 降噪 + 战斗日志合并 | T0043, T0044 | [spec](specs/T0045-toast-combat-log-polish.md) | ✅ |
+| [T0046](tasks/todo/T0046-combat-ui-revamp.md) | 战斗弹窗 UI 重做（头像+血条+可视化） | T0003, T0044, T0041 | [spec](specs/T0046-combat-ui-revamp.md) | ⬜ |
 
 ### 🏷️ 部署与体验
 
