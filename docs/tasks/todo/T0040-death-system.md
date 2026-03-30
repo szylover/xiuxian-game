@@ -2,7 +2,7 @@
 
 - **状态**: ⬜ 未开始
 - **分类**: 进阶机制
-- **前置**: T0001, T0003, T0012
+- **前置**: T0001, T0003, T0012, T0018, T0044
 - **Spec**: [docs/specs/T0040-death-system.md](../specs/T0040-death-system.md)
 
 ## 描述
@@ -20,12 +20,19 @@
 ### 新增文件
 
 - `src/game/death.ts` — 死亡系统逻辑壳子
+- `src/components/shared/DeathModal.tsx` — severe 死亡弹窗（死因 + 复活选项）
 
 ### 修改文件
 
-- `src/game/registry.ts` — 新增 3 个注册表 Map + 查询 API
-- `src/hooks/useGameEngine.ts` — 重写死亡判定逻辑
-- `src/game/combat.ts` — 返回值新增死亡上下文
+- `src/game/types.ts` — 新增死亡系统类型定义 + DLCPack 扩展
+- `src/game/registry/stores.ts` + `dlc.ts` + `queries.ts` + `index.ts` — 新增 3 个注册表 Map + DLC 注册 + 查询 API
+- `src/game/player/types.ts` — PlayerTracking 新增心魔追踪字段
+- `src/hooks/useCoreActions.ts` — fight() 战斗死亡集成
+- `src/hooks/useGameEngine.ts` — advanceTime 死亡判定 + DeathModal 状态管理
+- `src/hooks/useSystemActions.ts` — breakthrough() 渡劫死亡集成
+- `src/game/breakthrough/attempt.ts` — 突破失败追踪
+- `src/components/shared/CombatModal.tsx` — 护命/惩罚信息展示
+- `src/App.tsx` — DeathModal 渲染编排
 - `src/data/core-items.json` — 追加 6 个护命/复活/延寿物品
 - `src/game/events.ts` — 新增护命道具获取事件
 - `src/components/ActionPanel.tsx` — 死亡弹窗 + 复活选项 UI

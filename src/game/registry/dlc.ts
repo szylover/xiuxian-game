@@ -6,7 +6,7 @@ import type { DLCPack } from '../types';
 import {
   dlcRegistry, eventRegistry, itemDefRegistry, recipeRegistry,
   equipRegistry, smithingRecipeRegistry, breakthroughReqRegistry, tribulationRegistry,
-  techniqueRegistry,
+  techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
 } from './stores';
 
 export function registerDLC(pack: DLCPack): void {
@@ -19,6 +19,9 @@ export function registerDLC(pack: DLCPack): void {
   if (pack.breakthroughReqs) for (const br of pack.breakthroughReqs) breakthroughReqRegistry.set(br.fromRealmIndex, br);
   if (pack.tribulations) for (const t of pack.tribulations) tribulationRegistry.set(t.forRealmIndex, t);
   if (pack.techniques) for (const tech of pack.techniques) techniqueRegistry.set(tech.id, tech);
+  if (pack.deathTriggers) for (const dt of pack.deathTriggers) deathTriggerRegistry.set(dt.id, dt);
+  if (pack.lifeSavers) for (const ls of pack.lifeSavers) lifeSaverRegistry.set(ls.id, ls);
+  if (pack.revivalMethods) for (const rm of pack.revivalMethods) revivalRegistry.set(rm.id, rm);
 }
 
 export function unregisterDLC(packId: string): void {
@@ -32,6 +35,9 @@ export function unregisterDLC(packId: string): void {
   if (pack.breakthroughReqs) for (const br of pack.breakthroughReqs) breakthroughReqRegistry.delete(br.fromRealmIndex);
   if (pack.tribulations) for (const t of pack.tribulations) tribulationRegistry.delete(t.forRealmIndex);
   if (pack.techniques) for (const tech of pack.techniques) techniqueRegistry.delete(tech.id);
+  if (pack.deathTriggers) for (const dt of pack.deathTriggers) deathTriggerRegistry.delete(dt.id);
+  if (pack.lifeSavers) for (const ls of pack.lifeSavers) lifeSaverRegistry.delete(ls.id);
+  if (pack.revivalMethods) for (const rm of pack.revivalMethods) revivalRegistry.delete(rm.id);
   dlcRegistry.delete(packId);
 }
 

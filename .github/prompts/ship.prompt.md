@@ -13,6 +13,8 @@ tools: [read, edit, search, execute]
    - [ ] **任务文件**：完成的任务从 `docs/tasks/todo/` 移到 `docs/tasks/done/`，更新文件内状态为 ✅ + 关键文件 + 完成日期
    - [ ] **`docs/roadmap.md`**：完成的任务状态改为 ✅，链接路径从 `tasks/todo/` 改为 `tasks/done/`
    - [ ] **`docs/progress.md`**：移除已完成任务，加入最近完成表，检查新解锁的可执行任务
+   - [ ] **`docs/test-guide.md`**：追加新功能测试用例章节（≥4 条），如涉及 Debug 面板变更则同步更新「附录 A」
+   - [ ] **调试面板**：如新功能有新数值/物品/状态需要调试，`src/components/debug/` 已同步更新
    - [ ] `docs/changelog.md` — 如果功能/行为有变化，追加今天的条目
    - [ ] `.github/copilot-instructions.md` 项目目录树 — 如果目录结构变了就更新
    - [ ] `staticwebapp.config.json` — 如有需要则更新

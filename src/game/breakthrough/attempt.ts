@@ -60,6 +60,9 @@ export function attemptBreakthrough(player: Player): BreakthroughResult {
     delete btState.failedAttempts[player.realmIndex];
     p = setBreakthroughState(p, btState);
 
+    // 突破成功：重置连续突破失败计数
+    p.tracking = { ...p.tracking, consecutiveBreakthroughFails: 0 };
+
     logs.push(`🎆 突破成功！晋升 ${newRealm.name}期！`);
     logs.push(`寿限 +${newRealm.lifespanBonus}，属性全面提升！`);
     return { success: true, player: p, logs, triggerTribulation: false };
@@ -76,6 +79,9 @@ export function attemptBreakthrough(player: Player): BreakthroughResult {
   btState.failedAttempts[player.realmIndex] = (btState.failedAttempts[player.realmIndex] ?? 0) + 1;
   p = setBreakthroughState(p, btState);
   const failCount = btState.failedAttempts[player.realmIndex];
+
+  // 突破失败：递增连续突破失败计数
+  p.tracking = { ...p.tracking, consecutiveBreakthroughFails: (p.tracking.consecutiveBreakthroughFails ?? 0) + 1 };
 
   logs.push(`💥 突破失败！损失 ${expLoss} 修为，心情 -${penalty.moodLoss ?? 20}，健康 -${penalty.healthLoss ?? 10}。`);
   logs.push(`（成功率 ${(status.successRate * 100).toFixed(1)}%，掷骰 ${(roll * 100).toFixed(1)}%，累计失败 ${failCount} 次）`);

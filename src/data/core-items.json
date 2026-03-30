@@ -502,5 +502,75 @@
     "maxStack": 3,
     "usable": false,
     "sellPrice": 2000
+  },
+  {
+    "id": "core:life_talisman",
+    "name": "护身灵符",
+    "category": "consumable",
+    "rarity": "uncommon",
+    "description": "蕴含灵力的护身符，可抵消一次致命伤害",
+    "stackable": true,
+    "maxStack": 5,
+    "usable": false,
+    "sellPrice": 80
+  },
+  {
+    "id": "core:jade_shield",
+    "name": "玉碎护身",
+    "category": "consumable",
+    "rarity": "rare",
+    "description": "灵玉打造的护盾，危急时碎裂护主",
+    "stackable": true,
+    "maxStack": 3,
+    "usable": false,
+    "sellPrice": 200
+  },
+  {
+    "id": "core:soul_lamp",
+    "name": "魂灯",
+    "category": "consumable",
+    "rarity": "epic",
+    "description": "封印一缕魂火的灯盏，可免一死",
+    "stackable": true,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 500
+  },
+  {
+    "id": "core:nine_turn_pill",
+    "name": "九转还魂丹",
+    "category": "consumable",
+    "rarity": "legendary",
+    "description": "传说中的仙丹，可令亡者复生",
+    "stackable": true,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 2000
+  },
+  {
+    "id": "core:calming_talisman",
+    "name": "定心符",
+    "category": "consumable",
+    "rarity": "uncommon",
+    "description": "安定心神的符箓，可防心魔入侵",
+    "stackable": true,
+    "maxStack": 5,
+    "usable": false,
+    "sellPrice": 40
+  },
+  {
+    "id": "core:longevity_pill",
+    "name": "延寿丹",
+    "category": "consumable",
+    "rarity": "rare",
+    "description": "延长寿命 50 年的珍贵丹药",
+    "stackable": true,
+    "maxStack": 3,
+    "usable": true,
+    "effects": {
+      "lifespan": 50
+    },
+    "effectMessage": "💊 服下延寿丹，寿限延长 50 年。",
+    "sellPrice": 300
   }
 ]

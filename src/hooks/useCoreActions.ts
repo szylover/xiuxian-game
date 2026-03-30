@@ -12,6 +12,8 @@ import type { CombatResult } from '../game/combat';
 import { triggerExploreEvent } from '../game/events';
 import { addItem } from '../game/inventory';
 import { getItemDef } from '../game/registry';
+import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
+import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef } from '../game/types';
 import type { LogCategory } from './useGameLog';
 
 export interface LootEntry {
@@ -20,13 +22,23 @@ export interface LootEntry {
   amount: number;
 }
 
+export interface CombatDeathInfo {
+  blocked: boolean;
+  saverName?: string;
+  triggered: boolean;
+  severity?: DeathSeverity;
+  penaltyLogs?: string[];
+  availableRevivals?: RevivalMethodDef[];
+  triggerDef?: DeathTriggerDef;
+}
+
 export interface CoreActionDeps {
   addLog: (msg: string, category?: LogCategory) => void;
   addLogs: (msgs: string[], category?: LogCategory) => void;
   setPlayer: React.Dispatch<React.SetStateAction<Player | null>>;
   advanceTime: (p: Player, actionKey: string) => Player;
   canAct: (actionKey: string) => boolean;
-  onCombatResult: (monsterName: string, result: CombatResult, loot: LootEntry[]) => void;
+  onCombatResult: (monsterName: string, result: CombatResult, loot: LootEntry[], deathInfo?: CombatDeathInfo) => void;
 }
 
 export function useCoreActions(deps: CoreActionDeps) {
@@ -34,7 +46,7 @@ export function useCoreActions(deps: CoreActionDeps) {
   // 收集日志用 ref，避免 React strict mode 重复
   const pendingRef = useRef<{ msgs: string[]; categories: LogCategory[] }>({ msgs: [], categories: [] });
   // 战斗结果暂存（setPlayer回调内收集，setTimeout中消费）
-  const combatResultRef = useRef<{ monsterName: string; result: CombatResult; loot: LootEntry[] } | null>(null);
+  const combatResultRef = useRef<{ monsterName: string; result: CombatResult; loot: LootEntry[]; deathInfo?: CombatDeathInfo } | null>(null);
 
   const flushLogs = () => {
     const { msgs, categories } = pendingRef.current;
@@ -154,8 +166,51 @@ export function useCoreActions(deps: CoreActionDeps) {
           }
         }
       } else if (result.winner === 'monster') {
-        p.health = Math.max(0, p.health - 20);
-        p.hp = Math.max(1, Math.floor(p.maxHp * 0.1));
+        // T0040: 通过死亡系统处理战斗失败
+        const isBoss = monster.realmIndex >= p.realmIndex + 2;
+        const deathCheck = checkDeathTriggers(p, {
+          source: 'combat',
+          data: { monsterRealmIndex: monster.realmIndex, isBoss },
+        });
+
+        if (deathCheck.triggered) {
+          if (deathCheck.blocked) {
+            // 护命道具拦截
+            p = deathCheck.player;
+            combatResultRef.current = {
+              monsterName: monster.name, result, loot,
+              deathInfo: {
+                blocked: true,
+                saverName: deathCheck.blockedBy?.name,
+                triggered: true,
+              },
+            };
+          } else {
+            // 死亡触发
+            const death = applyDeath(p, deathCheck.trigger!);
+            p = death.player;
+            // HP clamp to 1 for non-severe (player continues)
+            if (death.severity !== 'severe') {
+              p.hp = Math.max(1, Math.floor(p.maxHp * 0.1));
+            }
+            combatResultRef.current = {
+              monsterName: monster.name, result, loot,
+              deathInfo: {
+                blocked: false,
+                triggered: true,
+                severity: death.severity,
+                penaltyLogs: death.logs,
+                availableRevivals: death.availableRevivals,
+                triggerDef: deathCheck.trigger!,
+              },
+            };
+          }
+        } else {
+          // 兜底：未触发死亡（理论上不会到这）
+          p.health = Math.max(0, p.health - 20);
+          p.hp = Math.max(1, Math.floor(p.maxHp * 0.1));
+          combatResultRef.current = { monsterName: monster.name, result, loot };
+        }
         if (p.hp < p.maxHp * 0.1) {
           p.tracking = { ...p.tracking, hasBeenBelow10Hp: true };
         }
@@ -169,8 +224,8 @@ export function useCoreActions(deps: CoreActionDeps) {
     });
     setTimeout(() => {
       if (combatResultRef.current) {
-        const { monsterName, result, loot } = combatResultRef.current;
-        onCombatResult(monsterName, result, loot);
+        const { monsterName, result, loot, deathInfo } = combatResultRef.current;
+        onCombatResult(monsterName, result, loot, deathInfo);
         combatResultRef.current = null;
       } else {
         flushLogs();

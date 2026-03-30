@@ -48,7 +48,7 @@ export function createPlayer(name: string = '无名散修'): Player {
     equipped: { weapon: null, helmet: null, armor: null, boots: null, accessory1: null, accessory2: null },
     techniques: [], activeTechniqueId: null,
     items: {}, passives: {}, systems: {},
-    tracking: { killCount: 0, bossKillCount: 0, consecutiveRests: 0, consecutiveCultivates: 0, hasBeenBelow10Hp: false, defeatedHigherRealm: false },
+    tracking: { killCount: 0, bossKillCount: 0, consecutiveRests: 0, consecutiveCultivates: 0, hasBeenBelow10Hp: false, defeatedHigherRealm: false, lowMoodStreak: 0, consecutiveBreakthroughFails: 0 },
     gameYear: 1, gameMonth: 1,
   };
 }

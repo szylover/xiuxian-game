@@ -1911,3 +1911,71 @@ body {
   color: #ccc;
   border-color: #555;
 }
+
+/* ── T0040: DeathModal 死亡弹窗 ── */
+.death-modal {
+  border-color: #8b0000;
+  box-shadow: 0 0 30px rgba(139, 0, 0, 0.5);
+}
+.death-modal-header {
+  color: #ff4444 !important;
+  border-bottom-color: #8b0000 !important;
+}
+.death-modal-cause {
+  color: #ccc;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.death-modal-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 16px;
+  color: #aaa;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+}
+.death-modal-section-title {
+  color: #d4a843;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+.death-modal-revivals {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.death-modal-revival-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 10px 14px;
+  background: rgba(0, 80, 0, 0.3);
+  border: 1px solid #2a5a2a;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.death-modal-revival-btn:hover {
+  background: rgba(0, 100, 0, 0.4);
+  border-color: #4a8a4a;
+}
+.death-modal-revival-name {
+  color: #6fbf6f;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+.death-modal-revival-desc {
+  color: #999;
+  font-size: 0.8rem;
+}
+.death-modal-no-revival {
+  color: #ff6666;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.95rem;
+}

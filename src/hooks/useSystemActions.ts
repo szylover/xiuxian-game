@@ -13,8 +13,10 @@ import { performSmithing } from '../game/smithing';
 import { attemptBreakthrough as attemptBreakthroughFn } from '../game/breakthrough';
 import { runTribulation as runTribulationFn } from '../game/tribulation';
 import { learnTechnique, practiceTechnique, activateTechnique } from '../game/technique';
+import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
 import type { EquipSlot } from '../game/registry';
 import type { LogCategory } from './useGameLog';
+import type { DeathModalState } from './useGameEngine';
 
 export interface SystemActionDeps {
   player: Player | null;
@@ -22,10 +24,11 @@ export interface SystemActionDeps {
   setPlayer: React.Dispatch<React.SetStateAction<Player | null>>;
   setGameOver: React.Dispatch<React.SetStateAction<boolean>>;
   setGameOverReason: React.Dispatch<React.SetStateAction<string>>;
+  setDeathModal: React.Dispatch<React.SetStateAction<DeathModalState | null>>;
 }
 
 export function useSystemActions(deps: SystemActionDeps) {
-  const { player, addLog, setPlayer, setGameOver, setGameOverReason } = deps;
+  const { player, addLog, setPlayer, setGameOver, setGameOverReason, setDeathModal } = deps;
 
   // ── 通用模式：执行操作 → 更新 player → 写日志 ──
   const execAction = useCallback(

@@ -15,6 +15,7 @@ import GameLayout from './components/layout/GameLayout';
 import LeftPanel from './components/layout/LeftPanel';
 import RightPanel from './components/layout/RightPanel';
 import CombatModal from './components/shared/CombatModal';
+import DeathModal from './components/shared/DeathModal';
 import type { PanelKey } from './components/layout/PanelButtons';
 import './App.css';
 
@@ -98,6 +99,13 @@ export default function App() {
             state={engine.combatModal}
             onNext={engine.handleCombatNext}
             onClose={engine.handleCombatClose}
+          />
+        )}
+        {engine.deathModal && (
+          <DeathModal
+            state={engine.deathModal}
+            onRevival={engine.handleRevival}
+            onClose={engine.handleDeathModalClose}
           />
         )}
       </>}
