@@ -677,55 +677,54 @@ body {
   50% { box-shadow: 0 0 12px rgba(255, 215, 0, 0.6); }
 }
 
-/* ── Toast 即时反馈 ── */
-.toast-container {
-  position: fixed;
-  top: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
+/* ── Toast 消息栏（顶部固定占位） ── */
+.top-message-bar {
+  width: 100%;
+  min-height: 28px;
   display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  pointer-events: none;
-  max-width: 500px;
-  width: 90%;
+  align-items: center;
+  justify-content: center;
 }
 
-.toast-item {
-  background: rgba(18, 22, 42, 0.95);
+.toast-bar {
+  background: rgba(18, 22, 42, 0.85);
   border: 1px solid #2a2e3e;
   border-left: 3px solid #aaa;
-  border-radius: 6px;
-  padding: 0.5rem 0.8rem;
-  font-size: 0.82rem;
+  border-radius: 4px;
+  padding: 4px 16px;
+  font-size: 0.78rem;
   color: #ddd;
-  pointer-events: auto;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-  animation: toastIn 0.3s ease-out;
+  width: 100%;
+  text-align: center;
+  transition: opacity 0.3s ease;
 }
 
-.toast-item:hover {
-  background: rgba(26, 30, 46, 0.98);
+.toast-bar:hover {
+  background: rgba(26, 30, 46, 0.95);
 }
 
 .toast-fade-in {
-  animation: toastIn 0.3s ease-out;
+  animation: toastFadeIn 0.3s ease-out;
 }
 
 .toast-fade-out {
-  animation: toastOut 0.3s ease-in forwards;
+  animation: toastFadeOut 0.3s ease-in forwards;
 }
 
-@keyframes toastIn {
-  from { opacity: 0; transform: translateY(-12px); }
-  to   { opacity: 1; transform: translateY(0); }
+.top-message-bar:empty,
+.top-message-bar:not(:has(.toast-bar)) {
+  min-height: 28px;
 }
 
-@keyframes toastOut {
-  from { opacity: 1; transform: translateY(0); }
-  to   { opacity: 0; transform: translateY(-12px); }
+@keyframes toastFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes toastFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
 }
 
 /* ── 日志面板（时间线） ── */
@@ -1894,10 +1893,60 @@ body {
 }
 
 .combat-modal-log-line {
-  padding: 0.2rem 0;
+  padding: 0.15rem 0;
   font-size: 0.85rem;
-  color: #ef5350;
+  color: #bbb;
   line-height: 1.5;
+}
+
+/* 战斗日志富文本着色 */
+.cl-text     { color: #bbb; }
+.cl-player   { color: #5bc0de; font-weight: bold; }
+.cl-monster  { color: #e67e22; font-weight: bold; }
+.cl-skill    { color: #d4a843; font-weight: bold; }
+.cl-damage   { color: #ef5350; font-weight: bold; }
+.cl-heal     { color: #66bb6a; font-weight: bold; }
+.cl-crit     { color: #ff7043; font-weight: bold; text-shadow: 0 0 4px rgba(255, 112, 67, 0.5); }
+.cl-dodge    { color: #78909c; font-style: italic; }
+.cl-info     { color: #d4a843; }
+.cl-mp       { color: #7e57c2; }
+.cl-debuff   { color: #ab47bc; }
+
+.combat-modal-fixed {
+  height: 70vh;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.combat-modal-fixed .combat-modal-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.combat-round-block {
+  margin-bottom: 0.6rem;
+  padding: 0.4rem 0.6rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 2px solid #333;
+  border-radius: 0 4px 4px 0;
+}
+
+.combat-round-header {
+  color: #d4a843;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 0.15rem 0;
+  margin-bottom: 0.2rem;
+}
+
+.combat-log-appear {
+  animation: logAppear 0.3s ease-out;
+}
+
+@keyframes logAppear {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 .combat-modal-footer {
@@ -1976,22 +2025,28 @@ body {
   margin-left: auto;
 }
 
-.log-collapse-btn {
-  background: none;
-  border: 1px solid #333;
-  border-radius: 4px;
-  color: #888;
+.log-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid #3a3e52;
+  border-radius: 50%;
+  color: #d4a843;
   cursor: pointer;
-  padding: 0.15rem 0.35rem;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   line-height: 1;
-  transition: all 0.15s;
+  margin-left: 6px;
+  vertical-align: middle;
+  transition: all 0.2s;
 }
 
-.log-collapse-btn:hover {
-  background: #1e2235;
-  color: #ccc;
-  border-color: #555;
+.log-toggle-btn:hover {
+  background: rgba(212, 168, 67, 0.15);
+  border-color: #d4a843;
+  color: #f0c96a;
 }
 
 /* ── T0040: DeathModal 死亡弹窗 ── */

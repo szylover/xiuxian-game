@@ -84,7 +84,7 @@
 |----|------|------|------|------|
 | [T0029](tasks/done/T0029-breakthrough-v2.md) | 突破系统重构 + 渡劫 | T0004, T0012 | [spec](specs/T0029-breakthrough-tribulation.md) | ✅ |
 | [T0030](tasks/todo/T0030-reincarnation.md) | 转世重修 | T0029, T0040 | — | ⬜ |
-| [T0040](tasks/todo/T0040-death-system.md) | 死亡与复活系统 | T0001, T0003, T0012, T0018, T0044 | [spec](specs/T0040-death-system.md) | ⬜ |
+| [T0040](tasks/done/T0040-death-system.md) | 死亡与复活系统 | T0001, T0003, T0012, T0018, T0044 | [spec](specs/T0040-death-system.md) | ✅ |
 | [T0031](tasks/todo/T0031-achievement.md) | 成就系统 | T0001 | — | ⬜ |
 | [T0032](tasks/todo/T0032-leaderboard.md) | 排行榜 | T0031 | — | ⬜ |
 | [T0033](tasks/todo/T0033-ascension.md) | 仙道境界（飞升） | T0029 | — | ⬜ |
@@ -98,6 +98,7 @@
 | [T0041](tasks/done/T0041-ui-layout-revamp.md) | 界面布局改版（三栏 + 头像） | T0006 | [spec](specs/T0041-ui-layout-revamp.md) | ✅ |
 | [T0043](tasks/done/T0043-log-revamp.md) | 日志系统改进（Toast + 时间线 + 功法增强） | T0011, T0042, T0017 | — | ✅ |
 | [T0044](tasks/done/T0044-combat-modal-log.md) | 战斗弹窗 + 日志精简 | T0003, T0043 | [spec](specs/T0044-combat-modal-log.md) | ✅ |
+| [T0045](tasks/done/T0045-toast-combat-log-polish.md) | Toast 降噪 + 战斗日志合并 | T0043, T0044 | [spec](specs/T0045-toast-combat-log-polish.md) | ✅ |
 
 ### 🏷️ 部署与体验
 
