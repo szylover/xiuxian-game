@@ -16,7 +16,7 @@
 
 ```
 用户: "实现战斗系统"
-1. @PM  → 调研代码库 + 输出 Design Spec 到 docs/specs/ + 创建任务 + 更新 roadmap & progress
+1. @PM  → 调研代码库 + 输出 Design Spec 到 docs/specs/ + 创建任务 + 更新 roadmap
    ↓ 用户确认 spec 后
 2. @Dev ║ @Designer  ← 并行消费同一份 spec（Dev 必须先检查 spec 是否存在）
 3. /ship  → 检查清单 → commit → push → PR
@@ -32,7 +32,7 @@
 
 ```
 用户: "我上次做到哪了" / "下一步做什么"
-→ 读 docs/roadmap.md（任务列表 + 依赖图）+ docs/progress.md（当前可执行任务）
+→ 读 docs/roadmap.md（任务列表 + 依赖图）+ 扫描 docs/tasks/done/ 最近完成的任务
 ```
 
 ## 任务管理
@@ -41,7 +41,6 @@
 - 每个任务有唯一 ID（T0001–T9999，4 位编号，10000 个槽位），声明前置依赖和设计文档索引
 - 每个任务对应 `docs/tasks/` 下独立文件，按状态归入 `done/` / `active/` / `todo/` 子目录
 - 任务按分类分组，但任意分类可随时追加新任务
-- `docs/progress.md` 是 roadmap 的视图：只列出当前可执行的任务和最近完成记录
 
 ### 任务完成时必须同步更新（每次 merge 前检查）
 
@@ -49,15 +48,11 @@
 
 1. **移动 task 文件**：`docs/tasks/todo/T0XXX-*.md` → `docs/tasks/done/T0XXX-*.md`，更新文件内状态为 ✅ + 关键文件 + 完成日期
 2. **更新 `docs/roadmap.md`**：对应行状态改为 ✅，链接路径从 `tasks/todo/` 改为 `tasks/done/`
-3. **更新 `docs/progress.md`**：
-   - 从"当前可执行任务"表中移除已完成任务
-   - 加入"最近完成"表（ID + 任务名 + 完成日期）
-   - 检查是否有新任务的前置被满足，加入"当前可执行任务"表
-4. **更新 `docs/test-guide.md`**：
+3. **更新 `docs/test-guide.md`**：
    - 在对应分类下追加新功能的测试用例章节（至少 4 条用例）
    - 如涉及调试面板变更，同步更新「附录 A：调试面板功能清单」
    - 测试用例须覆盖：正常流程、边界条件、Debug 辅助验证
-5. **更新调试面板**：如新功能引入了需要手动测试的数值/物品/状态，同步更新 `src/components/debug/` 下的调试面板代码，确保 Debug 模式可快速验证新功能
+4. **更新调试面板**：如新功能引入了需要手动测试的数值/物品/状态，同步更新 `src/components/debug/` 下的调试面板代码，确保 Debug 模式可快速验证新功能
 
 ## 设计原则
 
@@ -94,7 +89,6 @@ xiuxian-game/
 ├── index.html                     # Vite 入口 HTML
 ├── README.md
 ├── docs/                          # 项目文档
-│   ├── progress.md                #   实时进度看板（@Progress 维护）
 │   ├── roadmap.md                 #   任务列表（DAG 依赖图 + DLC 规划 + 扩展性约定）
 │   ├── test-guide.md              #   功能测试手册（每个功能的测试用例）
 │   ├── tasks/                     #   每个任务的独立文件（T0001–T9999）
