@@ -53,11 +53,7 @@ export default function GameLog({ logs, currentYear = 1, currentMonth = 1 }: Gam
     });
   };
 
-  // 折叠全部 / 展开全部
-  const collapseAll = () => {
-    setExpandedYears(new Set());
-    setExpandedMonths(new Set());
-  };
+  const [allExpanded, setAllExpanded] = useState(false);
 
   const expandAll = () => {
     const allYears = new Set(grouped.keys());
@@ -69,6 +65,17 @@ export default function GameLog({ logs, currentYear = 1, currentMonth = 1 }: Gam
     }
     setExpandedYears(allYears);
     setExpandedMonths(allMonths);
+    setAllExpanded(true);
+  };
+
+  const collapseAll = () => {
+    setExpandedYears(new Set());
+    setExpandedMonths(new Set());
+    setAllExpanded(false);
+  };
+
+  const toggleAll = () => {
+    if (allExpanded) collapseAll(); else expandAll();
   };
 
   // 按年降序排列
@@ -77,7 +84,7 @@ export default function GameLog({ logs, currentYear = 1, currentMonth = 1 }: Gam
   return (
     <div className="game-log">
       <div className="log-header">
-        <h3>📜 日志</h3>
+        <h3>📜 日志 <button className="log-toggle-btn" onClick={toggleAll} title={allExpanded ? '折叠全部' : '展开全部'}>{allExpanded ? '▾' : '▸'}</button></h3>
         <TabBar
           tabs={FILTER_TABS}
           activeKey={filter}
@@ -85,10 +92,6 @@ export default function GameLog({ logs, currentYear = 1, currentMonth = 1 }: Gam
           className="log-filters"
           tabClassName="log-filter-btn"
         />
-        <div className="log-header-actions">
-          <button className="log-collapse-btn" onClick={expandAll} title="展开全部">🔽</button>
-          <button className="log-collapse-btn" onClick={collapseAll} title="折叠全部">🔼</button>
-        </div>
       </div>
       <div className="log-list">
         {years.length === 0 && <p className="log-empty">暂无日志…</p>}

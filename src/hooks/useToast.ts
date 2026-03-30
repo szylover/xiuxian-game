@@ -1,5 +1,5 @@
 // ============================================================
-// hooks/useToast.ts — Toast 即时反馈管理
+// hooks/useToast.ts — Toast 消息条（单条最新消息，3s 淡出）
 // ============================================================
 
 import { useState, useCallback, useRef } from 'react';
@@ -12,30 +12,24 @@ export interface ToastMessage {
   fading?: boolean;
 }
 
-const MAX_TOASTS = 5;
 const DEFAULT_DURATION = 3000;
 
 export function useToast() {
-  const [toasts, setToasts] = useState<ToastMessage[]>([]);
-  const timersRef = useRef<Map<number, number>>(new Map());
+  const [toast, setToast] = useState<ToastMessage | null>(null);
+  const timerRef = useRef<number | null>(null);
 
-  const dismiss = useCallback((id: number) => {
-    // 先标记 fading 触发退出动画
-    setToasts(prev => prev.map(t => t.id === id ? { ...t, fading: true } : t));
-    setTimeout(() => {
-      setToasts(prev => prev.filter(t => t.id !== id));
-    }, 300);
-    const timer = timersRef.current.get(id);
-    if (timer) { clearTimeout(timer); timersRef.current.delete(id); }
+  const dismiss = useCallback(() => {
+    setToast(prev => prev ? { ...prev, fading: true } : null);
+    setTimeout(() => setToast(null), 300);
+    if (timerRef.current) { clearTimeout(timerRef.current); timerRef.current = null; }
   }, []);
 
   const showToast = useCallback((text: string, category: LogCategory = 'default', duration = DEFAULT_DURATION) => {
+    if (timerRef.current) { clearTimeout(timerRef.current); timerRef.current = null; }
     const id = Date.now() + Math.random();
-    const toast: ToastMessage = { id, text, category };
-    setToasts(prev => [...prev, toast].slice(-MAX_TOASTS));
-    const timer = window.setTimeout(() => dismiss(id), duration);
-    timersRef.current.set(id, timer);
+    setToast({ id, text, category, fading: false });
+    timerRef.current = window.setTimeout(() => dismiss(), duration);
   }, [dismiss]);
 
-  return { toasts, showToast, dismiss };
+  return { toast, showToast, dismiss };
 }

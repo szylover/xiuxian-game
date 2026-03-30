@@ -38,7 +38,7 @@ export interface CoreActionDeps {
   setPlayer: React.Dispatch<React.SetStateAction<Player | null>>;
   advanceTime: (p: Player, actionKey: string) => Player;
   canAct: (actionKey: string) => boolean;
-  onCombatResult: (monsterName: string, result: CombatResult, loot: LootEntry[], deathInfo?: CombatDeathInfo) => void;
+  onCombatResult: (monsterName: string, result: CombatResult, loot: LootEntry[], deathInfo?: CombatDeathInfo, hpBefore?: number, mpBefore?: number) => void;
 }
 
 export function useCoreActions(deps: CoreActionDeps) {
@@ -46,7 +46,7 @@ export function useCoreActions(deps: CoreActionDeps) {
   // 收集日志用 ref，避免 React strict mode 重复
   const pendingRef = useRef<{ msgs: string[]; categories: LogCategory[] }>({ msgs: [], categories: [] });
   // 战斗结果暂存（setPlayer回调内收集，setTimeout中消费）
-  const combatResultRef = useRef<{ monsterName: string; result: CombatResult; loot: LootEntry[]; deathInfo?: CombatDeathInfo } | null>(null);
+  const combatResultRef = useRef<{ monsterName: string; result: CombatResult; loot: LootEntry[]; deathInfo?: CombatDeathInfo; hpBefore: number; mpBefore: number } | null>(null);
 
   const flushLogs = () => {
     const { msgs, categories } = pendingRef.current;
@@ -124,6 +124,10 @@ export function useCoreActions(deps: CoreActionDeps) {
       // 收集战利品用于弹窗展示
       const loot: LootEntry[] = [];
 
+      // 记录战斗前 HP/MP 用于日志摘要
+      const hpBefore = p.hp;
+      const mpBefore = p.mp;
+
       p.hp = result.playerHpLeft;
       p.exp += result.expGained;
       p.gold += result.goldGained;
@@ -173,17 +177,16 @@ export function useCoreActions(deps: CoreActionDeps) {
           data: { monsterRealmIndex: monster.realmIndex, isBoss },
         });
 
+        let localDeathInfo: CombatDeathInfo | undefined;
+
         if (deathCheck.triggered) {
           if (deathCheck.blocked) {
             // 护命道具拦截
             p = deathCheck.player;
-            combatResultRef.current = {
-              monsterName: monster.name, result, loot,
-              deathInfo: {
-                blocked: true,
-                saverName: deathCheck.blockedBy?.name,
-                triggered: true,
-              },
+            localDeathInfo = {
+              blocked: true,
+              saverName: deathCheck.blockedBy?.name,
+              triggered: true,
             };
           } else {
             // 死亡触发
@@ -193,39 +196,38 @@ export function useCoreActions(deps: CoreActionDeps) {
             if (death.severity !== 'severe') {
               p.hp = Math.max(1, Math.floor(p.maxHp * 0.1));
             }
-            combatResultRef.current = {
-              monsterName: monster.name, result, loot,
-              deathInfo: {
-                blocked: false,
-                triggered: true,
-                severity: death.severity,
-                penaltyLogs: death.logs,
-                availableRevivals: death.availableRevivals,
-                triggerDef: deathCheck.trigger!,
-              },
+            localDeathInfo = {
+              blocked: false,
+              triggered: true,
+              severity: death.severity,
+              penaltyLogs: death.logs,
+              availableRevivals: death.availableRevivals,
+              triggerDef: deathCheck.trigger!,
             };
           }
         } else {
           // 兜底：未触发死亡（理论上不会到这）
           p.health = Math.max(0, p.health - 20);
           p.hp = Math.max(1, Math.floor(p.maxHp * 0.1));
-          combatResultRef.current = { monsterName: monster.name, result, loot };
         }
         if (p.hp < p.maxHp * 0.1) {
           p.tracking = { ...p.tracking, hasBeenBelow10Hp: true };
         }
+        combatResultRef.current = { monsterName: monster.name, result, loot, deathInfo: localDeathInfo, hpBefore, mpBefore };
       }
 
-      // 暂存战斗结果，不写日志
-      combatResultRef.current = { monsterName: monster.name, result, loot };
+      // 暂存战斗结果（玩家胜利 / 平局时 deathInfo 为空）
+      if (!combatResultRef.current) {
+        combatResultRef.current = { monsterName: monster.name, result, loot, hpBefore, mpBefore };
+      }
 
       p = advanceTime(p, 'combat');
       return p;
     });
     setTimeout(() => {
       if (combatResultRef.current) {
-        const { monsterName, result, loot, deathInfo } = combatResultRef.current;
-        onCombatResult(monsterName, result, loot, deathInfo);
+        const { monsterName, result, loot, deathInfo, hpBefore, mpBefore } = combatResultRef.current;
+        onCombatResult(monsterName, result, loot, deathInfo, hpBefore, mpBefore);
         combatResultRef.current = null;
       } else {
         flushLogs();
@@ -251,7 +253,7 @@ export function useCoreActions(deps: CoreActionDeps) {
       p = { ...updated };
 
       pendingRef.current = { msgs: [], categories: [] };
-      queueLog(message, message.includes('【奇遇】') ? 'adventure' : 'explore');
+      let exploreMsg = message;
 
       const exploreLoot: [string, number][] = [
         ['core:iron_ore', 0.15],
@@ -269,11 +271,13 @@ export function useCoreActions(deps: CoreActionDeps) {
           if (added > 0) {
             p = p2;
             const def = getItemDef(itemId);
-            queueLog(`🎁 拾取 ${def?.name ?? itemId} ×1`, 'explore');
+            exploreMsg += `（获得${def?.name ?? itemId}×1）`;
           }
           break;
         }
       }
+
+      queueLog(exploreMsg, exploreMsg.includes('【奇遇】') ? 'adventure' : 'explore');
 
       p = advanceTime(p, 'explore');
       return p;

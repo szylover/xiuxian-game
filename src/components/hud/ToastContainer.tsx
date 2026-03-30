@@ -1,30 +1,25 @@
 // ============================================================
-// hud/ToastContainer.tsx — Toast 气泡容器
+// hud/ToastContainer.tsx — 单条消息条（替代多条 Toast 气泡）
 // ============================================================
 
 import type { ToastMessage } from '../../hooks/useToast';
 import { LOG_COLORS } from '../../hooks/useGameLog';
 
-interface ToastContainerProps {
-  toasts: ToastMessage[];
-  onDismiss: (id: number) => void;
+interface ToastBarProps {
+  toast: ToastMessage | null;
+  onDismiss: () => void;
 }
 
-export default function ToastContainer({ toasts, onDismiss }: ToastContainerProps) {
-  if (toasts.length === 0) return null;
+export default function ToastContainer({ toast, onDismiss }: ToastBarProps) {
+  if (!toast) return null;
 
   return (
-    <div className="toast-container">
-      {toasts.map(toast => (
-        <div
-          key={toast.id}
-          className={`toast-item ${toast.fading ? 'toast-fade-out' : 'toast-fade-in'}`}
-          style={{ borderLeftColor: LOG_COLORS[toast.category] || LOG_COLORS.default }}
-          onClick={() => onDismiss(toast.id)}
-        >
-          {toast.text}
-        </div>
-      ))}
+    <div
+      className={`toast-bar ${toast.fading ? 'toast-fade-out' : 'toast-fade-in'}`}
+      style={{ borderLeftColor: LOG_COLORS[toast.category] || LOG_COLORS.default }}
+      onClick={onDismiss}
+    >
+      {toast.text}
     </div>
   );
 }

@@ -14,20 +14,23 @@
 | [T0020](tasks/todo/T0020-divine-arts.md) | 神通（元素体系） | T0017 ✅, T0018 ✅ | — | ⬜ |
 | [T0021](tasks/todo/T0021-map-system.md) | 地图系统 | T0001 ✅ | — | ⬜ |
 | [T0025](tasks/todo/T0025-npc-system.md) | NPC 系统 | T0001 ✅ | — | ⬜ |
-| [T0030](tasks/todo/T0030-reincarnation.md) | 转世重修 | T0029 ✅, T0040 | — | ⬜ |
+| [T0030](tasks/todo/T0030-reincarnation.md) | 转世重修 | T0029 ✅, T0040 ✅ | — | ⬜ |
 | [T0031](tasks/todo/T0031-achievement.md) | 成就系统 | T0001 ✅ | — | ⬜ |
 | [T0033](tasks/todo/T0033-ascension.md) | 仙道境界（飞升） | T0029 ✅ | — | ⬜ |
 | [T0035](tasks/todo/T0035-azure-cicd.md) | Azure SWA CI/CD | — | — | ⬜ |
 | [T0037](tasks/todo/T0037-audio.md) | 音效系统 | — | — | ⬜ |
 | [T0038](tasks/todo/T0038-multi-save.md) | 多存档 | — | — | ⬜ |
 | [T0039](tasks/todo/T0039-tutorial.md) | 新手引导 | T0001 ✅ | — | ⬜ |
-| [T0040](tasks/todo/T0040-death-system.md) | 死亡与复活系统 | T0001 ✅, T0003 ✅, T0012 ✅ | [spec](specs/T0040-death-system.md) | ⬜ |
+
+
 
 
 ## 最近完成
 
 | ID | 任务 | 完成日期 |
 |----|------|----------|
+| T0045 | Toast 降噪 + 战斗日志合并 | 2026-03-30 |
+| T0040 | 死亡与复活系统 | 2026-03-30 |
 | T0044 | 战斗弹窗 + 日志精简 | 2026-03-27 |
 | T0018 | 技能战斗 | 2026-03-27 |
 | T0043 | 日志系统改进（Toast + 时间线） | 2026-03-27 |
