@@ -1,9 +1,10 @@
 # T0040 — 死亡与复活系统
 
-- **状态**: ⬜ 未开始
+- **状态**: ✅ 已完成（2026-03-30）
 - **分类**: 进阶机制
 - **前置**: T0001, T0003, T0012, T0018, T0044
 - **Spec**: [docs/specs/T0040-death-system.md](../specs/T0040-death-system.md)
+- **关键文件**: `src/game/death.ts`、`src/game/events.ts`、`src/components/shared/DeathModal.tsx`、`src/hooks/useCoreActions.ts`、`src/hooks/useGameEngine.ts`
 
 ## 描述
 

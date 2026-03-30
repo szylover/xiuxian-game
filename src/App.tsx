@@ -55,6 +55,7 @@ export default function App() {
 
   return (
     <GameLayout
+      topBar={<ToastContainer toast={engine.toast} onDismiss={engine.dismissToast} />}
       left={
         <LeftPanel
           player={engine.player}
@@ -93,7 +94,6 @@ export default function App() {
       }
       debug={<>
         <DebugPanel player={engine.player} onUpdate={engine.debugSetPlayer} />
-        <ToastContainer toasts={engine.toasts} onDismiss={engine.dismissToast} />
         {engine.combatModal && (
           <CombatModal
             state={engine.combatModal}

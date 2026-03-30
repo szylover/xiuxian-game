@@ -9,12 +9,14 @@ interface GameLayoutProps {
   left: ReactNode;
   center: ReactNode;
   right: ReactNode;
+  topBar?: ReactNode;
   debug?: ReactNode;
 }
 
-export default function GameLayout({ left, center, right, debug }: GameLayoutProps) {
+export default function GameLayout({ left, center, right, topBar, debug }: GameLayoutProps) {
   return (
     <div className="game-layout-wrapper">
+      {topBar && <div className="top-message-bar">{topBar}</div>}
       <div className="game-layout">
         <aside className="left-panel">{left}</aside>
         <main className="center-panel">{center}</main>

@@ -27,6 +27,8 @@ export interface CombatModalState {
   result: CombatResult;
   loot: LootEntry[];
   deathInfo?: CombatDeathInfo;
+  playerHpBefore: number;
+  playerMpBefore: number;
 }
 
 export interface DeathModalState {
@@ -85,7 +87,7 @@ export function useGameEngine(
   const [combatModal, setCombatModal] = useState<CombatModalState | null>(null);
   const [deathModal, setDeathModal] = useState<DeathModalState | null>(null);
   const playerRef = useRef<Player | null>(null);
-  const { toasts, showToast, dismiss: dismissToast } = useToast();
+  const { toast, showToast, dismiss: dismissToast } = useToast();
 
   // 同步 playerRef
   useEffect(() => { playerRef.current = player; }, [player]);
@@ -271,8 +273,8 @@ export function useGameEngine(
   }, [player, gameOver]);
 
   // ── 战斗弹窗回调（T0044 + T0040）──
-  const onCombatResult = useCallback((monsterName: string, result: CombatResult, loot: LootEntry[], deathInfo?: CombatDeathInfo) => {
-    setCombatModal({ phase: 'battle', monsterName, result, loot, deathInfo });
+  const onCombatResult = useCallback((monsterName: string, result: CombatResult, loot: LootEntry[], deathInfo?: CombatDeathInfo, hpBefore?: number, mpBefore?: number) => {
+    setCombatModal({ phase: 'battle', monsterName, result, loot, deathInfo, playerHpBefore: hpBefore ?? 0, playerMpBefore: mpBefore ?? 0 });
   }, []);
 
   const handleCombatNext = useCallback(() => {
@@ -285,22 +287,36 @@ export function useGameEngine(
   const handleCombatClose = useCallback(() => {
     const modal = combatModalRef.current;
     if (!modal) return;
-    const { monsterName, result, loot, deathInfo } = modal;
+    const { monsterName, result, loot, deathInfo, playerHpBefore, playerMpBefore } = modal;
+
     if (result.winner === 'player') {
-      const parts = [`⚔️ 击败 ${monsterName} → +${result.expGained}修为 +${result.goldGained}灵石`];
-      for (const l of loot) parts.push(`${l.name}×${l.amount}`);
-      addLog(parts.join(' '), 'combat');
+      const details: string[] = [];
+      if (result.expGained > 0) details.push(`+${result.expGained}修为`);
+      if (result.goldGained > 0) details.push(`+${result.goldGained}灵石`);
+      const hpLost = playerHpBefore - result.playerHpLeft;
+      if (hpLost > 0) details.push(`-${hpLost}HP`);
+      if (result.mpUsed > 0) details.push(`-${result.mpUsed}MP`);
+      if (loot.length > 0) details.push(`获得: ${loot.map(l => `${l.name}×${l.amount}`).join(' ')}`);
+      addLog(`⚔️ 击败 ${monsterName}（${details.join(' ')}）`, 'combat');
     } else if (result.winner === 'monster') {
+      const details: string[] = [];
+      const hpLost = playerHpBefore - result.playerHpLeft;
+      if (hpLost > 0) details.push(`-${hpLost}HP`);
+      if (result.mpUsed > 0) details.push(`-${result.mpUsed}MP`);
       if (deathInfo?.blocked) {
-        addLog(`⚔️ 败于 ${monsterName}，${deathInfo.saverName}抵消了致命伤害！`, 'combat');
-      } else if (deathInfo?.triggered && deathInfo.severity && deathInfo.severity !== 'severe') {
-        const penaltyMsg = deathInfo.penaltyLogs?.join('，') || '';
-        addLog(`💀 败于 ${monsterName}，${penaltyMsg}`, 'combat');
+        details.push(`${deathInfo.saverName ?? '护命道具'}救回一命`);
+      } else if (deathInfo?.triggered && deathInfo.penaltyLogs?.length) {
+        details.push(...deathInfo.penaltyLogs);
       } else {
-        addLog(`💀 败于 ${monsterName}，身受重伤`, 'combat');
+        details.push('-20健康');
       }
+      addLog(`💀 败于 ${monsterName}（${details.join(' ')}）`, 'combat');
     } else {
-      addLog(`⚔️ 与 ${monsterName} 战斗超时，双方脱战`, 'combat');
+      const details: string[] = [];
+      const hpLost = playerHpBefore - result.playerHpLeft;
+      if (hpLost > 0) details.push(`-${hpLost}HP`);
+      if (result.mpUsed > 0) details.push(`-${result.mpUsed}MP`);
+      addLog(`⚔️ 与 ${monsterName} 缠斗超时，双方脱战（${details.join(' ')}）`, 'combat');
     }
     setCombatModal(null);
 
@@ -390,7 +406,7 @@ export function useGameEngine(
     learnTechnique,
     practiceTechnique,
     activateTechnique,
-    toasts,
+    toast,
     dismissToast,
     combatModal,
     handleCombatNext,
