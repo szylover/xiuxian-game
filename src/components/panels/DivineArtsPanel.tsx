@@ -159,6 +159,11 @@ function DivineArtCard({ def, isActive, aptitude, canActivate, onActivate }: Div
             ⚡ 激活
           </button>
         )}
+        {isActive && (
+          <button className="btn btn-technique" onClick={onActivate}>
+            ❎ 取消激活
+          </button>
+        )}
       </div>
     </div>
   );
