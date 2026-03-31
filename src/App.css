@@ -21,9 +21,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+  justify-content: flex-start;
+  height: 100vh;
+  overflow-y: auto;
   gap: 1rem;
+  padding: 2rem 1rem 3rem;
+  box-sizing: border-box;
 }
 
 .game-title {
@@ -189,6 +192,132 @@ body {
   font-size: 0.75rem;
   color: #aaa;
   text-align: right;
+}
+
+/* ── 栏位标题行（含锁按钮） ── */
+.slot-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+}
+
+.slot-title {
+  color: #aaa;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.lock-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0 0.2rem;
+  line-height: 1;
+  opacity: 0.9;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.lock-btn:hover:not(:disabled) {
+  transform: scale(1.2);
+}
+
+.lock-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.lock-btn-locked {
+  filter: drop-shadow(0 0 4px #ffd700);
+}
+
+/* ── 锁资源指示 ── */
+.lock-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.8rem;
+  padding: 0.5rem 0.8rem;
+  background: #12162a;
+  border: 1px solid #222;
+  border-radius: 8px;
+}
+
+.lock-counter-label {
+  color: #aaa;
+  font-size: 0.8rem;
+}
+
+.lock-icon-avail {
+  font-size: 1rem;
+}
+
+.lock-icon-used {
+  font-size: 1rem;
+  opacity: 0.25;
+  filter: grayscale(1);
+}
+
+/* ── 资质网格 ── */
+.aptitude-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+.aptitude-group-label {
+  color: #888;
+  font-size: 0.72rem;
+  margin-bottom: 0.2rem;
+  letter-spacing: 1px;
+}
+
+.aptitude-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.3rem 0.5rem;
+}
+
+.aptitude-cell {
+  display: grid;
+  grid-template-columns: 30px 1fr 28px;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.aptitude-name {
+  font-size: 0.72rem;
+  color: #ccc;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.aptitude-bar {
+  height: 5px;
+  background: #1a1e2e;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.aptitude-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+.aptitude-val {
+  font-size: 0.7rem;
+  text-align: right;
+}
+
+/* ── 灵根内联展示（放在 innate-attrs 内） ── */
+.spirit-root-display-inline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* ── 单页操作按钮区 ── */
