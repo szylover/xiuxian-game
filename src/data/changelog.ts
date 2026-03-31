@@ -12,6 +12,17 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.0.10',
+    date: '2026-03-31',
+    title: '开始界面改版：随机角色弹窗',
+    items: [
+      '开始界面改为居中单栏布局，信息更聚焦',
+      '天赋预览移入"随机角色"弹窗，主页只显示天赋摘要',
+      '弹窗支持单属性级别锁定（5 把锁），替代旧的 4 分类粗粒度锁',
+      '支持锁定灵根组合、单灵根亲和度、先天属性、元素资质、体质',
+    ],
+  },
+  {
     version: '1.0.9',
     date: '2026-03-31',
     title: '代码分割 & 懒加载',
