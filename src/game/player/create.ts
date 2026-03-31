@@ -150,6 +150,9 @@ export function createPlayer(options: CreatePlayerOptions): Player {
     items: {}, passives: {}, systems: {},
     tracking: { killCount: 0, bossKillCount: 0, consecutiveRests: 0, consecutiveCultivates: 0, hasBeenBelow10Hp: false, defeatedHigherRealm: false, lowMoodStreak: 0, consecutiveBreakthroughFails: 0 },
     gameYear: 1, gameMonth: 1,
+    // T0059 体修
+    physique: 0, maxPhysique: 50, bodyRealmIndex: 0, bodyRealmExp: 0,
+    physiqueDmgReduce: 0, bodyTempering: 0,
   };
 }
 

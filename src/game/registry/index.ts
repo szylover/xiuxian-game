@@ -15,6 +15,7 @@ export type {
   DeathSeverity, DeathTriggerDef, DeathPenaltyDef, LifeSaverDef, RevivalMethodDef, DeathSystemState,
   MonsterDef,
   ElementType, DivineArtDef, DivineArtSkillEffect,
+  BodyRealmDef, SpiritRootBodyBonus,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,

@@ -2,13 +2,15 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus } from '../types';
+import type { SpiritRootType } from '../spirit-root';
 import type { AchievementDef } from '../achievement/types';
 import {
   eventRegistry, itemDefRegistry, recipeRegistry,
   equipRegistry, smithingRecipeRegistry, breakthroughReqRegistry, tribulationRegistry,
   techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
   monsterRegistry, divineArtRegistry, achievementRegistry,
+  bodyRealmRegistry, spiritRootBodyBonusRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -82,3 +84,13 @@ export function getDivineArtsByElement(element: ElementType): DivineArtDef[] {
 
 export function getAchievement(id: string): AchievementDef | undefined { return achievementRegistry.get(id); }
 export function getAllAchievementDefs(): AchievementDef[] { return Array.from(achievementRegistry.values()); }
+
+// ── 体修境界（T0059）──
+
+export function getBodyRealmDef(index: number): BodyRealmDef | undefined { return bodyRealmRegistry.get(index); }
+export function getAllBodyRealmDefs(): BodyRealmDef[] { return Array.from(bodyRealmRegistry.values()).sort((a, b) => a.index - b.index); }
+
+// ── 灵根体修加成（T0059）──
+
+export function getSpiritRootBodyBonus(rootType: SpiritRootType): SpiritRootBodyBonus | undefined { return spiritRootBodyBonusRegistry.get(rootType); }
+export function getAllSpiritRootBodyBonuses(): SpiritRootBodyBonus[] { return Array.from(spiritRootBodyBonusRegistry.values()); }

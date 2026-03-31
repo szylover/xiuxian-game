@@ -6,6 +6,7 @@ import { REALMS } from '../data';
 import { getEquipDef } from '../registry';
 import { getAllTechniquePassiveBonus } from '../technique';
 import { getAchievementRecalcBonus } from '../achievement/engine';
+import { getBodyRealmBonus } from '../body-cultivation';
 import type { EquipStatBonus } from '../registry';
 import type { Player, Aptitudes, SpiritRootGrade, PlayerSpiritRoots } from './types';
 import type { SpiritRootCombo } from '../spirit-root';
@@ -71,6 +72,9 @@ export function recalcStats(player: Player): Player {
         if (s.critRate) p.critRate += s.critRate;
         if (s.critResist) p.critResist += s.critResist;
         if (s.moveSpeed) p.moveSpeed += s.moveSpeed;
+        // T0059 体修装备加成
+        if (s.physique) p.maxPhysique += s.physique;
+        if (s.physiqueDmgReduce) p.physiqueDmgReduce = Math.min(50, p.physiqueDmgReduce + s.physiqueDmgReduce);
       }
     }
   }
@@ -84,6 +88,9 @@ export function recalcStats(player: Player): Player {
   if (passiveBonus.mp)                p.maxMp += passiveBonus.mp;
   if (passiveBonus.critRate)          p.critRate += passiveBonus.critRate;
   if (passiveBonus.critDmgMultiplier) p.critDmgMultiplier += passiveBonus.critDmgMultiplier;
+  // T0059 功法被动体修加成
+  if (passiveBonus.physique)          p.maxPhysique += passiveBonus.physique;
+  if (passiveBonus.physiqueDmgReduce) p.physiqueDmgReduce = Math.min(50, p.physiqueDmgReduce + passiveBonus.physiqueDmgReduce);
 
   // 成就永久加成（T0031）——recalcStats 型
   const achBonus = getAchievementRecalcBonus(p);
@@ -98,10 +105,19 @@ export function recalcStats(player: Player): Player {
   if (achBonus.critResist)        p.critResist += achBonus.critResist;
   if (achBonus.moveSpeed)         p.moveSpeed += achBonus.moveSpeed;
 
+  // T0059 体修境界加成（从注册表读取）
+  const bodyBonus = getBodyRealmBonus(p);
+  p.maxHp += bodyBonus.hp;
+  p.atk += bodyBonus.atk;
+  p.def += bodyBonus.def;
+  p.maxPhysique = bodyBonus.maxPhysique + (passiveBonus.physique ?? 0);
+  p.physiqueDmgReduce = Math.min(50, bodyBonus.physiqueDmgReduce + (passiveBonus.physiqueDmgReduce ?? 0));
+
   p.hp = Math.min(p.hp, p.maxHp);
   p.mp = Math.min(p.mp, p.maxMp);
   p.stamina = Math.min(p.stamina, p.maxStamina);
   p.mentalPower = Math.min(p.mentalPower, p.maxMentalPower);
+  p.physique = Math.min(p.physique, p.maxPhysique);
   return p;
 }
 

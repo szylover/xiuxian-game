@@ -7,6 +7,7 @@ import type { Player } from './player';
 import type { TechniqueDef, TechniqueStatBonus, TechniqueActiveSkill } from './types';
 import type { TechniqueSlot } from './player/types';
 import { getTechniqueDef, getAllTechniqueDefs } from './registry';
+import { gainBodyRealmExp } from './body-cultivation';
 
 // ── 功法类型 → 资质字段映射 ──
 const TYPE_APTITUDE_MAP: Record<string, keyof Player['aptitudes']> = {
@@ -149,10 +150,23 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
 
   const newTechniques = [...p.techniques];
   newTechniques[idx] = { ...slot, level: newLevel, exp: newExp };
+  p = { ...p, techniques: newTechniques };
+
+  // T0059 体修修为（每条功法数据定义自己的 bodyExpRate，0 表示不给体修修为）
+  let bodyExpMsg = '';
+  if (def.bodyExpRate && def.bodyExpRate > 0) {
+    const baseBodyExp = Math.floor(gain * def.bodyExpRate);
+    const { player: p2, message: btMsg, actualGain } = gainBodyRealmExp(p, baseBodyExp);
+    p = p2;
+    if (actualGain > 0) {
+      bodyExpMsg = ` 💪体修修为+${actualGain}`;
+    }
+    if (btMsg) bodyExpMsg += ` ${btMsg}`;
+  }
 
   return {
-    player: { ...p, techniques: newTechniques },
-    message: `🧘 修炼 ${def.name}，熟练度 +${gain}（精力-${staminaCost} 灵力-${mpCost}）。${levelUpMsg}${passiveUnlockMsg}`,
+    player: p,
+    message: `🧘 修炼 ${def.name}，熟练度 +${gain}（精力-${staminaCost} 灵力-${mpCost}）。${levelUpMsg}${passiveUnlockMsg}${bodyExpMsg}`,
   };
 }
 

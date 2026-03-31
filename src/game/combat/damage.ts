@@ -36,6 +36,12 @@ export function calcDamage(attacker: Combatant, defender: Combatant): DamageResu
     isDodge = true;
   }
 
+  // 5. 体魄减伤（T0059，上限 50%）
+  if (!isDodge && defender.physiqueDmgReduce && defender.physiqueDmgReduce > 0) {
+    const reduceRate = Math.min(0.50, defender.physiqueDmgReduce / 100);
+    dmg = Math.floor(dmg * (1 - reduceRate));
+  }
+
   const finalDmg = Math.floor(dmg);
 
   if (isDodge) {
@@ -96,6 +102,12 @@ export function calcSkillDamage(
     if (Math.random() < dodgeChance) {
       dmg = 0;
       isDodge = true;
+    }
+
+    // 体魄减伤（T0059）
+    if (!isDodge && defender.physiqueDmgReduce && defender.physiqueDmgReduce > 0) {
+      const reduceRate = Math.min(0.50, defender.physiqueDmgReduce / 100);
+      dmg = Math.floor(dmg * (1 - reduceRate));
     }
 
     const finalDmg = Math.floor(dmg);

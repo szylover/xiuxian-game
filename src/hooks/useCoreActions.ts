@@ -13,6 +13,7 @@ import { triggerExploreEvent } from '../game/events';
 import { addItem } from '../game/inventory';
 import { getItemDef, getAllMonsters } from '../game/registry';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
+import { restorePhysique, gainBodyRealmExp } from '../game/body-cultivation';
 import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef } from '../game/types';
 import type { LogCategory } from './useGameLog';
 
@@ -131,6 +132,12 @@ export function useCoreActions(deps: CoreActionDeps) {
       p.hp = result.playerHpLeft;
       p.exp += result.expGained;
       p.gold += result.goldGained;
+
+      // T0059 体修修为战斗结算
+      if (result.bodyExpGained > 0) {
+        const { player: p2 } = gainBodyRealmExp(p, result.bodyExpGained);
+        p = p2;
+      }
 
       // 扣减战斗中消耗的灵力
       if (result.mpUsed > 0) {
@@ -296,6 +303,8 @@ export function useCoreActions(deps: CoreActionDeps) {
       p.mp = p.maxMp;
       p.health = Math.min(100, p.health + 5);
       p.mood = Math.min(100, p.mood + 3);
+      // T0059 休息恢复体魄
+      p = restorePhysique(p);
       p.tracking = { ...p.tracking, consecutiveRests: p.tracking.consecutiveRests + 1, consecutiveCultivates: 0 };
       p = advanceTime(p, 'rest');
 

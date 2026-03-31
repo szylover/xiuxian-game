@@ -3,7 +3,7 @@
 // ============================================================
 
 import type { Player } from '../player';
-import type { MonsterDef } from '../types';
+import type { MonsterDef, TechniqueDef } from '../types';
 import type { SkillState, StatusEffect, CombatResult, RoundSnapshot } from './types';
 import { calcDamage, tryUseSkill, calcSkillDamage } from './damage';
 import { getActiveTechniqueBonus, getActiveSkillInfo, calcAptitudeBonus } from '../technique';
@@ -12,29 +12,43 @@ import {
   ELEMENT_EMOJI, ELEMENT_CN,
 } from '../divine-arts';
 import { getDivineArtDef } from '../registry/queries';
+import { getEquipDef } from '../registry';
 
 export function runCombat(player: Player, monster: MonsterDef): CombatResult {
   const logs: string[] = [];
   const snapshots: RoundSnapshot[] = [];
 
+  // 获取主动技能信息（需在 buffedPlayer 之前，因为 techType 匹配要用）
+  const skillInfo = getActiveSkillInfo(player);
+  const skill = skillInfo?.skill ?? null;
+  const techniqueName = skillInfo?.def.name ?? '';
+  const aptitudeBonus = skillInfo ? calcAptitudeBonus(player, skillInfo.def) : 1.0;
+
   // 叠加功法加成
   const techBonus = getActiveTechniqueBonus(player);
+  let extraAtk = 0;
+
+  // T0059 体修武器 physiqueBonusRate 加成
+  const weaponId = player.equipped?.weapon;
+  const weaponDef = weaponId ? getEquipDef(weaponId) : null;
+  const activeTechDef: TechniqueDef | null = skillInfo?.def ?? null;
+  if (weaponDef?.physiqueBonusRate && weaponDef.techType && activeTechDef) {
+    if (weaponDef.techType.includes(activeTechDef.type)) {
+      extraAtk = Math.floor(player.physique * weaponDef.physiqueBonusRate);
+    }
+  }
+
   const buffedPlayer = {
     ...player,
-    atk: player.atk + (techBonus.atk ?? 0),
+    atk: player.atk + (techBonus.atk ?? 0) + extraAtk,
     def: player.def + (techBonus.def ?? 0),
     speed: player.speed + (techBonus.speed ?? 0),
     critRate: player.critRate + (techBonus.critRate ?? 0),
     critDmgMultiplier: player.critDmgMultiplier + (techBonus.critDmgMultiplier ?? 0),
     hp: player.hp,
     maxHp: player.maxHp + (techBonus.hp ?? 0),
+    physiqueDmgReduce: player.physiqueDmgReduce,
   };
-
-  // 获取主动技能信息
-  const skillInfo = getActiveSkillInfo(player);
-  const skill = skillInfo?.skill ?? null;
-  const techniqueName = skillInfo?.def.name ?? '';
-  const aptitudeBonus = skillInfo ? calcAptitudeBonus(player, skillInfo.def) : 1.0;
 
   // 技能状态
   const skillState: SkillState = {
@@ -86,6 +100,9 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
   }
   if (activeArt) {
     logs.push(`✨ 激活神通：【${activeArt.name}】（${ELEMENT_EMOJI[activeArt.element]}${ELEMENT_CN[activeArt.element]}系）`);
+  }
+  if (extraAtk > 0) {
+    logs.push(`💪 体修加持：体魄×${weaponDef!.physiqueBonusRate} = +${extraAtk} 攻击`);
   }
 
   // 先手：speed 高的先攻
@@ -350,10 +367,20 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
       mpUsed: skillState.totalMpUsed + divineSkillState.totalMpUsed,
       skillUseCount: skillState.useCount,
       snapshots, monsterMaxHp: monster.hp, playerMaxHp: buffedPlayer.maxHp, playerMaxMp: player.mp,
+      bodyExpGained: 0,
     };
   }
 
   const playerWon = pHp > 0;
+
+  // T0059 体修修为战斗结算（胜利+装备体修武器时获得）
+  let bodyExpGained = 0;
+  if (playerWon && weaponDef?.techType) {
+    const hasFistOrFinger = weaponDef.techType.some(t => t === 'fist' || t === 'finger');
+    if (hasFistOrFinger) {
+      bodyExpGained = Math.floor(monster.realmIndex * 10 + 10);
+    }
+  }
 
   if (playerWon) {
     logs.push(`🎉 你击败了 ${monster.name}！`);
@@ -363,6 +390,9 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
     }
     if (divineSkillState.useCount > 0) {
       logs.push(`✨ 本场施展神通 ${divineSkillState.useCount} 次，消耗灵力 ${divineSkillState.totalMpUsed} 点。`);
+    }
+    if (bodyExpGained > 0) {
+      logs.push(`💪 获得体修修为 +${bodyExpGained}`);
     }
   } else {
     logs.push(`💀 你被 ${monster.name} 击败了…`);
@@ -381,5 +411,6 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
     monsterMaxHp: monster.hp,
     playerMaxHp: buffedPlayer.maxHp,
     playerMaxMp: player.mp,
+    bodyExpGained,
   };
 }
