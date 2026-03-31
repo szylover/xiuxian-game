@@ -9,7 +9,7 @@
 
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
-| [T0064](tasks/active/T0064-bottleneck-system.md) | 瓶颈系统（境界/功法卡点 + 多元解锁） | T0002 ✅, T0029 ✅, T0007 ✅, T0017 ✅, T0058 ✅ | [spec](specs/T0064-bottleneck-system.md) | 🔨 |
+| [T0064](tasks/active/T0064-bottleneck-system.md) | 瓶颈系统（境界/功法卡点 + 多元解锁） | T0002 ✅, T0029 ✅, T0007 ✅, T0017 ✅, T0058 ✅ | [spec](specs/T0064-bottleneck-system.md) | ✅ |
 | [T0021](tasks/todo/T0021-map-system.md) | 地图系统 | T0001 ✅ | — | ⬜ |
 | [T0025](tasks/todo/T0025-npc-system.md) | NPC 系统 | T0001 ✅ | — | ⬜ |
 | [T0030](tasks/todo/T0030-reincarnation.md) | 转世重修 | T0029 ✅, T0040 ✅ | — | ⬜ |

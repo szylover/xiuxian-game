@@ -9,6 +9,8 @@ import Avatar from './Avatar';
 import { CapacityBar, FloatingPanel, STAT_COLORS } from '../shared';
 import StatusPanel from '../panels/StatusPanel';
 import type { PanelKey } from './PanelButtons';
+import { hasLockedRealmBottleneck, getFirstLockedRealmBottleneck } from '../../game/bottleneck';
+import { bottleneckDefsMap } from '../../game/registry/stores';
 
 interface LeftPanelProps {
   player: Player;
@@ -23,6 +25,11 @@ export default function LeftPanel({ player, activePanel, onSelectPanel }: LeftPa
     ? Math.min(100, (player.exp / nextRealm.expReq) * 100)
     : 100;
 
+  // T0064：瓶颈状态
+  const lockedBottleneckAb = getFirstLockedRealmBottleneck(player);
+  const lockedBottleneckDef = lockedBottleneckAb ? (bottleneckDefsMap.get(lockedBottleneckAb.defId) ?? null) : null;
+  const isBottlenecked = hasLockedRealmBottleneck(player);
+
   return (
     <>
       {/* 头像区域 */}
@@ -31,6 +38,14 @@ export default function LeftPanel({ player, activePanel, onSelectPanel }: LeftPa
         <div className="left-name">{player.name}</div>
         <div className="left-realm" style={{ color: realm.name.includes('大乘') ? '#FFD700' : undefined }}>
           【{realm.name}】
+          {isBottlenecked && (
+            <span
+              className="bottleneck-badge"
+              title={lockedBottleneckDef?.description ?? '存在瓶颈阻隔，需寻机缘突破'}
+            >
+              🔒
+            </span>
+          )}
         </div>
       </div>
 

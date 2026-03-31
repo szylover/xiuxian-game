@@ -6,7 +6,7 @@
 import { useCallback, useRef } from 'react';
 import type { Player } from '../game/player';
 import { getSpiritRootGrade } from '../game/player';
-import { ACTION_COSTS, BASE_CULTIVATE_EXP } from '../game/data';
+import { ACTION_COSTS, BASE_CULTIVATE_EXP, REALMS } from '../game/data';
 import { runCombat } from '../game/combat';
 import type { CombatResult } from '../game/combat';
 import { triggerExploreEvent } from '../game/events';
@@ -16,6 +16,12 @@ import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/dea
 import { restorePhysique, gainBodyRealmExp } from '../game/body-cultivation';
 import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef } from '../game/types';
 import type { LogCategory } from './useGameLog';
+import {
+  checkCombatBottleneckUnlock,
+  checkAndEnterRealmBottleneck,
+  getFirstLockedRealmBottleneck,
+  addProgressToAllLocked,
+} from '../game/bottleneck';
 
 export interface LootEntry {
   icon: string;
@@ -88,10 +94,26 @@ export function useCoreActions(deps: CoreActionDeps) {
       const expGain = Math.floor(BASE_CULTIVATE_EXP * compBonus * cultivationMult * moodBonus);
       p.exp += expGain;
       p.tracking = { ...p.tracking, consecutiveCultivates: p.tracking.consecutiveCultivates + 1, consecutiveRests: 0 };
+
+      // T0064：修为溢出上限保护（境界瓶颈激活时不超过 realm.expReq）
+      p = checkAndEnterRealmBottleneck(p);
+      const activeRealmBottleneck = getFirstLockedRealmBottleneck(p);
+      let bottleneckNote = '';
+      if (activeRealmBottleneck) {
+        const realmDef = REALMS[p.realmIndex];
+        const cap = realmDef?.expReq ?? Infinity;
+        if (p.exp > cap) p.exp = cap;
+        p = addProgressToAllLocked(p, 'cultivate', 1);
+        // 每 10 次修炼提示一次（用 tracking.consecutiveCultivates 做模运算）
+        if (p.tracking.consecutiveCultivates % 10 === 0) {
+          bottleneckNote = ' 🔒 修为已至大圆满，感知到瓶颈，需寻得机缘方可突破！';
+        }
+      }
+
       p = advanceTime(p, 'cultivate');
 
       pendingRef.current = { msgs: [], categories: [] };
-      queueLog(`🧘 修炼一次，获得 ${expGain} 修为。（悟性×${compBonus.toFixed(1)} 灵根×${cultivationMult} 心情×${moodBonus.toFixed(1)}）`, 'system');
+      queueLog(`🧘 修炼一次，获得 ${expGain} 修为。（悟性×${compBonus.toFixed(1)} 灵根×${cultivationMult} 心情×${moodBonus.toFixed(1)}）${bottleneckNote}`, 'system');
       return p;
     });
     setTimeout(flushLogs, 0);
@@ -149,6 +171,14 @@ export function useCoreActions(deps: CoreActionDeps) {
         if (monster.realmIndex > p.realmIndex) {
           p.tracking = { ...p.tracking, defeatedHigherRealm: true };
         }
+
+        // T0064：战斗感悟瓶颈解锁检查（概率触发解锁 或 静默积累 +3 progress）
+        const { player: p2, unlocked: btUnlocked, log: btLog } = checkCombatBottleneckUnlock(p, monster);
+        p = p2;
+        if (btUnlocked && btLog) {
+          queueLog(btLog, 'system');
+        }
+
         if (Math.random() < 0.3) {
           const { player: p2, added } = addItem(p, 'core:monster_fang', 1);
           p = p2;
@@ -177,7 +207,8 @@ export function useCoreActions(deps: CoreActionDeps) {
           }
         }
       } else if (result.winner === 'monster') {
-        // T0040: 通过死亡系统处理战斗失败
+        // T0064：战斗失败也积累瓶颈 progress +1
+        p = addProgressToAllLocked(p, 'combat', 1);
         const isBoss = monster.realmIndex >= p.realmIndex + 2;
         const deathCheck = checkDeathTriggers(p, {
           source: 'combat',
@@ -285,6 +316,9 @@ export function useCoreActions(deps: CoreActionDeps) {
       }
 
       queueLog(exploreMsg, exploreMsg.includes('【奇遇】') ? 'adventure' : 'explore');
+
+      // T0064：探索积累瓶颈进度 +2
+      p = addProgressToAllLocked(p, 'explore', 2);
 
       p = advanceTime(p, 'explore');
       return p;

@@ -8,6 +8,9 @@ import { BREAKTHROUGH_BASE_RATE, BREAKTHROUGH_COMP_BONUS, BREAKTHROUGH_LUCK_BONU
 import type { Realm } from '../data';
 import { getBreakthroughReq, getItemDef } from '../registry';
 import type { BreakthroughReqDef } from '../registry';
+import type { BottleneckDef } from '../bottleneck/types';
+import { getFirstLockedRealmBottleneck, getFirstRealmBottleneckDef } from '../bottleneck';
+import { bottleneckDefsMap } from '../registry/stores';
 
 export interface ItemCheckResult { itemId: string; name: string; required: number; have: number; ready: boolean; }
 export interface CondCheckResult { id: string; description: string; ready: boolean; }
@@ -21,6 +24,12 @@ export interface BreakthroughStatus {
   conditionsReady: CondCheckResult[];
   requiresTribulation: boolean;
   successRate: number;
+  // T0064：瓶颈字段
+  bottleneckActive?: boolean;
+  bottleneckDef?: BottleneckDef | null;
+  bottleneckProgress?: number;
+  bottleneckThreshold?: number;
+  bottleneckUnlocked?: boolean;
 }
 
 export function getBreakthroughState(player: Player) {
@@ -40,6 +49,29 @@ export function getBreakthroughStatus(player: Player): BreakthroughStatus {
   const nextRealm = getNextRealm(player);
   if (!nextRealm) return { canAttempt: false, nextRealm: null, req: null, expReady: false, itemsReady: [], conditionsReady: [], requiresTribulation: false, successRate: 0 };
 
+  // T0064：境界瓶颈检查（优先返回，阻止突破）
+  const lockedBottleneckAb = getFirstLockedRealmBottleneck(player);
+  if (lockedBottleneckAb) {
+    const def = bottleneckDefsMap.get(lockedBottleneckAb.defId) ?? null;
+    return {
+      canAttempt: false,
+      nextRealm,
+      req: null,
+      expReady: player.exp >= nextRealm.expReq,
+      itemsReady: [],
+      conditionsReady: [],
+      requiresTribulation: false,
+      successRate: 0,
+      bottleneckActive: true,
+      bottleneckDef: def,
+      bottleneckProgress: lockedBottleneckAb.progress,
+      bottleneckThreshold: def?.unlockProgressThreshold ?? 200,
+      bottleneckUnlocked: false,
+    };
+  }
+
+  // T0064：检查是否有已解锁（unlocked=true）但还未突破的境界瓶颈
+  const unlockedBottleneckDef = getFirstRealmBottleneckDef(player);
   const req = getBreakthroughReq(player.realmIndex);
   const expReady = player.exp >= nextRealm.expReq;
 
@@ -61,5 +93,10 @@ export function getBreakthroughStatus(player: Player): BreakthroughStatus {
   const successRate = requiresTribulation ? 0 : Math.min(0.95, baseRate + player.comprehension * BREAKTHROUGH_COMP_BONUS + player.luck * BREAKTHROUGH_LUCK_BONUS + failBonus);
 
   const canAttempt = expReady && itemsReady.every(i => i.ready) && conditionsReady.every(c => c.ready);
-  return { canAttempt, nextRealm, req: req ?? null, expReady, itemsReady, conditionsReady, requiresTribulation, successRate };
+  return {
+    canAttempt, nextRealm, req: req ?? null, expReady, itemsReady, conditionsReady, requiresTribulation, successRate,
+    bottleneckActive: false,
+    bottleneckDef: unlockedBottleneckDef,
+    bottleneckUnlocked: unlockedBottleneckDef !== null,
+  };
 }

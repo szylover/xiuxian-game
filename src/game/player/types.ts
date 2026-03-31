@@ -40,6 +40,7 @@ export interface PlayerTracking {
   defeatedHigherRealm: boolean;
   lowMoodStreak: number;
   consecutiveBreakthroughFails: number;
+  bottleneckTotalProgress: number; // T0064：瓶颈总积累进度（用于成就/统计）
 }
 
 export interface TechniqueSlot {

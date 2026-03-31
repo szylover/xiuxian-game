@@ -9,6 +9,7 @@ import type {
   BodyRealmDef, SpiritRootBodyBonus, RealmDef,
 } from '../types';
 import type { AchievementDef } from '../achievement/types';
+import type { BottleneckDef } from '../bottleneck/types';
 
 export const dlcRegistry = new Map<string, DLCPack>();
 export const eventRegistry = new Map<string, GameEvent>();
@@ -30,3 +31,5 @@ export const spiritRootBodyBonusRegistry = new Map<string, SpiritRootBodyBonus>(
 export const realmRegistry = new Map<number, RealmDef>();
 export const triggeredOnce = new Set<string>();
 export const cooldowns = new Map<string, number>();
+// T0064 瓶颈系统
+export const bottleneckDefsMap = new Map<string, BottleneckDef>();
