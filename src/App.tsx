@@ -62,6 +62,8 @@ export default function App() {
       left={
         <LeftPanel
           player={engine.player}
+          activePanel={activePanel}
+          onSelectPanel={handleSelectPanel}
         />
       }
       center={

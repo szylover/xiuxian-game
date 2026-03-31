@@ -4,7 +4,7 @@
 
 import type { Player } from '../../game/player';
 
-export type PanelKey = 'inventory' | 'shop' | 'crafting' | 'equipment' | 'technique' | 'divine' | 'achievement';
+export type PanelKey = 'inventory' | 'shop' | 'crafting' | 'equipment' | 'technique' | 'divine' | 'achievement' | 'status';
 
 interface PanelDef {
   key: PanelKey;

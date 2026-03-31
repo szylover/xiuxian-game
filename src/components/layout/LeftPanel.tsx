@@ -2,20 +2,21 @@
 // layout/LeftPanel.tsx — 左栏：头像 + 道号 + 境界 + 核心属性
 // ============================================================
 
-import { useState } from 'react';
 import type { Player } from '../../game/player';
 import { REALMS, MONTH_NAMES } from '../../game/data';
 import { getNextRealm } from '../../game/player';
 import Avatar from './Avatar';
 import { CapacityBar, FloatingPanel, STAT_COLORS } from '../shared';
 import StatusPanel from '../panels/StatusPanel';
+import type { PanelKey } from './PanelButtons';
 
 interface LeftPanelProps {
   player: Player;
+  activePanel: PanelKey | null;
+  onSelectPanel: (key: PanelKey) => void;
 }
 
-export default function LeftPanel({ player }: LeftPanelProps) {
-  const [showDetail, setShowDetail] = useState(false);
+export default function LeftPanel({ player, activePanel, onSelectPanel }: LeftPanelProps) {
   const realm = REALMS[player.realmIndex];
   const nextRealm = getNextRealm(player);
   const expProgress = nextRealm
@@ -78,17 +79,17 @@ export default function LeftPanel({ player }: LeftPanelProps) {
       </div>
 
       {/* 详细属性按钮 */}
-      <button className="btn left-detail-btn" onClick={() => setShowDetail(v => !v)}>
+      <button className={`btn left-detail-btn${activePanel === 'status' ? ' panel-btn-active' : ''}`} onClick={() => onSelectPanel('status')}>
         📋 详细属性
       </button>
 
       {/* 浮动详细属性面板 */}
-      {showDetail && (
+      {activePanel === 'status' && (
         <FloatingPanel
           title="详细属性"
           icon="📋"
           width={420}
-          onClose={() => setShowDetail(false)}
+          onClose={() => onSelectPanel('status')}
         >
           <StatusPanel player={player} />
         </FloatingPanel>
