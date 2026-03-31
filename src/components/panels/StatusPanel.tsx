@@ -8,7 +8,7 @@ import type { Player } from '../../game/player';
 import { getBodyRealmDef } from '../../game/registry';
 import { getNextBodyRealm } from '../../game/body-cultivation';
 import { StatRow, AptitudeBar, STAT_COLORS } from '../shared';
-import { SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS } from '../shared/constants';
+import { SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS, STAT_LABEL_MAP } from '../shared/constants';
 
 interface StatusPanelProps {
   player: Player;
@@ -20,6 +20,11 @@ export default function StatusPanel({ player }: StatusPanelProps) {
   const rootGrade = player.spiritRoots
     ? getSpiritRootDisplay(player.spiritRoots)
     : getSpiritRootGrade(player.aptitudes);
+
+  // 收集 passives 中的数值型额外属性（过滤零值）
+  const extraPassives = Object.entries(player.passives ?? {}).filter(
+    ([, v]) => typeof v === 'number' && (v as number) !== 0,
+  ) as [string, number][];
 
   return (
     <div className="status-panel-content">
@@ -44,6 +49,7 @@ export default function StatusPanel({ player }: StatusPanelProps) {
           <StatRow icon="👟" label="脚力" value={player.speed} />
           <StatRow icon="💨" label="移速" value={player.moveSpeed} />
           <StatRow icon="💥" label="会心" value={`${player.critRate}%`} />
+          <StatRow icon="🎯" label="暴击伤害" value={`${(player.critDmgMultiplier * 100).toFixed(0)}%`} />
           <StatRow icon="🛑" label="护心" value={`${player.critResist}%`} />
           <StatRow icon="🔰" label="功法抗性" value={`${player.skillResist}%`} />
           <StatRow icon="✨" label="神通抗性" value={`${player.spellResist}%`} />
@@ -98,6 +104,31 @@ export default function StatusPanel({ player }: StatusPanelProps) {
           <AptitudeBar label="🪨 土" value={player.aptitudes.earth} />
           <AptitudeBar label="🌿 木" value={player.aptitudes.wood} />
         </div>
+
+        {/* ── 额外属性（DLC / passives 动态渲染） ── */}
+        {extraPassives.length > 0 && (
+          <div className="panel-section">
+            <h3>✨ 额外属性</h3>
+            {extraPassives
+              .sort(([a], [b]) => a.localeCompare(b))
+              .map(([key, val]) => {
+                const label = STAT_LABEL_MAP[key] ?? key;
+                // 仅对倍率类（Multiplier 结尾）换算为百分比；其余直接显示原始数值
+                const isMultiplier = key.endsWith('Multiplier');
+                const display = isMultiplier
+                  ? `${(val * 100).toFixed(0)}%`
+                  : String(val);
+                return (
+                  <StatRow
+                    key={key}
+                    icon="🔹"
+                    label={label}
+                    value={display}
+                  />
+                );
+              })}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -29,6 +29,35 @@ export const STAT_CN: Record<string, string> = {
   critRate: '暴击', critResist: '护心', moveSpeed: '移速',
 };
 
+// ── DLC / passives 属性键 → 中文标签（用于动态渲染额外属性） ──
+// 注：与 STAT_CN 的差异：STAT_CN 用于装备属性描述，STAT_LABEL_MAP 用于属性面板展示，
+// 部分属性中文名与面板保持一致（如 speed → 脚力）
+export const STAT_LABEL_MAP: Record<string, string> = {
+  // 战斗
+  atk: '攻击', def: '防御', speed: '脚力', moveSpeed: '移速',
+  critRate: '会心率', critResist: '护心', critDmgMultiplier: '暴击伤害',
+  skillResist: '功法抗性', spellResist: '神通抗性',
+  // 气血/灵力/体力
+  hp: '体力', maxHp: '体力上限', mp: '灵力', maxMp: '灵力上限',
+  mentalPower: '念力', maxMentalPower: '念力上限',
+  stamina: '精力', maxStamina: '精力上限',
+  // 体修
+  physique: '体魄', maxPhysique: '体魄上限',
+  physiqueDmgReduce: '体魄减伤', bodyTempering: '淬体次数',
+  bodyExpMultiplier: '体修倍率',
+  physiqueRegenRate: '体魄回复率',
+  dmgReduceBonus: '额外减伤',
+  hpBonusRate: '气血加成率',
+  hpBonus: '气血加成', atkBonus: '攻击加成',
+  defBonus: '防御加成', physiqueBonus: '体魄加成',
+  // 修炼
+  expMultiplier: '修炼倍率',
+  // 先天
+  luck: '幸运', comprehension: '悟性', charisma: '魅力',
+  // 寿命
+  lifespan: '寿命上限',
+};
+
 // ── 装备槽位图标 ──
 export const SLOT_ICONS: Record<EquipSlot, string> = {
   weapon:     '🗡️',
