@@ -62,6 +62,7 @@
     "expPerLevel": 50,
     "statBonusPerLevel": { "atk": 2, "hp": 10 },
     "aptitudeKey": "fist",
+    "spiritRootElement": "earth",
     "passiveEffects": [
       { "minLevel": 3, "stat": "hp",  "value": 30, "description": "体魄强健：体力 +30" },
       { "minLevel": 7, "stat": "atk", "value": 6,  "description": "拳意精通：攻击 +6" }
@@ -88,6 +89,7 @@
     "expPerLevel": 50,
     "statBonusPerLevel": { "atk": 2, "def": 2 },
     "aptitudeKey": "palm",
+    "spiritRootElement": "water",
     "passiveEffects": [
       { "minLevel": 3, "stat": "def", "value": 8,  "description": "柔劲护体：防御 +8" },
       { "minLevel": 7, "stat": "mp",  "value": 20, "description": "内力绵延：灵力 +20" }
@@ -115,6 +117,7 @@
     "expPerLevel": 50,
     "statBonusPerLevel": { "atk": 2, "critRate": 1 },
     "aptitudeKey": "finger",
+    "spiritRootElement": "metal",
     "passiveEffects": [
       { "minLevel": 3, "stat": "critRate", "value": 2, "description": "指法精准：暴击率 +2%" },
       { "minLevel": 7, "stat": "atk",      "value": 8, "description": "一指锁喉：攻击 +8" }
@@ -141,6 +144,7 @@
     "expPerLevel": 50,
     "statBonusPerLevel": { "atk": 3, "def": 1 },
     "aptitudeKey": "spear",
+    "spiritRootElement": "wood",
     "passiveEffects": [
       { "minLevel": 3, "stat": "atk", "value": 8, "description": "枪势初展：攻击 +8" },
       { "minLevel": 7, "stat": "def", "value": 6, "description": "枪盾合一：防御 +6" }
@@ -168,6 +172,7 @@
     "expPerLevel": 80,
     "statBonusPerLevel": { "atk": 4, "speed": 2, "critRate": 1 },
     "aptitudeKey": "sword",
+    "spiritRootElement": "metal",
     "passiveEffects": [
       { "minLevel": 3,  "stat": "speed",    "value": 8,  "description": "疾风步法：速度 +8" },
       { "minLevel": 8,  "stat": "atk",      "value": 12, "description": "风刃锋利：攻击 +12" },
@@ -195,6 +200,7 @@
     "expPerLevel": 80,
     "statBonusPerLevel": { "atk": 3, "def": 2, "hp": 15 },
     "aptitudeKey": "fist",
+    "spiritRootElement": "earth",
     "passiveEffects": [
       { "minLevel": 3,  "stat": "hp",  "value": 50, "description": "铁骨皮肉：体力 +50" },
       { "minLevel": 8,  "stat": "atk", "value": 15, "description": "铁拳贯穿：攻击 +15" },
@@ -223,6 +229,7 @@
     "expPerLevel": 120,
     "statBonusPerLevel": { "atk": 6, "critRate": 2, "critDmgMultiplier": 0.05 },
     "aptitudeKey": "blade",
+    "spiritRootElement": "metal",
     "passiveEffects": [
       { "minLevel": 5,  "stat": "atk",              "value": 20,  "description": "雷威：攻击 +20" },
       { "minLevel": 10, "stat": "critRate",          "value": 5,   "description": "霆击必中：暴击率 +5%" },
@@ -251,6 +258,7 @@
     "expPerLevel": 120,
     "statBonusPerLevel": { "atk": 4, "speed": 3, "def": 2 },
     "aptitudeKey": "palm",
+    "spiritRootElement": "water",
     "passiveEffects": [
       { "minLevel": 5,  "stat": "speed", "value": 15, "description": "幻影身法：速度 +15" },
       { "minLevel": 10, "stat": "atk",   "value": 18, "description": "幻掌虚实：攻击 +18" },
@@ -278,6 +286,7 @@
     "expPerLevel": 200,
     "statBonusPerLevel": { "atk": 8, "speed": 3, "critRate": 2, "mp": 10 },
     "aptitudeKey": "sword",
+    "spiritRootElement": "fire",
     "passiveEffects": [
       { "minLevel": 5,  "stat": "atk",              "value": 30,  "description": "天罡锋锐：攻击 +30" },
       { "minLevel": 10, "stat": "critRate",          "value": 8,   "description": "罡气贯心：暴击率 +8%" },
@@ -306,6 +315,7 @@
     "expPerLevel": 200,
     "statBonusPerLevel": { "atk": 7, "def": 3, "speed": 2, "hp": 20 },
     "aptitudeKey": "spear",
+    "spiritRootElement": "wood",
     "passiveEffects": [
       { "minLevel": 5,  "stat": "def", "value": 25,  "description": "龙鳞护甲：防御 +25" },
       { "minLevel": 10, "stat": "atk", "value": 28,  "description": "龙吟破甲：攻击 +28" },
@@ -321,6 +331,156 @@
       "cooldown": 4,
       "triggerRate": 0.20,
       "effect": { "type": "debuff_atk", "value": 20, "duration": 3 }
+    }
+  },
+  {
+    "id": "core:flame_fist",
+    "name": "烈焰拳法",
+    "type": "fist",
+    "rarity": "rare",
+    "description": "以火灵根为引，拳意如烈焰，灼伤敌人。需火灵根才可习得。",
+    "minRealm": 1,
+    "maxLevel": 20,
+    "expPerLevel": 100,
+    "statBonusPerLevel": { "atk": 5, "hp": 8 },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "fire",
+    "requiredSpiritRoot": "fire",
+    "passiveEffects": [
+      { "minLevel": 4,  "stat": "atk", "value": 15, "description": "焰心开窍：攻击 +15" },
+      { "minLevel": 10, "stat": "hp",  "value": 60, "description": "火体淬炼：体力 +60" },
+      { "minLevel": 16, "stat": "critRate", "value": 5, "description": "烈焰暴击：暴击率 +5%" }
+    ],
+    "activeSkill": {
+      "name": "燎原拳",
+      "description": "一拳如燎原之火，持续灼烧敌人。",
+      "mpCost": 18,
+      "staminaCost": 6,
+      "dmgMultiplier": 1.6,
+      "hitCount": 1,
+      "cooldown": 2,
+      "triggerRate": 0.30,
+      "effect": { "type": "dot", "value": 25, "duration": 3 }
+    }
+  },
+  {
+    "id": "core:water_sword",
+    "name": "流水剑法",
+    "type": "sword",
+    "rarity": "rare",
+    "description": "以水灵根为根基，剑势绵绵不绝，以守化攻。需水灵根才可习得。",
+    "minRealm": 1,
+    "maxLevel": 20,
+    "expPerLevel": 100,
+    "statBonusPerLevel": { "atk": 4, "def": 3, "mp": 8 },
+    "aptitudeKey": "sword",
+    "spiritRootElement": "water",
+    "requiredSpiritRoot": "water",
+    "passiveEffects": [
+      { "minLevel": 4,  "stat": "mp",  "value": 30, "description": "水源充沛：灵力 +30" },
+      { "minLevel": 10, "stat": "def", "value": 18, "description": "水盾护身：防御 +18" },
+      { "minLevel": 16, "stat": "atk", "value": 20, "description": "水剑锋利：攻击 +20" }
+    ],
+    "activeSkill": {
+      "name": "百川归海",
+      "description": "剑意如流水，连击五次，每击回复少量灵力。",
+      "mpCost": 15,
+      "staminaCost": 5,
+      "dmgMultiplier": 0.9,
+      "hitCount": 5,
+      "cooldown": 3,
+      "triggerRate": 0.28,
+      "effect": { "type": "heal_self", "value": 20, "duration": 1 }
+    }
+  },
+  {
+    "id": "core:earth_palm",
+    "name": "厚土掌法",
+    "type": "palm",
+    "rarity": "rare",
+    "description": "以土灵根凝聚厚重之力，掌力沉稳，坚如磐石。需土灵根才可习得。",
+    "minRealm": 1,
+    "maxLevel": 20,
+    "expPerLevel": 100,
+    "statBonusPerLevel": { "atk": 3, "def": 4, "hp": 12 },
+    "aptitudeKey": "palm",
+    "spiritRootElement": "earth",
+    "requiredSpiritRoot": "earth",
+    "passiveEffects": [
+      { "minLevel": 4,  "stat": "def", "value": 20, "description": "厚土护体：防御 +20" },
+      { "minLevel": 10, "stat": "hp",  "value": 80, "description": "磐石体魄：体力 +80" },
+      { "minLevel": 16, "stat": "atk", "value": 18, "description": "岩破万法：攻击 +18" }
+    ],
+    "activeSkill": {
+      "name": "泰山压顶",
+      "description": "如泰山压顶，一掌压制敌人。",
+      "mpCost": 20,
+      "staminaCost": 7,
+      "dmgMultiplier": 2.0,
+      "hitCount": 1,
+      "cooldown": 3,
+      "triggerRate": 0.28,
+      "effect": { "type": "debuff_def", "value": 8, "duration": 3 }
+    }
+  },
+  {
+    "id": "core:metal_blade",
+    "name": "金煞刀法",
+    "type": "blade",
+    "rarity": "rare",
+    "description": "以金灵根引天地杀气，刀势霸道凌厉，如金煞降世。需金灵根才可习得。",
+    "minRealm": 1,
+    "maxLevel": 20,
+    "expPerLevel": 100,
+    "statBonusPerLevel": { "atk": 6, "critRate": 2 },
+    "aptitudeKey": "blade",
+    "spiritRootElement": "metal",
+    "requiredSpiritRoot": "metal",
+    "passiveEffects": [
+      { "minLevel": 4,  "stat": "atk",     "value": 18, "description": "金煞附身：攻击 +18" },
+      { "minLevel": 10, "stat": "critRate", "value": 5,  "description": "金锋决断：暴击率 +5%" },
+      { "minLevel": 16, "stat": "critDmgMultiplier", "value": 0.25, "description": "金煞斩杀：暴击伤害 +25%" }
+    ],
+    "activeSkill": {
+      "name": "金煞一斩",
+      "description": "凝聚金灵之力于一刀，斩出后流血不止。",
+      "mpCost": 22,
+      "staminaCost": 7,
+      "dmgMultiplier": 1.8,
+      "hitCount": 1,
+      "cooldown": 3,
+      "triggerRate": 0.28,
+      "effect": { "type": "dot", "value": 20, "duration": 4 }
+    }
+  },
+  {
+    "id": "core:wood_spear",
+    "name": "翠木枪法",
+    "type": "spear",
+    "rarity": "rare",
+    "description": "以木灵根为本，枪势灵动如生长之木，攻守转换迅捷。需木灵根才可习得。",
+    "minRealm": 1,
+    "maxLevel": 20,
+    "expPerLevel": 100,
+    "statBonusPerLevel": { "atk": 4, "def": 2, "speed": 2 },
+    "aptitudeKey": "spear",
+    "spiritRootElement": "wood",
+    "requiredSpiritRoot": "wood",
+    "passiveEffects": [
+      { "minLevel": 4,  "stat": "speed", "value": 10, "description": "翠木身法：速度 +10" },
+      { "minLevel": 10, "stat": "atk",   "value": 18, "description": "翠木穿刺：攻击 +18" },
+      { "minLevel": 16, "stat": "def",   "value": 15, "description": "木甲护身：防御 +15" }
+    ],
+    "activeSkill": {
+      "name": "枯木逢春",
+      "description": "枪出如翠竹，连刺三次并回复自身体力。",
+      "mpCost": 18,
+      "staminaCost": 6,
+      "dmgMultiplier": 1.2,
+      "hitCount": 3,
+      "cooldown": 2,
+      "triggerRate": 0.30,
+      "effect": { "type": "heal_self", "value": 25, "duration": 1 }
     }
   }
 ]

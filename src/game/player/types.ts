@@ -2,6 +2,9 @@
 // player/types.ts — Player 接口 + 相关类型
 // ============================================================
 
+import type { PlayerSpiritRoots } from '../spirit-root';
+export type { PlayerSpiritRoots };
+
 export interface Aptitudes {
   alchemy: number; smithing: number;
   fengshui: number; mining: number;
@@ -87,6 +90,9 @@ export interface Player {
   tracking: PlayerTracking;
   gameYear: number;                        // 历法年份（从 1 开始）
   gameMonth: number;                       // 当前月份（1-12）
+  spiritRoots: PlayerSpiritRoots;          // T0056 五行灵根
+  gender: 'male' | 'female';              // T0056 性别
+  appearance: number;                      // T0056 外貌（头像序号）
 }
 
 export interface SpiritRootGrade {

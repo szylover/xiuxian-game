@@ -82,15 +82,15 @@ export function useCoreActions(deps: CoreActionDeps) {
       p.stamina -= cost.stamina;
 
       const compBonus = 1 + p.comprehension / 50;
-      const rootGrade = getSpiritRootGrade(p.aptitudes);
+      const cultivationMult = p.spiritRoots?.cultivationMultiplier ?? getSpiritRootGrade(p.aptitudes).multiplier;
       const moodBonus = 0.5 + (p.mood / 100);
-      const expGain = Math.floor(BASE_CULTIVATE_EXP * compBonus * rootGrade.multiplier * moodBonus);
+      const expGain = Math.floor(BASE_CULTIVATE_EXP * compBonus * cultivationMult * moodBonus);
       p.exp += expGain;
       p.tracking = { ...p.tracking, consecutiveCultivates: p.tracking.consecutiveCultivates + 1, consecutiveRests: 0 };
       p = advanceTime(p, 'cultivate');
 
       pendingRef.current = { msgs: [], categories: [] };
-      queueLog(`🧘 修炼一次，获得 ${expGain} 修为。（悟性×${compBonus.toFixed(1)} 灵根×${rootGrade.multiplier} 心情×${moodBonus.toFixed(1)}）`, 'system');
+      queueLog(`🧘 修炼一次，获得 ${expGain} 修为。（悟性×${compBonus.toFixed(1)} 灵根×${cultivationMult} 心情×${moodBonus.toFixed(1)}）`, 'system');
       return p;
     });
     setTimeout(flushLogs, 0);
@@ -291,17 +291,16 @@ export function useCoreActions(deps: CoreActionDeps) {
     setPlayer(prev => {
       if (!prev) return prev;
       let p: Player = { ...prev };
-      const staminaRecover = Math.floor(p.maxStamina * 0.3);
-      p.stamina = Math.min(p.maxStamina, p.stamina + staminaRecover);
-      p.hp = Math.min(p.maxHp, p.hp + Math.floor(p.maxHp * 0.1));
-      p.mp = Math.min(p.maxMp, p.mp + Math.floor(p.maxMp * 0.1));
+      p.stamina = p.maxStamina;
+      p.hp = p.maxHp;
+      p.mp = p.maxMp;
       p.health = Math.min(100, p.health + 5);
       p.mood = Math.min(100, p.mood + 3);
       p.tracking = { ...p.tracking, consecutiveRests: p.tracking.consecutiveRests + 1, consecutiveCultivates: 0 };
       p = advanceTime(p, 'rest');
 
       pendingRef.current = { msgs: [], categories: [] };
-      queueLog(`💤 休息片刻，恢复 ${staminaRecover} 精力，HP/MP/健康/心情少量恢复。`, 'system');
+      queueLog(`💤 休息片刻，体力、灵力、精力完全恢复，健康/心情少量恢复。`, 'system');
       return p;
     });
     setTimeout(flushLogs, 0);

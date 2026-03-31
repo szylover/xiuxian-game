@@ -3,11 +3,12 @@
 // ============================================================
 
 import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef } from '../types';
+import type { AchievementDef } from '../achievement/types';
 import {
   eventRegistry, itemDefRegistry, recipeRegistry,
   equipRegistry, smithingRecipeRegistry, breakthroughReqRegistry, tribulationRegistry,
   techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
-  monsterRegistry, divineArtRegistry,
+  monsterRegistry, divineArtRegistry, achievementRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -76,3 +77,8 @@ export function getAllDivineArtDefs(): DivineArtDef[] { return Array.from(divine
 export function getDivineArtsByElement(element: ElementType): DivineArtDef[] {
   return Array.from(divineArtRegistry.values()).filter(a => a.element === element);
 }
+
+// ── 成就 ──
+
+export function getAchievement(id: string): AchievementDef | undefined { return achievementRegistry.get(id); }
+export function getAllAchievementDefs(): AchievementDef[] { return Array.from(achievementRegistry.values()); }

@@ -16,6 +16,10 @@ export type {
   MonsterDef,
   ElementType, DivineArtDef, DivineArtSkillEffect,
 } from '../types';
+export type {
+  AchievementCategory, AchievementDef, AchievementBonusStats,
+  AchievementRecalcBonus, AchievementOnceBonus, AchievementSystemState,
+} from '../achievement/types';
 
 export { registerDLC, unregisterDLC, getDLC, getAllDLCs } from './dlc';
 export {
@@ -31,6 +35,7 @@ export {
   getRevivalMethod, getAllRevivalMethods,
   getMonster, getAllMonsters, getMonstersByRealm,
   getDivineArtDef, getAllDivineArtDefs, getDivineArtsByElement,
+  getAchievement, getAllAchievementDefs,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

@@ -7,7 +7,7 @@ import {
   dlcRegistry, eventRegistry, itemDefRegistry, recipeRegistry,
   equipRegistry, smithingRecipeRegistry, breakthroughReqRegistry, tribulationRegistry,
   techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
-  monsterRegistry, divineArtRegistry,
+  monsterRegistry, divineArtRegistry, achievementRegistry,
 } from './stores';
 
 export function registerDLC(pack: DLCPack): void {
@@ -25,6 +25,7 @@ export function registerDLC(pack: DLCPack): void {
   if (pack.revivalMethods) for (const rm of pack.revivalMethods) revivalRegistry.set(rm.id, rm);
   if (pack.monsters) for (const m of pack.monsters) monsterRegistry.set(m.id, m);
   if (pack.divineArts) for (const da of pack.divineArts) divineArtRegistry.set(da.id, da);
+  if (pack.achievements) for (const ach of pack.achievements) achievementRegistry.set(ach.id, ach);
 }
 
 export function unregisterDLC(packId: string): void {
@@ -43,6 +44,7 @@ export function unregisterDLC(packId: string): void {
   if (pack.revivalMethods) for (const rm of pack.revivalMethods) revivalRegistry.delete(rm.id);
   if (pack.monsters) for (const m of pack.monsters) monsterRegistry.delete(m.id);
   if (pack.divineArts) for (const da of pack.divineArts) divineArtRegistry.delete(da.id);
+  if (pack.achievements) for (const ach of pack.achievements) achievementRegistry.delete(ach.id);
   dlcRegistry.delete(packId);
 }
 

@@ -21,9 +21,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+  justify-content: flex-start;
+  height: 100vh;
+  overflow-y: auto;
   gap: 1rem;
+  padding: 2rem 1rem 3rem;
+  box-sizing: border-box;
 }
 
 .game-title {
@@ -61,6 +64,399 @@ body {
 .start-form input:focus {
   outline: none;
   border-color: #ffd700;
+}
+
+/* ── T0056: 建角色 - 表单行 ── */
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 340px;
+}
+
+.form-row label {
+  min-width: 52px;
+  color: #aaa;
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.gender-row { align-items: center; }
+.gender-btns { display: flex; gap: 0.5rem; }
+.gender-btns .btn { padding: 0.4rem 1rem; font-size: 0.85rem; }
+
+/* ── 头像选择器 ── */
+.avatar-row { align-items: flex-start; }
+.avatar-selector { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+.avatar-option {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 4px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  background: #1a1e2e;
+}
+
+.avatar-option:hover { border-color: #888; }
+.avatar-option.selected {
+  border-color: #ffd700;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+.avatar-option img { display: block; border-radius: 6px; }
+
+/* ── 单页建角色布局 ── */
+.create-char-form {
+  display: flex;
+  flex-direction: row;
+  gap: 1.6rem;
+  align-items: flex-start;
+  max-width: 760px;
+  width: 100%;
+  padding: 1rem;
+  background: #0d1120;
+  border: 1px solid #222;
+  border-radius: 12px;
+}
+
+.create-char-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 260px;
+}
+
+.create-char-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.talent-section-title {
+  color: #ffd700;
+  font-size: 0.95rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 0.1rem;
+}
+
+/* ── 先天属性条 ── */
+.innate-attrs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.6rem 0.8rem;
+  background: #12162a;
+  border: 1px solid #222;
+  border-radius: 10px;
+}
+
+.innate-title {
+  color: #aaa;
+  font-size: 0.8rem;
+  margin-bottom: 0.2rem;
+  letter-spacing: 1px;
+}
+
+.innate-row {
+  display: grid;
+  grid-template-columns: 36px 1fr 36px;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.innate-label {
+  color: #ccc;
+  font-size: 0.85rem;
+  text-align: right;
+}
+
+.innate-bar {
+  height: 6px;
+  background: #1a1e2e;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.innate-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+.innate-val {
+  font-size: 0.75rem;
+  color: #aaa;
+  text-align: right;
+}
+
+/* ── 栏位标题行（含锁按钮） ── */
+.slot-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+}
+
+.slot-title {
+  color: #aaa;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.lock-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0 0.2rem;
+  line-height: 1;
+  opacity: 0.9;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.lock-btn:hover:not(:disabled) {
+  transform: scale(1.2);
+}
+
+.lock-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.lock-btn-locked {
+  filter: drop-shadow(0 0 4px #ffd700);
+}
+
+/* ── 锁资源指示 ── */
+.lock-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.8rem;
+  padding: 0.5rem 0.8rem;
+  background: #12162a;
+  border: 1px solid #222;
+  border-radius: 8px;
+}
+
+.lock-counter-label {
+  color: #aaa;
+  font-size: 0.8rem;
+}
+
+.lock-icon-avail {
+  font-size: 1rem;
+}
+
+.lock-icon-used {
+  font-size: 1rem;
+  opacity: 0.25;
+  filter: grayscale(1);
+}
+
+/* ── 资质网格 ── */
+.aptitude-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+.aptitude-group-label {
+  color: #888;
+  font-size: 0.72rem;
+  margin-bottom: 0.2rem;
+  letter-spacing: 1px;
+}
+
+.aptitude-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.3rem 0.5rem;
+}
+
+.aptitude-cell {
+  display: grid;
+  grid-template-columns: 30px 1fr 28px;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.aptitude-name {
+  font-size: 0.72rem;
+  color: #ccc;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.aptitude-bar {
+  height: 5px;
+  background: #1a1e2e;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.aptitude-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+.aptitude-val {
+  font-size: 0.7rem;
+  text-align: right;
+}
+
+/* ── 灵根内联展示（放在 innate-attrs 内） ── */
+.spirit-root-display-inline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ── 单页操作按钮区 ── */
+.create-char-actions {
+  margin-top: 0.2rem;
+}
+
+/* ── T0056: 灵根测算界面（保留兼容旧样式） ── */
+.spirit-result { max-width: 400px; width: 100%; }
+
+.char-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.preview-avatar {
+  border: 2px solid #ffd700;
+  border-radius: 12px;
+  background: #0a0e1a;
+}
+
+.char-name {
+  color: #ffd700;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* ── 灵根组合展示 ── */
+.spirit-root-display {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem;
+  background: #12162a;
+  border: 1px solid #222;
+  border-radius: 10px;
+  margin-bottom: 0.6rem;
+}
+
+.combo-badge {
+  font-size: 1.3rem;
+  font-weight: bold;
+  border: 2px solid currentColor;
+  border-radius: 8px;
+  padding: 0.2rem 1rem;
+  letter-spacing: 2px;
+}
+
+.cultivation-mult {
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+.root-list-empty {
+  color: #666;
+  font-size: 0.85rem;
+  font-style: italic;
+  text-align: center;
+}
+
+.root-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.root-item {
+  display: grid;
+  grid-template-columns: 28px 70px 1fr 80px;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid;
+  border-radius: 6px;
+  background: rgba(0,0,0,0.2);
+}
+
+.root-icon { font-size: 1rem; text-align: center; }
+.root-name { font-size: 0.85rem; font-weight: bold; }
+
+.root-affinity-bar {
+  height: 6px;
+  background: #1a1e2e;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.root-affinity-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+.root-affinity-val {
+  font-size: 0.75rem;
+  color: #aaa;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ── 重掷区 ── */
+.reroll-area {
+  margin: 0.3rem 0;
+}
+
+.no-reroll {
+  color: #555;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+/* ── 底部操作按钮 ── */
+.form-actions {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  margin-top: 0.3rem;
+}
+
+/* ── StatusPanel 灵根信息 ── */
+.spirit-roots-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.root-tag {
+  font-size: 0.78rem;
+  padding: 0.2rem 0.5rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: 4px;
+  border: 1px solid currentColor;
 }
 
 /* ── 按钮 ── */
@@ -1658,6 +2054,61 @@ body {
   white-space: nowrap;
 }
 
+/* ── 灵根相关功法样式（T0056）── */
+.technique-root-tag {
+  font-size: 0.65rem;
+  padding: 0.05rem 0.3rem;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  margin-left: 0.25rem;
+}
+
+.technique-root-affinity {
+  font-size: 0.6rem;
+  opacity: 0.85;
+}
+
+.technique-root-req {
+  font-size: 0.72rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  margin: 0.2rem 0;
+}
+
+.technique-root-met {
+  color: #4CAF50;
+  background: rgba(76, 175, 80, 0.1);
+}
+
+.technique-root-unmet {
+  color: #FF9800;
+  background: rgba(255, 152, 0, 0.1);
+}
+
+.technique-max-bonus {
+  font-size: 0.65rem;
+  color: #FFD700;
+}
+
+.technique-root-speed {
+  font-size: 0.65rem;
+  color: #4CAF50;
+}
+
+.technique-atk-bonus {
+  font-size: 0.65rem;
+  color: #FF7043;
+}
+
+.technique-card.technique-locked {
+  opacity: 0.8;
+}
+
+.technique-card.technique-locked .btn-technique-learn {
+  background: #424242;
+  color: #9E9E9E;
+  cursor: not-allowed;
+}
 
 .debug-panel {
   position: fixed;
@@ -2331,4 +2782,166 @@ body {
   color: #616161;
   cursor: not-allowed;
   text-align: center;
+/* ============================================================
+   成就面板（T0031）
+   ============================================================ */
+
+.achievement-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  height: 100%;
+}
+
+.achievement-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid #1e2235;
+}
+
+.achievement-progress {
+  font-size: 0.8rem;
+  color: #FFD700;
+  font-weight: bold;
+}
+
+.achievement-tabs {
+  display: flex;
+  gap: 0.2rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #1e2235;
+}
+
+.achievement-tab {
+  background: #0e1020;
+  border: 1px solid #1e2235;
+  color: #888;
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.achievement-tab:hover {
+  border-color: #FFD700;
+  color: #FFD700;
+}
+
+.achievement-tab.active {
+  background: #1a1500;
+  border-color: #FFD700;
+  color: #FFD700;
+}
+
+.achievement-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding-right: 0.2rem;
+}
+
+.achievement-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #1e2235;
+  background: #0e1020;
+  transition: transform 0.15s;
+}
+
+.achievement-card:hover {
+  transform: scale(1.01);
+}
+
+.achievement-card.achievement-unlocked {
+  border-color: #FFD700;
+  background: #120f00;
+}
+
+.achievement-card.achievement-locked {
+  opacity: 0.7;
+}
+
+.achievement-card-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.achievement-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.achievement-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.15rem;
+}
+
+.achievement-card-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.achievement-card-status {
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.achievement-card-desc {
+  font-size: 0.72rem;
+  margin-bottom: 0.15rem;
+}
+
+.achievement-card-bonus {
+  font-size: 0.7rem;
+}
+
+.achievement-summary {
+  border-top: 1px solid #1e2235;
+  padding-top: 0.4rem;
+  flex-shrink: 0;
+}
+
+.achievement-summary-title {
+  font-size: 0.72rem;
+  color: #888;
+  margin-bottom: 0.25rem;
+}
+
+.achievement-summary-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.achievement-summary-item {
+  font-size: 0.72rem;
+  color: #8BC34A;
+  background: #0e1a0e;
+  border: 1px solid #1e3a1e;
+  border-radius: 3px;
+  padding: 0.1rem 0.35rem;
+}
+
+.achievement-summary-once {
+  color: #FFD700;
+  background: #1a1500;
+  border-color: #3a3000;
+}
+
+.achievement-summary-empty {
+  font-size: 0.72rem;
+  color: #555;
 }

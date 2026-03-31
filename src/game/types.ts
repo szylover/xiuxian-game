@@ -234,12 +234,14 @@ export interface TechniqueDef {
   rarity: TechniqueRarity;                 // 品质
   description: string;                     // 描述
   minRealm: number;                        // 最低修炼境界
-  maxLevel: number;                        // 最大等级
+  maxLevel: number;                        // 基础最大等级（灵根亲和度可突破此上限）
   expPerLevel: number;                     // 每级所需熟练度
   statBonusPerLevel: TechniqueStatBonus;   // 每级属性加成
   aptitudeKey: keyof import('./player').Aptitudes; // 对应资质字段
   activeSkill?: TechniqueActiveSkill;      // 主动技能定义（无则该功法只有被动加成）
   passiveEffects?: PassiveEffect[];        // 多级被动效果，按 minLevel 升序排列（T0019）
+  spiritRootElement?: import('./spirit-root').SpiritRootType; // 功法五行属性（T0056）：对应灵根亲和度越高修炼越快、上限越高
+  requiredSpiritRoot?: import('./spirit-root').SpiritRootType; // 学习门槛（T0056）：必须拥有此灵根才能习得
 }
 
 // ── 事件类型定义 ──
@@ -304,6 +306,7 @@ export interface DLCPack {
   revivalMethods?: RevivalMethodDef[];     // 该 DLC 提供的复活手段定义
   monsters?: MonsterDef[];                 // 该 DLC 提供的妖兽定义
   divineArts?: DivineArtDef[];             // 该 DLC 提供的神通定义
+  achievements?: import('./achievement/types').AchievementDef[]; // 该 DLC 提供的成就定义
 }
 
 // ── 死亡系统类型定义 ──
