@@ -43,13 +43,14 @@ interface RightPanelProps {
   onActivateTechnique: (techniqueId: string) => void;
   onLearnDivineArt: (artId: string) => void;
   onActivateDivineArt: (artId: string) => void;
+  onDeactivateDivineArt: () => void;
 }
 
 export default function RightPanel({
   player, activePanel, onSelectPanel,
   onUseItem, onCraft, onSmith, onEquip, onUnequip, onBuy, onSell,
   onLearnTechnique, onPracticeTechnique, onActivateTechnique,
-  onLearnDivineArt, onActivateDivineArt,
+  onLearnDivineArt, onActivateDivineArt, onDeactivateDivineArt,
 }: RightPanelProps) {
   const closePanel = () => onSelectPanel(activePanel!);
   const config = activePanel ? PANEL_CONFIG[activePanel] : null;
@@ -68,7 +69,7 @@ export default function RightPanel({
           {activePanel === 'inventory' && <InventoryPanel player={player} onUseItem={onUseItem} />}
           {activePanel === 'shop' && <ShopPanel player={player} onBuy={onBuy} onSell={onSell} />}
           {activePanel === 'technique' && <TechniquePanel player={player} onLearn={onLearnTechnique} onPractice={onPracticeTechnique} onActivate={onActivateTechnique} />}
-          {activePanel === 'divine' && <DivineArtsPanel player={player} onLearn={onLearnDivineArt} onActivate={onActivateDivineArt} />}
+          {activePanel === 'divine' && <DivineArtsPanel player={player} onLearn={onLearnDivineArt} onActivate={onActivateDivineArt} onDeactivate={onDeactivateDivineArt} />}
           {activePanel === 'crafting' && <CraftingPanel player={player} onCraft={onCraft} onSmith={onSmith} />}
           {activePanel === 'equipment' && <EquipmentPanel player={player} onEquip={onEquip} onUnequip={onUnequip} />}
           {activePanel === 'achievement' && <AchievementPanel player={player} />}

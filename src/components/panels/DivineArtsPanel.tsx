@@ -18,9 +18,10 @@ interface DivineArtsPanelProps {
   player: Player;
   onLearn: (artId: string) => void;
   onActivate: (artId: string) => void;
+  onDeactivate: () => void;
 }
 
-export default function DivineArtsPanel({ player, onLearn, onActivate }: DivineArtsPanelProps) {
+export default function DivineArtsPanel({ player, onLearn, onActivate, onDeactivate }: DivineArtsPanelProps) {
   const state = getDivineArtsState(player);
   const learnedIds = new Set(state.learned.map(s => s.artId));
   const allDefs = getAllDivineArtDefs();
@@ -70,6 +71,7 @@ export default function DivineArtsPanel({ player, onLearn, onActivate }: DivineA
                 aptitude={aptitude}
                 canActivate={!isActive}
                 onActivate={() => onActivate(def.id)}
+                onDeactivate={onDeactivate}
               />
             );
           })}
@@ -112,9 +114,10 @@ interface DivineArtCardProps {
   aptitude: number;
   canActivate: boolean;
   onActivate: () => void;
+  onDeactivate: () => void;
 }
 
-function DivineArtCard({ def, isActive, aptitude, canActivate, onActivate }: DivineArtCardProps) {
+function DivineArtCard({ def, isActive, aptitude, canActivate, onActivate, onDeactivate }: DivineArtCardProps) {
   const color = ELEMENT_COLOR[def.element];
   const emoji = ELEMENT_EMOJI[def.element];
   const cn = ELEMENT_CN[def.element];
@@ -160,7 +163,7 @@ function DivineArtCard({ def, isActive, aptitude, canActivate, onActivate }: Div
           </button>
         )}
         {isActive && (
-          <button className="btn btn-technique" onClick={onActivate}>
+          <button className="btn btn-technique" onClick={onDeactivate}>
             ❎ 取消激活
           </button>
         )}

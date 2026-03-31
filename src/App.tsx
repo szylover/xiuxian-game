@@ -97,6 +97,7 @@ export default function App() {
           onActivateTechnique={engine.activateTechnique}
           onLearnDivineArt={engine.learnDivineArt}
           onActivateDivineArt={engine.activateDivineArt}
+          onDeactivateDivineArt={engine.deactivateDivineArt}
         />
       }
       debug={<>
