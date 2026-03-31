@@ -27,6 +27,7 @@
 - **禁止直接 push 到 main**。所有代码必须通过创建分支 + PR 合并的方式进入 main。
 - 分支命名：`feat/T0XXX-简要描述`、`fix/简要描述`、`chore/简要描述`
 - PR 合并策略：squash merge
+- **文档归文档，代码归代码**：纯文档变更（`docs/`、`.github/` 下的 spec/task/roadmap 等）和代码变更（`src/`）必须在**不同的分支和 PR** 中提交，禁止混在同一个 PR 里。例如：@PM 产出的 Design Spec + 任务文件 + roadmap 更新走一个 `chore/` 分支；@Dev 的代码实现走另一个 `feat/` 分支。
 
 ### 新会话恢复
 
