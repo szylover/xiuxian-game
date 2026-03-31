@@ -16,7 +16,8 @@ import TechniquePanel from '../panels/TechniquePanel';
 import DivineArtsPanel from '../panels/DivineArtsPanel';
 import AchievementPanel from '../panels/AchievementPanel';
 
-const PANEL_CONFIG: Record<PanelKey, { title: string; icon: string; width?: number }> = {
+// 'status' panel is rendered by LeftPanel, so excluded from this config
+const PANEL_CONFIG: Partial<Record<PanelKey, { title: string; icon: string; width?: number }>> = {
   inventory: { title: '背包', icon: '🎒', width: 380 },
   shop:      { title: '商店', icon: '🏪', width: 380 },
   technique: { title: '功法', icon: '📖', width: 400 },
