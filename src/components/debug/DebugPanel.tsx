@@ -273,12 +273,15 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
               <button className="btn debug-btn" onClick={() => setElementAptitude('wood', 50)} style={{ color: '#27ae60' }}>
                 🌿木=50
               </button>
+              <button className="btn debug-btn" onClick={() => setElementAptitude('metal', 60)} style={{ color: '#DAA520' }}>
+                ⚔️金=60
+              </button>
             </div>
 
-            {/* 六系灵根资质当前数值 */}
+            {/* 七系灵根资质当前数值（含金系，对应 T0056 五行） */}
             <div style={{ marginTop: '0.6rem' }}>
-              <span className="debug-label" style={{ fontWeight: 'bold' }}>📊 六系灵根资质</span>
-              {(['fire', 'water', 'thunder', 'wind', 'earth', 'wood'] as const).map(el => {
+              <span className="debug-label" style={{ fontWeight: 'bold' }}>📊 七系灵根资质</span>
+              {(['fire', 'water', 'thunder', 'wind', 'earth', 'wood', 'metal'] as const).map(el => {
                 const val = (player.aptitudes as unknown as Record<string, number>)[el] ?? 0;
                 return (
                   <div key={el} className="debug-row" style={{ marginTop: '0.25rem' }}>

@@ -17,7 +17,8 @@
 ## 关键文件
 
 - `src/game/divine-arts.ts` — 神通系统核心逻辑（学习/激活/计算/元素克制）
-- `src/data/core-divine-arts.ts` — 六系神通数据（烈焰斩/寒冰波/雷霆击/疾风连斩/磐石护身/藤蔓束缚）
+- `src/data/core-divine-arts.ts` — 七系神通数据（烈焰斩/寒冰波/雷霆击/疾风连斩/磐石护身/藤蔓束缚/金锋诀）
 - `src/components/panels/DivineArtsPanel.tsx` — 神通面板 UI
-- `src/game/types.ts` — 新增 ElementType/DivineArtDef/DivineArtSkillEffect 等类型
+- `src/game/types.ts` — 新增 ElementType（含 metal）/DivineArtDef/DivineArtSkillEffect 等类型
 - `src/game/combat/run.ts` — 战斗集成神通触发、护盾减伤、playerEffects 管理
+- `src/game/player/types.ts` — Aptitudes 新增 metal 字段（对应 T0056 五行灵根·金）

@@ -13,11 +13,11 @@ import { REALMS } from './data';
 // ── 元素显示常量 ──
 
 export const ELEMENT_EMOJI: Record<ElementType, string> = {
-  fire: '🔥', water: '💧', thunder: '⚡', wind: '🌪️', earth: '🪨', wood: '🌿',
+  fire: '🔥', water: '💧', thunder: '⚡', wind: '🌪️', earth: '🪨', wood: '🌿', metal: '⚔️',
 };
 
 export const ELEMENT_CN: Record<ElementType, string> = {
-  fire: '火', water: '水', thunder: '雷', wind: '风', earth: '土', wood: '木',
+  fire: '火', water: '水', thunder: '雷', wind: '风', earth: '土', wood: '木', metal: '金',
 };
 
 export const ELEMENT_COLOR: Record<ElementType, string> = {
@@ -27,6 +27,7 @@ export const ELEMENT_COLOR: Record<ElementType, string> = {
   wind: '#1abc9c',
   earth: '#795548',
   wood: '#27ae60',
+  metal: '#DAA520',
 };
 
 // ── 玩家神通系统状态 ──

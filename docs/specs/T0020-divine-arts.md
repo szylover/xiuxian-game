@@ -16,7 +16,7 @@
 
 ```typescript
 // ── 元素类型 ──
-export type ElementType = 'fire' | 'water' | 'thunder' | 'wind' | 'earth' | 'wood';
+export type ElementType = 'fire' | 'water' | 'thunder' | 'wind' | 'earth' | 'wood' | 'metal';
 
 // ── 元素克制表（攻击元素 → 克制的防御元素，伤害 ×1.3）──
 // 存储为常量对象，不是运行时计算
@@ -27,6 +27,7 @@ export const ELEMENT_COUNTER_TABLE: Record<ElementType, ElementType[]> = {
   earth:   ['water'],          // 土克水
   thunder: ['water'],          // 雷克水（双克：雷也克水）
   wind:    ['fire'],           // 风克火（辅助克制）
+  metal:   ['wood'],           // 金克木（对应 T0056 五行灵根系统）
 };
 
 export const ELEMENT_COUNTER_MULTIPLIER = 1.3; // 克制加成系数
@@ -146,7 +147,9 @@ resist = player.aptitudes[element] / 200
 
 ---
 
-## 神通数据设计（六系各一）
+## 神通数据设计（七系各一）
+
+> 六系（火/水/雷/风/土/木）+ 金系，金系对应 T0056 五行灵根·金（金木水火土），确保元素体系与灵根体系一一对应。
 
 | 系别 | ID | 名称 | 境界要求 | 最低资质 | MP | 倍率 | 段数 | 冷却 | 触发率 | 穿透 | 附加效果 | 特色 |
 |------|----|------|---------|---------|-----|------|-----|-----|------|-----|---------|------|
@@ -156,6 +159,7 @@ resist = player.aptitudes[element] / 200
 | 🌪️ 风 | `core:divine_wind_slash` | 疾风连斩 | 炼气(1) | 30 | 40 | 0.7x | 5 | 2 | 45% | — | — | 五段多击，每段独立暴击 |
 | 🪨 土 | `core:divine_earth_shield` | 磐石护身 | 筑基(2) | 35 | 30 | 1.2x | 1 | 4 | 35% | — | shield_self: 25/3回合 + debuff_def: 10/2回合 | 格挡+破甲 |
 | 🌿 木 | `core:divine_wood_bind` | 藤蔓束缚 | 炼气(1) | 30 | 30 | 1.0x | 1 | 2 | 45% | — | dot: 28/5回合 | 高持续伤害 |
+| ⚔️ 金 | `core:divine_metal_blade` | 金锋诀 | 炼气(1) | 30 | 40 | 1.3x | 3 | 2 | 40% | 0.2 | debuff_def: 8/2回合 | 三连斩+破甲，克制木系 |
 
 **aptitudeScaling 默认值均为 1.0**（资质 30~100 对应伤害倍率加成 0%~50%）。
 
@@ -360,11 +364,11 @@ pHp -= actualDamage;
 需在 Debug 面板新增以下内容：
 
 **神通系统区块**
-- 字段显示：当前已学神通列表（artId + element）
+- 字段显示：七系灵根资质当前数值（fire/water/thunder/wind/earth/wood/metal）
 - 字段显示：当前激活神通 ID
-- 字段显示：六系灵根资质当前数值（fire/water/thunder/wind/earth/wood）
-- 按钮：`学习全部神通`（将六系神通一键学习，方便测试）
-- 按钮：`设置火系资质=100 / 雷系资质=60`（快速设置测试值）
+- 字段显示：当前已学神通列表（artId + element）
+- 按钮：`学习全部神通`（将七系神通一键学习，方便测试）
+- 按钮：`设置火系资质=100 / 雷系资质=60 / 金系资质=60`（快速设置测试值）
 - 数值输入：快速修改指定元素资质（select 选择系别 + number input）
 
 ---

@@ -118,4 +118,24 @@ export const CORE_DIVINE_ARTS: DivineArtDef[] = [
       { type: 'dot', value: 28, duration: 5 },
     ],
   },
+
+  // ── ⚔️ 金系：金锋诀 ──（对应 T0056 五行灵根·金）
+  {
+    id: 'core:divine_metal_blade',
+    name: '金锋诀',
+    element: 'metal',
+    description: '凝聚金系灵力于刃，三连斩击每段独立暴击判定，锋利无匹，破甲克木。',
+    minRealm: 1,
+    minAptitude: 30,
+    mpCost: 40,
+    dmgMultiplier: 1.3,
+    hitCount: 3,
+    cooldown: 2,
+    triggerRate: 0.40,
+    defPenetration: 0.2,
+    aptitudeScaling: 1.0,
+    effects: [
+      { type: 'debuff_def', value: 8, duration: 2 },
+    ],
+  },
 ];

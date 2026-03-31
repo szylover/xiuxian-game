@@ -30,6 +30,7 @@ export function createPlayer(name: string = '无名散修'): Player {
     fire: rollAptitude(), water: rollAptitude(),
     thunder: rollAptitude(), wind: rollAptitude(),
     earth: rollAptitude(), wood: rollAptitude(),
+    metal: rollAptitude(),
   };
 
   return {

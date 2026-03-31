@@ -11,6 +11,7 @@ export interface Aptitudes {
   fire: number; water: number;
   thunder: number; wind: number;
   earth: number; wood: number;
+  metal: number;
 }
 
 export interface InventorySlot {
