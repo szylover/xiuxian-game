@@ -4,6 +4,7 @@
 
 import type { Player } from '../../game/player';
 import { REALMS } from '../../game/data';
+import { getAllBodyRealmDefs } from '../../game/registry';
 
 // 可编辑数值行：显示当前值 + 快捷递增按钮
 function StatEditor({ label, value, deltas, onChange }: { label: string; value: number; deltas: number[]; onChange: (v: number) => void }) {
@@ -52,6 +53,11 @@ const STAT_FIELDS: { label: string; key: string; deltas: number[] }[] = [
   { label: '📅 年龄', key: 'age', deltas: [10, 50] },
   { label: '📅 寿限', key: 'lifespan', deltas: [100, 500, 2000] },
   { label: '🎒 背包容量', key: 'inventoryCapacity', deltas: [5, 20, 50] },
+  // T0062 体修
+  { label: '💪 体魄', key: 'physique', deltas: [50, 200, 1000] },
+  { label: '💪 体魄上限', key: 'maxPhysique', deltas: [100, 500] },
+  { label: '📈 体修修为', key: 'bodyRealmExp', deltas: [100, 1000, 10000] },
+  { label: '🛡️ 体魄减伤%', key: 'physiqueDmgReduce', deltas: [5, 10] },
 ];
 
 interface DebugStatsTabProps {
@@ -72,6 +78,22 @@ export default function DebugStatsTab({ player, onSetStat, onFullRestore }: Debu
               key={i}
               className={`btn debug-btn ${player.realmIndex === i ? 'debug-active' : ''}`}
               onClick={() => onSetStat('realmIndex', i)}
+            >
+              {r.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* 体修境界（T0062） */}
+      <div className="debug-row">
+        <span className="debug-label">💪 体修境界</span>
+        <div className="debug-btns">
+          {getAllBodyRealmDefs().map((r) => (
+            <button
+              key={r.index}
+              className={`btn debug-btn ${player.bodyRealmIndex === r.index ? 'debug-active' : ''}`}
+              onClick={() => onSetStat('bodyRealmIndex', r.index)}
             >
               {r.name}
             </button>

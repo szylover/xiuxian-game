@@ -5,6 +5,9 @@
 import type { Player } from '../../game/player';
 import { REALMS, MONTH_NAMES } from '../../game/data';
 import { getNextRealm } from '../../game/player';
+import { getNextBodyRealm } from '../../game/body-cultivation';
+import { getBodyRealmDef, getTechniqueDef, getDivineArtDef } from '../../game/registry';
+import { getDivineArtsState } from '../../game/divine-arts';
 import Avatar from './Avatar';
 import { CapacityBar, FloatingPanel, STAT_COLORS } from '../shared';
 import StatusPanel from '../panels/StatusPanel';
@@ -22,6 +25,16 @@ export default function LeftPanel({ player, activePanel, onSelectPanel }: LeftPa
   const expProgress = nextRealm
     ? Math.min(100, (player.exp / nextRealm.expReq) * 100)
     : 100;
+  const bodyRealm = getBodyRealmDef(player.bodyRealmIndex);
+  const nextBodyRealm = getNextBodyRealm(player);
+  const bodyExpProgress = nextBodyRealm
+    ? Math.min(100, (player.bodyRealmExp / nextBodyRealm.expReq) * 100)
+    : 100;
+
+  // 当前激活的功法和神通
+  const activeTech = player.activeTechniqueId ? getTechniqueDef(player.activeTechniqueId) : null;
+  const divineState = getDivineArtsState(player);
+  const activeArt = divineState.activeArtId ? getDivineArtDef(divineState.activeArtId) : null;
 
   return (
     <>
@@ -54,6 +67,27 @@ export default function LeftPanel({ player, activePanel, onSelectPanel }: LeftPa
         </div>
         <CapacityBar current={player.stamina} max={player.maxStamina} color={STAT_COLORS.stamina} />
 
+        {/* 当前功法 & 神通 */}
+        <div className="left-stat-row">
+          <span>📖 功法</span>
+          <span style={{ color: activeTech ? '#4FC3F7' : '#666' }}>
+            {activeTech ? activeTech.name : '未装备'}
+          </span>
+        </div>
+        <div className="left-stat-row">
+          <span>✨ 神通</span>
+          <span style={{ color: activeArt ? '#CE93D8' : '#666' }}>
+            {activeArt ? activeArt.name : '未装备'}
+          </span>
+        </div>
+
+        {/* T0062 体魄条 */}
+        <div className="left-stat-row">
+          <span>💪 体魄</span>
+          <span>{player.physique}/{player.maxPhysique}</span>
+        </div>
+        <CapacityBar current={player.physique} max={player.maxPhysique} color={STAT_COLORS.physique} />
+
         <div className="left-stat-row">
           <span>📅 寿命</span>
           <span>{Math.floor(player.age)}岁/{player.lifespan === Infinity ? '∞' : player.lifespan}</span>
@@ -76,6 +110,20 @@ export default function LeftPanel({ player, activePanel, onSelectPanel }: LeftPa
         <div className="left-exp-bar">
           <div className="left-exp-fill" style={{ width: `${expProgress}%` }} />
         </div>
+
+        {/* T0062 体修境界 + 修为 */}
+        <div className="left-stat-row">
+          <span>💪 体修</span>
+          <span>【{bodyRealm?.name ?? '凡躯'}】{player.bodyRealmExp}{nextBodyRealm ? `/${nextBodyRealm.expReq}` : ''}</span>
+        </div>
+        <div className="left-exp-bar">
+          <div className="left-exp-fill" style={{ width: `${bodyExpProgress}%`, background: STAT_COLORS.physique }} />
+        </div>
+        {nextBodyRealm && player.bodyRealmExp >= nextBodyRealm.expReq && player.physique < player.maxPhysique * 0.8 && (
+          <div style={{ fontSize: '0.75em', color: '#FF9800', marginTop: 2 }}>
+            ⚠️ 体魄不足（需 {Math.ceil(player.maxPhysique * 0.8)}），休息或战斗可恢复
+          </div>
+        )}
       </div>
 
       {/* 详细属性按钮 */}

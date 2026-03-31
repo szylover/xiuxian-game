@@ -67,7 +67,7 @@
 | [T0059](tasks/done/T0059-body-cultivation.md) | 体修系统核心（体魄 · 体修境界 · 减伤） | T0001, T0003, T0017, T0019 | [spec](specs/T0059-body-cultivation.md) | ✅ |
 | [T0060](tasks/todo/T0060-body-weapons.md) | 体修武器内容（拳套 · 指环 · 手甲） | T0059, T0014, T0015 | [spec](specs/T0059-body-cultivation.md) | ⬜ |
 | [T0061](tasks/todo/T0061-body-techniques.md) | 体修功法内容（高阶拳法 · 指法） | T0059, T0017 | [spec](specs/T0059-body-cultivation.md) | ⬜ |
-| [T0062](tasks/todo/T0062-body-ui.md) | 体修 UI（境界行 · 体魄条 · Debug 面板） | T0059, T0041, T0046 | [spec](specs/T0059-body-cultivation.md) | ⬜ |
+| [T0062](tasks/done/T0062-body-ui.md) | 体修 UI（境界行 · 体魄条 · Debug 面板） | T0059, T0041, T0046 | [spec](specs/T0059-body-cultivation.md) | ✅ |
 
 
 ### 🏷️ 世界与地图

@@ -5,6 +5,8 @@
 
 import { getSpiritRootGrade, getSpiritRootDisplay } from '../../game/player';
 import type { Player } from '../../game/player';
+import { getBodyRealmDef } from '../../game/registry';
+import { getNextBodyRealm } from '../../game/body-cultivation';
 import { StatRow, AptitudeBar, STAT_COLORS } from '../shared';
 import { SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS } from '../shared/constants';
 
@@ -45,6 +47,21 @@ export default function StatusPanel({ player }: StatusPanelProps) {
           <StatRow icon="🛑" label="护心" value={`${player.critResist}%`} />
           <StatRow icon="🔰" label="功法抗性" value={`${player.skillResist}%`} />
           <StatRow icon="✨" label="神通抗性" value={`${player.spellResist}%`} />
+          {player.physiqueDmgReduce > 0 && (
+            <StatRow icon="💪" label="体魄减伤" value={`${player.physiqueDmgReduce.toFixed(1)}%`} />
+          )}
+        </div>
+
+        {/* ── 体修属性（T0062）── */}
+        <div className="panel-section">
+          <h3>💪 体修</h3>
+          <StatRow icon="🏋️" label="体修境界" value={`【${getBodyRealmDef(player.bodyRealmIndex)?.name ?? '凡躯'}】`} />
+          <StatRow icon="💪" label="体魄" value={player.physique} max={player.maxPhysique} color={STAT_COLORS.physique} />
+          <StatRow icon="📈" label="体修修为" value={player.bodyRealmExp} max={getNextBodyRealm(player)?.expReq} />
+          {player.physiqueDmgReduce > 0 && (
+            <StatRow icon="🛡️" label="体魄减伤" value={`${player.physiqueDmgReduce.toFixed(1)}%`} />
+          )}
+          <StatRow icon="🔥" label="淬体次数" value={player.bodyTempering} />
         </div>
 
         {/* ── 先天属性 ── */}
