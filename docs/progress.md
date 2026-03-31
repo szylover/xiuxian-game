@@ -21,6 +21,7 @@
 | [T0039](tasks/todo/T0039-tutorial.md) | 新手引导 | T0001 ✅ | — | ⬜ |
 | [T0056](tasks/todo/T0056-initial-random-attributes.md) | 初始随机属性系统 | T0001 ✅ | — | ⬜ |
 | [T0064](tasks/todo/T0064-bottleneck-system.md) | 瓶颈系统（境界/功法/体修 + 5 种解锁方式） | T0029 ✅, T0017 ✅, T0059 ✅, T0007 ✅ | [Spec](specs/T0064-bottleneck-system.md) | 📐 |
+| [T0065](tasks/todo/T0065-dlc-attribute-display.md) | 详细属性面板补全（critDmgMultiplier + DLC passives 动态展示） | T0006 ✅, T0019 ✅, T0059 ✅ | [spec](specs/T0065-dlc-attribute-display.md) | 📐 |
 
 
 
