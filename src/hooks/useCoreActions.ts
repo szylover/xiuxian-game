@@ -13,7 +13,8 @@ import { triggerExploreEvent } from '../game/events';
 import { addItem } from '../game/inventory';
 import { getItemDef, getAllMonsters } from '../game/registry';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
-import { restorePhysique, gainBodyRealmExp } from '../game/body-cultivation';
+import { restorePhysique, gainBodyRealmExp, tryBodyRealmBreakthrough } from '../game/body-cultivation';
+import { getTechniqueDef } from '../game/registry';
 import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef } from '../game/types';
 import type { LogCategory } from './useGameLog';
 
@@ -87,11 +88,36 @@ export function useCoreActions(deps: CoreActionDeps) {
       const moodBonus = 0.5 + (p.mood / 100);
       const expGain = Math.floor(BASE_CULTIVATE_EXP * compBonus * cultivationMult * moodBonus);
       p.exp += expGain;
+
+      // T0062 根据激活功法类型决定锄体/修炼模式
+      const activeDef = p.activeTechniqueId ? getTechniqueDef(p.activeTechniqueId) : null;
+      const bodyRate = activeDef?.bodyExpRate ?? 0;
+      let bodyMsg = '';
+
+      // 修炼时也恢复少量体魄（练功也锻炼身体）
+      const physiqueGain = Math.floor(p.maxPhysique * (bodyRate >= 0.6 ? 0.08 : 0.03));
+      if (physiqueGain > 0) {
+        p.physique = Math.min(p.maxPhysique, p.physique + physiqueGain);
+      }
+
+      if (bodyRate > 0) {
+        const baseBodyExp = Math.floor(expGain * bodyRate * 0.5);
+        const { player: p2, message: btMsg, actualGain } = gainBodyRealmExp(p, baseBodyExp);
+        p = p2;
+        if (actualGain > 0) bodyMsg = ` 💪体修修为+${actualGain}`;
+        if (btMsg) bodyMsg += ` ${btMsg}`;
+      }
+
+      const isBodyMode = bodyRate >= 0.8;
       p.tracking = { ...p.tracking, consecutiveCultivates: p.tracking.consecutiveCultivates + 1, consecutiveRests: 0 };
       p = advanceTime(p, 'cultivate');
 
       pendingRef.current = { msgs: [], categories: [] };
-      queueLog(`🧘 修炼一次，获得 ${expGain} 修为。（悟性×${compBonus.toFixed(1)} 灵根×${cultivationMult} 心情×${moodBonus.toFixed(1)}）`, 'system');
+      if (isBodyMode) {
+        queueLog(`🧘 修炼一次，获得 ${expGain} 修为。${bodyMsg}`, 'system');
+      } else {
+        queueLog(`🧘 修炼一次，获得 ${expGain} 修为。（悟性×${compBonus.toFixed(1)} 灵根×${cultivationMult} 心情×${moodBonus.toFixed(1)}）${bodyMsg}`, 'system');
+      }
       return p;
     });
     setTimeout(flushLogs, 0);
@@ -305,6 +331,12 @@ export function useCoreActions(deps: CoreActionDeps) {
       p.mood = Math.min(100, p.mood + 3);
       // T0059 休息恢复体魄
       p = restorePhysique(p);
+      // 体魄恢复后检查体修突破
+      const btResult = tryBodyRealmBreakthrough(p);
+      if (btResult.breakthrough) {
+        p = btResult.player;
+        queueLog(btResult.message, 'system');
+      }
       p.tracking = { ...p.tracking, consecutiveRests: p.tracking.consecutiveRests + 1, consecutiveCultivates: 0 };
       p = advanceTime(p, 'rest');
 

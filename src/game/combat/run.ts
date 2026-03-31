@@ -361,25 +361,35 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
   }
 
   if (round >= MAX_ROUNDS && pHp > 0 && mHp > 0) {
+    // 超时也给体修修为（打了这么久肯定挨了不少打）
+    const drawDmgTaken = Math.max(0, buffedPlayer.hp - pHp);
+    const drawDmgRatio = drawDmgTaken / Math.max(1, buffedPlayer.maxHp);
+    let drawBodyExp = 5 + Math.floor(drawDmgRatio * 30) + monster.realmIndex * 5;
+    if (weaponDef?.techType?.some(t => t === 'fist' || t === 'finger')) drawBodyExp *= 2;
     logs.push(`战斗超时，双方脱战。`);
+    if (drawBodyExp > 0) logs.push(`💪 获得体修修为 +${drawBodyExp}`);
     return {
       winner: 'draw', playerHpLeft: pHp, logs, expGained: 0, goldGained: 0,
       mpUsed: skillState.totalMpUsed + divineSkillState.totalMpUsed,
       skillUseCount: skillState.useCount,
       snapshots, monsterMaxHp: monster.hp, playerMaxHp: buffedPlayer.maxHp, playerMaxMp: player.mp,
-      bodyExpGained: 0,
+      bodyExpGained: drawBodyExp,
     };
   }
 
   const playerWon = pHp > 0;
 
-  // T0059 体修修为战斗结算（胜利+装备体修武器时获得）
-  let bodyExpGained = 0;
-  if (playerWon && weaponDef?.techType) {
+  // T0062 体修修为战斗结算（所有战斗都给，挨打越多越强）
+  const damageTaken = Math.max(0, buffedPlayer.hp - pHp);
+  const damageRatio = damageTaken / Math.max(1, buffedPlayer.maxHp);
+  const baseBodyExp = 5;                                  // 只要打了就有
+  const damageBonus = Math.floor(damageRatio * 30);       // 挨打越多越多（最高30）
+  const monsterBonus = monster.realmIndex * 5;            // 怪物等级越高越多
+  let bodyExpGained = baseBodyExp + damageBonus + monsterBonus;
+  // 体修武器加倍
+  if (weaponDef?.techType) {
     const hasFistOrFinger = weaponDef.techType.some(t => t === 'fist' || t === 'finger');
-    if (hasFistOrFinger) {
-      bodyExpGained = Math.floor(monster.realmIndex * 10 + 10);
-    }
+    if (hasFistOrFinger) bodyExpGained *= 2;
   }
 
   if (playerWon) {
