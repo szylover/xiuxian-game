@@ -1,0 +1,5 @@
+# Use union merge driver for frequently-updated tracking files to reduce
+# merge conflicts. The union strategy keeps lines from both sides instead
+# of producing conflict markers.
+docs/progress.md merge=union
+docs/roadmap.md merge=union

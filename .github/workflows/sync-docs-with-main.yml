@@ -1,0 +1,83 @@
+name: Auto-sync docs with main
+
+# Triggered whenever a feature branch pushes changes to the two high-conflict
+# docs files. The workflow performs a union merge of those files with the
+# current main, then commits the result back to the branch. By the time the
+# PR is ready to merge, GitHub will no longer see a conflict in these files.
+on:
+  push:
+    branches-ignore:
+      - main
+    paths:
+      - 'docs/progress.md'
+      - 'docs/roadmap.md'
+
+permissions:
+  contents: write
+
+jobs:
+  sync-docs:
+    runs-on: ubuntu-latest
+    # Skip if this push was itself made by the bot (prevents infinite loop)
+    if: github.actor != 'github-actions[bot]'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          # Use GITHUB_TOKEN so the bot can push back to the branch
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch main
+        run: git fetch origin main
+
+      - name: Union-merge docs files with main
+        run: |
+          MERGE_BASE=$(git merge-base HEAD origin/main 2>/dev/null || true)
+          if [ -z "$MERGE_BASE" ]; then
+            echo "No common merge base with main — skipping."
+            exit 0
+          fi
+
+          CHANGED=false
+          for f in docs/progress.md docs/roadmap.md; do
+            # Obtain the three versions needed for a three-way merge
+            git show "${MERGE_BASE}:${f}" > /tmp/merge_base.md  2>/dev/null || echo "" > /tmp/merge_base.md
+            git show "origin/main:${f}"   > /tmp/main_ver.md    2>/dev/null || echo "" > /tmp/main_ver.md
+
+            # If main has not changed the file since the common ancestor, nothing to do
+            if diff -q /tmp/merge_base.md /tmp/main_ver.md > /dev/null 2>&1; then
+              continue
+            fi
+
+            # If *our* branch hasn't changed the file either, just fast-forward to main
+            if diff -q "${f}" /tmp/merge_base.md > /dev/null 2>&1; then
+              cp /tmp/main_ver.md "${f}"
+              CHANGED=true
+              continue
+            fi
+
+            # Both sides changed — perform a union merge (keeps lines from both sides)
+            cp "${f}" /tmp/our_ver.md
+            # git merge-file --union writes result into the first file; exit code 1 means
+            # conflicts were found but resolved by keeping both sides (that's expected)
+            git merge-file --union /tmp/our_ver.md /tmp/merge_base.md /tmp/main_ver.md || true
+
+            if ! diff -q "${f}" /tmp/our_ver.md > /dev/null 2>&1; then
+              cp /tmp/our_ver.md "${f}"
+              CHANGED=true
+            fi
+          done
+
+          if [ "$CHANGED" = "true" ]; then
+            git add docs/progress.md docs/roadmap.md
+            git commit -m "docs: auto-sync progress/roadmap from main (union merge)"
+            git push
+          else
+            echo "Docs files already up-to-date with main — no commit needed."
+          fi
