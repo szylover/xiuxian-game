@@ -18,6 +18,7 @@ import { getAchievementState, checkAchievements, ONCE_BONUS_KEYS } from '../../g
 import { CollapsiblePanel, TabBar } from '../shared';
 import DebugStatsTab from './DebugStatsTab';
 import DebugItemsTab from './DebugItemsTab';
+import DebugChangelogTab from './DebugChangelogTab';
 
 interface DebugPanelProps {
   player: Player;
@@ -30,11 +31,12 @@ const DEBUG_TABS = [
   { key: 'technique' as const, label: '功法', icon: '✨' },
   { key: 'divine' as const, label: '神通', icon: '🌟' },
   { key: 'achievement' as const, label: '成就', icon: '🏆' },
+  { key: 'changelog' as const, label: '更新日志', icon: '📋' },
 ];
 
 export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [tab, setTab] = useState<'stats' | 'items' | 'technique' | 'divine' | 'achievement'>('stats');
+  const [tab, setTab] = useState<'stats' | 'items' | 'technique' | 'divine' | 'achievement' | 'changelog'>('stats');
   const [itemQty, setItemQty] = useState<Record<string, number>>({});
 
   if (!player || player.name !== 'Debug') return null;
@@ -441,6 +443,9 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
               </div>
             </div>
           </div>
+        )}
+        {tab === 'changelog' && (
+          <DebugChangelogTab />
         )}
       </div>
     </CollapsiblePanel>

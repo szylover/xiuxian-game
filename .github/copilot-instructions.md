@@ -53,6 +53,15 @@
    - 如涉及调试面板变更，同步更新「附录 A：调试面板功能清单」
    - 测试用例须覆盖：正常流程、边界条件、Debug 辅助验证
 4. **更新调试面板**：如新功能引入了需要手动测试的数值/物品/状态，同步更新 `src/components/debug/` 下的调试面板代码，确保 Debug 模式可快速验证新功能
+5. **更新 `src/data/changelog.ts`**：在 `CHANGELOG` 数组顶部追加本次版本条目，并同步更新 `CURRENT_VERSION`。格式：
+   ```ts
+   {
+     version: '1.x.y',
+     date: 'YYYY-MM-DD',
+     title: '版本标题',
+     items: ['变更描述…'],
+   }
+   ```
 
 ## 设计原则
 
@@ -95,8 +104,7 @@ xiuxian-game/
 │   │   ├── done/                  #     已完成的任务
 │   │   ├── active/                #     进行中的任务
 │   │   └── todo/                  #     未开始的任务
-│   ├── changelog.md               #   变更日志
-│   └── specs/                     #   设计文档存放目录
+│   ├── specs/                     #   设计文档存放目录
 │       ├── design-attribute-system.md
 │       ├── design-novel-events.md
 │       ├── T0029-breakthrough-tribulation.md
@@ -175,7 +183,8 @@ xiuxian-game/
     │   ├── core-shop.json         #     商店商品
     │   ├── core-smithing.json     #     炼器配方
     │   ├── core-techniques.json   #     功法定义
-    │   └── core-breakthrough.ts   #     突破需求 + 渡劫定义
+    │   ├── core-breakthrough.ts   #     突破需求 + 渡劫定义
+    │   └── changelog.ts           #     版本更新日志（每次 merge PR 时同步追加）
     └── hooks/                     #   自定义 React Hooks
         ├── useGameEngine.ts       #     游戏引擎 Hook（状态管理 + 存档）
         ├── useCoreActions.ts      #     核心行为 Hook（修炼/战斗/探索/休息）
