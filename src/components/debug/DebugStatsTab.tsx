@@ -4,13 +4,6 @@
 
 import type { Player } from '../../game/player';
 import { REALMS } from '../../game/data';
-import {
-  resolveAllBottlenecks,
-  resetBottleneckState,
-  enterBottleneck,
-  getBottleneckState,
-} from '../../game/bottleneck';
-import { bottleneckDefsMap } from '../../game/registry/stores';
 
 // 可编辑数值行：显示当前值 + 快捷递增按钮
 function StatEditor({ label, value, deltas, onChange }: { label: string; value: number; deltas: number[]; onChange: (v: number) => void }) {
@@ -65,21 +58,9 @@ interface DebugStatsTabProps {
   player: Player;
   onSetStat: (key: string, value: number) => void;
   onFullRestore: () => void;
-  onSetPlayer?: (p: Player) => void;
 }
 
-export default function DebugStatsTab({ player, onSetStat, onFullRestore, onSetPlayer }: DebugStatsTabProps) {
-  const bottleneckState = getBottleneckState(player);
-  const realmBottleneck = bottleneckState.activeBottlenecks.find(ab => {
-    const def = bottleneckDefsMap.get(ab.defId);
-    return def?.type === 'realm';
-  });
-  const realmBottleneckDef = realmBottleneck ? bottleneckDefsMap.get(realmBottleneck.defId) : undefined;
-  const techBottleneck = bottleneckState.activeBottlenecks.find(ab => {
-    const def = bottleneckDefsMap.get(ab.defId);
-    return def?.type === 'technique';
-  });
-
+export default function DebugStatsTab({ player, onSetStat, onFullRestore }: DebugStatsTabProps) {
   return (
     <div className="debug-stats">
       {/* 境界 */}
@@ -115,60 +96,6 @@ export default function DebugStatsTab({ player, onSetStat, onFullRestore, onSetP
           onChange={v => onSetStat(key, v)}
         />
       ))}
-
-      {/* ── T0064 瓶颈系统调试区块 ── */}
-      {onSetPlayer && (
-        <div className="debug-section">
-          <div className="debug-section-title">🔒 瓶颈系统</div>
-          <div className="debug-row">
-            <span className="debug-label">
-              当前瓶颈数：<strong>{bottleneckState.activeBottlenecks.length}</strong>
-            </span>
-          </div>
-          <div className="debug-row">
-            <span className="debug-label">
-              境界瓶颈：<strong>{realmBottleneck ? realmBottleneckDef?.name ?? realmBottleneck.defId : '无'}</strong>
-              {realmBottleneck && (
-                <> 进度：{Math.floor(realmBottleneck.progress)}/{realmBottleneckDef?.unlockProgressThreshold ?? '?'}
-                  已解锁：{realmBottleneck.unlocked ? '是' : '否'}
-                </>
-              )}
-            </span>
-          </div>
-          <div className="debug-row">
-            <span className="debug-label">
-              功法瓶颈：<strong>{techBottleneck ? techBottleneck.defId : '无'}</strong>
-            </span>
-          </div>
-          <div className="debug-btns" style={{ flexWrap: 'wrap', gap: 4 }}>
-            <button
-              className="btn debug-btn"
-              onClick={() => onSetPlayer(resolveAllBottlenecks(player))}
-            >
-              ✅ 强制解锁所有瓶颈
-            </button>
-            <button
-              className="btn debug-btn"
-              onClick={() => {
-                // 触发当前境界对应的瓶颈
-                const allDefs = Array.from(bottleneckDefsMap.values());
-                const matchDef = allDefs.find(d => d.type === 'realm' && d.blockedAtRealmIndex === player.realmIndex);
-                if (matchDef) {
-                  onSetPlayer(enterBottleneck(player, matchDef.id));
-                }
-              }}
-            >
-              🔒 触发境界瓶颈
-            </button>
-            <button
-              className="btn debug-btn"
-              onClick={() => onSetPlayer(resetBottleneckState(player))}
-            >
-              🔄 重置瓶颈状态
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

@@ -14,9 +14,6 @@ import { CORE_BREAKTHROUGH_REQS, CORE_TRIBULATIONS } from '../data/core-breakthr
 import { CORE_DIVINE_ARTS } from '../data/core-divine-arts';
 import { CORE_BODY_REALMS, CORE_SPIRIT_ROOT_BODY_BONUSES } from '../data/core-body-config';
 import { CORE_REALMS } from '../data/core-realms';
-import { CORE_BOTTLENECKS } from '../data/core-bottlenecks';
-import { CORE_BOTTLENECK_EVENTS } from '../data/core-bottleneck-events';
-import { getFirstLockedBottleneck, resolveBottleneck } from './bottleneck';
 import { registerShopGoods } from './shop';
 import type { ShopGoodsDef } from './shop';
 import { getDeathSystemState } from './death';
@@ -266,31 +263,9 @@ export async function registerCoreEvents(): Promise<void> {
   const equips = coreEquipsJson as EquipDef[];
   const smithingRecipes = coreSmithingJson as SmithingRecipeDef[];
   const techniques = coreTechniquesJson as TechniqueDef[];
-
-  // T0064 顿悟石物品定义
-  const enlightenmentStone = {
-    id: 'core:enlightenment_stone',
-    name: '顿悟石',
-    category: 'consumable' as const,
-    rarity: 'rare' as const,
-    description: '蕴含天地精华的奇异石块，使用后能瞬间打通心中瓶颈，感悟大道。',
-    stackable: true,
-    maxStack: 3,
-    usable: true,
-    effect: (p: Player) => {
-      const ab = getFirstLockedBottleneck(p);
-      if (!ab) return p;
-      const { player: p2 } = resolveBottleneck(p, ab.defId, 'item');
-      return p2;
-    },
-    effectMessage: '🪨 顿悟石散发奇异光晕，心中陡然明悟，瓶颈消融！',
-    sellPrice: 5000,
-  };
-
   registerDLC({
     ...pack,
-    events: [...(pack.events ?? []), ...CORE_BOTTLENECK_EVENTS],
-    items: [...items, enlightenmentStone],
+    items,
     recipes,
     equips,
     smithingRecipes,
@@ -306,7 +281,6 @@ export async function registerCoreEvents(): Promise<void> {
     bodyRealms: CORE_BODY_REALMS,
     spiritRootBodyBonuses: CORE_SPIRIT_ROOT_BODY_BONUSES,
     realms: CORE_REALMS,
-    bottlenecks: CORE_BOTTLENECKS,
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }

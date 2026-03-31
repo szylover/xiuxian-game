@@ -203,12 +203,7 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
         />
 
         {tab === 'stats' && (
-          <DebugStatsTab
-            player={player}
-            onSetStat={setStat}
-            onFullRestore={fullRestore}
-            onSetPlayer={(p) => onUpdate(() => p)}
-          />
+          <DebugStatsTab player={player} onSetStat={setStat} onFullRestore={fullRestore} />
         )}
 
         {tab === 'items' && (

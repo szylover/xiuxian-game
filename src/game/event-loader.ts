@@ -12,8 +12,6 @@
 
 import type { Player } from './player';
 import type { GameEvent, EventCategory, EventTone, DLCPack } from './registry';
-import { hasLockedBottleneck, hasLockedRealmBottleneck, getBottleneckState } from './bottleneck';
-import { bottleneckDefsMap } from './registry/stores';
 
 // ── JSON 事件数据格式 ──
 
@@ -29,10 +27,6 @@ export interface JsonEventCondition {
   minMood?: number;
   minHealth?: number;
   maxHealth?: number;
-  // T0064：瓶颈系统条件字段
-  hasLockedBottleneck?: boolean;        // 存在任何未解锁瓶颈
-  hasLockedRealmBottleneck?: boolean;   // 存在未解锁境界瓶颈
-  hasLockedTechniqueBottleneck?: boolean; // 存在未解锁功法瓶颈
 }
 
 export type EffectValue = number | string | [number, number];
@@ -67,18 +61,6 @@ function buildCondition(cond?: JsonEventCondition | null): ((p: Player) => boole
     if (cond.minMood !== undefined && p.mood < cond.minMood) return false;
     if (cond.minHealth !== undefined && p.health < cond.minHealth) return false;
     if (cond.maxHealth !== undefined && p.health > cond.maxHealth) return false;
-    // T0064：瓶颈系统条件
-    if (cond.hasLockedBottleneck !== undefined && cond.hasLockedBottleneck !== hasLockedBottleneck(p)) return false;
-    if (cond.hasLockedRealmBottleneck !== undefined && cond.hasLockedRealmBottleneck !== hasLockedRealmBottleneck(p)) return false;
-    if (cond.hasLockedTechniqueBottleneck !== undefined) {
-      const state = getBottleneckState(p);
-      const hasTechBottleneck = state.activeBottlenecks.some(ab => {
-        if (ab.unlocked) return false;
-        const def = bottleneckDefsMap.get(ab.defId);
-        return def?.type === 'technique';
-      });
-      if (cond.hasLockedTechniqueBottleneck !== hasTechBottleneck) return false;
-    }
     return true;
   };
 }

@@ -104,15 +104,3 @@ export function getMaxRealmIndex(): number {
   for (const key of realmRegistry.keys()) { if (key > max) max = key; }
   return max;
 }
-
-// ── 瓶颈（T0064）──
-
-import type { BottleneckDef } from '../bottleneck/types';
-import { bottleneckDefsMap } from './stores';
-
-export function registerBottleneckDefs(defs: BottleneckDef[]): void {
-  for (const def of defs) bottleneckDefsMap.set(def.id, def);
-}
-export function getBottleneckDef(id: string): BottleneckDef | undefined { return bottleneckDefsMap.get(id); }
-export function getAllBottleneckDefs(): BottleneckDef[] { return Array.from(bottleneckDefsMap.values()); }
-

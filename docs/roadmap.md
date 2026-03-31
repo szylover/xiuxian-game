@@ -106,7 +106,7 @@
 | [T0034](tasks/todo/T0034-honghuang-endgame.md) | 洪荒终局 | T0033 | — | ⬜ |
 | [T0042](tasks/done/T0042-calendar-system.md) | 年月历法系统 | T0001, T0005 | [spec](specs/T0042-calendar-system.md) | ✅ |
 | [T0050](tasks/todo/T0050-inner-demon.md) | 心魔系统 | T0029 | — | ⬜ |
-| [T0064](tasks/done/T0064-bottleneck-system.md) | 瓶颈系统（境界/功法卡点 + 多元解锁） | T0002, T0029, T0007, T0017, T0058 | [spec](specs/T0064-bottleneck-system.md) | ✅ |
+| [T0064](tasks/active/T0064-bottleneck-system.md) | 瓶颈系统（境界/功法卡点 + 多元解锁） | T0002, T0029, T0007, T0017, T0058 | [spec](specs/T0064-bottleneck-system.md) | 🔨 |
 | [T0055](tasks/todo/T0055-heavenly-ranking.md) | 天机榜（天骄排行） | T0025, T0003, T0051 | — | ⬜ |
 
 ### 🏷️ 界面与体验

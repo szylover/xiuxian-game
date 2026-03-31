@@ -118,14 +118,6 @@ function loadSave(): Player | null {
     if (!p.systems.achievement) {
       p.systems.achievement = { unlockedIds: [], pendingToast: [] };
     }
-    // T0064: bottleneck 向后兼容
-    if (!p.systems.bottleneck) {
-      p.systems.bottleneck = { activeBottlenecks: [], resolvedBottlenecks: [] };
-    }
-    // T0064: tracking.bottleneckTotalProgress 向后兼容
-    if (p.tracking && p.tracking.bottleneckTotalProgress === undefined) {
-      p.tracking.bottleneckTotalProgress = 0;
-    }
     return p;
   } catch { return null; }
 }

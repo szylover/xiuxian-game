@@ -8,7 +8,6 @@ import { REALMS, BREAKTHROUGH_FAIL_EXP_LOSS } from '../data';
 import { getItemDef } from '../registry';
 import { removeItem } from '../inventory';
 import { getBreakthroughStatus, getBreakthroughState, setBreakthroughState } from './status';
-import { hasLockedRealmBottleneck, checkAndEnterRealmBottleneck } from '../bottleneck';
 
 export interface BreakthroughResult {
   success: boolean;
@@ -18,33 +17,21 @@ export interface BreakthroughResult {
 }
 
 export function attemptBreakthrough(player: Player): BreakthroughResult {
-  // T0064：检查并激活境界瓶颈（在突破时触发检查）
-  let p = checkAndEnterRealmBottleneck(player);
-
-  // T0064：如果存在未解锁的境界瓶颈，拦截突破
-  if (hasLockedRealmBottleneck(p)) {
-    return {
-      success: false,
-      player: p,
-      logs: ['🔒 道路封闭，感知到瓶颈阻隔。修为已至大圆满，却无法更进一步。需寻得机缘方可叩响晋升之门。'],
-      triggerTribulation: false,
-    };
-  }
-
-  const status = getBreakthroughStatus(p);
+  const status = getBreakthroughStatus(player);
   const logs: string[] = [];
 
-  if (!status.nextRealm) return { success: false, player: p, logs: ['🏔️ 你已到达当前版本的最高境界！'], triggerTribulation: false };
+  if (!status.nextRealm) return { success: false, player, logs: ['🏔️ 你已到达当前版本的最高境界！'], triggerTribulation: false };
   if (!status.expReady) {
-    logs.push(`⚠️ 修为不足！突破 ${status.nextRealm.name} 需要 ${status.nextRealm.expReq} 修为（当前 ${p.exp}）。`);
-    return { success: false, player: p, logs, triggerTribulation: false };
+    logs.push(`⚠️ 修为不足！突破 ${status.nextRealm.name} 需要 ${status.nextRealm.expReq} 修为（当前 ${player.exp}）。`);
+    return { success: false, player, logs, triggerTribulation: false };
   }
 
   for (const item of status.itemsReady) if (!item.ready) logs.push(`⚠️ 材料不足：${item.name} 需要 ${item.required} 个（当前 ${item.have}）。`);
   for (const cond of status.conditionsReady) if (!cond.ready) logs.push(`⚠️ 条件未满足：${cond.description}`);
-  if (!status.canAttempt) return { success: false, player: p, logs, triggerTribulation: false };
+  if (!status.canAttempt) return { success: false, player, logs, triggerTribulation: false };
 
   // 消耗物品
+  let p = { ...player };
   if (status.req) {
     for (const cost of status.req.itemCosts) {
       p = removeItem(p, cost.itemId, cost.count);

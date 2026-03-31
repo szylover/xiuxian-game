@@ -361,7 +361,6 @@ export interface DLCPack {
   bodyRealms?: BodyRealmDef[];              // T0059 体修境界定义
   spiritRootBodyBonuses?: SpiritRootBodyBonus[]; // T0059 灵根对体修的加成配置
   realms?: RealmDef[];                       // T0058 气修境界定义
-  bottlenecks?: import('./bottleneck/types').BottleneckDef[]; // T0064 瓶颈定义
 }
 
 // ── 死亡系统类型定义 ──

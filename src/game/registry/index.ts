@@ -22,7 +22,6 @@ export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
   AchievementRecalcBonus, AchievementOnceBonus, AchievementSystemState,
 } from '../achievement/types';
-export type { BottleneckDef, UnlockMethodDef, ActiveBottleneck, BottleneckSystemState } from '../bottleneck/types';
 
 export { registerDLC, unregisterDLC, getDLC, getAllDLCs } from './dlc';
 export {
@@ -42,7 +41,6 @@ export {
   getBodyRealmDef, getAllBodyRealmDefs,
   getSpiritRootBodyBonus, getAllSpiritRootBodyBonuses,
   getRealmDef, getAllRealmDefs, getMaxRealmIndex,
-  registerBottleneckDefs, getBottleneckDef, getAllBottleneckDefs,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

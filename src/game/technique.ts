@@ -8,7 +8,6 @@ import type { TechniqueDef, TechniqueStatBonus, TechniqueActiveSkill } from './t
 import type { TechniqueSlot } from './player/types';
 import { getTechniqueDef, getAllTechniqueDefs } from './registry';
 import { gainBodyRealmExp } from './body-cultivation';
-import { getLockedTechniqueBottleneck, addBottleneckProgress } from './bottleneck';
 
 // ── 功法类型 → 资质字段映射 ──
 const TYPE_APTITUDE_MAP: Record<string, keyof Player['aptitudes']> = {
@@ -98,13 +97,6 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
   const slot = player.techniques[idx];
   const effectiveMax = getEffectiveMaxLevel(player, def);
   if (slot.level >= effectiveMax) {
-    // T0064：功法瓶颈检查
-    const techBottleneck = getLockedTechniqueBottleneck(player, techniqueId);
-    if (techBottleneck) {
-      const p2 = addBottleneckProgress(player, techBottleneck.defId, 'practice', 1);
-      const bar = `${Math.floor(techBottleneck.progress)}/${techBottleneck.unlockThreshold}`;
-      return { player: p2, message: `📖 ${def.name} 修炼触及瓶颈（进度 ${bar}），需机缘解锁方可突破上限` };
-    }
     if (effectiveMax < def.maxLevel * 2) {
       return { player, message: `⚠️ ${def.name} 已达灵根上限（${effectiveMax} 级），提升灵根亲和度可解锁更高等级` };
     }

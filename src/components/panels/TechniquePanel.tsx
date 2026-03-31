@@ -9,7 +9,6 @@ import type { TechniqueDef, PassiveEffect } from '../../game/registry';
 import { getLearnableTechniques, calcTechniqueExpGain, getEffectiveMaxLevel, calcAptitudeBonus } from '../../game/technique';
 import { RARITY_COLORS, SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS } from '../shared';
 import type { TechniqueRarity } from '../../game/registry';
-import { getLockedTechniqueBottleneck } from '../../game/bottleneck';
 
 const TECHNIQUE_TYPE_CN: Record<string, string> = {
   sword: '剑法', blade: '刀法', fist: '拳法',
@@ -61,8 +60,6 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
             // 计算被动解锁角标
             const totalPassives = def.passiveEffects?.length ?? 0;
             const unlockedPassives = def.passiveEffects?.filter(pe => slot.level >= pe.minLevel).length ?? 0;
-            // T0064：功法瓶颈检测
-            const techBottleneck = isMaxLevel ? getLockedTechniqueBottleneck(player, slot.techniqueId) : null;
             // 灵根匹配信息
             const matchRoot = def.spiritRootElement
               ? player.spiritRoots?.roots.find(r => r.type === def.spiritRootElement)
@@ -98,15 +95,6 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                       title={`已解锁 ${unlockedPassives}/${totalPassives} 条被动`}
                     >
                       ✨{unlockedPassives}/{totalPassives}
-                    </span>
-                  )}
-                  {/* T0064：功法瓶颈徽章 */}
-                  {techBottleneck && (
-                    <span
-                      className="technique-bottleneck-badge"
-                      title={`功法瓶颈阻隔，修炼积累中（${Math.floor(techBottleneck.progress)}/${techBottleneck.unlockThreshold}）`}
-                    >
-                      🟠 瓶颈
                     </span>
                   )}
                 </div>

@@ -12,18 +12,6 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
-    version: '1.0.13',
-    date: '2026-03-31',
-    title: '瓶颈系统',
-    items: [
-      '新增境界瓶颈系统：炼气/金丹/化神/大乘大圆满将进入瓶颈状态',
-      '多种解锁机制：战斗感悟（概率触发）、探索灵光一闪、积累兜底解锁',
-      '新增顿悟石道具，可直接解锁当前瓶颈',
-      '突破面板显示瓶颈详情、解锁条件和积累进度',
-      '境界行新增🔒瓶颈徽章，Debug面板新增瓶颈调试区块',
-    ],
-  },
-  {
     version: '1.0.12',
     date: '2026-03-31',
     title: '境界表 DLC 化（T0058）',
