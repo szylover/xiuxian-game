@@ -33,28 +33,44 @@
 
 ```
 用户: "我上次做到哪了" / "下一步做什么"
-→ 读 docs/roadmap.md（任务列表 + 依赖图）+ 扫描 docs/tasks/done/ 最近完成的任务
+→ 读 docs/roadmap.md（高层路线图 + 依赖图）+ 搜索 GitHub Issues（open/closed）了解最新进展
 ```
 
 ## 任务管理
 
-- **`docs/roadmap.md`** 是任务的单一数据源（Single Source of Truth）
-- 每个任务有唯一 ID（T0001–T9999，4 位编号，10000 个槽位），声明前置依赖和设计文档索引
-- 每个任务对应 `docs/tasks/` 下独立文件，按状态归入 `done/` / `active/` / `todo/` 子目录
-- 任务按分类分组，但任意分类可随时追加新任务
+- **GitHub Issues** 是任务的单一数据源（Single Source of Truth）：https://github.com/szylover/xiuxian-game/issues
+- 每个任务有唯一 ID（T0001–T9999），对应一个 GitHub Issue，用 label 标注分类
+- 任务状态通过 Issue 的 open/closed 管理，不再维护本地 task 文件
+- **`docs/roadmap.md`** 仅作为高层路线图和依赖关系参考，不再逐任务更新状态
+- **`docs/specs/`** 仍保留设计文档，Issue 中放指向 spec 的链接
+
+### Labels 分类
+
+| Label | 含义 |
+|-------|------|
+| 核心循环 | 属性/修炼/战斗/突破/寿命 |
+| 事件系统 | 事件引擎+事件内容 |
+| 物品与经济 | 背包/商店/炼丹/装备/炼器 |
+| 功法与技能 | 功法/技能/神通/体修 |
+| 世界与地图 | 地图/区域/秘境 |
+| 社交与NPC | NPC/门派/对话 |
+| 进阶机制 | 突破/渡劫/成就/死亡/瓶颈 |
+| 部署与体验 | CI/CD/PWA/音效/存档 |
+| UI体验 | UI布局/日志/战斗弹窗 |
+| DLC内容包 | 纯数据内容包 |
+| DLC扩展包 | 含新系统的扩展包 |
 
 ### 任务完成时必须同步更新（每次 merge 前检查）
 
-当一个任务完成并准备 merge 时，**必须**在同一个 commit 中完成以下更新：
+当一个任务完成并准备 merge 时，**必须**完成以下更新：
 
-1. **移动 task 文件**：`docs/tasks/todo/T0XXX-*.md` → `docs/tasks/done/T0XXX-*.md`，更新文件内状态为 ✅ + 关键文件 + 完成日期
-2. **更新 `docs/roadmap.md`**：对应行状态改为 ✅，链接路径从 `tasks/todo/` 改为 `tasks/done/`
-3. **更新 `docs/test-guide.md`**：
+1. **关闭 GitHub Issue**：通过 `gh issue close <number> --reason completed` 或 PR 关联自动关闭
+2. **更新 `docs/test-guide.md`**：
    - 在对应分类下追加新功能的测试用例章节（至少 4 条用例）
    - 如涉及调试面板变更，同步更新「附录 A：调试面板功能清单」
    - 测试用例须覆盖：正常流程、边界条件、Debug 辅助验证
-4. **更新调试面板**：如新功能引入了需要手动测试的数值/物品/状态，同步更新 `src/components/debug/` 下的调试面板代码，确保 Debug 模式可快速验证新功能
-5. **更新 `src/data/changelog.ts`**：在 `CHANGELOG` 数组顶部追加本次版本条目，并同步更新 `CURRENT_VERSION`。格式：
+3. **更新调试面板**：如新功能引入了需要手动测试的数值/物品/状态，同步更新 `src/components/debug/` 下的调试面板代码，确保 Debug 模式可快速验证新功能
+4. **更新 `src/data/changelog.ts`**：在 `CHANGELOG` 数组顶部追加本次版本条目，并同步更新 `CURRENT_VERSION`。格式：
    ```ts
    {
      version: '1.x.y',
@@ -99,12 +115,8 @@ xiuxian-game/
 ├── index.html                     # Vite 入口 HTML
 ├── README.md
 ├── docs/                          # 项目文档
-│   ├── roadmap.md                 #   任务列表（DAG 依赖图 + DLC 规划 + 扩展性约定）
+│   ├── roadmap.md                 #   高层路线图（依赖图 + DLC 规划 + 扩展性约定）
 │   ├── test-guide.md              #   功能测试手册（每个功能的测试用例）
-│   ├── tasks/                     #   每个任务的独立文件（T0001–T9999）
-│   │   ├── done/                  #     已完成的任务
-│   │   ├── active/                #     进行中的任务
-│   │   └── todo/                  #     未开始的任务
 │   ├── specs/                     #   设计文档存放目录
 │       ├── design-attribute-system.md
 │       ├── design-novel-events.md
