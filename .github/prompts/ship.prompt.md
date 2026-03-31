@@ -15,7 +15,7 @@ tools: [read, edit, search, execute]
    - [ ] **`docs/progress.md`**：移除已完成任务，加入最近完成表，检查新解锁的可执行任务
    - [ ] **`docs/test-guide.md`**：追加新功能测试用例章节（≥4 条），如涉及 Debug 面板变更则同步更新「附录 A」
    - [ ] **调试面板**：如新功能有新数值/物品/状态需要调试，`src/components/debug/` 已同步更新
-   - [ ] `docs/changelog.md` — 如果功能/行为有变化，追加今天的条目
+   - [ ] **`src/data/changelog.ts`**：在 `CHANGELOG` 数组顶部追加本次版本条目，同步更新 `CURRENT_VERSION`
    - [ ] `.github/copilot-instructions.md` 项目目录树 — 如果目录结构变了就更新
    - [ ] `staticwebapp.config.json` — 如有需要则更新
 3. **Git 工作流**（禁止直接 push 到 main，必须走 PR）：
