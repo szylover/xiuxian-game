@@ -4,9 +4,11 @@
 
 import { useState } from 'react';
 import type { CreatePlayerOptions } from '../../game/player';
-import { rollPreview } from '../../game/player/create';
+import { rollPreview, rollAptitudesWithSpiritRoots, rollInnateAttr, randInt } from '../../game/player/create';
+import { rollSpiritRoots } from '../../game/spirit-root';
 import type { PreviewRoll } from '../../game/player/create';
-import { SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS, COMBO_CN } from '../shared/constants';
+import type { Aptitudes } from '../../game/player/types';
+import { SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS, COMBO_CN, APTITUDE_CN } from '../shared/constants';
 
 interface StartScreenProps {
   onNewGame: (options: CreatePlayerOptions) => void;
@@ -27,6 +29,9 @@ const MULT_MAP: Record<string, number> = {
   none: 0.1, single: 3.0, dual: 2.0, triple: 1.2, quad: 0.8, penta: 0.5,
 };
 
+type CreationSlot = 'spiritRoots' | 'innateStats' | 'aptitudes' | 'constitution';
+const TOTAL_LOCKS = 3;
+
 function InnateBar({ label, value }: { label: string; value: number }) {
   const color = value >= 80 ? '#FFD700' : value >= 60 ? '#4CAF50' : value >= 40 ? '#2196F3' : '#9E9E9E';
   return (
@@ -40,12 +45,85 @@ function InnateBar({ label, value }: { label: string; value: number }) {
   );
 }
 
+const APTITUDE_GROUPS: { label: string; keys: (keyof Aptitudes)[] }[] = [
+  { label: '元素', keys: ['fire', 'water', 'thunder', 'wind', 'earth', 'wood'] },
+  { label: '武学', keys: ['blade', 'spear', 'sword', 'fist', 'palm', 'finger'] },
+  { label: '功法', keys: ['alchemy', 'smithing', 'fengshui', 'mining'] },
+];
+
+function AptitudeGrid({ aptitudes }: { aptitudes: Aptitudes }) {
+  return (
+    <div className="aptitude-groups">
+      {APTITUDE_GROUPS.map(group => (
+        <div key={group.label} className="aptitude-group">
+          <div className="aptitude-group-label">{group.label}</div>
+          <div className="aptitude-grid">
+            {group.keys.map(key => {
+              const val = aptitudes[key];
+              const color = val >= 80 ? '#FFD700' : val >= 60 ? '#4CAF50' : val >= 40 ? '#2196F3' : '#9E9E9E';
+              return (
+                <div key={key} className="aptitude-cell">
+                  <span className="aptitude-name">{APTITUDE_CN[key]}</span>
+                  <div className="aptitude-bar">
+                    <div className="aptitude-fill" style={{ width: `${val}%`, backgroundColor: color }} />
+                  </div>
+                  <span className="aptitude-val" style={{ color }}>{val}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function SlotHeader({
+  title, slot, lockedSlots, onToggle,
+}: {
+  title: string;
+  slot: CreationSlot;
+  lockedSlots: Set<CreationSlot>;
+  onToggle: (slot: CreationSlot) => void;
+}) {
+  const isLocked = lockedSlots.has(slot);
+  const canLock = isLocked || lockedSlots.size < TOTAL_LOCKS;
+  return (
+    <div className="slot-header">
+      <span className="slot-title">{title}</span>
+      <button
+        className={`lock-btn ${isLocked ? 'lock-btn-locked' : 'lock-btn-unlocked'}`}
+        onClick={() => onToggle(slot)}
+        disabled={!canLock}
+        title={isLocked ? '点击解锁' : canLock ? '点击锁定' : '锁已用完'}
+      >
+        {isLocked ? '🔒' : '🔓'}
+      </button>
+    </div>
+  );
+}
+
 export default function StartScreen({ onNewGame, onLoadGame, hasSave }: StartScreenProps) {
   const [name, setName] = useState('');
   const [gender, setGender] = useState<'male' | 'female'>('male');
   const [appearance, setAppearance] = useState(0);
   const [preview, setPreview] = useState<PreviewRoll>(() => rollPreview());
-  const [freeRerolls, setFreeRerolls] = useState(3);
+  const [lockedSlots, setLockedSlots] = useState<Set<CreationSlot>>(new Set());
+
+  const locksUsed = lockedSlots.size;
+  const locksRemaining = TOTAL_LOCKS - locksUsed;
+
+  const toggleLock = (slot: CreationSlot) => {
+    setLockedSlots(prev => {
+      const next = new Set(prev);
+      if (next.has(slot)) {
+        next.delete(slot);
+      } else if (next.size < TOTAL_LOCKS) {
+        next.add(slot);
+      }
+      return next;
+    });
+  };
 
   const handleGenderChange = (g: 'male' | 'female') => {
     setGender(g);
@@ -53,10 +131,21 @@ export default function StartScreen({ onNewGame, onLoadGame, hasSave }: StartScr
   };
 
   const handleReroll = () => {
-    if (freeRerolls > 0) {
-      setPreview(rollPreview());
-      setFreeRerolls(prev => prev - 1);
-    }
+    setPreview(prev => {
+      const newSpiritRoots = lockedSlots.has('spiritRoots') ? prev.spiritRoots : rollSpiritRoots();
+      const newAptitudes = lockedSlots.has('aptitudes')
+        ? prev.aptitudes
+        : rollAptitudesWithSpiritRoots(newSpiritRoots);
+      return {
+        spiritRoots: newSpiritRoots,
+        luck:          lockedSlots.has('innateStats')  ? prev.luck          : rollInnateAttr(),
+        comprehension: lockedSlots.has('innateStats')  ? prev.comprehension : rollInnateAttr(),
+        charisma:      lockedSlots.has('innateStats')  ? prev.charisma      : rollInnateAttr(),
+        aptitudes:     newAptitudes,
+        mood:          lockedSlots.has('constitution') ? prev.mood          : randInt(50, 90),
+        health:        lockedSlots.has('constitution') ? prev.health        : randInt(80, 100),
+      };
+    });
   };
 
   const handleConfirm = () => {
@@ -120,6 +209,14 @@ export default function StartScreen({ onNewGame, onLoadGame, hasSave }: StartScr
               ))}
             </div>
           </div>
+
+          {/* ── 锁资源指示 ── */}
+          <div className="lock-counter">
+            <span className="lock-counter-label">剩余锁：</span>
+            {Array.from({ length: TOTAL_LOCKS }, (_, i) => (
+              <span key={i} className={i < locksRemaining ? 'lock-icon-avail' : 'lock-icon-used'}>🔒</span>
+            ))}
+          </div>
         </div>
 
         {/* ── 天赋预览 ── */}
@@ -127,57 +224,69 @@ export default function StartScreen({ onNewGame, onLoadGame, hasSave }: StartScr
           <div className="talent-section-title">✨ 角色天赋</div>
 
           {/* 灵根 */}
-          <div className="spirit-root-display">
-            <div className="combo-badge" style={{ color: comboColor, borderColor: comboColor }}>
-              {comboCN}
-            </div>
-            <div className="cultivation-mult">修炼速度 ×{mult}</div>
-            {spiritRoots.roots.length === 0 ? (
-              <div className="root-list-empty">无灵根之体，走上体修之路亦未尝不可…</div>
-            ) : (
-              <div className="root-list">
-                {spiritRoots.roots.map(root => (
-                  <div
-                    key={root.type}
-                    className="root-item"
-                    style={{ borderColor: SPIRIT_ROOT_COLORS[root.type] }}
-                  >
-                    <span className="root-icon">{SPIRIT_ROOT_ICONS[root.type]}</span>
-                    <span className="root-name" style={{ color: SPIRIT_ROOT_COLORS[root.type] }}>
-                      {SPIRIT_ROOT_CN[root.type]}灵根
-                    </span>
-                    <div className="root-affinity-bar">
-                      <div
-                        className="root-affinity-fill"
-                        style={{ width: `${root.affinity}%`, backgroundColor: SPIRIT_ROOT_COLORS[root.type] }}
-                      />
-                    </div>
-                    <span className="root-affinity-val">亲和度 {root.affinity}</span>
-                  </div>
-                ))}
+          <div className="innate-attrs">
+            <SlotHeader title="灵根" slot="spiritRoots" lockedSlots={lockedSlots} onToggle={toggleLock} />
+            <div className="spirit-root-display-inline">
+              <div className="combo-badge" style={{ color: comboColor, borderColor: comboColor }}>
+                {comboCN}
               </div>
-            )}
+              <div className="cultivation-mult">修炼速度 ×{mult}</div>
+              {spiritRoots.roots.length === 0 ? (
+                <div className="root-list-empty">无灵根之体</div>
+              ) : (
+                <div className="root-list">
+                  {spiritRoots.roots.map(root => (
+                    <div
+                      key={root.type}
+                      className="root-item"
+                      style={{ borderColor: SPIRIT_ROOT_COLORS[root.type] }}
+                    >
+                      <span className="root-icon">{SPIRIT_ROOT_ICONS[root.type]}</span>
+                      <span className="root-name" style={{ color: SPIRIT_ROOT_COLORS[root.type] }}>
+                        {SPIRIT_ROOT_CN[root.type]}灵根
+                      </span>
+                      <div className="root-affinity-bar">
+                        <div
+                          className="root-affinity-fill"
+                          style={{ width: `${root.affinity}%`, backgroundColor: SPIRIT_ROOT_COLORS[root.type] }}
+                        />
+                      </div>
+                      <span className="root-affinity-val">亲和度 {root.affinity}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* 先天属性 */}
           <div className="innate-attrs">
-            <div className="innate-title">先天属性</div>
+            <SlotHeader title="先天属性" slot="innateStats" lockedSlots={lockedSlots} onToggle={toggleLock} />
             <InnateBar label="运气" value={preview.luck} />
             <InnateBar label="悟性" value={preview.comprehension} />
             <InnateBar label="魅力" value={preview.charisma} />
+          </div>
+
+          {/* 元素资质 */}
+          <div className="innate-attrs">
+            <SlotHeader title="元素资质" slot="aptitudes" lockedSlots={lockedSlots} onToggle={toggleLock} />
+            <AptitudeGrid aptitudes={preview.aptitudes} />
+          </div>
+
+          {/* 体质 */}
+          <div className="innate-attrs">
+            <SlotHeader title="体质" slot="constitution" lockedSlots={lockedSlots} onToggle={toggleLock} />
+            <InnateBar label="心情" value={preview.mood} />
+            <InnateBar label="健康" value={preview.health} />
           </div>
         </div>
       </div>
 
       {/* ── 操作按钮 ── */}
       <div className="form-actions create-char-actions">
-        {freeRerolls > 0 ? (
-          <button className="btn btn-secondary" onClick={handleReroll}>
-            🎲 重新随机（剩余 {freeRerolls} 次）
-          </button>
-        ) : (
-          <div className="no-reroll">免费重随次数已用尽</div>
-        )}
+        <button className="btn btn-secondary" onClick={handleReroll}>
+          🎲 重新随机
+        </button>
         <button className="btn btn-primary" onClick={handleConfirm}>
           ✨ 开始修炼
         </button>

@@ -95,3 +95,10 @@ export const COMBO_CN: Record<string, string> = {
   none: '无灵根', single: '单灵根', dual: '双灵根',
   triple: '三灵根', quad: '四灵根', penta: '五灵根',
 };
+
+// ── 资质中文名 ──
+export const APTITUDE_CN: Record<string, string> = {
+  alchemy: '炼丹', smithing: '炼器', fengshui: '风水', mining: '采矿',
+  blade: '刀法', spear: '枪法', sword: '剑法', fist: '拳法', palm: '掌法', finger: '指法',
+  fire: '火系', water: '水系', thunder: '雷系', wind: '风系', earth: '土系', wood: '木系',
+};
