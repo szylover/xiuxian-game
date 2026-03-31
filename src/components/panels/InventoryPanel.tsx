@@ -40,6 +40,7 @@ export default function InventoryPanel({ player, onUseItem }: InventoryPanelProp
           current={usedSlots}
           max={player.inventoryCapacity}
           label="容量"
+          warnOnFull
         />
       </div>
 

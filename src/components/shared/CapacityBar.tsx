@@ -9,6 +9,7 @@ interface CapacityBarProps {
   label?: string;
   color?: string;
   warningColor?: string;
+  warnOnFull?: boolean;
 }
 
 export default function CapacityBar({
@@ -17,6 +18,7 @@ export default function CapacityBar({
   label,
   color = '#4CAF50',
   warningColor = '#F44336',
+  warnOnFull = false,
 }: CapacityBarProps) {
   const pct = max > 0 ? (current / max) * 100 : 0;
   const isFull = current >= max;
@@ -31,7 +33,7 @@ export default function CapacityBar({
           className="capacity-bar-fill"
           style={{
             width: `${pct}%`,
-            background: isFull ? warningColor : color,
+            background: warnOnFull && isFull ? warningColor : color,
           }}
         />
       </div>
