@@ -30,7 +30,7 @@ function weightedPick<T extends { adjustedWeight: number }>(items: T[]): T {
 
 // ── 筛选可触发的事件 ──
 
-function filterAvailable(events: GameEvent[], player: Player): GameEvent[] {
+function filterAvailable(events: GameEvent[], player: Player, regionTags?: string[]): GameEvent[] {
   return events.filter(e => {
     if (e.once && triggeredOnce.has(e.id)) return false;
     if (e.cooldown) {
@@ -38,6 +38,10 @@ function filterAvailable(events: GameEvent[], player: Player): GameEvent[] {
       if (lastAge !== undefined && player.age - lastAge < e.cooldown) return false;
     }
     if (e.condition && !e.condition(player)) return false;
+    // T0021: 区域标签匹配（无标签的事件在所有区域可触发）
+    if (regionTags && e.regionTags?.length) {
+      if (!e.regionTags.some(t => regionTags.includes(t))) return false;
+    }
     return true;
   });
 }
@@ -52,9 +56,9 @@ export interface EventResult {
   category: EventCategory;
 }
 
-export function triggerEvent(category: EventCategory, player: Player): EventResult | null {
+export function triggerEvent(category: EventCategory, player: Player, regionTags?: string[]): EventResult | null {
   const all = getEventsByCategory(category);
-  const available = filterAvailable(all, player);
+  const available = filterAvailable(all, player, regionTags);
   if (available.length === 0) return null;
 
   const weighted = available.map(e => ({ event: e, adjustedWeight: adjustWeight(e, player.luck) }));

@@ -6,6 +6,8 @@
 import type { Player } from './player';
 import { registerDLC, triggerEvent } from './registry';
 import type { RecipeDef, EquipDef, SmithingRecipeDef, TechniqueDef, DeathTriggerDef, LifeSaverDef, RevivalMethodDef, MonsterDef } from './registry';
+import type { RegionDef } from './types';
+import { getCurrentRegion } from './map';
 import { loadEventsFromJson } from './event-loader';
 import { loadItemsFromJson } from './item-loader';
 import type { JsonEvent } from './event-loader';
@@ -242,6 +244,7 @@ export async function registerCoreEvents(): Promise<void> {
     { default: coreShopJson },
     { default: coreSmithingJson },
     { default: coreTechniquesJson },
+    { default: coreRegionsJson },
   ] = await Promise.all([
     import('../data/core-events.json'),
     import('../data/core-items.json'),
@@ -250,6 +253,7 @@ export async function registerCoreEvents(): Promise<void> {
     import('../data/core-shop.json'),
     import('../data/core-smithing.json'),
     import('../data/core-techniques.json'),
+    import('../data/core-regions.json'),
   ]);
 
   const pack = loadEventsFromJson(coreEventsJson as JsonEvent[], {
@@ -281,21 +285,25 @@ export async function registerCoreEvents(): Promise<void> {
     bodyRealms: CORE_BODY_REALMS,
     spiritRootBodyBonuses: CORE_SPIRIT_ROOT_BODY_BONUSES,
     realms: CORE_REALMS,
+    regions: coreRegionsJson as RegionDef[],
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }
 
-// ── 探索入口 ──
+// ── 探索入口（T0021: 区域感知）──
 export function triggerExploreEvent(player: Player): { player: Player; message: string } {
+  const region = getCurrentRegion(player);
+  const regionTags = region?.regionTags;
+
   // 10% 概率触发奇遇代替普通探索
   if (Math.random() < 0.10) {
-    const adventure = triggerEvent('adventure', player);
+    const adventure = triggerEvent('adventure', player, regionTags);
     if (adventure) {
       return { player: adventure.player, message: adventure.message };
     }
   }
 
-  const result = triggerEvent('explore', player);
+  const result = triggerEvent('explore', player, regionTags);
   if (!result) {
     return { player, message: '🚶 四处探索了一番，未发现什么特别的东西。' };
   }

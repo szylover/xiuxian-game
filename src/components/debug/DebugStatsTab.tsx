@@ -4,7 +4,8 @@
 
 import type { Player } from '../../game/player';
 import { REALMS } from '../../game/data';
-import { getAllBodyRealmDefs } from '../../game/registry';
+import { getAllBodyRealmDefs, getAllRegions } from '../../game/registry';
+import { getMapState } from '../../game/map';
 
 // 可编辑数值行：显示当前值 + 快捷递增按钮
 function StatEditor({ label, value, deltas, onChange }: { label: string; value: number; deltas: number[]; onChange: (v: number) => void }) {
@@ -64,9 +65,10 @@ interface DebugStatsTabProps {
   player: Player;
   onSetStat: (key: string, value: number) => void;
   onFullRestore: () => void;
+  onDebugTravel?: (regionId: string) => void;
 }
 
-export default function DebugStatsTab({ player, onSetStat, onFullRestore }: DebugStatsTabProps) {
+export default function DebugStatsTab({ player, onSetStat, onFullRestore, onDebugTravel }: DebugStatsTabProps) {
   return (
     <div className="debug-stats">
       {/* 境界 */}
@@ -100,6 +102,28 @@ export default function DebugStatsTab({ player, onSetStat, onFullRestore }: Debu
           ))}
         </div>
       </div>
+
+      {/* 区域传送（T0021） */}
+      {onDebugTravel && (
+        <div className="debug-row">
+          <span className="debug-label">📍 当前区域</span>
+          <div className="debug-btns">
+            {getAllRegions().sort((a, b) => a.minRealm - b.minRealm).map((r) => {
+              const mapState = getMapState(player);
+              const isCurrent = mapState.currentRegionId === r.id;
+              return (
+                <button
+                  key={r.id}
+                  className={`btn debug-btn ${isCurrent ? 'debug-active' : ''}`}
+                  onClick={() => onDebugTravel(r.id)}
+                >
+                  {r.emoji} {r.name}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* 全满 */}
       <div className="debug-row">

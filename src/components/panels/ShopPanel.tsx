@@ -6,7 +6,7 @@
 import { useState } from 'react';
 import type { Player } from '../../game/player';
 import { getItemDef } from '../../game/registry';
-import { getAllShopGoods, calcBuyPrice } from '../../game/shop';
+import { getShopGoodsForRegion, calcBuyPrice } from '../../game/shop';
 import { getInventoryEntries } from '../../game/inventory';
 import { TabBar } from '../shared';
 import ShopBuyItem from './shop/ShopBuyItem';
@@ -30,7 +30,7 @@ export default function ShopPanel({ player, onBuy, onSell }: ShopPanelProps) {
 
   if (!player) return null;
 
-  const goods = getAllShopGoods();
+  const goods = getShopGoodsForRegion(player);
   const inventoryEntries = getInventoryEntries(player);
 
   return (

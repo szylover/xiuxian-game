@@ -12,6 +12,7 @@ import type { CombatResult } from '../game/combat';
 import { triggerExploreEvent } from '../game/events';
 import { addItem } from '../game/inventory';
 import { getItemDef, getAllMonsters } from '../game/registry';
+import { getCurrentRegion } from '../game/map';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
 import { restorePhysique, gainBodyRealmExp, tryBodyRealmBreakthrough } from '../game/body-cultivation';
 import { getTechniqueDef } from '../game/registry';
@@ -133,13 +134,28 @@ export function useCoreActions(deps: CoreActionDeps) {
     combatResultRef.current = null;
     setPlayer(prev => {
       if (!prev) return prev;
+
+      // T0021: 安全区禁止战斗
+      const region = getCurrentRegion(prev);
+      if (region?.safeZone) {
+        pendingRef.current = { msgs: [], categories: [] };
+        queueLog(`🛡️ ${region.emoji} ${region.name}是安全区域，无法战斗。`, 'system');
+        return prev;
+      }
+
       let p: Player = { ...prev };
       const cost = ACTION_COSTS.combat;
       p.stamina -= cost.stamina;
 
-      const eligible = getAllMonsters().filter(m =>
-        m.realmIndex >= p.realmIndex - 1 && m.realmIndex <= p.realmIndex
-      );
+      // T0021: 按区域标签筛选妖兽
+      const regionTags = region?.regionTags;
+      const eligible = getAllMonsters().filter(m => {
+        if (m.realmIndex < p.realmIndex - 1 || m.realmIndex > p.realmIndex) return false;
+        if (regionTags && m.regionTags?.length) {
+          if (!m.regionTags.some(t => regionTags.includes(t))) return false;
+        }
+        return true;
+      });
       if (eligible.length === 0) {
         pendingRef.current = { msgs: [], categories: [] };
         queueLog('🔍 四周平静，没有发现妖兽。', 'combat');

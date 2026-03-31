@@ -74,7 +74,7 @@
 
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
-| [T0021](tasks/todo/T0021-map-system.md) | 地图系统（多区域） | T0001 | — | ⬜ |
+| [T0021](tasks/done/T0021-map-system.md) | 地图系统（多区域） | T0001 | [spec](specs/T0021-map-system.md) | ✅ |
 | [T0022](tasks/todo/T0022-region-events.md) | 区域事件 | T0007, T0021 | — | ⬜ |
 | [T0023](tasks/todo/T0023-dungeon.md) | 秘境探索（限时副本） | T0021, T0003 | — | ⬜ |
 | [T0024](tasks/todo/T0024-fengshui-mining.md) | 风水采矿 | T0021, T0012 | — | ⬜ |

@@ -42,6 +42,7 @@ export interface JsonEvent {
   condition?: JsonEventCondition | null;
   once?: boolean;
   cooldown?: number;
+  regionTags?: string[];
 }
 
 // ── 条件谓词构建 ──
@@ -152,6 +153,7 @@ function jsonToGameEvent(json: JsonEvent): GameEvent {
     condition: buildCondition(json.condition),
     once: json.once || false,
     cooldown: json.cooldown || undefined,
+    regionTags: json.regionTags,
   };
 }
 

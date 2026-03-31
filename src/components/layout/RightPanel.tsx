@@ -15,6 +15,7 @@ import EquipmentPanel from '../panels/EquipmentPanel';
 import TechniquePanel from '../panels/TechniquePanel';
 import DivineArtsPanel from '../panels/DivineArtsPanel';
 import AchievementPanel from '../panels/AchievementPanel';
+import MapPanel from '../panels/MapPanel';
 
 // 'status' panel is rendered by LeftPanel, so excluded from this config
 const PANEL_CONFIG: Partial<Record<PanelKey, { title: string; icon: string; width?: number }>> = {
@@ -25,6 +26,7 @@ const PANEL_CONFIG: Partial<Record<PanelKey, { title: string; icon: string; widt
   crafting:  { title: '炼制', icon: '🔥', width: 380 },
   equipment: { title: '装备', icon: '⚔️', width: 380 },
   achievement: { title: '成就', icon: '🏆', width: 420 },
+  map:       { title: '世界地图', icon: '🗺️', width: 420 },
 };
 
 interface RightPanelProps {
@@ -44,6 +46,7 @@ interface RightPanelProps {
   onLearnDivineArt: (artId: string) => void;
   onActivateDivineArt: (artId: string) => void;
   onDeactivateDivineArt: () => void;
+  onTravel: (regionId: string) => void;
 }
 
 export default function RightPanel({
@@ -51,6 +54,7 @@ export default function RightPanel({
   onUseItem, onCraft, onSmith, onEquip, onUnequip, onBuy, onSell,
   onLearnTechnique, onPracticeTechnique, onActivateTechnique,
   onLearnDivineArt, onActivateDivineArt, onDeactivateDivineArt,
+  onTravel,
 }: RightPanelProps) {
   const closePanel = () => onSelectPanel(activePanel!);
   const config = activePanel ? PANEL_CONFIG[activePanel] : null;
@@ -73,6 +77,7 @@ export default function RightPanel({
           {activePanel === 'crafting' && <CraftingPanel player={player} onCraft={onCraft} onSmith={onSmith} />}
           {activePanel === 'equipment' && <EquipmentPanel player={player} onEquip={onEquip} onUnequip={onUnequip} />}
           {activePanel === 'achievement' && <AchievementPanel player={player} />}
+          {activePanel === 'map' && <MapPanel player={player} onTravel={onTravel} />}
         </FloatingPanel>
       )}
     </>

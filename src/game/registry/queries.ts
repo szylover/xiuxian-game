@@ -2,7 +2,7 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef } from '../types';
 import type { SpiritRootType } from '../spirit-root';
 import type { AchievementDef } from '../achievement/types';
 import {
@@ -10,7 +10,7 @@ import {
   equipRegistry, smithingRecipeRegistry, breakthroughReqRegistry, tribulationRegistry,
   techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
   monsterRegistry, divineArtRegistry, achievementRegistry,
-  bodyRealmRegistry, spiritRootBodyBonusRegistry, realmRegistry,
+  bodyRealmRegistry, spiritRootBodyBonusRegistry, realmRegistry, regionRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -104,3 +104,8 @@ export function getMaxRealmIndex(): number {
   for (const key of realmRegistry.keys()) { if (key > max) max = key; }
   return max;
 }
+
+// ── 区域（T0021）──
+
+export function getRegion(id: string): RegionDef | undefined { return regionRegistry.get(id); }
+export function getAllRegions(): RegionDef[] { return Array.from(regionRegistry.values()); }

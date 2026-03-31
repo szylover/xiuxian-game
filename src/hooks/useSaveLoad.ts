@@ -69,6 +69,14 @@ export function loadSave(): Player | null {
     if (!p.systems.achievement) {
       p.systems.achievement = { unlockedIds: [], pendingToast: [] };
     }
+    // T0021: 地图系统向后兼容
+    if (!p.systems['map']) {
+      p.systems['map'] = {
+        currentRegionId: 'core:qingyun_town',
+        unlockedRegions: ['core:qingyun_town'],
+        travelCount: 0,
+      };
+    }
     return p;
   } catch { return null; }
 }

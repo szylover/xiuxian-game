@@ -17,6 +17,7 @@ export type {
   ElementType, DivineArtDef, DivineArtSkillEffect,
   BodyRealmDef, SpiritRootBodyBonus,
   RealmDef,
+  RegionDef, MapSystemState,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
@@ -41,6 +42,7 @@ export {
   getBodyRealmDef, getAllBodyRealmDefs,
   getSpiritRootBodyBonus, getAllSpiritRootBodyBonuses,
   getRealmDef, getAllRealmDefs, getMaxRealmIndex,
+  getRegion, getAllRegions,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,
