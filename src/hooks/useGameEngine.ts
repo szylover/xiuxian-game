@@ -402,6 +402,7 @@ export function useGameEngine(
       const details: string[] = [];
       if (result.expGained > 0) details.push(`+${result.expGained}修为`);
       if (result.goldGained > 0) details.push(`+${result.goldGained}灵石`);
+      if (result.bodyExpGained > 0) details.push(`+${result.bodyExpGained}体修`);
       const hpLost = playerHpBefore - result.playerHpLeft;
       if (hpLost > 0) details.push(`-${hpLost}HP`);
       if (result.mpUsed > 0) details.push(`-${result.mpUsed}MP`);
@@ -412,6 +413,7 @@ export function useGameEngine(
       const hpLost = playerHpBefore - result.playerHpLeft;
       if (hpLost > 0) details.push(`-${hpLost}HP`);
       if (result.mpUsed > 0) details.push(`-${result.mpUsed}MP`);
+      if (result.bodyExpGained > 0) details.push(`+${result.bodyExpGained}体修`);
       if (deathInfo?.blocked) {
         details.push(`${deathInfo.saverName ?? '护命道具'}救回一命`);
       } else if (deathInfo?.triggered && deathInfo.penaltyLogs?.length) {
@@ -425,6 +427,7 @@ export function useGameEngine(
       const hpLost = playerHpBefore - result.playerHpLeft;
       if (hpLost > 0) details.push(`-${hpLost}HP`);
       if (result.mpUsed > 0) details.push(`-${result.mpUsed}MP`);
+      if (result.bodyExpGained > 0) details.push(`+${result.bodyExpGained}体修`);
       addLog(`⚔️ 与 ${monsterName} 缠斗超时，双方脱战（${details.join(' ')}）`, 'combat');
     }
     setCombatModal(null);

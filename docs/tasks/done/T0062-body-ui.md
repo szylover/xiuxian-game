@@ -1,8 +1,10 @@
 # T0062 — 体修 UI 展示
 
 - **类型**：feat
-- **状态**：⬜ 未开始
-- **Spec**：[docs/specs/T0059-body-cultivation.md#八ui方案designer](../../specs/T0059-body-cultivation.md)
+- **状态**：✅ 已完成
+- **完成日期**：2026-03-31
+- **Spec**：[docs/specs/T0059-body-cultivation.md#八-ui方案designer](../../specs/T0059-body-cultivation.md)
+- **关键文件**：`src/components/layout/LeftPanel.tsx`, `src/components/panels/StatusPanel.tsx`, `src/components/debug/DebugStatsTab.tsx`
 - **创建日期**：2026-04-01
 
 ---

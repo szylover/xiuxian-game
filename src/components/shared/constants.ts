@@ -64,6 +64,7 @@ export const STAT_COLORS = {
   comprehension: '#2196F3', // 悟性 — 蓝
   charisma: '#FF9800',  // 魅力 — 橙
   exp:      '#00BCD4',  // 修为 — 青
+  physique: '#FF6D00',  // 体魄 — 橙
 } as const;
 
 // ── 属性统计转中文字符串 ──

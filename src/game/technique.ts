@@ -170,7 +170,7 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
   };
 }
 
-// ── 激活功法 ──
+// ── 激活/取消激活功法 ──
 export function activateTechnique(player: Player, techniqueId: string): { player: Player; message: string } {
   const def = getTechniqueDef(techniqueId);
   if (!def) return { player, message: `❌ 未知功法` };
@@ -178,8 +178,12 @@ export function activateTechnique(player: Player, techniqueId: string): { player
   const existing = player.techniques.find(t => t.techniqueId === techniqueId);
   if (!existing) return { player, message: `❌ 尚未学会 ${def.name}` };
 
+  // 点击已激活的功法 = 取消激活
   if (player.activeTechniqueId === techniqueId) {
-    return { player, message: `⚠️ ${def.name} 已经是当前功法` };
+    return {
+      player: { ...player, activeTechniqueId: null },
+      message: `❎ 取消激活 ${def.name}`,
+    };
   }
 
   return {

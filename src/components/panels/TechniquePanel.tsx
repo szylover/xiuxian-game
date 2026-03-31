@@ -153,6 +153,11 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                       ⚔️ 激活
                     </button>
                   )}
+                  {isActive && (
+                    <button className="btn btn-technique" onClick={() => onActivate(slot.techniqueId)}>
+                      ❎ 取消激活
+                    </button>
+                  )}
                 </div>
               </div>
             );

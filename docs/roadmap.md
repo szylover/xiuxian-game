@@ -108,6 +108,7 @@
 | [T0050](tasks/todo/T0050-inner-demon.md) | 心魔系统 | T0029 | — | ⬜ |
 | [T0064](tasks/active/T0064-bottleneck-system.md) | 瓶颈系统（境界/功法卡点 + 多元解锁） | T0002, T0029, T0007, T0017, T0058 | [spec](specs/T0064-bottleneck-system.md) | 🔨 |
 | [T0055](tasks/todo/T0055-heavenly-ranking.md) | 天机榜（天骄排行） | T0025, T0003, T0051 | — | ⬜ |
+| [T0064](tasks/todo/T0064-bottleneck-system.md) | 瓶颈系统（境界/功法/体修瓶颈 + 5 种解锁方式） | T0029, T0017, T0059, T0007 | [Design Spec](specs/T0064-bottleneck-system.md) | 📐 |
 
 ### 🏷️ 界面与体验
 
