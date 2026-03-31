@@ -1,9 +1,12 @@
 # T0059 — 体修路线（武器 · 拳法 · 指法）
 
 - **类型**：feat
-- **状态**：📐 设计完成，待实现
+- **状态**：✅ 已完成
+- **完成日期**：2026-03-31
 - **Spec**：[docs/specs/T0059-body-cultivation.md](../../specs/T0059-body-cultivation.md)
+- **数值调整指南**：[docs/specs/T0059-body-tuning-guide.md](../../specs/T0059-body-tuning-guide.md)
 - **创建日期**：2026-04-01
+- **关键文件**：`src/game/body-cultivation.ts`, `src/data/core-body-config.ts`, `src/data/core-techniques.json`
 
 ---
 

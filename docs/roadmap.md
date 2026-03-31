@@ -64,7 +64,7 @@
 | [T0019](tasks/done/T0019-passive-effects.md) | 被动效果 | T0017 | [spec](specs/T0019-passive-effects.md) | ✅ |
 | [T0020](tasks/done/T0020-divine-arts.md) | 神通（元素体系） | T0017, T0018 | [Spec](specs/T0020-divine-arts.md) | ✅ |
 | [T0049](tasks/todo/T0049-enlightenment.md) | 悟道顿悟系统 | T0002, T0017 | — | ⬜ |
-| [T0059](tasks/todo/T0059-body-cultivation.md) | 体修系统核心（体魄 · 体修境界 · 减伤） | T0001, T0003, T0017, T0019 | [spec](specs/T0059-body-cultivation.md) | 📐 |
+| [T0059](tasks/done/T0059-body-cultivation.md) | 体修系统核心（体魄 · 体修境界 · 减伤） | T0001, T0003, T0017, T0019 | [spec](specs/T0059-body-cultivation.md) | ✅ |
 | [T0060](tasks/todo/T0060-body-weapons.md) | 体修武器内容（拳套 · 指环 · 手甲） | T0059, T0014, T0015 | [spec](specs/T0059-body-cultivation.md) | ⬜ |
 | [T0061](tasks/todo/T0061-body-techniques.md) | 体修功法内容（高阶拳法 · 指法） | T0059, T0017 | [spec](specs/T0059-body-cultivation.md) | ⬜ |
 | [T0062](tasks/todo/T0062-body-ui.md) | 体修 UI（境界行 · 体魄条 · Debug 面板） | T0059, T0041, T0046 | [spec](specs/T0059-body-cultivation.md) | ⬜ |
@@ -102,7 +102,7 @@
 | [T0031](tasks/done/T0031-achievement.md) | 成就系统 | T0001 | [spec](specs/T0031-achievement.md) | ✅ |
 | [T0032](tasks/todo/T0032-leaderboard.md) | 排行榜 | T0031 | — | ⬜ |
 | [T0033](tasks/todo/T0033-ascension.md) | 仙道境界（飞升） | T0029, T0058 | — | ⬜ |
-| [T0058](tasks/todo/T0058-realm-dlc.md) | 境界表 DLC 化 | — | [spec](specs/T0058-realm-dlc.md) | ⬜ |
+| [T0058](tasks/done/T0058-realm-dlc.md) | 境界表 DLC 化 | — | [spec](specs/T0058-realm-dlc.md) | ✅ |
 | [T0034](tasks/todo/T0034-honghuang-endgame.md) | 洪荒终局 | T0033 | — | ⬜ |
 | [T0042](tasks/done/T0042-calendar-system.md) | 年月历法系统 | T0001, T0005 | [spec](specs/T0042-calendar-system.md) | ✅ |
 | [T0050](tasks/todo/T0050-inner-demon.md) | 心魔系统 | T0029 | — | ⬜ |
