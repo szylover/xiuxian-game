@@ -1,11 +1,11 @@
 // ============================================================
-// StartScreen.tsx — 开始界面（T0056: 三步建角色）
+// StartScreen.tsx — 开始界面（单页建角色：基本信息 + 天赋预览）
 // ============================================================
 
 import { useState } from 'react';
 import type { CreatePlayerOptions } from '../../game/player';
-import { rollSpiritRoots } from '../../game/spirit-root';
-import type { PlayerSpiritRoots } from '../../game/spirit-root';
+import { rollPreview } from '../../game/player/create';
+import type { PreviewRoll } from '../../game/player/create';
 import { SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS, COMBO_CN } from '../shared/constants';
 
 interface StartScreenProps {
@@ -29,12 +29,24 @@ const MULT_MAP: Record<string, number> = {
   none: 0.1, single: 3.0, dual: 2.0, triple: 1.2, quad: 0.8, penta: 0.5,
 };
 
+function InnateBar({ label, value }: { label: string; value: number }) {
+  const color = value >= 80 ? '#FFD700' : value >= 60 ? '#4CAF50' : value >= 40 ? '#2196F3' : '#9E9E9E';
+  return (
+    <div className="innate-row">
+      <span className="innate-label">{label}</span>
+      <div className="innate-bar">
+        <div className="innate-fill" style={{ width: `${value}%`, backgroundColor: color }} />
+      </div>
+      <span className="innate-val">{value}</span>
+    </div>
+  );
+}
+
 export default function StartScreen({ onNewGame, onLoadGame, hasSave, dataReady, dataError }: StartScreenProps) {
-  const [step, setStep] = useState<1 | 2>(1);
   const [name, setName] = useState('');
   const [gender, setGender] = useState<'male' | 'female'>('male');
   const [appearance, setAppearance] = useState(0);
-  const [spiritRoots, setSpiritRoots] = useState<PlayerSpiritRoots>(() => rollSpiritRoots());
+  const [preview, setPreview] = useState<PreviewRoll>(() => rollPreview());
   const [freeRerolls, setFreeRerolls] = useState(3);
 
   const handleGenderChange = (g: 'male' | 'female') => {
@@ -44,34 +56,39 @@ export default function StartScreen({ onNewGame, onLoadGame, hasSave, dataReady,
 
   const handleReroll = () => {
     if (freeRerolls > 0) {
-      setSpiritRoots(rollSpiritRoots());
+      setPreview(rollPreview());
       setFreeRerolls(prev => prev - 1);
     }
   };
 
   const handleConfirm = () => {
     const finalName = name.trim() || '无名散修';
-    onNewGame({ name: finalName, gender, appearance, spiritRoots });
+    onNewGame({ name: finalName, gender, appearance, preview });
   };
 
-  const startBtnLabel = dataError ? '⚠️ 数据加载失败' : dataReady ? '下一步：测算灵根 →' : '⏳ 加载中…';
+  const startBtnLabel = dataError ? '⚠️ 数据加载失败' : dataReady ? '✨ 开始修炼' : '⏳ 加载中…';
 
-  // ── 第一步：基本信息 ──
-  if (step === 1) {
-    return (
-      <div className="start-screen">
-        <h1 className="game-title">🏔️ 修仙之路</h1>
-        <p className="subtitle">踏入修仙世界，逆天改命</p>
-        <div className="start-form">
+  const { spiritRoots } = preview;
+  const comboColor = COMBO_COLORS[spiritRoots.combo] ?? '#fff';
+  const comboCN = COMBO_CN[spiritRoots.combo] ?? spiritRoots.combo;
+  const mult = MULT_MAP[spiritRoots.combo] ?? spiritRoots.cultivationMultiplier;
+
+  return (
+    <div className="start-screen">
+      <h1 className="game-title">🏔️ 修仙之路</h1>
+      <p className="subtitle">踏入修仙世界，逆天改命</p>
+
+      <div className="start-form create-char-form">
+        {/* ── 基本信息 ── */}
+        <div className="create-char-left">
           <div className="form-row">
             <label>道号：</label>
             <input
               type="text"
               value={name}
               onChange={e => setName(e.target.value)}
-              placeholder="请输入道号（留空随机）"
+              placeholder="留空则为无名散修"
               maxLength={10}
-              onKeyDown={e => e.key === 'Enter' && setStep(2)}
             />
           </div>
           <div className="form-row gender-row">
@@ -107,105 +124,74 @@ export default function StartScreen({ onNewGame, onLoadGame, hasSave, dataReady,
               ))}
             </div>
           </div>
-          <button className="btn btn-primary" onClick={() => setStep(2)} disabled={!dataReady}>
-            {startBtnLabel}
-          </button>
-          {hasSave && (
-            <button className="btn btn-secondary" onClick={onLoadGame} disabled={!dataReady}>
-              继续修炼
-            </button>
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  // ── 第二步：灵根测算结果 ──
-  const comboColor = COMBO_COLORS[spiritRoots.combo] ?? '#fff';
-  const comboCN = COMBO_CN[spiritRoots.combo] ?? spiritRoots.combo;
-  const mult = MULT_MAP[spiritRoots.combo] ?? spiritRoots.cultivationMultiplier;
-
-  return (
-    <div className="start-screen">
-      <h1 className="game-title">🏔️ 修仙之路</h1>
-      <p className="subtitle">灵根测算结果</p>
-      <div className="start-form spirit-result">
-        {/* 角色预览 */}
-        <div className="char-preview">
-          <img
-            src={`/avatars/${gender}-${appearance}.svg`}
-            onError={e => { (e.target as HTMLImageElement).src = '/avatars/default.svg'; }}
-            alt="头像"
-            width={80}
-            height={80}
-            className="preview-avatar"
-          />
-          <div className="char-name">
-            {name.trim() || '无名散修'} · {gender === 'male' ? '男修' : '女修'}
-          </div>
         </div>
 
-        {/* 灵根展示 */}
-        <div className="spirit-root-display">
-          <div className="combo-badge" style={{ color: comboColor, borderColor: comboColor }}>
-            {comboCN}
-          </div>
-          <div className="cultivation-mult">修炼速度 ×{mult}</div>
+        {/* ── 天赋预览 ── */}
+        <div className="create-char-right">
+          <div className="talent-section-title">✨ 角色天赋</div>
 
-          {spiritRoots.roots.length === 0 ? (
-            <div className="root-list-empty">
-              无灵根之体，走上体修之路亦未尝不可…
+          {/* 灵根 */}
+          <div className="spirit-root-display">
+            <div className="combo-badge" style={{ color: comboColor, borderColor: comboColor }}>
+              {comboCN}
             </div>
-          ) : (
-            <div className="root-list">
-              {spiritRoots.roots.map(root => (
-                <div
-                  key={root.type}
-                  className="root-item"
-                  style={{ borderColor: SPIRIT_ROOT_COLORS[root.type] }}
-                >
-                  <span className="root-icon">{SPIRIT_ROOT_ICONS[root.type]}</span>
-                  <span className="root-name" style={{ color: SPIRIT_ROOT_COLORS[root.type] }}>
-                    {SPIRIT_ROOT_CN[root.type]}灵根
-                  </span>
-                  <div className="root-affinity-bar">
-                    <div
-                      className="root-affinity-fill"
-                      style={{
-                        width: `${root.affinity}%`,
-                        backgroundColor: SPIRIT_ROOT_COLORS[root.type],
-                      }}
-                    />
+            <div className="cultivation-mult">修炼速度 ×{mult}</div>
+            {spiritRoots.roots.length === 0 ? (
+              <div className="root-list-empty">无灵根之体，走上体修之路亦未尝不可…</div>
+            ) : (
+              <div className="root-list">
+                {spiritRoots.roots.map(root => (
+                  <div
+                    key={root.type}
+                    className="root-item"
+                    style={{ borderColor: SPIRIT_ROOT_COLORS[root.type] }}
+                  >
+                    <span className="root-icon">{SPIRIT_ROOT_ICONS[root.type]}</span>
+                    <span className="root-name" style={{ color: SPIRIT_ROOT_COLORS[root.type] }}>
+                      {SPIRIT_ROOT_CN[root.type]}灵根
+                    </span>
+                    <div className="root-affinity-bar">
+                      <div
+                        className="root-affinity-fill"
+                        style={{ width: `${root.affinity}%`, backgroundColor: SPIRIT_ROOT_COLORS[root.type] }}
+                      />
+                    </div>
+                    <span className="root-affinity-val">亲和度 {root.affinity}</span>
                   </div>
-                  <span className="root-affinity-val">亲和度 {root.affinity}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+                ))}
+              </div>
+            )}
+          </div>
 
-        {/* 重掷区 */}
-        <div className="reroll-area">
-          {freeRerolls > 0 ? (
-            <button className="btn btn-secondary" onClick={handleReroll}>
-              🎲 重新随机（剩余 {freeRerolls} 次）
-            </button>
-          ) : (
-            <div className="no-reroll">免费重随次数已用尽</div>
-          )}
-        </div>
-
-        {/* 操作按钮 */}
-        <div className="form-actions">
-          <button className="btn btn-secondary" onClick={() => setStep(1)}>
-            ← 返回
-          </button>
-          <button className="btn btn-primary" onClick={handleConfirm} disabled={!dataReady}>
-            ✨ 开始修炼
-          </button>
+          {/* 先天属性 */}
+          <div className="innate-attrs">
+            <div className="innate-title">先天属性</div>
+            <InnateBar label="运气" value={preview.luck} />
+            <InnateBar label="悟性" value={preview.comprehension} />
+            <InnateBar label="魅力" value={preview.charisma} />
+          </div>
         </div>
       </div>
+
+      {/* ── 操作按钮 ── */}
+      <div className="form-actions create-char-actions">
+        {freeRerolls > 0 ? (
+          <button className="btn btn-secondary" onClick={handleReroll}>
+            🎲 重新随机（剩余 {freeRerolls} 次）
+          </button>
+        ) : (
+          <div className="no-reroll">免费重随次数已用尽</div>
+        )}
+        <button className="btn btn-primary" onClick={handleConfirm} disabled={!dataReady}>
+          {startBtnLabel}
+        </button>
+      </div>
+
+      {hasSave && (
+        <button className="btn btn-secondary" onClick={onLoadGame} disabled={!dataReady}>
+          继续修炼
+        </button>
+      )}
     </div>
   );
 }
-

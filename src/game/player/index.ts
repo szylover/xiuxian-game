@@ -3,6 +3,6 @@
 // ============================================================
 
 export type { Player, Aptitudes, InventorySlot, EquippedSlots, PlayerTracking, SpiritRootGrade, PlayerSpiritRoots } from './types';
-export { createPlayer } from './create';
-export type { CreatePlayerOptions } from './create';
+export { createPlayer, rollPreview } from './create';
+export type { CreatePlayerOptions, PreviewRoll } from './create';
 export { getSpiritRootGrade, getSpiritRootDisplay, recalcStats, getRealmInfo, getNextRealm } from './stats';
