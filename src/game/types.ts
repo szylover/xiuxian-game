@@ -309,6 +309,22 @@ export interface BodyRealmDef {
   description: string;
 }
 
+// ── 气修境界定义（T0058）──
+
+export interface RealmDef {
+  id: string;                     // 'core:realm_mortal'
+  name: string;                   // '凡人' | '炼气' | …
+  index: number;                  // 0–7+（DLC 可追加更高境界）
+  expReq: number;                 // 突破所需修为
+  lifespanBonus: number;          // 寿命加成
+  hpBase: number;                 // 基础 HP
+  mpBase: number;                 // 基础 MP
+  atkBase: number;                // 基础攻击
+  defBase: number;                // 基础防御
+  speedBase: number;              // 基础速度
+  mentalBase: number;             // 基础念力
+}
+
 /** 灵根对体修的加成配置（数据驱动，通过 DLC 注册） */
 export interface SpiritRootBodyBonus {
   rootType: import('./spirit-root').SpiritRootType;
@@ -344,6 +360,7 @@ export interface DLCPack {
   achievements?: import('./achievement/types').AchievementDef[]; // 该 DLC 提供的成就定义
   bodyRealms?: BodyRealmDef[];              // T0059 体修境界定义
   spiritRootBodyBonuses?: SpiritRootBodyBonus[]; // T0059 灵根对体修的加成配置
+  realms?: RealmDef[];                       // T0058 气修境界定义
 }
 
 // ── 死亡系统类型定义 ──

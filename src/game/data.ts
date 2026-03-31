@@ -4,18 +4,12 @@
 // ============================================================
 
 // ── 类型定义 ──
-export interface Realm {
-  name: string;
-  index: number;
-  expReq: number;
-  lifespanBonus: number;
-  hpBase: number;
-  mpBase: number;
-  atkBase: number;
-  defBase: number;
-  speedBase: number;
-  mentalBase: number;
-}
+
+// T0058: Realm 保留为向后兼容别名，实际类型为 RealmDef（定义在 types.ts）
+import type { RealmDef } from './types';
+export type Realm = RealmDef;
+
+import { getAllRealmDefs, getRealmDef } from './registry/queries';
 
 export interface ActionCost {
   stamina: number;
@@ -41,18 +35,40 @@ export interface Pill {
   desc: string;
 }
 
-// ── 境界表 ──
-// index 对应 realmIndex，属性值为该境界的基础数值
-export const REALMS: Realm[] = [
-  { name: '凡人',   index: 0,  expReq: 0,      lifespanBonus: 0,     hpBase: 100,  mpBase: 30,   atkBase: 8,   defBase: 3,   speedBase: 8,   mentalBase: 20  },
-  { name: '炼气',   index: 1,  expReq: 100,    lifespanBonus: 50,    hpBase: 200,  mpBase: 60,   atkBase: 15,  defBase: 8,   speedBase: 12,  mentalBase: 40  },
-  { name: '筑基',   index: 2,  expReq: 500,    lifespanBonus: 100,   hpBase: 500,  mpBase: 150,  atkBase: 35,  defBase: 20,  speedBase: 18,  mentalBase: 80  },
-  { name: '金丹',   index: 3,  expReq: 2000,   lifespanBonus: 200,   hpBase: 1200, mpBase: 400,  atkBase: 80,  defBase: 45,  speedBase: 25,  mentalBase: 150 },
-  { name: '元婴',   index: 4,  expReq: 8000,   lifespanBonus: 500,   hpBase: 3000, mpBase: 1000, atkBase: 180, defBase: 100, speedBase: 35,  mentalBase: 300 },
-  { name: '化神',   index: 5,  expReq: 30000,  lifespanBonus: 1000,  hpBase: 7000, mpBase: 2500, atkBase: 400, defBase: 220, speedBase: 50,  mentalBase: 600 },
-  { name: '渡劫',   index: 6,  expReq: 100000, lifespanBonus: 2000,  hpBase: 15000,mpBase: 5000, atkBase: 900, defBase: 500, speedBase: 70,  mentalBase: 1200},
-  { name: '大乘',   index: 7,  expReq: 500000, lifespanBonus: 5000,  hpBase: 35000,mpBase: 12000,atkBase: 2000,defBase: 1100,speedBase: 100, mentalBase: 2500},
-];
+// ── 境界表（T0058: DLC 化，从注册表动态读取）──
+// 核心境界数据在 src/data/core-realms.ts，通过 registerDLC() 注册。
+// REALMS 保留为向后兼容的访问器，所有旧代码 REALMS[index] 照常工作。
+// DLC 追加新境界后，REALMS 会自动包含新境界。
+
+/** @deprecated 直接使用 getRealmDef(index) 或 getAllRealmDefs() 代替 */
+export function getRealms(): RealmDef[] {
+  return getAllRealmDefs();
+}
+
+// 向后兼容：大部分旧代码使用 REALMS[index] 访问
+// 使用 Proxy 让 REALMS 表现为数组但从注册表读数据
+const REALMS_PROXY_HANDLER: ProxyHandler<RealmDef[]> = {
+  get(_, prop) {
+    // 数字索引：从注册表读
+    if (typeof prop === 'string' && /^\d+$/.test(prop)) {
+      return getRealmDef(Number(prop));
+    }
+    // .length
+    if (prop === 'length') {
+      const all = getAllRealmDefs();
+      return all.length > 0 ? all[all.length - 1].index + 1 : 0;
+    }
+    // .map / .filter / .forEach / Symbol.iterator 等数组方法
+    const arr = getAllRealmDefs();
+    const val = (arr as unknown as Record<string | symbol, unknown>)[prop];
+    if (typeof val === 'function') {
+      return (val as Function).bind(arr);
+    }
+    return val;
+  },
+};
+
+export const REALMS = new Proxy([] as RealmDef[], REALMS_PROXY_HANDLER);
 
 // ── 操作消耗 & 时间推进（time 单位：月） ──
 export const ACTION_COSTS: Record<string, ActionCost> = {

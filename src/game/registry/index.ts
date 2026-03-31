@@ -16,6 +16,7 @@ export type {
   MonsterDef,
   ElementType, DivineArtDef, DivineArtSkillEffect,
   BodyRealmDef, SpiritRootBodyBonus,
+  RealmDef,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
@@ -37,6 +38,9 @@ export {
   getMonster, getAllMonsters, getMonstersByRealm,
   getDivineArtDef, getAllDivineArtDefs, getDivineArtsByElement,
   getAchievement, getAllAchievementDefs,
+  getBodyRealmDef, getAllBodyRealmDefs,
+  getSpiritRootBodyBonus, getAllSpiritRootBodyBonuses,
+  getRealmDef, getAllRealmDefs, getMaxRealmIndex,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,
