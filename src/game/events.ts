@@ -12,6 +12,7 @@ import type { JsonEvent } from './event-loader';
 import type { JsonItem } from './item-loader';
 import { CORE_BREAKTHROUGH_REQS, CORE_TRIBULATIONS } from '../data/core-breakthrough';
 import { CORE_DIVINE_ARTS } from '../data/core-divine-arts';
+import { CORE_BODY_REALMS, CORE_SPIRIT_ROOT_BODY_BONUSES } from '../data/core-body-config';
 import { registerShopGoods } from './shop';
 import type { ShopGoodsDef } from './shop';
 import { getDeathSystemState } from './death';
@@ -276,6 +277,8 @@ export async function registerCoreEvents(): Promise<void> {
     monsters: CORE_MONSTERS,
     divineArts: CORE_DIVINE_ARTS,
     achievements: CORE_ACHIEVEMENTS,
+    bodyRealms: CORE_BODY_REALMS,
+    spiritRootBodyBonuses: CORE_SPIRIT_ROOT_BODY_BONUSES,
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }

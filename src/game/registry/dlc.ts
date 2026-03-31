@@ -8,6 +8,7 @@ import {
   equipRegistry, smithingRecipeRegistry, breakthroughReqRegistry, tribulationRegistry,
   techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
   monsterRegistry, divineArtRegistry, achievementRegistry,
+  bodyRealmRegistry, spiritRootBodyBonusRegistry,
 } from './stores';
 
 export function registerDLC(pack: DLCPack): void {
@@ -26,6 +27,8 @@ export function registerDLC(pack: DLCPack): void {
   if (pack.monsters) for (const m of pack.monsters) monsterRegistry.set(m.id, m);
   if (pack.divineArts) for (const da of pack.divineArts) divineArtRegistry.set(da.id, da);
   if (pack.achievements) for (const ach of pack.achievements) achievementRegistry.set(ach.id, ach);
+  if (pack.bodyRealms) for (const br of pack.bodyRealms) bodyRealmRegistry.set(br.index, br);
+  if (pack.spiritRootBodyBonuses) for (const sb of pack.spiritRootBodyBonuses) spiritRootBodyBonusRegistry.set(sb.rootType, sb);
 }
 
 export function unregisterDLC(packId: string): void {
@@ -45,6 +48,8 @@ export function unregisterDLC(packId: string): void {
   if (pack.monsters) for (const m of pack.monsters) monsterRegistry.delete(m.id);
   if (pack.divineArts) for (const da of pack.divineArts) divineArtRegistry.delete(da.id);
   if (pack.achievements) for (const ach of pack.achievements) achievementRegistry.delete(ach.id);
+  if (pack.bodyRealms) for (const br of pack.bodyRealms) bodyRealmRegistry.delete(br.index);
+  if (pack.spiritRootBodyBonuses) for (const sb of pack.spiritRootBodyBonuses) spiritRootBodyBonusRegistry.delete(sb.rootType);
   dlcRegistry.delete(packId);
 }
 

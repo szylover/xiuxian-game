@@ -89,6 +89,9 @@ export interface EquipStatBonus {
   critRate?: number;
   critResist?: number;
   moveSpeed?: number;
+  // ─── T0059 体修装备加成 ───
+  physique?: number;              // 装备提供的体魄上限加成
+  physiqueDmgReduce?: number;     // 装备提供的减伤%
 }
 
 export interface EquipDef {
@@ -100,6 +103,9 @@ export interface EquipDef {
   stats: EquipStatBonus;                   // 属性加成
   minRealm: number;                        // 最低佩戴境界
   sellPrice: number;                       // 售卖价格
+  // ─── T0059 体修武器 ───
+  techType?: TechniqueType[];              // 武器兼容的功法类型
+  physiqueBonusRate?: number;              // 体魄值按此比例追加攻击
 }
 
 export interface RecipeDef {
@@ -200,6 +206,10 @@ export interface TechniqueStatBonus {
   critDmgMultiplier?: number;
   hp?: number;
   mp?: number;
+  // ─── T0059 体修被动加成 ───
+  physique?: number;              // 提升体魄上限
+  bodyRealmExp?: number;          // 每次修炼额外获得的体修修为
+  physiqueDmgReduce?: number;     // 额外减伤%（累加，总上限 50%）
 }
 
 /** 功法主动技能定义 */
@@ -242,6 +252,7 @@ export interface TechniqueDef {
   passiveEffects?: PassiveEffect[];        // 多级被动效果，按 minLevel 升序排列（T0019）
   spiritRootElement?: import('./spirit-root').SpiritRootType; // 功法五行属性（T0056）：对应灵根亲和度越高修炼越快、上限越高
   requiredSpiritRoot?: import('./spirit-root').SpiritRootType; // 学习门槛（T0056）：必须拥有此灵根才能习得
+  bodyExpRate?: number;                     // T0059 体修修为系数（0-1，修炼此功法时按此比例给予体修修为）
 }
 
 // ── 事件类型定义 ──
@@ -283,6 +294,30 @@ export interface MonsterDef {
   elementResists?: Partial<Record<ElementType, number>>; // 各系元素抗性 0~1（减免比例）
 }
 
+// ── 体修境界定义（T0059）──
+
+export interface BodyRealmDef {
+  id: string;                     // 'core:body_mortal'
+  name: string;                   // '凡躯' | '铜皮' | …
+  index: number;                  // 0–6
+  maxPhysique: number;            // 该境界体魄上限
+  expReq: number;                 // 升阶所需体修修为
+  physiqueDmgReduce: number;      // 提供的减伤百分比
+  hpBonus: number;                // 额外 HP 加成
+  atkBonus: number;               // 额外攻击加成
+  defBonus: number;               // 额外防御加成
+  description: string;
+}
+
+/** 灵根对体修的加成配置（数据驱动，通过 DLC 注册） */
+export interface SpiritRootBodyBonus {
+  rootType: import('./spirit-root').SpiritRootType;
+  bodyExpMultiplier?: number;     // 体修修为获取倍率（1.3 = +30%）
+  physiqueRegenRate?: number;     // 体魄恢复速率倍率（1.2 = +20%）
+  dmgReduceBonus?: number;        // 额外减伤%
+  hpBonusRate?: number;           // HP 加成比例（0.15 = +15%）
+}
+
 // ── DLC 包定义 ──
 
 // 预留，Phase 1 不实现
@@ -307,6 +342,8 @@ export interface DLCPack {
   monsters?: MonsterDef[];                 // 该 DLC 提供的妖兽定义
   divineArts?: DivineArtDef[];             // 该 DLC 提供的神通定义
   achievements?: import('./achievement/types').AchievementDef[]; // 该 DLC 提供的成就定义
+  bodyRealms?: BodyRealmDef[];              // T0059 体修境界定义
+  spiritRootBodyBonuses?: SpiritRootBodyBonus[]; // T0059 灵根对体修的加成配置
 }
 
 // ── 死亡系统类型定义 ──

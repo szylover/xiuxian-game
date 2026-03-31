@@ -13,6 +13,7 @@ export interface Combatant {
   critRate: number;
   critDmgMultiplier?: number;
   critResist: number;
+  physiqueDmgReduce?: number;     // T0059 体魄减伤（%）
 }
 
 export interface DamageResult {
@@ -58,4 +59,5 @@ export interface CombatResult {
   monsterMaxHp: number;             // 怪物最大 HP（用于血条百分比）
   playerMaxHp: number;              // 玩家最大 HP（含功法加成）
   playerMaxMp: number;              // 玩家最大 MP（战斗开始时）
+  bodyExpGained: number;            // T0059 本场获得的体修修为
 }

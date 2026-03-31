@@ -93,6 +93,13 @@ export interface Player {
   spiritRoots: PlayerSpiritRoots;          // T0056 五行灵根
   gender: 'male' | 'female';              // T0056 性别
   appearance: number;                      // T0056 外貌（头像序号）
+  // ─── T0059 体修专属属性 ───
+  physique: number;                        // 当前体魄值
+  maxPhysique: number;                     // 体魄上限（由体修境界+功法被动叠加）
+  bodyRealmIndex: number;                  // 体修境界索引（0=凡躯，1-6）
+  bodyRealmExp: number;                    // 当前体修修为
+  physiqueDmgReduce: number;               // 体魄减伤%（上限50）
+  bodyTempering: number;                   // 淬体次数
 }
 
 export interface SpiritRootGrade {
