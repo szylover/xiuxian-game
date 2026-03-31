@@ -31,7 +31,7 @@ const DEBUG_TABS = [
   { key: 'technique' as const, label: '功法', icon: '✨' },
   { key: 'divine' as const, label: '神通', icon: '🌟' },
   { key: 'achievement' as const, label: '成就', icon: '🏆' },
-  { key: 'changelog' as const, label: '更新日志', icon: '📋' },
+  { key: 'changelog' as const, label: '日志', icon: '📋' },
 ];
 
 export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {

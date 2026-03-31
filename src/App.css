@@ -107,41 +107,48 @@ body {
 
 .avatar-option img { display: block; border-radius: 6px; }
 
-/* ── 单页建角色布局 ── */
-.create-char-form {
+/* ── 单页建角色布局（T0063: 居中单栏） ── */
+.start-form-centered {
   display: flex;
-  flex-direction: row;
-  gap: 1.6rem;
-  align-items: flex-start;
-  max-width: 760px;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  max-width: 420px;
   width: 100%;
-  padding: 1rem;
+  padding: 1.2rem 1.5rem;
   background: #0d1120;
   border: 1px solid #222;
   border-radius: 12px;
 }
 
-.create-char-left {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  min-width: 260px;
-}
-
-.create-char-right {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-}
-
-.talent-section-title {
+/* ── 随机角色按钮 ── */
+.btn-reroll {
+  background: linear-gradient(135deg, #2a3a5c, #1a2a4c);
   color: #ffd700;
-  font-size: 0.95rem;
+  border: 1px solid #ffd700;
+  padding: 0.6rem 1.8rem;
+  font-size: 1rem;
   font-weight: bold;
-  letter-spacing: 1px;
-  margin-bottom: 0.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-top: 0.4rem;
 }
+.btn-reroll:hover { background: linear-gradient(135deg, #3a4a6c, #2a3a5c); filter: brightness(1.1); }
+
+/* ── 天赋摘要 ── */
+.talent-summary {
+  color: #aaa;
+  font-size: 0.82rem;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #2a2e3e;
+  border-radius: 6px;
+  background: #12162a;
+  transition: border-color 0.15s;
+}
+.talent-summary:hover { border-color: #ffd700; color: #ccc; }
 
 /* ── 先天属性条 ── */
 .innate-attrs {
@@ -2782,6 +2789,8 @@ body {
   color: #616161;
   cursor: not-allowed;
   text-align: center;
+}
+
 /* ============================================================
    成就面板（T0031）
    ============================================================ */
@@ -2944,4 +2953,251 @@ body {
 .achievement-summary-empty {
   font-size: 0.72rem;
   color: #555;
+}
+
+/* ============================================================
+   RerollModal — 随机角色弹窗 (T0063)
+   ============================================================ */
+.reroll-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: reroll-fade-in 0.2s ease;
+}
+
+@keyframes reroll-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.reroll-modal {
+  background: linear-gradient(180deg, #111827 0%, #0c1021 100%);
+  border: 1px solid #2a3a5c;
+  border-radius: 14px;
+  width: 92%;
+  max-width: 500px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.8), 0 0 1px rgba(255, 215, 0, 0.15);
+  animation: reroll-slide-up 0.25s ease;
+}
+
+@keyframes reroll-slide-up {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.reroll-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid #1e2a45;
+  background: rgba(255, 215, 0, 0.03);
+}
+.reroll-header h2 {
+  color: #ffd700;
+  font-size: 1.05rem;
+  margin: 0;
+  letter-spacing: 1px;
+}
+.reroll-close-btn {
+  background: none;
+  border: 1px solid #333;
+  color: #666;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  line-height: 1;
+  transition: all 0.15s;
+}
+.reroll-close-btn:hover { color: #fff; border-color: #666; background: rgba(255,255,255,0.05); }
+
+.reroll-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.8rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+/* ── 分区 ── */
+.reroll-section {
+  padding: 0.6rem 0.7rem;
+  background: rgba(15, 20, 40, 0.7);
+  border: 1px solid #1a2340;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.reroll-section-title {
+  color: #6b7db3;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.1rem;
+  border-bottom: 1px solid #1a2340;
+  padding-bottom: 0.3rem;
+}
+
+/* ── 行 ── */
+.reroll-row {
+  display: grid;
+  grid-template-columns: 85px 1fr 32px 24px;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.15rem 0;
+}
+
+.reroll-row-combo {
+  grid-template-columns: 85px auto auto 24px;
+}
+
+.reroll-row-empty {
+  grid-template-columns: 1fr;
+}
+
+.reroll-row-label {
+  font-size: 0.82rem;
+  color: #c0c8e0;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.root-icon-sm { font-size: 0.9rem; }
+
+.reroll-bar {
+  height: 7px;
+  background: #1a1e30;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.reroll-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.reroll-val {
+  font-size: 0.78rem;
+  text-align: right;
+  font-weight: 600;
+  color: #bbb;
+}
+
+.reroll-mult {
+  font-size: 0.78rem;
+  color: #8a8a8a;
+}
+
+.combo-badge-sm {
+  font-size: 0.82rem;
+  font-weight: bold;
+  border: 1px solid currentColor;
+  border-radius: 5px;
+  padding: 0.1rem 0.5rem;
+  letter-spacing: 1px;
+}
+
+/* ── 锁按钮 ── */
+.reroll-lock-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 0;
+  line-height: 1;
+  opacity: 0.35;
+  transition: opacity 0.15s, transform 0.15s;
+}
+.reroll-lock-btn:hover:not(:disabled) { transform: scale(1.2); opacity: 0.8; }
+.reroll-lock-btn:disabled { opacity: 0.15; cursor: not-allowed; }
+.reroll-lock-btn-locked {
+  opacity: 1;
+  filter: drop-shadow(0 0 3px #ffd700);
+}
+
+/* ── 资质网格（弹窗内） ── */
+.reroll-apt-group { margin-top: 0.2rem; }
+.reroll-apt-group-label {
+  color: #5a6a90;
+  font-size: 0.68rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  letter-spacing: 1px;
+}
+
+.reroll-apt-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.3rem 0.6rem;
+}
+
+.reroll-apt-cell {
+  display: grid;
+  grid-template-columns: 28px 1fr 22px 18px;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.reroll-apt-name {
+  font-size: 0.72rem;
+  color: #a0a8c0;
+  text-align: right;
+}
+
+.reroll-apt-bar {
+  height: 5px;
+  background: #1a1e30;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.reroll-apt-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.reroll-apt-val {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* ── 底部 ── */
+.reroll-footer {
+  padding: 0.7rem 1.2rem;
+  border-top: 1px solid #1e2a45;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 215, 0, 0.02);
+}
+
+.reroll-lock-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #888;
+  font-size: 0.78rem;
+}
+
+.reroll-actions {
+  display: flex;
+  gap: 1rem;
 }
