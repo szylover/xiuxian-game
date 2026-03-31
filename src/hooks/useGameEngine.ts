@@ -465,7 +465,7 @@ export function useGameEngine(
   const {
     useItem, craft, equip, unequip, buy, sell, smith, breakthrough,
     learnTechnique, practiceTechnique, activateTechnique,
-    learnDivineArt, activateDivineArt,
+    learnDivineArt, activateDivineArt, deactivateDivineArt,
   } = useSystemActions({
     player, addLog, setPlayer, setGameOver, setGameOverReason, setDeathModal,
   });
@@ -523,6 +523,7 @@ export function useGameEngine(
     activateTechnique,
     learnDivineArt,
     activateDivineArt,
+    deactivateDivineArt,
     toast,
     dismissToast,
     combatModal,

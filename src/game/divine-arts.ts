@@ -106,6 +106,21 @@ export function activateDivineArt(player: Player, artId: string): { player: Play
   };
 }
 
+/** 取消激活当前神通 */
+export function deactivateDivineArt(player: Player): { player: Player; message: string } {
+  const state = getDivineArtsState(player);
+  if (!state.activeArtId) {
+    return { player, message: '❌ 当前没有激活的神通。' };
+  }
+  const artDef = getDivineArtDef(state.activeArtId);
+  const artName = artDef ? artDef.name : state.activeArtId;
+  const newState: DivineArtsSystemState = { ...state, activeArtId: null };
+  return {
+    player: { ...player, systems: { ...player.systems, divineArts: newState } },
+    message: `❎ 已取消激活神通【${artName}】。`,
+  };
+}
+
 /** 获取可学神通列表：境界达标 + 资质达标 + 未已学 */
 export function getLearnableDivineArts(player: Player): DivineArtDef[] {
   const state = getDivineArtsState(player);
