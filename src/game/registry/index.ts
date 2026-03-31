@@ -14,6 +14,7 @@ export type {
   DLCPack,
   DeathSeverity, DeathTriggerDef, DeathPenaltyDef, LifeSaverDef, RevivalMethodDef, DeathSystemState,
   MonsterDef,
+  ElementType, DivineArtDef, DivineArtSkillEffect,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
@@ -33,6 +34,7 @@ export {
   getLifeSaver, getAllLifeSavers,
   getRevivalMethod, getAllRevivalMethods,
   getMonster, getAllMonsters, getMonstersByRealm,
+  getDivineArtDef, getAllDivineArtDefs, getDivineArtsByElement,
   getAchievement, getAllAchievementDefs,
 } from './queries';
 export {

@@ -6,10 +6,15 @@
 import { useState } from 'react';
 import type { Player } from '../../game/player';
 import { recalcStats } from '../../game/player';
-import { getAllItemDefs, getAllEquipDefs, getAllTechniqueDefs, getAllAchievementDefs } from '../../game/registry';
+import { getAllItemDefs, getAllEquipDefs, getAllTechniqueDefs, getAllDivineArtDefs, getAllAchievementDefs } from '../../game/registry';
 import { addItem } from '../../game/inventory';
 import { getAllTechniquePassiveBonus } from '../../game/technique';
+import { getDivineArtsState, ELEMENT_EMOJI, ELEMENT_CN, ELEMENT_COLOR } from '../../game/divine-arts';
+import type { DivineArtsSystemState } from '../../game/divine-arts';
 import { getAchievementState, checkAchievements, ONCE_BONUS_KEYS } from '../../game/achievement/engine';
+
+// 颜色映射（供模板字面量中使用）
+
 import { CollapsiblePanel, TabBar } from '../shared';
 import DebugStatsTab from './DebugStatsTab';
 import DebugItemsTab from './DebugItemsTab';
@@ -24,13 +29,14 @@ const DEBUG_TABS = [
   { key: 'stats' as const, label: '数值', icon: '📊' },
   { key: 'items' as const, label: '物品', icon: '📦' },
   { key: 'technique' as const, label: '功法', icon: '✨' },
+  { key: 'divine' as const, label: '神通', icon: '🌟' },
   { key: 'achievement' as const, label: '成就', icon: '🏆' },
   { key: 'changelog' as const, label: '更新日志', icon: '📋' },
 ];
 
 export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [tab, setTab] = useState<'stats' | 'items' | 'technique' | 'achievement' | 'changelog'>('stats');
+  const [tab, setTab] = useState<'stats' | 'items' | 'technique' | 'divine' | 'achievement' | 'changelog'>('stats');
   const [itemQty, setItemQty] = useState<Record<string, number>>({});
 
   if (!player || player.name !== 'Debug') return null;
@@ -94,6 +100,26 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
 
   const getQty = (id: string) => itemQty[id] || 1;
   const setQty = (id: string, v: number) => setItemQty(prev => ({ ...prev, [id]: Math.max(1, v) }));
+
+  // ── 神通调试操作 ──
+  const learnAllDivineArts = () => {
+    onUpdate(prev => {
+      if (!prev) return prev;
+      const allArtDefs = getAllDivineArtDefs();
+      const newState: DivineArtsSystemState = {
+        learned: allArtDefs.map(d => ({ artId: d.id })),
+        activeArtId: (prev.systems['divineArts'] as DivineArtsSystemState | undefined)?.activeArtId ?? null,
+      };
+      return { ...prev, systems: { ...prev.systems, divineArts: newState } };
+    });
+  };
+
+  const setElementAptitude = (element: string, value: number) => {
+    onUpdate(prev => {
+      if (!prev) return prev;
+      return { ...prev, aptitudes: { ...prev.aptitudes, [element]: value } };
+    });
+  };
 
   // ── 成就调试操作 ──
   const unlockAllAchievements = () => {
@@ -251,6 +277,101 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
                         </div>
                       );
                     })}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {tab === 'divine' && (
+          <div className="debug-stats">
+            {/* 神通状态概览 */}
+            <div className="debug-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.3rem' }}>
+              <span className="debug-label" style={{ fontWeight: 'bold' }}>🌟 神通系统状态</span>
+              {(() => {
+                const daState = getDivineArtsState(player);
+                return (
+                  <div style={{ fontSize: '0.75rem', fontFamily: 'monospace', color: '#ccc' }}>
+                    <div>激活神通：<span style={{ color: '#f1c40f' }}>{daState.activeArtId ?? '无'}</span></div>
+                    <div>已学神通：{daState.learned.length > 0
+                      ? daState.learned.map(s => {
+                          const def = getAllDivineArtDefs().find(d => d.id === s.artId);
+                          return def ? `${ELEMENT_EMOJI[def.element]}${def.name}` : s.artId;
+                        }).join(' | ')
+                      : '无'}
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+
+            {/* 一键学习全部神通 */}
+            <div className="debug-row" style={{ marginTop: '0.5rem' }}>
+              <button
+                className="btn debug-btn"
+                onClick={learnAllDivineArts}
+                title="将六系神通全部学习（用于测试）"
+              >
+                🌟 学习全部神通
+              </button>
+            </div>
+
+            {/* 快速设置资质 */}
+            <div className="debug-row" style={{ marginTop: '0.5rem', flexWrap: 'wrap', gap: '0.3rem' }}>
+              <span className="debug-label">⚡ 快速设置：</span>
+              <button className="btn debug-btn" onClick={() => setElementAptitude('fire', 100)} style={{ color: '#e74c3c' }}>
+                🔥火=100
+              </button>
+              <button className="btn debug-btn" onClick={() => setElementAptitude('thunder', 60)} style={{ color: '#f1c40f' }}>
+                ⚡雷=60
+              </button>
+              <button className="btn debug-btn" onClick={() => setElementAptitude('water', 50)} style={{ color: '#3498db' }}>
+                💧水=50
+              </button>
+              <button className="btn debug-btn" onClick={() => setElementAptitude('wind', 50)} style={{ color: '#1abc9c' }}>
+                🌪️风=50
+              </button>
+              <button className="btn debug-btn" onClick={() => setElementAptitude('earth', 50)} style={{ color: '#795548' }}>
+                🪨土=50
+              </button>
+              <button className="btn debug-btn" onClick={() => setElementAptitude('wood', 50)} style={{ color: '#27ae60' }}>
+                🌿木=50
+              </button>
+              <button className="btn debug-btn" onClick={() => setElementAptitude('metal', 60)} style={{ color: '#DAA520' }}>
+                ⚔️金=60
+              </button>
+            </div>
+
+            {/* 七系灵根资质当前数值（含金系，对应 T0056 五行） */}
+            <div style={{ marginTop: '0.6rem' }}>
+              <span className="debug-label" style={{ fontWeight: 'bold' }}>📊 七系灵根资质</span>
+              {(['fire', 'water', 'thunder', 'wind', 'earth', 'wood', 'metal'] as const).map(el => {
+                const val = (player.aptitudes as unknown as Record<string, number>)[el] ?? 0;
+                return (
+                  <div key={el} className="debug-row" style={{ marginTop: '0.25rem' }}>
+                    <span className="debug-label" style={{ color: ELEMENT_COLOR[el] }}>
+                      {ELEMENT_EMOJI[el]} {ELEMENT_CN[el]}灵根：<strong>{val}</strong>
+                    </span>
+                    <div className="debug-btns">
+                      {[10, 30, 50].map(d => (
+                        <button key={d} className="btn debug-btn" onClick={() => setElementAptitude(el, val + d)}>
+                          +{d}
+                        </button>
+                      ))}
+                      <input
+                        type="number"
+                        className="debug-input-sm"
+                        placeholder="="
+                        onKeyDown={e => {
+                          if (e.key === 'Enter') setElementAptitude(el, Number((e.target as HTMLInputElement).value) || 0);
+                        }}
+                        onBlur={e => {
+                          const v = Number(e.target.value);
+                          if (v || v === 0) setElementAptitude(el, v);
+                        }}
+                      />
+                    </div>
                   </div>
                 );
               })}

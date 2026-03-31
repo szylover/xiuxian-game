@@ -13,6 +13,7 @@ import { performSmithing } from '../game/smithing';
 import { attemptBreakthrough as attemptBreakthroughFn } from '../game/breakthrough';
 import { runTribulation as runTribulationFn } from '../game/tribulation';
 import { learnTechnique, practiceTechnique, activateTechnique } from '../game/technique';
+import { learnDivineArt as learnDivineArtFn, activateDivineArt as activateDivineArtFn } from '../game/divine-arts';
 import { recalcStats } from '../game/player';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
 import type { EquipSlot } from '../game/registry';
@@ -122,6 +123,15 @@ export function useSystemActions(deps: SystemActionDeps) {
     execAction(p => activateTechnique(p, techniqueId));
   }, [execAction]);
 
+  // ── T0020: 神通 ──
+  const learnDivineArt = useCallback((artId: string) => {
+    execAction(p => learnDivineArtFn(p, artId));
+  }, [execAction]);
+
+  const activateDivineArt = useCallback((artId: string) => {
+    execAction(p => activateDivineArtFn(p, artId));
+  }, [execAction]);
+
   return {
     useItem: useItemAction,
     craft,
@@ -134,5 +144,7 @@ export function useSystemActions(deps: SystemActionDeps) {
     learnTechnique: learn,
     practiceTechnique: practice,
     activateTechnique: activate,
+    learnDivineArt,
+    activateDivineArt,
   };
 }

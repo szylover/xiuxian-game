@@ -75,6 +75,7 @@ export function rollAptitudesWithSpiritRoots(spiritRoots: PlayerSpiritRoots): Ap
     fire: rollAptitude(), water: rollAptitude(),
     thunder: rollAptitude(), wind: rollAptitude(),
     earth: rollAptitude(), wood: rollAptitude(),
+    metal: rollAptitude(),
   };
 
   // 根据灵根对对应元素资质施加加成
