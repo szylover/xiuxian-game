@@ -10,13 +10,6 @@ import { loadEventsFromJson } from './event-loader';
 import { loadItemsFromJson } from './item-loader';
 import type { JsonEvent } from './event-loader';
 import type { JsonItem } from './item-loader';
-import coreEventsJson from '../data/core-events.json';
-import coreItemsJson from '../data/core-items.json';
-import coreRecipesJson from '../data/core-recipes.json';
-import coreEquipsJson from '../data/core-equips.json';
-import coreShopJson from '../data/core-shop.json';
-import coreSmithingJson from '../data/core-smithing.json';
-import coreTechniquesJson from '../data/core-techniques.json';
 import { CORE_BREAKTHROUGH_REQS, CORE_TRIBULATIONS } from '../data/core-breakthrough';
 import { registerShopGoods } from './shop';
 import type { ShopGoodsDef } from './shop';
@@ -237,7 +230,25 @@ const CORE_MONSTERS: MonsterDef[] = [
 ];
 
 // ── 注册 core DLC ──
-export function registerCoreEvents(): void {
+export async function registerCoreEvents(): Promise<void> {
+  const [
+    { default: coreEventsJson },
+    { default: coreItemsJson },
+    { default: coreRecipesJson },
+    { default: coreEquipsJson },
+    { default: coreShopJson },
+    { default: coreSmithingJson },
+    { default: coreTechniquesJson },
+  ] = await Promise.all([
+    import('../data/core-events.json'),
+    import('../data/core-items.json'),
+    import('../data/core-recipes.json'),
+    import('../data/core-equips.json'),
+    import('../data/core-shop.json'),
+    import('../data/core-smithing.json'),
+    import('../data/core-techniques.json'),
+  ]);
+
   const pack = loadEventsFromJson(coreEventsJson as JsonEvent[], {
     id: 'core',
     name: '基础内容包',

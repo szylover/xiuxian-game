@@ -1,9 +1,38 @@
 // ============================================================
-// player/create.ts — 新建玩家角色
+// player/create.ts — 新建玩家角色 (T0056: 初始随机属性系统)
 // ============================================================
 
 import { REALMS } from '../data';
+import { rollSpiritRoots } from '../spirit-root';
+import type { PlayerSpiritRoots } from '../spirit-root';
 import type { Player, Aptitudes } from './types';
+
+/** 建角色时预先随机好的核心属性（可用于UI展示+重掷） */
+export interface PreviewRoll {
+  spiritRoots: PlayerSpiritRoots;
+  luck: number;
+  comprehension: number;
+  charisma: number;
+}
+
+/** 生成一套随机预览属性 */
+export function rollPreview(): PreviewRoll {
+  return {
+    spiritRoots: rollSpiritRoots(),
+    luck: rollInnateAttr(),
+    comprehension: rollInnateAttr(),
+    charisma: rollInnateAttr(),
+  };
+}
+
+export interface CreatePlayerOptions {
+  name: string;
+  gender: 'male' | 'female';
+  appearance: number;
+  preview?: PreviewRoll; // 可选：允许外部传入预先随机好的属性
+  /** @deprecated use preview instead */
+  spiritRoots?: PlayerSpiritRoots;
+}
 
 function randInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -19,8 +48,20 @@ function rollAptitude(): number {
   return randInt(96, 100);
 }
 
-export function createPlayer(name: string = '无名散修'): Player {
+// 先天属性加权随机：低(50%) 中(30%) 高(15%) 极(5%)
+function rollInnateAttr(): number {
+  const roll = Math.random() * 100;
+  if (roll < 50) return randInt(1, 30);
+  if (roll < 80) return randInt(31, 60);
+  if (roll < 95) return randInt(61, 85);
+  return randInt(86, 100);
+}
+
+export function createPlayer(options: CreatePlayerOptions): Player {
+  const { name, gender, appearance } = options;
   const realm = REALMS[0];
+
+  // 先生成基础资质
   const aptitudes: Aptitudes = {
     alchemy: rollAptitude(), smithing: rollAptitude(),
     fengshui: rollAptitude(), mining: rollAptitude(),
@@ -32,9 +73,50 @@ export function createPlayer(name: string = '无名散修'): Player {
     earth: rollAptitude(), wood: rollAptitude(),
   };
 
+  // 决定灵根（优先使用预览中的值，兼容旧 spiritRoots 字段）
+  const spiritRoots = options.preview?.spiritRoots ?? options.spiritRoots ?? rollSpiritRoots();
+
+  // 根据灵根对对应元素资质施加加成
+  // metal → thunder + wind；其余直接对应
+  for (const root of spiritRoots.roots) {
+    const bonus = randInt(20, 40);
+    switch (root.type) {
+      case 'fire':  aptitudes.fire  = Math.min(100, aptitudes.fire  + bonus); break;
+      case 'water': aptitudes.water = Math.min(100, aptitudes.water + bonus); break;
+      case 'earth': aptitudes.earth = Math.min(100, aptitudes.earth + bonus); break;
+      case 'wood':  aptitudes.wood  = Math.min(100, aptitudes.wood  + bonus); break;
+      case 'metal': {
+        // 金灵根对应雷系与风系（锐利/穿透），各自独立随机加成
+        const b2 = randInt(20, 40);
+        aptitudes.thunder = Math.min(100, aptitudes.thunder + bonus);
+        aptitudes.wind    = Math.min(100, aptitudes.wind    + b2);
+        break;
+      }
+    }
+  }
+
+  // 单灵根：对应主元素资质保证 ≥ 80
+  if (spiritRoots.combo === 'single' && spiritRoots.roots.length === 1) {
+    const root = spiritRoots.roots[0];
+    if (root.type === 'fire'  && aptitudes.fire  < 80) aptitudes.fire  = randInt(80, 100);
+    if (root.type === 'water' && aptitudes.water < 80) aptitudes.water = randInt(80, 100);
+    if (root.type === 'earth' && aptitudes.earth < 80) aptitudes.earth = randInt(80, 100);
+    if (root.type === 'wood'  && aptitudes.wood  < 80) aptitudes.wood  = randInt(80, 100);
+    if (root.type === 'metal') {
+      if (aptitudes.thunder < 80) aptitudes.thunder = randInt(80, 100);
+      if (aptitudes.wind    < 80) aptitudes.wind    = randInt(80, 100);
+    }
+  }
+
   return {
-    name, avatar: 'default', realmIndex: 0, exp: 0,
-    age: 16, lifespan: 100, mood: 70, health: 100,
+    name: name || '无名散修',
+    avatar: `${gender}-${appearance}`,
+    gender,
+    appearance,
+    realmIndex: 0, exp: 0,
+    age: 16, lifespan: 100,
+    mood: randInt(50, 90),
+    health: randInt(80, 100),
     stamina: 100, maxStamina: 100,
     hp: realm.hpBase, maxHp: realm.hpBase,
     mp: realm.mpBase, maxMp: realm.mpBase,
@@ -42,8 +124,11 @@ export function createPlayer(name: string = '无名散修'): Player {
     atk: realm.atkBase, def: realm.defBase, speed: realm.speedBase,
     skillResist: 0, spellResist: 0,
     critRate: 5, critDmgMultiplier: 1.5, critResist: 0, moveSpeed: 10,
-    luck: randInt(1, 100), comprehension: randInt(1, 100), charisma: randInt(1, 100),
+    luck:          options.preview?.luck          ?? rollInnateAttr(),
+    comprehension: options.preview?.comprehension ?? rollInnateAttr(),
+    charisma:      options.preview?.charisma      ?? rollInnateAttr(),
     aptitudes,
+    spiritRoots,
     gold: 0, inventory: [], inventoryCapacity: 20,
     equipped: { weapon: null, helmet: null, armor: null, boots: null, accessory1: null, accessory2: null },
     techniques: [], activeTechniqueId: null,
@@ -52,3 +137,4 @@ export function createPlayer(name: string = '无名散修'): Player {
     gameYear: 1, gameMonth: 1,
   };
 }
+

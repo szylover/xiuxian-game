@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="fhair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2a3e"/>
+      <stop offset="100%" stop-color="#151520"/>
+    </linearGradient>
+    <linearGradient id="frobe" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5a1a3a"/>
+      <stop offset="100%" stop-color="#3a0a24"/>
+    </linearGradient>
+    <linearGradient id="finner" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdf0f8"/>
+      <stop offset="100%" stop-color="#e8d0e4"/>
+    </linearGradient>
+    <linearGradient id="fskin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fce8d0"/>
+      <stop offset="60%" stop-color="#f5d8c0"/>
+      <stop offset="100%" stop-color="#e8c8a8"/>
+    </linearGradient>
+    <filter id="fglow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 长直发 -->
+  <ellipse cx="100" cy="58" rx="42" ry="44" fill="url(#fhair)"/>
+  <path d="M58,60 Q50,88 52,155 Q56,158 60,153 Q56,94 62,64Z" fill="url(#fhair)"/>
+  <path d="M142,60 Q150,88 148,155 Q144,158 140,153 Q144,94 138,64Z" fill="url(#fhair)"/>
+  <!-- 玫红仙袍 -->
+  <path d="M65,94 Q56,106 42,195 L158,195 Q144,106 135,94 Q122,88 100,87 Q78,88 65,94Z" fill="url(#frobe)"/>
+  <!-- 宽袖 -->
+  <path d="M58,102 Q40,120 32,150 Q36,146 46,130 Q52,118 60,108Z" fill="#420a28" opacity="0.5"/>
+  <path d="M142,102 Q160,120 168,150 Q164,146 154,130 Q148,118 140,108Z" fill="#420a28" opacity="0.5"/>
+  <!-- 白色内衬 -->
+  <path d="M82,91 L76,195 L124,195 L118,91 L100,108Z" fill="url(#finner)"/>
+  <path d="M82,91 L100,108 L118,91" stroke="#c090b8" stroke-width="1.2" fill="none"/>
+  <!-- 腰带 (粉金) -->
+  <path d="M64,116 Q80,120 100,120 Q120,120 136,116 L134,123 Q118,127 100,127 Q82,127 66,123Z" fill="#e8b8d0"/>
+  <ellipse cx="100" cy="123" rx="5" ry="3" fill="#f8d0e8"/>
+  <line x1="100" y1="127" x2="100" y2="138" stroke="#d090b0" stroke-width="0.8"/>
+  <circle cx="100" cy="141" r="5.5" fill="#e060a0" stroke="#b040808" stroke-width="0.8" filter="url(#fglow)"/>
+  <circle cx="100" cy="141" r="2.5" fill="#f890c8" opacity="0.7"/>
+  <!-- 脸部 (较圆润) -->
+  <ellipse cx="100" cy="65" rx="26" ry="29" fill="url(#fskin)"/>
+  <path d="M74,72 Q82,94 100,97 Q118,94 126,72" fill="url(#fskin)"/>
+  <ellipse cx="74" cy="66" rx="4" ry="6.5" fill="#f0c8a8"/>
+  <ellipse cx="126" cy="66" rx="4" ry="6.5" fill="#f0c8a8"/>
+  <!-- 发型 - 高盘发 -->
+  <path d="M74,50 Q84,42 100,44 Q116,42 126,50 Q120,36 100,32 Q80,36 74,50Z" fill="url(#fhair)"/>
+  <ellipse cx="100" cy="20" rx="16" ry="12" fill="url(#fhair)"/>
+  <path d="M84,22 Q92,10 100,8 Q108,10 116,22" stroke="#2a2a3e" stroke-width="1" fill="none"/>
+  <!-- 发簪 (花形) -->
+  <line x1="84" y1="16" x2="116" y2="16" stroke="#e888b8" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="116" cy="16" r="4" fill="#f0a0c8" stroke="#e060a0" stroke-width="0.5"/>
+  <circle cx="116" cy="16" r="2" fill="#fff" opacity="0.7"/>
+  <!-- 眉毛 (细弯) -->
+  <path d="M82,53 Q88,50 95,52" stroke="#2a2020" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <path d="M105,52 Q112,50 118,53" stroke="#2a2020" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <!-- 眼睛 (杏眼) -->
+  <ellipse cx="88" cy="61" rx="7.5" ry="5.5" fill="#fff"/>
+  <ellipse cx="88" cy="62" rx="5" ry="4.5" fill="#2a1020"/>
+  <circle cx="87" cy="61" r="2.2" fill="#1a0818"/>
+  <circle cx="85.5" cy="60" r="1.3" fill="#fff"/>
+  <path d="M80,58 Q84,56 96,58" stroke="#180818" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="112" cy="61" rx="7.5" ry="5.5" fill="#fff"/>
+  <ellipse cx="112" cy="62" rx="5" ry="4.5" fill="#2a1020"/>
+  <circle cx="113" cy="61" r="2.2" fill="#1a0818"/>
+  <circle cx="114.5" cy="60" r="1.3" fill="#fff"/>
+  <path d="M104,58 Q108,56 120,58" stroke="#180818" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- 腮红 -->
+  <ellipse cx="80" cy="70" rx="8" ry="5" fill="#f0a0a0" opacity="0.25"/>
+  <ellipse cx="120" cy="70" rx="8" ry="5" fill="#f0a0a0" opacity="0.25"/>
+  <!-- 鼻嘴 -->
+  <path d="M100,67 L99,73 L101,73Z" fill="#e8c0a0" opacity="0.8"/>
+  <path d="M94,80 Q100,84 106,80" stroke="#c07080" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+</svg>

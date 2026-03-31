@@ -31,7 +31,7 @@
 | [T0005](tasks/done/T0005-lifespan.md) | 寿命系统 | T0001 | — | ✅ |
 | [T0006](tasks/done/T0006-status-panel.md) | 状态面板 v2 | T0001 | — | ✅ |
 | [T0047](tasks/todo/T0047-talent-fate.md) | 命格天赋系统 | T0001 | — | ⬜ |
-| [T0056](tasks/todo/T0056-initial-random-attributes.md) | 初始随机属性系统 | T0001 | — | ⬜ |
+| [T0056](tasks/done/T0056-initial-random-attributes.md) | 初始随机属性系统 | T0001 | — | ✅ |
 
 ### 🏷️ 事件系统
 
@@ -126,6 +126,7 @@
 | [T0037](tasks/todo/T0037-audio.md) | 音效系统 | — | — | ⬜ |
 | [T0038](tasks/todo/T0038-multi-save.md) | 多存档 | — | — | ⬜ |
 | [T0039](tasks/todo/T0039-tutorial.md) | 新手引导 | T0001 | — | ⬜ |
+| [T0059](tasks/done/T0059-data-lazy-loading.md) | 数据懒加载 & Bundle 分割 | — | [spec](specs/T0059-data-lazy-loading.md) | ✅ |
 
 ---
 

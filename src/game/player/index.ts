@@ -2,6 +2,7 @@
 // player/index.ts — barrel re-export
 // ============================================================
 
-export type { Player, Aptitudes, InventorySlot, EquippedSlots, PlayerTracking, SpiritRootGrade } from './types';
-export { createPlayer } from './create';
-export { getSpiritRootGrade, recalcStats, getRealmInfo, getNextRealm } from './stats';
+export type { Player, Aptitudes, InventorySlot, EquippedSlots, PlayerTracking, SpiritRootGrade, PlayerSpiritRoots } from './types';
+export { createPlayer, rollPreview } from './create';
+export type { CreatePlayerOptions, PreviewRoll } from './create';
+export { getSpiritRootGrade, getSpiritRootDisplay, recalcStats, getRealmInfo, getNextRealm } from './stats';

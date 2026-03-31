@@ -5,6 +5,7 @@
 import { useState } from 'react';
 import { useGameEngine } from './hooks/useGameEngine';
 import { useGameLog } from './hooks/useGameLog';
+import type { CreatePlayerOptions } from './game/player';
 import StartScreen from './components/screens/StartScreen';
 import GameOverScreen from './components/screens/GameOverScreen';
 import GameLog from './components/hud/GameLog';
@@ -35,9 +36,11 @@ export default function App() {
   if (!engine.player) {
     return (
       <StartScreen
-        onNewGame={(name) => { clearLogs(); engine.newGame(name); }}
+        onNewGame={(options: CreatePlayerOptions) => { clearLogs(); engine.newGame(options); }}
         onLoadGame={() => { clearLogs(); engine.loadGame(); }}
         hasSave={hasSave}
+        dataReady={engine.dataReady}
+        dataError={engine.dataError}
       />
     );
   }

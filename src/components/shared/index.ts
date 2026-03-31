@@ -13,4 +13,5 @@ export { StatRow, AptitudeBar } from './StatRow';
 export {
   RARITY_COLORS, RARITY_LABELS, STAT_CN, STAT_COLORS,
   SLOT_ICONS, CATEGORY_TABS, statsCN,
+  SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS, COMBO_CN,
 } from './constants';
