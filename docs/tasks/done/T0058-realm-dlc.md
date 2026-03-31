@@ -1,7 +1,10 @@
 # T0058 — 境界表 DLC 化
 
-- **状态**: ⬜ 未开始
+- **状态**: ✅ 已完成
+- **完成日期**: 2026-03-31
 - **分类**: 进阶机制
+- **数值调整指南**: [docs/specs/T0058-realm-tuning-guide.md](../../specs/T0058-realm-tuning-guide.md)
+- **关键文件**: `src/data/core-realms.ts`, `src/game/data.ts`
 - **前置**: —（注册表基础设施已就绪）
 - **Spec**: [spec](../../specs/T0058-realm-dlc.md)
 
