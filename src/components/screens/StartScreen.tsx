@@ -12,6 +12,8 @@ interface StartScreenProps {
   onNewGame: (options: CreatePlayerOptions) => void;
   onLoadGame: () => void;
   hasSave: boolean;
+  dataReady: boolean;
+  dataError?: boolean;
 }
 
 const COMBO_COLORS: Record<string, string> = {
@@ -40,7 +42,7 @@ function InnateBar({ label, value }: { label: string; value: number }) {
   );
 }
 
-export default function StartScreen({ onNewGame, onLoadGame, hasSave }: StartScreenProps) {
+export default function StartScreen({ onNewGame, onLoadGame, hasSave, dataReady, dataError }: StartScreenProps) {
   const [name, setName] = useState('');
   const [gender, setGender] = useState<'male' | 'female'>('male');
   const [appearance, setAppearance] = useState(0);
@@ -63,6 +65,8 @@ export default function StartScreen({ onNewGame, onLoadGame, hasSave }: StartScr
     const finalName = name.trim() || '无名散修';
     onNewGame({ name: finalName, gender, appearance, preview });
   };
+
+  const startBtnLabel = dataError ? '⚠️ 数据加载失败' : dataReady ? '✨ 开始修炼' : '⏳ 加载中…';
 
   const { spiritRoots } = preview;
   const comboColor = COMBO_COLORS[spiritRoots.combo] ?? '#fff';
@@ -178,17 +182,16 @@ export default function StartScreen({ onNewGame, onLoadGame, hasSave }: StartScr
         ) : (
           <div className="no-reroll">免费重随次数已用尽</div>
         )}
-        <button className="btn btn-primary" onClick={handleConfirm}>
-          ✨ 开始修炼
+        <button className="btn btn-primary" onClick={handleConfirm} disabled={!dataReady}>
+          {startBtnLabel}
         </button>
       </div>
 
       {hasSave && (
-        <button className="btn btn-secondary" onClick={onLoadGame}>
+        <button className="btn btn-secondary" onClick={onLoadGame} disabled={!dataReady}>
           继续修炼
         </button>
       )}
     </div>
   );
 }
-

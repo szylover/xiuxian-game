@@ -23,8 +23,7 @@ import type { DeathCheckResult, DeathResult } from '../game/death';
 import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef } from '../game/types';
 import { checkAchievements } from '../game/achievement/engine';
 
-// 注册核心事件（模块加载时执行一次）
-registerCoreEvents();
+// 注册状态由 useGameEngine 内部管理，通过 useEffect 异步加载
 
 export interface CombatModalState {
   phase: 'battle' | 'loot';
@@ -136,8 +135,20 @@ export function useGameEngine(
   const [gameOverReason, setGameOverReason] = useState('');
   const [combatModal, setCombatModal] = useState<CombatModalState | null>(null);
   const [deathModal, setDeathModal] = useState<DeathModalState | null>(null);
+  const [dataReady, setDataReady] = useState(false);
+  const [dataError, setDataError] = useState(false);
   const playerRef = useRef<Player | null>(null);
   const { toast, showToast, dismiss: dismissToast } = useToast();
+
+  // 异步加载游戏数据（代码分割，仅首次调用）
+  useEffect(() => {
+    registerCoreEvents()
+      .then(() => setDataReady(true))
+      .catch((err) => {
+        console.error('[xiuxian] 游戏数据加载失败', err);
+        setDataError(true);
+      });
+  }, []);
 
   // 同步 playerRef
   useEffect(() => { playerRef.current = player; }, [player]);
@@ -485,6 +496,8 @@ export function useGameEngine(
     player,
     gameOver,
     gameOverReason,
+    dataReady,
+    dataError,
     newGame,
     loadGame,
     cultivate,
