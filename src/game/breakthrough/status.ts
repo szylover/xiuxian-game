@@ -4,7 +4,8 @@
 
 import type { Player } from '../player';
 import { getNextRealm } from '../player';
-import { REALMS, BREAKTHROUGH_BASE_RATE, BREAKTHROUGH_COMP_BONUS, BREAKTHROUGH_LUCK_BONUS } from '../data';
+import { BREAKTHROUGH_BASE_RATE, BREAKTHROUGH_COMP_BONUS, BREAKTHROUGH_LUCK_BONUS } from '../data';
+import type { Realm } from '../data';
 import { getBreakthroughReq, getItemDef } from '../registry';
 import type { BreakthroughReqDef } from '../registry';
 
@@ -13,7 +14,7 @@ export interface CondCheckResult { id: string; description: string; ready: boole
 
 export interface BreakthroughStatus {
   canAttempt: boolean;
-  nextRealm: typeof REALMS[number] | null;
+  nextRealm: Realm | null;
   req: BreakthroughReqDef | null;
   expReady: boolean;
   itemsReady: ItemCheckResult[];

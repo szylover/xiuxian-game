@@ -2,7 +2,7 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef } from '../types';
 import type { SpiritRootType } from '../spirit-root';
 import type { AchievementDef } from '../achievement/types';
 import {
@@ -10,7 +10,7 @@ import {
   equipRegistry, smithingRecipeRegistry, breakthroughReqRegistry, tribulationRegistry,
   techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
   monsterRegistry, divineArtRegistry, achievementRegistry,
-  bodyRealmRegistry, spiritRootBodyBonusRegistry,
+  bodyRealmRegistry, spiritRootBodyBonusRegistry, realmRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -94,3 +94,13 @@ export function getAllBodyRealmDefs(): BodyRealmDef[] { return Array.from(bodyRe
 
 export function getSpiritRootBodyBonus(rootType: SpiritRootType): SpiritRootBodyBonus | undefined { return spiritRootBodyBonusRegistry.get(rootType); }
 export function getAllSpiritRootBodyBonuses(): SpiritRootBodyBonus[] { return Array.from(spiritRootBodyBonusRegistry.values()); }
+
+// ── 气修境界（T0058）──
+
+export function getRealmDef(index: number): RealmDef | undefined { return realmRegistry.get(index); }
+export function getAllRealmDefs(): RealmDef[] { return Array.from(realmRegistry.values()).sort((a, b) => a.index - b.index); }
+export function getMaxRealmIndex(): number {
+  let max = -1;
+  for (const key of realmRegistry.keys()) { if (key > max) max = key; }
+  return max;
+}
