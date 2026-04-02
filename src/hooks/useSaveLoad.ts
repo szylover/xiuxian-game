@@ -91,6 +91,10 @@ function applyCompatFixes(p: Player): Player {
       travelCount: 0,
     };
   }
+  // T0064: 瓶颈系统向后兼容
+  if (!p.systems['bottleneck']) {
+    p.systems['bottleneck'] = { active: {}, unlocked: {} };
+  }
   return p;
 }
 

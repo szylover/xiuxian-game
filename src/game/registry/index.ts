@@ -18,6 +18,7 @@ export type {
   BodyRealmDef, SpiritRootBodyBonus,
   RealmDef,
   RegionDef, MapSystemState,
+  BottleneckDef, BottleneckUnlockMethod, BottleneckState,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
@@ -43,6 +44,7 @@ export {
   getSpiritRootBodyBonus, getAllSpiritRootBodyBonuses,
   getRealmDef, getAllRealmDefs, getMaxRealmIndex,
   getRegion, getAllRegions,
+  getBottleneckDef, getAllBottleneckDefs, getBottlenecksForRealm, getBottlenecksForBodyRealm, getBottlenecksForTechnique,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

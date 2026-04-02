@@ -4,6 +4,7 @@
 
 import type { Player } from '../../game/player';
 import { REALMS, MONTH_NAMES } from '../../game/data';
+import { getActiveBottlenecks, ensureBottleneckState } from '../../game/bottleneck';
 import { getNextRealm } from '../../game/player';
 import { getNextBodyRealm } from '../../game/body-cultivation';
 import { getBodyRealmDef, getTechniqueDef, getDivineArtDef } from '../../game/registry';
@@ -33,6 +34,10 @@ export default function LeftPanel({ player, activePanel, onSelectPanel, onExit }
     ? Math.min(100, (player.bodyRealmExp / nextBodyRealm.expReq) * 100)
     : 100;
 
+  // T0064: 激活的瓶颈
+  const pWithBn = ensureBottleneckState(player);
+  const activeBns = getActiveBottlenecks(pWithBn);
+
   // 当前激活的功法和神通
   const activeTech = player.activeTechniqueId ? getTechniqueDef(player.activeTechniqueId) : null;
   const divineState = getDivineArtsState(player);
@@ -47,6 +52,20 @@ export default function LeftPanel({ player, activePanel, onSelectPanel, onExit }
         <div className="left-name">{player.name}</div>
         <div className="left-realm" style={{ color: realm.name.includes('大乘') ? '#FFD700' : undefined }}>
           【{realm.name}】
+          {activeBns.length > 0 && (
+            <span style={{
+              fontSize: '0.7em',
+              background: '#4a2800',
+              color: '#ff9800',
+              border: '1px solid #ff9800',
+              borderRadius: 4,
+              padding: '1px 5px',
+              marginLeft: 4,
+              verticalAlign: 'middle',
+            }}>
+              🚧 瓶颈
+            </span>
+          )}
         </div>
         {currentRegion && (
           <div style={{ fontSize: '0.85em', color: '#9E9E9E', marginTop: 2 }}>
