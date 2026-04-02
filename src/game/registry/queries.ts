@@ -2,7 +2,7 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition } from '../types';
 import type { SpiritRootType } from '../spirit-root';
 import type { AchievementDef } from '../achievement/types';
 import {
@@ -11,7 +11,7 @@ import {
   techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
   monsterRegistry, divineArtRegistry, achievementRegistry,
   bodyRealmRegistry, spiritRootBodyBonusRegistry, realmRegistry, regionRegistry,
-  bottleneckRegistry,
+  bottleneckRegistry, npcRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -123,4 +123,22 @@ export function getBottlenecksForBodyRealm(fromBodyRealmIndex: number): Bottlene
 }
 export function getBottlenecksForTechnique(techniqueId: string, level: number): BottleneckDef[] {
   return Array.from(bottleneckRegistry.values()).filter(b => b.targetType === 'technique' && b.techniqueId === techniqueId && b.atLevel === level);
+}
+
+// ── NPC（T0025）──
+
+export function getNpcDef(id: string): NpcDef | undefined { return npcRegistry.get(id); }
+export function getAllNpcDefs(): NpcDef[] { return Array.from(npcRegistry.values()); }
+export function getNpcsByRegionTags(tags: string[]): NpcDef[] {
+  return Array.from(npcRegistry.values()).filter(npc => {
+    if (npc.homeRegionId) return false;
+    if (!npc.regionTags.length) return true;
+    return npc.regionTags.some(t => tags.includes(t));
+  });
+}
+export function getNpcsByRole(role: NpcRole): NpcDef[] {
+  return Array.from(npcRegistry.values()).filter(npc => npc.roles.includes(role));
+}
+export function getNpcsByDisposition(disposition: NpcDisposition): NpcDef[] {
+  return Array.from(npcRegistry.values()).filter(npc => npc.disposition === disposition);
 }

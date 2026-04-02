@@ -21,6 +21,7 @@ import { CollapsiblePanel, TabBar } from '../shared';
 import DebugStatsTab from './DebugStatsTab';
 import DebugItemsTab from './DebugItemsTab';
 import DebugChangelogTab from './DebugChangelogTab';
+import DebugNpcTab from './DebugNpcTab';
 
 interface DebugPanelProps {
   player: Player;
@@ -34,12 +35,13 @@ const DEBUG_TABS = [
   { key: 'divine' as const, label: '神通', icon: '🌟' },
   { key: 'achievement' as const, label: '成就', icon: '🏆' },
   { key: 'bottleneck' as const, label: '瓶颈', icon: '🚧' },
+  { key: 'npc' as const, label: 'NPC', icon: '👥' },
   { key: 'changelog' as const, label: '日志', icon: '📋' },
 ];
 
 export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [tab, setTab] = useState<'stats' | 'items' | 'technique' | 'divine' | 'achievement' | 'bottleneck' | 'changelog'>('stats');
+  const [tab, setTab] = useState<'stats' | 'items' | 'technique' | 'divine' | 'achievement' | 'bottleneck' | 'npc' | 'changelog'>('stats');
   const [itemQty, setItemQty] = useState<Record<string, number>>({});
 
   if (!player || player.name !== 'Debug') return null;
@@ -514,6 +516,9 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
             </div>
           );
         })()}
+        {tab === 'npc' && (
+          <DebugNpcTab player={player} onUpdate={onUpdate} />
+        )}
         {tab === 'changelog' && (
           <DebugChangelogTab />
         )}

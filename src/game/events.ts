@@ -7,6 +7,7 @@ import type { Player } from './player';
 import { registerDLC, triggerEvent } from './registry';
 import type { RecipeDef, EquipDef, SmithingRecipeDef, TechniqueDef, DeathTriggerDef, LifeSaverDef, RevivalMethodDef, MonsterDef } from './registry';
 import type { RegionDef } from './types';
+import type { NpcDef } from './types';
 import { getCurrentRegion } from './map';
 import { loadEventsFromJson } from './event-loader';
 import { loadItemsFromJson } from './item-loader';
@@ -246,6 +247,7 @@ export async function registerCoreEvents(): Promise<void> {
     { default: coreSmithingJson },
     { default: coreTechniquesJson },
     { default: coreRegionsJson },
+    { default: coreNpcsJson },
   ] = await Promise.all([
     import('../data/core-events.json'),
     import('../data/core-items.json'),
@@ -255,6 +257,7 @@ export async function registerCoreEvents(): Promise<void> {
     import('../data/core-smithing.json'),
     import('../data/core-techniques.json'),
     import('../data/core-regions.json'),
+    import('../data/core-npcs.json'),
   ]);
 
   const pack = loadEventsFromJson(coreEventsJson as JsonEvent[], {
@@ -288,6 +291,7 @@ export async function registerCoreEvents(): Promise<void> {
     realms: CORE_REALMS,
     regions: coreRegionsJson as RegionDef[],
     bottlenecks: CORE_BOTTLENECKS,
+    npcs: coreNpcsJson as NpcDef[],
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }
