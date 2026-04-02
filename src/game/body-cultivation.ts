@@ -8,6 +8,7 @@ import type { Player } from './player';
 import type { BodyRealmDef } from './types';
 import { getBodyRealmDef, getSpiritRootBodyBonus } from './registry/queries';
 import { checkBottleneck, activateBottleneck, ensureBottleneckState } from './bottleneck';
+import { BODY_CULTIVATION_TEXTS } from '../data/texts/body-cultivation';
 
 // ── 查询 ──
 
@@ -133,7 +134,7 @@ export function tryBodyRealmBreakthrough(player: Player): {
     return {
       player: p,
       breakthrough: false,
-      message: `🚧 体修瓶颈未破：${bnResult.bottleneckDef.name}。${bnResult.bottleneckDef.hint}`,
+      message: BODY_CULTIVATION_TEXTS.bottleneck(bnResult.bottleneckDef.name, bnResult.bottleneckDef.hint),
       blockedByBottleneck: true,
     };
   }
@@ -149,7 +150,7 @@ export function tryBodyRealmBreakthrough(player: Player): {
   return {
     player: p,
     breakthrough: true,
-    message: `🔥 体修突破！肉身淬炼至【${nextRealm.name}】！减伤 ${nextRealm.physiqueDmgReduce}%`,
+    message: BODY_CULTIVATION_TEXTS.breakthrough(nextRealm.name, nextRealm.physiqueDmgReduce),
   };
 }
 

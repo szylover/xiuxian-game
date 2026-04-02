@@ -7,6 +7,7 @@ import type { Player } from './player';
 import type { SmithingRecipeDef } from './registry';
 import { getSmithingRecipe, getAllSmithingRecipes, getItemDef, getEquipDef } from './registry';
 import { hasItem, addItem, removeItem } from './inventory';
+import { SMITHING_TEXTS } from '../data/texts/smithing';
 
 // ── 炼器结果 ──
 
@@ -47,25 +48,25 @@ export function calcSmithingSuccessRate(player: Player, recipe: SmithingRecipeDe
 export function performSmithing(player: Player, recipeId: string): SmithingResult {
   const recipe = getSmithingRecipe(recipeId);
   if (!recipe) {
-    return { player, success: false, message: '配方不存在。' };
+    return { player, success: false, message: SMITHING_TEXTS.recipeNotFound };
   }
 
   if (player.realmIndex < recipe.minRealm) {
-    return { player, success: false, message: '境界不足，无法炼制此器。' };
+    return { player, success: false, message: SMITHING_TEXTS.realmInsufficient };
   }
 
   if (player.mentalPower < recipe.mentalCost) {
-    return { player, success: false, message: '念力不足，无法炼器。' };
+    return { player, success: false, message: SMITHING_TEXTS.mentalInsufficient };
   }
 
   if (player.gold < recipe.goldCost) {
-    return { player, success: false, message: `灵石不足！需要 ${recipe.goldCost}，当前 ${player.gold}。` };
+    return { player, success: false, message: SMITHING_TEXTS.goldInsufficient(recipe.goldCost, player.gold) };
   }
 
   for (const input of recipe.inputs) {
     if (!hasItem(player, input.itemId, input.count)) {
       const def = getItemDef(input.itemId);
-      return { player, success: false, message: `材料不足：${def?.name ?? input.itemId} 需要 ${input.count} 个。` };
+      return { player, success: false, message: SMITHING_TEXTS.materialInsufficient(def?.name ?? input.itemId, input.count) };
     }
   }
 
@@ -85,7 +86,7 @@ export function performSmithing(player: Player, recipeId: string): SmithingResul
     return {
       player: p,
       success: false,
-      message: `💥 炼器失败！材料化为废铁。（成功率 ${(successRate * 100).toFixed(1)}%）`,
+      message: SMITHING_TEXTS.failed((successRate * 100).toFixed(1)),
     };
   }
 
@@ -100,7 +101,7 @@ export function performSmithing(player: Player, recipeId: string): SmithingResul
     player: p,
     success: true,
     message: added > 0
-      ? `⚒️ 炼器成功！打造出 ${name}！（成功率 ${(successRate * 100).toFixed(1)}%）`
-      : `⚒️ 炼器成功但背包已满！${name} 丢失了。`,
+      ? SMITHING_TEXTS.success(name, (successRate * 100).toFixed(1))
+      : SMITHING_TEXTS.successFull(name),
   };
 }

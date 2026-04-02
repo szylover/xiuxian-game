@@ -4,6 +4,7 @@
 
 import type { Combatant, DamageResult, SkillState } from './types';
 import type { TechniqueActiveSkill } from '../types';
+import { COMBAT_TEXTS } from '../../data/texts/combat';
 
 // ── 随机浮点 ──
 export function rand(min: number, max: number): number {
@@ -45,11 +46,11 @@ export function calcDamage(attacker: Combatant, defender: Combatant): DamageResu
   const finalDmg = Math.floor(dmg);
 
   if (isDodge) {
-    log.push(`${defender.name} 闪避了攻击！`);
+    log.push(COMBAT_TEXTS.dodge(defender.name));
   } else if (isCrit) {
-    log.push(`${attacker.name} 暴击！对 ${defender.name} 造成 ${finalDmg} 点伤害！`);
+    log.push(COMBAT_TEXTS.crit(attacker.name, defender.name, finalDmg));
   } else {
-    log.push(`${attacker.name} 攻击 ${defender.name}，造成 ${finalDmg} 点伤害。`);
+    log.push(COMBAT_TEXTS.normalHit(attacker.name, defender.name, finalDmg));
   }
 
   return { damage: finalDmg, isCrit, isDodge, log };
@@ -116,11 +117,11 @@ export function calcSkillDamage(
     if (skill.hitCount > 1) {
       // 多段攻击：每段独立显示
       if (isDodge) {
-        log.push(`💨 第 ${hit + 1} 段被闪避！`);
+        log.push(COMBAT_TEXTS.segDodge(hit + 1));
       } else if (isCrit) {
-        log.push(`💥 第 ${hit + 1} 段暴击！造成 ${finalDmg} 点伤害！`);
+        log.push(COMBAT_TEXTS.segCrit(hit + 1, finalDmg));
       } else {
-        log.push(`第 ${hit + 1} 段命中，造成 ${finalDmg} 点伤害。`);
+        log.push(COMBAT_TEXTS.segHit(hit + 1, finalDmg));
       }
     }
   }

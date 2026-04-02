@@ -13,6 +13,7 @@ import type {
   DeathSeverity, DeathTriggerDef, DeathPenaltyDef,
   LifeSaverDef, RevivalMethodDef, DeathSystemState,
 } from './types';
+import { DEATH_TEXTS } from '../data/texts/death';
 
 // ── 默认后果表 ──
 
@@ -141,7 +142,7 @@ export function checkDeathTriggers(player: Player, context: DeathContext): Death
           blocked: true,
           blockedBy: saverResult.saver,
           player: p,
-          logs: [`💎 ${saverResult.saver.name}碎裂！抵消了致命伤害！`],
+          logs: [DEATH_TEXTS.lifeSaverBlock(saverResult.saver.name)],
         };
       }
     }
@@ -263,14 +264,14 @@ function applyPenalty(player: Player, penalty: DeathPenaltyDef, logs: string[]):
   if (penalty.expLossRate > 0) {
     const loss = Math.floor(p.exp * penalty.expLossRate);
     p.exp = Math.max(0, p.exp - loss);
-    if (loss > 0) logs.push(`📉 损失 ${loss} 修为`);
+    if (loss > 0) logs.push(DEATH_TEXTS.expLoss(loss));
   }
 
   // 灵石损失
   if (penalty.goldLossRate > 0) {
     const loss = Math.floor(p.gold * penalty.goldLossRate);
     p.gold = Math.max(0, p.gold - loss);
-    if (loss > 0) logs.push(`💰 损失 ${loss} 灵石`);
+    if (loss > 0) logs.push(DEATH_TEXTS.goldLoss(loss));
   }
 
   // 随机丢失物品
@@ -283,17 +284,17 @@ function applyPenalty(player: Player, penalty: DeathPenaltyDef, logs: string[]):
       lost++;
     }
     p = { ...p, inventory: inv };
-    if (lost > 0) logs.push(`📦 丢失 ${lost} 件物品`);
+    if (lost > 0) logs.push(DEATH_TEXTS.itemLoss(lost));
   }
 
   // 健康、心情损失
   if (penalty.healthLoss > 0) {
     p.health = Math.max(0, p.health - penalty.healthLoss);
-    logs.push(`❤️ 健康 -${penalty.healthLoss}`);
+    logs.push(DEATH_TEXTS.healthLoss(penalty.healthLoss));
   }
   if (penalty.moodLoss > 0) {
     p.mood = Math.max(0, p.mood - penalty.moodLoss);
-    logs.push(`😞 心情 -${penalty.moodLoss}`);
+    logs.push(DEATH_TEXTS.moodLoss(penalty.moodLoss));
   }
 
   // 降境界
@@ -303,7 +304,7 @@ function applyPenalty(player: Player, penalty: DeathPenaltyDef, logs: string[]):
     p = recalcStats(p);
     p.hp = Math.max(1, Math.min(p.hp, p.maxHp));
     p.mp = Math.min(p.mp, p.maxMp);
-    logs.push(`🏔️ 境界跌落 ${drop} 级，当前 ${REALMS[p.realmIndex].name}期`);
+    logs.push(DEATH_TEXTS.realmDrop(drop, REALMS[p.realmIndex].name));
   }
 
   return p;
@@ -334,12 +335,12 @@ export function applyRevival(player: Player, method: RevivalMethodDef): RevivalR
 
   // 执行复活效果
   p = method.effect(p);
-  logs.push(`🔮 ${method.name}！${method.description}`);
+  logs.push(DEATH_TEXTS.revival(method.name, method.description));
 
   // 消耗物品
   if (method.consumeOnUse && method.type === 'item' && method.itemId) {
     p = removeItem(p, method.itemId, 1);
-    logs.push(`📦 消耗了 ${method.name}`);
+    logs.push(DEATH_TEXTS.consumeRevival(method.name));
   }
 
   // 应用复活代价

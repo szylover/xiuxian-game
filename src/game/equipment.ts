@@ -8,6 +8,8 @@ import type { EquipDef, EquipSlot } from './registry';
 import { getEquipDef } from './registry';
 import { addItem, removeItem, hasItem } from './inventory';
 import { recalcStats } from './player';
+import { EQUIPMENT_TEXTS } from '../data/texts/equipment';
+import { SLOT_NAMES, REALM_NAMES } from '../data/texts/common';
 
 // ── 装备操作结果 ──
 
@@ -19,17 +21,8 @@ export interface EquipResult {
 
 // ── 获取槽位中文名 ──
 
-const SLOT_NAMES: Record<EquipSlot, string> = {
-  weapon: '武器',
-  helmet: '头盔',
-  armor: '衣甲',
-  boots: '靴子',
-  accessory1: '饰品一',
-  accessory2: '饰品二',
-};
-
 export function getSlotName(slot: EquipSlot): string {
-  return SLOT_NAMES[slot];
+  return SLOT_NAMES[slot] ?? slot;
 }
 
 // ── 查询已装备 ──
@@ -45,16 +38,15 @@ export function getEquippedDef(player: Player, slot: EquipSlot): EquipDef | null
 export function equipItem(player: Player, equipId: string): EquipResult {
   const def = getEquipDef(equipId);
   if (!def) {
-    return { player, success: false, message: `⚠️ 装备定义不存在（${equipId}），可能缺少注册。` };
+    return { player, success: false, message: EQUIPMENT_TEXTS.unknownEquip(equipId) };
   }
 
   if (player.realmIndex < def.minRealm) {
-    const realmNames = ['凡人','炼气','筑基','金丹','元婴','化神','渡劫','大乘'];
-    return { player, success: false, message: `⚠️ 境界不足！${def.name} 需要 ${realmNames[def.minRealm] ?? ''}期。` };
+    return { player, success: false, message: EQUIPMENT_TEXTS.realmInsufficient(def.name, REALM_NAMES[def.minRealm] ?? `境界${def.minRealm}`) };
   }
 
   if (!hasItem(player, equipId)) {
-    return { player, success: false, message: `⚠️ 背包中没有 ${def.name}。` };
+    return { player, success: false, message: EQUIPMENT_TEXTS.noItemInInventory(def.name) };
   }
 
   let p = { ...player, equipped: { ...player.equipped } };
@@ -77,8 +69,8 @@ export function equipItem(player: Player, equipId: string): EquipResult {
 
   const oldDef = oldEquipId ? getEquipDef(oldEquipId) : null;
   const msg = oldDef
-    ? `⚔️ 装备 ${def.name}，替换 ${oldDef.name}。`
-    : `⚔️ 装备 ${def.name} → ${getSlotName(def.slot)}。`;
+    ? EQUIPMENT_TEXTS.equipReplace(def.name, oldDef.name)
+    : EQUIPMENT_TEXTS.equip(def.name, getSlotName(def.slot));
 
   return { player: p, success: true, message: msg };
 }
@@ -88,7 +80,7 @@ export function equipItem(player: Player, equipId: string): EquipResult {
 export function unequipItem(player: Player, slot: EquipSlot): EquipResult {
   const equipId = player.equipped[slot];
   if (!equipId) {
-    return { player, success: false, message: `${getSlotName(slot)} 没有装备。` };
+    return { player, success: false, message: EQUIPMENT_TEXTS.noEquipInSlot(getSlotName(slot)) };
   }
 
   const def = getEquipDef(equipId);
@@ -98,7 +90,7 @@ export function unequipItem(player: Player, slot: EquipSlot): EquipResult {
   // 装备放回背包
   const { player: p2, added } = addItem(p, equipId, 1);
   if (added === 0) {
-    return { player, success: false, message: '背包已满，无法卸下装备。' };
+    return { player, success: false, message: EQUIPMENT_TEXTS.inventoryFull };
   }
 
   p = { ...p2, equipped: { ...p.equipped } };
@@ -110,6 +102,6 @@ export function unequipItem(player: Player, slot: EquipSlot): EquipResult {
   return {
     player: p,
     success: true,
-    message: `🔓 卸下 ${def?.name ?? equipId}。`,
+    message: EQUIPMENT_TEXTS.unequip(def?.name ?? equipId),
   };
 }

@@ -20,6 +20,8 @@ import { ensureBottleneckState, getActiveBottlenecks, tickPersistenceCultivation
 import { getNpcsInRegion, meetNpc as meetNpcFn } from '../game/npc';
 import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef, RegionDef } from '../game/types';
 import type { LogCategory } from './useGameLog';
+import { COMBAT_TEXTS } from '../data/texts/combat';
+import { CULTIVATION_TEXTS } from '../data/texts/cultivation';
 
 export interface LootEntry {
   icon: string;
@@ -95,7 +97,7 @@ export function useCoreActions(deps: CoreActionDeps) {
   // ── A-2: 修炼 ──
   const cultivate = useCallback(() => {
     if (!canAct('cultivate')) {
-      addLog('⚠️ 精力不足，请先休息！', 'system');
+      addLog(COMBAT_TEXTS.noStamina, 'system');
       return;
     }
     pendingRef.current = { msgs: [], categories: [] };
@@ -126,7 +128,7 @@ export function useCoreActions(deps: CoreActionDeps) {
         const baseBodyExp = Math.floor(expGain * bodyRate * 0.5);
         const { player: p2, message: btMsg, actualGain } = gainBodyRealmExp(p, baseBodyExp);
         p = p2;
-        if (actualGain > 0) bodyMsg = ` 💪体修修为+${actualGain}`;
+        if (actualGain > 0) bodyMsg = ` ${CULTIVATION_TEXTS.bodyExpGain(actualGain)}`;
         if (btMsg) bodyMsg += ` ${btMsg}`;
       }
 
@@ -157,9 +159,9 @@ export function useCoreActions(deps: CoreActionDeps) {
 
       pendingRef.current = { msgs: [], categories: [] };
       if (isBodyMode) {
-        queueLog(`🧘 修炼一次，获得 ${expGain} 修为。${bodyMsg}`, 'system');
+        queueLog(CULTIVATION_TEXTS.cultivateBody(expGain) + bodyMsg, 'system');
       } else {
-        queueLog(`🧘 修炼一次，获得 ${expGain} 修为。（悟性×${compBonus.toFixed(1)} 灵根×${cultivationMult} 心情×${moodBonus.toFixed(1)}）${bodyMsg}`, 'system');
+        queueLog(CULTIVATION_TEXTS.cultivate(expGain, compBonus.toFixed(1), cultivationMult, moodBonus.toFixed(1)) + bodyMsg, 'system');
       }
       return p;
     });
@@ -169,7 +171,7 @@ export function useCoreActions(deps: CoreActionDeps) {
   // ── A-3: 战斗 ──
   const fight = useCallback(() => {
     if (!canAct('combat')) {
-      addLog('⚠️ 精力不足，请先休息！', 'system');
+      addLog(COMBAT_TEXTS.noStamina, 'system');
       return;
     }
     pendingRef.current = { msgs: [], categories: [] };
@@ -181,7 +183,7 @@ export function useCoreActions(deps: CoreActionDeps) {
       const region = getCurrentRegion(prev);
       if (region?.safeZone) {
         pendingRef.current = { msgs: [], categories: [] };
-        queueLog(`🛡️ ${region.emoji} ${region.name}是安全区域，无法战斗。`, 'system');
+        queueLog(COMBAT_TEXTS.safeZone(region.emoji, region.name), 'system');
         return prev;
       }
 
@@ -200,7 +202,7 @@ export function useCoreActions(deps: CoreActionDeps) {
       });
       if (eligible.length === 0) {
         pendingRef.current = { msgs: [], categories: [] };
-        queueLog('🔍 四周平静，没有发现妖兽。', 'combat');
+        queueLog(COMBAT_TEXTS.noMonster, 'combat');
         return p;
       }
       const monster = eligible[Math.floor(Math.random() * eligible.length)];
@@ -338,7 +340,7 @@ export function useCoreActions(deps: CoreActionDeps) {
   // ── 探索 ──
   const explore = useCallback(() => {
     if (!canAct('explore')) {
-      addLog('⚠️ 精力不足，请先休息！', 'system');
+      addLog(COMBAT_TEXTS.noStamina, 'system');
       return;
     }
     pendingRef.current = { msgs: [], categories: [] };
@@ -421,7 +423,7 @@ export function useCoreActions(deps: CoreActionDeps) {
       p = advanceTime(p, 'rest');
 
       pendingRef.current = { msgs: [], categories: [] };
-      queueLog(`💤 休息片刻，体力、灵力、精力完全恢复，健康/心情少量恢复。`, 'system');
+      queueLog(CULTIVATION_TEXTS.rest, 'system');
       return p;
     });
     setTimeout(flushLogs, 0);

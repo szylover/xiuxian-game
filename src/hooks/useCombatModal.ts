@@ -11,6 +11,7 @@ import type { LootEntry, CombatDeathInfo } from './useCoreActions';
 import type { Player } from '../game/player';
 import { getDeathSystemState } from '../game/death';
 import type { LogCategory } from './useGameLog';
+import { COMBAT_TEXTS } from '../data/texts/combat';
 
 export interface CombatModalState {
   phase: 'battle' | 'loot';
@@ -90,35 +91,35 @@ export function useCombatModal(
 
     if (result.winner === 'player') {
       const details: string[] = [];
-      if (result.expGained > 0) details.push(`+${result.expGained}修为`);
-      if (result.goldGained > 0) details.push(`+${result.goldGained}灵石`);
-      if (result.bodyExpGained > 0) details.push(`+${result.bodyExpGained}体修`);
+      if (result.expGained > 0) details.push(COMBAT_TEXTS.detailExp(result.expGained));
+      if (result.goldGained > 0) details.push(COMBAT_TEXTS.detailGold(result.goldGained));
+      if (result.bodyExpGained > 0) details.push(COMBAT_TEXTS.detailBodyExp(result.bodyExpGained));
       const hpLost = playerHpBefore - result.playerHpLeft;
       if (hpLost > 0) details.push(`-${hpLost}HP`);
       if (result.mpUsed > 0) details.push(`-${result.mpUsed}MP`);
-      if (loot.length > 0) details.push(`获得: ${loot.map(l => `${l.name}×${l.amount}`).join(' ')}`);
-      addLog(`⚔️ 击败 ${monsterName}（${details.join(' ')}）`, 'combat');
+      if (loot.length > 0) details.push(COMBAT_TEXTS.detailLoot(loot.map(l => `${l.name}×${l.amount}`).join(' ')));
+      addLog(COMBAT_TEXTS.modalVictory(monsterName, details.join(' ')), 'combat');
     } else if (result.winner === 'monster') {
       const details: string[] = [];
       const hpLost = playerHpBefore - result.playerHpLeft;
       if (hpLost > 0) details.push(`-${hpLost}HP`);
       if (result.mpUsed > 0) details.push(`-${result.mpUsed}MP`);
-      if (result.bodyExpGained > 0) details.push(`+${result.bodyExpGained}体修`);
+      if (result.bodyExpGained > 0) details.push(COMBAT_TEXTS.detailBodyExp(result.bodyExpGained));
       if (deathInfo?.blocked) {
-        details.push(`${deathInfo.saverName ?? '护命道具'}救回一命`);
+        details.push(COMBAT_TEXTS.detailSaverBlocked(deathInfo.saverName ?? '护命道具'));
       } else if (deathInfo?.triggered && deathInfo.penaltyLogs?.length) {
         details.push(...deathInfo.penaltyLogs);
       } else {
-        details.push('-20健康');
+        details.push(COMBAT_TEXTS.healthLoss);
       }
-      addLog(`💀 败于 ${monsterName}（${details.join(' ')}）`, 'combat');
+      addLog(COMBAT_TEXTS.modalDefeat(monsterName, details.join(' ')), 'combat');
     } else {
       const details: string[] = [];
       const hpLost = playerHpBefore - result.playerHpLeft;
       if (hpLost > 0) details.push(`-${hpLost}HP`);
       if (result.mpUsed > 0) details.push(`-${result.mpUsed}MP`);
-      if (result.bodyExpGained > 0) details.push(`+${result.bodyExpGained}体修`);
-      addLog(`⚔️ 与 ${monsterName} 缠斗超时，双方脱战（${details.join(' ')}）`, 'combat');
+      if (result.bodyExpGained > 0) details.push(COMBAT_TEXTS.detailBodyExp(result.bodyExpGained));
+      addLog(COMBAT_TEXTS.modalDraw(monsterName, details.join(' ')), 'combat');
     }
     setCombatModal(null);
 
@@ -141,7 +142,7 @@ export function useCombatModal(
         });
       } else {
         setGameOver(true);
-        setGameOverReason(deathInfo.triggerDef?.description ?? '战斗中身亡');
+        setGameOverReason(deathInfo.triggerDef?.description ?? COMBAT_TEXTS.deathFallback);
       }
     }
   }, [addLog, playerRef, setGameOver, setGameOverReason, setDeathModal]);

@@ -23,6 +23,9 @@ import { getEquipDef, getTechniqueDef } from '../game/registry';
 import type { EquipSlot } from '../game/registry';
 import type { LogCategory } from './useGameLog';
 import type { DeathModalState } from './useGameEngine';
+import { UI_LABELS } from '../data/texts/ui-labels';
+import { BODY_CULTIVATION_TEXTS } from '../data/texts/body-cultivation';
+import { BREAKTHROUGH_TEXTS } from '../data/texts/breakthrough';
 
 export interface SystemActionDeps {
   player: Player | null;
@@ -72,9 +75,9 @@ export function useSystemActions(deps: SystemActionDeps) {
           ? getTechniqueDef(player.activeTechniqueId)
           : null;
         if (!activeTechDef) {
-          addLog(`⚠️ ${def.name} 为体修武器（${def.techType.join('/')}），激活对应功法后可获得体魄攻击加成！`, 'system');
+          addLog(UI_LABELS.bodyWeaponHint(def.name, def.techType.join('/')), 'system');
         } else if (!def.techType.includes(activeTechDef.type)) {
-          addLog(`⚠️ ${def.name} 兼容功法类型【${def.techType.join('/')}】，当前激活的【${activeTechDef.name}】（${activeTechDef.type}）不匹配，体魄加成无法生效！`, 'system');
+          addLog(UI_LABELS.bodyWeaponMismatch(def.name, def.techType.join('/'), activeTechDef.name, activeTechDef.type), 'system');
         }
       }
     }
@@ -113,7 +116,7 @@ export function useSystemActions(deps: SystemActionDeps) {
 
       if (!tribResult.success && finalPlayer.hp <= 0) {
         setGameOver(true);
-        setGameOverReason('渡劫失败，形神俱灭！');
+        setGameOverReason(UI_LABELS.tribulationGameOver);
       }
     }
 
@@ -124,7 +127,7 @@ export function useSystemActions(deps: SystemActionDeps) {
     // 突破失败额外提示
     if (!btResult.success && !btResult.triggerTribulation) {
       if (btResult.blockedByBottleneck) {
-        addLog('💡 提示：可通过战斗击杀指定妖兽、探索触发顿悟、或坚持修炼来突破瓶颈。', 'system');
+        addLog(BREAKTHROUGH_TEXTS.bottleneckHint, 'system');
       }
     }
   }, [player, addLog, setPlayer, setGameOver, setGameOverReason]);
@@ -169,7 +172,7 @@ export function useSystemActions(deps: SystemActionDeps) {
     execAction(p => {
       const result = tryBodyRealmBreakthrough(p);
       if (!result.breakthrough) {
-        return { player: p, message: '❌ 体修突破条件未满足。' };
+        return { player: p, message: BODY_CULTIVATION_TEXTS.notReady };
       }
       return { player: result.player, message: result.message };
     });

@@ -16,6 +16,7 @@ import {
   getRealmDef,
   getBodyRealmDef,
 } from './registry';
+import { BOTTLENECK_TEXTS } from '../data/texts/bottleneck';
 
 // ── 存档兼容：确保 player.systems.bottleneck 存在 ──
 
@@ -123,7 +124,7 @@ export function activateBottleneck(player: Player, bottleneckId: string): { play
   };
 
   p = setState(p, newState);
-  const log = `⚠️ 【瓶颈】${def.name}——${def.description}`;
+  const log = BOTTLENECK_TEXTS.activated(def.name, def.description);
   return { player: p, log };
 }
 
@@ -176,15 +177,8 @@ export function unlockBottleneck(
     }
   }
 
-  const methodNames: Record<BottleneckUnlockMethod['type'], string> = {
-    quest: '完成任务',
-    combat: '战斗突破',
-    discourse: '论道感悟',
-    epiphany: '灵光顿悟',
-    persistence: '坚韧修炼',
-    overflow: '修为溢出',
-  };
-  const log = `🎆 【瓶颈突破】${def.name}已突破！（${methodNames[method]}）道心通畅，修为再无阻碍！`;
+  const methodNames = BOTTLENECK_TEXTS.methodNames;
+  const log = BOTTLENECK_TEXTS.unlocked(def.name, methodNames[method]);
   return { player: p, log };
 }
 
@@ -367,7 +361,7 @@ export function tryOverflowUnlock(player: Player): {
       if (nextRealm && p.exp >= nextRealm.expReq * ratio) {
         const result = unlockBottleneck(p, id, 'overflow');
         p = result.player;
-        log = `🌊 【瓶颈消融】${def.name}——修为深厚远超此境，瓶颈不攻自破！`;
+        log = BOTTLENECK_TEXTS.overflowRealm(def.name);
         triggered = true;
         break;
       }
@@ -376,7 +370,7 @@ export function tryOverflowUnlock(player: Player): {
       if (nextBodyRealm && p.bodyRealmExp >= nextBodyRealm.expReq * ratio) {
         const result = unlockBottleneck(p, id, 'overflow');
         p = result.player;
-        log = `🌊 【瓶颈消融】${def.name}——体修深厚远超此境，瓶颈不攻自破！`;
+        log = BOTTLENECK_TEXTS.overflowBody(def.name);
         triggered = true;
         break;
       }
