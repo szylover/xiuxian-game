@@ -593,5 +593,6 @@ export type NpcRelationLevel =
 export interface NpcSystemState {
   relations: Record<string, NpcRelation>;
   discoveredNpcs: string[];
-  lastGiftYear: Record<string, number>;
+  /** 每个 NPC 最后一次赠礼时的 player.age，用于 CD 计算 */
+  lastGiftAge: Record<string, number>;
 }

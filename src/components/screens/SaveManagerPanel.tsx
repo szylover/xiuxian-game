@@ -113,7 +113,7 @@ export default function SaveManagerPanel({ onNewGame, onLoadGame, dataReady, dat
               <div className="save-slot-preview">
                 <span className="save-slot-name">{slot.name}</span>
                 <span className="save-slot-realm">【{getRealmName(slot.realmIndex)}】</span>
-                <span className="save-slot-age">{Math.floor(slot.age ?? 0)} 岁</span>
+                <span className="save-slot-age">{Math.floor((slot.age ?? 0) / 12)} 岁</span>
                 {slot.gameYear !== undefined && (
                   <span className="save-slot-year">第 {slot.gameYear} 年</span>
                 )}

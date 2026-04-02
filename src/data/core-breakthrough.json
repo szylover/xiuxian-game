@@ -1,0 +1,137 @@
+{
+  "breakthroughReqs": [
+    {
+      "id": "core:bt_0_1",
+      "fromRealmIndex": 0,
+      "toRealmIndex": 1,
+      "itemCosts": [],
+      "conditions": [],
+      "requiresTribulation": false,
+      "baseSuccessRate": 0.7,
+      "description": "感应天地灵气，踏入修行之路。"
+    },
+    {
+      "id": "core:bt_1_2",
+      "fromRealmIndex": 1,
+      "toRealmIndex": 2,
+      "itemCosts": [{ "itemId": "core:breakthrough_lianqi", "count": 1 }],
+      "conditions": [],
+      "requiresTribulation": false,
+      "baseSuccessRate": 0.6,
+      "description": "凝聚灵气筑造根基，需练气散辅助。"
+    },
+    {
+      "id": "core:bt_2_3",
+      "fromRealmIndex": 2,
+      "toRealmIndex": 3,
+      "itemCosts": [
+        { "itemId": "core:foundation_pill", "count": 1 },
+        { "itemId": "core:herb_lingzhi", "count": 3 }
+      ],
+      "conditions": [],
+      "requiresTribulation": false,
+      "baseSuccessRate": 0.5,
+      "description": "灵气凝丹，结成金丹。需筑基丹和灵芝草催化。"
+    },
+    {
+      "id": "core:bt_3_4",
+      "fromRealmIndex": 3,
+      "toRealmIndex": 4,
+      "itemCosts": [
+        { "itemId": "core:golden_core_stone", "count": 1 },
+        { "itemId": "core:monster_core", "count": 5 }
+      ],
+      "conditions": [
+        {
+          "id": "core:cond_kill_50",
+          "description": "击杀妖兽 ≥ 50",
+          "field": "tracking.killCount",
+          "op": ">=",
+          "value": 50
+        }
+      ],
+      "requiresTribulation": false,
+      "baseSuccessRate": 0.4,
+      "description": "金丹化婴，需经历足够战斗磨练。"
+    },
+    {
+      "id": "core:bt_4_5",
+      "fromRealmIndex": 4,
+      "toRealmIndex": 5,
+      "itemCosts": [
+        { "itemId": "core:nascent_soul_pill", "count": 1 },
+        { "itemId": "core:herb_snow_lotus", "count": 5 },
+        { "itemId": "core:millennium_lingzhi", "count": 1 }
+      ],
+      "conditions": [
+        {
+          "id": "core:cond_defeat_higher",
+          "description": "曾击败过高境界敌人",
+          "field": "tracking.defeatedHigherRealm",
+          "op": "==",
+          "value": true
+        }
+      ],
+      "requiresTribulation": false,
+      "baseSuccessRate": 0.35,
+      "description": "元神蜕变化神，需要珍稀天材地宝助力。"
+    },
+    {
+      "id": "core:bt_5_6",
+      "fromRealmIndex": 5,
+      "toRealmIndex": 6,
+      "itemCosts": [
+        { "itemId": "core:tribulation_pill", "count": 1 },
+        { "itemId": "core:thunder_lure", "count": 1 }
+      ],
+      "conditions": [],
+      "requiresTribulation": true,
+      "description": "以天雷引引动天劫，渡过一九天劫方可晋升。"
+    },
+    {
+      "id": "core:bt_6_7",
+      "fromRealmIndex": 6,
+      "toRealmIndex": 7,
+      "itemCosts": [
+        { "itemId": "core:mahayana_scroll", "count": 3 },
+        { "itemId": "core:chaos_stone", "count": 1 }
+      ],
+      "conditions": [],
+      "requiresTribulation": true,
+      "description": "领悟大乘奥义，经受二九天劫考验。"
+    }
+  ],
+  "tribulations": [
+    {
+      "id": "core:tribulation_huashen",
+      "name": "一九天劫",
+      "description": "三道天雷降下，考验修士道心与肉身…",
+      "forRealmIndex": 5,
+      "waves": [
+        { "name": "第一道天雷", "hp": 5000, "atk": 350, "def": 150, "speed": 40 },
+        { "name": "第二道天雷", "hp": 6000, "atk": 450, "def": 180, "speed": 45, "specialEffect": { "type": "dot",       "value": 50, "description": "天雷附带灼烧，每回合额外 50 伤害" } },
+        { "name": "第三道天雷", "hp": 8000, "atk": 600, "def": 200, "speed": 50, "specialEffect": { "type": "debuff_def", "value": 30, "description": "碎甲天劫，降低防御 30%" } }
+      ],
+      "rewards": { "bonusExp": 5000, "items": [{ "itemId": "core:mahayana_scroll", "count": 1 }] },
+      "failureType": "realm_drop",
+      "failureDescription": "天劫反噬，修为大损，跌回元婴期！"
+    },
+    {
+      "id": "core:tribulation_dujie",
+      "name": "二九天劫",
+      "description": "六道紫雷与天火心魔轮番降下，修仙最终考验…",
+      "forRealmIndex": 6,
+      "waves": [
+        { "name": "第一道紫雷", "hp": 10000, "atk": 800,  "def": 400, "speed": 60 },
+        { "name": "第二道紫雷", "hp": 12000, "atk": 900,  "def": 420, "speed": 62, "specialEffect": { "type": "dot",        "value": 80,  "description": "紫雷灼身，每回合 80 伤害" } },
+        { "name": "第三道紫雷", "hp": 14000, "atk": 1000, "def": 450, "speed": 65, "specialEffect": { "type": "debuff_def",  "value": 40,  "description": "碎甲紫雷，降低防御 40%" } },
+        { "name": "天火劫",     "hp": 16000, "atk": 1100, "def": 480, "speed": 68, "specialEffect": { "type": "heal_block",  "value": 0,   "description": "天火焚身，无法恢复" } },
+        { "name": "心魔劫",     "hp": 12000, "atk": 1300, "def": 350, "speed": 72, "specialEffect": { "type": "debuff_atk",  "value": 30,  "description": "心魔入侵，攻击降低 30%" } },
+        { "name": "混元雷罚",   "hp": 20000, "atk": 1500, "def": 500, "speed": 75, "specialEffect": { "type": "dot",        "value": 120, "description": "混元雷罚，每回合 120 伤害" } }
+      ],
+      "rewards": { "bonusExp": 50000, "items": [{ "itemId": "core:chaos_stone", "count": 1 }] },
+      "failureType": "become_loose_immortal",
+      "failureDescription": "二九天劫不可力敌，道基崩碎，沦为散仙…"
+    }
+  ]
+}

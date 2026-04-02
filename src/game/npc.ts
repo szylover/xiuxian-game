@@ -12,21 +12,25 @@ import { hasItem, removeItem } from './inventory';
 
 // ── 默认状态 ──
 
+/** 赠礼 CD：3 个月（age 单位为月） */
+export const GIFT_CD = 3;
+
 const DEFAULT_NPC_STATE: NpcSystemState = {
   relations: {},
   discoveredNpcs: [],
-  lastGiftYear: {},
+  lastGiftAge: {},
 };
 
 /** 读取 NPC 系统状态（兼容旧存档） */
 export function getNpcState(player: Player): NpcSystemState {
   const s = player.systems['npc'];
-  if (!s || typeof s !== 'object') return { ...DEFAULT_NPC_STATE, relations: {}, discoveredNpcs: [], lastGiftYear: {} };
-  const state = s as Partial<NpcSystemState>;
+  if (!s || typeof s !== 'object') return { ...DEFAULT_NPC_STATE, relations: {}, discoveredNpcs: [], lastGiftAge: {} };
+  const state = s as Partial<NpcSystemState> & { lastGiftYear?: Record<string, number> };
   return {
     relations: state.relations ?? {},
     discoveredNpcs: Array.isArray(state.discoveredNpcs) ? state.discoveredNpcs : [],
-    lastGiftYear: state.lastGiftYear ?? {},
+    // 兼容旧存档 lastGiftYear → lastGiftAge
+    lastGiftAge: state.lastGiftAge ?? state.lastGiftYear ?? {},
   };
 }
 
@@ -159,10 +163,11 @@ export function giveGift(
   const rel = state.relations[npcId];
   if (!rel?.met) return { player, message: '❌ 尚未邂逅此 NPC。', affinityChange: 0 };
 
-  // 每年每 NPC 限赠一次
-  const lastYear = state.lastGiftYear[npcId] ?? -1;
-  if (lastYear >= player.gameYear) {
-    return { player, message: `❌ 今年已向${npcDef.name}赠过礼物，明年再来吧。`, affinityChange: 0 };
+  // 赠礼 CD：3 个月
+  const lastAge = state.lastGiftAge[npcId] ?? -Infinity;
+  const remaining = (lastAge + GIFT_CD) - player.age;
+  if (remaining > 0) {
+    return { player, message: `❌ 赠礼尚在冷却中，还需等待约 ${remaining} 个月。`, affinityChange: 0 };
   }
 
   if (!hasItem(player, itemId, 1)) {
@@ -197,8 +202,8 @@ export function giveGift(
 
   let p = removeItem(player, itemId, 1);
 
-  const newLastGiftYear = { ...state.lastGiftYear, [npcId]: player.gameYear };
-  p = setNpcState(p, { ...getNpcState(p), lastGiftYear: newLastGiftYear });
+  const newLastGiftAge = { ...state.lastGiftAge, [npcId]: player.age };
+  p = setNpcState(p, { ...getNpcState(p), lastGiftAge: newLastGiftAge });
 
   const result = changeAffinity(p, npcId, delta, 'gift');
   const msg = `🎁 向${npcDef.emoji} ${npcDef.name}赠送了【${itemName}】，${npcDef.name}${reaction}。${result.message}`;

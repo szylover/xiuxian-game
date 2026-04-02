@@ -69,7 +69,7 @@ export function runTribulation(player: Player): TribulationResult {
   const passed = ((btSys.tribulationsPassed ?? []) as string[]).slice();
   passed.push(tribDef.id);
   p.systems = { ...p.systems, breakthrough: { ...btSys, tribulationsPassed: passed } };
-  logs.push(`🎆 晋升 ${newRealm.name}期！寿限 +${newRealm.lifespanBonus}！`);
+  logs.push(`🎆 晋升 ${newRealm.name}期！寿限 +${newRealm.lifespanBonus / 12}年！`);
 
   return { success: true, player: p, logs, wavesCleared, totalWaves: tribDef.waves.length };
 }

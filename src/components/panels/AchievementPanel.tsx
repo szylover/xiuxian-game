@@ -144,7 +144,8 @@ export default function AchievementPanel({ player }: AchievementPanelProps) {
           {Object.entries(ONCE_LABELS).map(([key, label]) => {
             const val = onceBonus[key];
             if (!val) return null;
-            return <span key={key} className="achievement-summary-item achievement-summary-once">{label} +{val}</span>;
+            const displayVal = key === 'lifespan' ? `${Math.floor(val / 12)}年` : val;
+            return <span key={key} className="achievement-summary-item achievement-summary-once">{label} +{displayVal}</span>;
           })}
           {Object.values(recalcBonus).every(v => !v) && Object.values(onceBonus).every(v => !v) && (
             <span className="achievement-summary-empty">暂无永久加成</span>

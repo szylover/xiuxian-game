@@ -145,9 +145,9 @@ export const CORE_ACHIEVEMENTS: AchievementDef[] = [
     description: '年龄达到 100 岁',
     category: 'cultivation',
     icon: '🎂',
-    condition: (p) => p.age >= 100,
-    bonusStats: { lifespan: 50 },
-    bonusDescription: '寿元 +50（一次性）',
+    condition: (p) => p.age >= 1200,
+    bonusStats: { lifespan: 600 },
+    bonusDescription: '寿元 +50年（一次性）',
   },
 
   // ── 炼丹 ──

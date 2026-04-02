@@ -28,6 +28,30 @@ export const CHANGELOG: ChangelogEntry[] = [
     ],
   },
   {
+    version: '1.3.3',
+    date: '2026-04-02',
+    title: '年龄系统月份化（T0067）',
+    items: [
+      'player.age 从浮点年改为整数月，消除浮点精度问题',
+      '新增 formatAge(months) 工具函数，UI 显示"X岁Y月"格式',
+      '初始年龄 192 月（16岁），基础寿限 1200 月（100年）',
+      '所有境界突破寿限加成、丹药延寿、成就加成统一改为月份',
+      '旧存档自动迁移：_ageInMonths 标志检测，age×12、lifespan×12',
+      'Debug 面板年龄/寿限调整步进改为月份单位',
+    ],
+  },
+  {
+    version: '1.3.2',
+    date: '2026-04-02',
+    title: '数据文件 TS → JSON 迁移（T0066）',
+    items: [
+      '将 core-realms、core-body-config、core-divine-arts、core-bottlenecks 迁移为 JSON + 薄壳 TS loader',
+      '设计突破条件声明式 DSL（field/op/value），由 breakthrough-loader.ts 编译为谓词函数',
+      '将 core-breakthrough 迁移为 JSON + breakthrough-loader.ts 薄壳',
+      '策划/Content Agent 修改数值只需编辑 JSON 文件，无需了解 TypeScript',
+    ],
+  },
+  {
     version: '1.3.1',
     date: '2026-04-02',
     title: '区域事件系统（T0022）',

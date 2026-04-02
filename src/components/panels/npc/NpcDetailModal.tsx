@@ -6,7 +6,7 @@ import { useState } from 'react';
 import type { Player } from '../../../game/player';
 import type { NpcDef, NpcRelationLevel } from '../../../game/types';
 import { REALMS } from '../../../game/data';
-import { getRelation, getNpcState } from '../../../game/npc';
+import { getRelation, getNpcState, GIFT_CD } from '../../../game/npc';
 import { NPC_RELATION_CN, NPC_RELATION_COLORS, NPC_RELATION_EMOJI, NPC_PERSONALITY_CN } from '../../shared/constants';
 import GiftModal from './GiftModal';
 
@@ -32,10 +32,11 @@ export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift }:
   const relLabel = NPC_RELATION_CN[rel.relationLevel];
   const personalityCN = NPC_PERSONALITY_CN[npc.personality] ?? npc.personality;
 
-  const canGift = rel.met
-    && player.inventory.length > 0
-    && (npcState.lastGiftYear[npc.id] ?? -1) < player.gameYear;
-  const giftedThisYear = (npcState.lastGiftYear[npc.id] ?? -1) >= player.gameYear;
+  const lastGiftAge = npcState.lastGiftAge[npc.id] ?? -Infinity;
+  const giftCdRemaining = (lastGiftAge + GIFT_CD) - player.age;
+  const giftOnCd = giftCdRemaining > 0;
+  const canGift = rel.met && player.inventory.length > 0 && !giftOnCd;
+  const cdMonths = giftOnCd ? giftCdRemaining : 0;
 
   const barPct = Math.max(0, Math.min(100, ((rel.affinity + 100) / (maxAffinity + 100)) * 100));
 
@@ -129,9 +130,9 @@ export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift }:
                   disabled={!canGift}
                   onClick={() => setShowGiftModal(true)}
                   style={{ fontSize: '0.8rem', opacity: canGift ? 1 : 0.5 }}
-                  title={giftedThisYear ? '今年已赠过礼物' : '选择物品赠送'}
+                  title={giftOnCd ? `冷却中，还需 ${cdMonths} 个月` : '选择物品赠送'}
                 >
-                  🎁 赠礼{giftedThisYear ? '（已赠）' : ''}
+                  🎁 赠礼{giftOnCd ? `（${cdMonths}月）` : ''}
                 </button>
                 <button className="btn" disabled style={{ fontSize: '0.8rem', opacity: 0.4 }} title="T0064 论道系统待接入">
                   📖 论道

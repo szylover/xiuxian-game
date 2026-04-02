@@ -4,7 +4,7 @@
 // ============================================================
 
 import { useState } from 'react';
-import { getSpiritRootGrade, getSpiritRootDisplay } from '../../game/player';
+import { getSpiritRootGrade, getSpiritRootDisplay, formatAge } from '../../game/player';
 import type { Player } from '../../game/player';
 import { getBodyRealmDef } from '../../game/registry';
 import { getNextBodyRealm } from '../../game/body-cultivation';
@@ -106,7 +106,7 @@ export default function StatusPanel({ player }: StatusPanelProps) {
 
         <Section title="📦 基础属性" defaultOpen>
           <StatRow icon="📍" label="位置" value={region ? `${region.emoji} ${region.name}` : '未知'} />
-          <StatRow icon="📅" label="寿命" value={player.age.toFixed(1)} max={player.lifespan === Infinity ? undefined : player.lifespan} color={STAT_COLORS.lifespan} />
+          <StatRow icon="📅" label="寿命" value={`${formatAge(player.age)} / ${player.lifespan === Infinity ? '∞' : Math.floor(player.lifespan / 12) + '岁'}`} color={STAT_COLORS.lifespan} />
           <StatRow icon="😊" label="心情" value={player.mood} max={100} color={STAT_COLORS.mood} />
           <StatRow icon="💚" label="健康" value={player.health} max={100} color={player.health < 30 ? '#F44336' : STAT_COLORS.health} />
           <StatRow icon="⚡" label="精力" value={player.stamina} max={player.maxStamina} color={STAT_COLORS.stamina} />

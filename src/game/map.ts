@@ -116,7 +116,7 @@ export function travelTo(player: Player, regionId: string): { player: Player; me
   const newPlayer: Player = {
     ...player,
     stamina: player.stamina - cost,
-    age: player.age + region.travelTimeMonths / 12,
+    age: player.age + region.travelTimeMonths,
     gameYear: newYear,
     gameMonth: newMonth,
     systems: { ...player.systems, map: newState },

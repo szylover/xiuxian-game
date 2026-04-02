@@ -16,13 +16,12 @@ interface GiftModalProps {
 }
 
 export default function GiftModal({ player, npc, onGift, onClose }: GiftModalProps) {
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
 
-  // 过滤可赠送的物品（排除装备中的）
-  const giftableItems = player.inventory.filter(slot => {
-    const def = getItemDef(slot.itemId);
-    return !!def;
-  });
+  // 过滤可赠送的物品（排除装备中的），保留原始索引
+  const giftableItems = player.inventory
+    .map((slot, idx) => ({ slot, idx }))
+    .filter(({ slot }) => !!getItemDef(slot.itemId));
 
   const prefs = npc.giftPreferences;
 
@@ -56,14 +55,14 @@ export default function GiftModal({ player, npc, onGift, onClose }: GiftModalPro
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-            {giftableItems.map(slot => {
+            {giftableItems.map(({ slot, idx }) => {
               const def = getItemDef(slot.itemId)!;
               const pref = getPreferenceLabel(slot.itemId);
-              const isSelected = selected === slot.itemId;
+              const isSelected = selectedIdx === idx;
               return (
                 <div
-                  key={slot.itemId}
-                  onClick={() => setSelected(slot.itemId)}
+                  key={idx}
+                  onClick={() => setSelectedIdx(idx)}
                   style={{
                     display: 'flex', alignItems: 'center', gap: '0.4rem',
                     padding: '0.35rem 0.5rem', borderRadius: 4,
@@ -72,7 +71,7 @@ export default function GiftModal({ player, npc, onGift, onClose }: GiftModalPro
                   }}
                 >
                   <span style={{ color: RARITY_COLORS[def.rarity], fontSize: '0.8rem', flex: 1 }}>
-                    {def.name} ×{slot.count}
+                    {def.name}（赠送 1 个，持有 {slot.count}）
                   </span>
                   {pref && (
                     <span style={{ fontSize: '0.65rem', color: pref.color, whiteSpace: 'nowrap' }}>
@@ -89,9 +88,14 @@ export default function GiftModal({ player, npc, onGift, onClose }: GiftModalPro
           <button className="btn" onClick={onClose} style={{ fontSize: '0.8rem' }}>取消</button>
           <button
             className="btn"
-            disabled={!selected}
-            onClick={() => { if (selected) { onGift(selected); onClose(); } }}
-            style={{ fontSize: '0.8rem', opacity: selected ? 1 : 0.5 }}
+            disabled={selectedIdx === null}
+            onClick={() => {
+              if (selectedIdx !== null) {
+                const item = giftableItems.find(g => g.idx === selectedIdx);
+                if (item) { onGift(item.slot.itemId); onClose(); }
+              }
+            }}
+            style={{ fontSize: '0.8rem', opacity: selectedIdx !== null ? 1 : 0.5 }}
           >
             赠送
           </button>

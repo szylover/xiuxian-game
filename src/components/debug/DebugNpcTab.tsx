@@ -61,7 +61,7 @@ export default function DebugNpcTab({ player, onUpdate }: Props) {
   const resetAll = () => {
     onUpdate(prev => {
       if (!prev) return prev;
-      const newState: NpcSystemState = { relations: {}, discoveredNpcs: [], lastGiftYear: {} };
+      const newState: NpcSystemState = { relations: {}, discoveredNpcs: [], lastGiftAge: {} };
       return { ...prev, systems: { ...prev.systems, npc: newState } };
     });
   };
