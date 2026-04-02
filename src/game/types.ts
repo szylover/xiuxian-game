@@ -316,6 +316,7 @@ export interface RegionDef {
   combatBonus?: number;           // 战斗经验加成（0~1）
   shopDiscount?: number;          // 商店折扣加成（0~1）
   connections?: string[];         // 可直接移动到的相邻区域 ID 列表（预留）
+  lootTable?: Array<{ itemId: string; chance: number }>;  // T0022 区域专属掉落表
 }
 
 export interface MapSystemState {

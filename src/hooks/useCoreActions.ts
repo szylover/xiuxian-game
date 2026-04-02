@@ -17,7 +17,7 @@ import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/dea
 import { restorePhysique, gainBodyRealmExp, tryBodyRealmBreakthrough } from '../game/body-cultivation';
 import { getTechniqueDef } from '../game/registry';
 import { ensureBottleneckState, getActiveBottlenecks, tickPersistenceCultivation, tryBattleUnlock, tryEpiphanyUnlock, tryOverflowUnlock } from '../game/bottleneck';
-import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef } from '../game/types';
+import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef, RegionDef } from '../game/types';
 import type { LogCategory } from './useGameLog';
 
 export interface LootEntry {
@@ -43,6 +43,25 @@ export interface CoreActionDeps {
   advanceTime: (p: Player, actionKey: string) => Player;
   canAct: (actionKey: string) => boolean;
   onCombatResult: (monsterName: string, monsterEmoji: string, result: CombatResult, loot: LootEntry[], deathInfo?: CombatDeathInfo, hpBefore?: number, mpBefore?: number) => void;
+}
+
+// ── T0022: 区域掉落表辅助函数 ──
+const DEFAULT_EXPLORE_LOOT: [string, number][] = [
+  ['core:iron_ore', 0.15],
+  ['core:spirit_stone_shard', 0.20],
+  ['core:herb_lingzhi', 0.08],
+  ['core:herb_snow_lotus', 0.03],
+  ['core:jade_slip', 0.05],
+  ['core:hp_pill', 0.10],
+  ['core:spirit_water', 0.06],
+  ['core:map_fragment', 0.02],
+];
+
+function getRegionLootTable(region: RegionDef | undefined): [string, number][] {
+  if (region?.lootTable?.length) {
+    return region.lootTable.map(e => [e.itemId, e.chance]);
+  }
+  return DEFAULT_EXPLORE_LOOT;
 }
 
 export function useCoreActions(deps: CoreActionDeps) {
@@ -337,24 +356,16 @@ export function useCoreActions(deps: CoreActionDeps) {
 
       // T0064: 探索时尝试顿悟解锁瓶颈
       p = ensureBottleneckState(p);
-      const region = getCurrentRegion(p);
-      const locationTag = region?.id ?? '';
+      const currentRegion = getCurrentRegion(p);
+      const locationTag = currentRegion?.id ?? '';
       const epiphanyResult = tryEpiphanyUnlock(p, locationTag);
       if (epiphanyResult.triggered && epiphanyResult.log) {
         p = epiphanyResult.player;
         exploreMsg += ` ✨${epiphanyResult.log}`;
       }
 
-      const exploreLoot: [string, number][] = [
-        ['core:iron_ore', 0.15],
-        ['core:spirit_stone_shard', 0.20],
-        ['core:herb_lingzhi', 0.08],
-        ['core:herb_snow_lotus', 0.03],
-        ['core:jade_slip', 0.05],
-        ['core:hp_pill', 0.10],
-        ['core:spirit_water', 0.06],
-        ['core:map_fragment', 0.02],
-      ];
+      // T0022: 优先使用区域专属掉落表，若区域无掉落表则使用默认表
+      const exploreLoot = getRegionLootTable(currentRegion);
       for (const [itemId, chance] of exploreLoot) {
         if (Math.random() < chance) {
           const { player: p2, added } = addItem(p, itemId, 1);
