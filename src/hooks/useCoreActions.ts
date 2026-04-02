@@ -121,7 +121,7 @@ export function useCoreActions(deps: CoreActionDeps) {
           const tickResult = tickPersistenceCultivation(p, entry.bottleneckId);
           p = tickResult.player;
           if (tickResult.unlocked && tickResult.log) {
-            bodyMsg += ` ${tickResult.log}`;
+            queueLog(tickResult.log, 'system');
           }
         }
       }
