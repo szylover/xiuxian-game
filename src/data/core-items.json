@@ -572,5 +572,49 @@
     },
     "effectMessage": "💊 服下延寿丹，寿限延长 50 年。",
     "sellPrice": 300
+  },
+  {
+    "id": "core:mountain_herb",
+    "name": "岩山灵草",
+    "category": "material",
+    "rarity": "common",
+    "description": "生长于妖兽山岩缝间的灵草，含有野性灵力",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 12
+  },
+  {
+    "id": "core:sand_crystal",
+    "name": "荒沙晶石",
+    "category": "material",
+    "rarity": "uncommon",
+    "description": "荒原深处蕴育的天然晶石，储有地脉能量",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 25
+  },
+  {
+    "id": "core:mystery_fragment",
+    "name": "秘境碎片",
+    "category": "material",
+    "rarity": "rare",
+    "description": "秘境中残留的神秘物质，蕴含空间法则的波动",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": false,
+    "sellPrice": 80
+  },
+  {
+    "id": "core:celestial_jade",
+    "name": "仙都灵玉",
+    "category": "material",
+    "rarity": "rare",
+    "description": "仙都特产的高阶灵玉，灵气充沛，修士趋之若鹜",
+    "stackable": true,
+    "maxStack": 30,
+    "usable": false,
+    "sellPrice": 120
   }
 ]

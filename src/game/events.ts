@@ -222,16 +222,16 @@ const CORE_REVIVAL_METHODS: RevivalMethodDef[] = [
 // ── 核心妖兽表（DLC 化，含 emoji）──
 
 const CORE_MONSTERS: MonsterDef[] = [
-  { id: 'core:wild_wolf',    name: '野狼',     emoji: '🐺', realmIndex: 0, hp: 80,   atk: 7,   def: 2,  speed: 10, moveSpeed: 8,  critRate: 3,  critResist: 0,  critDmgMultiplier: 1.5, expReward: 15,   goldReward: 5    },
-  { id: 'core:viper',        name: '毒蛇',     emoji: '🐍', realmIndex: 0, hp: 60,   atk: 10,  def: 1,  speed: 12, moveSpeed: 12, critRate: 8,  critResist: 0,  critDmgMultiplier: 1.5, expReward: 18,   goldReward: 8    },
-  { id: 'core:iron_bear',    name: '铁背熊',   emoji: '🐻', realmIndex: 1, hp: 250,  atk: 18,  def: 12, speed: 8,  moveSpeed: 5,  critRate: 5,  critResist: 2,  critDmgMultiplier: 1.5, expReward: 40,   goldReward: 15   },
-  { id: 'core:flame_python', name: '赤焰蟒',   emoji: '🔥', realmIndex: 1, hp: 200,  atk: 22,  def: 8,  speed: 14, moveSpeed: 10, critRate: 10, critResist: 0,  critDmgMultiplier: 1.5, expReward: 50,   goldReward: 20   },
-  { id: 'core:ice_spider',   name: '玄冰蛛',   emoji: '🕷️', realmIndex: 2, hp: 600,  atk: 45,  def: 25, speed: 16, moveSpeed: 14, critRate: 12, critResist: 5,  critDmgMultiplier: 1.5, expReward: 120,  goldReward: 50   },
-  { id: 'core:soul_hawk',    name: '噬魂鹰',   emoji: '🦅', realmIndex: 2, hp: 500,  atk: 55,  def: 18, speed: 22, moveSpeed: 20, critRate: 15, critResist: 3,  critDmgMultiplier: 1.5, expReward: 140,  goldReward: 60   },
-  { id: 'core:fire_lizard',  name: '地火蜥蜴', emoji: '🦎', realmIndex: 3, hp: 1500, atk: 100, def: 55, speed: 20, moveSpeed: 12, critRate: 10, critResist: 8,  critDmgMultiplier: 1.5, expReward: 350,  goldReward: 120  },
-  { id: 'core:silver_dragon',name: '银角蛟龙', emoji: '🐉', realmIndex: 3, hp: 1800, atk: 120, def: 65, speed: 28, moveSpeed: 18, critRate: 18, critResist: 10, critDmgMultiplier: 1.5, expReward: 500,  goldReward: 200  },
-  { id: 'core:sky_tiger',    name: '天煞虎',   emoji: '🐯', realmIndex: 4, hp: 4000, atk: 250, def: 130,speed: 32, moveSpeed: 22, critRate: 15, critResist: 12, critDmgMultiplier: 1.5, expReward: 1200, goldReward: 500  },
-  { id: 'core:kui_bull',     name: '夔牛',     emoji: '🐂', realmIndex: 5, hp: 9000, atk: 550, def: 280,speed: 45, moveSpeed: 30, critRate: 20, critResist: 15, critDmgMultiplier: 1.5, expReward: 4000, goldReward: 1500 },
+  { id: 'core:wild_wolf',    name: '野狼',     emoji: '🐺', realmIndex: 0, hp: 80,   atk: 7,   def: 2,  speed: 10, moveSpeed: 8,  critRate: 3,  critResist: 0,  critDmgMultiplier: 1.5, expReward: 15,   goldReward: 5,    regionTags: ['mountain', 'wilderness', 'wasteland'] },
+  { id: 'core:viper',        name: '毒蛇',     emoji: '🐍', realmIndex: 0, hp: 60,   atk: 10,  def: 1,  speed: 12, moveSpeed: 12, critRate: 8,  critResist: 0,  critDmgMultiplier: 1.5, expReward: 18,   goldReward: 8,    regionTags: ['mountain', 'wilderness', 'valley'] },
+  { id: 'core:iron_bear',    name: '铁背熊',   emoji: '🐻', realmIndex: 1, hp: 250,  atk: 18,  def: 12, speed: 8,  moveSpeed: 5,  critRate: 5,  critResist: 2,  critDmgMultiplier: 1.5, expReward: 40,   goldReward: 15,   regionTags: ['mountain', 'wilderness'] },
+  { id: 'core:flame_python', name: '赤焰蟒',   emoji: '🔥', realmIndex: 1, hp: 200,  atk: 22,  def: 8,  speed: 14, moveSpeed: 10, critRate: 10, critResist: 0,  critDmgMultiplier: 1.5, expReward: 50,   goldReward: 20,   regionTags: ['mountain', 'wilderness', 'wasteland'] },
+  { id: 'core:ice_spider',   name: '玄冰蛛',   emoji: '🕷️', realmIndex: 2, hp: 600,  atk: 45,  def: 25, speed: 16, moveSpeed: 14, critRate: 12, critResist: 5,  critDmgMultiplier: 1.5, expReward: 120,  goldReward: 50,   regionTags: ['wasteland', 'mystic'] },
+  { id: 'core:soul_hawk',    name: '噬魂鹰',   emoji: '🦅', realmIndex: 2, hp: 500,  atk: 55,  def: 18, speed: 22, moveSpeed: 20, critRate: 15, critResist: 3,  critDmgMultiplier: 1.5, expReward: 140,  goldReward: 60,   regionTags: ['wasteland', 'mystic', 'dangerous'] },
+  { id: 'core:fire_lizard',  name: '地火蜥蜴', emoji: '🦎', realmIndex: 3, hp: 1500, atk: 100, def: 55, speed: 20, moveSpeed: 12, critRate: 10, critResist: 8,  critDmgMultiplier: 1.5, expReward: 350,  goldReward: 120,  regionTags: ['mystic', 'dangerous'] },
+  { id: 'core:silver_dragon',name: '银角蛟龙', emoji: '🐉', realmIndex: 3, hp: 1800, atk: 120, def: 65, speed: 28, moveSpeed: 18, critRate: 18, critResist: 10, critDmgMultiplier: 1.5, expReward: 500,  goldReward: 200,  regionTags: ['mystic', 'dangerous'] },
+  { id: 'core:sky_tiger',    name: '天煞虎',   emoji: '🐯', realmIndex: 4, hp: 4000, atk: 250, def: 130,speed: 32, moveSpeed: 22, critRate: 15, critResist: 12, critDmgMultiplier: 1.5, expReward: 1200, goldReward: 500,  regionTags: ['mystic', 'dangerous', 'celestial'] },
+  { id: 'core:kui_bull',     name: '夔牛',     emoji: '🐂', realmIndex: 5, hp: 9000, atk: 550, def: 280,speed: 45, moveSpeed: 30, critRate: 20, critResist: 15, critDmgMultiplier: 1.5, expReward: 4000, goldReward: 1500, regionTags: ['mystic', 'dangerous', 'celestial'] },
 ];
 
 // ── 注册 core DLC ──

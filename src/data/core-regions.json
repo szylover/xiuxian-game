@@ -21,7 +21,13 @@
     "travelCostBase": 0,
     "travelTimeMonths": 1,
     "safeZone": true,
-    "shopDiscount": 0
+    "shopDiscount": 0,
+    "lootTable": [
+      { "itemId": "core:spirit_stone_shard", "chance": 0.30 },
+      { "itemId": "core:jade_slip",          "chance": 0.12 },
+      { "itemId": "core:hp_pill",            "chance": 0.10 },
+      { "itemId": "core:map_fragment",       "chance": 0.05 }
+    ]
   },
   {
     "id": "core:beast_mountain",
@@ -33,7 +39,14 @@
     "regionTags": ["mountain", "wilderness"],
     "travelCostBase": 15,
     "travelTimeMonths": 1,
-    "combatBonus": 0.2
+    "combatBonus": 0.2,
+    "lootTable": [
+      { "itemId": "core:iron_ore",       "chance": 0.25 },
+      { "itemId": "core:monster_fang",   "chance": 0.20 },
+      { "itemId": "core:mountain_herb",  "chance": 0.15 },
+      { "itemId": "core:monster_core",   "chance": 0.05 },
+      { "itemId": "core:jade_slip",      "chance": 0.04 }
+    ]
   },
   {
     "id": "core:herb_valley",
@@ -45,7 +58,14 @@
     "regionTags": ["valley", "herb"],
     "travelCostBase": 15,
     "travelTimeMonths": 1,
-    "explorationBonus": 0.3
+    "explorationBonus": 0.3,
+    "lootTable": [
+      { "itemId": "core:herb_lingzhi",       "chance": 0.30 },
+      { "itemId": "core:herb_snow_lotus",    "chance": 0.12 },
+      { "itemId": "core:spirit_water",       "chance": 0.18 },
+      { "itemId": "core:spirit_stone_shard", "chance": 0.10 },
+      { "itemId": "core:hp_pill",            "chance": 0.06 }
+    ]
   },
   {
     "id": "core:desolate_waste",
@@ -57,7 +77,14 @@
     "regionTags": ["wasteland", "wilderness"],
     "travelCostBase": 25,
     "travelTimeMonths": 1,
-    "combatBonus": 0.3
+    "combatBonus": 0.3,
+    "lootTable": [
+      { "itemId": "core:sand_crystal",       "chance": 0.22 },
+      { "itemId": "core:iron_ore",           "chance": 0.18 },
+      { "itemId": "core:monster_core",       "chance": 0.10 },
+      { "itemId": "core:spirit_stone_shard", "chance": 0.12 },
+      { "itemId": "core:map_fragment",       "chance": 0.05 }
+    ]
   },
   {
     "id": "core:mystic_realm",
@@ -69,7 +96,14 @@
     "regionTags": ["mystic", "dangerous"],
     "travelCostBase": 35,
     "travelTimeMonths": 1,
-    "explorationBonus": 0.5
+    "explorationBonus": 0.5,
+    "lootTable": [
+      { "itemId": "core:mystery_fragment",   "chance": 0.20 },
+      { "itemId": "core:jade_slip",          "chance": 0.15 },
+      { "itemId": "core:monster_core",       "chance": 0.12 },
+      { "itemId": "core:herb_snow_lotus",    "chance": 0.08 },
+      { "itemId": "core:spirit_stone_shard", "chance": 0.15 }
+    ]
   },
   {
     "id": "core:celestial_city",
@@ -81,6 +115,13 @@
     "regionTags": ["city", "celestial"],
     "travelCostBase": 40,
     "travelTimeMonths": 1,
-    "shopDiscount": 0.1
+    "shopDiscount": 0.1,
+    "lootTable": [
+      { "itemId": "core:celestial_jade",     "chance": 0.18 },
+      { "itemId": "core:jade_slip",          "chance": 0.12 },
+      { "itemId": "core:spirit_stone_shard", "chance": 0.20 },
+      { "itemId": "core:mystery_fragment",   "chance": 0.08 },
+      { "itemId": "core:hp_pill",            "chance": 0.05 }
+    ]
   }
 ]
