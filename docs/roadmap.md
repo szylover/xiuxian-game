@@ -65,8 +65,8 @@
 | [T0020](https://github.com/szylover/xiuxian-game/issues/76) | 神通（元素体系） | T0017, T0018 | [Spec](specs/T0020-divine-arts.md) | ✅ |
 | [T0049](https://github.com/szylover/xiuxian-game/issues/112) | 悟道顿悟系统 | T0002, T0017 | — | ⬜ |
 | [T0059](https://github.com/szylover/xiuxian-game/issues/89) | 体修系统核心（体魄 · 体修境界 · 减伤） | T0001, T0003, T0017, T0019 | [spec](specs/T0059-body-cultivation.md) | ✅ |
-| [T0060](https://github.com/szylover/xiuxian-game/issues/120) | 体修武器内容（拳套 · 指环 · 手甲） | T0059, T0014, T0015 | [spec](specs/T0059-body-cultivation.md) | ⬜ |
-| [T0061](https://github.com/szylover/xiuxian-game/issues/121) | 体修功法内容（高阶拳法 · 指法） | T0059, T0017 | [spec](specs/T0059-body-cultivation.md) | ⬜ |
+| [T0060](https://github.com/szylover/xiuxian-game/issues/120) | 体修武器内容（拳套 · 指环 · 手甲） | T0059, T0014, T0015 | [spec](specs/T0059-body-cultivation.md) | ✅ |
+| [T0061](https://github.com/szylover/xiuxian-game/issues/121) | 体修功法内容（高阶拳法 · 指法） | T0059, T0017 | [spec](specs/T0059-body-cultivation.md) | ✅ |
 | [T0062](https://github.com/szylover/xiuxian-game/issues/91) | 体修 UI（境界行 · 体魄条 · Debug 面板） | T0059, T0041, T0046 | [spec](specs/T0059-body-cultivation.md) | ✅ |
 
 
@@ -74,13 +74,8 @@
 
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
-| [T0021](tasks/done/T0021-map-system.md) | 地图系统（多区域） | T0001 | [spec](specs/T0021-map-system.md) | ✅ |
-| [T0022](tasks/todo/T0022-region-events.md) | 区域事件 | T0007, T0021 | — | ⬜ |
-| [T0023](tasks/todo/T0023-dungeon.md) | 秘境探索（限时副本） | T0021, T0003 | — | ⬜ |
-| [T0024](tasks/todo/T0024-fengshui-mining.md) | 风水采矿 | T0021, T0012 | — | ⬜ |
-| [T0054](tasks/todo/T0054-bounty-quest.md) | 历练悬赏任务 | T0021, T0025 | — | ⬜ |
 | [T0021](https://github.com/szylover/xiuxian-game/issues/77) | 地图系统（多区域） | T0001 | [spec](specs/T0021-map-system.md) | ✅ |
-| [T0022](https://github.com/szylover/xiuxian-game/issues/94) | 区域事件 | T0007, T0021 | — | ⬜ |
+| [T0022](https://github.com/szylover/xiuxian-game/issues/94) | 区域事件 | T0007, T0021 | — | ✅ |
 | [T0023](https://github.com/szylover/xiuxian-game/issues/95) | 秘境探索（限时副本） | T0021, T0003 | — | ⬜ |
 | [T0024](https://github.com/szylover/xiuxian-game/issues/96) | 风水采矿 | T0021, T0012 | — | ⬜ |
 | [T0054](https://github.com/szylover/xiuxian-game/issues/117) | 历练悬赏任务 | T0021, T0025 | — | ⬜ |
@@ -111,7 +106,7 @@
 | [T0034](https://github.com/szylover/xiuxian-game/issues/104) | 洪荒终局 | T0033 | — | ⬜ |
 | [T0042](https://github.com/szylover/xiuxian-game/issues/82) | 年月历法系统 | T0001, T0005 | [spec](specs/T0042-calendar-system.md) | ✅ |
 | [T0050](https://github.com/szylover/xiuxian-game/issues/113) | 心魔系统 | T0029 | — | ⬜ |
-| [T0064](https://github.com/szylover/xiuxian-game/issues/93) | 瓶颈系统（境界/功法卡点 + 多元解锁） | T0002, T0029, T0007, T0017, T0058 | [spec](specs/T0064-bottleneck-system.md) | 🔨 |
+| [T0064](https://github.com/szylover/xiuxian-game/issues/93) | 瓶颈系统（境界/功法卡点 + 多元解锁） | T0002, T0029, T0007, T0017, T0058 | [spec](specs/T0064-bottleneck-system.md) | ✅ |
 | [T0055](https://github.com/szylover/xiuxian-game/issues/118) | 天机榜（天骄排行） | T0025, T0003, T0051 | — | ⬜ |
 
 ### 🏷️ 界面与体验
@@ -124,16 +119,17 @@
 | [T0045](https://github.com/szylover/xiuxian-game/issues/85) | Toast 降噪 + 战斗日志合并 | T0043, T0044 | [spec](specs/T0045-toast-combat-log-polish.md) | ✅ |
 | [T0046](https://github.com/szylover/xiuxian-game/issues/86) | 战斗弹窗 UI 重做（头像+血条+可视化） | T0003, T0044, T0041 | [spec](specs/T0046-combat-ui-revamp.md) | ✅ |
 | [T0063](https://github.com/szylover/xiuxian-game/issues/92) | 开始界面改版：随机角色弹窗 | T0056 | [spec](specs/T0063-start-screen-reroll-modal.md) | ✅ |
-| T0065 | 文案集中管理（中文文本从代码中抽取到统一文件） | — | [spec](specs/T0065-text-centralization.md) | ⬜ |
+| [T0065](https://github.com/szylover/xiuxian-game/issues/138) | 文案集中管理（中文文本从代码中抽取到统一文件） | — | [spec](specs/T0065-text-centralization.md) | ⬜ |
 
 ### 🏷️ 部署与体验
 
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
-| [T0035](https://github.com/szylover/xiuxian-game/issues/105) | Azure SWA CI/CD | — | — | ⬜ |
-| [T0036](https://github.com/szylover/xiuxian-game/issues/106) | PWA 支持 | T0035 | — | ⬜ |
+| [T0035](https://github.com/szylover/xiuxian-game/issues/105) | Azure SWA CI/CD | — | — | ✅ |
+| [T0036](https://github.com/szylover/xiuxian-game/issues/106) | PWA 支持 | T0035 | — | ✅ |
 | [T0037](https://github.com/szylover/xiuxian-game/issues/107) | 音效系统 | — | — | ⬜ |
-| [T0038](https://github.com/szylover/xiuxian-game/issues/108) | 多存档 | — | — | ⬜ |
+| [T0038](https://github.com/szylover/xiuxian-game/issues/108) | 多存档 | — | — | ✅ |
+| [T0066](https://github.com/szylover/xiuxian-game/issues/139) | 数据文件 TS→JSON 迁移 | — | — | ⬜ |
 | [T0039](https://github.com/szylover/xiuxian-game/issues/109) | 新手引导 | T0001 | — | ⬜ |
 | [T0059b](https://github.com/szylover/xiuxian-game/issues/90) | 数据懒加载 & Bundle 分割 | — | [spec](specs/T0059-data-lazy-loading.md) | ✅ |
 
