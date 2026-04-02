@@ -119,7 +119,7 @@
 | [T0045](https://github.com/szylover/xiuxian-game/issues/85) | Toast 降噪 + 战斗日志合并 | T0043, T0044 | [spec](specs/T0045-toast-combat-log-polish.md) | ✅ |
 | [T0046](https://github.com/szylover/xiuxian-game/issues/86) | 战斗弹窗 UI 重做（头像+血条+可视化） | T0003, T0044, T0041 | [spec](specs/T0046-combat-ui-revamp.md) | ✅ |
 | [T0063](https://github.com/szylover/xiuxian-game/issues/92) | 开始界面改版：随机角色弹窗 | T0056 | [spec](specs/T0063-start-screen-reroll-modal.md) | ✅ |
-| [T0065](https://github.com/szylover/xiuxian-game/issues/138) | 文案集中管理（中文文本从代码中抽取到统一文件） | — | [spec](specs/T0065-text-centralization.md) | ⬜ |
+| [T0065](https://github.com/szylover/xiuxian-game/issues/138) | 文案集中管理（中文文本从代码中抽取到统一文件） | — | [spec](specs/T0065-text-centralization.md) | ✅ |
 
 ### 🏷️ 部署与体验
 
