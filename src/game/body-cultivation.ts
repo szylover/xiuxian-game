@@ -72,6 +72,34 @@ export function getSpiritRootHpBonusRate(player: Player): number {
   return rate;
 }
 
+// ── 体修境界突破状态查询 ──
+
+export interface BodyBreakthroughStatus {
+  canAttempt: boolean;
+  nextRealm: BodyRealmDef | undefined;
+  expReady: boolean;
+  physiqueReady: boolean;
+  physiqueRequired: number;
+}
+
+/** 获取体修突破状态（供 UI 显示突破按钮） */
+export function getBodyBreakthroughStatus(player: Player): BodyBreakthroughStatus {
+  const nextRealm = getBodyRealmDef(player.bodyRealmIndex + 1);
+  if (!nextRealm) {
+    return { canAttempt: false, nextRealm: undefined, expReady: false, physiqueReady: false, physiqueRequired: 0 };
+  }
+  const expReady = player.bodyRealmExp >= nextRealm.expReq;
+  const physiqueRequired = Math.ceil(player.maxPhysique * 0.8);
+  const physiqueReady = player.physique >= physiqueRequired;
+  return {
+    canAttempt: expReady && physiqueReady,
+    nextRealm,
+    expReady,
+    physiqueReady,
+    physiqueRequired,
+  };
+}
+
 // ── 体修境界突破 ──
 
 export function tryBodyRealmBreakthrough(player: Player): {

@@ -7,6 +7,7 @@ import type { Player } from './player';
 import { getItemDef } from './registry';
 import type { ItemDef } from './registry';
 import { addItem, removeItem, hasItem } from './inventory';
+import { getCurrentRegion } from './map';
 
 // ── 商品定义（注册到全局表）──
 
@@ -14,6 +15,7 @@ export interface ShopGoodsDef {
   itemId: string;         // 商品物品 ID
   buyPrice: number;       // 基础买入价（玩家视角）
   stock: number;          // 库存（-1 = 无限）
+  regionTags?: string[];  // T0021 区域标签（空/未设置 = 所有区域可购买）
 }
 
 // ── 商品注册表 ──
@@ -31,6 +33,16 @@ export function registerShopGoods(goods: ShopGoodsDef[]): void {
 
 export function getAllShopGoods(): ShopGoodsDef[] {
   return shopGoodsRegistry;
+}
+
+/** T0021: 按当前区域过滤商品（无 regionTags 的商品在所有区域可见） */
+export function getShopGoodsForRegion(player: Player): ShopGoodsDef[] {
+  const region = getCurrentRegion(player);
+  if (!region) return shopGoodsRegistry;
+  const tags = region.regionTags;
+  return shopGoodsRegistry.filter(g =>
+    !g.regionTags?.length || g.regionTags.some(t => tags.includes(t))
+  );
 }
 
 // ── 价格计算 ──

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "core:mortal_world",
+    "name": "凡界",
+    "emoji": "🌍",
+    "description": "凡人与低阶修士生存的广袤世界",
+    "minRealm": 0,
+    "regionTags": [],
+    "travelCostBase": 0,
+    "travelTimeMonths": 0,
+    "isContainer": true
+  },
+  {
+    "id": "core:qingyun_town",
+    "name": "青云镇",
+    "emoji": "🏘️",
+    "description": "修仙者聚居的小镇，平和安宁，适合初入修仙之道的散修",
+    "minRealm": 0,
+    "parentId": "core:mortal_world",
+    "regionTags": ["town", "safe"],
+    "travelCostBase": 0,
+    "travelTimeMonths": 1,
+    "safeZone": true,
+    "shopDiscount": 0
+  },
+  {
+    "id": "core:beast_mountain",
+    "name": "妖兽山",
+    "emoji": "⛰️",
+    "description": "妖兽出没之地，适合以战养战的修行者",
+    "minRealm": 1,
+    "parentId": "core:mortal_world",
+    "regionTags": ["mountain", "wilderness"],
+    "travelCostBase": 15,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.2
+  },
+  {
+    "id": "core:herb_valley",
+    "name": "灵药谷",
+    "emoji": "🌿",
+    "description": "灵药遍地，适合炼丹师采集和修炼",
+    "minRealm": 1,
+    "parentId": "core:mortal_world",
+    "regionTags": ["valley", "herb"],
+    "travelCostBase": 15,
+    "travelTimeMonths": 1,
+    "explorationBonus": 0.3
+  },
+  {
+    "id": "core:desolate_waste",
+    "name": "荒原",
+    "emoji": "🏜️",
+    "description": "荒芜之地，凶险异常，但蕴藏稀有资源",
+    "minRealm": 2,
+    "parentId": "core:mortal_world",
+    "regionTags": ["wasteland", "wilderness"],
+    "travelCostBase": 25,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.3
+  },
+  {
+    "id": "core:mystic_realm",
+    "name": "秘境",
+    "emoji": "🌙",
+    "description": "神秘之地，机遇与危险并存",
+    "minRealm": 3,
+    "parentId": "core:mortal_world",
+    "regionTags": ["mystic", "dangerous"],
+    "travelCostBase": 35,
+    "travelTimeMonths": 1,
+    "explorationBonus": 0.5
+  },
+  {
+    "id": "core:celestial_city",
+    "name": "仙都",
+    "emoji": "🏛️",
+    "description": "仙人聚居之地，高阶修行者的圣地",
+    "minRealm": 4,
+    "parentId": "core:mortal_world",
+    "regionTags": ["city", "celestial"],
+    "travelCostBase": 40,
+    "travelTimeMonths": 1,
+    "shopDiscount": 0.1
+  }
+]

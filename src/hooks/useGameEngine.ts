@@ -23,6 +23,7 @@ import { checkDeathTriggers, applyDeath, applyRevival, getDeathSystemState } fro
 import type { RevivalMethodDef } from '../game/types';
 import { checkAchievements } from '../game/achievement/engine';
 import { SAVE_KEY, loadSave, writeSave } from './useSaveLoad';
+import { refreshUnlockedRegions } from '../game/map';
 
 // Re-export types so existing imports still work
 export type { CombatModalState, DeathModalState } from './useCombatModal';
@@ -93,7 +94,9 @@ export function useGameEngine(
   const loadGame = useCallback(() => {
     const saved = loadSave();
     if (saved) {
-      setPlayer(saved);
+      // T0021: 根据境界刷新解锁区域（旧存档可能境界已高）
+      const withRegions = refreshUnlockedRegions(saved);
+      setPlayer(withRegions);
       setGameOver(false);
       setGameOverReason('');
       addLog(`📂 读取存档成功！${saved.name}，${REALMS[saved.realmIndex].name}期。`, 'system');
@@ -252,6 +255,7 @@ export function useGameEngine(
     useItem, craft, equip, unequip, buy, sell, smith, breakthrough,
     learnTechnique, practiceTechnique, activateTechnique,
     learnDivineArt, activateDivineArt, deactivateDivineArt,
+    travel, bodyBreakthrough,
   } = useSystemActions({
     player, addLog, setPlayer, setGameOver, setGameOverReason, setDeathModal,
   });
@@ -310,6 +314,8 @@ export function useGameEngine(
     learnDivineArt,
     activateDivineArt,
     deactivateDivineArt,
+    travel,
+    bodyBreakthrough,
     toast,
     dismissToast,
     combatModal,

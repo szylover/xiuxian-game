@@ -13,6 +13,7 @@ import {
   ELEMENT_COLOR,
 } from '../../game/divine-arts';
 import { REALMS } from '../../game/data';
+import { useState } from 'react';
 
 interface DivineArtsPanelProps {
   player: Player;
@@ -22,6 +23,7 @@ interface DivineArtsPanelProps {
 }
 
 export default function DivineArtsPanel({ player, onLearn, onActivate, onDeactivate }: DivineArtsPanelProps) {
+  const [filterAvailable, setFilterAvailable] = useState(false);
   const state = getDivineArtsState(player);
   const learnedIds = new Set(state.learned.map(s => s.artId));
   const allDefs = getAllDivineArtDefs();
@@ -29,11 +31,27 @@ export default function DivineArtsPanel({ player, onLearn, onActivate, onDeactiv
   const learnedArts = allDefs.filter(d => learnedIds.has(d.id));
   const unlearnedArts = allDefs.filter(d => !learnedIds.has(d.id));
 
+  // 过滤可学神通：开启时只显示满足条件的
+  const displayUnlearned = filterAvailable
+    ? unlearnedArts.filter(def => checkLearnCondition(player, def).canLearn)
+    : unlearnedArts;
+
   const activeArtId = state.activeArtId;
   const activeArtDef = activeArtId ? allDefs.find(d => d.id === activeArtId) : null;
 
   return (
     <div className="technique-panel">
+      {/* 过滤开关 */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 4 }}>
+        <button
+          className={`btn ${filterAvailable ? 'btn-technique-activate' : 'btn-technique'}`}
+          onClick={() => setFilterAvailable(!filterAvailable)}
+          style={{ fontSize: '0.78em', padding: '2px 8px' }}
+        >
+          {filterAvailable ? '✅ 只看可学' : '👁️ 全部'}
+        </button>
+      </div>
+
       {/* 当前激活神通 */}
       <div className="divine-active-header">
         <span className="divine-active-label">当前激活：</span>
@@ -79,13 +97,13 @@ export default function DivineArtsPanel({ player, onLearn, onActivate, onDeactiv
       )}
 
       {/* 可学 / 锁定神通 */}
-      {unlearnedArts.length > 0 && (
+      {displayUnlearned.length > 0 && (
         <>
           <div className="technique-section-title" style={{ marginTop: '0.6rem' }}>
-            📚 可学神通
+            📚 可学神通{filterAvailable ? '（已筛选）' : ''}
           </div>
           <div className="technique-list">
-            {unlearnedArts.map(def => {
+            {displayUnlearned.map(def => {
               const check = checkLearnCondition(player, def);
               const aptitude = (player.aptitudes as unknown as Record<string, number>)[def.element] ?? 0;
               return (

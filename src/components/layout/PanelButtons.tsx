@@ -4,7 +4,7 @@
 
 import type { Player } from '../../game/player';
 
-export type PanelKey = 'inventory' | 'shop' | 'crafting' | 'equipment' | 'technique' | 'divine' | 'achievement' | 'status';
+export type PanelKey = 'inventory' | 'shop' | 'crafting' | 'equipment' | 'technique' | 'divine' | 'achievement' | 'map' | 'status';
 
 interface PanelDef {
   key: PanelKey;
@@ -38,6 +38,12 @@ const PANEL_GROUPS: PanelGroup[] = [
     label: '🏆 成就',
     panels: [
       { key: 'achievement', icon: '🏆', label: '成就' },
+    ],
+  },
+  {
+    label: '🌍 世界',
+    panels: [
+      { key: 'map', icon: '🗺️', label: '地图' },
     ],
   },
 ];

@@ -8,7 +8,11 @@
     "effects": {
       "gold": 20
     },
-    "message": "💎 探索中发现一处灵石矿脉，获得 20 灵石！"
+    "message": "💎 探索中发现一处灵石矿脉，获得 20 灵石！",
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:elder_advice",
@@ -30,7 +34,11 @@
     "effects": {
       "hp": 50
     },
-    "message": "🧪 在山洞中发现一瓶丹药，恢复 50 HP！"
+    "message": "🧪 在山洞中发现一瓶丹药，恢复 50 HP！",
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:spirit_spring",
@@ -42,7 +50,11 @@
       "mp": 30,
       "mood": 10
     },
-    "message": "🌊 发现一处灵泉，恢复 30 MP，心情 +10！"
+    "message": "🌊 发现一处灵泉，恢复 30 MP，心情 +10！",
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:herb_garden",
@@ -54,7 +66,11 @@
       "gold": 10,
       "health": 10
     },
-    "message": "🌿 发现一片灵草园，采集灵草，获得 10 灵石，健康 +10！"
+    "message": "🌿 发现一片灵草园，采集灵草，获得 10 灵石，健康 +10！",
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:ancient_scroll",
@@ -65,7 +81,15 @@
     "effects": {
       "exp": 50
     },
-    "message": "📜 在废墟中捡到一页古籍残页，参悟后获得 50 修为！"
+    "message": "📜 在废墟中捡到一页古籍残页，参悟后获得 50 修为！",
+    "regionTags": [
+      "dangerous",
+      "herb",
+      "mystic",
+      "valley",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:treasure_chest",
@@ -126,7 +150,11 @@
       "gold": 40,
       "mood": 10
     },
-    "message": "🐾 发现一只走失的灵兽幼崽，送还后获得报酬 40 灵石，心情 +10。"
+    "message": "🐾 发现一只走失的灵兽幼崽，送还后获得报酬 40 灵石，心情 +10。",
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:ambush",
@@ -138,7 +166,11 @@
       "hp": -30,
       "health": -5
     },
-    "message": "🐺 被妖兽偷袭！HP -30，健康 -5。"
+    "message": "🐺 被妖兽偷袭！HP -30，健康 -5。",
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:lost",
@@ -149,7 +181,11 @@
     "effects": {
       "mood": -15
     },
-    "message": "🌫️ 在迷雾中迷失了方向，心情 -15。"
+    "message": "🌫️ 在迷雾中迷失了方向，心情 -15。",
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:trap",
@@ -215,7 +251,11 @@
       "hp": -40,
       "mood": -10
     },
-    "message": "💀 闯入一处被诅咒的遗迹，邪气侵体！HP -40，心情 -10。"
+    "message": "💀 闯入一处被诅咒的遗迹，邪气侵体！HP -40，心情 -10。",
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:nothing",
@@ -235,7 +275,11 @@
     "effects": {
       "mood": 5
     },
-    "message": "🏔️ 看到了一处壮丽的奇异景观，略感心旷神怡。心情 +5。"
+    "message": "🏔️ 看到了一处壮丽的奇异景观，略感心旷神怡。心情 +5。",
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:old_battlefield",
@@ -246,7 +290,11 @@
     "effects": {
       "exp": 10
     },
-    "message": "⚔️ 经过一处古修士的战场遗迹，感悟残留的法意，修为 +10。"
+    "message": "⚔️ 经过一处古修士的战场遗迹，感悟残留的法意，修为 +10。",
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:cave_inheritance",
@@ -262,7 +310,11 @@
     "condition": {
       "minRealm": 1
     },
-    "once": true
+    "once": true,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:immortal_gift",
@@ -278,7 +330,11 @@
       "minRealm": 2,
       "minComprehension": 60
     },
-    "once": true
+    "once": true,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:reincarnation_pill",
@@ -298,7 +354,11 @@
     "condition": {
       "minRealm": 3
     },
-    "once": true
+    "once": true,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:ancient_formation",
@@ -314,7 +374,11 @@
     "condition": {
       "minRealm": 1
     },
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:fallen_star",
@@ -343,7 +407,11 @@
       "hp": -20
     },
     "message": "🌀 【奇遇】发现秘境入口！闯入其中，虽受轻伤（HP -20），但获得了不少感悟。",
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:heavenly_tribulation_preview",
@@ -360,7 +428,11 @@
     "condition": {
       "minRealm": 2
     },
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:market_discount",
@@ -371,7 +443,11 @@
     "effects": {
       "gold": 5
     },
-    "message": "🏪 路过集市，有商人低价出售灵材，你趁机捡了个便宜。灵石 +5。"
+    "message": "🏪 路过集市，有商人低价出售灵材，你趁机捡了个便宜。灵石 +5。",
+    "regionTags": [
+      "city",
+      "town"
+    ]
   },
   {
     "id": "core:good_weather",
@@ -479,7 +555,11 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0001",
@@ -495,7 +575,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0002",
@@ -524,7 +608,11 @@
     "message": "☠️ 吸入毒雾，邪气侵体。HP -15，心情 -5。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0004",
@@ -554,7 +642,12 @@
     "message": "🐺 在探索中遭遇一头铁背熊的袭击！措手不及。精力 -5。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0006",
@@ -584,7 +677,13 @@
       "minComprehension": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0008",
@@ -616,7 +715,11 @@
       "minHealth": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0010",
@@ -646,7 +749,11 @@
     "message": "🐾 遇到一只炎凤雏，它似乎对你很亲近，留下一颗灵珠。修为 +15。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0012",
@@ -756,7 +863,11 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0019",
@@ -786,7 +897,11 @@
     "message": "🐺 在探索中遭遇一只九尾猫的袭击！险些丧命。灵力 -10。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0021",
@@ -802,7 +917,11 @@
       "minRealm": 3
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0022",
@@ -851,7 +970,11 @@
       "minLuck": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0025",
@@ -868,7 +991,11 @@
       "minHealth": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0026",
@@ -900,7 +1027,13 @@
       "minComprehension": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0028",
@@ -933,7 +1066,11 @@
       "minRealm": 3
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0030",
@@ -950,7 +1087,11 @@
       "minRealm": 1
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0031",
@@ -964,7 +1105,12 @@
     "message": "🏔️ 途经迷雾森林，看到灵兽嬉戏，沉思良久。心情 +3。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0032",
@@ -1028,7 +1174,11 @@
       "minLuck": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0036",
@@ -1040,7 +1190,11 @@
     "message": "🏔️ 途经烈阳荒原，看到古怪岩石，热血沸腾。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0037",
@@ -1073,7 +1227,11 @@
       "minRealm": 3
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0039",
@@ -1089,7 +1247,13 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0040",
@@ -1169,7 +1333,11 @@
       "minLuck": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0045",
@@ -1228,7 +1396,11 @@
       "minRealm": 3
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0049",
@@ -1244,7 +1416,11 @@
       "minCharisma": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0050",
@@ -1261,7 +1437,11 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0051",
@@ -1319,7 +1499,11 @@
     "message": "🚶 在青云山脚闲逛了一圈，略有感触。修为 +5。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0055",
@@ -1384,7 +1568,11 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0059",
@@ -1399,7 +1587,11 @@
     "message": "🚶 在金光大道闲逛了一圈，略有感触。HP +10，心情 -5。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0060",
@@ -1413,7 +1605,11 @@
     "message": "🐺 在探索中遭遇一只赤焰鹰的袭击！险些丧命。HP -50。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0061",
@@ -1475,7 +1671,11 @@
       "maxHealth": 70
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0065",
@@ -1521,7 +1721,11 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0068",
@@ -1535,7 +1739,11 @@
     "message": "☠️ 吸入毒雾，邪气侵体。灵力 -10。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0069",
@@ -1597,7 +1805,11 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0073",
@@ -1628,7 +1840,11 @@
       "minRealm": 1
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0075",
@@ -1672,7 +1888,11 @@
     "message": "🏔️ 途经古寺废墟，看到古怪岩石，心如止水。修为 +3。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0078",
@@ -1718,7 +1938,11 @@
       "minHealth": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0081",
@@ -1748,7 +1972,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0083",
@@ -1764,7 +1992,11 @@
       "maxHealth": 70
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0084",
@@ -1862,7 +2094,11 @@
       "maxHealth": 70
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0090",
@@ -1984,7 +2220,11 @@
     "message": "🐺 在探索中遭遇一只冰晶蜘蛛的袭击！险些丧命。HP -20，健康 -5。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0098",
@@ -1999,7 +2239,11 @@
     "message": "🎁 无意间在路边发现一块天外陨铁，大喜过望。修为 +15，心情 +5。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0099",
@@ -2029,7 +2273,11 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0101",
@@ -2092,7 +2340,11 @@
     "message": "🔍 在溪流旁探索时，发现了一张泛黄的地图。HP +30，灵力 +20。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0105",
@@ -2106,7 +2358,11 @@
       "minLuck": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0106",
@@ -2122,7 +2378,11 @@
       "maxHealth": 70
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0107",
@@ -2164,7 +2424,11 @@
     "message": "🎁 无意间在路边发现一本阵法图解，欣喜不已。灵石 +50。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0110",
@@ -2209,7 +2473,11 @@
     "message": "🔍 在溪流旁探索时，发现了一张泛黄的地图。灵力 +30。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0113",
@@ -2271,7 +2539,11 @@
     "message": "🎁 无意间在路边发现一块天外陨铁，欣喜不已。灵石 +15。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0117",
@@ -2301,7 +2573,11 @@
     "message": "🚶 在烈阳荒原闲逛了一圈，偶有所得。心情 -3。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0119",
@@ -2345,7 +2621,11 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0122",
@@ -2361,7 +2641,11 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0123",
@@ -2425,7 +2709,11 @@
       "minRealm": 3
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0127",
@@ -2656,7 +2944,11 @@
       "minRealm": 1
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0142",
@@ -2673,7 +2965,11 @@
       "minRealm": 3
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0143",
@@ -2689,7 +2985,11 @@
       "minRealm": 1
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0144",
@@ -2703,7 +3003,13 @@
     "message": "🐾 遇到一只墨玉蚕，它似乎对你很亲近，叼来一株灵草。灵石 +10。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0145",
@@ -2732,7 +3038,11 @@
     "message": "💎 在断崖边感应到地下灵脉波动，挖掘后有所收获。灵石 +10，修为 +10。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0147",
@@ -2763,7 +3073,11 @@
     "message": "🚶 在风暴峡谷闲逛了一圈，略有感触。修为 +5, 心情 -3。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0149",
@@ -2809,7 +3123,11 @@
       "minComprehension": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0152",
@@ -2825,7 +3143,11 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0153",
@@ -2873,7 +3195,11 @@
       "minHealth": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0156",
@@ -2903,7 +3229,13 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0158",
@@ -2919,7 +3251,11 @@
       "minLuck": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0159",
@@ -2933,7 +3269,11 @@
     "message": "🏔️ 途经月光湖畔，看到奇花异草，心生警惕。修为 +3。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0160",
@@ -2996,7 +3336,13 @@
       "minCharisma": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0164",
@@ -3011,7 +3357,11 @@
     "message": "💎 在废弃矿洞感应到地下灵脉波动，挖掘后略有斩获。灵石 +5，健康 +5。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0165",
@@ -3027,7 +3377,11 @@
       "minLuck": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0166",
@@ -3073,7 +3427,11 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "city",
+      "town"
+    ]
   },
   {
     "id": "core:explore_0169",
@@ -3138,7 +3496,11 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0173",
@@ -3154,7 +3516,11 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0174",
@@ -3186,7 +3552,11 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0176",
@@ -3202,7 +3572,11 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0177",
@@ -3247,7 +3621,11 @@
     "message": "🚶 在瀑布后的洞穴闲逛了一圈，偶有所得。修为 +5。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0180",
@@ -3263,7 +3641,11 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0181",
@@ -3308,7 +3690,11 @@
     "message": "🔍 在迷雾森林探索时，发现了一块血玉。HP +30，灵力 +20。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0184",
@@ -3324,7 +3710,11 @@
       "minComprehension": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0185",
@@ -3369,7 +3759,11 @@
     "message": "🐾 遇到一只灵狐，它似乎对你很亲近，引路到一处宝地。灵石 +50。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0188",
@@ -3418,7 +3812,13 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0191",
@@ -3476,7 +3876,11 @@
     "message": "🎁 无意间在路边发现一根仙藤，大喜过望。修为 +50。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0195",
@@ -3508,7 +3912,11 @@
       "maxHealth": 70
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0197",
@@ -3573,7 +3981,13 @@
       "minRealm": 3
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0201",
@@ -3712,7 +4126,11 @@
       "minLuck": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0210",
@@ -3728,7 +4146,11 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0211",
@@ -3786,7 +4208,11 @@
     "message": "🚶 在灵草坪闲逛了一圈，消磨了时光。灵石 +3。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0215",
@@ -3908,7 +4334,11 @@
       "minRealm": 3
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0223",
@@ -3956,7 +4386,11 @@
       "minHealth": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0226",
@@ -3986,7 +4420,13 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0228",
@@ -4002,7 +4442,12 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0229",
@@ -4018,7 +4463,11 @@
       "minRealm": 3
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "city",
+      "town"
+    ]
   },
   {
     "id": "core:explore_0230",
@@ -4035,7 +4484,11 @@
       "minRealm": 1
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0231",
@@ -4128,7 +4581,11 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0237",
@@ -4142,7 +4599,11 @@
     "message": "⚠️ 在忘忧崖遭遇危险，跌落悬崖。HP -10。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0238",
@@ -4191,7 +4652,11 @@
       "maxHealth": 70
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0241",
@@ -4223,7 +4688,11 @@
       "minComprehension": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0243",
@@ -4321,7 +4790,11 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0249",
@@ -4352,7 +4825,11 @@
     "message": "🧘 在星辰崖找到一处适合修炼的地方，心旷神怡。灵石 +30。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0251",
@@ -4386,7 +4863,11 @@
       "minRealm": 3
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0253",
@@ -4400,7 +4881,11 @@
     "message": "💎 在古寺废墟感应到地下灵脉波动，挖掘后略有斩获。心情 +15。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0254",
@@ -4451,7 +4936,13 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0257",
@@ -4591,7 +5082,11 @@
       "minHealth": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0266",
@@ -4607,7 +5102,11 @@
       "minLuck": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0267",
@@ -4623,7 +5122,11 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0268",
@@ -4637,7 +5140,11 @@
     "message": "🧘 在瀑布后的洞穴找到一处适合修炼的地方，沉思良久。修为 +30。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0269",
@@ -4699,7 +5206,11 @@
     "message": "⚠️ 在紫竹林遭遇危险，跌落悬崖。灵石 -5。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0273",
@@ -4715,7 +5226,13 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0274",
@@ -4826,7 +5343,11 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0281",
@@ -4874,7 +5395,13 @@
       "minRealm": 1
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0284",
@@ -4888,7 +5415,13 @@
     "message": "🧘 在灵草坪找到一处适合修炼的地方，心旷神怡。HP +20。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0285",
@@ -4902,7 +5435,12 @@
     "message": "🏔️ 途经古寺废墟，看到灵兽嬉戏，感慨万千。修为 +3。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0286",
@@ -4951,7 +5489,11 @@
       "maxHealth": 70
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0289",
@@ -4967,7 +5509,11 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0290",
@@ -4998,7 +5544,11 @@
       "minCharisma": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0292",
@@ -5030,7 +5580,11 @@
       "minCharisma": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0294",
@@ -5141,7 +5695,13 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0301",
@@ -5155,7 +5715,11 @@
     "message": "⚠️ 在断崖边遭遇危险，中了毒。灵力 -20。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0302",
@@ -5201,7 +5765,11 @@
       "minRealm": 1
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0305",
@@ -5232,7 +5800,14 @@
     "message": "🐾 遇到一头铁背熊，它似乎对你很亲近，叼来一株灵草。灵石 +10，修为 +10。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0307",
@@ -5248,7 +5823,11 @@
       "minLuck": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0308",
@@ -5295,7 +5874,11 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0311",
@@ -5312,7 +5895,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0312",
@@ -5328,7 +5915,12 @@
       "maxHealth": 70
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0313",
@@ -5421,7 +6013,11 @@
     "message": "🎁 无意间在路边发现一根仙藤，欣喜不已。修为 +10。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0319",
@@ -5522,7 +6118,14 @@
     "message": "🏔️ 途经断崖边，看到灵兽嬉戏，心旷神怡。修为 +5, 心情 -3。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mountain",
+      "mystic",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0326",
@@ -5583,7 +6186,11 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0330",
@@ -5599,7 +6206,13 @@
       "minHealth": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0331",
@@ -5615,7 +6228,12 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0332",
@@ -5723,7 +6341,11 @@
     "message": "⚠️ 在废弃矿洞遭遇危险，踩入陷阱。灵石 -10。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0339",
@@ -5739,7 +6361,11 @@
       "minCharisma": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0340",
@@ -5755,7 +6381,13 @@
       "minCharisma": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0341",
@@ -5771,7 +6403,11 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0342",
@@ -5785,7 +6421,13 @@
     "message": "🐾 遇到一只灵狐，它似乎对你很亲近，叼来一株灵草。HP +50。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0343",
@@ -5799,7 +6441,11 @@
     "message": "🎁 无意间在路边发现一根仙藤，欣喜不已。修为 +20。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0344",
@@ -5861,7 +6507,11 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0348",
@@ -5877,7 +6527,11 @@
       "minRealm": 1
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0349",
@@ -5891,7 +6545,11 @@
     "message": "🏔️ 途经忘忧崖，看到灵兽嬉戏，沉思良久。心情 +3。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0350",
@@ -5907,7 +6565,13 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0351",
@@ -5923,7 +6587,11 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0352",
@@ -5969,7 +6637,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0355",
@@ -6065,7 +6737,11 @@
       "minCharisma": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0361",
@@ -6095,7 +6771,11 @@
       "minRealm": 3
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0363",
@@ -6125,7 +6805,11 @@
     "message": "🔍 在寒霜原野探索时，发现了一枚储物戒指。修为 +30。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0365",
@@ -6157,7 +6841,13 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0367",
@@ -6237,7 +6927,11 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0372",
@@ -6253,7 +6947,11 @@
       "minRealm": 1
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0373",
@@ -6285,7 +6983,11 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0375",
@@ -6346,7 +7048,11 @@
       "minLuck": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0379",
@@ -6360,7 +7066,11 @@
     "message": "🤝 路上偶遇一个炼丹师，交谈甚欢。修为 +50。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0380",
@@ -6405,7 +7115,11 @@
     "message": "🚶 在风暴峡谷闲逛了一圈，偶有所得。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0383",
@@ -6419,7 +7133,11 @@
     "message": "☠️ 吸入毒雾，毒素入侵。HP -50。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0384",
@@ -6435,7 +7153,11 @@
       "minRealm": 1
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0385",
@@ -6465,7 +7187,11 @@
     "message": "🤝 路上偶遇一个炼丹师，互换心得。灵石 +50。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0387",
@@ -6482,7 +7208,11 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0388",
@@ -6560,7 +7290,12 @@
       "minComprehension": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0393",
@@ -6623,7 +7358,11 @@
     "message": "🔍 在青云山脚探索时，发现了一枚储物戒指。灵石 +10。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0397",
@@ -6639,7 +7378,13 @@
       "minComprehension": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0398",
@@ -6670,7 +7415,11 @@
     "message": "🏔️ 途经玄天洞，看到奇花异草，精神一振。修为 +5, 心情 -3。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0400",
@@ -6716,7 +7465,11 @@
       "minComprehension": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0403",
@@ -6748,7 +7501,11 @@
       "minHealth": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0405",
@@ -6762,7 +7519,13 @@
     "message": "🐾 遇到一只风翼雀，它似乎对你很亲近，叼来一株灵草。健康 +5。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0406",
@@ -6778,7 +7541,11 @@
       "minHealth": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0407",
@@ -6843,7 +7610,11 @@
       "minRealm": 3
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0411",
@@ -6873,7 +7644,11 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0413",
@@ -6952,7 +7727,11 @@
       "minLuck": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0418",
@@ -6966,7 +7745,11 @@
     "message": "🤝 路上偶遇一个挑担货郎，互换心得。心情 +15。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "city",
+      "town"
+    ]
   },
   {
     "id": "core:explore_0419",
@@ -6996,7 +7779,11 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0421",
@@ -7088,7 +7875,11 @@
     "message": "🔍 在荒废药园探索时，发现了一张泛黄的地图。精力 +10。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0427",
@@ -7181,7 +7972,13 @@
       "minLuck": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0433",
@@ -7197,7 +7994,11 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0434",
@@ -7213,7 +8014,11 @@
       "minRealm": 1
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0435",
@@ -7244,7 +8049,11 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0437",
@@ -7273,7 +8082,11 @@
     "message": "🧘 在溪流旁找到一处适合修炼的地方，感慨万千。灵石 +5，健康 +5。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0439",
@@ -7306,7 +8119,13 @@
       "minRealm": 3
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0441",
@@ -7322,7 +8141,12 @@
       "minRealm": 3
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0442",
@@ -7399,7 +8223,11 @@
     "message": "🐾 遇到一只幽灵蛇，它似乎对你很亲近，引路到一处宝地。灵石 +10。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0447",
@@ -7445,7 +8273,11 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0450",
@@ -7462,7 +8294,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0451",
@@ -7495,7 +8331,13 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0453",
@@ -7528,7 +8370,11 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "city",
+      "town"
+    ]
   },
   {
     "id": "core:explore_0455",
@@ -7572,7 +8418,11 @@
       "minComprehension": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0458",
@@ -7588,7 +8438,11 @@
       "minLuck": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0459",
@@ -7604,7 +8458,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0460",
@@ -7648,7 +8506,11 @@
     "message": "🎁 无意间在路边发现一根仙藤，喜出望外。灵石 +10，修为 +10。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:explore_0463",
@@ -7711,7 +8573,11 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0467",
@@ -7741,7 +8607,13 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0469",
@@ -7818,7 +8690,11 @@
       "minRealm": 1
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0474",
@@ -7832,7 +8708,13 @@
     "message": "🐾 遇到一条银鳞蛟，它似乎对你很亲近，叼来一株灵草。心情 +10。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0475",
@@ -7879,7 +8761,11 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0478",
@@ -7944,7 +8830,11 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0482",
@@ -7990,7 +8880,11 @@
       "minCharisma": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "valley"
+    ]
   },
   {
     "id": "core:explore_0485",
@@ -8022,7 +8916,13 @@
       "minCharisma": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0487",
@@ -8143,7 +9043,14 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "herb",
+      "mountain",
+      "valley",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:explore_0495",
@@ -8222,7 +9129,11 @@
     "message": "🔍 在须弥洞天探索时，发现了一块兽骨。灵石 +10，修为 +10。",
     "condition": null,
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0000",
@@ -8239,7 +9150,14 @@
       "minHealth": 50
     },
     "once": false,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0001",
@@ -8256,7 +9174,11 @@
       "minHealth": 50
     },
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0002",
@@ -8273,7 +9195,11 @@
       "minComprehension": 52
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0003",
@@ -8292,7 +9218,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0004",
@@ -8309,7 +9239,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0005",
@@ -8325,7 +9259,11 @@
       "maxMood": 50
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0006",
@@ -8341,7 +9279,11 @@
       "minRealm": 3
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0007",
@@ -8358,7 +9300,13 @@
       "minHealth": 50
     },
     "once": false,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "dangerous",
+      "mystic",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0008",
@@ -8375,7 +9323,11 @@
       "minRealm": 0
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0009",
@@ -8391,7 +9343,11 @@
       "minCharisma": 40
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0010",
@@ -8408,7 +9364,11 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0011",
@@ -8424,7 +9384,11 @@
       "maxHealth": 70
     },
     "once": false,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0012",
@@ -8441,7 +9405,11 @@
       "minComprehension": 43
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0013",
@@ -8457,7 +9425,13 @@
       "minHealth": 50
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0014",
@@ -8474,7 +9448,11 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0015",
@@ -8491,7 +9469,12 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0016",
@@ -8508,7 +9491,11 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0017",
@@ -8524,7 +9511,11 @@
       "minComprehension": 40
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0018",
@@ -8557,7 +9548,11 @@
     "message": "🌀 【奇遇】在海边礁石发现空间裂缝，闯入后险象环生。修为 +125，HP -13。",
     "condition": null,
     "once": false,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0020",
@@ -8608,7 +9603,13 @@
       "maxMood": 50
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0023",
@@ -8624,7 +9625,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0024",
@@ -8641,7 +9648,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0025",
@@ -8658,7 +9669,11 @@
       "minComprehension": 51
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0026",
@@ -8686,7 +9701,11 @@
     "message": "🐾 【奇遇】遇到一只血色蚁王，互生好感，协助你修炼。灵石 +179。",
     "condition": null,
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0028",
@@ -8702,7 +9721,11 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 12
+    "cooldown": 12,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0029",
@@ -8738,7 +9761,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0031",
@@ -8757,7 +9784,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0032",
@@ -8774,7 +9805,11 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0033",
@@ -8793,7 +9828,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0034",
@@ -8810,7 +9851,12 @@
       "minRealm": 3
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0035",
@@ -8827,7 +9873,12 @@
       "maxHealth": 70
     },
     "once": false,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0036",
@@ -8844,7 +9895,11 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0037",
@@ -8859,7 +9914,12 @@
     "message": "🌀 【奇遇】在金光大道发现秘境入口，闯入后历经磨难。修为 +87，HP -30。",
     "condition": null,
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0038",
@@ -8873,7 +9933,11 @@
     "message": "🐾 【奇遇】遇到一只炎凤雏，互生好感，它赠予你一件宝物。灵石 +112。",
     "condition": null,
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0039",
@@ -8905,7 +9969,12 @@
     "message": "🐾 【奇遇】遇到一头铁背熊，结为契约，协助你修炼。灵石 +88。",
     "condition": null,
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "mountain",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0041",
@@ -8924,7 +9993,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "celestial",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0042",
@@ -8941,7 +10016,11 @@
       "minComprehension": 55
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0043",
@@ -8955,7 +10034,11 @@
     "message": "☄️ 【奇遇】紫雷贯地，携带远古传承！修为 +438。",
     "condition": null,
     "once": false,
-    "cooldown": 12
+    "cooldown": 12,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0044",
@@ -8972,7 +10055,13 @@
       "minCharisma": 40
     },
     "once": false,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0045",
@@ -8989,7 +10078,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "dangerous",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0046",
@@ -9020,7 +10115,11 @@
     "message": "🌀 【奇遇】在百花谷发现次元通道，闯入后险象环生。修为 +74，HP -27。",
     "condition": null,
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0048",
@@ -9052,7 +10151,11 @@
     "message": "☄️ 【奇遇】天降异宝，携带远古传承！修为 +374。",
     "condition": null,
     "once": false,
-    "cooldown": 14
+    "cooldown": 14,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0050",
@@ -9071,7 +10174,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0051",
@@ -9089,7 +10198,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0052",
@@ -9105,7 +10218,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0053",
@@ -9122,7 +10239,11 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0054",
@@ -9136,7 +10257,13 @@
     "message": "🐾 【奇遇】遇到一条地龙，以诚心打动，引你至宝藏所在。灵石 +54。",
     "condition": null,
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0055",
@@ -9152,7 +10279,11 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0056",
@@ -9169,7 +10300,11 @@
       "minRealm": 3
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0057",
@@ -9186,7 +10321,13 @@
       "minRealm": 0
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0058",
@@ -9200,7 +10341,11 @@
     "message": "🐾 【奇遇】遇到一头雷角兽，结为契约，它赠予你一件宝物。灵石 +119。",
     "condition": null,
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0059",
@@ -9219,7 +10364,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0060",
@@ -9236,7 +10387,11 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0061",
@@ -9255,7 +10410,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0062",
@@ -9289,7 +10450,11 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0064",
@@ -9305,7 +10470,13 @@
       "minMood": 60
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0065",
@@ -9322,7 +10493,11 @@
       "minRealm": 1
     },
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0066",
@@ -9339,7 +10514,13 @@
       "minRealm": 3
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0067",
@@ -9356,7 +10537,11 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0068",
@@ -9373,7 +10558,13 @@
       "minComprehension": 50
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0069",
@@ -9390,7 +10581,11 @@
       "minComprehension": 58
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0070",
@@ -9420,7 +10615,11 @@
     "message": "🐾 【奇遇】遇到一条银鳞蛟，互生好感，它赠予你一件宝物。灵石 +190。",
     "condition": null,
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0072",
@@ -9439,7 +10638,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0073",
@@ -9455,7 +10658,13 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0074",
@@ -9473,7 +10682,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0075",
@@ -9487,7 +10700,11 @@
     "message": "🐾 【奇遇】遇到一条银鳞蛟，互生好感，它赠予你一件宝物。灵石 +192。",
     "condition": null,
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0076",
@@ -9541,7 +10758,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0079",
@@ -9557,7 +10780,12 @@
       "minMood": 60
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "mountain",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0080",
@@ -9571,7 +10799,11 @@
     "message": "🐾 【奇遇】遇到一只幽灵蛇，以诚心打动，协助你修炼。灵石 +57。",
     "condition": null,
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0081",
@@ -9588,7 +10820,11 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0082",
@@ -9604,7 +10840,13 @@
       "minRealm": 3
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0083",
@@ -9618,7 +10860,11 @@
     "message": "☄️ 【奇遇】一道金光从天而降，携带远古传承！修为 +249。",
     "condition": null,
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0084",
@@ -9634,7 +10880,11 @@
       "minGold": 10
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0085",
@@ -9652,7 +10902,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 10
+    "cooldown": 10,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0086",
@@ -9668,7 +10922,13 @@
       "minLuck": 40
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0087",
@@ -9702,7 +10962,11 @@
       "minLuck": 40
     },
     "once": false,
-    "cooldown": 12
+    "cooldown": 12,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0089",
@@ -9719,7 +10983,13 @@
       "maxHealth": 70
     },
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0090",
@@ -9737,7 +11007,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 9
+    "cooldown": 9,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0091",
@@ -9754,7 +11028,11 @@
       "minComprehension": 57
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0092",
@@ -9771,7 +11049,11 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0093",
@@ -9790,7 +11072,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0094",
@@ -9841,7 +11127,11 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0097",
@@ -9871,7 +11161,13 @@
       "maxMood": 50
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0099",
@@ -9888,7 +11184,11 @@
       "minRealm": 0
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0100",
@@ -9921,7 +11221,13 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0102",
@@ -9938,7 +11244,12 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0103",
@@ -9955,7 +11266,13 @@
       "minRealm": 3
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0104",
@@ -9972,7 +11289,13 @@
       "minComprehension": 40
     },
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0105",
@@ -9991,7 +11314,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0106",
@@ -10008,7 +11337,12 @@
       "minRealm": 3
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0107",
@@ -10039,7 +11373,12 @@
       "minRealm": 3
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0109",
@@ -10053,7 +11392,13 @@
     "message": "🐾 【奇遇】遇到一只墨玉蚕，互生好感，引你至宝藏所在。灵石 +70。",
     "condition": null,
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0110",
@@ -10070,7 +11415,12 @@
       "minRealm": 3
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0111",
@@ -10089,7 +11439,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0112",
@@ -10105,7 +11461,13 @@
       "minComprehension": 40
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0113",
@@ -10124,7 +11486,15 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0114",
@@ -10141,7 +11511,11 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0115",
@@ -10155,7 +11529,11 @@
     "message": "🐾 【奇遇】遇到一只七彩蝶，互生好感，它赠予你一件宝物。灵石 +101。",
     "condition": null,
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0116",
@@ -10172,7 +11550,11 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0117",
@@ -10189,7 +11571,11 @@
       "minRealm": 3
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0118",
@@ -10205,7 +11591,11 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0119",
@@ -10219,7 +11609,11 @@
     "message": "🐾 【奇遇】遇到一只风翼雀，互生好感，它赠予你一件宝物。灵石 +191。",
     "condition": null,
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0120",
@@ -10237,7 +11631,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 9
+    "cooldown": 9,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0121",
@@ -10255,7 +11653,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 9
+    "cooldown": 9,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0122",
@@ -10272,7 +11674,13 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0123",
@@ -10291,7 +11699,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0124",
@@ -10326,7 +11738,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0126",
@@ -10363,7 +11781,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0128",
@@ -10382,7 +11806,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0129",
@@ -10398,7 +11826,13 @@
       "maxHealth": 70
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0130",
@@ -10415,7 +11849,11 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0131",
@@ -10432,7 +11870,11 @@
       "minComprehension": 58
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0132",
@@ -10449,7 +11891,14 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0133",
@@ -10463,7 +11912,11 @@
     "message": "☄️ 【奇遇】天降异宝，携带远古传承！修为 +262。",
     "condition": null,
     "once": false,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0134",
@@ -10479,7 +11932,11 @@
       "minMood": 60
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0135",
@@ -10496,7 +11953,11 @@
       "minComprehension": 37
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0136",
@@ -10513,7 +11974,11 @@
       "minComprehension": 49
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0137",
@@ -10532,7 +11997,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "mystic",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0138",
@@ -10551,7 +12022,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0139",
@@ -10570,7 +12045,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "mystic",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0140",
@@ -10585,7 +12066,11 @@
     "message": "🌀 【奇遇】在暗影密林发现次元通道，闯入后九死一生。修为 +142，HP -20。",
     "condition": null,
     "once": false,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0141",
@@ -10600,7 +12085,11 @@
     "message": "🌀 【奇遇】在须弥洞天发现结界缺口，闯入后历经磨难。修为 +108，HP -11。",
     "condition": null,
     "once": false,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0142",
@@ -10619,7 +12108,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "celestial",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0143",
@@ -10636,7 +12131,13 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "dangerous",
+      "mystic",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0144",
@@ -10653,7 +12154,13 @@
       "minRealm": 1
     },
     "once": false,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0145",
@@ -10669,7 +12176,11 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 12
+    "cooldown": 12,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0146",
@@ -10688,7 +12199,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0147",
@@ -10705,7 +12220,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0148",
@@ -10724,7 +12243,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0149",
@@ -10740,7 +12265,11 @@
       "maxMood": 50
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0150",
@@ -10757,7 +12286,14 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0151",
@@ -10806,7 +12342,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0154",
@@ -10823,7 +12363,11 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0155",
@@ -10842,7 +12386,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0156",
@@ -10858,7 +12406,11 @@
       "minGold": 10
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0157",
@@ -10875,7 +12427,13 @@
       "minRealm": 0
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mystic",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0158",
@@ -10907,7 +12465,11 @@
       "maxMood": 50
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0160",
@@ -10926,7 +12488,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0161",
@@ -10944,7 +12510,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 9
+    "cooldown": 9,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0162",
@@ -10980,7 +12550,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "celestial",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0164",
@@ -11033,7 +12609,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "celestial",
+      "mystic",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0167",
@@ -11050,7 +12632,11 @@
       "minComprehension": 49
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0168",
@@ -11067,7 +12653,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0169",
@@ -11084,7 +12674,11 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0170",
@@ -11133,7 +12727,13 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0173",
@@ -11167,7 +12767,13 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0175",
@@ -11184,7 +12790,11 @@
       "minComprehension": 36
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0176",
@@ -11203,7 +12813,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0177",
@@ -11222,7 +12838,15 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0178",
@@ -11239,7 +12863,11 @@
       "minComprehension": 57
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0179",
@@ -11256,7 +12884,12 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0180",
@@ -11273,7 +12906,11 @@
       "minComprehension": 41
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0181",
@@ -11292,7 +12929,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0182",
@@ -11309,7 +12950,11 @@
       "minComprehension": 47
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0183",
@@ -11324,7 +12969,11 @@
     "message": "🌀 【奇遇】在火山口发现结界缺口，闯入后历经磨难。修为 +88，HP -25。",
     "condition": null,
     "once": false,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0184",
@@ -11343,7 +12992,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0185",
@@ -11360,7 +13013,11 @@
       "minComprehension": 44
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0186",
@@ -11376,7 +13033,11 @@
       "maxHealth": 70
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0187",
@@ -11393,7 +13054,11 @@
       "minComprehension": 56
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0188",
@@ -11410,7 +13075,13 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mystic",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0189",
@@ -11429,7 +13100,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "celestial",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0190",
@@ -11446,7 +13123,14 @@
       "minRealm": 3
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mystic",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0191",
@@ -11463,7 +13147,13 @@
       "minComprehension": 37
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0192",
@@ -11481,7 +13171,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0193",
@@ -11498,7 +13192,11 @@
       "minComprehension": 53
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "herb",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0194",
@@ -11514,7 +13212,11 @@
       "minGold": 10
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0195",
@@ -11532,7 +13234,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 10
+    "cooldown": 10,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0196",
@@ -11551,7 +13257,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0197",
@@ -11568,7 +13280,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0198",
@@ -11586,7 +13302,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 10
+    "cooldown": 10,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0199",
@@ -11602,7 +13322,11 @@
       "maxMood": 50
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0200",
@@ -11620,7 +13344,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0201",
@@ -11638,7 +13366,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 9
+    "cooldown": 9,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0202",
@@ -11655,7 +13387,11 @@
       "minComprehension": 47
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0203",
@@ -11671,7 +13407,11 @@
       "minComprehension": 40
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0204",
@@ -11688,7 +13428,11 @@
       "minComprehension": 57
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0205",
@@ -11702,7 +13446,11 @@
     "message": "☄️ 【奇遇】天降异宝，携带远古传承！修为 +465。",
     "condition": null,
     "once": false,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0206",
@@ -11718,7 +13466,14 @@
       "minHealth": 50
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0207",
@@ -11751,7 +13506,11 @@
       "minComprehension": 44
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0209",
@@ -11770,7 +13529,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0210",
@@ -11787,7 +13550,11 @@
       "minComprehension": 39
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0211",
@@ -11805,7 +13572,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0212",
@@ -11822,7 +13593,11 @@
       "minComprehension": 51
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0213",
@@ -11837,7 +13612,11 @@
     "message": "🌀 【奇遇】在桃花源发现结界缺口，闯入后历经磨难。修为 +115，HP -18。",
     "condition": null,
     "once": false,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0214",
@@ -11854,7 +13633,13 @@
       "minRealm": 3
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0215",
@@ -11869,7 +13654,11 @@
     "message": "🌀 【奇遇】在冰川裂谷发现秘境入口，闯入后历经磨难。修为 +126，HP -25。",
     "condition": null,
     "once": false,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0216",
@@ -11906,7 +13695,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0218",
@@ -11941,7 +13734,12 @@
       "minComprehension": 40
     },
     "once": false,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0220",
@@ -11958,7 +13756,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0221",
@@ -11972,7 +13774,11 @@
     "message": "🐾 【奇遇】遇到一只冰晶蜘蛛，结为契约，它赠予你一件宝物。灵石 +175。",
     "condition": null,
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0222",
@@ -11987,7 +13793,13 @@
     "message": "🌀 【奇遇】在溪流旁发现结界缺口，闯入后险象环生。修为 +76，HP -22。",
     "condition": null,
     "once": false,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0223",
@@ -12004,7 +13816,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0224",
@@ -12020,7 +13838,13 @@
       "minMood": 60
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0225",
@@ -12039,7 +13863,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0226",
@@ -12056,7 +13886,11 @@
       "minRealm": 3
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0227",
@@ -12073,7 +13907,14 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mystic",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0228",
@@ -12090,7 +13931,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "dangerous",
+      "mystic",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0229",
@@ -12107,7 +13954,11 @@
       "minMood": 60
     },
     "once": false,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0230",
@@ -12122,7 +13973,11 @@
     "message": "🌀 【奇遇】在冰川裂谷发现秘境入口，闯入后历经磨难。修为 +137，HP -13。",
     "condition": null,
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0231",
@@ -12139,7 +13994,11 @@
       "minComprehension": 55
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0232",
@@ -12153,7 +14012,11 @@
     "message": "🐾 【奇遇】遇到一头青铜牛，结为契约，它赠予你一件宝物。灵石 +122。",
     "condition": null,
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0233",
@@ -12170,7 +14033,11 @@
       "minRealm": 1
     },
     "once": false,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0234",
@@ -12187,7 +14054,11 @@
       "minComprehension": 46
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0235",
@@ -12206,7 +14077,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0236",
@@ -12222,7 +14097,11 @@
       "minCharisma": 40
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0237",
@@ -12239,7 +14118,14 @@
       "minRealm": 3
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mystic",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0238",
@@ -12257,7 +14143,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0239",
@@ -12289,7 +14179,11 @@
     "message": "🐾 【奇遇】遇到一头雷角兽，以诚心打动，协助你修炼。灵石 +58。",
     "condition": null,
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0241",
@@ -12303,7 +14197,13 @@
     "message": "🐾 【奇遇】遇到一头金角鹿，以诚心打动，引你至宝藏所在。灵石 +105。",
     "condition": null,
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0242",
@@ -12320,7 +14220,13 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0243",
@@ -12337,7 +14243,11 @@
       "minRealm": 3
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0244",
@@ -12356,7 +14266,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0245",
@@ -12372,7 +14288,11 @@
       "minRealm": 3
     },
     "once": false,
-    "cooldown": 12
+    "cooldown": 12,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0246",
@@ -12387,7 +14307,11 @@
     "message": "🌀 【奇遇】在幽冥谷发现结界缺口，闯入后九死一生。修为 +70，HP -18。",
     "condition": null,
     "once": false,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0247",
@@ -12420,7 +14344,11 @@
       "minComprehension": 52
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0249",
@@ -12435,7 +14363,11 @@
     "message": "🌀 【奇遇】在冰川裂谷发现秘境入口，闯入后险象环生。修为 +92，HP -23。",
     "condition": null,
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0250",
@@ -12452,7 +14384,11 @@
       "minComprehension": 45
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0251",
@@ -12469,7 +14405,14 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0252",
@@ -12486,7 +14429,13 @@
       "minComprehension": 53
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0253",
@@ -12505,7 +14454,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0254",
@@ -12524,7 +14477,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0255",
@@ -12555,7 +14512,11 @@
     "message": "🐾 【奇遇】遇到一条蟒蛇，结为契约，它赠予你一件宝物。灵石 +118。",
     "condition": null,
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0257",
@@ -12570,7 +14531,13 @@
     "message": "🌀 【奇遇】在月光湖畔发现结界缺口，闯入后历经磨难。修为 +111，HP -19。",
     "condition": null,
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0258",
@@ -12587,7 +14554,11 @@
       "minComprehension": 40
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0259",
@@ -12602,7 +14573,11 @@
     "message": "🌀 【奇遇】在百花谷发现次元通道，闯入后九死一生。修为 +105，HP -27。",
     "condition": null,
     "once": false,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0260",
@@ -12616,7 +14591,11 @@
     "message": "☄️ 【奇遇】紫雷贯地，携带远古传承！修为 +124。",
     "condition": null,
     "once": false,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0261",
@@ -12633,7 +14612,11 @@
       "minComprehension": 48
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0262",
@@ -12650,7 +14633,11 @@
       "minRealm": 0
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0263",
@@ -12682,7 +14669,11 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 15
+    "cooldown": 15,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0265",
@@ -12699,7 +14690,11 @@
       "minComprehension": 38
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "city",
+      "town"
+    ]
   },
   {
     "id": "core:adventure_0266",
@@ -12733,7 +14728,11 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0268",
@@ -12749,7 +14748,13 @@
       "minLuck": 40
     },
     "once": true,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0269",
@@ -12766,7 +14771,11 @@
       "minComprehension": 60
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0270",
@@ -12785,7 +14794,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0271",
@@ -12801,7 +14814,12 @@
       "maxHealth": 70
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "mountain",
+      "wasteland",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0272",
@@ -12818,7 +14836,11 @@
       "minComprehension": 54
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0273",
@@ -12835,7 +14857,12 @@
       "minRealm": 0
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0274",
@@ -12854,7 +14881,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0275",
@@ -12891,7 +14922,11 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0277",
@@ -12908,7 +14943,12 @@
       "minRealm": 0
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0278",
@@ -12927,7 +14967,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "celestial",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0279",
@@ -12944,7 +14990,11 @@
       "maxMood": 50
     },
     "once": false,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0280",
@@ -12975,7 +15025,11 @@
     "message": "🌀 【奇遇】在混沌边缘发现秘境入口，闯入后九死一生。修为 +76，HP -28。",
     "condition": null,
     "once": false,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0282",
@@ -13025,7 +15079,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 10
+    "cooldown": 10,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0285",
@@ -13042,7 +15100,11 @@
       "minComprehension": 58
     },
     "once": true,
-    "cooldown": 6
+    "cooldown": 6,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0286",
@@ -13060,7 +15122,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 8
+    "cooldown": 8,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0287",
@@ -13077,7 +15143,13 @@
       "minComprehension": 44
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0288",
@@ -13147,7 +15219,11 @@
       "minComprehension": 58
     },
     "once": true,
-    "cooldown": 4
+    "cooldown": 4,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0292",
@@ -13162,7 +15238,12 @@
     "message": "🌀 【奇遇】在金光大道发现结界缺口，闯入后险象环生。修为 +69，HP -22。",
     "condition": null,
     "once": false,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "celestial",
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0293",
@@ -13179,7 +15260,13 @@
       "minComprehension": 40
     },
     "once": false,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0294",
@@ -13196,7 +15283,11 @@
       "minRealm": 2
     },
     "once": true,
-    "cooldown": 5
+    "cooldown": 5,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0295",
@@ -13215,7 +15306,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "celestial",
+      "herb",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0296",
@@ -13232,7 +15329,11 @@
       "minComprehension": 58
     },
     "once": true,
-    "cooldown": 7
+    "cooldown": 7,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:adventure_0297",
@@ -13249,7 +15350,13 @@
       "minRealm": 1
     },
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "valley"
+    ]
   },
   {
     "id": "core:adventure_0298",
@@ -13265,7 +15372,13 @@
       "minGold": 10
     },
     "once": true,
-    "cooldown": 2
+    "cooldown": 2,
+    "regionTags": [
+      "dangerous",
+      "mountain",
+      "mystic",
+      "wilderness"
+    ]
   },
   {
     "id": "core:adventure_0299",
@@ -13279,7 +15392,11 @@
     "message": "🐾 【奇遇】遇到一只冰晶蜘蛛，以诚心打动，协助你修炼。灵石 +106。",
     "condition": null,
     "once": true,
-    "cooldown": 3
+    "cooldown": 3,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:daily_0000",
@@ -14745,7 +16862,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ]
   },
   {
     "id": "core:daily_0095",
@@ -14870,7 +16991,11 @@
       "minLuck": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:daily_0103",
@@ -14902,7 +17027,11 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "city",
+      "town"
+    ]
   },
   {
     "id": "core:daily_0105",
@@ -15338,7 +17467,11 @@
       "minLuck": 40
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "city",
+      "town"
+    ]
   },
   {
     "id": "core:daily_0133",
@@ -15547,7 +17680,11 @@
       "minHealth": 50
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
   },
   {
     "id": "core:daily_0147",
@@ -15702,7 +17839,11 @@
       "minGold": 20
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "dangerous",
+      "mystic"
+    ]
   },
   {
     "id": "core:daily_0157",
@@ -16024,7 +18165,11 @@
       "minGold": 10
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "city",
+      "town"
+    ]
   },
   {
     "id": "core:daily_0178",
@@ -16085,7 +18230,11 @@
       "minRealm": 2
     },
     "once": false,
-    "cooldown": 0
+    "cooldown": 0,
+    "regionTags": [
+      "city",
+      "town"
+    ]
   },
   {
     "id": "core:daily_0182",

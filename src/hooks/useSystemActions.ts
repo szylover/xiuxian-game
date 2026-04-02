@@ -14,6 +14,8 @@ import { attemptBreakthrough as attemptBreakthroughFn } from '../game/breakthrou
 import { runTribulation as runTribulationFn } from '../game/tribulation';
 import { learnTechnique, practiceTechnique, activateTechnique } from '../game/technique';
 import { learnDivineArt as learnDivineArtFn, activateDivineArt as activateDivineArtFn, deactivateDivineArt as deactivateDivineArtFn } from '../game/divine-arts';
+import { travelTo as travelToFn } from '../game/map';
+import { tryBodyRealmBreakthrough } from '../game/body-cultivation';
 import { recalcStats } from '../game/player';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
 import type { EquipSlot } from '../game/registry';
@@ -136,6 +138,22 @@ export function useSystemActions(deps: SystemActionDeps) {
     execAction(p => deactivateDivineArtFn(p));
   }, [execAction]);
 
+  // ── T0021: 区域移动 ──
+  const travel = useCallback((regionId: string) => {
+    execAction(p => travelToFn(p, regionId));
+  }, [execAction]);
+
+  // ── T0059: 体修突破（手动） ──
+  const bodyBreakthrough = useCallback(() => {
+    execAction(p => {
+      const result = tryBodyRealmBreakthrough(p);
+      if (!result.breakthrough) {
+        return { player: p, message: '❌ 体修突破条件未满足。' };
+      }
+      return { player: result.player, message: result.message };
+    });
+  }, [execAction]);
+
   return {
     useItem: useItemAction,
     craft,
@@ -151,5 +169,7 @@ export function useSystemActions(deps: SystemActionDeps) {
     learnDivineArt,
     activateDivineArt,
     deactivateDivineArt,
+    travel,
+    bodyBreakthrough,
   };
 }

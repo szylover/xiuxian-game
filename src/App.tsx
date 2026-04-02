@@ -75,6 +75,7 @@ export default function App() {
             onExplore={engine.explore}
             onRest={engine.rest}
             onBreakthrough={engine.breakthrough}
+            onBodyBreakthrough={engine.bodyBreakthrough}
             gameOver={engine.gameOver}
           />
           <GameLog logs={logs} currentYear={engine.player.gameYear} currentMonth={engine.player.gameMonth} />
@@ -98,6 +99,7 @@ export default function App() {
           onLearnDivineArt={engine.learnDivineArt}
           onActivateDivineArt={engine.activateDivineArt}
           onDeactivateDivineArt={engine.deactivateDivineArt}
+          onTravel={engine.travel}
         />
       }
       debug={<>

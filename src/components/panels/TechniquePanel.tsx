@@ -9,6 +9,7 @@ import type { TechniqueDef, PassiveEffect } from '../../game/registry';
 import { getLearnableTechniques, calcTechniqueExpGain, getEffectiveMaxLevel, calcAptitudeBonus } from '../../game/technique';
 import { RARITY_COLORS, SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS } from '../shared';
 import type { TechniqueRarity } from '../../game/registry';
+import { useState } from 'react';
 
 const TECHNIQUE_TYPE_CN: Record<string, string> = {
   sword: '剑法', blade: '刀法', fist: '拳法',
@@ -40,10 +41,32 @@ function SpiritRootTag({ rootType, affinity }: { rootType: string; affinity?: nu
 }
 
 export default function TechniquePanel({ player, onLearn, onPractice, onActivate }: TechniquePanelProps) {
+  const [filterAvailable, setFilterAvailable] = useState(false);
   const learnable = getLearnableTechniques(player);
+  const learnableIds = new Set(learnable.map(d => d.id));
+
+  // 过滤可学功法：开启时只显示满足条件的
+  const displayLearnable = filterAvailable
+    ? learnable.filter(def => {
+        const hasRequired = !def.requiredSpiritRoot
+          || player.spiritRoots?.roots.some(r => r.type === def.requiredSpiritRoot);
+        return hasRequired;
+      })
+    : learnable;
 
   return (
     <div className="technique-panel">
+      {/* 过滤开关 */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 4 }}>
+        <button
+          className={`btn ${filterAvailable ? 'btn-technique-activate' : 'btn-technique'}`}
+          onClick={() => setFilterAvailable(!filterAvailable)}
+          style={{ fontSize: '0.78em', padding: '2px 8px' }}
+        >
+          {filterAvailable ? '✅ 只看可学' : '👁️ 全部'}
+        </button>
+      </div>
+
       {/* 已学功法 */}
       <div className="technique-section-title">📖 已学功法</div>
       {player.techniques.length === 0 ? (
@@ -166,11 +189,11 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
       )}
 
       {/* 可学功法 */}
-      {learnable.length > 0 && (
+      {displayLearnable.length > 0 && (
         <>
-          <div className="technique-section-title" style={{ marginTop: '0.6rem' }}>📚 可学功法</div>
+          <div className="technique-section-title" style={{ marginTop: '0.6rem' }}>📚 可学功法{filterAvailable ? '（已筛选）' : ''}</div>
           <div className="technique-list">
-            {learnable.map(def => {
+            {displayLearnable.map(def => {
               const effectiveMax = getEffectiveMaxLevel(player, def);
               const matchRoot = def.spiritRootElement
                 ? player.spiritRoots?.roots.find(r => r.type === def.spiritRootElement)

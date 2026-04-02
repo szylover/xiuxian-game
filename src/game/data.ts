@@ -77,6 +77,7 @@ export const ACTION_COSTS: Record<string, ActionCost> = {
   combat:    { stamina: 20, time: 1 },
   alchemy:   { stamina: 10, time: 1 },
   rest:      { stamina: 0,  time: 1 },
+  travel:    { stamina: 0,  time: 1 },  // T0021: 实际消耗由 map.ts 计算
 };
 
 // ── 月份名称 ──

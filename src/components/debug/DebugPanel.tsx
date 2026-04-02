@@ -60,6 +60,28 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
     });
   };
 
+  // T0021: Debug 区域传送（无视境界/精力限制）
+  const debugTravel = (regionId: string) => {
+    onUpdate(prev => {
+      if (!prev) return prev;
+      const systems = prev.systems ?? {};
+      const mapState = systems['map'] as { currentRegionId: string; unlockedRegions: string[]; travelCount: number } | undefined;
+      const unlocked = new Set(mapState?.unlockedRegions ?? ['core:qingyun_town']);
+      unlocked.add(regionId);
+      return {
+        ...prev,
+        systems: {
+          ...systems,
+          map: {
+            currentRegionId: regionId,
+            unlockedRegions: Array.from(unlocked),
+            travelCount: (mapState?.travelCount ?? 0) + 1,
+          },
+        },
+      };
+    });
+  };
+
   const giveItem = (itemId: string) => {
     const count = itemQty[itemId] || 1;
     onUpdate(prev => {
@@ -203,7 +225,7 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
         />
 
         {tab === 'stats' && (
-          <DebugStatsTab player={player} onSetStat={setStat} onFullRestore={fullRestore} />
+          <DebugStatsTab player={player} onSetStat={setStat} onFullRestore={fullRestore} onDebugTravel={debugTravel} />
         )}
 
         {tab === 'items' && (

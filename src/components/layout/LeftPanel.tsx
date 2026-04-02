@@ -8,6 +8,7 @@ import { getNextRealm } from '../../game/player';
 import { getNextBodyRealm } from '../../game/body-cultivation';
 import { getBodyRealmDef, getTechniqueDef, getDivineArtDef } from '../../game/registry';
 import { getDivineArtsState } from '../../game/divine-arts';
+import { getCurrentRegion } from '../../game/map';
 import Avatar from './Avatar';
 import { CapacityBar, FloatingPanel, STAT_COLORS } from '../shared';
 import StatusPanel from '../panels/StatusPanel';
@@ -35,6 +36,7 @@ export default function LeftPanel({ player, activePanel, onSelectPanel }: LeftPa
   const activeTech = player.activeTechniqueId ? getTechniqueDef(player.activeTechniqueId) : null;
   const divineState = getDivineArtsState(player);
   const activeArt = divineState.activeArtId ? getDivineArtDef(divineState.activeArtId) : null;
+  const currentRegion = getCurrentRegion(player);
 
   return (
     <>
@@ -45,6 +47,11 @@ export default function LeftPanel({ player, activePanel, onSelectPanel }: LeftPa
         <div className="left-realm" style={{ color: realm.name.includes('大乘') ? '#FFD700' : undefined }}>
           【{realm.name}】
         </div>
+        {currentRegion && (
+          <div style={{ fontSize: '0.85em', color: '#9E9E9E', marginTop: 2 }}>
+            📍 {currentRegion.emoji} {currentRegion.name}
+          </div>
+        )}
       </div>
 
       {/* 核心属性 */}
