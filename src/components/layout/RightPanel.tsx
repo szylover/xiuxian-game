@@ -63,7 +63,7 @@ export default function RightPanel({
     <>
       <PanelButtons player={player} activePanel={activePanel} onSelect={onSelectPanel} />
 
-      {activePanel && panelLabel && (
+      {activePanel && activePanel !== 'status' && panelLabel && (
         <FloatingPanel
           title={panelLabel.title}
           icon={panelLabel.icon}

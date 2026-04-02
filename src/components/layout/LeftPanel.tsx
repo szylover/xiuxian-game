@@ -3,28 +3,25 @@
 // ============================================================
 
 import type { Player } from '../../game/player';
-import { REALMS, MONTH_NAMES } from '../../game/data';
+import { REALMS } from '../../game/data';
 import { getActiveBottlenecks, ensureBottleneckState } from '../../game/bottleneck';
 import { getNextRealm, formatAge } from '../../game/player';
 import { getNextBodyRealm } from '../../game/body-cultivation';
-import { getBodyRealmDef, getTechniqueDef, getDivineArtDef } from '../../game/registry';
-import { getDivineArtsState } from '../../game/divine-arts';
+import { getBodyRealmDef } from '../../game/registry';
 import { getCurrentRegion } from '../../game/map';
 import Avatar from './Avatar';
 import { CapacityBar, FloatingPanel, STAT_COLORS } from '../shared';
 import StatusPanel from '../panels/StatusPanel';
 import type { PanelKey } from './PanelButtons';
 import { UI_LABELS } from '../../data/texts/ui-labels';
-import { NOT_EQUIPPED } from '../../data/texts/common';
 
 interface LeftPanelProps {
   player: Player;
   activePanel: PanelKey | null;
   onSelectPanel: (key: PanelKey) => void;
-  onExit?: () => void;
 }
 
-export default function LeftPanel({ player, activePanel, onSelectPanel, onExit }: LeftPanelProps) {
+export default function LeftPanel({ player, activePanel, onSelectPanel }: LeftPanelProps) {
   const realm = REALMS[player.realmIndex];
   const nextRealm = getNextRealm(player);
   const expProgress = nextRealm
@@ -40,10 +37,6 @@ export default function LeftPanel({ player, activePanel, onSelectPanel, onExit }
   const pWithBn = ensureBottleneckState(player);
   const activeBns = getActiveBottlenecks(pWithBn);
 
-  // 当前激活的功法和神通
-  const activeTech = player.activeTechniqueId ? getTechniqueDef(player.activeTechniqueId) : null;
-  const divineState = getDivineArtsState(player);
-  const activeArt = divineState.activeArtId ? getDivineArtDef(divineState.activeArtId) : null;
   const currentRegion = getCurrentRegion(player);
 
   return (
@@ -96,20 +89,6 @@ export default function LeftPanel({ player, activePanel, onSelectPanel, onExit }
         </div>
         <CapacityBar current={player.stamina} max={player.maxStamina} color={STAT_COLORS.stamina} />
 
-        {/* 当前功法 & 神通 */}
-        <div className="left-stat-row">
-          <span>{UI_LABELS.stats.technique}</span>
-          <span style={{ color: activeTech ? '#4FC3F7' : '#666' }}>
-            {activeTech ? activeTech.name : NOT_EQUIPPED}
-          </span>
-        </div>
-        <div className="left-stat-row">
-          <span>{UI_LABELS.stats.divine}</span>
-          <span style={{ color: activeArt ? '#CE93D8' : '#666' }}>
-            {activeArt ? activeArt.name : NOT_EQUIPPED}
-          </span>
-        </div>
-
         {/* T0062 体魄条 */}
         <div className="left-stat-row">
           <span>{UI_LABELS.stats.physique}</span>
@@ -120,11 +99,6 @@ export default function LeftPanel({ player, activePanel, onSelectPanel, onExit }
         <div className="left-stat-row">
           <span>{UI_LABELS.stats.lifespan}</span>
           <span>{formatAge(player.age)}/{player.lifespan === Infinity ? '∞' : Math.floor(player.lifespan / 12) + UI_LABELS.age}</span>
-        </div>
-
-        <div className="left-stat-row">
-          <span>{UI_LABELS.stats.calendar}</span>
-          <span>{UI_LABELS.yearPrefix}{player.gameYear}{UI_LABELS.yearSuffix} {MONTH_NAMES[(player.gameMonth || 1) - 1]}</span>
         </div>
 
         <div className="left-stat-row">
@@ -172,12 +146,6 @@ export default function LeftPanel({ player, activePanel, onSelectPanel, onExit }
         </FloatingPanel>
       )}
 
-      {/* T0038: 主菜单按钮 */}
-      {onExit && (
-        <button className="btn left-exit-btn" onClick={onExit} title="返回主菜单">
-          🏠 主菜单
-        </button>
-      )}
     </>
   );
 }

@@ -68,12 +68,12 @@ export default function App() {
     <>
       <GameLayout
         topBar={<ToastContainer toast={engine.toast} onDismiss={engine.dismissToast} />}
+        onExit={handleExitGame}
         left={
           <LeftPanel
             player={engine.player}
             activePanel={activePanel}
             onSelectPanel={handleSelectPanel}
-            onExit={handleExitGame}
           />
         }
         center={
