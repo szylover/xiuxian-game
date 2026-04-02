@@ -24,6 +24,7 @@ import type { RevivalMethodDef } from '../game/types';
 import { checkAchievements } from '../game/achievement/engine';
 import { loadSaveSlot, writeSaveSlot, deleteSaveSlot } from './useSaveLoad';
 import { refreshUnlockedRegions } from '../game/map';
+import { tickAffinityDecay } from '../game/npc';
 
 // Re-export types so existing imports still work
 export type { CombatModalState, DeathModalState } from './useCombatModal';
@@ -155,6 +156,9 @@ export function useGameEngine(
       newMonth = ((newMonth - 1) % 12) + 1;
     }
 
+    // T0025: 跨年时触发 NPC 好感度衰减
+    const crossedYear = newYear > p.gameYear;
+
     let updated = {
       ...p,
       age: p.age + cost.time / 12,
@@ -235,6 +239,12 @@ export function useGameEngine(
         addLog(daily.message, 'daily');
       }
     }
+
+    // T0025: 跨年 NPC 好感度衰减
+    if (crossedYear) {
+      updated = tickAffinityDecay(updated);
+    }
+
     return updated;
   }, [addLog, gameOver]);
 
@@ -260,6 +270,7 @@ export function useGameEngine(
     learnTechnique, practiceTechnique, activateTechnique,
     learnDivineArt, activateDivineArt, deactivateDivineArt,
     travel, bodyBreakthrough,
+    meetNpc, giveGift,
   } = useSystemActions({
     player, addLog, setPlayer, setGameOver, setGameOverReason, setDeathModal,
   });
@@ -328,6 +339,8 @@ export function useGameEngine(
     deactivateDivineArt,
     travel,
     bodyBreakthrough,
+    meetNpc,
+    giveGift,
     toast,
     dismissToast,
     combatModal,

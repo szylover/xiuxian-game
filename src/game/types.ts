@@ -394,6 +394,7 @@ export interface DLCPack {
   realms?: RealmDef[];                       // T0058 气修境界定义
   regions?: RegionDef[];                     // T0021 区域定义
   bottlenecks?: BottleneckDef[];             // T0064 瓶颈定义
+  npcs?: NpcDef[];                           // T0025 NPC 定义
 }
 
 // ── 死亡系统类型定义 ──
@@ -502,4 +503,95 @@ export interface BottleneckState {
     unlockedAt: number;
     method: BottleneckUnlockMethod['type'];
   }>;
+}
+
+// ── NPC 系统类型定义（T0025）──
+
+/** NPC 态度类型 */
+export type NpcDisposition = 'friendly' | 'neutral' | 'hostile';
+
+/** NPC 角色标签 */
+export type NpcRole =
+  | 'merchant'
+  | 'elder'
+  | 'wanderer'
+  | 'guard'
+  | 'alchemist'
+  | 'smith'
+  | 'sect_leader'
+  | 'rival'
+  | 'companion';
+
+/** NPC 性格标签 */
+export type NpcPersonality =
+  | 'gentle'
+  | 'cold'
+  | 'hot_tempered'
+  | 'cunning'
+  | 'righteous'
+  | 'mysterious';
+
+export interface NpcDef {
+  id: string;
+  name: string;
+  title?: string;
+  emoji: string;
+  gender: 'male' | 'female';
+  description: string;
+  realmIndex: number;
+  hp: number;
+  atk: number;
+  def: number;
+  speed: number;
+  critRate: number;
+  critResist: number;
+  critDmgMultiplier?: number;
+  disposition: NpcDisposition;
+  roles: NpcRole[];
+  personality: NpcPersonality;
+  charisma: number;
+  regionTags: string[];
+  homeRegionId?: string;
+  minRealm?: number;
+  condition?: (p: Player) => boolean;
+  dialoguePoolId?: string;
+  sectId?: string;
+  shopGoodsIds?: string[];
+  aiTags?: string[];
+  maxAffinity?: number;
+  affinityDecayRate?: number;
+  giftPreferences?: {
+    loved: string[];
+    liked: string[];
+    disliked: string[];
+  };
+}
+
+/** 单个 NPC 的运行时关系状态 */
+export interface NpcRelation {
+  npcId: string;
+  affinity: number;
+  met: boolean;
+  metAt: number;
+  interactionCount: number;
+  lastInteractionYear: number;
+  relationLevel: NpcRelationLevel;
+  flags: Record<string, unknown>;
+}
+
+/** 关系等级 */
+export type NpcRelationLevel =
+  | 'hostile'
+  | 'cold'
+  | 'stranger'
+  | 'acquaintance'
+  | 'friend'
+  | 'close_friend'
+  | 'soulmate';
+
+/** NPC 系统整体状态 */
+export interface NpcSystemState {
+  relations: Record<string, NpcRelation>;
+  discoveredNpcs: string[];
+  lastGiftYear: Record<string, number>;
 }

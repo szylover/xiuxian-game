@@ -17,6 +17,7 @@ import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/dea
 import { restorePhysique, gainBodyRealmExp, tryBodyRealmBreakthrough } from '../game/body-cultivation';
 import { getTechniqueDef } from '../game/registry';
 import { ensureBottleneckState, getActiveBottlenecks, tickPersistenceCultivation, tryBattleUnlock, tryEpiphanyUnlock, tryOverflowUnlock } from '../game/bottleneck';
+import { getNpcsInRegion, meetNpc as meetNpcFn } from '../game/npc';
 import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef, RegionDef } from '../game/types';
 import type { LogCategory } from './useGameLog';
 
@@ -375,6 +376,17 @@ export function useCoreActions(deps: CoreActionDeps) {
             exploreMsg += `（获得${def?.name ?? itemId}×1）`;
           }
           break;
+        }
+      }
+
+      // T0025: 探索时随机邂逅 NPC（20% 概率）
+      if (Math.random() < 0.2) {
+        const npcsHere = getNpcsInRegion(p);
+        if (npcsHere.length > 0) {
+          const npc = npcsHere[Math.floor(Math.random() * npcsHere.length)];
+          const meetResult = meetNpcFn(p, npc.id);
+          p = meetResult.player;
+          exploreMsg += ` ${meetResult.message}`;
         }
       }
 

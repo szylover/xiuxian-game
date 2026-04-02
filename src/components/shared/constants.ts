@@ -103,3 +103,46 @@ export const APTITUDE_CN: Record<string, string> = {
   blade: '刀法', spear: '枪法', sword: '剑法', fist: '拳法', palm: '掌法', finger: '指法',
   fire: '火系', water: '水系', thunder: '雷系', wind: '风系', earth: '土系', wood: '木系',
 };
+
+// ── NPC 关系等级常量（T0025）──
+
+import type { NpcRelationLevel } from '../../game/types';
+
+export const NPC_RELATION_CN: Record<NpcRelationLevel, string> = {
+  hostile:      '敌对',
+  cold:         '冷淡',
+  stranger:     '陌生',
+  acquaintance: '相识',
+  friend:       '友好',
+  close_friend: '至交',
+  soulmate:     '知己',
+};
+
+export const NPC_RELATION_COLORS: Record<NpcRelationLevel, string> = {
+  hostile:      '#F44336',
+  cold:         '#9E9E9E',
+  stranger:     '#FFFFFF',
+  acquaintance: '#FFEB3B',
+  friend:       '#4CAF50',
+  close_friend: '#2196F3',
+  soulmate:     '#E91E63',
+};
+
+export const NPC_RELATION_EMOJI: Record<NpcRelationLevel, string> = {
+  hostile:      '💢',
+  cold:         '🥶',
+  stranger:     '🤍',
+  acquaintance: '💛',
+  friend:       '💚',
+  close_friend: '💙',
+  soulmate:     '❤️',
+};
+
+export const NPC_PERSONALITY_CN: Record<string, string> = {
+  gentle:       '温和',
+  cold:         '冷漠',
+  hot_tempered: '暴躁',
+  cunning:      '狡猾',
+  righteous:    '正义',
+  mysterious:   '神秘',
+};

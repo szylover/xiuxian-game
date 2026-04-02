@@ -19,6 +19,7 @@ export type {
   RealmDef,
   RegionDef, MapSystemState,
   BottleneckDef, BottleneckUnlockMethod, BottleneckState,
+  NpcDef, NpcDisposition, NpcRole, NpcPersonality, NpcRelation, NpcRelationLevel, NpcSystemState,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
@@ -45,6 +46,7 @@ export {
   getRealmDef, getAllRealmDefs, getMaxRealmIndex,
   getRegion, getAllRegions,
   getBottleneckDef, getAllBottleneckDefs, getBottlenecksForRealm, getBottlenecksForBodyRealm, getBottlenecksForTechnique,
+  getNpcDef, getAllNpcDefs, getNpcsByRegionTags, getNpcsByRole, getNpcsByDisposition,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,
