@@ -141,6 +141,8 @@ export type QuestChainCategory =
   | 'main'          // 主线任务
   | 'side'          // 支线任务
   | 'daily'         // 每日任务（repeatable=true）
+  | 'bounty'        // 悬赏任务（单步/repeatable，特定区域 NPC 发布，奖励以灵石/材料为主）
+  | 'dialogue'      // 对话任务（NPC 对话触发，talk_npc 目标为主，叙事驱动）
   | 'event';        // 限时活动任务（预留）
 ```
 
@@ -453,6 +455,95 @@ export function getQuestChainsByCategory(category: QuestChainCategory): QuestCha
     "repeatable": false
   },
   {
+    "id": "core:quest_wolf_bounty",
+    "name": "悬赏：荒野狼患",
+    "description": "青云镇猎户悬赏：近日荒野狼群异常活跃，斩杀 5 只野狼可领取赏金。",
+    "icon": "🏷️",
+    "category": "bounty",
+    "condition": {
+      "minRealm": 0,
+      "regionId": "core:qingyun_town"
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "斩杀野狼",
+        "description": "前往荒野斩杀 5 只野狼，回镇领取赏金。",
+        "objectives": [
+          {
+            "type": "kill_monster",
+            "targetId": "core:wild_wolf",
+            "count": 5,
+            "description": "斩杀野狼 (0/5)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "gold": 120,
+      "items": [
+        { "itemId": "core:iron_ore", "count": 3 }
+      ]
+    },
+    "repeatable": true
+  },
+  {
+    "id": "core:quest_elder_wisdom",
+    "name": "长老的教诲",
+    "description": "青云镇的张长老似乎有话要对你说，前去拜访一番。",
+    "icon": "💬",
+    "category": "dialogue",
+    "condition": {
+      "minRealm": 1,
+      "requiredQuests": ["core:quest_first_hunt"]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "拜访张长老",
+        "description": "前往青云镇与张长老交谈。",
+        "objectives": [
+          {
+            "type": "talk_npc",
+            "targetId": "core:elder_zhang",
+            "description": "与张长老交谈"
+          }
+        ],
+        "dialogueSnippet": "张长老抚须叹道：「孩子，修仙一途如逆水行舟。老夫有几句心得，你且听来……」"
+      },
+      {
+        "id": "step_2",
+        "name": "聆听教诲",
+        "description": "修炼 3 次以验证张长老所授之法。",
+        "objectives": [
+          {
+            "type": "cultivate_count",
+            "count": 3,
+            "description": "修炼 (0/3)"
+          }
+        ],
+        "dialogueSnippet": "张长老微微点头：「去吧，以修炼印证老夫所言，方能真正领悟。」"
+      },
+      {
+        "id": "step_3",
+        "name": "回禀长老",
+        "description": "再次与张长老交谈，汇报修炼心得。",
+        "objectives": [
+          {
+            "type": "talk_npc",
+            "targetId": "core:elder_zhang",
+            "description": "向张长老汇报"
+          }
+        ],
+        "dialogueSnippet": "张长老欣慰一笑：「孺子可教也。这本《清心诀》便赠予你，望你日后勤加修行。」"
+      }
+    ],
+    "rewards": {
+      "exp": 60,
+      "statBonus": { "comprehension": 2 }
+    }
+  },
+  {
     "id": "core:quest_gather_herbs",
     "name": "采药基础",
     "description": "收集灵芝和雪莲，了解炼丹的入门材料。",
@@ -737,17 +828,17 @@ checkAutoAcceptQuests(player: Player): { player: Player; logs: string[] }
 9. useSystemActions.ts 集成（炼丹 / 炼器 / 移动 / NPC 后触发）
 10. useGameEngine.ts 中 advanceTime 集成超时检查 + 自动接取
 
-### Phase 3：UI
+### Phase 3：UI → 移至 T0067
 
-11. QuestPanel.tsx + 子组件
-12. PanelButtons / RightPanel 新增面板入口
-13. QuestTracker 追踪指示器
-14. LeftPanel 集成追踪
+> **已拆分至 [T0067 — 任务面板 UI（QuestPanel + 追踪器）](T0067-quest-ui.md)**
+>
+> 包含：QuestPanel.tsx + 子组件、PanelButtons/RightPanel 面板入口、QuestTracker 追踪指示器、LeftPanel 集成追踪。
 
-### Phase 4：调试 & 瓶颈联动
+### Phase 4：调试面板 & 瓶颈联动 → 移至 T0067
 
-15. Debug 面板新增任务 Tab
-16. bottleneck.ts 中 `tryQuestUnlock` 实现
+> **已拆分至 [T0067](T0067-quest-ui.md)**
+>
+> 包含：Debug 面板新增任务 Tab、bottleneck.ts 中 `tryQuestUnlock` 实现。
 
 ---
 
@@ -766,6 +857,7 @@ checkAutoAcceptQuests(player: Player): { player: Player; logs: string[] }
 
 | ID | 任务 | 说明 |
 |----|------|------|
+| T0067 | 任务面板 UI（QuestPanel + 追踪器） | T0057 Phase 3+4 拆分 |
 | CP-01 | 凡人修仙（内容包） | 需要任务链系统承载剧情 |
 | CP-02 | 苟道求真（内容包） | 同上 |
 | T0054 | 历练悬赏任务 | 可复用任务链框架（repeatable=true） |
