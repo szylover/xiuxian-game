@@ -42,7 +42,7 @@
 | [T0009](https://github.com/szylover/xiuxian-game/issues/65) | 奇遇系统 | T0007 | [spec](specs/design-novel-events.md) | ✅ |
 | [T0010](https://github.com/szylover/xiuxian-game/issues/66) | 日常事件 | T0007 | — | ✅ |
 | [T0011](https://github.com/szylover/xiuxian-game/issues/67) | 事件日志（分类/颜色/回溯） | T0007 | — | ✅ |
-| [T0057](https://github.com/szylover/xiuxian-game/issues/119) | 任务链系统（Quest Chain） | T0007, T0012, T0042, T0021 | — | ⬜ |
+| [T0057](https://github.com/szylover/xiuxian-game/issues/119) | 任务链系统（Quest Chain） | T0007, T0012, T0042, T0021 | [spec](specs/T0057-quest-chain.md) | 📐 |
 
 ### 🏷️ 物品与经济
 
@@ -129,7 +129,7 @@
 | [T0036](https://github.com/szylover/xiuxian-game/issues/106) | PWA 支持 | T0035 | — | ✅ |
 | [T0037](https://github.com/szylover/xiuxian-game/issues/107) | 音效系统 | — | — | ⬜ |
 | [T0038](https://github.com/szylover/xiuxian-game/issues/108) | 多存档 | — | — | ✅ |
-| [T0066](https://github.com/szylover/xiuxian-game/issues/139) | 数据文件 TS→JSON 迁移 | — | — | ⬜ |
+| [T0066](https://github.com/szylover/xiuxian-game/issues/139) | 数据文件 TS→JSON 迁移 | — | — | ✅ |
 | [T0039](https://github.com/szylover/xiuxian-game/issues/109) | 新手引导 | T0001 | — | ⬜ |
 | [T0059b](https://github.com/szylover/xiuxian-game/issues/90) | 数据懒加载 & Bundle 分割 | — | [spec](specs/T0059-data-lazy-loading.md) | ✅ |
 
