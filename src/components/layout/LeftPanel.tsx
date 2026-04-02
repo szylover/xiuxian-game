@@ -18,9 +18,10 @@ interface LeftPanelProps {
   player: Player;
   activePanel: PanelKey | null;
   onSelectPanel: (key: PanelKey) => void;
+  onExit?: () => void;
 }
 
-export default function LeftPanel({ player, activePanel, onSelectPanel }: LeftPanelProps) {
+export default function LeftPanel({ player, activePanel, onSelectPanel, onExit }: LeftPanelProps) {
   const realm = REALMS[player.realmIndex];
   const nextRealm = getNextRealm(player);
   const expProgress = nextRealm
@@ -148,6 +149,13 @@ export default function LeftPanel({ player, activePanel, onSelectPanel }: LeftPa
         >
           <StatusPanel player={player} />
         </FloatingPanel>
+      )}
+
+      {/* T0038: 主菜单按钮 */}
+      {onExit && (
+        <button className="btn left-exit-btn" onClick={onExit} title="返回主菜单">
+          🏠 主菜单
+        </button>
       )}
     </>
   );

@@ -3201,3 +3201,260 @@ body {
   display: flex;
   gap: 1rem;
 }
+
+/* ============================================================
+   T0038 多存档管理面板
+   ============================================================ */
+
+.save-manager {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+
+.save-slot-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.save-slot-card {
+  background: #12162a;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 12px 14px;
+  transition: border-color 0.2s;
+}
+
+.save-slot-card.save-slot-occupied {
+  border-color: #2a3050;
+}
+
+.save-slot-card.save-slot-occupied:hover {
+  border-color: #ffd700;
+}
+
+.save-slot-card.save-slot-empty {
+  border-color: #1a1e30;
+  opacity: 0.8;
+}
+
+.save-slot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.save-slot-index {
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.save-slot-date {
+  font-size: 0.7rem;
+  color: #666;
+}
+
+.save-slot-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  min-height: 28px;
+}
+
+.save-slot-preview-empty {
+  justify-content: center;
+}
+
+.save-slot-empty-text {
+  font-size: 0.85rem;
+  color: #555;
+  font-style: italic;
+}
+
+.save-slot-name {
+  font-size: 1rem;
+  color: #e8d5a3;
+  font-weight: bold;
+}
+
+.save-slot-realm {
+  font-size: 0.85rem;
+  color: #4FC3F7;
+}
+
+.save-slot-age {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.save-slot-year {
+  font-size: 0.75rem;
+  color: #666;
+  margin-left: auto;
+}
+
+.save-slot-indicator {
+  display: inline-block;
+  background: #1e2235;
+  border: 1px solid #2a3050;
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.save-slot-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.save-slot-btn {
+  padding: 4px 10px !important;
+  font-size: 0.78rem !important;
+  min-width: unset !important;
+}
+
+.save-import-error {
+  background: rgba(244, 67, 54, 0.15);
+  border: 1px solid #f44336;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  color: #ef9a9a;
+  margin-bottom: 10px;
+}
+
+/* 删除确认弹窗 */
+.save-delete-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.save-delete-modal {
+  background: #12162a;
+  border: 1px solid #f44336;
+  border-radius: 10px;
+  padding: 24px;
+  max-width: 360px;
+  width: 90%;
+  text-align: center;
+}
+
+.save-delete-title {
+  font-size: 1.1rem;
+  color: #ef9a9a;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.save-delete-body {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+.save-delete-body strong {
+  color: #e8d5a3;
+}
+
+.save-delete-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* 退出确认弹窗 */
+.exit-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.exit-confirm-modal {
+  background: #12162a;
+  border: 1px solid #2a3050;
+  border-radius: 10px;
+  padding: 24px;
+  max-width: 340px;
+  width: 90%;
+  text-align: center;
+}
+
+.exit-confirm-title {
+  font-size: 1.1rem;
+  color: #e8d5a3;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.exit-confirm-body {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+.exit-confirm-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* 主菜单按钮 */
+.left-exit-btn {
+  width: 100%;
+  margin-top: 8px;
+  background: #1a1e30 !important;
+  color: #888 !important;
+  border: 1px solid #333 !important;
+  font-size: 0.75rem !important;
+  padding: 5px 10px !important;
+}
+
+.left-exit-btn:hover {
+  background: #222840 !important;
+  color: #aaa !important;
+  border-color: #444 !important;
+}
+
+/* btn-danger */
+.btn-danger {
+  background: linear-gradient(135deg, #c62828, #b71c1c);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  transition: filter 0.2s, transform 0.1s;
+}
+
+.btn-danger:hover {
+  filter: brightness(1.15);
+}
+
+.btn-danger:active {
+  transform: scale(0.97);
+}
