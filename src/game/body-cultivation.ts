@@ -7,6 +7,7 @@
 import type { Player } from './player';
 import type { BodyRealmDef } from './types';
 import { getBodyRealmDef, getSpiritRootBodyBonus } from './registry/queries';
+import { checkBottleneck, activateBottleneck, ensureBottleneckState } from './bottleneck';
 
 // ── 查询 ──
 
@@ -106,6 +107,7 @@ export function tryBodyRealmBreakthrough(player: Player): {
   player: Player;
   breakthrough: boolean;
   message: string;
+  blockedByBottleneck?: boolean;
 } {
   const nextRealm = getBodyRealmDef(player.bodyRealmIndex + 1);
   if (!nextRealm) {
@@ -120,7 +122,23 @@ export function tryBodyRealmBreakthrough(player: Player): {
     return { player, breakthrough: false, message: '' };
   }
 
-  const p = { ...player };
+  // T0064: 体修瓶颈检查
+  let p = ensureBottleneckState(player);
+  const bnResult = checkBottleneck(p, 'body_realm', p.bodyRealmIndex);
+  if (bnResult.blocked && bnResult.bottleneckDef) {
+    if (bnResult.isNewlyActivated) {
+      const act = activateBottleneck(p, bnResult.bottleneckDef.id);
+      p = act.player;
+    }
+    return {
+      player: p,
+      breakthrough: false,
+      message: `🚧 体修瓶颈未破：${bnResult.bottleneckDef.name}。${bnResult.bottleneckDef.hint}`,
+      blockedByBottleneck: true,
+    };
+  }
+
+  p = { ...p };
   p.bodyRealmIndex = nextRealm.index;
   p.bodyRealmExp = 0;
   p.bodyTempering += 1;

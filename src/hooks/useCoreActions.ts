@@ -16,6 +16,7 @@ import { getCurrentRegion } from '../game/map';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
 import { restorePhysique, gainBodyRealmExp, tryBodyRealmBreakthrough } from '../game/body-cultivation';
 import { getTechniqueDef } from '../game/registry';
+import { ensureBottleneckState, getActiveBottlenecks, tickPersistenceCultivation, tryBattleUnlock, tryEpiphanyUnlock, tryOverflowUnlock } from '../game/bottleneck';
 import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef } from '../game/types';
 import type { LogCategory } from './useGameLog';
 
@@ -111,6 +112,27 @@ export function useCoreActions(deps: CoreActionDeps) {
 
       const isBodyMode = bodyRate >= 0.8;
       p.tracking = { ...p.tracking, consecutiveCultivates: p.tracking.consecutiveCultivates + 1, consecutiveRests: 0 };
+
+      // T0064: 坚韧修炼 tick — 每次修炼推进所有激活瓶颈的坚韧进度
+      p = ensureBottleneckState(p);
+      const activeBottlenecks = getActiveBottlenecks(p);
+      for (const { def, entry } of activeBottlenecks) {
+        if (def.unlockMethods.some(m => m.type === 'persistence')) {
+          const tickResult = tickPersistenceCultivation(p, entry.bottleneckId);
+          p = tickResult.player;
+          if (tickResult.unlocked && tickResult.log) {
+            queueLog(tickResult.log, 'system');
+          }
+        }
+      }
+
+      // T0064: 修为溢出自动消除瓶颈
+      const overflowResult = tryOverflowUnlock(p);
+      if (overflowResult.triggered) {
+        p = overflowResult.player;
+        queueLog(overflowResult.log, 'system');
+      }
+
       p = advanceTime(p, 'cultivate');
 
       pendingRef.current = { msgs: [], categories: [] };
@@ -191,6 +213,15 @@ export function useCoreActions(deps: CoreActionDeps) {
         if (monster.realmIndex > p.realmIndex) {
           p.tracking = { ...p.tracking, defeatedHigherRealm: true };
         }
+
+        // T0064: 战斗胜利后检查瓶颈解锁
+        p = ensureBottleneckState(p);
+        const battleUnlock = tryBattleUnlock(p, monster.id);
+        if (battleUnlock.triggered) {
+          p = battleUnlock.player;
+          loot.push({ icon: '🎆', name: '瓶颈突破！道心通畅', amount: 0 });
+        }
+
         if (Math.random() < 0.3) {
           const { player: p2, added } = addItem(p, 'core:monster_fang', 1);
           p = p2;
@@ -303,6 +334,16 @@ export function useCoreActions(deps: CoreActionDeps) {
 
       pendingRef.current = { msgs: [], categories: [] };
       let exploreMsg = message;
+
+      // T0064: 探索时尝试顿悟解锁瓶颈
+      p = ensureBottleneckState(p);
+      const region = getCurrentRegion(p);
+      const locationTag = region?.id ?? '';
+      const epiphanyResult = tryEpiphanyUnlock(p, locationTag);
+      if (epiphanyResult.triggered && epiphanyResult.log) {
+        p = epiphanyResult.player;
+        exploreMsg += ` ✨${epiphanyResult.log}`;
+      }
 
       const exploreLoot: [string, number][] = [
         ['core:iron_ore', 0.15],

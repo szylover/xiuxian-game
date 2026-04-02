@@ -2,7 +2,7 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef } from '../types';
 import type { SpiritRootType } from '../spirit-root';
 import type { AchievementDef } from '../achievement/types';
 import {
@@ -11,6 +11,7 @@ import {
   techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
   monsterRegistry, divineArtRegistry, achievementRegistry,
   bodyRealmRegistry, spiritRootBodyBonusRegistry, realmRegistry, regionRegistry,
+  bottleneckRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -109,3 +110,17 @@ export function getMaxRealmIndex(): number {
 
 export function getRegion(id: string): RegionDef | undefined { return regionRegistry.get(id); }
 export function getAllRegions(): RegionDef[] { return Array.from(regionRegistry.values()); }
+
+// ── 瓶颈（T0064）──
+
+export function getBottleneckDef(id: string): BottleneckDef | undefined { return bottleneckRegistry.get(id); }
+export function getAllBottleneckDefs(): BottleneckDef[] { return Array.from(bottleneckRegistry.values()); }
+export function getBottlenecksForRealm(fromRealmIndex: number): BottleneckDef[] {
+  return Array.from(bottleneckRegistry.values()).filter(b => b.targetType === 'realm' && b.fromRealmIndex === fromRealmIndex);
+}
+export function getBottlenecksForBodyRealm(fromBodyRealmIndex: number): BottleneckDef[] {
+  return Array.from(bottleneckRegistry.values()).filter(b => b.targetType === 'body_realm' && b.fromBodyRealmIndex === fromBodyRealmIndex);
+}
+export function getBottlenecksForTechnique(techniqueId: string, level: number): BottleneckDef[] {
+  return Array.from(bottleneckRegistry.values()).filter(b => b.targetType === 'technique' && b.techniqueId === techniqueId && b.atLevel === level);
+}
