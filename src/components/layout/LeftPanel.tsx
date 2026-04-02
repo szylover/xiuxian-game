@@ -14,6 +14,8 @@ import Avatar from './Avatar';
 import { CapacityBar, FloatingPanel, STAT_COLORS } from '../shared';
 import StatusPanel from '../panels/StatusPanel';
 import type { PanelKey } from './PanelButtons';
+import { UI_LABELS } from '../../data/texts/ui-labels';
+import { NOT_EQUIPPED } from '../../data/texts/common';
 
 interface LeftPanelProps {
   player: Player;
@@ -63,7 +65,7 @@ export default function LeftPanel({ player, activePanel, onSelectPanel, onExit }
               marginLeft: 4,
               verticalAlign: 'middle',
             }}>
-              🚧 瓶颈
+              {UI_LABELS.bottleneck}
             </span>
           )}
         </div>
@@ -77,61 +79,61 @@ export default function LeftPanel({ player, activePanel, onSelectPanel, onExit }
       {/* 核心属性 */}
       <div className="left-stats">
         <div className="left-stat-row">
-          <span>❤️ 体力</span>
+          <span>{UI_LABELS.stats.hp}</span>
           <span>{player.hp}/{player.maxHp}</span>
         </div>
         <CapacityBar current={player.hp} max={player.maxHp} color={STAT_COLORS.hp} />
 
         <div className="left-stat-row">
-          <span>🔮 灵力</span>
+          <span>{UI_LABELS.stats.mp}</span>
           <span>{player.mp}/{player.maxMp}</span>
         </div>
         <CapacityBar current={player.mp} max={player.maxMp} color={STAT_COLORS.mp} />
 
         <div className="left-stat-row">
-          <span>⚡ 精力</span>
+          <span>{UI_LABELS.stats.stamina}</span>
           <span>{player.stamina}/{player.maxStamina}</span>
         </div>
         <CapacityBar current={player.stamina} max={player.maxStamina} color={STAT_COLORS.stamina} />
 
         {/* 当前功法 & 神通 */}
         <div className="left-stat-row">
-          <span>📖 功法</span>
+          <span>{UI_LABELS.stats.technique}</span>
           <span style={{ color: activeTech ? '#4FC3F7' : '#666' }}>
-            {activeTech ? activeTech.name : '未装备'}
+            {activeTech ? activeTech.name : NOT_EQUIPPED}
           </span>
         </div>
         <div className="left-stat-row">
-          <span>✨ 神通</span>
+          <span>{UI_LABELS.stats.divine}</span>
           <span style={{ color: activeArt ? '#CE93D8' : '#666' }}>
-            {activeArt ? activeArt.name : '未装备'}
+            {activeArt ? activeArt.name : NOT_EQUIPPED}
           </span>
         </div>
 
         {/* T0062 体魄条 */}
         <div className="left-stat-row">
-          <span>💪 体魄</span>
+          <span>{UI_LABELS.stats.physique}</span>
           <span>{player.physique}/{player.maxPhysique}</span>
         </div>
         <CapacityBar current={player.physique} max={player.maxPhysique} color={STAT_COLORS.physique} />
 
         <div className="left-stat-row">
-          <span>📅 寿命</span>
-          <span>{formatAge(player.age)}/{player.lifespan === Infinity ? '∞' : Math.floor(player.lifespan / 12) + '岁'}</span>
+          <span>{UI_LABELS.stats.lifespan}</span>
+          <span>{formatAge(player.age)}/{player.lifespan === Infinity ? '∞' : Math.floor(player.lifespan / 12) + UI_LABELS.age}</span>
         </div>
 
         <div className="left-stat-row">
-          <span>🗓️ 历法</span>
-          <span>第{player.gameYear}年 {MONTH_NAMES[(player.gameMonth || 1) - 1]}</span>
+          <span>{UI_LABELS.stats.calendar}</span>
+          <span>{UI_LABELS.yearPrefix}{player.gameYear}{UI_LABELS.yearSuffix} {MONTH_NAMES[(player.gameMonth || 1) - 1]}</span>
         </div>
 
         <div className="left-stat-row">
-          <span>💰 灵石</span>
+          <span>{UI_LABELS.stats.gold}</span>
           <span className="gold-value">{player.gold}</span>
         </div>
 
         <div className="left-stat-row">
-          <span>📈 修为</span>
+          <span>{UI_LABELS.stats.exp}</span>
           <span>{player.exp}{nextRealm ? `/${nextRealm.expReq}` : ''}</span>
         </div>
         <div className="left-exp-bar">
@@ -140,7 +142,7 @@ export default function LeftPanel({ player, activePanel, onSelectPanel, onExit }
 
         {/* T0062 体修境界 + 修为 */}
         <div className="left-stat-row">
-          <span>💪 体修</span>
+          <span>{UI_LABELS.stats.bodyRealm}</span>
           <span>【{bodyRealm?.name ?? '凡躯'}】{player.bodyRealmExp}{nextBodyRealm ? `/${nextBodyRealm.expReq}` : ''}</span>
         </div>
         <div className="left-exp-bar">
@@ -155,14 +157,14 @@ export default function LeftPanel({ player, activePanel, onSelectPanel, onExit }
 
       {/* 详细属性按钮 */}
       <button className={`btn left-detail-btn${activePanel === 'status' ? ' panel-btn-active' : ''}`} onClick={() => onSelectPanel('status')}>
-        📋 详细属性
+        {UI_LABELS.detailBtn}
       </button>
 
       {/* 浮动详细属性面板 */}
       {activePanel === 'status' && (
         <FloatingPanel
-          title="详细属性"
-          icon="📋"
+          title={UI_LABELS.panels.status.title}
+          icon={UI_LABELS.panels.status.icon}
           width={420}
           onClose={() => onSelectPanel('status')}
         >

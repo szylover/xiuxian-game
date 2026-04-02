@@ -3,6 +3,7 @@
 // ============================================================
 
 import type { Player } from '../../game/player';
+import { UI_LABELS } from '../../data/texts/ui-labels';
 
 export type PanelKey = 'inventory' | 'shop' | 'crafting' | 'equipment' | 'technique' | 'divine' | 'achievement' | 'map' | 'npc' | 'status';
 
@@ -17,34 +18,37 @@ interface PanelGroup {
   panels: PanelDef[];
 }
 
+const p = UI_LABELS.panels;
+const g = UI_LABELS.panelGroups;
+
 const PANEL_GROUPS: PanelGroup[] = [
   {
-    label: '📦 物品经济',
+    label: g.economy,
     panels: [
-      { key: 'inventory', icon: '🎒', label: '背包' },
-      { key: 'shop', icon: '🏪', label: '商店' },
+      { key: 'inventory', icon: p.inventory.icon, label: p.inventory.title },
+      { key: 'shop', icon: p.shop.icon, label: p.shop.title },
     ],
   },
   {
-    label: '⚔️ 修行',
+    label: g.cultivation,
     panels: [
-      { key: 'technique', icon: '📖', label: '功法' },
-      { key: 'divine', icon: '✨', label: '神通' },
-      { key: 'crafting', icon: '🔥', label: '炼制' },
-      { key: 'equipment', icon: '⚔️', label: '装备' },
+      { key: 'technique', icon: p.technique.icon, label: p.technique.title },
+      { key: 'divine', icon: p.divine.icon, label: p.divine.title },
+      { key: 'crafting', icon: p.crafting.icon, label: p.crafting.title },
+      { key: 'equipment', icon: p.equipment.icon, label: p.equipment.title },
     ],
   },
   {
-    label: '🏆 成就',
+    label: g.achievement,
     panels: [
-      { key: 'achievement', icon: '🏆', label: '成就' },
+      { key: 'achievement', icon: p.achievement.icon, label: p.achievement.title },
     ],
   },
   {
-    label: '🌍 世界',
+    label: g.world,
     panels: [
-      { key: 'map', icon: '🗺️', label: '地图' },
-      { key: 'npc', icon: '👥', label: 'NPC' },
+      { key: 'map', icon: p.map.icon, label: p.map.title },
+      { key: 'npc', icon: p.npc.icon, label: p.npc.title },
     ],
   },
 ];

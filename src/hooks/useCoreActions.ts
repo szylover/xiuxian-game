@@ -22,6 +22,7 @@ import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef, RegionDef } from
 import type { LogCategory } from './useGameLog';
 import { COMBAT_TEXTS } from '../data/texts/combat';
 import { CULTIVATION_TEXTS } from '../data/texts/cultivation';
+import { EXPLORE_TEXTS } from '../data/texts/explore';
 
 export interface LootEntry {
   icon: string;
@@ -241,18 +242,18 @@ export function useCoreActions(deps: CoreActionDeps) {
         const battleUnlock = tryBattleUnlock(p, monster.id);
         if (battleUnlock.triggered) {
           p = battleUnlock.player;
-          loot.push({ icon: '🎆', name: '瓶颈突破！道心通畅', amount: 0 });
+          loot.push({ icon: '🎆', name: EXPLORE_TEXTS.bottleneckBreak, amount: 0 });
         }
 
         if (Math.random() < 0.3) {
           const { player: p2, added } = addItem(p, 'core:monster_fang', 1);
           p = p2;
-          if (added > 0) loot.push({ icon: '🦴', name: '妖兽獠牙', amount: 1 });
+          if (added > 0) loot.push({ icon: '🦴', name: getItemDef('core:monster_fang')?.name ?? 'monster_fang', amount: 1 });
         }
         if (Math.random() < 0.1) {
           const { player: p2, added } = addItem(p, 'core:monster_core', 1);
           p = p2;
-          if (added > 0) loot.push({ icon: '💎', name: '妖丹', amount: 1 });
+          if (added > 0) loot.push({ icon: '💎', name: getItemDef('core:monster_core')?.name ?? 'monster_core', amount: 1 });
         }
         if (Math.random() < 0.05) {
           const equipDrops: Record<number, string[]> = {
@@ -375,7 +376,7 @@ export function useCoreActions(deps: CoreActionDeps) {
           if (added > 0) {
             p = p2;
             const def = getItemDef(itemId);
-            exploreMsg += `（获得${def?.name ?? itemId}×1）`;
+            exploreMsg += EXPLORE_TEXTS.lootGained(def?.name ?? itemId);
           }
           break;
         }

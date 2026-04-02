@@ -7,6 +7,7 @@ import type { LogEntry, LogCategory } from '../../hooks/useGameLog';
 import { LOG_COLORS, groupLogsByTime } from '../../hooks/useGameLog';
 import { MONTH_NAMES } from '../../game/data';
 import { TabBar } from '../shared';
+import { UI_LABELS } from '../../data/texts/ui-labels';
 
 interface GameLogProps {
   logs: LogEntry[];
@@ -15,12 +16,12 @@ interface GameLogProps {
 }
 
 const FILTER_TABS: { key: LogCategory | 'all'; label: string; icon?: string }[] = [
-  { key: 'all',       label: '全部' },
-  { key: 'combat',    label: '战斗', icon: '⚔️' },
-  { key: 'explore',   label: '探索', icon: '🔍' },
-  { key: 'adventure', label: '奇遇', icon: '✨' },
-  { key: 'daily',     label: '日常', icon: '📅' },
-  { key: 'system',    label: '系统', icon: '⚙️' },
+  { key: 'all',       label: UI_LABELS.logFilters.all },
+  { key: 'combat',    label: UI_LABELS.logFilters.combat, icon: '⚔️' },
+  { key: 'explore',   label: UI_LABELS.logFilters.explore, icon: '🔍' },
+  { key: 'adventure', label: UI_LABELS.logFilters.adventure, icon: '✨' },
+  { key: 'daily',     label: UI_LABELS.logFilters.daily, icon: '📅' },
+  { key: 'system',    label: UI_LABELS.logFilters.system, icon: '⚙️' },
 ];
 
 export default function GameLog({ logs, currentYear = 1, currentMonth = 1 }: GameLogProps) {

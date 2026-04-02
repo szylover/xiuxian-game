@@ -11,6 +11,7 @@ import type { SkillState } from './combat/types';
 import { REALMS } from './data';
 import { DIVINE_ARTS_TEXTS } from '../data/texts/divine-arts';
 import { COMBAT_TEXTS } from '../data/texts/combat';
+import { ELEMENT_CN } from '../data/texts/common';
 
 // ── 元素显示常量 ──
 
@@ -18,9 +19,7 @@ export const ELEMENT_EMOJI: Record<ElementType, string> = {
   fire: '🔥', water: '💧', thunder: '⚡', wind: '🌪️', earth: '🪨', wood: '🌿', metal: '⚔️',
 };
 
-export const ELEMENT_CN: Record<ElementType, string> = {
-  fire: '火', water: '水', thunder: '雷', wind: '风', earth: '土', wood: '木', metal: '金',
-};
+export { ELEMENT_CN };
 
 export const ELEMENT_COLOR: Record<ElementType, string> = {
   fire: '#e74c3c',

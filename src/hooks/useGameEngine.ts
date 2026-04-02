@@ -25,7 +25,7 @@ import { checkAchievements } from '../game/achievement/engine';
 import { loadSaveSlot, writeSaveSlot, deleteSaveSlot } from './useSaveLoad';
 import { refreshUnlockedRegions } from '../game/map';
 import { UI_LABELS } from '../data/texts/ui-labels';
-import { SPIRIT_ROOT_CN } from '../data/texts/common';
+import { SPIRIT_ROOT_CN, SEPARATOR, NONE_TEXT } from '../data/texts/common';
 import { tickAffinityDecay } from '../game/npc';
 
 // Re-export types so existing imports still work
@@ -90,7 +90,7 @@ export function useGameEngine(
     addLog(UI_LABELS.spiritRootGrade(rootDisplay.grade, String(rootDisplay.multiplier)), 'system');
     const rootList = p.spiritRoots.roots.map(r => {
       return `${SPIRIT_ROOT_CN[r.type] ?? r.type}(${r.affinity})`;
-    }).join('、') || '无';
+    }).join(SEPARATOR) || NONE_TEXT;
     addLog(UI_LABELS.spiritRootDetails(rootList), 'system');
     addLog(UI_LABELS.playerStats(p.luck, p.comprehension, p.charisma), 'system');
   }, [addLog]);

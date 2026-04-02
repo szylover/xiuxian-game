@@ -6,6 +6,7 @@ import { REALMS } from '../../game/data';
 import { getNextRealm, formatAge } from '../../game/player';
 import type { Player } from '../../game/player';
 import { StatusItem } from '../shared';
+import { UI_LABELS } from '../../data/texts/ui-labels';
 
 interface StatusBarProps {
   player: Player;
@@ -27,7 +28,7 @@ export default function StatusBar({ player }: StatusBarProps) {
       <StatusItem icon="🔮" text={`${player.mp}/${player.maxMp}`} title={`MP ${player.mp}/${player.maxMp}`} />
       <StatusItem icon="⚡" text={`${player.stamina}/${player.maxStamina}`} title={`精力 ${player.stamina}/${player.maxStamina}`} />
       <StatusItem icon="💰" text={`${player.gold}`} title="灵石" />
-      <StatusItem icon="📅" text={`${formatAge(player.age)}/${player.lifespan === Infinity ? '∞' : Math.floor(player.lifespan / 12) + '岁'}`} title="年龄/寿限" />
+      <StatusItem icon="📅" text={`${formatAge(player.age)}/${player.lifespan === Infinity ? '∞' : Math.floor(player.lifespan / 12) + UI_LABELS.age}`} title="年龄/寿限" />
       <div className="exp-bar" title={`修为 ${player.exp}${nextRealm ? '/' + nextRealm.expReq : ' (MAX)'}`}>
         <div className="exp-bar-fill" style={{ width: `${expProgress}%` }} />
         <span className="exp-bar-text">

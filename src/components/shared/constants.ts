@@ -23,11 +23,9 @@ export const RARITY_LABELS: Record<ItemRarity, string> = {
   legendary: '橙',
 };
 
-// ── 战斗属性中文名 ──
-export const STAT_CN: Record<string, string> = {
-  atk: '攻击', def: '防御', speed: '速度', hp: '体力', mp: '灵力',
-  critRate: '暴击', critResist: '护心', moveSpeed: '移速',
-};
+// ── 战斗属性中文名（re-export from texts/common）──
+import { ATTR_NAMES as STAT_CN } from '../../data/texts/common';
+export { STAT_CN };
 
 // ── 装备槽位图标 ──
 export const SLOT_ICONS: Record<EquipSlot, string> = {
@@ -75,10 +73,9 @@ export function statsCN(stats: Record<string, number | undefined>): string {
     .join(' ');
 }
 
-// ── 灵根五行常量 (T0056) ──
-export const SPIRIT_ROOT_CN: Record<string, string> = {
-  metal: '金', wood: '木', water: '水', fire: '火', earth: '土',
-};
+// ── 灵根五行常量 (re-export from texts/common) ──
+import { SPIRIT_ROOT_CN } from '../../data/texts/common';
+export { SPIRIT_ROOT_CN };
 
 export const SPIRIT_ROOT_COLORS: Record<string, string> = {
   metal: '#C0C0C0',  // 银色
@@ -92,17 +89,11 @@ export const SPIRIT_ROOT_ICONS: Record<string, string> = {
   metal: '⚔️', wood: '🌿', water: '💧', fire: '🔥', earth: '🪨',
 };
 
-export const COMBO_CN: Record<string, string> = {
-  none: '无灵根', single: '单灵根', dual: '双灵根',
-  triple: '三灵根', quad: '四灵根', penta: '五灵根',
-};
+import { COMBO_CN } from '../../data/texts/common';
+export { COMBO_CN };
 
-// ── 资质中文名 ──
-export const APTITUDE_CN: Record<string, string> = {
-  alchemy: '炼丹', smithing: '炼器', fengshui: '风水', mining: '采矿',
-  blade: '刀法', spear: '枪法', sword: '剑法', fist: '拳法', palm: '掌法', finger: '指法',
-  fire: '火系', water: '水系', thunder: '雷系', wind: '风系', earth: '土系', wood: '木系',
-};
+import { APTITUDE_CN } from '../../data/texts/common';
+export { APTITUDE_CN };
 
 // ── NPC 关系等级常量（T0025）──
 
