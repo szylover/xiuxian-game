@@ -47,7 +47,7 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
   const allItems = getAllItemDefs();
   const allEquips = getAllEquipDefs();
 
-  const RECALC_KEYS = new Set(['realmIndex', 'bodyRealmIndex', 'maxHp', 'maxMp', 'maxStamina', 'maxMentalPower', 'atk', 'def', 'speed', 'maxPhysique', 'physiqueDmgReduce']);
+  const RECALC_KEYS = new Set(['realmIndex', 'bodyRealmIndex']);
 
   const setStat = (key: string, value: number) => {
     onUpdate(prev => {
