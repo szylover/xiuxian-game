@@ -42,7 +42,7 @@
 | [T0009](https://github.com/szylover/xiuxian-game/issues/65) | 奇遇系统 | T0007 | [spec](specs/design-novel-events.md) | ✅ |
 | [T0010](https://github.com/szylover/xiuxian-game/issues/66) | 日常事件 | T0007 | — | ✅ |
 | [T0011](https://github.com/szylover/xiuxian-game/issues/67) | 事件日志（分类/颜色/回溯） | T0007 | — | ✅ |
-| [T0057](https://github.com/szylover/xiuxian-game/issues/119) | 任务链系统（Quest Chain） | T0007, T0012, T0042, T0021 | — | ⬜ |
+| [T0057](https://github.com/szylover/xiuxian-game/issues/119) | 任务链系统（Quest Chain） | T0007, T0012, T0042, T0021 | [spec](specs/T0057-quest-chain.md) | 📐 |
 
 ### 🏷️ 物品与经济
 
