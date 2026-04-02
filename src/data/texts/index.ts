@@ -7,6 +7,8 @@ export { ALCHEMY_TEXTS } from './alchemy';
 export { SMITHING_TEXTS } from './smithing';
 export { EQUIPMENT_TEXTS } from './equipment';
 export { INVENTORY_TEXTS } from './inventory';
+export { SHOP_TEXTS } from './shop';
+export { BOTTLENECK_TEXTS } from './bottleneck';
 export { BREAKTHROUGH_TEXTS, TRIBULATION_TEXTS } from './breakthrough';
 export { DEATH_TEXTS } from './death';
 export { MAP_TEXTS } from './map';

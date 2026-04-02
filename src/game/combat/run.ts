@@ -94,9 +94,9 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
   logs.push(COMBAT_TEXTS.encounter(monster.name, mHp));
   if (techBonus.atk || techBonus.def) {
     const parts: string[] = [];
-    if (techBonus.atk) parts.push(`攻击+${techBonus.atk}`);
-    if (techBonus.def) parts.push(`防御+${techBonus.def}`);
-    if (techBonus.speed) parts.push(`速度+${techBonus.speed}`);
+    if (techBonus.atk) parts.push(COMBAT_TEXTS.techBonusAtk(techBonus.atk));
+    if (techBonus.def) parts.push(COMBAT_TEXTS.techBonusDef(techBonus.def));
+    if (techBonus.speed) parts.push(COMBAT_TEXTS.techBonusSpeed(techBonus.speed));
     logs.push(COMBAT_TEXTS.techBonus(parts));
   }
   if (activeArt) {

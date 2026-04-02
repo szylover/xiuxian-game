@@ -53,6 +53,17 @@ export const COMBAT_TEXTS = {
   modalDraw: (name: string, details: string) => `⚔️ 与 ${name} 缠斗超时，双方脱战（${details}）`,
   // useCombatModal deathInfo fallback
   healthLoss: '-20健康',
+  deathFallback: '战斗中身亡',
+  // combat modal detail fragments
+  detailExp:     (n: number) => `+${n}修为`,
+  detailGold:    (n: number) => `+${n}灵石`,
+  detailBodyExp: (n: number) => `+${n}体修`,
+  detailLoot:    (items: string) => `获得: ${items}`,
+  detailSaverBlocked: (name: string) => `${name}救回一命`,
+  // tech bonus parts
+  techBonusAtk:   (val: number) => `攻击+${val}`,
+  techBonusDef:   (val: number) => `防御+${val}`,
+  techBonusSpeed: (val: number) => `速度+${val}`,
   // useCoreActions.ts
   noStamina: '⚠️ 精力不足，请先休息！',
   safeZone: (emoji: string, name: string) => `🛡️ ${emoji} ${name}是安全区域，无法战斗。`,

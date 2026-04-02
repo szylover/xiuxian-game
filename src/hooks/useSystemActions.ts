@@ -24,6 +24,7 @@ import type { LogCategory } from './useGameLog';
 import type { DeathModalState } from './useGameEngine';
 import { UI_LABELS } from '../data/texts/ui-labels';
 import { BODY_CULTIVATION_TEXTS } from '../data/texts/body-cultivation';
+import { BREAKTHROUGH_TEXTS } from '../data/texts/breakthrough';
 
 export interface SystemActionDeps {
   player: Player | null;
@@ -125,7 +126,7 @@ export function useSystemActions(deps: SystemActionDeps) {
     // 突破失败额外提示
     if (!btResult.success && !btResult.triggerTribulation) {
       if (btResult.blockedByBottleneck) {
-        addLog('💡 提示：可通过战斗击杀指定妖兽、探索触发顿悟、或坚持修炼来突破瓶颈。', 'system');
+        addLog(BREAKTHROUGH_TEXTS.bottleneckHint, 'system');
       }
     }
   }, [player, addLog, setPlayer, setGameOver, setGameOverReason]);

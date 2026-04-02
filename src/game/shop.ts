@@ -8,6 +8,7 @@ import { getItemDef } from './registry';
 import type { ItemDef } from './registry';
 import { addItem, removeItem, hasItem } from './inventory';
 import { getCurrentRegion } from './map';
+import { SHOP_TEXTS } from '../data/texts/shop';
 
 // ── 商品定义（注册到全局表）──
 
@@ -71,32 +72,32 @@ export interface ShopResult {
 export function buyItem(player: Player, itemId: string, count: number = 1): ShopResult {
   const good = shopGoodsRegistry.find(g => g.itemId === itemId);
   if (!good) {
-    return { player, success: false, message: '商品不存在。' };
+    return { player, success: false, message: SHOP_TEXTS.itemNotFound };
   }
 
   const def = getItemDef(itemId);
   if (!def) {
-    return { player, success: false, message: '物品定义不存在。' };
+    return { player, success: false, message: SHOP_TEXTS.itemDefNotFound };
   }
 
   const unitPrice = calcBuyPrice(good.buyPrice, player.charisma);
   const totalCost = unitPrice * count;
 
   if (player.gold < totalCost) {
-    return { player, success: false, message: `灵石不足！需要 ${totalCost}，当前 ${player.gold}。` };
+    return { player, success: false, message: SHOP_TEXTS.goldInsufficient(totalCost, player.gold) };
   }
 
   const { player: p2, added, overflow } = addItem(player, itemId, count);
   if (added === 0) {
-    return { player, success: false, message: '背包已满，无法购买。' };
+    return { player, success: false, message: SHOP_TEXTS.inventoryFull };
   }
 
   const actualCost = unitPrice * added;
   const p = { ...p2, gold: p2.gold - actualCost };
 
-  let msg = `🛒 购入 ${def.name} ×${added}，花费 ${actualCost} 灵石。`;
+  let msg = SHOP_TEXTS.bought(def.name, added, actualCost);
   if (overflow > 0) {
-    msg += `（背包满，${overflow} 个未购入）`;
+    msg += SHOP_TEXTS.boughtOverflow(overflow);
   }
 
   return { player: p, success: true, message: msg };
@@ -107,11 +108,11 @@ export function buyItem(player: Player, itemId: string, count: number = 1): Shop
 export function sellItem(player: Player, itemId: string, count: number = 1): ShopResult {
   const def = getItemDef(itemId);
   if (!def) {
-    return { player, success: false, message: '物品不存在。' };
+    return { player, success: false, message: SHOP_TEXTS.sellItemNotFound };
   }
 
   if (!hasItem(player, itemId, count)) {
-    return { player, success: false, message: `${def.name} 数量不足。` };
+    return { player, success: false, message: SHOP_TEXTS.stockInsufficient(def.name) };
   }
 
   const unitPrice = calcSellPrice(def);
@@ -123,6 +124,6 @@ export function sellItem(player: Player, itemId: string, count: number = 1): Sho
   return {
     player: p,
     success: true,
-    message: `💰 卖出 ${def.name} ×${count}，获得 ${totalGold} 灵石。`,
+    message: SHOP_TEXTS.sold(def.name, count, totalGold),
   };
 }
