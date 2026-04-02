@@ -1,9 +1,25 @@
 // ============================================================
 // shared/constants.ts — 全局共享常量
 // 品质颜色、属性中文名、槽位信息等
+// 文案类常量统一从 data/texts/common 引入并 re-export（T0065）
 // ============================================================
 
 import type { ItemRarity, ItemCategory, EquipSlot } from '../../game/registry';
+import {
+  ATTR_NAMES,
+  QUALITY_NAMES,
+  SPIRIT_ROOT_NAMES,
+  APTITUDE_NAMES,
+} from '../../data/texts/common';
+
+// ── re-export 文案常量（保持向后兼容） ──
+export { ATTR_NAMES, QUALITY_NAMES, SPIRIT_ROOT_NAMES, APTITUDE_NAMES };
+/** @deprecated 请使用 ATTR_NAMES */
+export const STAT_CN = ATTR_NAMES;
+/** @deprecated 请使用 SPIRIT_ROOT_NAMES */
+export const SPIRIT_ROOT_CN = SPIRIT_ROOT_NAMES;
+/** @deprecated 请使用 APTITUDE_NAMES */
+export const APTITUDE_CN = APTITUDE_NAMES;
 
 // ── 品质颜色映射 ──
 export const RARITY_COLORS: Record<ItemRarity, string> = {
@@ -23,11 +39,6 @@ export const RARITY_LABELS: Record<ItemRarity, string> = {
   legendary: '橙',
 };
 
-// ── 战斗属性中文名 ──
-export const STAT_CN: Record<string, string> = {
-  atk: '攻击', def: '防御', speed: '速度', hp: '体力', mp: '灵力',
-  critRate: '暴击', critResist: '护心', moveSpeed: '移速',
-};
 
 // ── 装备槽位图标 ──
 export const SLOT_ICONS: Record<EquipSlot, string> = {
@@ -76,10 +87,6 @@ export function statsCN(stats: Record<string, number | undefined>): string {
 }
 
 // ── 灵根五行常量 (T0056) ──
-export const SPIRIT_ROOT_CN: Record<string, string> = {
-  metal: '金', wood: '木', water: '水', fire: '火', earth: '土',
-};
-
 export const SPIRIT_ROOT_COLORS: Record<string, string> = {
   metal: '#C0C0C0',  // 银色
   wood:  '#4CAF50',  // 绿色
@@ -97,9 +104,4 @@ export const COMBO_CN: Record<string, string> = {
   triple: '三灵根', quad: '四灵根', penta: '五灵根',
 };
 
-// ── 资质中文名 ──
-export const APTITUDE_CN: Record<string, string> = {
-  alchemy: '炼丹', smithing: '炼器', fengshui: '风水', mining: '采矿',
-  blade: '刀法', spear: '枪法', sword: '剑法', fist: '拳法', palm: '掌法', finger: '指法',
-  fire: '火系', water: '水系', thunder: '雷系', wind: '风系', earth: '土系', wood: '木系',
-};
+

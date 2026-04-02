@@ -8,6 +8,7 @@ import type { EquipDef, EquipSlot } from './registry';
 import { getEquipDef } from './registry';
 import { addItem, removeItem, hasItem } from './inventory';
 import { recalcStats } from './player';
+import { REALM_NAMES, SLOT_NAMES } from '../data/texts/common';
 
 // ── 装备操作结果 ──
 
@@ -18,16 +19,6 @@ export interface EquipResult {
 }
 
 // ── 获取槽位中文名 ──
-
-const SLOT_NAMES: Record<EquipSlot, string> = {
-  weapon: '武器',
-  helmet: '头盔',
-  armor: '衣甲',
-  boots: '靴子',
-  accessory1: '饰品一',
-  accessory2: '饰品二',
-};
-
 export function getSlotName(slot: EquipSlot): string {
   return SLOT_NAMES[slot];
 }
@@ -49,8 +40,7 @@ export function equipItem(player: Player, equipId: string): EquipResult {
   }
 
   if (player.realmIndex < def.minRealm) {
-    const realmNames = ['凡人','炼气','筑基','金丹','元婴','化神','渡劫','大乘'];
-    return { player, success: false, message: `⚠️ 境界不足！${def.name} 需要 ${realmNames[def.minRealm] ?? ''}期。` };
+    return { player, success: false, message: `⚠️ 境界不足！${def.name} 需要 ${REALM_NAMES[def.minRealm] ?? ''}期。` };
   }
 
   if (!hasItem(player, equipId)) {

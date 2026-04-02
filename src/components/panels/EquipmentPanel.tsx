@@ -8,6 +8,7 @@ import type { EquipSlot } from '../../game/registry';
 import { getEquipDef } from '../../game/registry';
 import { getEquippedDef } from '../../game/equipment';
 import { getInventoryEntries } from '../../game/inventory';
+import { REALM_NAMES } from '../../data/texts/common';
 import EquipSlotCard from './equipment/EquipSlotCard';
 import EquippableItem from './equipment/EquippableItem';
 
@@ -47,7 +48,7 @@ export default function EquipmentPanel({ player, onEquip, onUnequip }: Equipment
             const equipDef = getEquipDef(slot.itemId);
             if (!equipDef) return null;
             const canEquip = player.realmIndex >= equipDef.minRealm;
-            const reason = !canEquip ? `需 ${['凡人','炼气','筑基','金丹','元婴','化神','渡劫','大乘'][equipDef.minRealm] ?? ''}期` : '';
+            const reason = !canEquip ? `需 ${REALM_NAMES[equipDef.minRealm] ?? ''}期` : '';
             return (
               <EquippableItem
                 key={slot.itemId}

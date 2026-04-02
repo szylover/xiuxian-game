@@ -8,13 +8,9 @@ import { getTechniqueDef } from '../../game/registry';
 import type { TechniqueDef, PassiveEffect } from '../../game/registry';
 import { getLearnableTechniques, calcTechniqueExpGain, getEffectiveMaxLevel, calcAptitudeBonus } from '../../game/technique';
 import { RARITY_COLORS, SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS } from '../shared';
+import { TECHNIQUE_TYPE_NAMES } from '../../data/texts/common';
 import type { TechniqueRarity } from '../../game/registry';
 import { useState } from 'react';
-
-const TECHNIQUE_TYPE_CN: Record<string, string> = {
-  sword: '剑法', blade: '刀法', fist: '拳法',
-  palm: '掌法', finger: '指法', spear: '枪法',
-};
 
 interface TechniquePanelProps {
   player: Player;
@@ -105,7 +101,7 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                   <span className="technique-name" style={{ color: RARITY_COLORS[def.rarity as TechniqueRarity] }}>
                     {def.name}
                   </span>
-                  <span className="technique-type">{TECHNIQUE_TYPE_CN[def.type] ?? def.type}</span>
+                  <span className="technique-type">{TECHNIQUE_TYPE_NAMES[def.type] ?? def.type}</span>
                   {def.spiritRootElement && (
                     <SpiritRootTag
                       rootType={def.spiritRootElement}
@@ -210,7 +206,7 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                     <span className="technique-name" style={{ color: RARITY_COLORS[def.rarity as TechniqueRarity] }}>
                       {def.name}
                     </span>
-                    <span className="technique-type">{TECHNIQUE_TYPE_CN[def.type] ?? def.type}</span>
+                    <span className="technique-type">{TECHNIQUE_TYPE_NAMES[def.type] ?? def.type}</span>
                     {def.spiritRootElement && (
                       <SpiritRootTag
                         rootType={def.spiritRootElement}
