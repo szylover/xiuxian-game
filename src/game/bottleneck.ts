@@ -9,6 +9,7 @@ import type { BottleneckDef, BottleneckState, BottleneckUnlockMethod } from './t
 import { addItem } from './inventory';
 import {
   getBottleneckDef,
+  getAllBottleneckDefs,
   getBottlenecksForRealm,
   getBottlenecksForBodyRealm,
   getBottlenecksForTechnique,
@@ -240,6 +241,7 @@ export function tryBattleUnlock(player: Player, killedMonsterId: string): {
   let triggered = false;
   let log = '';
 
+  // 1. 检查已激活的瓶颈
   for (const [id, entry] of Object.entries(state.active)) {
     const def = getBottleneckDef(id);
     if (!def) continue;
@@ -255,6 +257,40 @@ export function tryBattleUnlock(player: Player, killedMonsterId: string): {
     if (triggered) break;
   }
 
+  // 2. 未激活但匹配当前玩家的瓶颈也能被击杀预解锁
+  if (!triggered) {
+    const allDefs = getAllBottleneckDefs();
+    for (const def of allDefs) {
+      // 跳过已激活/已解锁的
+      if (getState(p).active[def.id] || getState(p).unlocked[def.id]) continue;
+      // 条件谓词不满足则跳过
+      if (def.condition && !def.condition(p)) continue;
+      // 检查是否匹配击杀的怪物
+      for (const method of def.unlockMethods) {
+        if (method.type === 'combat' && method.monsterId === killedMonsterId) {
+          // 检查该瓶颈是否与当前玩家相关（境界/体修/功法对得上）
+          let relevant = false;
+          if (def.targetType === 'realm' && def.fromRealmIndex === p.realmIndex) relevant = true;
+          if (def.targetType === 'body_realm' && def.fromBodyRealmIndex === p.bodyRealmIndex) relevant = true;
+          if (def.targetType === 'technique' && def.techniqueId) {
+            relevant = p.techniques.some(t => t.techniqueId === def.techniqueId);
+          }
+          if (relevant) {
+            // 激活后立即解锁
+            const act = activateBottleneck(p, def.id);
+            p = act.player;
+            const result = unlockBottleneck(p, def.id, 'combat');
+            p = result.player;
+            log = result.log;
+            triggered = true;
+            break;
+          }
+        }
+      }
+      if (triggered) break;
+    }
+  }
+
   return { player: p, triggered, log };
 }
 
@@ -267,21 +303,41 @@ export function tryEpiphanyUnlock(player: Player, locationTag: string): {
   log: string;
 } {
   let p = ensureBottleneckState(player);
-  const state = getState(p);
 
-  for (const [id, _entry] of Object.entries(state.active)) {
+  // 收集所有应检查的瓶颈（已激活 + 未激活但相关的）
+  const candidates: BottleneckDef[] = [];
+  const state = getState(p);
+  for (const [id] of Object.entries(state.active)) {
     const def = getBottleneckDef(id);
-    if (!def) continue;
+    if (def) candidates.push(def);
+  }
+  // 未激活但与当前玩家相关的
+  for (const def of getAllBottleneckDefs()) {
+    if (state.active[def.id] || state.unlocked[def.id]) continue;
+    if (def.condition && !def.condition(p)) continue;
+    let relevant = false;
+    if (def.targetType === 'realm' && def.fromRealmIndex === p.realmIndex) relevant = true;
+    if (def.targetType === 'body_realm' && def.fromBodyRealmIndex === p.bodyRealmIndex) relevant = true;
+    if (def.targetType === 'technique' && def.techniqueId) {
+      relevant = p.techniques.some(t => t.techniqueId === def.techniqueId);
+    }
+    if (relevant) candidates.push(def);
+  }
+
+  for (const def of candidates) {
     for (const method of def.unlockMethods) {
       if (method.type !== 'epiphany') continue;
-      // 匹配地图标签（空字符串 = 任意地图）
       if (method.locationTag && method.locationTag !== locationTag && locationTag !== '') continue;
 
-      // 概率判定（luck 和 comprehension 提升触发率）
       const chance = method.baseChance * (1 + p.luck * 0.002 + p.comprehension * 0.003);
       if (Math.random() < chance) {
-        const result = unlockBottleneck(p, id, 'epiphany');
-        return { player: result.player, triggered: true, bottleneckId: id, log: result.log };
+        // 如果未激活，先激活
+        if (!getState(p).active[def.id]) {
+          const act = activateBottleneck(p, def.id);
+          p = act.player;
+        }
+        const result = unlockBottleneck(p, def.id, 'epiphany');
+        return { player: result.player, triggered: true, bottleneckId: def.id, log: result.log };
       }
     }
   }
