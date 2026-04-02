@@ -261,14 +261,10 @@ export function tryBattleUnlock(player: Player, killedMonsterId: string): {
   if (!triggered) {
     const allDefs = getAllBottleneckDefs();
     for (const def of allDefs) {
-      // 跳过已激活/已解锁的
       if (getState(p).active[def.id] || getState(p).unlocked[def.id]) continue;
-      // 条件谓词不满足则跳过
       if (def.condition && !def.condition(p)) continue;
-      // 检查是否匹配击杀的怪物
       for (const method of def.unlockMethods) {
         if (method.type === 'combat' && method.monsterId === killedMonsterId) {
-          // 检查该瓶颈是否与当前玩家相关（境界/体修/功法对得上）
           let relevant = false;
           if (def.targetType === 'realm' && def.fromRealmIndex === p.realmIndex) relevant = true;
           if (def.targetType === 'body_realm' && def.fromBodyRealmIndex === p.bodyRealmIndex) relevant = true;
@@ -276,7 +272,6 @@ export function tryBattleUnlock(player: Player, killedMonsterId: string): {
             relevant = p.techniques.some(t => t.techniqueId === def.techniqueId);
           }
           if (relevant) {
-            // 激活后立即解锁
             const act = activateBottleneck(p, def.id);
             p = act.player;
             const result = unlockBottleneck(p, def.id, 'combat');

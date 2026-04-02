@@ -8,7 +8,7 @@ import type { TechniqueDef, TechniqueStatBonus, TechniqueActiveSkill } from './t
 import type { TechniqueSlot } from './player/types';
 import { getTechniqueDef, getAllTechniqueDefs } from './registry';
 import { gainBodyRealmExp } from './body-cultivation';
-import { checkBottleneck, activateBottleneck, ensureBottleneckState } from './bottleneck';
+import { checkBottleneck, activateBottleneck, ensureBottleneckState, getActiveBottlenecks, tickPersistenceCultivation } from './bottleneck';
 
 // ── 功法类型 → 资质字段映射 ──
 const TYPE_APTITUDE_MAP: Record<string, keyof Player['aptitudes']> = {
@@ -179,9 +179,22 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
     if (btMsg) bodyExpMsg += ` ${btMsg}`;
   }
 
+  // T0064: 功法修炼也推进坚韧修炼进度
+  p = ensureBottleneckState(p);
+  let persistenceMsg = '';
+  for (const { def: bnDef, entry } of getActiveBottlenecks(p)) {
+    if (bnDef.unlockMethods.some(m => m.type === 'persistence')) {
+      const tickResult = tickPersistenceCultivation(p, entry.bottleneckId);
+      p = tickResult.player;
+      if (tickResult.unlocked && tickResult.log) {
+        persistenceMsg = ` ${tickResult.log}`;
+      }
+    }
+  }
+
   return {
     player: p,
-    message: `🧘 修炼 ${def.name}，熟练度 +${gain}（精力-${staminaCost} 灵力-${mpCost}）。${levelUpMsg}${passiveUnlockMsg}${bodyExpMsg}${bottleneckMsg}`,
+    message: `🧘 修炼 ${def.name}，熟练度 +${gain}（精力-${staminaCost} 灵力-${mpCost}）。${levelUpMsg}${passiveUnlockMsg}${bodyExpMsg}${bottleneckMsg}${persistenceMsg}`,
   };
 }
 
