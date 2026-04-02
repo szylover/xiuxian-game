@@ -9,6 +9,8 @@ import { ELEMENT_COUNTER_TABLE, ELEMENT_COUNTER_MULTIPLIER } from './types';
 import { getDivineArtDef, getAllDivineArtDefs } from './registry/queries';
 import type { SkillState } from './combat/types';
 import { REALMS } from './data';
+import { DIVINE_ARTS_TEXTS } from '../data/texts/divine-arts';
+import { COMBAT_TEXTS } from '../data/texts/combat';
 
 // ── 元素显示常量 ──
 
@@ -57,16 +59,16 @@ export function getDivineArtsState(player: Player): DivineArtsSystemState {
 /** 学习神通：检查境界 + 资质 + 未已学，写入 systems['divineArts'].learned */
 export function learnDivineArt(player: Player, artId: string): { player: Player; message: string } {
   const artDef = getDivineArtDef(artId);
-  if (!artDef) return { player, message: `❌ 神通 ${artId} 不存在。` };
+  if (!artDef) return { player, message: DIVINE_ARTS_TEXTS.notFound(artId) };
 
   const state = getDivineArtsState(player);
   if (state.learned.some(s => s.artId === artId)) {
-    return { player, message: `❌ 已学习【${artDef.name}】。` };
+    return { player, message: DIVINE_ARTS_TEXTS.alreadyLearned(artDef.name) };
   }
 
   if (player.realmIndex < artDef.minRealm) {
     const realmName = REALMS[artDef.minRealm]?.name ?? `境界${artDef.minRealm}`;
-    return { player, message: `❌ 境界不足，需达到${realmName}期才能学习【${artDef.name}】。` };
+    return { player, message: DIVINE_ARTS_TEXTS.realmInsufficient(realmName, artDef.name) };
   }
 
   const aptitude = (player.aptitudes as unknown as Record<string, number>)[artDef.element] ?? 0;
@@ -74,7 +76,7 @@ export function learnDivineArt(player: Player, artId: string): { player: Player;
     const elemCN = ELEMENT_CN[artDef.element];
     return {
       player,
-      message: `❌ ${elemCN}灵根不足（当前 ${aptitude} / 需要 ${artDef.minAptitude}），无法学习【${artDef.name}】。`,
+      message: DIVINE_ARTS_TEXTS.aptitudeInsufficient(elemCN, aptitude, artDef.minAptitude, artDef.name),
     };
   }
 
@@ -85,24 +87,24 @@ export function learnDivineArt(player: Player, artId: string): { player: Player;
 
   return {
     player: { ...player, systems: { ...player.systems, divineArts: newState } },
-    message: `✨ 习得神通【${artDef.name}】（${ELEMENT_EMOJI[artDef.element]}${ELEMENT_CN[artDef.element]}系）！战斗中将自动施展。`,
+    message: DIVINE_ARTS_TEXTS.learned(artDef.name, ELEMENT_EMOJI[artDef.element], ELEMENT_CN[artDef.element]),
   };
 }
 
 /** 激活神通：只能激活已学的神通 */
 export function activateDivineArt(player: Player, artId: string): { player: Player; message: string } {
   const artDef = getDivineArtDef(artId);
-  if (!artDef) return { player, message: `❌ 神通 ${artId} 不存在。` };
+  if (!artDef) return { player, message: DIVINE_ARTS_TEXTS.activateNotFound(artId) };
 
   const state = getDivineArtsState(player);
   if (!state.learned.some(s => s.artId === artId)) {
-    return { player, message: `❌ 尚未学习【${artDef.name}】，无法激活。` };
+    return { player, message: DIVINE_ARTS_TEXTS.activateNotLearned(artDef.name) };
   }
 
   const newState: DivineArtsSystemState = { ...state, activeArtId: artId };
   return {
     player: { ...player, systems: { ...player.systems, divineArts: newState } },
-    message: `⚡ 激活神通【${artDef.name}】（${ELEMENT_EMOJI[artDef.element]}${ELEMENT_CN[artDef.element]}系），战斗中将自动施展！`,
+    message: DIVINE_ARTS_TEXTS.activated(artDef.name, ELEMENT_EMOJI[artDef.element], ELEMENT_CN[artDef.element]),
   };
 }
 
@@ -110,14 +112,14 @@ export function activateDivineArt(player: Player, artId: string): { player: Play
 export function deactivateDivineArt(player: Player): { player: Player; message: string } {
   const state = getDivineArtsState(player);
   if (!state.activeArtId) {
-    return { player, message: '❌ 当前没有激活的神通。' };
+    return { player, message: DIVINE_ARTS_TEXTS.noActiveArt };
   }
   const artDef = getDivineArtDef(state.activeArtId);
   const artName = artDef ? artDef.name : state.activeArtId;
   const newState: DivineArtsSystemState = { ...state, activeArtId: null };
   return {
     player: { ...player, systems: { ...player.systems, divineArts: newState } },
-    message: `❎ 已取消激活神通【${artName}】。`,
+    message: DIVINE_ARTS_TEXTS.deactivated(artName),
   };
 }
 
@@ -212,18 +214,18 @@ export function calcDivineArtDamage(
     // 多段攻击才记录每段日志
     if (artDef.hitCount > 1) {
       if (isDodge) {
-        logs.push(`💨 第 ${hit + 1} 段被闪避！`);
+        logs.push(COMBAT_TEXTS.artSegDodge(hit + 1));
       } else if (isCrit) {
-        logs.push(`💥 第 ${hit + 1} 段暴击！造成 ${finalDmg} 点元素伤害！`);
+        logs.push(COMBAT_TEXTS.artSegCrit(hit + 1, finalDmg));
       } else {
-        logs.push(`第 ${hit + 1} 段命中，造成 ${finalDmg} 点元素伤害。`);
+        logs.push(COMBAT_TEXTS.artSegHit(hit + 1, finalDmg));
       }
     }
   }
 
   // 克制提示
   if (countered && monster.element) {
-    logs.push(`${ELEMENT_EMOJI[artDef.element]}克${ELEMENT_EMOJI[monster.element]} 克制加成 ×${ELEMENT_COUNTER_MULTIPLIER}`);
+    logs.push(COMBAT_TEXTS.elementCounter(ELEMENT_EMOJI[artDef.element], ELEMENT_EMOJI[monster.element], ELEMENT_COUNTER_MULTIPLIER));
   }
 
   return { totalDamage, logs };

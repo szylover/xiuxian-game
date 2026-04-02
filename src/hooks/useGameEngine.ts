@@ -24,6 +24,8 @@ import type { RevivalMethodDef } from '../game/types';
 import { checkAchievements } from '../game/achievement/engine';
 import { loadSaveSlot, writeSaveSlot, deleteSaveSlot } from './useSaveLoad';
 import { refreshUnlockedRegions } from '../game/map';
+import { UI_LABELS } from '../data/texts/ui-labels';
+import { SPIRIT_ROOT_CN } from '../data/texts/common';
 
 // Re-export types so existing imports still work
 export type { CombatModalState, DeathModalState } from './useCombatModal';
@@ -83,14 +85,13 @@ export function useGameEngine(
     setPlayer(p);
     setGameOver(false);
     setGameOverReason('');
-    addLog(`🌟 ${p.name} 踏上修仙之路！`, 'system');
-    addLog(`灵根：${rootDisplay.grade}（修炼速度 ×${rootDisplay.multiplier}）`, 'system');
+    addLog(UI_LABELS.newGame(p.name), 'system');
+    addLog(UI_LABELS.spiritRootGrade(rootDisplay.grade, String(rootDisplay.multiplier)), 'system');
     const rootList = p.spiritRoots.roots.map(r => {
-      const cn: Record<string, string> = { metal: '金', wood: '木', water: '水', fire: '火', earth: '土' };
-      return `${cn[r.type] ?? r.type}(${r.affinity})`;
+      return `${SPIRIT_ROOT_CN[r.type] ?? r.type}(${r.affinity})`;
     }).join('、') || '无';
-    addLog(`灵根详情：${rootList}`, 'system');
-    addLog(`气运: ${p.luck} | 悟性: ${p.comprehension} | 魅力: ${p.charisma}`, 'system');
+    addLog(UI_LABELS.spiritRootDetails(rootList), 'system');
+    addLog(UI_LABELS.playerStats(p.luck, p.comprehension, p.charisma), 'system');
   }, [addLog]);
 
   // ── 加载存档 ──
@@ -103,7 +104,7 @@ export function useGameEngine(
       setPlayer(withRegions);
       setGameOver(false);
       setGameOverReason('');
-      addLog(`📂 读取存档成功！${saved.name}，${REALMS[saved.realmIndex].name}期。`, 'system');
+      addLog(UI_LABELS.loadSuccess(saved.name, REALMS[saved.realmIndex].name), 'system');
       return true;
     }
     return false;
@@ -130,7 +131,7 @@ export function useGameEngine(
     if (newAchievements.length === 0) return;
     for (const ach of newAchievements) {
       const bonus = ach.bonusDescription ? ` — ${ach.bonusDescription}` : '';
-      addLog(`🏆 解锁成就：${ach.name}${bonus}`, 'system');
+      addLog(UI_LABELS.achievementUnlock(ach.name, bonus), 'system');
     }
     // 清空 pendingToast 并持久化新状态
     const achState = updated.systems?.achievement as { unlockedIds: string[]; pendingToast: string[] };
@@ -210,8 +211,8 @@ export function useGameEngine(
         const death = applyDeath(deathCheck.player, deathCheck.trigger!);
         updated = death.player;
         setGameOver(true);
-        setGameOverReason(death.gameOverReason || `寿元耗尽，享年 ${Math.floor(updated.age)} 岁，${REALMS[updated.realmIndex].name}期。`);
-        addLog(`💀 寿元耗尽！享年 ${Math.floor(updated.age)} 岁。修仙之路到此为止…`, 'system');
+        setGameOverReason(death.gameOverReason || UI_LABELS.lifespanDeathReason(Math.floor(updated.age), REALMS[updated.realmIndex].name));
+        addLog(UI_LABELS.lifespanDeath(Math.floor(updated.age)), 'system');
       }
     }
 
@@ -279,7 +280,7 @@ export function useGameEngine(
   const handleDeathModalClose = useCallback(() => {
     setDeathModal(null);
     setGameOver(true);
-    setGameOverReason('修仙之路到此为止…');
+    setGameOverReason(UI_LABELS.gameOverFallback);
   }, []);
 
   // ── 删档 ──
@@ -287,7 +288,7 @@ export function useGameEngine(
     deleteSaveSlot(currentSlotRef.current);
     setPlayer(null);
     setGameOver(false);
-    addLog('🗑️ 存档已删除。', 'system');
+    addLog(UI_LABELS.deleteSave, 'system');
   }, [addLog]);
 
   // ── T0038: 退出到主菜单（不删档）──

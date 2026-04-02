@@ -9,6 +9,8 @@ import type { TechniqueSlot } from './player/types';
 import { getTechniqueDef, getAllTechniqueDefs } from './registry';
 import { gainBodyRealmExp } from './body-cultivation';
 import { checkBottleneck, activateBottleneck, ensureBottleneckState, getActiveBottlenecks, tickPersistenceCultivation } from './bottleneck';
+import { TECHNIQUE_TEXTS } from '../data/texts/technique';
+import { SPIRIT_ROOT_CN } from '../data/texts/common';
 
 // ── 功法类型 → 资质字段映射 ──
 const TYPE_APTITUDE_MAP: Record<string, keyof Player['aptitudes']> = {
@@ -56,24 +58,23 @@ export function calcTechniqueExpGain(player: Player, def: TechniqueDef): number 
 // ── 学习功法 ──
 export function learnTechnique(player: Player, techniqueId: string): { player: Player; message: string } {
   const def = getTechniqueDef(techniqueId);
-  if (!def) return { player, message: `❌ 未知功法：${techniqueId}` };
+  if (!def) return { player, message: TECHNIQUE_TEXTS.unknownTechnique(techniqueId) };
 
   if (player.realmIndex < def.minRealm) {
-    return { player, message: `❌ 境界不足，需达到更高境界才能修炼 ${def.name}` };
+    return { player, message: TECHNIQUE_TEXTS.realmInsufficient(def.name) };
   }
 
   // T0056：检查灵根门槛
   if (def.requiredSpiritRoot) {
     const hasRoot = player.spiritRoots?.roots.some(r => r.type === def.requiredSpiritRoot);
     if (!hasRoot) {
-      const rootCN: Record<string, string> = { fire: '火', water: '水', earth: '土', wood: '木', metal: '金' };
-      return { player, message: `❌ 此功法需要【${rootCN[def.requiredSpiritRoot] ?? def.requiredSpiritRoot}灵根】才能习得` };
+      return { player, message: TECHNIQUE_TEXTS.spiritRootRequired(SPIRIT_ROOT_CN[def.requiredSpiritRoot] ?? '', def.requiredSpiritRoot) };
     }
   }
 
   const existing = player.techniques.find(t => t.techniqueId === techniqueId);
   if (existing) {
-    return { player, message: `⚠️ 已经学会了 ${def.name}` };
+    return { player, message: TECHNIQUE_TEXTS.alreadyLearned(def.name) };
   }
 
   const newSlot: TechniqueSlot = { techniqueId, level: 1, exp: 0 };
@@ -84,31 +85,31 @@ export function learnTechnique(player: Player, techniqueId: string): { player: P
     activeTechniqueId: player.activeTechniqueId ?? techniqueId,
   };
 
-  return { player: p, message: `📖 习得功法 ${def.name}！` };
+  return { player: p, message: TECHNIQUE_TEXTS.learned(def.name) };
 }
 
 // ── 修炼功法（增加熟练度，可能升级）──
 export function practiceTechnique(player: Player, techniqueId: string): { player: Player; message: string } {
   const def = getTechniqueDef(techniqueId);
-  if (!def) return { player, message: `❌ 未知功法` };
+  if (!def) return { player, message: TECHNIQUE_TEXTS.unknownPractice };
 
   const idx = player.techniques.findIndex(t => t.techniqueId === techniqueId);
-  if (idx === -1) return { player, message: `❌ 尚未学会 ${def.name}` };
+  if (idx === -1) return { player, message: TECHNIQUE_TEXTS.notLearned(def.name) };
 
   const slot = player.techniques[idx];
   const effectiveMax = getEffectiveMaxLevel(player, def);
   if (slot.level >= effectiveMax) {
     if (effectiveMax < def.maxLevel * 2) {
-      return { player, message: `⚠️ ${def.name} 已达灵根上限（${effectiveMax} 级），提升灵根亲和度可解锁更高等级` };
+      return { player, message: TECHNIQUE_TEXTS.rootLimitReached(def.name, effectiveMax) };
     }
-    return { player, message: `⚠️ ${def.name} 已满级（${effectiveMax}）` };
+    return { player, message: TECHNIQUE_TEXTS.maxLevel(def.name, effectiveMax) };
   }
 
   // 消耗精力 + 灵力
   const staminaCost = 10;
   const mpCost = 5;
   if (player.stamina < staminaCost) {
-    return { player, message: `⚠️ 精力不足，无法修炼功法（需 ${staminaCost}）` };
+    return { player, message: TECHNIQUE_TEXTS.staminaInsufficient(staminaCost) };
   }
 
   let p = { ...player, stamina: player.stamina - staminaCost, mp: Math.max(0, player.mp - mpCost) };
@@ -141,13 +142,13 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
           const act = activateBottleneck(p, bnCheck.bottleneckDef.id);
           p = act.player;
         }
-        bottleneckMsg = ` 🚧 功法瓶颈：${bnCheck.bottleneckDef.name}`;
+        bottleneckMsg = TECHNIQUE_TEXTS.bottleneck(bnCheck.bottleneckDef.name);
         break;
       }
     }
     newExp -= def.expPerLevel;
     newLevel++;
-    levelUpMsg = ` 🎉 ${def.name} 升至 ${newLevel} 级！`;
+    levelUpMsg = TECHNIQUE_TEXTS.levelUp(def.name, newLevel);
   }
 
   // 检测本次新解锁的被动效果（T0019）
@@ -158,8 +159,9 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
       pe => pe.minLevel > oldLevel && pe.minLevel <= newLevel
     );
     if (newlyUnlocked.length > 0) {
-      passiveUnlockMsg = ' ✨ 解锁被动：' +
-        newlyUnlocked.map(pe => `${pe.description}`).join('、');
+      passiveUnlockMsg = TECHNIQUE_TEXTS.passiveUnlock(
+        newlyUnlocked.map(pe => `${pe.description}`).join('、')
+      );
     }
   }
 
@@ -174,7 +176,7 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
     const { player: p2, message: btMsg, actualGain } = gainBodyRealmExp(p, baseBodyExp);
     p = p2;
     if (actualGain > 0) {
-      bodyExpMsg = ` 💪体修修为+${actualGain}`;
+      bodyExpMsg = TECHNIQUE_TEXTS.bodyExpGain(actualGain);
     }
     if (btMsg) bodyExpMsg += ` ${btMsg}`;
   }
@@ -194,29 +196,29 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
 
   return {
     player: p,
-    message: `🧘 修炼 ${def.name}，熟练度 +${gain}（精力-${staminaCost} 灵力-${mpCost}）。${levelUpMsg}${passiveUnlockMsg}${bodyExpMsg}${bottleneckMsg}${persistenceMsg}`,
+    message: TECHNIQUE_TEXTS.practiced(def.name, gain, staminaCost, mpCost) + levelUpMsg + passiveUnlockMsg + bodyExpMsg + bottleneckMsg + persistenceMsg,
   };
 }
 
 // ── 激活/取消激活功法 ──
 export function activateTechnique(player: Player, techniqueId: string): { player: Player; message: string } {
   const def = getTechniqueDef(techniqueId);
-  if (!def) return { player, message: `❌ 未知功法` };
+  if (!def) return { player, message: TECHNIQUE_TEXTS.activateNotLearned };
 
   const existing = player.techniques.find(t => t.techniqueId === techniqueId);
-  if (!existing) return { player, message: `❌ 尚未学会 ${def.name}` };
+  if (!existing) return { player, message: TECHNIQUE_TEXTS.activateNotLearnedName(def.name) };
 
   // 点击已激活的功法 = 取消激活
   if (player.activeTechniqueId === techniqueId) {
     return {
       player: { ...player, activeTechniqueId: null },
-      message: `❎ 取消激活 ${def.name}`,
+      message: TECHNIQUE_TEXTS.deactivate(def.name),
     };
   }
 
   return {
     player: { ...player, activeTechniqueId: techniqueId },
-    message: `⚔️ 切换功法为 ${def.name}`,
+    message: TECHNIQUE_TEXTS.activate(def.name),
   };
 }
 

@@ -8,6 +8,8 @@ import type { Player } from './player';
 import type { RecipeDef, RecipeQuality } from './registry';
 import { getRecipe, getAllRecipes, getItemDef } from './registry';
 import { hasItem, addItem, removeItem } from './inventory';
+import { ALCHEMY_TEXTS } from '../data/texts/alchemy';
+import { QUALITY_NAMES } from '../data/texts/common';
 
 // ── 炼丹结果 ──
 
@@ -64,21 +66,21 @@ function rollQuality(player: Player): RecipeQuality {
 export function performAlchemy(player: Player, recipeId: string): AlchemyResult {
   const recipe = getRecipe(recipeId);
   if (!recipe) {
-    return { player, success: false, message: '配方不存在。' };
+    return { player, success: false, message: ALCHEMY_TEXTS.recipeNotFound };
   }
 
   if (player.realmIndex < recipe.minRealm) {
-    return { player, success: false, message: '境界不足，无法炼制此丹。' };
+    return { player, success: false, message: ALCHEMY_TEXTS.realmInsufficient };
   }
 
   if (player.mentalPower < recipe.mentalCost) {
-    return { player, success: false, message: '念力不足，无法炼丹。' };
+    return { player, success: false, message: ALCHEMY_TEXTS.mentalInsufficient };
   }
 
   for (const input of recipe.inputs) {
     if (!hasItem(player, input.itemId, input.count)) {
       const def = getItemDef(input.itemId);
-      return { player, success: false, message: `材料不足：${def?.name ?? input.itemId} 需要 ${input.count} 个。` };
+      return { player, success: false, message: ALCHEMY_TEXTS.materialInsufficient(def?.name ?? input.itemId, input.count) };
     }
   }
 
@@ -97,7 +99,7 @@ export function performAlchemy(player: Player, recipeId: string): AlchemyResult 
     return {
       player: p,
       success: false,
-      message: `💥 炼丹失败！材料化为灰烬。（成功率 ${(successRate * 100).toFixed(1)}%）`,
+      message: ALCHEMY_TEXTS.failed((successRate * 100).toFixed(1)),
     };
   }
 
@@ -120,12 +122,12 @@ export function performAlchemy(player: Player, recipeId: string): AlchemyResult 
   };
 
   const outputDef = getItemDef(recipe.outputItemId);
-  const qualityLabel = quality === 'excellent' ? '✨极品' : quality === 'good' ? '🌟良品' : '普通';
+  const qualityLabel = QUALITY_NAMES[quality] ?? '普通';
 
   return {
     player: p,
     success: true,
     quality,
-    message: `🔥 炼丹成功！获得 ${qualityLabel} ${outputDef?.name ?? recipe.outputItemId} ×${added}。（成功率 ${(successRate * 100).toFixed(1)}%）`,
+    message: ALCHEMY_TEXTS.success(qualityLabel, outputDef?.name ?? recipe.outputItemId, added, (successRate * 100).toFixed(1)),
   };
 }

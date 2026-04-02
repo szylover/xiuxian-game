@@ -3,6 +3,7 @@
 // ============================================================
 
 import type { TribulationWave } from '../registry';
+import { TRIBULATION_TEXTS } from '../../data/texts/breakthrough';
 
 export interface WaveResult { won: boolean; hpLeft: number; logs: string[]; }
 
@@ -44,6 +45,6 @@ export function fightWave(playerHp: number, playerAtk: number, playerDef: number
   }
 
   const won = pHp > 0 && wHp <= 0;
-  logs.push(won ? `✅ 扛住了 ${wave.name}！（剩余体力 ${Math.max(0, pHp)}）` : `❌ 未能抵挡 ${wave.name}…`);
+  logs.push(won ? TRIBULATION_TEXTS.waveWin(wave.name, Math.max(0, pHp)) : TRIBULATION_TEXTS.waveLose(wave.name));
   return { won, hpLeft: Math.max(0, pHp), logs };
 }

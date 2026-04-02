@@ -13,6 +13,7 @@ import {
 } from '../divine-arts';
 import { getDivineArtDef } from '../registry/queries';
 import { getEquipDef } from '../registry';
+import { COMBAT_TEXTS } from '../../data/texts/combat';
 
 export function runCombat(player: Player, monster: MonsterDef): CombatResult {
   const logs: string[] = [];
@@ -90,19 +91,19 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
   let monsterCurrentDef = monster.def;
   let monsterCurrentAtk = monster.atk;
 
-  logs.push(`⚔️ 遭遇 ${monster.name}（${mHp} HP）！`);
+  logs.push(COMBAT_TEXTS.encounter(monster.name, mHp));
   if (techBonus.atk || techBonus.def) {
     const parts: string[] = [];
     if (techBonus.atk) parts.push(`攻击+${techBonus.atk}`);
     if (techBonus.def) parts.push(`防御+${techBonus.def}`);
     if (techBonus.speed) parts.push(`速度+${techBonus.speed}`);
-    logs.push(`📖 功法加成：${parts.join(' ')}`);
+    logs.push(COMBAT_TEXTS.techBonus(parts));
   }
   if (activeArt) {
-    logs.push(`✨ 激活神通：【${activeArt.name}】（${ELEMENT_EMOJI[activeArt.element]}${ELEMENT_CN[activeArt.element]}系）`);
+    logs.push(COMBAT_TEXTS.activateArt(activeArt.name, ELEMENT_EMOJI[activeArt.element], ELEMENT_CN[activeArt.element]));
   }
   if (extraAtk > 0) {
-    logs.push(`💪 体修加持：体魄×${weaponDef!.physiqueBonusRate} = +${extraAtk} 攻击`);
+    logs.push(COMBAT_TEXTS.physiqueBoost(weaponDef!.physiqueBonusRate ?? 0, extraAtk));
   }
 
   // 先手：speed 高的先攻
@@ -110,9 +111,9 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
     || (buffedPlayer.speed === monster.speed && Math.random() > 0.5);
 
   if (playerFirst) {
-    logs.push(`你的脚力更快，获得先手！`);
+    logs.push(COMBAT_TEXTS.playerFirst);
   } else {
-    logs.push(`${monster.name} 先发制人！`);
+    logs.push(COMBAT_TEXTS.monsterFirst(monster.name));
   }
 
   let round = 0;
@@ -120,7 +121,7 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
 
   while (pHp > 0 && mHp > 0 && round < MAX_ROUNDS) {
     round++;
-    logs.push(`── 第 ${round} 回合 ──`);
+    logs.push(COMBAT_TEXTS.roundHeader(round));
 
     // 构造当前怪物状态（应用 debuff）
     const currentMonster = {
@@ -156,15 +157,15 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
           mHp -= totalDamage;
 
           if (activeArt.hitCount > 1) {
-            logs.push(
-              `✨ 你施展【${activeArt.name}】（${ELEMENT_EMOJI[activeArt.element]} ${ELEMENT_CN[activeArt.element]}系），` +
-              `连击 ${activeArt.hitCount} 段，共造成 ${totalDamage} 点元素伤害！（灵力-${activeArt.mpCost}）`,
-            );
+            logs.push(COMBAT_TEXTS.artMultiHit(
+              activeArt.name, ELEMENT_EMOJI[activeArt.element], ELEMENT_CN[activeArt.element],
+              activeArt.hitCount, totalDamage, activeArt.mpCost,
+            ));
           } else {
-            logs.push(
-              `✨ 你施展【${activeArt.name}】（${ELEMENT_EMOJI[activeArt.element]} ${ELEMENT_CN[activeArt.element]}系），` +
-              `造成 ${totalDamage} 点元素伤害！（灵力-${activeArt.mpCost}）`,
-            );
+            logs.push(COMBAT_TEXTS.artSingleHit(
+              activeArt.name, ELEMENT_EMOJI[activeArt.element], ELEMENT_CN[activeArt.element],
+              totalDamage, activeArt.mpCost,
+            ));
           }
           logs.push(...artLogs);
 
@@ -176,7 +177,7 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
               const healAmt = Math.min(eff.value, buffedPlayer.maxHp - pHp);
               pHp += healAmt;
               if (healAmt > 0) {
-                logs.push(`💚 【${activeArt.name}】恢复 ${healAmt} 点生命！`);
+                logs.push(COMBAT_TEXTS.artHeal(activeArt.name, healAmt));
               }
             } else if (eff.type === 'shield_self') {
               playerEffects.push({
@@ -185,7 +186,7 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
                 remainingRounds: eff.duration,
                 sourceName: activeArt.name,
               });
-              logs.push(`🛡️ 你获得【${activeArt.name}】护盾，每次受击减免 ${eff.value} 点伤害（${eff.duration}回合）`);
+              logs.push(COMBAT_TEXTS.artShield(activeArt.name, eff.value, eff.duration));
             } else if (eff.type === 'debuff_def') {
               monsterEffects.push({
                 type: 'debuff_def',
@@ -194,7 +195,7 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
                 sourceName: activeArt.name,
               });
               monsterCurrentDef = Math.max(0, monsterCurrentDef - eff.value);
-              logs.push(`🛡️ ${monster.name} 防御降低 ${eff.value}！（持续 ${eff.duration} 回合）`);
+              logs.push(COMBAT_TEXTS.debuffDef(monster.name, eff.value, eff.duration));
             } else if (eff.type === 'debuff_atk') {
               monsterEffects.push({
                 type: 'debuff_atk',
@@ -203,7 +204,7 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
                 sourceName: activeArt.name,
               });
               monsterCurrentAtk = Math.max(0, monsterCurrentAtk - eff.value);
-              logs.push(`⚡ ${monster.name} 攻击降低 ${eff.value}！（持续 ${eff.duration} 回合）`);
+              logs.push(COMBAT_TEXTS.debuffAtk(monster.name, eff.value, eff.duration));
             } else if (eff.type === 'dot') {
               monsterEffects.push({
                 type: 'dot',
@@ -211,7 +212,7 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
                 remainingRounds: eff.duration,
                 sourceName: activeArt.name,
               });
-              logs.push(`🔥 ${monster.name} 被附加元素灼伤！每回合 ${eff.value} 点伤害（持续 ${eff.duration} 回合）`);
+              logs.push(COMBAT_TEXTS.artDot(monster.name, eff.value, eff.duration));
             }
           }
         }
@@ -240,10 +241,10 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
 
           mHp -= totalDamage;
           if (skill.hitCount > 1) {
-            logs.push(`⚔️ 你使出【${techniqueName}·${skill.name}】，连斩 ${skill.hitCount} 次，造成 ${totalDamage} 点伤害！（灵力-${skill.mpCost}）`);
+            logs.push(COMBAT_TEXTS.skillMultiHit(techniqueName, skill.name, skill.hitCount, totalDamage, skill.mpCost));
             logs.push(...hitLogs);
           } else {
-            logs.push(`⚔️ 你使出【${techniqueName}·${skill.name}】，造成 ${totalDamage} 点伤害！（灵力-${skill.mpCost}）`);
+            logs.push(COMBAT_TEXTS.skillSingleHit(techniqueName, skill.name, totalDamage, skill.mpCost));
           }
 
           // 处理附加效果
@@ -253,7 +254,7 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
               const healAmt = Math.min(eff.value, buffedPlayer.maxHp - pHp);
               pHp += healAmt;
               if (healAmt > 0) {
-                logs.push(`💚 ${skill.name} 恢复 ${healAmt} 点生命！`);
+                logs.push(COMBAT_TEXTS.skillHeal(skill.name, healAmt));
               }
             } else {
               // dot / debuff_def / debuff_atk → 施加到怪物
@@ -268,12 +269,12 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
               }
               if (eff.type === 'debuff_def') {
                 monsterCurrentDef = Math.max(0, monsterCurrentDef - eff.value);
-                logs.push(`🛡️ ${monster.name} 防御降低 ${eff.value}！（持续 ${eff.duration} 回合）`);
+                logs.push(COMBAT_TEXTS.skillDebuffDef(monster.name, eff.value, eff.duration));
               } else if (eff.type === 'debuff_atk') {
                 monsterCurrentAtk = Math.max(0, monsterCurrentAtk - eff.value);
-                logs.push(`⚡ ${monster.name} 攻击降低 ${eff.value}！（持续 ${eff.duration} 回合）`);
+                logs.push(COMBAT_TEXTS.skillDebuffAtk(monster.name, eff.value, eff.duration));
               } else if (eff.type === 'dot') {
-                logs.push(`🔥 ${monster.name} 被附加灼烧！每回合 ${eff.value} 点伤害（持续 ${eff.duration} 回合）`);
+                logs.push(COMBAT_TEXTS.skillDot(monster.name, eff.value, eff.duration));
               }
             }
           }
@@ -308,7 +309,7 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
               const shieldAmt = Math.min(eff.value, actualDamage);
               if (shieldAmt > 0) {
                 actualDamage = Math.max(0, actualDamage - shieldAmt);
-                logs.push(`🛡️ 【${eff.sourceName}】护盾抵挡 ${shieldAmt} 点伤害！`);
+                logs.push(COMBAT_TEXTS.shieldBlock(eff.sourceName, shieldAmt));
               }
             }
           }
@@ -323,7 +324,7 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
       const eff = monsterEffects[i];
       if (eff.type === 'dot' && mHp > 0) {
         mHp -= eff.value;
-        logs.push(`🔥 ${monster.name} 受到持续伤害 ${eff.value} 点！`);
+        logs.push(COMBAT_TEXTS.dotTick(monster.name, eff.value));
       }
 
       eff.remainingRounds--;
@@ -343,7 +344,7 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
       const eff = playerEffects[i];
       eff.remainingRounds--;
       if (eff.remainingRounds <= 0) {
-        logs.push(`🛡️ 【${eff.sourceName}】护盾效果结束。`);
+        logs.push(COMBAT_TEXTS.shieldExpire(eff.sourceName));
         playerEffects.splice(i, 1);
       }
     }
@@ -366,8 +367,8 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
     const drawDmgRatio = drawDmgTaken / Math.max(1, buffedPlayer.maxHp);
     let drawBodyExp = 5 + Math.floor(drawDmgRatio * 30) + monster.realmIndex * 5;
     if (weaponDef?.techType?.some(t => t === 'fist' || t === 'finger')) drawBodyExp *= 2;
-    logs.push(`战斗超时，双方脱战。`);
-    if (drawBodyExp > 0) logs.push(`💪 获得体修修为 +${drawBodyExp}`);
+    logs.push(COMBAT_TEXTS.timeout);
+    if (drawBodyExp > 0) logs.push(COMBAT_TEXTS.bodyExpGain(drawBodyExp));
     return {
       winner: 'draw', playerHpLeft: pHp, logs, expGained: 0, goldGained: 0,
       mpUsed: skillState.totalMpUsed + divineSkillState.totalMpUsed,
@@ -393,20 +394,20 @@ export function runCombat(player: Player, monster: MonsterDef): CombatResult {
   }
 
   if (playerWon) {
-    logs.push(`🎉 你击败了 ${monster.name}！`);
-    logs.push(`获得 ${monster.expReward} 修为，${monster.goldReward} 灵石。`);
+    logs.push(COMBAT_TEXTS.victory(monster.name));
+    logs.push(COMBAT_TEXTS.victoryRewards(monster.expReward, monster.goldReward));
     if (skillState.useCount > 0) {
-      logs.push(`📖 本场使用功法技能 ${skillState.useCount} 次，消耗灵力 ${skillState.totalMpUsed} 点。`);
+      logs.push(COMBAT_TEXTS.skillUsage(skillState.useCount, skillState.totalMpUsed));
     }
     if (divineSkillState.useCount > 0) {
-      logs.push(`✨ 本场施展神通 ${divineSkillState.useCount} 次，消耗灵力 ${divineSkillState.totalMpUsed} 点。`);
+      logs.push(COMBAT_TEXTS.artUsage(divineSkillState.useCount, divineSkillState.totalMpUsed));
     }
     if (bodyExpGained > 0) {
-      logs.push(`💪 获得体修修为 +${bodyExpGained}`);
+      logs.push(COMBAT_TEXTS.bodyExpGain(bodyExpGained));
     }
   } else {
-    logs.push(`💀 你被 ${monster.name} 击败了…`);
-    logs.push(`身受重伤，健康值大幅下降。`);
+    logs.push(COMBAT_TEXTS.defeat(monster.name));
+    logs.push(COMBAT_TEXTS.defeatHp);
   }
 
   return {

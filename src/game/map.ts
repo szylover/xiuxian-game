@@ -7,6 +7,7 @@
 import type { Player } from './player';
 import type { RegionDef, MapSystemState } from './types';
 import { getRegion, getAllRegions } from './registry';
+import { MAP_TEXTS } from '../data/texts/map';
 
 const DEFAULT_REGION_ID = 'core:qingyun_town';
 
@@ -62,10 +63,10 @@ export function refreshUnlockedRegions(player: Player): Player {
 /** 检查是否可进入某区域（任一修炼路线达标即可） */
 export function checkRegionAccess(player: Player, regionId: string): { canEnter: boolean; reason?: string } {
   const region = getRegion(regionId);
-  if (!region) return { canEnter: false, reason: '区域不存在' };
+  if (!region) return { canEnter: false, reason: MAP_TEXTS.regionNotExist };
   const maxLevel = getMaxCultivationLevel(player);
   if (maxLevel < region.minRealm) {
-    return { canEnter: false, reason: `修炼等级不足（需 ${region.minRealm} 阶）` };
+    return { canEnter: false, reason: MAP_TEXTS.levelInsufficient(region.minRealm) };
   }
   return { canEnter: true };
 }
@@ -81,22 +82,22 @@ export function calcTravelCost(player: Player, region: RegionDef): number {
 /** 执行区域移动 */
 export function travelTo(player: Player, regionId: string): { player: Player; message: string } {
   const region = getRegion(regionId);
-  if (!region) return { player, message: '❌ 目标区域不存在。' };
-  if (region.isContainer) return { player, message: '❌ 无法前往容器区域。' };
+  if (!region) return { player, message: MAP_TEXTS.regionNotFound };
+  if (region.isContainer) return { player, message: MAP_TEXTS.containerRegion };
 
   const state = getMapState(player);
   if (state.currentRegionId === regionId) {
-    return { player, message: `❌ 你已经在${region.emoji} ${region.name}了。` };
+    return { player, message: MAP_TEXTS.alreadyHere(region.emoji, region.name) };
   }
 
   const access = checkRegionAccess(player, regionId);
   if (!access.canEnter) {
-    return { player, message: `❌ 无法前往${region.emoji} ${region.name}：${access.reason}` };
+    return { player, message: MAP_TEXTS.accessDenied(region.emoji, region.name, access.reason ?? '') };
   }
 
   const cost = calcTravelCost(player, region);
   if (player.stamina < cost) {
-    return { player, message: `❌ 精力不足（需 ${cost}，当前 ${player.stamina}）` };
+    return { player, message: MAP_TEXTS.staminaInsufficient(cost, player.stamina) };
   }
 
   // 扣除精力，推进时间
@@ -124,6 +125,6 @@ export function travelTo(player: Player, regionId: string): { player: Player; me
 
   return {
     player: newPlayer,
-    message: `🗺️ 到达 ${region.emoji} ${region.name}（消耗 ${cost} 精力）`,
+    message: MAP_TEXTS.arrived(region.emoji, region.name, cost),
   };
 }

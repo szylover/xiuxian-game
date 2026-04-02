@@ -6,6 +6,7 @@
 import type { Player, InventorySlot } from './player';
 import { getItemDef } from './registry';
 import type { ItemDef } from './registry';
+import { INVENTORY_TEXTS } from '../data/texts/inventory';
 
 // ── 查询 ──
 
@@ -101,19 +102,19 @@ export interface UseItemResult {
 export function useItem(player: Player, itemId: string): UseItemResult {
   const def = getItemDef(itemId);
   if (!def) {
-    return { player, success: false, message: '物品不存在。' };
+    return { player, success: false, message: INVENTORY_TEXTS.itemNotFound };
   }
   if (!def.usable || !def.effect) {
-    return { player, success: false, message: `${def.name} 无法使用。` };
+    return { player, success: false, message: INVENTORY_TEXTS.notUsable(def.name) };
   }
   if (!hasItem(player, itemId)) {
-    return { player, success: false, message: `没有 ${def.name}。` };
+    return { player, success: false, message: INVENTORY_TEXTS.noItem(def.name) };
   }
 
   let p = removeItem(player, itemId, 1);
   p = def.effect(p);
 
-  const message = def.effectMessage || `使用了 ${def.name}。`;
+  const message = def.effectMessage || INVENTORY_TEXTS.used(def.name);
   return { player: p, success: true, message };
 }
 
