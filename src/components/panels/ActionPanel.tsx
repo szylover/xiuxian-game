@@ -202,7 +202,7 @@ export default function ActionPanel({ player, onCultivate, onFight, onExplore, o
                 <div style={{ fontWeight: 'bold', marginBottom: 6, color: '#ffcc80' }}>解锁方式（任意一种即可）：</div>
                 {def.unlockMethods.map((m, i) => {
                   const icons: Record<string, string> = {
-                    quest: '📜', combat: '⚔️', discourse: '💬', epiphany: '✨', persistence: '🔁',
+                    quest: '📜', combat: '⚔️', discourse: '💬', epiphany: '✨', persistence: '🔁', overflow: '🌊',
                   };
                   let desc = '';
                   if (m.type === 'combat') desc = `击败指定强敌`;

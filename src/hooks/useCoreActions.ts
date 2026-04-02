@@ -16,7 +16,7 @@ import { getCurrentRegion } from '../game/map';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
 import { restorePhysique, gainBodyRealmExp, tryBodyRealmBreakthrough } from '../game/body-cultivation';
 import { getTechniqueDef } from '../game/registry';
-import { ensureBottleneckState, getActiveBottlenecks, tickPersistenceCultivation, tryBattleUnlock, tryEpiphanyUnlock } from '../game/bottleneck';
+import { ensureBottleneckState, getActiveBottlenecks, tickPersistenceCultivation, tryBattleUnlock, tryEpiphanyUnlock, tryOverflowUnlock } from '../game/bottleneck';
 import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef } from '../game/types';
 import type { LogCategory } from './useGameLog';
 
@@ -124,6 +124,13 @@ export function useCoreActions(deps: CoreActionDeps) {
             queueLog(tickResult.log, 'system');
           }
         }
+      }
+
+      // T0064: 修为溢出自动消除瓶颈
+      const overflowResult = tryOverflowUnlock(p);
+      if (overflowResult.triggered) {
+        p = overflowResult.player;
+        queueLog(overflowResult.log, 'system');
       }
 
       p = advanceTime(p, 'cultivate');

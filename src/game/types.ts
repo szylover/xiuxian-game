@@ -461,7 +461,8 @@ export type BottleneckUnlockMethod =
   | { type: 'combat';      monsterId: string; minRealmIndex?: number }
   | { type: 'discourse';   npcId: string; cost: { itemId: string; count: number }[] }
   | { type: 'epiphany';    locationTag: string; baseChance: number }
-  | { type: 'persistence'; cultivationCount: number };
+  | { type: 'persistence'; cultivationCount: number }
+  | { type: 'overflow' };
 
 export interface BottleneckDef {
   id: string;
@@ -474,6 +475,10 @@ export interface BottleneckDef {
   description: string;
   hint: string;
   unlockMethods: BottleneckUnlockMethod[];
+
+  /** 修为溢出比例，达到下一境界 expReq * overflowRatio 时自动消除。
+   *  仅对 realm / body_realm 类型生效。默认 1.5。设为 0 或 Infinity 可禁用。 */
+  overflowRatio?: number;
   unlockBonus?: {
     expBonus?: number;
     statBonus?: Partial<Record<'atk' | 'def' | 'comprehension' | 'luck', number>>;

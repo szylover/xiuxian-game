@@ -13,6 +13,8 @@ import {
   getBottlenecksForRealm,
   getBottlenecksForBodyRealm,
   getBottlenecksForTechnique,
+  getRealmDef,
+  getBodyRealmDef,
 } from './registry';
 
 // ── 存档兼容：确保 player.systems.bottleneck 存在 ──
@@ -180,6 +182,7 @@ export function unlockBottleneck(
     discourse: '论道感悟',
     epiphany: '灵光顿悟',
     persistence: '坚韧修炼',
+    overflow: '修为溢出',
   };
   const log = `🎆 【瓶颈突破】${def.name}已突破！（${methodNames[method]}）道心通畅，修为再无阻碍！`;
   return { player: p, log };
@@ -338,6 +341,49 @@ export function tryEpiphanyUnlock(player: Player, locationTag: string): {
   }
 
   return { player: p, triggered: false, log: '' };
+}
+
+// ── 修为溢出自动消除瓶颈 ──
+
+export function tryOverflowUnlock(player: Player): {
+  player: Player;
+  triggered: boolean;
+  log: string;
+} {
+  let p = ensureBottleneckState(player);
+  const state = getState(p);
+  let triggered = false;
+  let log = '';
+
+  for (const [id] of Object.entries(state.active)) {
+    const def = getBottleneckDef(id);
+    if (!def) continue;
+
+    const ratio = def.overflowRatio ?? 1.5;
+    if (ratio <= 0 || !isFinite(ratio)) continue;
+
+    if (def.targetType === 'realm' && def.fromRealmIndex !== undefined) {
+      const nextRealm = getRealmDef(def.fromRealmIndex + 1);
+      if (nextRealm && p.exp >= nextRealm.expReq * ratio) {
+        const result = unlockBottleneck(p, id, 'overflow');
+        p = result.player;
+        log = `🌊 【瓶颈消融】${def.name}——修为深厚远超此境，瓶颈不攻自破！`;
+        triggered = true;
+        break;
+      }
+    } else if (def.targetType === 'body_realm' && def.fromBodyRealmIndex !== undefined) {
+      const nextBodyRealm = getBodyRealmDef(def.fromBodyRealmIndex + 1);
+      if (nextBodyRealm && p.bodyRealmExp >= nextBodyRealm.expReq * ratio) {
+        const result = unlockBottleneck(p, id, 'overflow');
+        p = result.player;
+        log = `🌊 【瓶颈消融】${def.name}——体修深厚远超此境，瓶颈不攻自破！`;
+        triggered = true;
+        break;
+      }
+    }
+  }
+
+  return { player: p, triggered, log };
 }
 
 // ── 论道解锁（T0064-C，预留接口） ──
