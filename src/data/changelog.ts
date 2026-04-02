@@ -12,6 +12,18 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.2.0',
+    date: '2026-04-02',
+    title: '体修武器内容（T0060）',
+    items: [
+      '新增 12 件体修专属武器：拳套×4（fist）、指环×4（finger）、重手甲×4（fist+finger 通用）',
+      'EquipStatBonus 新增 critDmgMultiplier 字段，指环类装备可提升暴击伤害倍率',
+      '装备系统 recalcStats 同步应用 critDmgMultiplier 加成',
+      '商店按境界分阶段解锁体修武器：初阶在青云镇/安全区，中阶在仙都/城市，顶阶仅限仙都',
+      '装备体修武器时若当前激活功法不匹配，Toast 弹出警告提示',
+    ],
+  },
+  {
     version: '1.1.1',
     date: '2026-04-02',
     title: '体修功法内容扩充（T0061）',

@@ -18,6 +18,7 @@ import { travelTo as travelToFn } from '../game/map';
 import { tryBodyRealmBreakthrough } from '../game/body-cultivation';
 import { recalcStats } from '../game/player';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
+import { getEquipDef, getTechniqueDef } from '../game/registry';
 import type { EquipSlot } from '../game/registry';
 import type { LogCategory } from './useGameLog';
 import type { DeathModalState } from './useGameEngine';
@@ -62,7 +63,21 @@ export function useSystemActions(deps: SystemActionDeps) {
   // ── T0014: 装备 ──
   const equip = useCallback((equipId: string) => {
     execAction(p => equipItem(p, equipId));
-  }, [execAction]);
+    // T0060：体修武器 techType 兼容性提示（装备后检查）
+    if (player) {
+      const def = getEquipDef(equipId);
+      if (def?.techType?.length) {
+        const activeTechDef = player.activeTechniqueId
+          ? getTechniqueDef(player.activeTechniqueId)
+          : null;
+        if (!activeTechDef) {
+          addLog(`⚠️ ${def.name} 为体修武器（${def.techType.join('/')}），激活对应功法后可获得体魄攻击加成！`, 'system');
+        } else if (!def.techType.includes(activeTechDef.type)) {
+          addLog(`⚠️ ${def.name} 兼容功法类型【${def.techType.join('/')}】，当前激活的【${activeTechDef.name}】（${activeTechDef.type}）不匹配，体魄加成无法生效！`, 'system');
+        }
+      }
+    }
+  }, [execAction, player, addLog]);
 
   const unequip = useCallback((slot: EquipSlot) => {
     execAction(p => unequipItem(p, slot));

@@ -87,6 +87,7 @@ export interface EquipStatBonus {
   hp?: number;
   mp?: number;
   critRate?: number;
+  critDmgMultiplier?: number;     // 暴击伤害倍率加成（如 +0.1 = 暴击伤害×10%）
   critResist?: number;
   moveSpeed?: number;
   // ─── T0059 体修装备加成 ───
