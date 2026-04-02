@@ -12,6 +12,18 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.1.1',
+    date: '2026-04-02',
+    title: '体修功法内容扩充（T0061）',
+    items: [
+      '新增 10 条拳法功法：硬气功、铁布衫（uncommon）；虎啸拳法、碎山拳诀、石化功、醉八拳（rare）；金刚伏魔拳、龙象般若拳（epic）；不灭体拳经、混元一气拳（legendary）',
+      '新增 11 条指法功法：骨压指（common）；铁指功、钢铁指、灵动指法（uncommon）；虚空穿刺指、柳叶点穴手、疾风指（rare）；葵花点穴手、雷霆点指（epic）；一指禅、穿天指（legendary）',
+      '拳法功法 bodyExpRate 均为 1.0~1.2，修炼时正确积累体修修为',
+      '指法功法 bodyExpRate 均为 0.8~1.0，修炼时正确积累体修修为',
+      '各级被动效果覆盖：体魄上限（physique）、物理减伤（physiqueDmgReduce）、ATK/DEF/HP/暴击率/暴击倍率',
+    ],
+  },
+  {
     version: '1.1.0',
     date: '2026-03-31',
     title: '地图系统 + 体验改进（T0021）',
