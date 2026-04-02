@@ -253,6 +253,7 @@ export interface TechniqueDef {
   spiritRootElement?: import('./spirit-root').SpiritRootType; // 功法五行属性（T0056）：对应灵根亲和度越高修炼越快、上限越高
   requiredSpiritRoot?: import('./spirit-root').SpiritRootType; // 学习门槛（T0056）：必须拥有此灵根才能习得
   bodyExpRate?: number;                     // T0059 体修修为系数（0-1，修炼此功法时按此比例给予体修修为）
+  levelBottlenecks?: number[];               // T0064 哪些等级会触发瓶颈
 }
 
 // ── 事件类型定义 ──
@@ -390,6 +391,7 @@ export interface DLCPack {
   spiritRootBodyBonuses?: SpiritRootBodyBonus[]; // T0059 灵根对体修的加成配置
   realms?: RealmDef[];                       // T0058 气修境界定义
   regions?: RegionDef[];                     // T0021 区域定义
+  bottlenecks?: BottleneckDef[];             // T0064 瓶颈定义
 }
 
 // ── 死亡系统类型定义 ──
@@ -450,4 +452,47 @@ export interface DeathSystemState {
   revivalCount: number;
   lifeSaverTriggered: string[];
   isLooseImmortal: boolean;
+}
+
+// ── 瓶颈系统类型定义（T0064）──
+
+export type BottleneckUnlockMethod =
+  | { type: 'quest';       questId: string }
+  | { type: 'combat';      monsterId: string; minRealmIndex?: number }
+  | { type: 'discourse';   npcId: string; cost: { itemId: string; count: number }[] }
+  | { type: 'epiphany';    locationTag: string; baseChance: number }
+  | { type: 'persistence'; cultivationCount: number };
+
+export interface BottleneckDef {
+  id: string;
+  targetType: 'realm' | 'technique' | 'body_realm';
+  fromRealmIndex?: number;
+  fromBodyRealmIndex?: number;
+  techniqueId?: string;
+  atLevel?: number;
+  name: string;
+  description: string;
+  hint: string;
+  unlockMethods: BottleneckUnlockMethod[];
+  unlockBonus?: {
+    expBonus?: number;
+    statBonus?: Partial<Record<'atk' | 'def' | 'comprehension' | 'luck', number>>;
+    items?: { itemId: string; count: number }[];
+  };
+  condition?: (player: Player) => boolean;
+}
+
+export interface BottleneckState {
+  active: Record<string, {
+    bottleneckId: string;
+    activatedAt: number;
+    progress: {
+      persistenceCultivationCount?: number;
+    };
+  }>;
+  unlocked: Record<string, {
+    bottleneckId: string;
+    unlockedAt: number;
+    method: BottleneckUnlockMethod['type'];
+  }>;
 }

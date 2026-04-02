@@ -8,6 +8,7 @@ import type { TechniqueDef, TechniqueStatBonus, TechniqueActiveSkill } from './t
 import type { TechniqueSlot } from './player/types';
 import { getTechniqueDef, getAllTechniqueDefs } from './registry';
 import { gainBodyRealmExp } from './body-cultivation';
+import { checkBottleneck, activateBottleneck, ensureBottleneckState } from './bottleneck';
 
 // ── 功法类型 → 资质字段映射 ──
 const TYPE_APTITUDE_MAP: Record<string, keyof Player['aptitudes']> = {
@@ -129,7 +130,21 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
   let levelUpMsg = '';
 
   // 检测升级（使用有效上限）
+  let bottleneckMsg = '';
   while (newExp >= def.expPerLevel && newLevel < effectiveMax) {
+    // T0064-B：检查功法瓶颈
+    if (def.levelBottlenecks?.includes(newLevel + 1)) {
+      p = ensureBottleneckState(p);
+      const bnCheck = checkBottleneck(p, 'technique', newLevel + 1, def.id);
+      if (bnCheck.blocked && bnCheck.bottleneckDef) {
+        if (bnCheck.isNewlyActivated) {
+          const act = activateBottleneck(p, bnCheck.bottleneckDef.id);
+          p = act.player;
+        }
+        bottleneckMsg = ` 🚧 功法瓶颈：${bnCheck.bottleneckDef.name}`;
+        break;
+      }
+    }
     newExp -= def.expPerLevel;
     newLevel++;
     levelUpMsg = ` 🎉 ${def.name} 升至 ${newLevel} 级！`;
@@ -166,7 +181,7 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
 
   return {
     player: p,
-    message: `🧘 修炼 ${def.name}，熟练度 +${gain}（精力-${staminaCost} 灵力-${mpCost}）。${levelUpMsg}${passiveUnlockMsg}${bodyExpMsg}`,
+    message: `🧘 修炼 ${def.name}，熟练度 +${gain}（精力-${staminaCost} 灵力-${mpCost}）。${levelUpMsg}${passiveUnlockMsg}${bodyExpMsg}${bottleneckMsg}`,
   };
 }
 

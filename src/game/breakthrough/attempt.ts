@@ -8,12 +8,14 @@ import { REALMS, BREAKTHROUGH_FAIL_EXP_LOSS } from '../data';
 import { getItemDef } from '../registry';
 import { removeItem } from '../inventory';
 import { getBreakthroughStatus, getBreakthroughState, setBreakthroughState } from './status';
+import { checkBottleneck, activateBottleneck, ensureBottleneckState } from '../bottleneck';
 
 export interface BreakthroughResult {
   success: boolean;
   player: Player;
   logs: string[];
   triggerTribulation: boolean;
+  blockedByBottleneck?: boolean;
 }
 
 export function attemptBreakthrough(player: Player): BreakthroughResult {
@@ -30,8 +32,20 @@ export function attemptBreakthrough(player: Player): BreakthroughResult {
   for (const cond of status.conditionsReady) if (!cond.ready) logs.push(`⚠️ 条件未满足：${cond.description}`);
   if (!status.canAttempt) return { success: false, player, logs, triggerTribulation: false };
 
+  // T0064: 境界瓶颈检查
+  let p = ensureBottleneckState(player);
+  const bnResult = checkBottleneck(p, 'realm', p.realmIndex);
+  if (bnResult.blocked && bnResult.bottleneckDef) {
+    if (bnResult.isNewlyActivated) {
+      const act = activateBottleneck(p, bnResult.bottleneckDef.id);
+      p = act.player;
+      logs.push(act.log);
+    }
+    logs.push(`🚧 瓶颈未破：${bnResult.bottleneckDef.name}。${bnResult.bottleneckDef.hint}`);
+    return { success: false, player: p, logs, triggerTribulation: false, blockedByBottleneck: true };
+  }
+
   // 消耗物品
-  let p = { ...player };
   if (status.req) {
     for (const cost of status.req.itemCosts) {
       p = removeItem(p, cost.itemId, cost.count);

@@ -6,12 +6,14 @@
 import { useState } from 'react';
 import type { Player } from '../../game/player';
 import { recalcStats } from '../../game/player';
-import { getAllItemDefs, getAllEquipDefs, getAllTechniqueDefs, getAllDivineArtDefs, getAllAchievementDefs } from '../../game/registry';
+import { getAllItemDefs, getAllEquipDefs, getAllTechniqueDefs, getAllDivineArtDefs, getAllAchievementDefs, getAllBottleneckDefs } from '../../game/registry';
 import { addItem } from '../../game/inventory';
 import { getAllTechniquePassiveBonus } from '../../game/technique';
 import { getDivineArtsState, ELEMENT_EMOJI, ELEMENT_CN, ELEMENT_COLOR } from '../../game/divine-arts';
 import type { DivineArtsSystemState } from '../../game/divine-arts';
 import { getAchievementState, checkAchievements, ONCE_BONUS_KEYS } from '../../game/achievement/engine';
+import { activateBottleneck, unlockBottleneck, ensureBottleneckState } from '../../game/bottleneck';
+import type { BottleneckState } from '../../game/types';
 
 // 颜色映射（供模板字面量中使用）
 
@@ -31,12 +33,13 @@ const DEBUG_TABS = [
   { key: 'technique' as const, label: '功法', icon: '✨' },
   { key: 'divine' as const, label: '神通', icon: '🌟' },
   { key: 'achievement' as const, label: '成就', icon: '🏆' },
+  { key: 'bottleneck' as const, label: '瓶颈', icon: '🚧' },
   { key: 'changelog' as const, label: '日志', icon: '📋' },
 ];
 
 export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [tab, setTab] = useState<'stats' | 'items' | 'technique' | 'divine' | 'achievement' | 'changelog'>('stats');
+  const [tab, setTab] = useState<'stats' | 'items' | 'technique' | 'divine' | 'achievement' | 'bottleneck' | 'changelog'>('stats');
   const [itemQty, setItemQty] = useState<Record<string, number>>({});
 
   if (!player || player.name !== 'Debug') return null;
@@ -466,6 +469,71 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
             </div>
           </div>
         )}
+        {tab === 'bottleneck' && (() => {
+          const allBnDefs = getAllBottleneckDefs();
+          const bnState = (player.systems.bottleneck ?? { active: {}, unlocked: {} }) as BottleneckState;
+          return (
+            <div className="debug-stats">
+              <div className="debug-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.4rem' }}>
+                <span className="debug-label" style={{ fontWeight: 'bold' }}>🚧 瓶颈系统调试</span>
+                <div style={{ fontSize: '0.75rem', color: '#ccc' }}>
+                  <div>已注册瓶颈：{allBnDefs.length}</div>
+                  <div>激活中：{Object.keys(bnState.active).length}</div>
+                  <div>已解锁：{Object.keys(bnState.unlocked).length}</div>
+                </div>
+              </div>
+              <div style={{ marginTop: '0.5rem' }}>
+                {allBnDefs.map(def => {
+                  const isActive = !!bnState.active[def.id];
+                  const isUnlocked = !!bnState.unlocked[def.id];
+                  const status = isUnlocked ? '✅ 已解锁' : isActive ? '⚠️ 激活中' : '⬜ 未触发';
+                  const progress = bnState.active[def.id]?.progress.persistenceCultivationCount ?? 0;
+                  return (
+                    <div key={def.id} style={{
+                      border: '1px solid #444', borderRadius: 4, padding: '6px 8px', marginBottom: 4, fontSize: '0.73rem',
+                    }}>
+                      <div style={{ color: isUnlocked ? '#4CAF50' : isActive ? '#ff9800' : '#888' }}>
+                        {status} {def.name} ({def.id})
+                      </div>
+                      {isActive && <div style={{ color: '#aaa' }}>坚韧进度：{progress}</div>}
+                      <div style={{ display: 'flex', gap: '0.3rem', marginTop: 4 }}>
+                        {!isActive && !isUnlocked && (
+                          <button className="btn debug-btn" onClick={() => {
+                            onUpdate(prev => {
+                              if (!prev) return prev;
+                              const res = activateBottleneck(ensureBottleneckState(prev), def.id);
+                              return res.player;
+                            });
+                          }}>激活</button>
+                        )}
+                        {isActive && (
+                          <button className="btn debug-btn" onClick={() => {
+                            onUpdate(prev => {
+                              if (!prev) return prev;
+                              const res = unlockBottleneck(ensureBottleneckState(prev), def.id, 'persistence');
+                              return res.player;
+                            });
+                          }}>强制解锁</button>
+                        )}
+                        {isUnlocked && (
+                          <button className="btn debug-btn" onClick={() => {
+                            onUpdate(prev => {
+                              if (!prev) return prev;
+                              const p = ensureBottleneckState(prev);
+                              const st = (p.systems.bottleneck as BottleneckState);
+                              const { [def.id]: _, ...rest } = st.unlocked;
+                              return { ...p, systems: { ...p.systems, bottleneck: { ...st, unlocked: rest } } };
+                            });
+                          }}>重置为未触发</button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })()}
         {tab === 'changelog' && (
           <DebugChangelogTab />
         )}
