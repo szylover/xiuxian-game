@@ -210,6 +210,18 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
     });
   };
 
+  const setTrackingField = (key: string, v: number) => {
+    onUpdate(prev => {
+      if (!prev) return prev;
+      return { ...prev, tracking: { ...prev.tracking, [key]: v } };
+    });
+  };
+
+  // 物品/装备按品质排序
+  const RARITY_ORDER: Record<string, number> = { legendary: 0, epic: 1, rare: 2, uncommon: 3, common: 4 };
+  const sortedItems = [...allItems].sort((a, b) => (RARITY_ORDER[a.rarity] ?? 5) - (RARITY_ORDER[b.rarity] ?? 5));
+  const sortedEquips = [...allEquips].sort((a, b) => (RARITY_ORDER[a.rarity] ?? 5) - (RARITY_ORDER[b.rarity] ?? 5));
+
   return (
     <CollapsiblePanel
       className="debug-panel"
@@ -231,13 +243,13 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
         />
 
         {tab === 'stats' && (
-          <DebugStatsTab player={player} onSetStat={setStat} onFullRestore={fullRestore} onDebugTravel={debugTravel} />
+          <DebugStatsTab player={player} onSetStat={setStat} onFullRestore={fullRestore} onDebugTravel={debugTravel} onSetTracking={setTrackingField} />
         )}
 
         {tab === 'items' && (
           <DebugItemsTab
-            items={allItems}
-            equips={allEquips}
+            items={sortedItems}
+            equips={sortedEquips}
             getQty={getQty}
             onQtyChange={setQty}
             onGive={giveItem}
@@ -433,41 +445,6 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
                 <button className="btn debug-btn" onClick={triggerAchievementCheck} title="立即检测当前 player 状态是否满足成就条件">
                   🔍 手动触发检测
                 </button>
-              </div>
-            </div>
-
-            {/* killCount / bossKillCount 快速编辑 */}
-            <div className="debug-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.3rem', marginTop: '0.4rem' }}>
-              <span className="debug-label" style={{ fontWeight: 'bold' }}>⚔️ 战斗追踪</span>
-              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
-                <span style={{ fontSize: '0.75rem', color: '#aaa' }}>击杀: <strong>{player.tracking.killCount}</strong></span>
-                <div className="debug-btns">
-                  {[10, 50, 100].map(d => (
-                    <button key={d} className="btn debug-btn" onClick={() => setKillCount(player.tracking.killCount + d)}>+{d}</button>
-                  ))}
-                  <input
-                    type="number"
-                    className="debug-input-sm"
-                    placeholder="="
-                    onKeyDown={e => { if (e.key === 'Enter') setKillCount(Number((e.target as HTMLInputElement).value) || 0); }}
-                    onBlur={e => { const v = Number(e.target.value); if (v || v === 0) setKillCount(v); }}
-                  />
-                </div>
-              </div>
-              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
-                <span style={{ fontSize: '0.75rem', color: '#aaa' }}>Boss击杀: <strong>{player.tracking.bossKillCount}</strong></span>
-                <div className="debug-btns">
-                  {[5, 10].map(d => (
-                    <button key={d} className="btn debug-btn" onClick={() => setBossKillCount(player.tracking.bossKillCount + d)}>+{d}</button>
-                  ))}
-                  <input
-                    type="number"
-                    className="debug-input-sm"
-                    placeholder="="
-                    onKeyDown={e => { if (e.key === 'Enter') setBossKillCount(Number((e.target as HTMLInputElement).value) || 0); }}
-                    onBlur={e => { const v = Number(e.target.value); if (v || v === 0) setBossKillCount(v); }}
-                  />
-                </div>
               </div>
             </div>
           </div>
