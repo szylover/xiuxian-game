@@ -61,11 +61,19 @@ function applyCompatFixes(p: Player): Player {
   if (!p.avatar) p.avatar = 'default';
   if (!Array.isArray(p.techniques)) p.techniques = [];
   if (p.activeTechniqueId === undefined) p.activeTechniqueId = null;
-  // T0042: 历法向后兼容
+  // T0067: age/lifespan 月份化迁移（旧存档 age 为浮点年，需转换为整数月）
+  const saveData = p as Player & { _ageInMonths?: boolean };
+  if (!saveData._ageInMonths) {
+    p.age = Math.round(p.age * 12);
+    if (p.lifespan !== Infinity) {
+      p.lifespan = Math.round(p.lifespan * 12);
+    }
+  }
+  // T0042: 历法向后兼容（age 此时已是月份）
   if (!p.gameYear) {
-    const elapsed = p.age - 16;
-    p.gameYear = Math.max(1, Math.floor(elapsed) + 1);
-    p.gameMonth = Math.max(1, Math.min(12, Math.floor((elapsed - Math.floor(elapsed)) * 12) + 1));
+    const elapsedMonths = p.age - 192; // 192 = 16 * 12，起始年龄
+    p.gameYear = Math.max(1, Math.floor(elapsedMonths / 12) + 1);
+    p.gameMonth = Math.max(1, Math.min(12, (elapsedMonths % 12) + 1));
   }
   // T0040: tracking 向后兼容
   if (p.tracking) {
@@ -137,7 +145,7 @@ export function loadSaveSlot(slotIndex: number): Player | null {
 
 /** 向指定槽位写入存档 */
 export function writeSaveSlot(slotIndex: number, player: Player): void {
-  const data = { ...player, _savedAt: Date.now() };
+  const data = { ...player, _savedAt: Date.now(), _ageInMonths: true };
   localStorage.setItem(getSlotKey(slotIndex), JSON.stringify(data));
 }
 

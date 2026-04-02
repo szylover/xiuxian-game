@@ -157,7 +157,7 @@ export function useGameEngine(
 
     let updated = {
       ...p,
-      age: p.age + cost.time / 12,
+      age: p.age + cost.time,
       gameYear: newYear,
       gameMonth: newMonth,
     };
@@ -210,8 +210,8 @@ export function useGameEngine(
         const death = applyDeath(deathCheck.player, deathCheck.trigger!);
         updated = death.player;
         setGameOver(true);
-        setGameOverReason(death.gameOverReason || `寿元耗尽，享年 ${Math.floor(updated.age)} 岁，${REALMS[updated.realmIndex].name}期。`);
-        addLog(`💀 寿元耗尽！享年 ${Math.floor(updated.age)} 岁。修仙之路到此为止…`, 'system');
+        setGameOverReason(death.gameOverReason || `寿元耗尽，享年 ${Math.floor(updated.age / 12)} 岁，${REALMS[updated.realmIndex].name}期。`);
+        addLog(`💀 寿元耗尽！享年 ${Math.floor(updated.age / 12)} 岁。修仙之路到此为止…`, 'system');
       }
     }
 

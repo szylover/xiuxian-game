@@ -78,7 +78,7 @@ export function attemptBreakthrough(player: Player): BreakthroughResult {
     p.tracking = { ...p.tracking, consecutiveBreakthroughFails: 0 };
 
     logs.push(`🎆 突破成功！晋升 ${newRealm.name}期！`);
-    logs.push(`寿限 +${newRealm.lifespanBonus}，属性全面提升！`);
+    logs.push(`寿限 +${newRealm.lifespanBonus / 12}年，属性全面提升！`);
     return { success: true, player: p, logs, triggerTribulation: false };
   }
 

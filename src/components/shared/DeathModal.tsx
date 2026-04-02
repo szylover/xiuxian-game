@@ -28,7 +28,7 @@ export default function DeathModal({ state, onRevival, onClose }: DeathModalProp
           <div className="death-modal-info">
             <div>🏷️ {playerSnapshot.name}</div>
             <div>🔮 {realmName}</div>
-            <div>📅 {playerSnapshot.age} 岁</div>
+            <div>📅 {Math.floor(playerSnapshot.age / 12)} 岁</div>
             <div>⚔️ 击杀 {playerSnapshot.killCount} · 死亡 {playerSnapshot.deathCount}</div>
           </div>
 
