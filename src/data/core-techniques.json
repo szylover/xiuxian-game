@@ -829,5 +829,1026 @@
       }
     },
     "bodyExpRate": 0.3
+  },
+  {
+    "id": "core:hard_qigong",
+    "name": "硬气功",
+    "type": "fist",
+    "rarity": "uncommon",
+    "description": "以刚猛内劲淬炼皮肉，练就一身铜筋铁骨，体修修为积累极快。",
+    "minRealm": 1,
+    "maxLevel": 15,
+    "expPerLevel": 80,
+    "statBonusPerLevel": {
+      "hp": 20,
+      "def": 3
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "earth",
+    "passiveEffects": [
+      {
+        "minLevel": 3,
+        "stat": "physique",
+        "value": 50,
+        "description": "内劲淬体：体魄上限 +50"
+      },
+      {
+        "minLevel": 8,
+        "stat": "hp",
+        "value": 80,
+        "description": "铜筋铁骨：体力 +80"
+      },
+      {
+        "minLevel": 12,
+        "stat": "def",
+        "value": 15,
+        "description": "硬气护体：防御 +15"
+      }
+    ],
+    "activeSkill": {
+      "name": "硬抗一击",
+      "description": "以内劲护体，硬抗敌人一击并反震。",
+      "mpCost": 10,
+      "staminaCost": 5,
+      "dmgMultiplier": 1.2,
+      "hitCount": 1,
+      "cooldown": 1,
+      "triggerRate": 0.3
+    },
+    "bodyExpRate": 1.0
+  },
+  {
+    "id": "core:iron_shirt",
+    "name": "铁布衫",
+    "type": "fist",
+    "rarity": "uncommon",
+    "description": "以金刚之气包裹全身，皮肉如铁，物理减伤显著提升。",
+    "minRealm": 1,
+    "maxLevel": 15,
+    "expPerLevel": 80,
+    "statBonusPerLevel": {
+      "def": 4,
+      "hp": 15
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 3,
+        "stat": "physiqueDmgReduce",
+        "value": 1,
+        "description": "金刚护体：物理减伤 +1%"
+      },
+      {
+        "minLevel": 8,
+        "stat": "def",
+        "value": 15,
+        "description": "铁甲肌肤：防御 +15"
+      },
+      {
+        "minLevel": 12,
+        "stat": "hp",
+        "value": 60,
+        "description": "铁布衫成：体力 +60"
+      }
+    ],
+    "activeSkill": {
+      "name": "铁布衫护体",
+      "description": "全身内劲外放，减少本次受到的伤害并反击。",
+      "mpCost": 8,
+      "staminaCost": 4,
+      "dmgMultiplier": 1.0,
+      "hitCount": 1,
+      "cooldown": 1,
+      "triggerRate": 0.3
+    },
+    "bodyExpRate": 1.0
+  },
+  {
+    "id": "core:tiger_roar_fist",
+    "name": "虎啸拳法",
+    "type": "fist",
+    "rarity": "rare",
+    "description": "模拟猛虎扑击之势，三段连击势如雷霆，体魄随修炼大幅提升。",
+    "minRealm": 2,
+    "maxLevel": 20,
+    "expPerLevel": 120,
+    "statBonusPerLevel": {
+      "atk": 5,
+      "hp": 12,
+      "def": 2
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "earth",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "physique",
+        "value": 100,
+        "description": "虎躯淬炼：体魄上限 +100"
+      },
+      {
+        "minLevel": 12,
+        "stat": "atk",
+        "value": 25,
+        "description": "虎威显现：攻击 +25"
+      },
+      {
+        "minLevel": 18,
+        "stat": "def",
+        "value": 20,
+        "description": "虎骨护身：防御 +20"
+      }
+    ],
+    "activeSkill": {
+      "name": "虎啸连击",
+      "description": "如猛虎出山，三击连贯，势不可挡。",
+      "mpCost": 12,
+      "staminaCost": 8,
+      "dmgMultiplier": 0.6,
+      "hitCount": 3,
+      "cooldown": 2,
+      "triggerRate": 0.35
+    },
+    "bodyExpRate": 1.0
+  },
+  {
+    "id": "core:mountain_crush_fist",
+    "name": "碎山拳诀",
+    "type": "fist",
+    "rarity": "rare",
+    "description": "以千钧之力凝于一拳，一击碎山，体魄与减伤并重。",
+    "minRealm": 2,
+    "maxLevel": 20,
+    "expPerLevel": 120,
+    "statBonusPerLevel": {
+      "atk": 6,
+      "hp": 15
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "earth",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "hp",
+        "value": 200,
+        "description": "磐石体魄：体力 +200"
+      },
+      {
+        "minLevel": 12,
+        "stat": "physique",
+        "value": 200,
+        "description": "碎山淬体：体魄上限 +200"
+      },
+      {
+        "minLevel": 18,
+        "stat": "physiqueDmgReduce",
+        "value": 3,
+        "description": "金刚筋骨：物理减伤 +3%"
+      }
+    ],
+    "activeSkill": {
+      "name": "碎山一击",
+      "description": "千钧一击，力贯山河，重创敌人。",
+      "mpCost": 18,
+      "staminaCost": 12,
+      "dmgMultiplier": 2.0,
+      "hitCount": 1,
+      "cooldown": 3,
+      "triggerRate": 0.25
+    },
+    "bodyExpRate": 1.0
+  },
+  {
+    "id": "core:stone_body",
+    "name": "石化功",
+    "type": "fist",
+    "rarity": "rare",
+    "description": "以土系内劲石化全身，防御极高，速度略有下降，减伤效果卓越。",
+    "minRealm": 2,
+    "maxLevel": 20,
+    "expPerLevel": 120,
+    "statBonusPerLevel": {
+      "def": 5,
+      "hp": 18
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "earth",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "def",
+        "value": 30,
+        "description": "石肤护甲：防御 +30"
+      },
+      {
+        "minLevel": 12,
+        "stat": "physique",
+        "value": 150,
+        "description": "石化淬体：体魄上限 +150"
+      },
+      {
+        "minLevel": 18,
+        "stat": "physiqueDmgReduce",
+        "value": 4,
+        "description": "石身减伤：物理减伤 +4%"
+      }
+    ],
+    "activeSkill": {
+      "name": "石身护体",
+      "description": "短暂石化皮肤，减少受击伤害并反击敌人。",
+      "mpCost": 15,
+      "staminaCost": 8,
+      "dmgMultiplier": 1.5,
+      "hitCount": 1,
+      "cooldown": 2,
+      "triggerRate": 0.28,
+      "effect": {
+        "type": "debuff_atk",
+        "value": 15,
+        "duration": 2
+      }
+    },
+    "bodyExpRate": 1.0
+  },
+  {
+    "id": "core:eight_drunken_fists",
+    "name": "醉八拳",
+    "type": "fist",
+    "rarity": "rare",
+    "description": "身形飘忽如醉汉，步伐难以捉摸，速度极快，暴击频率极高。",
+    "minRealm": 2,
+    "maxLevel": 20,
+    "expPerLevel": 120,
+    "statBonusPerLevel": {
+      "atk": 4,
+      "speed": 3,
+      "critRate": 2
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "water",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "speed",
+        "value": 10,
+        "description": "醉步飘逸：速度 +10"
+      },
+      {
+        "minLevel": 12,
+        "stat": "critRate",
+        "value": 5,
+        "description": "醉拳暴击：暴击率 +5%"
+      },
+      {
+        "minLevel": 18,
+        "stat": "atk",
+        "value": 20,
+        "description": "醉意攻势：攻击 +20"
+      }
+    ],
+    "activeSkill": {
+      "name": "醉拳乱舞",
+      "description": "醉意横生，拳法飘忽不定，四段连击。",
+      "mpCost": 15,
+      "staminaCost": 8,
+      "dmgMultiplier": 0.5,
+      "hitCount": 4,
+      "cooldown": 2,
+      "triggerRate": 0.35
+    },
+    "bodyExpRate": 1.0
+  },
+  {
+    "id": "core:diamond_body_fist",
+    "name": "金刚伏魔拳",
+    "type": "fist",
+    "rarity": "epic",
+    "description": "金刚不坏之力，一拳震碎敌人防御，体魄与减伤大幅提升。",
+    "minRealm": 3,
+    "maxLevel": 25,
+    "expPerLevel": 200,
+    "statBonusPerLevel": {
+      "atk": 7,
+      "hp": 20,
+      "def": 3
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 8,
+        "stat": "physique",
+        "value": 300,
+        "description": "金刚淬体：体魄上限 +300"
+      },
+      {
+        "minLevel": 15,
+        "stat": "atk",
+        "value": 50,
+        "description": "金刚之力：攻击 +50"
+      },
+      {
+        "minLevel": 22,
+        "stat": "physiqueDmgReduce",
+        "value": 5,
+        "description": "金刚不坏：物理减伤 +5%"
+      }
+    ],
+    "activeSkill": {
+      "name": "金刚怒目",
+      "description": "金刚之力爆发，一拳重创敌人，大幅削弱其防御。",
+      "mpCost": 20,
+      "staminaCost": 15,
+      "dmgMultiplier": 1.8,
+      "hitCount": 1,
+      "cooldown": 3,
+      "triggerRate": 0.28,
+      "effect": {
+        "type": "debuff_def",
+        "value": 30,
+        "duration": 3
+      }
+    },
+    "bodyExpRate": 1.0
+  },
+  {
+    "id": "core:dragon_elephant_fist",
+    "name": "龙象般若拳",
+    "type": "fist",
+    "rarity": "epic",
+    "description": "汇聚龙之威猛与象之力量，四段冲击配合持续内伤，体魄极高。",
+    "minRealm": 3,
+    "maxLevel": 25,
+    "expPerLevel": 200,
+    "statBonusPerLevel": {
+      "atk": 8,
+      "hp": 25
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "earth",
+    "passiveEffects": [
+      {
+        "minLevel": 8,
+        "stat": "hp",
+        "value": 500,
+        "description": "龙血灌体：体力 +500"
+      },
+      {
+        "minLevel": 15,
+        "stat": "physique",
+        "value": 600,
+        "description": "象躯淬炼：体魄上限 +600"
+      },
+      {
+        "minLevel": 22,
+        "stat": "atk",
+        "value": 80,
+        "description": "龙象之力：攻击 +80"
+      }
+    ],
+    "activeSkill": {
+      "name": "龙象冲击",
+      "description": "龙象之力四击连贯，并附带持续内伤。",
+      "mpCost": 20,
+      "staminaCost": 15,
+      "dmgMultiplier": 0.5,
+      "hitCount": 4,
+      "cooldown": 3,
+      "triggerRate": 0.3,
+      "effect": {
+        "type": "dot",
+        "value": 30,
+        "duration": 3
+      }
+    },
+    "bodyExpRate": 1.0
+  },
+  {
+    "id": "core:immortal_body_fist",
+    "name": "不灭体拳经",
+    "type": "fist",
+    "rarity": "legendary",
+    "description": "传说中的不灭肉身修炼秘法，减伤极高，体魄如山岳般坚不可摧。",
+    "minRealm": 4,
+    "maxLevel": 30,
+    "expPerLevel": 350,
+    "statBonusPerLevel": {
+      "atk": 10,
+      "hp": 30,
+      "def": 5
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "earth",
+    "passiveEffects": [
+      {
+        "minLevel": 10,
+        "stat": "physiqueDmgReduce",
+        "value": 8,
+        "description": "不灭之躯：物理减伤 +8%"
+      },
+      {
+        "minLevel": 20,
+        "stat": "physique",
+        "value": 1000,
+        "description": "不灭体魄：体魄上限 +1000"
+      },
+      {
+        "minLevel": 28,
+        "stat": "atk",
+        "value": 120,
+        "description": "不灭拳意：攻击 +120"
+      }
+    ],
+    "activeSkill": {
+      "name": "不灭反击",
+      "description": "以不灭之躯承受一击，蓄势反击，爆发双倍伤害。",
+      "mpCost": 25,
+      "staminaCost": 20,
+      "dmgMultiplier": 2.0,
+      "hitCount": 1,
+      "cooldown": 5,
+      "triggerRate": 0.15
+    },
+    "bodyExpRate": 1.2
+  },
+  {
+    "id": "core:primal_chaos_fist",
+    "name": "混元一气拳",
+    "type": "fist",
+    "rarity": "legendary",
+    "description": "融合天地混元之气于肉身，修炼此功可同步恢复体魄，战力与生存皆达巅峰。",
+    "minRealm": 4,
+    "maxLevel": 30,
+    "expPerLevel": 350,
+    "statBonusPerLevel": {
+      "atk": 9,
+      "hp": 35
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "earth",
+    "passiveEffects": [
+      {
+        "minLevel": 10,
+        "stat": "hp",
+        "value": 1000,
+        "description": "混元体力：体力 +1000"
+      },
+      {
+        "minLevel": 20,
+        "stat": "atk",
+        "value": 150,
+        "description": "混元拳意：攻击 +150"
+      },
+      {
+        "minLevel": 28,
+        "stat": "physique",
+        "value": 1500,
+        "description": "混元体魄：体魄上限 +1500"
+      }
+    ],
+    "activeSkill": {
+      "name": "混元归一",
+      "description": "归一拳意，攻敌同时以混元之气恢复己身体力。",
+      "mpCost": 8,
+      "staminaCost": 5,
+      "dmgMultiplier": 1.0,
+      "hitCount": 1,
+      "cooldown": 4,
+      "triggerRate": 0.2,
+      "effect": {
+        "type": "heal_self",
+        "value": 200,
+        "duration": 1
+      }
+    },
+    "bodyExpRate": 1.2
+  },
+  {
+    "id": "core:bone_press_finger",
+    "name": "骨压指",
+    "type": "finger",
+    "rarity": "common",
+    "description": "以指力压迫骨骼穴位，基础指法入门，兼顾暴击与防御。",
+    "minRealm": 0,
+    "maxLevel": 10,
+    "expPerLevel": 50,
+    "statBonusPerLevel": {
+      "critRate": 1,
+      "def": 2
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 3,
+        "stat": "critRate",
+        "value": 2,
+        "description": "骨压精准：暴击率 +2%"
+      },
+      {
+        "minLevel": 7,
+        "stat": "def",
+        "value": 8,
+        "description": "骨压护体：防御 +8"
+      }
+    ],
+    "activeSkill": {
+      "name": "骨压一指",
+      "description": "精准点压骨骼穴位，削弱敌人防御。",
+      "mpCost": 8,
+      "staminaCost": 3,
+      "dmgMultiplier": 1.3,
+      "hitCount": 1,
+      "cooldown": 1,
+      "triggerRate": 0.3,
+      "effect": {
+        "type": "debuff_def",
+        "value": 3,
+        "duration": 2
+      }
+    },
+    "bodyExpRate": 0.8
+  },
+  {
+    "id": "core:iron_finger",
+    "name": "铁指功",
+    "type": "finger",
+    "rarity": "uncommon",
+    "description": "锻炼手指如铁，点穴准确，可点制敌人攻击力。",
+    "minRealm": 1,
+    "maxLevel": 15,
+    "expPerLevel": 80,
+    "statBonusPerLevel": {
+      "atk": 3,
+      "critRate": 2
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "critRate",
+        "value": 3,
+        "description": "铁指精准：暴击率 +3%"
+      },
+      {
+        "minLevel": 10,
+        "stat": "atk",
+        "value": 10,
+        "description": "铁指破防：攻击 +10"
+      }
+    ],
+    "activeSkill": {
+      "name": "点穴指",
+      "description": "精准点中敌人穴位，大幅削弱其攻击力。",
+      "mpCost": 12,
+      "staminaCost": 5,
+      "dmgMultiplier": 1.5,
+      "hitCount": 1,
+      "cooldown": 2,
+      "triggerRate": 0.3,
+      "effect": {
+        "type": "debuff_atk",
+        "value": 15,
+        "duration": 2
+      }
+    },
+    "bodyExpRate": 0.9
+  },
+  {
+    "id": "core:steel_finger",
+    "name": "钢铁指",
+    "type": "finger",
+    "rarity": "uncommon",
+    "description": "以金属之力强化手指，攻击力强劲，暴击伤害显著提升。",
+    "minRealm": 1,
+    "maxLevel": 15,
+    "expPerLevel": 80,
+    "statBonusPerLevel": {
+      "atk": 3,
+      "critDmgMultiplier": 0.02
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 3,
+        "stat": "atk",
+        "value": 8,
+        "description": "钢铁锋锐：攻击 +8"
+      },
+      {
+        "minLevel": 8,
+        "stat": "critDmgMultiplier",
+        "value": 0.15,
+        "description": "钢指斩杀：暴击伤害 +15%"
+      },
+      {
+        "minLevel": 12,
+        "stat": "critRate",
+        "value": 3,
+        "description": "钢指精准：暴击率 +3%"
+      }
+    ],
+    "activeSkill": {
+      "name": "钢铁穿刺",
+      "description": "以钢铁指力穿刺要害，造成大量伤害。",
+      "mpCost": 12,
+      "staminaCost": 5,
+      "dmgMultiplier": 1.6,
+      "hitCount": 1,
+      "cooldown": 2,
+      "triggerRate": 0.3
+    },
+    "bodyExpRate": 0.9
+  },
+  {
+    "id": "core:nimble_finger",
+    "name": "灵动指法",
+    "type": "finger",
+    "rarity": "uncommon",
+    "description": "指法灵动如风，速度极快，出指难以捉摸。",
+    "minRealm": 1,
+    "maxLevel": 15,
+    "expPerLevel": 80,
+    "statBonusPerLevel": {
+      "speed": 3,
+      "critRate": 1
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "wood",
+    "passiveEffects": [
+      {
+        "minLevel": 3,
+        "stat": "speed",
+        "value": 8,
+        "description": "灵动身法：速度 +8"
+      },
+      {
+        "minLevel": 8,
+        "stat": "critRate",
+        "value": 3,
+        "description": "灵指暴击：暴击率 +3%"
+      },
+      {
+        "minLevel": 12,
+        "stat": "speed",
+        "value": 5,
+        "description": "灵指如风：速度 +5"
+      }
+    ],
+    "activeSkill": {
+      "name": "灵指连点",
+      "description": "指法灵动，三点连出，速度极快。",
+      "mpCost": 10,
+      "staminaCost": 4,
+      "dmgMultiplier": 0.6,
+      "hitCount": 3,
+      "cooldown": 1,
+      "triggerRate": 0.35
+    },
+    "bodyExpRate": 0.9
+  },
+  {
+    "id": "core:void_pierce_finger",
+    "name": "虚空穿刺指",
+    "type": "finger",
+    "rarity": "rare",
+    "description": "以虚空之力凝于指尖，穿透敌人防御，暴击伤害极高。",
+    "minRealm": 2,
+    "maxLevel": 20,
+    "expPerLevel": 120,
+    "statBonusPerLevel": {
+      "atk": 4,
+      "critRate": 2
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "critRate",
+        "value": 5,
+        "description": "虚空精准：暴击率 +5%"
+      },
+      {
+        "minLevel": 12,
+        "stat": "critDmgMultiplier",
+        "value": 0.2,
+        "description": "虚空穿心：暴击伤害 +20%"
+      },
+      {
+        "minLevel": 18,
+        "stat": "atk",
+        "value": 20,
+        "description": "虚空锋锐：攻击 +20"
+      }
+    ],
+    "activeSkill": {
+      "name": "穿刺一指",
+      "description": "以虚空之力穿透敌人防御，造成巨量伤害。",
+      "mpCost": 20,
+      "staminaCost": 10,
+      "dmgMultiplier": 2.5,
+      "hitCount": 1,
+      "cooldown": 3,
+      "triggerRate": 0.25
+    },
+    "bodyExpRate": 0.9
+  },
+  {
+    "id": "core:willow_leaf_finger",
+    "name": "柳叶点穴手",
+    "type": "finger",
+    "rarity": "rare",
+    "description": "指法如柳叶飘落，连点七大穴位，速度与暴击率兼备。",
+    "minRealm": 2,
+    "maxLevel": 20,
+    "expPerLevel": 120,
+    "statBonusPerLevel": {
+      "atk": 3,
+      "speed": 3,
+      "critRate": 1
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "wood",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "speed",
+        "value": 5,
+        "description": "柳叶身法：速度 +5"
+      },
+      {
+        "minLevel": 12,
+        "stat": "critRate",
+        "value": 8,
+        "description": "柳叶精准：暴击率 +8%"
+      },
+      {
+        "minLevel": 18,
+        "stat": "speed",
+        "value": 5,
+        "description": "柳叶如风：速度 +5"
+      }
+    ],
+    "activeSkill": {
+      "name": "连点七穴",
+      "description": "连续点按七大穴位，每穴必中。",
+      "mpCost": 15,
+      "staminaCost": 8,
+      "dmgMultiplier": 0.4,
+      "hitCount": 7,
+      "cooldown": 2,
+      "triggerRate": 0.3
+    },
+    "bodyExpRate": 0.9
+  },
+  {
+    "id": "core:wind_finger",
+    "name": "疾风指",
+    "type": "finger",
+    "rarity": "rare",
+    "description": "指法快如疾风，速度与暴击率双高，三连指令敌防不胜防。",
+    "minRealm": 2,
+    "maxLevel": 20,
+    "expPerLevel": 120,
+    "statBonusPerLevel": {
+      "atk": 2,
+      "speed": 3,
+      "critRate": 2
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "wood",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "speed",
+        "value": 12,
+        "description": "疾风步法：速度 +12"
+      },
+      {
+        "minLevel": 12,
+        "stat": "critRate",
+        "value": 6,
+        "description": "疾风暴击：暴击率 +6%"
+      },
+      {
+        "minLevel": 18,
+        "stat": "speed",
+        "value": 8,
+        "description": "疾风如电：速度 +8"
+      }
+    ],
+    "activeSkill": {
+      "name": "疾风三指",
+      "description": "疾如风，三指连出，令敌难以招架。",
+      "mpCost": 12,
+      "staminaCost": 6,
+      "dmgMultiplier": 0.6,
+      "hitCount": 3,
+      "cooldown": 2,
+      "triggerRate": 0.35
+    },
+    "bodyExpRate": 0.9
+  },
+  {
+    "id": "core:sunflower_finger",
+    "name": "葵花点穴手",
+    "type": "finger",
+    "rarity": "epic",
+    "description": "葵花秘典指法，点穴精准，暴击率与暴击伤害均达极致。",
+    "minRealm": 3,
+    "maxLevel": 25,
+    "expPerLevel": 200,
+    "statBonusPerLevel": {
+      "atk": 5,
+      "critRate": 3
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 8,
+        "stat": "critRate",
+        "value": 12,
+        "description": "葵花精准：暴击率 +12%"
+      },
+      {
+        "minLevel": 15,
+        "stat": "critDmgMultiplier",
+        "value": 0.3,
+        "description": "葵花斩杀：暴击伤害 +30%"
+      },
+      {
+        "minLevel": 22,
+        "stat": "atk",
+        "value": 40,
+        "description": "葵花锋锐：攻击 +40"
+      }
+    ],
+    "activeSkill": {
+      "name": "致命一指",
+      "description": "聚集全部精气于指尖，一击必中要害，暴击率大幅提升。",
+      "mpCost": 22,
+      "staminaCost": 15,
+      "dmgMultiplier": 1.5,
+      "hitCount": 1,
+      "cooldown": 4,
+      "triggerRate": 0.18
+    },
+    "bodyExpRate": 0.9
+  },
+  {
+    "id": "core:thunder_finger",
+    "name": "雷霆点指",
+    "type": "finger",
+    "rarity": "epic",
+    "description": "以雷霆之力灌注指尖，五连点击夹带雷电内伤，威力惊人。",
+    "minRealm": 3,
+    "maxLevel": 25,
+    "expPerLevel": 200,
+    "statBonusPerLevel": {
+      "atk": 5,
+      "critRate": 2
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 8,
+        "stat": "critRate",
+        "value": 10,
+        "description": "雷霆精准：暴击率 +10%"
+      },
+      {
+        "minLevel": 15,
+        "stat": "critDmgMultiplier",
+        "value": 0.2,
+        "description": "雷霆斩杀：暴击伤害 +20%"
+      },
+      {
+        "minLevel": 22,
+        "stat": "atk",
+        "value": 35,
+        "description": "雷霆之力：攻击 +35"
+      }
+    ],
+    "activeSkill": {
+      "name": "雷霆连指",
+      "description": "雷霆五连指，每击带电，持续内伤。",
+      "mpCost": 25,
+      "staminaCost": 12,
+      "dmgMultiplier": 0.4,
+      "hitCount": 5,
+      "cooldown": 3,
+      "triggerRate": 0.3,
+      "effect": {
+        "type": "dot",
+        "value": 35,
+        "duration": 3
+      }
+    },
+    "bodyExpRate": 0.9
+  },
+  {
+    "id": "core:one_finger_chan",
+    "name": "一指禅",
+    "type": "finger",
+    "rarity": "legendary",
+    "description": "禅宗极意指法，一指通天地，暴击率达到修炼者的极限，点穴效果持久。",
+    "minRealm": 4,
+    "maxLevel": 30,
+    "expPerLevel": 350,
+    "statBonusPerLevel": {
+      "atk": 6,
+      "critRate": 3
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 10,
+        "stat": "critRate",
+        "value": 20,
+        "description": "禅指天启：暴击率 +20%"
+      },
+      {
+        "minLevel": 20,
+        "stat": "critDmgMultiplier",
+        "value": 0.5,
+        "description": "禅指杀伐：暴击伤害 +50%"
+      },
+      {
+        "minLevel": 28,
+        "stat": "atk",
+        "value": 100,
+        "description": "一指通天：攻击 +100"
+      }
+    ],
+    "activeSkill": {
+      "name": "禅指",
+      "description": "一指点出，直击对方本命穴位，防御崩溃持续五回合。",
+      "mpCost": 25,
+      "staminaCost": 15,
+      "dmgMultiplier": 1.8,
+      "hitCount": 1,
+      "cooldown": 4,
+      "triggerRate": 0.2,
+      "effect": {
+        "type": "debuff_def",
+        "value": 60,
+        "duration": 5
+      }
+    },
+    "bodyExpRate": 1.0
+  },
+  {
+    "id": "core:heaven_piercing_finger",
+    "name": "穿天指",
+    "type": "finger",
+    "rarity": "legendary",
+    "description": "传说可穿透天地的极致指法，单指爆发伤害冠绝天下，无视大量防御。",
+    "minRealm": 4,
+    "maxLevel": 30,
+    "expPerLevel": 350,
+    "statBonusPerLevel": {
+      "atk": 8,
+      "critRate": 2
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 10,
+        "stat": "critRate",
+        "value": 15,
+        "description": "穿天精准：暴击率 +15%"
+      },
+      {
+        "minLevel": 20,
+        "stat": "atk",
+        "value": 120,
+        "description": "穿天之力：攻击 +120"
+      },
+      {
+        "minLevel": 28,
+        "stat": "critDmgMultiplier",
+        "value": 0.6,
+        "description": "穿天斩杀：暴击伤害 +60%"
+      }
+    ],
+    "activeSkill": {
+      "name": "穿天一指",
+      "description": "聚天地灵气于一指，以三倍之力穿透敌人防御。",
+      "mpCost": 30,
+      "staminaCost": 18,
+      "dmgMultiplier": 3.0,
+      "hitCount": 1,
+      "cooldown": 5,
+      "triggerRate": 0.18
+    },
+    "bodyExpRate": 1.0
   }
 ]
