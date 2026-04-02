@@ -33,6 +33,12 @@ tools: [read, edit, search, execute, todo]
 - 境界定义、妖兽表、物品价格、事件权重
 - 游戏逻辑从数据表读取，绝不硬编码数字
 
+### 文案集中管理（禁止 magic string）
+- 所有面向玩家的中文文本（日志模板、系统提示、UI 标签、属性名映射等）**必须**定义在 `src/data/texts/` 下对应的模块文件中
+- 逻辑代码和组件通过 `import { XXX_TEXTS } from '@/data/texts'` 引用，**禁止**在 `src/game/`、`src/hooks/`、`src/components/` 中内联硬编码中文字符串
+- 新增系统时须同步在 `src/data/texts/` 下新建对应文案文件并在 `index.ts` 中 re-export
+- 静态文本用 `string`，动态模板用函数 `(...args) => string`
+
 ### 架构分层
 - **`src/game/`** — 纯 JS 游戏逻辑，不依赖 React（Player、Combat、Events 等类）
 - **`src/hooks/`** — 自定义 React Hooks，桥接游戏逻辑和 React 状态
