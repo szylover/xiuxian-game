@@ -6,7 +6,7 @@ import type {
   GameEvent, ItemDef, RecipeDef, EquipDef,
   SmithingRecipeDef, BreakthroughReqDef, TribulationDef, DLCPack, TechniqueDef,
   DeathTriggerDef, LifeSaverDef, RevivalMethodDef, MonsterDef, DivineArtDef,
-  BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef,
+  BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef,
 } from '../types';
 import type { AchievementDef } from '../achievement/types';
 
@@ -29,5 +29,6 @@ export const bodyRealmRegistry = new Map<number, BodyRealmDef>();
 export const spiritRootBodyBonusRegistry = new Map<string, SpiritRootBodyBonus>();
 export const realmRegistry = new Map<number, RealmDef>();
 export const regionRegistry = new Map<string, RegionDef>();
+export const bottleneckRegistry = new Map<string, BottleneckDef>();
 export const triggeredOnce = new Set<string>();
 export const cooldowns = new Map<string, number>();

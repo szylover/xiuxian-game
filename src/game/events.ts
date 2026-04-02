@@ -16,6 +16,7 @@ import { CORE_BREAKTHROUGH_REQS, CORE_TRIBULATIONS } from '../data/core-breakthr
 import { CORE_DIVINE_ARTS } from '../data/core-divine-arts';
 import { CORE_BODY_REALMS, CORE_SPIRIT_ROOT_BODY_BONUSES } from '../data/core-body-config';
 import { CORE_REALMS } from '../data/core-realms';
+import { CORE_BOTTLENECKS } from '../data/core-bottlenecks';
 import { registerShopGoods } from './shop';
 import type { ShopGoodsDef } from './shop';
 import { getDeathSystemState } from './death';
@@ -286,6 +287,7 @@ export async function registerCoreEvents(): Promise<void> {
     spiritRootBodyBonuses: CORE_SPIRIT_ROOT_BODY_BONUSES,
     realms: CORE_REALMS,
     regions: coreRegionsJson as RegionDef[],
+    bottlenecks: CORE_BOTTLENECKS,
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }
