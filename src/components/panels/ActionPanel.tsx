@@ -84,7 +84,7 @@ export default function ActionPanel({ player, onCultivate, onFight, onExplore, o
         disabled={!staminaOk('combat') || isSafeZone}
         title={isSafeZone ? `🛡️ ${region?.emoji} ${region?.name}是安全区域，无法战斗` : `消耗 ${ACTION_COSTS.combat.stamina} 精力`}
       >
-        ⚔️ 战斗
+        {isSafeZone ? `🛡️ 安全区域` : '⚔️ 战斗'}
       </button>
       <button
         className="btn btn-action"
