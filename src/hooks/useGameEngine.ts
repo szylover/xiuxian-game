@@ -22,7 +22,7 @@ import type { DeathModalState } from './useCombatModal';
 import { checkDeathTriggers, applyDeath, applyRevival, getDeathSystemState } from '../game/death';
 import type { RevivalMethodDef } from '../game/types';
 import { checkAchievements } from '../game/achievement/engine';
-import { SAVE_KEY, loadSave, writeSave } from './useSaveLoad';
+import { loadSaveSlot, writeSaveSlot, deleteSaveSlot } from './useSaveLoad';
 import { refreshUnlockedRegions } from '../game/map';
 
 // Re-export types so existing imports still work
@@ -39,6 +39,7 @@ export function useGameEngine(
   const [dataReady, setDataReady] = useState(false);
   const [dataError, setDataError] = useState(false);
   const playerRef = useRef<Player | null>(null);
+  const currentSlotRef = useRef(0);
   const { toast, showToast, dismiss: dismissToast } = useToast();
 
   // 异步加载游戏数据（代码分割，仅首次调用）
@@ -73,10 +74,12 @@ export function useGameEngine(
   }, [rawAddLogs, showToast]);
 
   // ── 新游戏 ──
-  const newGame = useCallback((options: CreatePlayerOptions) => {
+  const newGame = useCallback((options: CreatePlayerOptions & { slotIndex?: number }) => {
+    const slotIndex = options.slotIndex ?? 0;
+    currentSlotRef.current = slotIndex;
     const p = createPlayer(options);
     const rootDisplay = getSpiritRootDisplay(p.spiritRoots);
-    writeSave(p);
+    writeSaveSlot(slotIndex, p);
     setPlayer(p);
     setGameOver(false);
     setGameOverReason('');
@@ -91,8 +94,9 @@ export function useGameEngine(
   }, [addLog]);
 
   // ── 加载存档 ──
-  const loadGame = useCallback(() => {
-    const saved = loadSave();
+  const loadGame = useCallback((slotIndex = 0) => {
+    currentSlotRef.current = slotIndex;
+    const saved = loadSaveSlot(slotIndex);
     if (saved) {
       // T0021: 根据境界刷新解锁区域（旧存档可能境界已高）
       const withRegions = refreshUnlockedRegions(saved);
@@ -108,7 +112,7 @@ export function useGameEngine(
   // 自动存档
   useEffect(() => {
     if (player && !gameOver) {
-      writeSave(player);
+      writeSaveSlot(currentSlotRef.current, player);
     }
   }, [player, gameOver]);
 
@@ -280,11 +284,19 @@ export function useGameEngine(
 
   // ── 删档 ──
   const deleteSave = useCallback(() => {
-    localStorage.removeItem(SAVE_KEY);
+    deleteSaveSlot(currentSlotRef.current);
     setPlayer(null);
     setGameOver(false);
     addLog('🗑️ 存档已删除。', 'system');
   }, [addLog]);
+
+  // ── T0038: 退出到主菜单（不删档）──
+  const exitGame = useCallback(() => {
+    setPlayer(null);
+    setGameOver(false);
+    setGameOverReason('');
+    setDeathModal(null);
+  }, []);
 
   return {
     player,
@@ -324,6 +336,8 @@ export function useGameEngine(
     deathModal,
     handleRevival,
     handleDeathModalClose,
+    exitGame,
+    currentSlot: currentSlotRef.current,
     // Debug: 直接修改 player（仅 debug 模式使用）
     debugSetPlayer: setPlayer,
   };
