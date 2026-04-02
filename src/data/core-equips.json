@@ -158,5 +158,141 @@
     "stats": { "atk": 10, "def": 8, "hp": 80 },
     "minRealm": 2,
     "sellPrice": 160
+  },
+  {
+    "id": "core:iron_fist_gloves",
+    "name": "铁拳套",
+    "slot": "weapon",
+    "rarity": "common",
+    "description": "铸铁打造的厚重拳套，体修入门之选",
+    "stats": { "atk": 6, "physique": 30 },
+    "techType": ["fist"],
+    "physiqueBonusRate": 0.03,
+    "minRealm": 0,
+    "sellPrice": 8
+  },
+  {
+    "id": "core:bronze_gauntlets",
+    "name": "铜制手甲",
+    "slot": "weapon",
+    "rarity": "uncommon",
+    "description": "精炼铜矿锻造，蕴含体修之力",
+    "stats": { "atk": 14, "physique": 80 },
+    "techType": ["fist"],
+    "physiqueBonusRate": 0.05,
+    "minRealm": 1,
+    "sellPrice": 22
+  },
+  {
+    "id": "core:jade_fist_gloves",
+    "name": "玉髓拳套",
+    "slot": "weapon",
+    "rarity": "rare",
+    "description": "玉髓淬炼而成，肉身修为转化为伤害",
+    "stats": { "atk": 32, "physique": 200, "physiqueDmgReduce": 2 },
+    "techType": ["fist"],
+    "physiqueBonusRate": 0.08,
+    "minRealm": 2,
+    "sellPrice": 65
+  },
+  {
+    "id": "core:dragon_iron_fists",
+    "name": "龙象铁拳",
+    "slot": "weapon",
+    "rarity": "epic",
+    "description": "以龙象之力铸就，一拳可碎山岳",
+    "stats": { "atk": 70, "physique": 500, "physiqueDmgReduce": 5 },
+    "techType": ["fist"],
+    "physiqueBonusRate": 0.12,
+    "minRealm": 3,
+    "sellPrice": 220
+  },
+  {
+    "id": "core:bone_finger_ring",
+    "name": "骨制指环",
+    "slot": "weapon",
+    "rarity": "common",
+    "description": "妖兽骨制指环，以指为刃，出指如风",
+    "stats": { "atk": 4, "critRate": 3 },
+    "techType": ["finger"],
+    "minRealm": 0,
+    "sellPrice": 7
+  },
+  {
+    "id": "core:spirit_finger_guard",
+    "name": "灵纹指甲",
+    "slot": "weapon",
+    "rarity": "uncommon",
+    "description": "刻有灵纹的指甲套，暴击时伤害倍增（暴击伤害+10%）",
+    "stats": { "atk": 10, "critRate": 5, "critDmgMultiplier": 0.1 },
+    "techType": ["finger"],
+    "minRealm": 1,
+    "sellPrice": 20
+  },
+  {
+    "id": "core:gold_piercing_ring",
+    "name": "穿金指环",
+    "slot": "weapon",
+    "rarity": "rare",
+    "description": "以金属微丝编织，指尖锋利如剑，破甲入髓（暴击伤害+20%）",
+    "stats": { "atk": 24, "critRate": 8, "critDmgMultiplier": 0.2 },
+    "techType": ["finger"],
+    "minRealm": 2,
+    "sellPrice": 55
+  },
+  {
+    "id": "core:void_finger_claws",
+    "name": "虚空指爪",
+    "slot": "weapon",
+    "rarity": "epic",
+    "description": "虚空铁矿炼制，指法攻击如虚空裂爪（暴击伤害+30%）",
+    "stats": { "atk": 55, "critRate": 12, "critDmgMultiplier": 0.3, "physiqueDmgReduce": 3 },
+    "techType": ["finger"],
+    "minRealm": 3,
+    "sellPrice": 200
+  },
+  {
+    "id": "core:iron_hand_armor",
+    "name": "铁制手甲",
+    "slot": "weapon",
+    "rarity": "common",
+    "description": "粗铁铸造的厚重手甲，攻守兼备",
+    "stats": { "atk": 5, "def": 3, "physique": 20 },
+    "techType": ["fist", "finger"],
+    "minRealm": 0,
+    "sellPrice": 8
+  },
+  {
+    "id": "core:steel_hand_armor",
+    "name": "精钢手甲",
+    "slot": "weapon",
+    "rarity": "uncommon",
+    "description": "精钢锻造，刚柔并济，适合拳指两路",
+    "stats": { "atk": 12, "def": 8, "physique": 60, "physiqueDmgReduce": 1 },
+    "techType": ["fist", "finger"],
+    "minRealm": 1,
+    "sellPrice": 24
+  },
+  {
+    "id": "core:black_iron_gauntlets",
+    "name": "玄铁手甲",
+    "slot": "weapon",
+    "rarity": "rare",
+    "description": "玄铁矿脉所出，重若山岳，体修大成者方可使用",
+    "stats": { "atk": 28, "def": 18, "physique": 180, "physiqueDmgReduce": 3 },
+    "techType": ["fist", "finger"],
+    "minRealm": 2,
+    "sellPrice": 72
+  },
+  {
+    "id": "core:ancient_war_gauntlets",
+    "name": "古战手甲",
+    "slot": "weapon",
+    "rarity": "epic",
+    "description": "远古战修遗物，每一道刻痕皆是战场杀伐之气",
+    "stats": { "atk": 60, "def": 40, "physique": 450, "physiqueDmgReduce": 6 },
+    "techType": ["fist", "finger"],
+    "minRealm": 3,
+    "sellPrice": 235
   }
 ]

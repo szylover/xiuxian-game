@@ -70,6 +70,7 @@ export function recalcStats(player: Player): Player {
         if (s.hp) p.maxHp += s.hp;
         if (s.mp) p.maxMp += s.mp;
         if (s.critRate) p.critRate += s.critRate;
+        if (s.critDmgMultiplier) p.critDmgMultiplier += s.critDmgMultiplier;
         if (s.critResist) p.critResist += s.critResist;
         if (s.moveSpeed) p.moveSpeed += s.moveSpeed;
         // T0059 体修装备加成

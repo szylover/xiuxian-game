@@ -17,5 +17,17 @@
   { "itemId": "core:spirit_crown", "buyPrice": 80, "stock": 1, "regionTags": ["city", "celestial"] },
   { "itemId": "core:spirit_robe", "buyPrice": 110, "stock": 1, "regionTags": ["city", "celestial"] },
   { "itemId": "core:wind_boots", "buyPrice": 90, "stock": 1, "regionTags": ["city", "celestial"] },
-  { "itemId": "core:spirit_ring", "buyPrice": 100, "stock": 1, "regionTags": ["city", "celestial"] }
+  { "itemId": "core:spirit_ring", "buyPrice": 100, "stock": 1, "regionTags": ["city", "celestial"] },
+  { "itemId": "core:iron_fist_gloves", "buyPrice": 20, "stock": 3, "regionTags": ["town", "safe"] },
+  { "itemId": "core:bone_finger_ring", "buyPrice": 18, "stock": 3, "regionTags": ["town", "safe"] },
+  { "itemId": "core:iron_hand_armor", "buyPrice": 22, "stock": 3, "regionTags": ["town", "safe"] },
+  { "itemId": "core:bronze_gauntlets", "buyPrice": 60, "stock": 2, "regionTags": ["city", "celestial"] },
+  { "itemId": "core:spirit_finger_guard", "buyPrice": 55, "stock": 2, "regionTags": ["city", "celestial"] },
+  { "itemId": "core:steel_hand_armor", "buyPrice": 65, "stock": 2, "regionTags": ["city", "celestial"] },
+  { "itemId": "core:jade_fist_gloves", "buyPrice": 180, "stock": 1, "regionTags": ["city", "celestial"] },
+  { "itemId": "core:gold_piercing_ring", "buyPrice": 160, "stock": 1, "regionTags": ["city", "celestial"] },
+  { "itemId": "core:black_iron_gauntlets", "buyPrice": 200, "stock": 1, "regionTags": ["city", "celestial"] },
+  { "itemId": "core:dragon_iron_fists", "buyPrice": 600, "stock": 1, "regionTags": ["celestial"] },
+  { "itemId": "core:void_finger_claws", "buyPrice": 550, "stock": 1, "regionTags": ["celestial"] },
+  { "itemId": "core:ancient_war_gauntlets", "buyPrice": 650, "stock": 1, "regionTags": ["celestial"] }
 ]
