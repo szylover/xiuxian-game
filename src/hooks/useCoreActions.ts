@@ -212,7 +212,7 @@ export function useCoreActions(deps: CoreActionDeps) {
         const battleUnlock = tryBattleUnlock(p, monster.id);
         if (battleUnlock.triggered) {
           p = battleUnlock.player;
-          // 战斗解锁日志将通过 loot 展示，不走 queueLog
+          loot.push({ icon: '🎆', name: '瓶颈突破！道心通畅', amount: 0 });
         }
 
         if (Math.random() < 0.3) {
