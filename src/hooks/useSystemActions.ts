@@ -16,6 +16,7 @@ import { learnTechnique, practiceTechnique, activateTechnique } from '../game/te
 import { learnDivineArt as learnDivineArtFn, activateDivineArt as activateDivineArtFn, deactivateDivineArt as deactivateDivineArtFn } from '../game/divine-arts';
 import { travelTo as travelToFn } from '../game/map';
 import { tryBodyRealmBreakthrough } from '../game/body-cultivation';
+import { meetNpc as meetNpcFn, giveGift as giveGiftFn } from '../game/npc';
 import { recalcStats } from '../game/player';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
 import { getEquipDef, getTechniqueDef } from '../game/registry';
@@ -177,6 +178,19 @@ export function useSystemActions(deps: SystemActionDeps) {
     });
   }, [execAction]);
 
+  // ── T0025: NPC 邂逅 ──
+  const meetNpc = useCallback((npcId: string) => {
+    execAction(p => meetNpcFn(p, npcId));
+  }, [execAction]);
+
+  // ── T0025: NPC 赠礼 ──
+  const giveGift = useCallback((npcId: string, itemId: string) => {
+    execAction(p => {
+      const result = giveGiftFn(p, npcId, itemId);
+      return { player: result.player, message: result.message };
+    });
+  }, [execAction]);
+
   return {
     useItem: useItemAction,
     craft,
@@ -194,5 +208,7 @@ export function useSystemActions(deps: SystemActionDeps) {
     deactivateDivineArt,
     travel,
     bodyBreakthrough,
+    meetNpc,
+    giveGift,
   };
 }

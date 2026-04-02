@@ -29,6 +29,28 @@
 - PR 合并策略：squash merge
 - **文档归文档，代码归代码**：纯文档变更（`docs/`、`.github/` 下的 spec/task/roadmap 等）和代码变更（`src/`）必须在**不同的分支和 PR** 中提交，禁止混在同一个 PR 里。例如：@PM 产出的 Design Spec + 任务文件 + roadmap 更新走一个 `chore/` 分支；@Dev 的代码实现走另一个 `feat/` 分支。
 
+### 多任务并行开发（Git Worktree）
+
+本地同时开发多个任务时，使用 `git worktree` 让不同 session/分支互不影响：
+
+```bash
+# 在主仓库旁创建 worktree，检出目标分支
+git worktree add ../xiuxian-T0064 feat/T0064-bottleneck
+git worktree add ../xiuxian-T0065 feat/T0065-text-centralization
+
+# 目录结构：
+# /home/user/xiuxian-game        → main（主 worktree）
+# /home/user/xiuxian-T0064       → feat/T0064-bottleneck
+# /home/user/xiuxian-T0065       → feat/T0065-text-centralization
+```
+
+**注意事项：**
+- 每个 worktree 需单独 `npm install`（node_modules 不共享）
+- 同一分支不能同时在两个 worktree 检出
+- 多个 worktree 同时启动 dev server 时需指定不同端口：`npx vite --port 5174`
+- 完成后清理：`git worktree remove ../xiuxian-T0064`
+- 查看所有 worktree：`git worktree list`
+
 ### 新会话恢复
 
 ```

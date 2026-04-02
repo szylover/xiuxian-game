@@ -129,7 +129,7 @@ export function createPlayer(options: CreatePlayerOptions): Player {
     gender,
     appearance,
     realmIndex: 0, exp: 0,
-    age: 16, lifespan: 100,
+    age: 16 * 12, lifespan: 100 * 12,
     mood:   options.preview?.mood   ?? randInt(50, 90),
     health: options.preview?.health ?? randInt(80, 100),
     stamina: 100, maxStamina: 100,

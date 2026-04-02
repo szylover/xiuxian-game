@@ -110,6 +110,8 @@ export default function App() {
             onActivateDivineArt={engine.activateDivineArt}
             onDeactivateDivineArt={engine.deactivateDivineArt}
             onTravel={engine.travel}
+            onMeetNpc={engine.meetNpc}
+            onGiveGift={engine.giveGift}
           />
         }
         debug={<>

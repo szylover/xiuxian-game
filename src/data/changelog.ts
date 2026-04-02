@@ -12,6 +12,46 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.4.0',
+    date: '2026-04-02',
+    title: 'NPC 系统（T0025）',
+    items: [
+      '新增 NPC 系统：10 个初始 NPC 分布在各区域，拥有独立的好感度和关系等级',
+      '好感度系统：7 级关系（敌对→冷淡→陌生→相识→友好→至交→知己），受魅力值影响',
+      '赠礼机制：可向 NPC 赠送物品提升好感度，每年每 NPC 限赠 1 次',
+      'NPC 面板：右侧新增 NPC 标签页，支持「当前区域」和「人脉总览」两个视图',
+      'NPC 详情浮窗：查看 NPC 信息、好感度条、交互按钮（交谈/赠礼）',
+      '探索邂逅：探索时有 20% 概率遇见当前区域的 NPC',
+      '年度好感度衰减：跨年时自动衰减（部分 NPC 配置衰减率）',
+      'DLC 扩展支持：NPC 通过 registerDLC() 注册，支持命名空间',
+      'Debug 面板新增 NPC 调试 Tab：好感度修改、全部邂逅、批量设置',
+    ],
+  },
+  {
+    version: '1.3.3',
+    date: '2026-04-02',
+    title: '年龄系统月份化（T0067）',
+    items: [
+      'player.age 从浮点年改为整数月，消除浮点精度问题',
+      '新增 formatAge(months) 工具函数，UI 显示"X岁Y月"格式',
+      '初始年龄 192 月（16岁），基础寿限 1200 月（100年）',
+      '所有境界突破寿限加成、丹药延寿、成就加成统一改为月份',
+      '旧存档自动迁移：_ageInMonths 标志检测，age×12、lifespan×12',
+      'Debug 面板年龄/寿限调整步进改为月份单位',
+    ],
+  },
+  {
+    version: '1.3.2',
+    date: '2026-04-02',
+    title: '数据文件 TS → JSON 迁移（T0066）',
+    items: [
+      '将 core-realms、core-body-config、core-divine-arts、core-bottlenecks 迁移为 JSON + 薄壳 TS loader',
+      '设计突破条件声明式 DSL（field/op/value），由 breakthrough-loader.ts 编译为谓词函数',
+      '将 core-breakthrough 迁移为 JSON + breakthrough-loader.ts 薄壳',
+      '策划/Content Agent 修改数值只需编辑 JSON 文件，无需了解 TypeScript',
+    ],
+  },
+  {
     version: '1.3.1',
     date: '2026-04-02',
     title: '区域事件系统（T0022）',

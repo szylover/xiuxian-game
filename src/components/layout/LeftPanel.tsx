@@ -5,7 +5,7 @@
 import type { Player } from '../../game/player';
 import { REALMS, MONTH_NAMES } from '../../game/data';
 import { getActiveBottlenecks, ensureBottleneckState } from '../../game/bottleneck';
-import { getNextRealm } from '../../game/player';
+import { getNextRealm, formatAge } from '../../game/player';
 import { getNextBodyRealm } from '../../game/body-cultivation';
 import { getBodyRealmDef, getTechniqueDef, getDivineArtDef } from '../../game/registry';
 import { getDivineArtsState } from '../../game/divine-arts';
@@ -117,7 +117,7 @@ export default function LeftPanel({ player, activePanel, onSelectPanel, onExit }
 
         <div className="left-stat-row">
           <span>📅 寿命</span>
-          <span>{Math.floor(player.age)}岁/{player.lifespan === Infinity ? '∞' : player.lifespan}</span>
+          <span>{formatAge(player.age)}/{player.lifespan === Infinity ? '∞' : Math.floor(player.lifespan / 12) + '岁'}</span>
         </div>
 
         <div className="left-stat-row">
