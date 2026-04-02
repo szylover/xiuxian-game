@@ -129,7 +129,7 @@
 | [T0036](https://github.com/szylover/xiuxian-game/issues/106) | PWA 支持 | T0035 | — | ✅ |
 | [T0037](https://github.com/szylover/xiuxian-game/issues/107) | 音效系统 | — | — | ⬜ |
 | [T0038](https://github.com/szylover/xiuxian-game/issues/108) | 多存档 | — | — | ✅ |
-| [T0066](https://github.com/szylover/xiuxian-game/issues/139) | 数据文件 TS→JSON 迁移 | — | — | ⬜ |
+| [T0066](https://github.com/szylover/xiuxian-game/issues/139) | 数据文件 TS→JSON 迁移 | — | — | ✅ |
 | [T0039](https://github.com/szylover/xiuxian-game/issues/109) | 新手引导 | T0001 | — | ⬜ |
 | [T0059b](https://github.com/szylover/xiuxian-game/issues/90) | 数据懒加载 & Bundle 分割 | — | [spec](specs/T0059-data-lazy-loading.md) | ✅ |
 
