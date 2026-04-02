@@ -568,7 +568,7 @@
     "maxStack": 3,
     "usable": true,
     "effects": {
-      "lifespan": 50
+      "lifespan": 600
     },
     "effectMessage": "💊 服下延寿丹，寿限延长 50 年。",
     "sellPrice": 300

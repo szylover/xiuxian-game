@@ -53,8 +53,8 @@ export interface Player {
   avatar: string;
   realmIndex: number;
   exp: number;
-  age: number;
-  lifespan: number;
+  age: number;                             // T0067 年龄（整数月）
+  lifespan: number;                        // T0067 寿限（整数月）
   mood: number;
   health: number;
   stamina: number;

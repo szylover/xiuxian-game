@@ -120,7 +120,7 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
     newYear += Math.floor((newMonth - 1) / 12);
     newMonth = ((newMonth - 1) % 12) + 1;
   }
-  p.age = p.age + 1 / 12;
+  p.age = p.age + 1;
   p.gameMonth = newMonth;
   p.gameYear = newYear;
 
