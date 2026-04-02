@@ -86,7 +86,6 @@ export function useSystemActions(deps: SystemActionDeps) {
   const breakthrough = useCallback(() => {
     if (!player) return;
 
-    // 直接基于当前 player 计算结果，不使用 updater 函数
     const btResult = attemptBreakthroughFn(player);
     let finalPlayer = btResult.player;
     const allLogs = [...btResult.logs];
@@ -104,7 +103,13 @@ export function useSystemActions(deps: SystemActionDeps) {
 
     setPlayer(finalPlayer);
     for (const log of allLogs) {
-      addLog(log, 'system');
+      addLog(log, btResult.blockedByBottleneck ? 'adventure' : 'system');
+    }
+    // 突破失败额外提示
+    if (!btResult.success && !btResult.triggerTribulation) {
+      if (btResult.blockedByBottleneck) {
+        addLog('💡 提示：可通过战斗击杀指定妖兽、探索触发顿悟、或坚持修炼来突破瓶颈。', 'system');
+      }
     }
   }, [player, addLog, setPlayer, setGameOver, setGameOverReason]);
 
