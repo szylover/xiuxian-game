@@ -17,18 +17,12 @@ import DivineArtsPanel from '../panels/DivineArtsPanel';
 import AchievementPanel from '../panels/AchievementPanel';
 import MapPanel from '../panels/MapPanel';
 import NpcPanel from '../panels/NpcPanel';
+import { UI_LABELS } from '../../data/texts/ui-labels';
 
 // 'status' panel is rendered by LeftPanel, so excluded from this config
-const PANEL_CONFIG: Partial<Record<PanelKey, { title: string; icon: string; width?: number }>> = {
-  inventory: { title: '背包', icon: '🎒', width: 380 },
-  shop:      { title: '商店', icon: '🏪', width: 380 },
-  technique: { title: '功法', icon: '📖', width: 400 },
-  divine:    { title: '神通', icon: '✨', width: 420 },
-  crafting:  { title: '炼制', icon: '🔥', width: 380 },
-  equipment: { title: '装备', icon: '⚔️', width: 380 },
-  achievement: { title: '成就', icon: '🏆', width: 420 },
-  map:       { title: '世界地图', icon: '🗺️', width: 420 },
-  npc:       { title: 'NPC', icon: '👥', width: 380 },
+const PANEL_WIDTHS: Partial<Record<PanelKey, number>> = {
+  inventory: 380, shop: 380, technique: 400, divine: 420,
+  crafting: 380, equipment: 380, achievement: 420, map: 420, npc: 380,
 };
 
 interface RightPanelProps {
@@ -62,17 +56,18 @@ export default function RightPanel({
   onMeetNpc, onGiveGift,
 }: RightPanelProps) {
   const closePanel = () => onSelectPanel(activePanel!);
-  const config = activePanel ? PANEL_CONFIG[activePanel] : null;
+  const panelLabel = activePanel ? UI_LABELS.panels[activePanel] : null;
+  const panelWidth = activePanel ? PANEL_WIDTHS[activePanel] : undefined;
 
   return (
     <>
       <PanelButtons player={player} activePanel={activePanel} onSelect={onSelectPanel} />
 
-      {activePanel && config && (
+      {activePanel && panelLabel && (
         <FloatingPanel
-          title={config.title}
-          icon={config.icon}
-          width={config.width}
+          title={panelLabel.title}
+          icon={panelLabel.icon}
+          width={panelWidth}
           onClose={closePanel}
         >
           {activePanel === 'inventory' && <InventoryPanel player={player} onUseItem={onUseItem} />}

@@ -12,6 +12,20 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.5.0',
+    date: '2026-04-02',
+    title: '文案集中管理（T0065）',
+    items: [
+      '新增 src/data/texts/ 文案集中管理模块：18 个文案文件覆盖所有系统',
+      '消除 constants.ts 与 texts/common.ts 之间的重复映射（STAT_CN/SPIRIT_ROOT_CN/COMBO_CN/APTITUDE_CN）',
+      '消除 divine-arts.ts 中 ELEMENT_CN 的独立定义，统一从 texts/common.ts 导入',
+      'hooks 层系统消息迁移：战斗掉落物/瓶颈突破/探索获得等文案集中管理',
+      'UI 标签集中管理：面板标题/分组名/日志筛选/左面板属性标签统一定义在 ui-labels.ts',
+      '组件接入 UI_LABELS：RightPanel/PanelButtons/GameLog/LeftPanel/StatusBar 使用文案引用',
+      '新增通用常量：SEPARATOR（、）、NONE_TEXT（无）、NOT_EQUIPPED（未装备）',
+    ],
+  },
+  {
     version: '1.4.0',
     date: '2026-04-02',
     title: 'NPC 系统（T0025）',
