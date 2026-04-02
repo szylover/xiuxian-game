@@ -12,6 +12,17 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.3.2',
+    date: '2026-04-02',
+    title: '数据文件 TS → JSON 迁移（T0066）',
+    items: [
+      '将 core-realms、core-body-config、core-divine-arts、core-bottlenecks 迁移为 JSON + 薄壳 TS loader',
+      '设计突破条件声明式 DSL（field/op/value），由 breakthrough-loader.ts 编译为谓词函数',
+      '将 core-breakthrough 迁移为 JSON + breakthrough-loader.ts 薄壳',
+      '策划/Content Agent 修改数值只需编辑 JSON 文件，无需了解 TypeScript',
+    ],
+  },
+  {
     version: '1.3.1',
     date: '2026-04-02',
     title: '区域事件系统（T0022）',
