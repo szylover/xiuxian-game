@@ -5,7 +5,7 @@
 import type { Player } from '../../game/player';
 import { UI_LABELS } from '../../data/texts/ui-labels';
 
-export type PanelKey = 'inventory' | 'shop' | 'crafting' | 'equipment' | 'technique' | 'divine' | 'achievement' | 'map' | 'npc' | 'status';
+export type PanelKey = 'inventory' | 'shop' | 'crafting' | 'equipment' | 'technique' | 'divine' | 'achievement' | 'map' | 'npc' | 'quest' | 'status';
 
 interface PanelDef {
   key: PanelKey;
@@ -49,6 +49,7 @@ const PANEL_GROUPS: PanelGroup[] = [
     panels: [
       { key: 'map', icon: p.map.icon, label: p.map.title },
       { key: 'npc', icon: p.npc.icon, label: p.npc.title },
+      { key: 'quest', icon: p.quest.icon, label: p.quest.title },
     ],
   },
 ];

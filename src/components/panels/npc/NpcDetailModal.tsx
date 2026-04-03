@@ -7,7 +7,10 @@ import type { Player } from '../../../game/player';
 import type { NpcDef, NpcRelationLevel } from '../../../game/types';
 import { REALMS } from '../../../game/data';
 import { getRelation, getNpcState, GIFT_CD } from '../../../game/npc';
+import { getQuestsForNpc } from '../../../game/quest';
 import { NPC_RELATION_CN, NPC_RELATION_COLORS, NPC_RELATION_EMOJI, NPC_PERSONALITY_CN } from '../../shared/constants';
+import { QUEST_TEXTS } from '../../../data/texts/quest';
+import QuestRewardPreview from '../quest/QuestRewardPreview';
 import GiftModal from './GiftModal';
 
 interface NpcDetailModalProps {
@@ -16,9 +19,11 @@ interface NpcDetailModalProps {
   onClose: () => void;
   onMeet: (npcId: string) => void;
   onGift: (npcId: string, itemId: string) => void;
+  onAcceptQuest: (questId: string) => void;
+  onTurnInQuest: (questId: string) => void;
 }
 
-export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift }: NpcDetailModalProps) {
+export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift, onAcceptQuest, onTurnInQuest }: NpcDetailModalProps) {
   const [showGiftModal, setShowGiftModal] = useState(false);
   const [chatMsg, setChatMsg] = useState<string | null>(null);
 
@@ -53,6 +58,8 @@ export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift }:
     if (!rel.met) return;
     const lines = CHAT_LINES[npc.personality] ?? ['「你好。」'];
     setChatMsg(lines[Math.floor(Math.random() * lines.length)]);
+    // T0067: 交谈也触发 NPC 交互（推进任务目标 + 发现任务）
+    onMeet(npc.id);
   };
 
   return (
@@ -113,6 +120,39 @@ export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift }:
               {npc.emoji} {npc.name}：{chatMsg}
             </div>
           )}
+
+          {/* 📜 任务区域 */}
+          {(() => {
+            const { available, pendingTurnIn } = getQuestsForNpc(player, npc.id);
+            if (available.length === 0 && pendingTurnIn.length === 0) return null;
+            return (
+              <div style={{ marginBottom: '0.5rem', borderTop: '1px solid #444', paddingTop: '0.5rem' }}>
+                <div style={{ fontSize: '0.82rem', color: '#e6d9a8', fontWeight: 'bold', marginBottom: '0.3rem' }}>
+                  {QUEST_TEXTS.npcQuestsTitle}
+                </div>
+                {pendingTurnIn.map(({ def }) => (
+                  <div key={def.id} style={{ background: '#1a2a1a', border: '1px solid #4a4', borderRadius: 4, padding: '0.4rem', marginBottom: '0.3rem' }}>
+                    <div style={{ fontSize: '0.8rem', color: '#8f8' }}>{def.icon} {def.name} ✅</div>
+                    <div style={{ fontSize: '0.72rem', color: '#aaa' }}>{def.description}</div>
+                    <QuestRewardPreview reward={def.rewards} />
+                    <button className="btn btn-sm btn-primary" onClick={() => onTurnInQuest(def.id)} style={{ marginTop: '0.3rem', fontSize: '0.75rem' }}>
+                      {QUEST_TEXTS.npcQuestTurnIn}
+                    </button>
+                  </div>
+                ))}
+                {available.map(def => (
+                  <div key={def.id} style={{ background: '#252540', border: '1px solid #555', borderRadius: 4, padding: '0.4rem', marginBottom: '0.3rem' }}>
+                    <div style={{ fontSize: '0.8rem', color: '#e6d9a8' }}>{def.icon} {def.name}</div>
+                    <div style={{ fontSize: '0.72rem', color: '#aaa' }}>{def.description}</div>
+                    <QuestRewardPreview reward={def.rewards} />
+                    <button className="btn btn-sm btn-primary" onClick={() => onAcceptQuest(def.id)} style={{ marginTop: '0.3rem', fontSize: '0.75rem' }}>
+                      {QUEST_TEXTS.npcQuestAccept}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
 
           {/* 交互按钮 */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginTop: '0.5rem' }}>

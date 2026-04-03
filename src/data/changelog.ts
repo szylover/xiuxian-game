@@ -12,6 +12,21 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.7.0',
+    date: '2026-04-03',
+    title: 'WoW 风格任务面板（T0067）',
+    items: [
+      '新增任务面板 UI：三标签页（进行中/已发现/已完成）+ 追踪器',
+      'WoW 风格任务发现：通过 NPC 交谈接取任务，完成后回 NPC 处交付',
+      '任务交付流程：目标完成后进入 pending_turnin 状态，回 NPC 点交付获得奖励',
+      'NPC 任务标记：📜 可接任务 / ❓ 可交付任务',
+      'NPC 详情弹窗集成任务接取/交付 UI',
+      '可重复任务冷却机制（repeatCooldown）',
+      '奖励日志合并为单行摘要格式',
+      '交付提示显示目标 NPC 名字',
+    ],
+  },
+  {
     version: '1.6.0',
     date: '2026-04-03',
     title: '任务链系统（T0057）',

@@ -7,9 +7,9 @@
 import type { Player } from './player';
 import type {
   QuestChainDef, QuestChainProgress, QuestSystemState,
-  QuestObjectiveProgress, QuestTrigger, QuestReward,
+  QuestObjectiveProgress, QuestTrigger, QuestReward, QuestStatus,
 } from './types';
-import { getQuestChainDef, getAllQuestChainDefs, getItemDef } from './registry';
+import { getQuestChainDef, getAllQuestChainDefs, getItemDef, getNpcDef } from './registry';
 import { hasItem, removeItem, addItem } from './inventory';
 import { getCurrentRegion } from './map';
 import { getRelation } from './npc';
@@ -23,6 +23,8 @@ const DEFAULT_QUEST_STATE: QuestSystemState = {
   completedQuests: {},
   failedQuests: {},
   abandonedQuests: [],
+  discoveredQuests: [],
+  trackedQuestId: undefined,
   actionCounters: { explore: 0, cultivate: 0, combat: 0 },
 };
 
@@ -30,13 +32,15 @@ const DEFAULT_QUEST_STATE: QuestSystemState = {
 
 export function getQuestState(player: Player): QuestSystemState {
   const s = player.systems['quest'];
-  if (!s || typeof s !== 'object') return { ...DEFAULT_QUEST_STATE, activeQuests: {}, completedQuests: {}, failedQuests: {}, abandonedQuests: [], actionCounters: { explore: 0, cultivate: 0, combat: 0 } };
+  if (!s || typeof s !== 'object') return { ...DEFAULT_QUEST_STATE, activeQuests: {}, completedQuests: {}, failedQuests: {}, abandonedQuests: [], discoveredQuests: [], trackedQuestId: undefined, actionCounters: { explore: 0, cultivate: 0, combat: 0 } };
   const state = s as Partial<QuestSystemState>;
   return {
     activeQuests: state.activeQuests ?? {},
     completedQuests: state.completedQuests ?? {},
     failedQuests: state.failedQuests ?? {},
     abandonedQuests: state.abandonedQuests ?? [],
+    discoveredQuests: state.discoveredQuests ?? [],
+    trackedQuestId: state.trackedQuestId,
     actionCounters: state.actionCounters ?? { explore: 0, cultivate: 0, combat: 0 },
   };
 }
@@ -98,8 +102,14 @@ export function getAvailableQuests(player: Player): QuestChainDef[] {
   return all.filter(def => {
     // Already active
     if (state.activeQuests[def.id]) return false;
-    // Already completed (and not repeatable)
-    if (state.completedQuests[def.id] && !def.repeatable) return false;
+    // Already completed (and not repeatable, or cooldown not elapsed)
+    if (state.completedQuests[def.id]) {
+      if (!def.repeatable) return false;
+      if (def.repeatCooldown && def.repeatCooldown > 0) {
+        const elapsed = player.age - state.completedQuests[def.id].completedAt;
+        if (elapsed < def.repeatCooldown) return false;
+      }
+    }
     // Check condition
     return checkQuestCondition(player, def);
   });
@@ -107,7 +117,7 @@ export function getAvailableQuests(player: Player): QuestChainDef[] {
 
 export function getActiveQuests(player: Player): QuestChainProgress[] {
   const state = getQuestState(player);
-  return Object.values(state.activeQuests).filter(q => q.status === 'active');
+  return Object.values(state.activeQuests).filter(q => q.status === 'active' || q.status === 'pending_turnin');
 }
 
 export function getCompletedQuests(player: Player): string[] {
@@ -171,6 +181,10 @@ export function acceptQuest(player: Player, questId: string): { player: Player; 
   const state = getQuestState(player);
   if (state.activeQuests[questId]) return { player, logs: [QUEST_TEXTS.alreadyAccepted] };
   if (state.completedQuests[questId] && !def.repeatable) return { player, logs: [QUEST_TEXTS.alreadyAccepted] };
+  if (state.completedQuests[questId] && def.repeatable && def.repeatCooldown) {
+    const elapsed = player.age - state.completedQuests[questId].completedAt;
+    if (elapsed < def.repeatCooldown) return { player, logs: [QUEST_TEXTS.alreadyAccepted] };
+  }
 
   const progress: QuestChainProgress = {
     questId,
@@ -185,6 +199,7 @@ export function acceptQuest(player: Player, questId: string): { player: Player; 
   const newState: QuestSystemState = {
     ...state,
     activeQuests: { ...state.activeQuests, [questId]: progress },
+    discoveredQuests: state.discoveredQuests.filter(id => id !== questId),
   };
 
   let p = setQuestState(player, newState);
@@ -283,21 +298,28 @@ function checkStepCompletion(player: Player, questId: string): { player: Player;
   const logs: string[] = [];
   const step = def.steps[progress.currentStepIndex];
 
-  // Step completed
-  logs.push(QUEST_TEXTS.stepComplete(def.name, step.name));
-
   // Apply step rewards
   const { player: p2, logs: rewardLogs } = applyReward(p, step.rewards);
   p = p2;
-  logs.push(...rewardLogs);
+  // Step completed — single summary line with rewards
+  logs.push(QUEST_TEXTS.stepRewardSummary(def.name, step.name, rewardLogs));
 
-  // Advance to next step or complete
+  // Advance to next step or mark pending turn-in
   const nextStepIndex = progress.currentStepIndex + 1;
   if (nextStepIndex >= def.steps.length) {
-    // Quest complete
-    const { player: p3, logs: completeLogs } = completeQuest(p, questId);
-    p = p3;
-    logs.push(...completeLogs);
+    if (def.turnInNpcId) {
+      // All steps done — mark as pending turn-in (don't give chain rewards yet)
+      const newProgress: QuestChainProgress = { ...progress, status: 'pending_turnin' as QuestStatus, completedSteps: [...progress.completedSteps, progress.currentStepIndex] };
+      const newState: QuestSystemState = { ...getQuestState(p), activeQuests: { ...getQuestState(p).activeQuests, [questId]: newProgress } };
+      p = setQuestState(p, newState);
+      const turnInNpc = getNpcDef(def.turnInNpcId!);
+      logs.push(QUEST_TEXTS.readyToTurnIn(def.name, turnInNpc?.name ?? '???'));
+    } else {
+      // No turn-in NPC — complete immediately
+      const { player: p3, logs: completeLogs } = completeQuest(p, questId);
+      p = p3;
+      logs.push(...completeLogs);
+    }
   } else {
     // Advance step
     const newProgress: QuestChainProgress = {
@@ -331,12 +353,12 @@ function completeQuest(player: Player, questId: string): { player: Player; logs:
   if (!def) return { player, logs: [] };
 
   const state = getQuestState(player);
-  const logs: string[] = [QUEST_TEXTS.questComplete(def.name)];
 
   // Apply chain rewards
   const { player: p2, logs: rewardLogs } = applyReward(player, def.rewards);
   let p = p2;
-  logs.push(...rewardLogs);
+  // Single summary line with all rewards
+  const logs: string[] = [QUEST_TEXTS.questCompleteSummary(def.name, rewardLogs)];
 
   // Move from active to completed
   const { [questId]: _, ...restActive } = state.activeQuests;
@@ -355,16 +377,10 @@ function completeQuest(player: Player, questId: string): { player: Player; logs:
   };
   p = setQuestState(p, newState);
 
-  // Check if completing this quest unlocked new quests
-  const newlyAvailable = getAvailableQuests(p);
-  if (newlyAvailable.length > 0) {
-    const hasAutoAccept = newlyAvailable.some(d => d.autoAccept);
-    const hasManual = newlyAvailable.some(d => !d.autoAccept);
-    // Auto-accept ones will be picked up by checkAutoAcceptQuests in next tick
-    if (hasManual && !hasAutoAccept) {
-      logs.push(QUEST_TEXTS.newQuestAvailable);
-    }
-  }
+  // Check if completing this quest triggers discovery of new quests
+  const { player: p3, logs: discoveryLogs } = checkQuestDiscovery(p, { type: 'quest_complete', questId });
+  p = p3;
+  logs.push(...discoveryLogs);
 
   return { player: p, logs };
 }
@@ -556,34 +572,223 @@ function failQuest(player: Player, questId: string, reason: string): { player: P
   return { player: p, logs: [QUEST_TEXTS.questFailed(def.name, reason)] };
 }
 
-// ── 自动接取检查 ──
+// ── 任务发现系统 ──
 
-export function checkAutoAcceptQuests(player: Player): { player: Player; logs: string[] } {
-  const available = getAvailableQuests(player);
+export function discoverQuest(player: Player, questId: string): { player: Player; logs: string[] } {
+  const def = getQuestChainDef(questId);
+  if (!def) return { player, logs: [] };
+
+  const state = getQuestState(player);
+  if (state.discoveredQuests.includes(questId)) return { player, logs: [] };
+  if (state.activeQuests[questId]) return { player, logs: [] };
+
+  const newState: QuestSystemState = {
+    ...state,
+    discoveredQuests: [...state.discoveredQuests, questId],
+  };
+
+  const p = setQuestState(player, newState);
+  return { player: p, logs: [QUEST_TEXTS.discovered(def.name)] };
+}
+
+// ── 交付任务 ──
+
+export function turnInQuest(player: Player, questId: string): { player: Player; logs: string[] } {
+  const state = getQuestState(player);
+  const progress = state.activeQuests[questId];
+  if (!progress || progress.status !== 'pending_turnin') {
+    return { player, logs: [QUEST_TEXTS.questNotActive] };
+  }
+
+  const def = getQuestChainDef(questId);
+  if (!def) return { player, logs: [QUEST_TEXTS.questNotFound] };
+
+  // Complete the quest (gives chain rewards + moves to completedQuests)
+  const { player: p2, logs } = completeQuest(player, questId);
+  return { player: p2, logs };
+}
+
+// ── NPC 任务查询 ──
+
+export function getQuestsForNpc(player: Player, npcId: string): {
+  available: QuestChainDef[];
+  pendingTurnIn: { def: QuestChainDef; progress: QuestChainProgress }[];
+} {
+  const state = getQuestState(player);
+  const all = getAllQuestChainDefs();
+
+  // Available: not yet discovered/active/completed(non-repeatable), condition met, discoverSource.npcId matches
+  const available = all.filter(def => {
+    if (def.discoverSource.type !== 'npc') return false;
+    if (def.discoverSource.npcId !== npcId) return false;
+    if (state.discoveredQuests.includes(def.id)) return false;
+    if (state.activeQuests[def.id]) return false;
+    if (state.completedQuests[def.id]) {
+      if (!def.repeatable) return false;
+      if (def.repeatCooldown && def.repeatCooldown > 0) {
+        const elapsed = player.age - state.completedQuests[def.id].completedAt;
+        if (elapsed < def.repeatCooldown) return false;
+      }
+    }
+    return checkQuestCondition(player, def);
+  });
+
+  // Pending turn-in: status is 'pending_turnin' AND turnInNpcId matches
+  const pendingTurnIn: { def: QuestChainDef; progress: QuestChainProgress }[] = [];
+  for (const [qId, progress] of Object.entries(state.activeQuests)) {
+    if (progress.status !== 'pending_turnin') continue;
+    const def = getQuestChainDef(qId);
+    if (!def || def.turnInNpcId !== npcId) continue;
+    pendingTurnIn.push({ def, progress });
+  }
+
+  return { available, pendingTurnIn };
+}
+
+export function checkQuestDiscovery(player: Player, trigger: QuestTrigger): { player: Player; logs: string[] } {
+  const all = getAllQuestChainDefs();
+  const state = getQuestState(player);
   let p = player;
   const logs: string[] = [];
 
-  for (const def of available) {
-    if (def.autoAccept) {
-      const { player: p2, logs: acceptLogs } = acceptQuest(p, def.id);
-      p = p2;
-      // Replace accepted log with auto-accepted version
-      logs.push(QUEST_TEXTS.autoAccepted(def.name));
-      // Keep dialogue logs
-      for (const log of acceptLogs) {
-        if (log.startsWith('💬')) logs.push(log);
+  for (const def of all) {
+    const currentState = getQuestState(p);
+    if (currentState.discoveredQuests.includes(def.id)) continue;
+    if (currentState.activeQuests[def.id]) continue;
+    if (currentState.completedQuests[def.id]) {
+      if (!def.repeatable) continue;
+      if (def.repeatCooldown && def.repeatCooldown > 0) {
+        const elapsed = p.age - currentState.completedQuests[def.id].completedAt;
+        if (elapsed < def.repeatCooldown) continue;
       }
     }
-  }
 
-  // Only notify about new non-autoAccept quests when something was auto-accepted
-  // (meaning a state change happened that could have unlocked them)
-  if (logs.length > 0) {
-    const newAvailable = getAvailableQuests(p).filter(d => !d.autoAccept);
-    if (newAvailable.length > 0) {
-      logs.push(QUEST_TEXTS.newQuestAvailable);
+    if (!checkQuestCondition(p, def)) continue;
+
+    const ds = def.discoverSource;
+    if (!ds) continue;
+    let discovered = false;
+
+    switch (ds.type) {
+      case 'npc':
+        if (trigger.type === 'talk_npc' && trigger.npcId === ds.npcId) discovered = true;
+        break;
+      case 'exploration':
+        if (trigger.type === 'explore' && Math.random() < (ds.chance ?? 1)) discovered = true;
+        break;
+      case 'combat_drop':
+        if (trigger.type === 'kill_monster' && trigger.monsterId === ds.monsterId && Math.random() < (ds.chance ?? 1)) discovered = true;
+        break;
+      case 'region_enter':
+        if (trigger.type === 'reach_region' && trigger.regionId === ds.regionId) discovered = true;
+        break;
+      case 'realm_reach':
+        if (trigger.type === 'reach_realm' && trigger.realmIndex >= ds.realmIndex) discovered = true;
+        break;
+      case 'quest_complete':
+        if (trigger.type === 'quest_complete' && trigger.questId === ds.questId) discovered = true;
+        break;
+      case 'auto':
+        discovered = true;
+        break;
+    }
+
+    if (discovered) {
+      const { player: p2, logs: dLogs } = discoverQuest(p, def.id);
+      p = p2;
+      logs.push(...dLogs);
     }
   }
 
   return { player: p, logs };
+}
+
+export function getDiscoveredQuests(player: Player): QuestChainDef[] {
+  const state = getQuestState(player);
+  return state.discoveredQuests
+    .map(id => getQuestChainDef(id))
+    .filter((d): d is QuestChainDef => !!d);
+}
+
+export function setTrackedQuest(player: Player, questId: string | null): Player {
+  const state = getQuestState(player);
+  return setQuestState(player, { ...state, trackedQuestId: questId ?? undefined });
+}
+
+export function getTrackedQuestInfo(player: Player): { def: QuestChainDef; progress: QuestChainProgress } | null {
+  const state = getQuestState(player);
+  if (!state.trackedQuestId) return null;
+  const progress = state.activeQuests[state.trackedQuestId];
+  if (!progress || (progress.status !== 'active' && progress.status !== 'pending_turnin')) return null;
+  const def = getQuestChainDef(state.trackedQuestId);
+  if (!def) return null;
+  return { def, progress };
+}
+
+// ── 调试辅助 ──
+
+export function forceDiscoverQuest(player: Player, questId: string): Player {
+  const state = getQuestState(player);
+  if (state.discoveredQuests.includes(questId)) return player;
+  return setQuestState(player, { ...state, discoveredQuests: [...state.discoveredQuests, questId] });
+}
+
+export function forceAcceptQuest(player: Player, questId: string): { player: Player; logs: string[] } {
+  const p = forceDiscoverQuest(player, questId);
+  return acceptQuest(p, questId);
+}
+
+export function forceCompleteStep(player: Player, questId: string): { player: Player; logs: string[] } {
+  const state = getQuestState(player);
+  const progress = state.activeQuests[questId];
+  if (!progress || progress.status !== 'active') return { player, logs: [QUEST_TEXTS.questNotActive] };
+  const def = getQuestChainDef(questId);
+  if (!def) return { player, logs: [QUEST_TEXTS.questNotFound] };
+
+  const newObjProgress = progress.objectiveProgress.map(o => ({ ...o, completed: true, currentCount: def.steps[progress.currentStepIndex].objectives[o.objectiveIndex]?.count ?? 1 }));
+  const newProgress: QuestChainProgress = { ...progress, objectiveProgress: newObjProgress };
+  const newState: QuestSystemState = { ...state, activeQuests: { ...state.activeQuests, [questId]: newProgress } };
+  let p = setQuestState(player, newState);
+  return checkStepCompletion(p, questId);
+}
+
+export function forceCompleteQuest(player: Player, questId: string): { player: Player; logs: string[] } {
+  const def = getQuestChainDef(questId);
+  if (!def) return { player, logs: [QUEST_TEXTS.questNotFound] };
+  // Ensure quest is active first
+  let p = player;
+  const state = getQuestState(p);
+  if (!state.activeQuests[questId]) {
+    const { player: p2 } = forceAcceptQuest(p, questId);
+    p = p2;
+  }
+  // Complete all remaining steps
+  let allLogs: string[] = [];
+  for (let i = 0; i < def.steps.length; i++) {
+    const curState = getQuestState(p);
+    if (!curState.activeQuests[questId]) break; // Already completed
+    const { player: p2, logs } = forceCompleteStep(p, questId);
+    p = p2;
+    allLogs.push(...logs);
+  }
+  return { player: p, logs: allLogs };
+}
+
+export function resetQuest(player: Player, questId: string): Player {
+  const state = getQuestState(player);
+  const { [questId]: _a, ...restActive } = state.activeQuests;
+  const { [questId]: _c, ...restCompleted } = state.completedQuests;
+  const { [questId]: _f, ...restFailed } = state.failedQuests;
+  return setQuestState(player, {
+    ...state,
+    activeQuests: restActive,
+    completedQuests: restCompleted,
+    failedQuests: restFailed,
+    abandonedQuests: state.abandonedQuests.filter(id => id !== questId),
+    discoveredQuests: state.discoveredQuests.filter(id => id !== questId),
+  });
+}
+
+export function clearAllQuestData(player: Player): Player {
+  return setQuestState(player, { ...DEFAULT_QUEST_STATE });
 }

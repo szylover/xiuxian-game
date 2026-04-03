@@ -17,12 +17,14 @@ import DivineArtsPanel from '../panels/DivineArtsPanel';
 import AchievementPanel from '../panels/AchievementPanel';
 import MapPanel from '../panels/MapPanel';
 import NpcPanel from '../panels/NpcPanel';
+import QuestPanel from '../panels/QuestPanel';
 import { UI_LABELS } from '../../data/texts/ui-labels';
 
 // 'status' panel is rendered by LeftPanel, so excluded from this config
 const PANEL_WIDTHS: Partial<Record<PanelKey, number>> = {
   inventory: 380, shop: 380, technique: 400, divine: 420,
   crafting: 380, equipment: 380, achievement: 420, map: 420, npc: 380,
+  quest: 400,
 };
 
 interface RightPanelProps {
@@ -45,6 +47,11 @@ interface RightPanelProps {
   onTravel: (regionId: string) => void;
   onMeetNpc: (npcId: string) => void;
   onGiveGift: (npcId: string, itemId: string) => void;
+  onAcceptQuest: (questId: string) => void;
+  onAbandonQuest: (questId: string) => void;
+  onDeliverQuestItem: (questId: string, objectiveIndex: number) => void;
+  onTrackQuest: (questId: string | null) => void;
+  onTurnInQuest: (questId: string) => void;
 }
 
 export default function RightPanel({
@@ -54,6 +61,8 @@ export default function RightPanel({
   onLearnDivineArt, onActivateDivineArt, onDeactivateDivineArt,
   onTravel,
   onMeetNpc, onGiveGift,
+  onAcceptQuest, onAbandonQuest, onDeliverQuestItem, onTrackQuest,
+  onTurnInQuest,
 }: RightPanelProps) {
   const closePanel = () => onSelectPanel(activePanel!);
   const panelLabel = activePanel ? UI_LABELS.panels[activePanel] : null;
@@ -78,7 +87,8 @@ export default function RightPanel({
           {activePanel === 'equipment' && <EquipmentPanel player={player} onEquip={onEquip} onUnequip={onUnequip} />}
           {activePanel === 'achievement' && <AchievementPanel player={player} />}
           {activePanel === 'map' && <MapPanel player={player} onTravel={onTravel} />}
-          {activePanel === 'npc' && <NpcPanel player={player} onMeetNpc={onMeetNpc} onGiveGift={onGiveGift} />}
+          {activePanel === 'npc' && <NpcPanel player={player} onMeetNpc={onMeetNpc} onGiveGift={onGiveGift} onAcceptQuest={onAcceptQuest} onTurnInQuest={onTurnInQuest} />}
+          {activePanel === 'quest' && <QuestPanel player={player} onAcceptQuest={onAcceptQuest} onAbandonQuest={onAbandonQuest} onDeliverQuestItem={onDeliverQuestItem} onTrackQuest={onTrackQuest} />}
         </FloatingPanel>
       )}
     </>

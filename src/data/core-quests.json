@@ -6,8 +6,7 @@
     "icon": "⚔️",
     "category": "main",
     "condition": {
-      "minRealm": 0,
-      "regionTags": ["beginner"]
+      "minRealm": 0
     },
     "steps": [
       {
@@ -61,7 +60,8 @@
         { "itemId": "core:hp_pill", "count": 5 }
       ]
     },
-    "autoAccept": true,
+    "discoverSource": { "type": "npc", "npcId": "core:npc_gate_guard" },
+    "turnInNpcId": "core:npc_qingyun_elder",
     "repeatable": false
   },
   {
@@ -71,8 +71,7 @@
     "icon": "🏷️",
     "category": "bounty",
     "condition": {
-      "minRealm": 0,
-      "regionId": "core:qingyun_town"
+      "minRealm": 0
     },
     "steps": [
       {
@@ -95,7 +94,10 @@
         { "itemId": "core:iron_ore", "count": 3 }
       ]
     },
-    "repeatable": true
+    "discoverSource": { "type": "npc", "npcId": "core:npc_beast_hunter" },
+    "turnInNpcId": "core:npc_beast_hunter",
+    "repeatable": true,
+    "repeatCooldown": 1
   },
   {
     "id": "core:quest_elder_wisdom",
@@ -151,7 +153,9 @@
     "rewards": {
       "exp": 60,
       "statBonus": { "comprehension": 2 }
-    }
+    },
+    "discoverSource": { "type": "npc", "npcId": "core:npc_qingyun_elder" },
+    "turnInNpcId": "core:npc_qingyun_elder"
   },
   {
     "id": "core:quest_gather_herbs",
@@ -200,7 +204,9 @@
       "items": [
         { "itemId": "core:hp_pill", "count": 3 }
       ]
-    }
+    },
+    "discoverSource": { "type": "npc", "npcId": "core:npc_herb_master" },
+    "turnInNpcId": "core:npc_market_chen"
   },
   {
     "id": "core:quest_basic_training",
@@ -250,7 +256,8 @@
         { "itemId": "core:mp_pill", "count": 3 }
       ]
     },
-    "autoAccept": true,
+    "discoverSource": { "type": "npc", "npcId": "core:npc_qingyun_elder" },
+    "turnInNpcId": "core:npc_qingyun_elder",
     "repeatable": false
   },
   {
@@ -299,7 +306,8 @@
         { "itemId": "core:spirit_stone_shard", "count": 2 }
       ]
     },
-    "autoAccept": true,
+    "discoverSource": { "type": "npc", "npcId": "core:npc_gate_guard" },
+    "turnInNpcId": "core:npc_gate_guard",
     "repeatable": false
   },
   {
@@ -349,7 +357,8 @@
         { "itemId": "core:stamina_pill", "count": 2 }
       ]
     },
-    "autoAccept": true,
+    "discoverSource": { "type": "npc", "npcId": "core:npc_beast_hunter" },
+    "turnInNpcId": "core:npc_gate_guard",
     "repeatable": false
   },
   {
@@ -379,8 +388,10 @@
       "exp": 30,
       "gold": 20
     },
+    "discoverSource": { "type": "npc", "npcId": "core:npc_qingyun_elder" },
+    "turnInNpcId": "core:npc_qingyun_elder",
     "repeatable": true,
-    "autoAccept": true
+    "repeatCooldown": 1
   },
   {
     "id": "core:quest_survival",
@@ -411,7 +422,8 @@
       "gold": 30,
       "statBonus": { "luck": 1 }
     },
-    "autoAccept": true,
+    "discoverSource": { "type": "npc", "npcId": "core:npc_wanderer_li" },
+    "turnInNpcId": "core:npc_wanderer_li",
     "repeatable": false
   }
 ]

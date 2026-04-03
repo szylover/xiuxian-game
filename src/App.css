@@ -3459,3 +3459,217 @@ body {
 .btn-danger:active {
   transform: scale(0.97);
 }
+
+/* ============================================================
+   T0067 — 任务面板样式
+   ============================================================ */
+
+.quest-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quest-empty {
+  text-align: center;
+  color: #888;
+  padding: 24px 0;
+  font-style: italic;
+}
+
+.quest-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── 任务卡片 ── */
+
+.quest-card {
+  background: rgba(20, 20, 40, 0.6);
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 8px 10px;
+  transition: border-color 0.2s;
+}
+
+.quest-card:hover {
+  border-color: #888;
+}
+
+.quest-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.quest-card-icon {
+  font-size: 1.1em;
+}
+
+.quest-card-name {
+  font-weight: bold;
+  color: #e0d8c0;
+  flex: 1;
+}
+
+.quest-category-tag {
+  font-size: 0.72em;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.quest-category-tag[data-cat="main"]     { background: #e6ac00; color: #1a1a00; }
+.quest-category-tag[data-cat="side"]     { background: #4a9eff; color: #001a40; }
+.quest-category-tag[data-cat="daily"]    { background: #59b300; color: #0a1a00; }
+.quest-category-tag[data-cat="bounty"]   { background: #ff6b35; color: #1a0800; }
+.quest-category-tag[data-cat="dialogue"] { background: #c080ff; color: #1a0033; }
+.quest-category-tag[data-cat="event"]    { background: #ff4d6a; color: #1a000a; }
+
+.quest-card-body {
+  margin-left: 2px;
+}
+
+.quest-card-desc {
+  color: #aaa;
+  font-size: 0.88em;
+  margin-bottom: 6px;
+}
+
+.quest-step-info {
+  color: #ccc;
+  font-size: 0.85em;
+  margin-bottom: 4px;
+}
+
+.quest-step-name {
+  color: #e6d9a8;
+}
+
+.quest-card-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.quest-completed-info {
+  color: #888;
+  font-size: 0.82em;
+  margin-top: 2px;
+}
+
+/* ── 目标进度行 ── */
+
+.quest-objective-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85em;
+  padding: 2px 0;
+  color: #ccc;
+}
+
+.quest-objective-check {
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.quest-objective-desc {
+  flex: 1;
+}
+
+.quest-objective-count {
+  color: #aaa;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.quest-objective-pct {
+  color: #888;
+  font-size: 0.82em;
+  width: 32px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.quest-progress-bar {
+  width: 60px;
+  height: 6px;
+  background: #333;
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.quest-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #4a9eff, #80c0ff);
+  transition: width 0.3s ease;
+}
+
+.quest-objective-row.completed .quest-objective-desc,
+.quest-objective-row.completed .quest-objective-count {
+  color: #6a6;
+  text-decoration: line-through;
+}
+
+.quest-deliver-btn {
+  font-size: 0.75em;
+  padding: 1px 6px;
+}
+
+/* ── 奖励预览 ── */
+
+.quest-reward-preview {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  font-size: 0.82em;
+  color: #c8b888;
+  margin-top: 4px;
+}
+
+.quest-reward-label {
+  color: #888;
+}
+
+.quest-reward-items {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* ── 追踪器 ── */
+
+.quest-tracker {
+  margin-top: 8px;
+  padding: 6px 8px;
+  background: rgba(20, 20, 40, 0.5);
+  border: 1px solid #555;
+  border-radius: 4px;
+  font-size: 0.82em;
+}
+
+.quest-tracker-title {
+  color: #e6d9a8;
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
+.quest-tracker-step {
+  color: #aaa;
+  font-size: 0.92em;
+  margin-bottom: 2px;
+}
+
+/* ── NPC 任务标记 ── */
+
+.npc-quest-marker {
+  margin-left: 4px;
+  font-size: 0.9em;
+}
