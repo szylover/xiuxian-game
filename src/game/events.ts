@@ -15,11 +15,12 @@ import { loadQuestsFromJson } from './quest-loader';
 import type { JsonEvent } from './event-loader';
 import type { JsonItem } from './item-loader';
 import type { JsonQuestChain } from './quest-loader';
-import { CORE_BREAKTHROUGH_REQS, CORE_TRIBULATIONS } from '../data/core-breakthrough';
-import { CORE_DIVINE_ARTS } from '../data/core-divine-arts';
-import { CORE_BODY_REALMS, CORE_SPIRIT_ROOT_BODY_BONUSES } from '../data/core-body-config';
-import { CORE_REALMS } from '../data/core-realms';
-import { CORE_BOTTLENECKS } from '../data/core-bottlenecks';
+import { CORE_BREAKTHROUGH_REQS, CORE_TRIBULATIONS } from '../data/dlc/core/breakthrough';
+import { CORE_DIVINE_ARTS } from '../data/dlc/core/divine-arts';
+import { CORE_BODY_REALMS, CORE_SPIRIT_ROOT_BODY_BONUSES } from '../data/dlc/core/body-config';
+import { CORE_REALMS } from '../data/dlc/core/realms';
+import { CORE_BOTTLENECKS } from '../data/dlc/core/bottlenecks';
+import { CORE_DLC_META } from '../data/dlc/core/manifest';
 import { registerShopGoods } from './shop';
 import type { ShopGoodsDef } from './shop';
 import { getDeathSystemState } from './death';
@@ -252,24 +253,19 @@ export async function registerCoreEvents(): Promise<void> {
     { default: coreNpcsJson },
     { default: coreQuestsJson },
   ] = await Promise.all([
-    import('../data/core-events.json'),
-    import('../data/core-items.json'),
-    import('../data/core-recipes.json'),
-    import('../data/core-equips.json'),
-    import('../data/core-shop.json'),
-    import('../data/core-smithing.json'),
-    import('../data/core-techniques.json'),
-    import('../data/core-regions.json'),
-    import('../data/core-npcs.json'),
-    import('../data/core-quests.json'),
+    import('../data/dlc/core/events.json'),
+    import('../data/dlc/core/items.json'),
+    import('../data/dlc/core/recipes.json'),
+    import('../data/dlc/core/equips.json'),
+    import('../data/dlc/core/shop.json'),
+    import('../data/dlc/core/smithing.json'),
+    import('../data/dlc/core/techniques.json'),
+    import('../data/dlc/core/regions.json'),
+    import('../data/dlc/core/npcs.json'),
+    import('../data/dlc/core/quests.json'),
   ]);
 
-  const pack = loadEventsFromJson(coreEventsJson as JsonEvent[], {
-    id: 'core',
-    name: '基础内容包',
-    description: '核心事件 + 物品 + 配方 + 装备 + 炼器 + 突破 + 天劫',
-    version: '2.0.0',
-  });
+  const pack = loadEventsFromJson(coreEventsJson as JsonEvent[], CORE_DLC_META);
   const items = loadItemsFromJson(coreItemsJson as JsonItem[]);
   const recipes = coreRecipesJson as RecipeDef[];
   const equips = coreEquipsJson as EquipDef[];

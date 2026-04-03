@@ -4,7 +4,7 @@
 // 调数值请直接修改 core-divine-arts.json，无需改动 TS 代码。
 // ============================================================
 
-import type { DivineArtDef } from '../game/types';
-import rawData from './core-divine-arts.json';
+import type { DivineArtDef } from '../../../game/types';
+import rawData from './divine-arts.json';
 
 export const CORE_DIVINE_ARTS: DivineArtDef[] = rawData as DivineArtDef[];

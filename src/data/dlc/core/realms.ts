@@ -5,7 +5,7 @@
 // DLC 可追加更高境界（如散仙→金仙），index 从 8 开始。
 // ============================================================
 
-import type { RealmDef } from '../game/types';
-import rawData from './core-realms.json';
+import type { RealmDef } from '../../../game/types';
+import rawData from './realms.json';
 
 export const CORE_REALMS: RealmDef[] = rawData as RealmDef[];
