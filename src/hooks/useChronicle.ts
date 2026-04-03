@@ -24,8 +24,9 @@ export function useChronicle() {
     chronicleRef.current = chronicle;
   }, [chronicle]);
 
-  // 持久化
+  // 持久化 — 同步更新 ref，确保连续调用不丢事件
   const persist = useCallback((c: CultivationChronicle) => {
+    chronicleRef.current = c;
     setChronicle(c);
     saveChronicle(c);
   }, []);

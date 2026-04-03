@@ -111,10 +111,14 @@ export function useGameEngine(
       setGameOver(false);
       setGameOverReason('');
       addLog(UI_LABELS.loadSuccess(saved.name, REALMS[saved.realmIndex].name), 'system');
+      // T0068: 加载存档时确保有当前轮回
+      if (!chronicle.chronicle.current) {
+        chronicle.startNewIncarnation(withRegions);
+      }
       return true;
     }
     return false;
-  }, [addLog]);
+  }, [addLog, chronicle]);
 
   // 自动存档
   useEffect(() => {
