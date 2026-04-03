@@ -1,0 +1,32 @@
+/* ============================================================
+   SceneNpcs.css — NPC 区域样式（T0069）
+   ============================================================ */
+
+.scene-npcs {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  background: var(--color-bg-darkest);
+}
+
+.scene-npcs-list {
+  display: flex;
+  gap: var(--spacing-md);
+  overflow-x: auto;
+  padding: var(--spacing-sm) 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+.scene-npcs-list .npc-card {
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.scene-npcs-empty {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-dim);
+  padding: var(--spacing-md);
+  font-style: italic;
+}

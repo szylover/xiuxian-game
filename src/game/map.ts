@@ -128,3 +128,62 @@ export function travelTo(player: Player, regionId: string): { player: Player; me
     message: MAP_TEXTS.arrived(region.emoji, region.name, cost),
   };
 }
+
+// ── T0069: 场景出口计算 ──
+
+export interface SceneExit {
+  region: RegionDef;
+  direction: 'up' | 'down' | 'sibling';
+  travelCost: number;
+  canEnter: boolean;
+  lockReason?: string;
+}
+
+/** 根据当前区域，计算可前往的相邻区域列表（父/子/兄弟） */
+export function getSceneExits(player: Player): SceneExit[] {
+  const state = getMapState(player);
+  const current = getRegion(state.currentRegionId);
+  if (!current) return [];
+
+  const allRegions = getAllRegions();
+  const exits: SceneExit[] = [];
+
+  // 1. 父区域（⬆ 返回上级）
+  if (current.parentId) {
+    const parent = getRegion(current.parentId);
+    if (parent && !parent.isContainer) {
+      exits.push(buildExit(player, parent, 'up'));
+    }
+  }
+
+  // 2. 子区域（⬇ 探索更深处）
+  const children = allRegions
+    .filter(r => r.parentId === current.id && !r.isContainer)
+    .sort((a, b) => a.minRealm - b.minRealm);
+  for (const child of children) {
+    exits.push(buildExit(player, child, 'down'));
+  }
+
+  // 3. 兄弟区域（同级其他地点）
+  if (current.parentId) {
+    const siblings = allRegions
+      .filter(r => r.parentId === current.parentId && r.id !== current.id && !r.isContainer)
+      .sort((a, b) => a.minRealm - b.minRealm);
+    for (const sib of siblings) {
+      exits.push(buildExit(player, sib, 'sibling'));
+    }
+  }
+
+  return exits;
+}
+
+function buildExit(player: Player, region: RegionDef, direction: SceneExit['direction']): SceneExit {
+  const access = checkRegionAccess(player, region.id);
+  return {
+    region,
+    direction,
+    travelCost: calcTravelCost(player, region),
+    canEnter: access.canEnter,
+    lockReason: access.reason,
+  };
+}
