@@ -8,7 +8,10 @@ import type { Player } from '../../../game/player';
 import type { NpcDef, NpcRelationLevel } from '../../../game/types';
 import { REALMS } from '../../../game/data';
 import { getRelation, getNpcState, GIFT_CD } from '../../../game/npc';
+import { getQuestsForNpc } from '../../../game/quest';
 import { NPC_RELATION_CN, NPC_RELATION_COLORS, NPC_RELATION_EMOJI, NPC_PERSONALITY_CN } from '../../shared/constants';
+import { QUEST_TEXTS } from '../../../data/texts/quest';
+import QuestRewardPreview from '../quest/QuestRewardPreview';
 import GiftModal from './GiftModal';
 
 interface NpcDetailModalProps {
@@ -17,9 +20,11 @@ interface NpcDetailModalProps {
   onClose: () => void;
   onMeet: (npcId: string) => void;
   onGift: (npcId: string, itemId: string) => void;
+  onAcceptQuest: (questId: string) => void;
+  onTurnInQuest: (questId: string) => void;
 }
 
-export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift }: NpcDetailModalProps) {
+export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift, onAcceptQuest, onTurnInQuest }: NpcDetailModalProps) {
   const [showGiftModal, setShowGiftModal] = useState(false);
   const [chatMsg, setChatMsg] = useState<string | null>(null);
 
@@ -54,6 +59,8 @@ export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift }:
     if (!rel.met) return;
     const lines = CHAT_LINES[npc.personality] ?? ['「你好。」'];
     setChatMsg(lines[Math.floor(Math.random() * lines.length)]);
+    // T0067: 交谈也触发 NPC 交互（推进任务目标 + 发现任务）
+    onMeet(npc.id);
   };
 
   return (
@@ -105,6 +112,39 @@ export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift }:
               {npc.emoji} {npc.name}：{chatMsg}
             </div>
           )}
+
+          {/* 📜 任务区域 */}
+          {(() => {
+            const { available, pendingTurnIn } = getQuestsForNpc(player, npc.id);
+            if (available.length === 0 && pendingTurnIn.length === 0) return null;
+            return (
+              <div className="npc-quest-section">
+                <div className="npc-quest-section-title">
+                  {QUEST_TEXTS.npcQuestsTitle}
+                </div>
+                {pendingTurnIn.map(({ def }) => (
+                  <div key={def.id} className="npc-quest-item npc-quest-item-turnin">
+                    <div className="npc-quest-item-name npc-quest-item-name-turnin">{def.icon} {def.name} ✅</div>
+                    <div className="npc-quest-item-desc">{def.description}</div>
+                    <QuestRewardPreview reward={def.rewards} />
+                    <button className="btn btn-sm btn-primary npc-quest-item-btn" onClick={() => onTurnInQuest(def.id)}>
+                      {QUEST_TEXTS.npcQuestTurnIn}
+                    </button>
+                  </div>
+                ))}
+                {available.map(def => (
+                  <div key={def.id} className="npc-quest-item npc-quest-item-available">
+                    <div className="npc-quest-item-name">{def.icon} {def.name}</div>
+                    <div className="npc-quest-item-desc">{def.description}</div>
+                    <QuestRewardPreview reward={def.rewards} />
+                    <button className="btn btn-sm btn-primary npc-quest-item-btn" onClick={() => onAcceptQuest(def.id)}>
+                      {QUEST_TEXTS.npcQuestAccept}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
 
           {/* 交互按钮 */}
           <div className="npc-detail-actions">

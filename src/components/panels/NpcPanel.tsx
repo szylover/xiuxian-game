@@ -9,6 +9,7 @@ import { TabBar } from '../shared';
 import { getNpcsInRegion, getRelation, getNpcState } from '../../game/npc';
 import { getCurrentRegion } from '../../game/map';
 import { getAllNpcDefs } from '../../game/registry';
+import { getQuestsForNpc } from '../../game/quest';
 import type { NpcDef } from '../../game/types';
 import NpcCard from './npc/NpcCard';
 import NpcDetailModal from './npc/NpcDetailModal';
@@ -23,9 +24,11 @@ interface NpcPanelProps {
   player: Player;
   onMeetNpc: (npcId: string) => void;
   onGiveGift: (npcId: string, itemId: string) => void;
+  onAcceptQuest: (questId: string) => void;
+  onTurnInQuest: (questId: string) => void;
 }
 
-export default function NpcPanel({ player, onMeetNpc, onGiveGift }: NpcPanelProps) {
+export default function NpcPanel({ player, onMeetNpc, onGiveGift, onAcceptQuest, onTurnInQuest }: NpcPanelProps) {
   const [tab, setTab] = useState<'region' | 'contacts'>('region');
   const [selectedNpc, setSelectedNpc] = useState<NpcDef | null>(null);
 
@@ -37,6 +40,17 @@ export default function NpcPanel({ player, onMeetNpc, onGiveGift }: NpcPanelProp
   const contactNpcs = npcState.discoveredNpcs
     .map(id => getAllNpcDefs().find(d => d.id === id))
     .filter((d): d is NpcDef => !!d);
+
+  // T0067: 检查哪些 NPC 有可发现的任务或可交付的任务
+  const npcQuestFlags = new Map<string, { hasQuest: boolean; hasTurnIn: boolean }>();
+  const allRegionAndContactNpcs = [...regionNpcs, ...contactNpcs];
+  const seenNpc = new Set<string>();
+  for (const npc of allRegionAndContactNpcs) {
+    if (seenNpc.has(npc.id)) continue;
+    seenNpc.add(npc.id);
+    const { available, pendingTurnIn } = getQuestsForNpc(player, npc.id);
+    npcQuestFlags.set(npc.id, { hasQuest: available.length > 0, hasTurnIn: pendingTurnIn.length > 0 });
+  }
 
   const renderNpcList = (npcs: NpcDef[], emptyMsg: string) => {
     if (npcs.length === 0) {
@@ -50,6 +64,7 @@ export default function NpcPanel({ player, onMeetNpc, onGiveGift }: NpcPanelProp
       <div className="npc-list-container">
         {npcs.map(npc => {
           const rel = getRelation(player, npc.id);
+          const flags = npcQuestFlags.get(npc.id);
           return (
             <NpcCard
               key={npc.id}
@@ -57,6 +72,8 @@ export default function NpcPanel({ player, onMeetNpc, onGiveGift }: NpcPanelProp
               relationLevel={rel.relationLevel}
               affinity={rel.affinity}
               met={rel.met}
+              hasQuest={flags?.hasQuest}
+              hasTurnIn={flags?.hasTurnIn}
               onClick={() => setSelectedNpc(npc)}
             />
           );
@@ -100,6 +117,8 @@ export default function NpcPanel({ player, onMeetNpc, onGiveGift }: NpcPanelProp
           onClose={() => setSelectedNpc(null)}
           onMeet={(npcId) => { onMeetNpc(npcId); setSelectedNpc(null); }}
           onGift={(npcId, itemId) => { onGiveGift(npcId, itemId); }}
+          onAcceptQuest={(questId) => { onAcceptQuest(questId); }}
+          onTurnInQuest={(questId) => { onTurnInQuest(questId); }}
         />
       )}
     </div>

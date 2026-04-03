@@ -143,3 +143,53 @@
 .npc-btn-gift:not(:disabled) {
   opacity: 1;
 }
+
+/* ── NPC 任务区域 ── */
+
+.npc-quest-section {
+  margin-bottom: 0.5rem;
+  border-top: 1px solid #444;
+  padding-top: 0.5rem;
+}
+
+.npc-quest-section-title {
+  font-size: 0.82rem;
+  color: #e6d9a8;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.npc-quest-item {
+  border-radius: 4px;
+  padding: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.npc-quest-item-turnin {
+  background: #1a2a1a;
+  border: 1px solid #4a4;
+}
+
+.npc-quest-item-available {
+  background: #252540;
+  border: 1px solid #555;
+}
+
+.npc-quest-item-name {
+  font-size: 0.8rem;
+  color: #e6d9a8;
+}
+
+.npc-quest-item-name-turnin {
+  color: #8f8;
+}
+
+.npc-quest-item-desc {
+  font-size: 0.72rem;
+  color: #aaa;
+}
+
+.npc-quest-item-btn {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+}

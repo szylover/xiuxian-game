@@ -24,7 +24,7 @@ import type { RevivalMethodDef } from '../game/types';
 import { checkAchievements } from '../game/achievement/engine';
 import { loadSaveSlot, writeSaveSlot, deleteSaveSlot } from './useSaveLoad';
 import { refreshUnlockedRegions } from '../game/map';
-import { checkQuestTimeouts, checkAutoAcceptQuests, tickQuestObjectives } from '../game/quest';
+import { checkQuestTimeouts, checkQuestDiscovery, tickQuestObjectives, setTrackedQuest as setTrackedQuestFn } from '../game/quest';
 import { UI_LABELS } from '../data/texts/ui-labels';
 import { SPIRIT_ROOT_CN, SEPARATOR, NONE_TEXT } from '../data/texts/common';
 import { tickAffinityDecay } from '../game/npc';
@@ -81,7 +81,7 @@ export function useGameEngine(
   const newGame = useCallback((options: CreatePlayerOptions & { slotIndex?: number }) => {
     const slotIndex = options.slotIndex ?? 0;
     currentSlotRef.current = slotIndex;
-    const p = createPlayer(options);
+    let p = createPlayer(options);
     const rootDisplay = getSpiritRootDisplay(p.spiritRoots);
     writeSaveSlot(slotIndex, p);
     setPlayer(p);
@@ -252,10 +252,10 @@ export function useGameEngine(
     updated = questTimeoutResult.player;
     for (const log of questTimeoutResult.logs) addLog(log, 'system');
 
-    // T0057: 自动接取任务检查
-    const questAutoResult = checkAutoAcceptQuests(updated);
-    updated = questAutoResult.player;
-    for (const log of questAutoResult.logs) addLog(log, 'system');
+    // T0057: 自动接取任务检查 → T0067: 任务发现检查
+    const questDiscoverResult = checkQuestDiscovery(updated, { type: 'time_tick' as const });
+    updated = questDiscoverResult.player;
+    for (const log of questDiscoverResult.logs) addLog(log, 'system');
 
     // T0057: time_tick 触发（survive_months 目标）
     const questTickResult = tickQuestObjectives(updated, { type: 'time_tick' as const });
@@ -288,6 +288,7 @@ export function useGameEngine(
     learnDivineArt, activateDivineArt, deactivateDivineArt,
     travel, bodyBreakthrough,
     meetNpc, giveGift,
+    acceptQuest, abandonQuest, deliverQuestItem, turnInQuest,
   } = useSystemActions({
     player, addLog, setPlayer, setGameOver, setGameOverReason, setDeathModal,
   });
@@ -326,6 +327,14 @@ export function useGameEngine(
     setDeathModal(null);
   }, []);
 
+  // ── T0067: 任务追踪 ──
+  const setTrackedQuest = useCallback((questId: string | null) => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      return setTrackedQuestFn(prev, questId);
+    });
+  }, [setPlayer]);
+
   return {
     player,
     gameOver,
@@ -358,6 +367,11 @@ export function useGameEngine(
     bodyBreakthrough,
     meetNpc,
     giveGift,
+    acceptQuest,
+    abandonQuest,
+    deliverQuestItem,
+    turnInQuest,
+    setTrackedQuest,
     toast,
     dismissToast,
     combatModal,

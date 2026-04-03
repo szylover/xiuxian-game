@@ -6,6 +6,7 @@
 import type {
   QuestChainDef, QuestChainCategory, QuestChainCondition,
   QuestStep, QuestObjective, QuestObjectiveType, QuestReward,
+  QuestDiscoverSource,
 } from './types';
 
 // ── JSON 数据格式 ──
@@ -59,7 +60,9 @@ export interface JsonQuestChain {
   steps: JsonQuestStep[];
   rewards: JsonQuestReward;
   repeatable?: boolean;
-  autoAccept?: boolean;
+  repeatCooldown?: number;
+  discoverSource?: { type: string; npcId?: string; monsterId?: string; regionId?: string; realmIndex?: number; questId?: string; chance?: number };
+  turnInNpcId?: string;
   failOnDeath?: boolean;
   onCompleteEventId?: string;
   maxConcurrent?: number;
@@ -156,7 +159,9 @@ export function loadQuestsFromJson(jsonQuests: JsonQuestChain[]): QuestChainDef[
       steps: json.steps.map(parseStep),
       rewards: parseReward(json.rewards),
       repeatable: json.repeatable,
-      autoAccept: json.autoAccept,
+      repeatCooldown: json.repeatCooldown,
+      discoverSource: (json.discoverSource ?? { type: 'auto' }) as QuestDiscoverSource,
+      turnInNpcId: json.turnInNpcId,
       failOnDeath: json.failOnDeath,
       onCompleteEventId: json.onCompleteEventId,
       maxConcurrent: json.maxConcurrent,

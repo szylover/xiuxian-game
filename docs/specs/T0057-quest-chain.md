@@ -202,13 +202,96 @@ export interface QuestSystemState {
 
 ## 系统逻辑设计
 
-### 1. 任务发现与接取
+### 1. 任务发现与接取（WoW 风格）
 
-**流程：**
-1. 玩家打开「任务面板」或执行行动（探索/修炼）时，系统扫描注册表中所有 `QuestChainDef`
-2. 过滤出满足 `condition` 且未在 `activeQuests` / `completedQuests`（非 repeatable）中的任务链
-3. `autoAccept=true` 的任务自动接取并写入 `activeQuests`；其余显示在「可接取」列表
-4. 玩家点击「接受」按钮 → 调用 `acceptQuest(player, questId)` → 初始化进度 → 日志提示
+> **设计原则**：任务不会自动出现在面板中，玩家需要通过**游戏行为**发现任务。
+> 类似魔兽世界：NPC 头上有感叹号、打怪掉落任务物品、到达特定区域触发等。
+
+#### 任务发现来源（`discoverSource`）
+
+每条任务链定义一个 `discoverSource` 字段，描述该任务如何被玩家发现：
+
+| 来源类型 | 说明 | 游戏中表现 |
+|----------|------|-----------|
+| `npc` | 与指定 NPC 交互时发现 | NPC 名字旁显示 📜 图标，交互后弹出任务描述+接受按钮 |
+| `exploration` | 探索时随机发现 | 探索事件中触发「你发现了一个任务…」，日志提示+任务面板高亮 |
+| `combat_drop` | 击杀特定妖兽后掉落任务物品 | 战斗胜利拾取「神秘信件」等任务触发物品，自动进入可接取列表 |
+| `region_enter` | 进入特定区域时发现 | 到达某区域触发「你听到了关于…的传闻」，任务进入可接取列表 |
+| `realm_reach` | 达到特定境界时发现 | 突破后触发「你感应到了新的机缘…」 |
+| `quest_complete` | 完成前置任务后链式发现 | 完成任务 A 后 NPC 自动给出任务 B |
+| `auto` | 游戏开始/满足条件时自动发现（仅用于新手引导） | 极少数任务保留自动发现，但仍需手动接取 |
+
+#### 发现 → 接取 → 推进 → 交付流程
+
+```
+发现：NPC交互/打怪掉落/探索触发/进入区域
+  ↓
+任务进入「已发现」列表（面板中高亮显示 🆕）
+  ↓
+玩家打开任务面板 → 查看任务描述/奖励 → 点击「接受」
+  ↓
+任务进入「进行中」列表，开始追踪目标进度
+  ↓
+完成所有步骤目标
+  ↓
+（回到 NPC 处交付 / 自动完成，取决于任务类型）
+  ↓
+发放奖励，任务进入「已完成」列表
+```
+
+#### QuestChainDef 新增字段
+
+```ts
+interface QuestChainDef {
+  // ... 已有字段 ...
+  discoverSource: QuestDiscoverSource;  // 任务发现来源（替代 autoAccept）
+  turnInNpcId?: string;                 // 交付 NPC（可选，不设则自动完成）
+}
+
+type QuestDiscoverSource =
+  | { type: 'npc'; npcId: string }           // 与指定 NPC 交互时发现
+  | { type: 'exploration'; chance?: number } // 探索时随机发现（chance: 0~1，默认 1）
+  | { type: 'combat_drop'; monsterId: string; chance?: number } // 击杀后掉落发现
+  | { type: 'region_enter'; regionId: string }  // 进入区域时发现
+  | { type: 'realm_reach'; realmIndex: number } // 达到境界时发现
+  | { type: 'quest_complete'; questId: string } // 完成前置任务后发现
+  | { type: 'auto' };                          // 自动发现（仅新手引导）
+```
+
+#### 玩家状态扩展
+
+```ts
+interface QuestSystemState {
+  // ... 已有字段 ...
+  discoveredQuests: string[];  // 已发现但未接取的任务 ID 列表
+}
+```
+
+#### 发现检查时机
+
+| 来源 | 检查时机 | 实现位置 |
+|------|----------|----------|
+| `npc` | `meetNpc` 时 | `useCoreActions.ts` 的 NPC 交互回调 |
+| `exploration` | 探索完成时 | `useCoreActions.ts` 的 explore 回调 |
+| `combat_drop` | 战斗胜利时 | `useCoreActions.ts` 的 combat 回调 |
+| `region_enter` | `travelTo` 时 | `useSystemActions.ts` 的 travel 回调 |
+| `realm_reach` | 突破成功时 | `useSystemActions.ts` 的 breakthrough 回调 |
+| `quest_complete` | 任务完成时 | `quest.ts` 的 `completeQuest` |
+| `auto` | `checkAutoDiscoverQuests` | `useGameEngine.ts` 的 advanceTime |
+
+> **注意**：`autoAccept` 字段废弃，改用 `discoverSource.type === 'auto'`。
+> 即使是 `auto` 类型，也只是自动进入「已发现」列表，玩家仍需在面板中手动接取。
+
+**旧流程（已废弃）：**
+~~1. 系统扫描注册表中所有 `QuestChainDef`~~
+~~2. `autoAccept=true` 的任务自动接取~~
+~~3. 其余显示在「可接取」列表~~
+
+**新流程：**
+1. 玩家通过游戏行为（NPC/战斗/探索/移动）触发任务发现
+2. 发现的任务进入 `discoveredQuests` 列表
+3. 玩家在任务面板中查看已发现的任务，手动点击「接受」
+4. 接取后进入 `activeQuests`，开始目标追踪
 
 **条件检查函数（quest.ts 中实现）：**
 
@@ -613,56 +696,73 @@ function loadQuestsFromJson(jsonQuests: JsonQuestChain[]): QuestChainDef[]
 
 ---
 
-## UI 设计
+## UI 设计（WoW 风格任务面板）
 
 ### 新增面板：任务面板（QuestPanel.tsx）
 
 位于右侧面板区域（`src/components/panels/QuestPanel.tsx`），通过 PanelButtons 中新增「任务」按钮切换。
 
-#### 面板结构
+#### 面板结构（三标签页）
 
 ```
 ┌─────────────────────────────────────┐
 │ 📜 任务        [标签栏]              │
-│  进行中 | 可接取 | 已完成             │
+│  进行中(2) | 已发现(3) | 已完成(5)    │
 ├─────────────────────────────────────┤
 │                                     │
-│ 「进行中」标签：                       │
+│ 「进行中」标签（默认）：               │
 │ ┌─────────────────────────────────┐ │
 │ │ ⚔️ 初次历练 [主线]               │ │
 │ │   步骤 2/3：斩杀野狼             │ │
 │ │   ▸ 斩杀野狼 (2/3) ██████░░ 66% │ │
 │ │   [追踪] [放弃]                  │ │
 │ └─────────────────────────────────┘ │
-│                                     │
-│ 「可接取」标签：                       │
 │ ┌─────────────────────────────────┐ │
 │ │ 🌿 采药基础 [支线]               │ │
-│ │   收集灵芝和雪莲，了解炼丹材料     │ │
-│ │   奖励：80 修为 · 40 灵石          │ │
-│ │   [接受]                         │ │
+│ │   步骤 1/2：收集灵芝             │ │
+│ │   ▸ 收集灵芝 (1/3) ██░░░░ 33%   │ │
 │ └─────────────────────────────────┘ │
 │                                     │
-│ 「已完成」标签：                       │
+│ 「已发现」标签（未接取的任务）：        │
 │ ┌─────────────────────────────────┐ │
-│ │ ✅ 初次历练                       │ │
-│ │   完成于 第3年6月                 │ │
+│ │ 🆕 🏷️ 悬赏：荒野狼患 [悬赏]      │ │
+│ │   来源：猎妖人张猎               │ │
+│ │   斩杀 5 只野狼可领取赏金         │ │
+│ │   奖励：120 灵石 · 铁矿×3        │ │
+│ │   [接受]  [忽略]                 │ │
+│ └─────────────────────────────────┘ │
+│                                     │
+│ 「已完成」标签：                      │
+│ ┌─────────────────────────────────┐ │
+│ │ ✅ 初次历练                      │ │
+│ │   完成于 第3年6月                │ │
 │ └─────────────────────────────────┘ │
 └─────────────────────────────────────┘
+```
+
+#### NPC 任务标识
+
+在 NPC 列表中（地图面板的 NPC 交互），有可接任务的 NPC 名字旁显示 📜 标记：
+
+```
+NPC 列表：
+  张猎 📜     ← 有任务可以给你
+  陈掌柜       ← 无任务
+  青云长老 📜  ← 有任务可以给你
 ```
 
 #### 子组件拆分
 
 | 组件 | 文件 | 用途 |
 |------|------|------|
-| `QuestPanel` | `panels/QuestPanel.tsx` | 面板入口 + 标签切换 |
-| `QuestCard` | `panels/quest/QuestCard.tsx` | 单条任务链卡片 |
-| `QuestObjectiveRow` | `panels/quest/QuestObjectiveRow.tsx` | 单条目标进度行 |
-| `QuestRewardPreview` | `panels/quest/QuestRewardPreview.tsx` | 奖励预览 |
+| `QuestPanel` | `panels/QuestPanel.tsx` | 面板入口 + 三标签切换 |
+| `QuestCard` | `panels/quest/QuestCard.tsx` | 单条任务链卡片（进行中/已发现/已完成三种模式） |
+| `QuestObjectiveRow` | `panels/quest/QuestObjectiveRow.tsx` | 单条目标进度行 + 进度条 |
+| `QuestRewardPreview` | `panels/quest/QuestRewardPreview.tsx` | 奖励预览（修为/灵石/物品/属性） |
 
 ### 任务追踪指示器
 
-在左侧面板（`LeftPanel.tsx`）底部或状态栏中，显示**当前追踪的任务**摘要：
+在左侧面板（`LeftPanel.tsx`）底部，显示**当前追踪的任务**摘要：
 
 ```
 ────────────────
@@ -671,15 +771,16 @@ function loadQuestsFromJson(jsonQuests: JsonQuestChain[]): QuestChainDef[]
 ────────────────
 ```
 
-这是一个小型悬浮组件 `QuestTracker`，只显示当前标记为「追踪」的一条任务的当前步骤目标。
+小型组件 `QuestTracker`，只显示当前标记为「追踪」的一条任务的当前步骤目标。
 
 ### 交互设计
 
 | 操作 | 触发 | 效果 |
 |------|------|------|
-| 接受任务 | 点击「可接取」列表中的「接受」按钮 | 任务进入「进行中」，日志提示 |
-| 追踪任务 | 点击「进行中」列表中的「追踪」按钮 | 该任务显示在追踪指示器，同时只能追踪一条 |
-| 放弃任务 | 点击「放弃」按钮 → 确认弹窗 | 任务移至放弃列表 |
+| 发现任务 | NPC 交互 / 打怪掉落 / 探索 / 进入区域 | 任务进入「已发现」列表，日志提示+任务按钮高亮 |
+| 接受任务 | 在「已发现」标签中点击「接受」 | 任务进入「进行中」，日志提示 |
+| 追踪任务 | 点击「进行中」任务的「追踪」按钮 | 该任务显示在左侧追踪指示器，同时只能追踪一条 |
+| 放弃任务 | 点击「放弃」→ 确认弹窗 | 任务移至放弃列表，可重新发现 |
 | 交付物品 | 在 `deliver_item` 目标旁显示「交付」按钮 | 扣除物品，推进目标 |
 | 查看已完成 | 切换到「已完成」标签 | 展示历史完成记录 |
 
@@ -756,8 +857,10 @@ type QuestTrigger =
 tickQuestObjectives(player: Player, trigger: QuestTrigger): { player: Player; logs: string[] }
 checkQuestTimeouts(player: Player): { player: Player; logs: string[] }
 
-// 自动接取检查（每次行动后调用）
-checkAutoAcceptQuests(player: Player): { player: Player; logs: string[] }
+// 任务发现（替代原 autoAccept）
+discoverQuest(player: Player, questId: string): { player: Player; logs: string[] }
+checkQuestDiscovery(player: Player, trigger: QuestTrigger): { player: Player; logs: string[] }
+getDiscoveredQuests(player: Player): QuestChainDef[]   // 已发现但未接取的任务
 ```
 
 ---
@@ -768,6 +871,7 @@ checkAutoAcceptQuests(player: Player): { player: Player; logs: string[] }
 
 | 功能 | 操作 | 说明 |
 |------|------|------|
+| 发现任务 | 下拉选择任务链 + 「强制发现」按钮 | 无视条件直接加入已发现列表 |
 | 接取任务 | 下拉选择任务链 + 「强制接取」按钮 | 无视条件直接接取 |
 | 完成当前步骤 | 「跳过步骤」按钮 | 直接完成当前步骤所有目标并推进 |
 | 完成整条链 | 「完成任务」按钮 | 直接完成所有步骤并发放奖励 |
@@ -779,66 +883,73 @@ checkAutoAcceptQuests(player: Player): { player: Player; logs: string[] }
 
 ## 验证方式
 
-### 测试用例（初稿，将写入 test-guide.md）
+### 测试用例
 
-#### 13.1 任务接取
+#### 13.1 任务发现
 
-1. **新游戏后可接取初始任务**：新建角色 → 打开任务面板 → 「可接取」列表应显示 `core:quest_first_hunt`（autoAccept=true 的任务应自动出现在「进行中」）
-2. **条件不满足时不可接取**：Debug 设置境界为 0 → `core:quest_gather_herbs`（要求 minRealm=1 + 前置任务）不应出现
-3. **前置任务检查**：完成 `core:quest_first_hunt` 后 → 提升境界到 1 → `core:quest_gather_herbs` 应出现在可接取列表
-4. **接取确认**：点击「接受」→ 任务移至「进行中」，日志显示接取消息
+1. **NPC 交互发现任务**：与有任务的 NPC 交互 → 日志提示发现新任务 → 任务面板「已发现」列表出现该任务
+2. **探索发现任务**：探索时触发 exploration 类型任务 → 日志提示 → 任务面板出现
+3. **条件不满足时不可发现**：境界不够时，交互对应 NPC 不应触发任务发现
+4. **NPC 任务标记**：NPC 列表中有任务可给的 NPC 旁显示 📜 图标
 
-#### 13.2 目标推进
+#### 13.2 任务接取与推进
 
-5. **击杀计数**：接取含 kill_monster 目标的任务 → 战斗胜利击杀目标妖兽 → 目标面板计数 +1
-6. **物品收集**：接取含 collect_item 目标的任务 → 通过探索/商店获得目标物品 → 达到数量后目标自动完成
-7. **区域到达**：接取含 reach_region 目标的任务 → 移动到目标区域 → 目标标记完成
+5. **手动接取**：在「已发现」列表中点击「接受」→ 任务移至「进行中」，日志提示
+6. **击杀计数**：接取含 kill_monster 目标的任务 → 战斗胜利击杀目标妖兽 → 进度条更新
+7. **物品收集**：通过探索获得目标物品 → 目标面板计数更新
 8. **步骤推进**：步骤所有目标完成 → 自动推进到下一步骤，发放步骤奖励
 
 #### 13.3 完成与失败
 
 9. **任务完成**：最后一步完成 → 发放链级奖励，任务移至「已完成」，日志+Toast 通知
 10. **超时失败**：设定含时限的步骤 → Debug 推进时间超过时限 → 任务标记为失败
-11. **放弃任务**：点击「放弃」→ 确认 → 任务移至放弃列表
-12. **已完成不可重复接取**：非 repeatable 任务完成后不应出现在可接取列表
+11. **放弃任务**：点击「放弃」→ 确认 → 任务移至放弃列表，可重新发现
+12. **已完成不可重复发现**：非 repeatable 任务完成后不应再次出现
 
 #### 13.4 调试面板
 
-13. **强制接取**：Debug 面板中选择任务 → 点击「强制接取」→ 无视条件直接接取
-14. **跳过步骤**：Debug「跳过步骤」→ 当前步骤立即完成并推进
-15. **完成任务**：Debug「完成任务」→ 整条链直接完成并发放奖励
+13. **强制发现**：Debug 面板中选择任务 → 点击「强制发现」→ 直接加入已发现列表
+14. **强制接取**：Debug「强制接取」→ 无视发现/条件直接接取
+15. **跳过步骤/完成任务**：Debug 快速推进
 
 ---
 
 ## 实现计划
 
-### Phase 1：基础框架（最小可用）
+### Phase 1：基础框架（✅ 已完成）
 
 1. 类型定义（types.ts）
 2. 注册表扩展（stores.ts / dlc.ts / queries.ts / index.ts）
 3. quest-loader.ts（JSON 加载器）
 4. quest.ts 核心逻辑（接取 / 放弃 / 推进 / 完成 / 失败）
-5. core-quests.json（3 条初始任务链）
+5. core-quests.json（9 条初始任务链）
 6. texts/quest.ts（文案）
 7. events.ts 中加载 core-quests.json
 
-### Phase 2：目标推进集成
+### Phase 2：目标推进集成（✅ 已完成）
 
 8. useCoreActions.ts 集成（cultivate / combat / explore 后调用 tickQuestObjectives）
 9. useSystemActions.ts 集成（炼丹 / 炼器 / 移动 / NPC 后触发）
-10. useGameEngine.ts 中 advanceTime 集成超时检查 + 自动接取
+10. useGameEngine.ts 中 advanceTime 集成超时检查
 
-### Phase 3：UI → 移至 T0067
+### Phase 3：WoW 风格任务发现 + UI（T0067）
 
-> **已拆分至 [T0067 — 任务面板 UI（QuestPanel + 追踪器）](T0067-quest-ui.md)**
->
-> 包含：QuestPanel.tsx + 子组件、PanelButtons/RightPanel 面板入口、QuestTracker 追踪指示器、LeftPanel 集成追踪。
+> 重新设计任务发现机制，废弃 autoAccept，改为通过游戏行为触发发现。
 
-### Phase 4：调试面板 & 瓶颈联动 → 移至 T0067
+11. **类型扩展**：`QuestDiscoverSource` 类型 + `QuestChainDef.discoverSource` + `QuestSystemState.discoveredQuests`
+12. **发现逻辑**：`discoverQuest()` / `checkQuestDiscovery()` / `getDiscoveredQuests()`
+13. **废弃清理**：移除 `autoAccept` 字段 + `checkAutoAcceptQuests` 函数
+14. **quest 数据更新**：core-quests.json 中所有任务添加 `discoverSource` 字段，移除 `autoAccept`
+15. **Hook 集成**：NPC 交互/战斗/探索/移动时调用 `checkQuestDiscovery`
+16. **QuestPanel.tsx**：三标签页（进行中/已发现/已完成）+ QuestCard/QuestObjectiveRow/QuestRewardPreview
+17. **PanelButtons + RightPanel**：新增「任务」面板按钮 + 面板渲染
+18. **QuestTracker**：左侧面板追踪指示器
+19. **NPC 任务标记**：有任务的 NPC 显示 📜 图标
 
-> **已拆分至 [T0067](T0067-quest-ui.md)**
->
-> 包含：Debug 面板新增任务 Tab、bottleneck.ts 中 `tryQuestUnlock` 实现。
+### Phase 4：调试面板
+
+20. **DebugQuestTab**：强制发现/接取/跳步/完成/重置/清空
+21. **瓶颈联动**：bottleneck.ts 中 `tryQuestUnlock` 实现
 
 ---
 

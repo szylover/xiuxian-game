@@ -20,7 +20,7 @@ import { meetNpc as meetNpcFn, giveGift as giveGiftFn } from '../game/npc';
 import { recalcStats } from '../game/player';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
 import { getEquipDef, getTechniqueDef, getRecipe, getSmithingRecipe } from '../game/registry';
-import { tickQuestObjectives, acceptQuest as acceptQuestFn, abandonQuest as abandonQuestFn, deliverQuestItem as deliverQuestItemFn } from '../game/quest';
+import { tickQuestObjectives, acceptQuest as acceptQuestFn, abandonQuest as abandonQuestFn, deliverQuestItem as deliverQuestItemFn, checkQuestDiscovery, setTrackedQuest as setTrackedQuestFn, turnInQuest as turnInQuestFn } from '../game/quest';
 import type { EquipSlot } from '../game/registry';
 import type { LogCategory } from './useGameLog';
 import type { DeathModalState } from './useGameEngine';
@@ -159,6 +159,15 @@ export function useSystemActions(deps: SystemActionDeps) {
     for (const log of allLogs) {
       addLog(log, btResult.blockedByBottleneck ? 'adventure' : 'system');
     }
+    // T0067: 突破成功后检查可发现的任务
+    if (btResult.success) {
+      setPlayer(prev => {
+        if (!prev) return prev;
+        const questDiscover = checkQuestDiscovery(prev, { type: 'reach_realm', realmIndex: prev.realmIndex });
+        for (const log of questDiscover.logs) addLog(log, 'system');
+        return questDiscover.player;
+      });
+    }
     // 突破失败额外提示
     if (!btResult.success && !btResult.triggerTribulation) {
       if (btResult.blockedByBottleneck) {
@@ -206,10 +215,14 @@ export function useSystemActions(deps: SystemActionDeps) {
       travelMsg = result.message;
       let p = result.player;
       // T0057: 移动后推进 reach_region 目标
-      if (result.message && !result.message.includes('❌') && !result.message.includes('⚠️')) {
+        if (result.message && !result.message.includes('❌') && !result.message.includes('⚠️')) {
         const questResult = tickQuestObjectives(p, { type: 'reach_region', regionId });
         p = questResult.player;
         for (const log of questResult.logs) addLog(log, 'system');
+        // T0067: 移动后检查可发现的任务
+        const questDiscover = checkQuestDiscovery(p, { type: 'reach_region', regionId });
+        p = questDiscover.player;
+        for (const log of questDiscover.logs) addLog(log, 'system');
       }
       return p;
     });
@@ -239,6 +252,10 @@ export function useSystemActions(deps: SystemActionDeps) {
       const questResult = tickQuestObjectives(p, { type: 'talk_npc', npcId });
       p = questResult.player;
       for (const log of questResult.logs) addLog(log, 'system');
+      // T0067: NPC 交互后检查可发现的任务
+      const questDiscover = checkQuestDiscovery(p, { type: 'talk_npc', npcId });
+      p = questDiscover.player;
+      for (const log of questDiscover.logs) addLog(log, 'system');
       return p;
     });
     if (meetMsg) addLog(meetMsg, 'system');
@@ -254,31 +271,55 @@ export function useSystemActions(deps: SystemActionDeps) {
 
   // ── T0057: 任务链操作 ──
   const acceptQuest = useCallback((questId: string) => {
+    let questLogs: string[] = [];
     setPlayer(prev => {
       if (!prev) return prev;
       const result = acceptQuestFn(prev, questId);
-      for (const log of result.logs) addLog(log, 'system');
+      questLogs = result.logs;
       return result.player;
     });
+    setTimeout(() => { for (const log of questLogs) addLog(log, 'system'); }, 0);
   }, [addLog, setPlayer]);
 
   const abandonQuest = useCallback((questId: string) => {
+    let questLogs: string[] = [];
     setPlayer(prev => {
       if (!prev) return prev;
       const result = abandonQuestFn(prev, questId);
-      for (const log of result.logs) addLog(log, 'system');
+      questLogs = result.logs;
       return result.player;
     });
+    setTimeout(() => { for (const log of questLogs) addLog(log, 'system'); }, 0);
   }, [addLog, setPlayer]);
 
   const deliverQuestItem = useCallback((questId: string, objectiveIndex: number) => {
+    let questLogs: string[] = [];
     setPlayer(prev => {
       if (!prev) return prev;
       const result = deliverQuestItemFn(prev, questId, objectiveIndex);
-      for (const log of result.logs) addLog(log, 'system');
+      questLogs = result.logs;
       return result.player;
     });
+    setTimeout(() => { for (const log of questLogs) addLog(log, 'system'); }, 0);
   }, [addLog, setPlayer]);
+
+  const turnInQuest = useCallback((questId: string) => {
+    let questLogs: string[] = [];
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = turnInQuestFn(prev, questId);
+      questLogs = result.logs;
+      return result.player;
+    });
+    setTimeout(() => { for (const log of questLogs) addLog(log, 'system'); }, 0);
+  }, [addLog, setPlayer]);
+
+  const setTrackedQuest = useCallback((questId: string | null) => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      return setTrackedQuestFn(prev, questId);
+    });
+  }, [setPlayer]);
 
   return {
     useItem: useItemAction,
@@ -302,5 +343,7 @@ export function useSystemActions(deps: SystemActionDeps) {
     acceptQuest,
     abandonQuest,
     deliverQuestItem,
+    turnInQuest,
+    setTrackedQuest,
   };
 }

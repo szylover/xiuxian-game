@@ -1,0 +1,118 @@
+/* ============================================================
+   QuestCard.css — 任务卡片样式
+   ============================================================ */
+
+.quest-card {
+  background: rgba(20, 20, 40, 0.6);
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 8px 10px;
+  transition: border-color 0.2s;
+}
+
+.quest-card:hover {
+  border-color: #888;
+}
+
+.quest-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.quest-card-icon {
+  font-size: 1.1em;
+}
+
+.quest-card-name {
+  font-weight: bold;
+  color: #e0d8c0;
+  flex: 1;
+}
+
+.quest-category-tag {
+  font-size: 0.72em;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-weight: bold;
+  border: 1px solid transparent;
+}
+
+.quest-card-body {
+  margin-left: 2px;
+}
+
+.quest-card-desc {
+  color: #aaa;
+  font-size: 0.88em;
+  margin-bottom: 6px;
+}
+
+.quest-card-desc-dim {
+  opacity: 0.7;
+}
+
+.quest-step-info {
+  color: #ccc;
+  font-size: 0.85em;
+  margin-bottom: 4px;
+}
+
+.quest-step-name {
+  color: #e6d9a8;
+}
+
+.quest-step-name-pending {
+  color: #8f8;
+}
+
+.quest-card-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.quest-completed-info {
+  color: #888;
+  font-size: 0.82em;
+  margin-top: 2px;
+}
+
+.quest-completed-repeat {
+  margin-left: 8px;
+}
+
+/* ── 奖励预览 ── */
+
+.quest-reward-preview {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  font-size: 0.82em;
+  color: #c8b888;
+  margin-top: 4px;
+}
+
+.quest-reward-label {
+  color: #888;
+}
+
+.quest-reward-items {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.quest-deliver-btn {
+  font-size: 0.75em;
+  padding: 1px 6px;
+}
+
+/* ── NPC 任务标记 ── */
+
+.npc-quest-marker {
+  margin-left: 4px;
+  font-size: 0.9em;
+}

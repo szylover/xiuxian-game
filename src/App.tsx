@@ -112,6 +112,11 @@ export default function App() {
             onTravel={engine.travel}
             onMeetNpc={engine.meetNpc}
             onGiveGift={engine.giveGift}
+            onAcceptQuest={engine.acceptQuest}
+            onAbandonQuest={engine.abandonQuest}
+            onDeliverQuestItem={engine.deliverQuestItem}
+            onTrackQuest={engine.setTrackedQuest}
+            onTurnInQuest={engine.turnInQuest}
           />
         }
         debug={<>

@@ -18,7 +18,7 @@ import { restorePhysique, gainBodyRealmExp, tryBodyRealmBreakthrough } from '../
 import { getTechniqueDef } from '../game/registry';
 import { ensureBottleneckState, getActiveBottlenecks, tickPersistenceCultivation, tryBattleUnlock, tryEpiphanyUnlock, tryOverflowUnlock } from '../game/bottleneck';
 import { getNpcsInRegion, meetNpc as meetNpcFn } from '../game/npc';
-import { tickQuestObjectives, checkAutoAcceptQuests } from '../game/quest';
+import { tickQuestObjectives, checkQuestDiscovery } from '../game/quest';
 import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef, RegionDef } from '../game/types';
 import type { LogCategory } from './useGameLog';
 import { COMBAT_TEXTS } from '../data/texts/combat';
@@ -286,6 +286,11 @@ export function useCoreActions(deps: CoreActionDeps) {
         const questCombat = tickQuestObjectives(p, { type: 'combat' });
         p = questCombat.player;
         queueLogs(questCombat.logs, 'system');
+
+        // T0067: 战斗胜利后检查可发现的任务
+        const questDiscoverCombat = checkQuestDiscovery(p, { type: 'kill_monster', monsterId: monster.id });
+        p = questDiscoverCombat.player;
+        queueLogs(questDiscoverCombat.logs, 'system');
       } else if (result.winner === 'monster') {
         // T0040: 通过死亡系统处理战斗失败
         const isBoss = monster.realmIndex >= p.realmIndex + 2;
@@ -415,6 +420,11 @@ export function useCoreActions(deps: CoreActionDeps) {
       const questItemChange = tickQuestObjectives(p, { type: 'item_change' });
       p = questItemChange.player;
       queueLogs(questItemChange.logs, 'system');
+
+      // T0067: 探索时检查可发现的任务
+      const questDiscover = checkQuestDiscovery(p, { type: 'explore' });
+      p = questDiscover.player;
+      queueLogs(questDiscover.logs, 'system');
 
       queueLog(exploreMsg, exploreMsg.includes('【奇遇】') ? 'adventure' : 'explore');
 

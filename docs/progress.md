@@ -12,6 +12,7 @@
 | **T0068-CSS** | **Panel 组件 CSS 重构（内联样式→CSS 文件）** | CSS-Vars ✅ | — | ✅ |
 | **T0068-CSS2** | **剩余组件 CSS 重构（HUD/Layout/Screens/NPC/Achievement）** | T0068-CSS ✅ | — | ✅ |
 | **CSS-Vars** | **CSS 变量系统 + 共享组件重构** | — | — | ✅ |
+| T0069 | 中央区域布局重构（仪表盘 + 日志抽屉化） | T0041 ✅ T0043 ✅ T0057 ✅ T0064 ✅ | [spec](specs/T0069-center-panel-revamp.md) | 📐 |
 | T0047 | 命格天赋系统 | T0001 ✅ | — | ⬜ |
 | T0030 | 转世重修 | T0029 ✅ T0040 ✅ T0056 ✅ | — | ⬜ |
 | T0050 | 心魔系统 | T0029 ✅ | — | ⬜ |

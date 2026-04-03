@@ -1,0 +1,65 @@
+/* ============================================================
+   QuestObjectiveRow.css — 目标进度行样式
+   ============================================================ */
+
+.quest-objective-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85em;
+  padding: 2px 0;
+  color: #ccc;
+}
+
+.quest-objective-check {
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.quest-objective-desc {
+  flex: 1;
+}
+
+.quest-objective-count {
+  color: #aaa;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.quest-objective-pct {
+  color: #888;
+  font-size: 0.82em;
+  width: 32px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.quest-progress-bar {
+  width: 60px;
+  height: 6px;
+  background: #333;
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.quest-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.quest-progress-fill-active {
+  background: linear-gradient(90deg, #4a9eff, #80c0ff);
+}
+
+.quest-progress-fill-done {
+  background: #59b300;
+}
+
+.quest-objective-row.completed .quest-objective-desc,
+.quest-objective-row.completed .quest-objective-count {
+  color: #6a6;
+  text-decoration: line-through;
+}
