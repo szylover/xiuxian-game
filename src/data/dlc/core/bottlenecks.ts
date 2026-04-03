@@ -4,7 +4,7 @@
 // 调数值请直接修改 core-bottlenecks.json，无需改动 TS 代码。
 // ============================================================
 
-import type { BottleneckDef } from '../game/types';
-import rawData from './core-bottlenecks.json';
+import type { BottleneckDef } from '../../../game/types';
+import rawData from './bottlenecks.json';
 
 export const CORE_BOTTLENECKS: BottleneckDef[] = rawData as BottleneckDef[];

@@ -5,9 +5,9 @@
 // 条件使用声明式 DSL，由 breakthrough-loader.ts 编译为谓词函数。
 // ============================================================
 
-import type { TribulationDef } from '../game/registry';
-import { loadBreakthroughReqsFromJson, type JsonBreakthroughReq, type JsonTribulation } from '../game/breakthrough-loader';
-import rawData from './core-breakthrough.json';
+import type { TribulationDef } from '../../../game/registry';
+import { loadBreakthroughReqsFromJson, type JsonBreakthroughReq, type JsonTribulation } from '../../../game/breakthrough-loader';
+import rawData from './breakthrough.json';
 
 const { breakthroughReqs, tribulations } = rawData as {
   breakthroughReqs: JsonBreakthroughReq[];

@@ -6,6 +6,7 @@ import { useState } from 'react';
 import type { CreatePlayerOptions } from '../../game/player';
 import { rollPreview } from '../../game/player/create';
 import type { PreviewRoll } from '../../game/player/create';
+import { ALL_DLCS } from '../../data/dlc';
 import RerollModal from './RerollModal';
 import SaveManagerPanel from './SaveManagerPanel';
 
@@ -24,6 +25,19 @@ export default function StartScreen({ onNewGame, onLoadGame, dataReady, dataErro
   const [appearance, setAppearance] = useState(0);
   const [preview, setPreview] = useState<PreviewRoll>(() => rollPreview());
   const [showReroll, setShowReroll] = useState(false);
+  const [enabledDLCs, setEnabledDLCs] = useState<Set<string>>(() =>
+    new Set(ALL_DLCS.filter(d => d.required).map(d => d.id))
+  );
+
+  const toggleDLC = (id: string) => {
+    setEnabledDLCs(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  };
+
+  const optionalDLCs = ALL_DLCS.filter(d => !d.required);
 
   const handleGenderChange = (g: 'male' | 'female') => {
     setGender(g);
@@ -98,6 +112,24 @@ export default function StartScreen({ onNewGame, onLoadGame, dataReady, dataErro
           <button className="btn btn-reroll" onClick={() => setShowReroll(true)}>
             🎲 随机属性
           </button>
+
+          {/* ── DLC 内容包选择 ── */}
+          {optionalDLCs.length > 0 && (
+            <div className="dlc-selector">
+              <div className="dlc-selector-title">📦 内容包</div>
+              {optionalDLCs.map(dlc => (
+                <label key={dlc.id} className="dlc-option">
+                  <input
+                    type="checkbox"
+                    checked={enabledDLCs.has(dlc.id)}
+                    onChange={() => toggleDLC(dlc.id)}
+                  />
+                  <span className="dlc-option-name">{dlc.name}</span>
+                  <span className="dlc-option-desc">{dlc.description}</span>
+                </label>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* ── 操作按钮 ── */}
