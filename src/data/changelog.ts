@@ -12,6 +12,19 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.6.0',
+    date: '2026-04-03',
+    title: '任务链系统（T0057）',
+    items: [
+      '新增任务链系统：支持多步骤剧情任务，事件驱动目标推进',
+      '9 条初始任务链：修炼入门/初探天地/实战试炼/每日修炼/岁月如梭等',
+      '目标类型：击杀妖兽/收集物品/到达区域/修炼/探索/战斗/存活时间等',
+      '注册表扩展 questChainRegistry，支持 DLC 任务链注册',
+      'Hook 集成：修炼/战斗/探索/炼丹/移动/NPC 后自动触发目标推进',
+      '文案集中管理 texts/quest.ts',
+    ],
+  },
+  {
     version: '1.5.0',
     date: '2026-04-02',
     title: '文案集中管理（T0065）',

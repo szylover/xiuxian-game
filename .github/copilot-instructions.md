@@ -202,6 +202,8 @@ xiuxian-game/
     │   ├── shop.ts                #     商店系统
     │   ├── smithing.ts            #     炼器系统
     │   ├── technique.ts           #     功法系统
+    │   ├── quest.ts               #     任务链系统（T0057）
+    │   ├── quest-loader.ts        #     JSON 任务链加载器
     │   ├── registry/              #     全局注册表（DLC 扩展核心）
     │   │   ├── index.ts           #       barrel re-export
     │   │   ├── stores.ts          #       注册表存储（Map）
@@ -219,6 +221,7 @@ xiuxian-game/
     │   ├── core-shop.json         #     商店商品
     │   ├── core-smithing.json     #     炼器配方
     │   ├── core-techniques.json   #     功法定义
+    │   ├── core-quests.json       #     任务链定义（T0057）
     │   ├── core-breakthrough.ts   #     突破需求 + 渡劫定义
     │   ├── changelog.ts           #     版本更新日志（每次 merge PR 时同步追加）
     │   └── texts/                 #     中文文案集中管理（禁止 magic string）
@@ -226,6 +229,7 @@ xiuxian-game/
     │       ├── common.ts          #       通用映射（属性名/品质名/灵根名/元素名/境界名）
     │       ├── combat.ts          #       战斗系统文案
     │       ├── cultivation.ts     #       修炼系统文案
+    │       ├── quest.ts           #       任务链系统文案（T0057）
     │       └── ...                #       各系统对应文案文件（新增系统须同步新建）
     └── hooks/                     #   自定义 React Hooks
         ├── useGameEngine.ts       #     游戏引擎 Hook（状态管理 + 存档）
