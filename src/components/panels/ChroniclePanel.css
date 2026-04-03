@@ -1,0 +1,190 @@
+/* ============================================================
+   ChroniclePanel.css — 修仙履历面板样式（T0068）
+   ============================================================ */
+
+.chronicle-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm);
+}
+
+.chronicle-empty {
+  text-align: center;
+  color: var(--color-text-dim);
+  font-style: italic;
+  padding: var(--spacing-2xl);
+}
+
+/* ── 轮回卡片 ── */
+
+.chronicle-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-darkest);
+  overflow: hidden;
+}
+
+.chronicle-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-lg);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.chronicle-card-header:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.chronicle-card-header.expanded {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.chronicle-card-main {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.chronicle-card-no {
+  color: var(--color-text-dim);
+  font-size: var(--font-size-xs);
+  min-width: 28px;
+}
+
+.chronicle-card-name {
+  color: var(--color-text-white);
+  font-weight: bold;
+  font-size: var(--font-size-md);
+}
+
+.chronicle-card-realm {
+  color: var(--color-text-gold);
+  font-size: var(--font-size-sm);
+}
+
+.chronicle-card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  font-size: var(--font-size-xs);
+}
+
+.chronicle-outcome {
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  font-weight: bold;
+}
+
+.outcome-died {
+  color: var(--color-text-danger);
+  background: rgba(255, 68, 68, 0.1);
+  border: 1px solid rgba(255, 68, 68, 0.3);
+}
+
+.outcome-ascended {
+  color: var(--color-text-gold);
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.outcome-active {
+  color: var(--color-text-success);
+  background: rgba(76, 175, 80, 0.1);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.chronicle-card-age,
+.chronicle-card-duration {
+  color: var(--color-text-muted);
+}
+
+.chronicle-expand-arrow {
+  color: var(--color-text-dim);
+  font-size: var(--font-size-xs);
+  margin-left: var(--spacing-sm);
+}
+
+/* ── 详情区 ── */
+
+.chronicle-card-detail {
+  padding: var(--spacing-lg);
+}
+
+.chronicle-stats {
+  display: flex;
+  gap: var(--spacing-xl);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.chronicle-no-events {
+  text-align: center;
+  color: var(--color-text-dim);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+  padding: var(--spacing-md);
+}
+
+/* ── 时间线 ── */
+
+.chronicle-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding-left: var(--spacing-md);
+  border-left: 2px solid var(--color-border);
+}
+
+.chronicle-event {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: var(--font-size-xs);
+  position: relative;
+}
+
+.chronicle-event::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--spacing-md) - 5px);
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-border-light);
+  border: 1px solid var(--color-bg-darkest);
+}
+
+.chronicle-event-death::before {
+  background: var(--color-text-danger);
+}
+
+.chronicle-event-end::before {
+  background: var(--color-text-gold);
+}
+
+.chronicle-event-icon {
+  flex-shrink: 0;
+  font-size: var(--font-size-sm);
+}
+
+.chronicle-event-time {
+  color: var(--color-text-dim);
+  white-space: nowrap;
+  min-width: 70px;
+}
+
+.chronicle-event-desc {
+  color: var(--color-text-primary);
+}
+
+.chronicle-event-death .chronicle-event-desc {
+  color: var(--color-text-danger);
+}

@@ -29,6 +29,7 @@ export const UI_LABELS = {
     map:         { title: '世界地图', icon: '🗺️' },
     npc:         { title: 'NPC', icon: '👥' },
     quest:       { title: '任务', icon: '📜' },
+    chronicle:   { title: '修仙履历', icon: '📋' },
     status:      { title: '详细属性', icon: '📋' },
   } as Record<string, { title: string; icon: string }>,
 

@@ -18,6 +18,8 @@ import { travelTo as travelToFn } from '../game/map';
 import { tryBodyRealmBreakthrough } from '../game/body-cultivation';
 import { meetNpc as meetNpcFn, giveGift as giveGiftFn } from '../game/npc';
 import { recalcStats } from '../game/player';
+import { REALMS } from '../game/data';
+import type { ChronicleEventType } from '../game/chronicle';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
 import { getEquipDef, getTechniqueDef, getRecipe, getSmithingRecipe } from '../game/registry';
 import { tickQuestObjectives, acceptQuest as acceptQuestFn, abandonQuest as abandonQuestFn, deliverQuestItem as deliverQuestItemFn, checkQuestDiscovery, setTrackedQuest as setTrackedQuestFn, turnInQuest as turnInQuestFn } from '../game/quest';
@@ -28,6 +30,11 @@ import { UI_LABELS } from '../data/texts/ui-labels';
 import { BODY_CULTIVATION_TEXTS } from '../data/texts/body-cultivation';
 import { BREAKTHROUGH_TEXTS } from '../data/texts/breakthrough';
 
+interface ChronicleHooks {
+  recordEvent: (type: ChronicleEventType, player: Player, description: string, meta?: Record<string, unknown>) => void;
+  syncSnapshot: (player: Player) => void;
+}
+
 export interface SystemActionDeps {
   player: Player | null;
   addLog: (msg: string, category?: LogCategory) => void;
@@ -35,10 +42,11 @@ export interface SystemActionDeps {
   setGameOver: React.Dispatch<React.SetStateAction<boolean>>;
   setGameOverReason: React.Dispatch<React.SetStateAction<string>>;
   setDeathModal: React.Dispatch<React.SetStateAction<DeathModalState | null>>;
+  chronicleHooks?: ChronicleHooks;
 }
 
 export function useSystemActions(deps: SystemActionDeps) {
-  const { player, addLog, setPlayer, setGameOver, setGameOverReason, setDeathModal } = deps;
+  const { player, addLog, setPlayer, setGameOver, setGameOverReason, setDeathModal, chronicleHooks } = deps;
 
   // ── 通用模式：执行操作 → 更新 player → 写日志 ──
   const execAction = useCallback(
@@ -152,6 +160,11 @@ export function useSystemActions(deps: SystemActionDeps) {
       if (!tribResult.success && finalPlayer.hp <= 0) {
         setGameOver(true);
         setGameOverReason(UI_LABELS.tribulationGameOver);
+        // T0068: 渡劫失败
+        chronicleHooks?.recordEvent('tribulation_fail', finalPlayer, '渡劫失败，形神俱灭');
+      } else if (tribResult.success) {
+        // T0068: 渡劫成功
+        chronicleHooks?.recordEvent('tribulation_pass', finalPlayer, '渡劫成功');
       }
     }
 
@@ -161,6 +174,12 @@ export function useSystemActions(deps: SystemActionDeps) {
     }
     // T0067: 突破成功后检查可发现的任务
     if (btResult.success) {
+      // T0068: 记录境界突破事件
+      const realmName = REALMS[finalPlayer.realmIndex]?.name ?? '???';
+      chronicleHooks?.recordEvent('realm_breakthrough', finalPlayer, `突破至${realmName}期`, {
+        realmName, realmIndex: finalPlayer.realmIndex,
+      });
+      chronicleHooks?.syncSnapshot(finalPlayer);
       setPlayer(prev => {
         if (!prev) return prev;
         const questDiscover = checkQuestDiscovery(prev, { type: 'reach_realm', realmIndex: prev.realmIndex });
@@ -236,9 +255,15 @@ export function useSystemActions(deps: SystemActionDeps) {
       if (!result.breakthrough) {
         return { player: p, message: BODY_CULTIVATION_TEXTS.notReady };
       }
+      // T0068: 记录体修突破事件
+      const bodyRealmName = REALMS[result.player.bodyRealmIndex]?.name ?? '???';
+      chronicleHooks?.recordEvent('body_realm_breakthrough', result.player, `体修突破至${bodyRealmName}`, {
+        bodyRealmName, bodyRealmIndex: result.player.bodyRealmIndex,
+      });
+      chronicleHooks?.syncSnapshot(result.player);
       return { player: result.player, message: result.message };
     });
-  }, [execAction]);
+  }, [execAction, chronicleHooks]);
 
   // ── T0025: NPC 邂逅 ──
   const meetNpc = useCallback((npcId: string) => {

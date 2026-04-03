@@ -122,6 +122,7 @@ export default function App() {
             onDeliverQuestItem={engine.deliverQuestItem}
             onTrackQuest={engine.setTrackedQuest}
             onTurnInQuest={engine.turnInQuest}
+            chronicle={engine.chronicle}
           />
         }
         debug={<>

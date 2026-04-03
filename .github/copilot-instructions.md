@@ -169,6 +169,7 @@ xiuxian-game/
     │   │   ├── ShopPanel.tsx      #       商店面板
     │   │   ├── SmithingPanel.tsx  #       炼器面板
     │   │   ├── QuestPanel.tsx     #       任务面板（T0067）
+    │   │   ├── ChroniclePanel.tsx  #       修仙履历面板（T0068）
     │   │   ├── NpcPanel.tsx       #       NPC 面板
     │   │   ├── inventory/         #       背包子组件
     │   │   ├── shop/              #       商店子组件
@@ -202,6 +203,7 @@ xiuxian-game/
     │       └── FloatingPanel.tsx  #       浮动面板
     ├── game/                      #   游戏逻辑（纯 TS，不依赖 React）
     │   ├── types.ts               #     全局类型定义（DLC/装备/死亡等）
+    │   ├── chronicle.ts           #     修仙履历系统核心逻辑（T0068）
     │   ├── event-loader.ts        #     JSON 事件加载器（纯数据 → GameEvent）
     │   ├── item-loader.ts         #     JSON 物品加载器（纯数据 → ItemDef）
     │   ├── inventory.ts           #     背包系统（增删查用物品，容量管理）
@@ -250,4 +252,5 @@ xiuxian-game/
         ├── useSystemActions.ts    #     系统行为 Hook（使用物品/炼丹/装备/商店/突破等）
         ├── useGameLog.ts          #     日志管理 Hook
         └── useToast.ts            #     Toast 通知 Hook
+        └── useChronicle.ts        #     修仙履历 Hook（T0068）
 ```
