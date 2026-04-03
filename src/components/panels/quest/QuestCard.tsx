@@ -2,6 +2,7 @@
 // quest/QuestCard.tsx — 任务卡片（active/discovered/completed）
 // ============================================================
 
+import './QuestCard.css';
 import type { QuestChainDef, QuestChainProgress } from '../../../game/types';
 import { getNpcDef } from '../../../game/registry';
 import { QUEST_TEXTS } from '../../../data/texts/quest';
@@ -61,7 +62,7 @@ export default function QuestCard(props: QuestCardProps) {
       <div className="quest-card-header">
         <span className="quest-card-icon">{def.icon ?? '📜'}</span>
         <span className="quest-card-name">{def.name}</span>
-        <span className="quest-category-tag" style={{ background: catColor + '22', color: catColor, borderColor: catColor }}>
+        <span className="quest-category-tag" style={{ background: catColor + '22', color: catColor, borderColor: catColor } as React.CSSProperties}>
           {catLabel}
         </span>
       </div>
@@ -83,7 +84,7 @@ function ActiveBody({ def, progress, isTracked, onTrack, onAbandon, onDeliver }:
     <>
       {isPendingTurnIn ? (
         <div className="quest-step-info">
-          <span className="quest-step-name" style={{ color: '#8f8' }}>
+          <span className="quest-step-name quest-step-name-pending">
             {QUEST_TEXTS.pendingTurnInHint(getNpcDef(def.turnInNpcId ?? '')?.name ?? '???')}
           </span>
         </div>
@@ -148,10 +149,10 @@ function DiscoveredBody({ def, onAccept }: QuestCardDiscoveredProps) {
 function CompletedBody({ def, completedAt, repeatCount }: QuestCardCompletedProps) {
   return (
     <>
-      <div className="quest-card-desc" style={{ opacity: 0.7 }}>{def.description}</div>
+      <div className="quest-card-desc quest-card-desc-dim">{def.description}</div>
       <div className="quest-completed-info">
         <span>{QUEST_TEXTS.completedAt(completedAt)}</span>
-        {repeatCount > 1 && <span style={{ marginLeft: 8 }}>{QUEST_TEXTS.repeatCount(repeatCount)}</span>}
+        {repeatCount > 1 && <span className="quest-completed-repeat">{QUEST_TEXTS.repeatCount(repeatCount)}</span>}
       </div>
     </>
   );

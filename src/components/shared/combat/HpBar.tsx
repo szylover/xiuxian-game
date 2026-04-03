@@ -2,6 +2,8 @@
 // combat/HpBar.tsx — 通用 HP/MP 条组件（带动画过渡）
 // ============================================================
 
+import './HpBar.css';
+
 interface HpBarProps {
   current: number;
   max: number;
@@ -19,7 +21,7 @@ export default function HpBar({ current, max, color, label, showText = true, ani
       <div className="hpbar-track">
         <div
           className={`hpbar-fill hpbar-${color}${animate ? ' hpbar-animate' : ''}`}
-          style={{ width: `${pct}%` }}
+          style={{ '--hp-width': `${pct}%` } as React.CSSProperties}
         />
         {showText && <span className="hpbar-text">{current}/{max}</span>}
       </div>

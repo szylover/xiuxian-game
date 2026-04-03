@@ -2,6 +2,7 @@
 // StatusBar.tsx — 顶部状态栏（常驻）
 // ============================================================
 
+import './StatusBar.css';
 import { REALMS } from '../../game/data';
 import { getNextRealm, formatAge } from '../../game/player';
 import type { Player } from '../../game/player';
@@ -30,7 +31,7 @@ export default function StatusBar({ player }: StatusBarProps) {
       <StatusItem icon="💰" text={`${player.gold}`} title="灵石" />
       <StatusItem icon="📅" text={`${formatAge(player.age)}/${player.lifespan === Infinity ? '∞' : Math.floor(player.lifespan / 12) + UI_LABELS.age}`} title="年龄/寿限" />
       <div className="exp-bar" title={`修为 ${player.exp}${nextRealm ? '/' + nextRealm.expReq : ' (MAX)'}`}>
-        <div className="exp-bar-fill" style={{ width: `${expProgress}%` }} />
+        <div className="exp-bar-fill" style={{ '--exp-width': `${expProgress}%` } as React.CSSProperties} />
         <span className="exp-bar-text">
           修为 {player.exp}{nextRealm ? `/${nextRealm.expReq}` : ''}
         </span>

@@ -2,6 +2,7 @@
 // EquippableItem.tsx — 背包中可装备的物品行
 // ============================================================
 
+import './EquippableItem.css';
 import type { EquipDef } from '../../../game/registry';
 import { RARITY_COLORS, SLOT_ICONS, statsCN } from '../../shared';
 import { getSlotName } from '../../../game/equipment';
@@ -17,8 +18,11 @@ interface EquippableItemProps {
 
 export default function EquippableItem({ itemId, itemName, equipDef, canEquip, reason, onEquip }: EquippableItemProps) {
   return (
-    <div className="equip-inv-item" style={{ borderLeftColor: RARITY_COLORS[equipDef.rarity] }}>
-      <span className="equip-inv-name" style={{ color: RARITY_COLORS[equipDef.rarity] }}>
+    <div
+      className="equip-inv-item"
+      style={{ '--rarity-color': RARITY_COLORS[equipDef.rarity] } as React.CSSProperties}
+    >
+      <span className="equip-inv-name">
         {SLOT_ICONS[equipDef.slot]} {itemName}
       </span>
       <span className="equip-inv-stats">

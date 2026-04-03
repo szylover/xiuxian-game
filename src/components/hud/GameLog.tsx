@@ -2,6 +2,7 @@
 // GameLog.tsx — 时间线日志面板（T0043: 按年/月分组）
 // ============================================================
 
+import './GameLog.css';
 import { useState, useMemo } from 'react';
 import type { LogEntry, LogCategory } from '../../hooks/useGameLog';
 import { LOG_COLORS, groupLogsByTime } from '../../hooks/useGameLog';
@@ -135,7 +136,7 @@ export default function GameLog({ logs, currentYear = 1, currentMonth = 1 }: Gam
                           <div
                             key={entry.id}
                             className="log-entry"
-                            style={{ color: LOG_COLORS[entry.category] || LOG_COLORS.default }}
+                            style={{ '--log-color': LOG_COLORS[entry.category] || LOG_COLORS.default } as React.CSSProperties}
                           >
                             {entry.text}
                           </div>

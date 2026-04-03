@@ -2,6 +2,109 @@
    App.css — 修仙之路 全局样式
    ============================================================ */
 
+/* ── CSS 自定义属性（全局设计令牌）── */
+:root {
+  /* === 主题颜色 === */
+  --color-gold: #FFD700;
+  --color-gold-dim: #b8960c;
+  --color-accent: #FF6B35;
+  --color-accent-dim: #cc5520;
+
+  /* === 背景色 === */
+  --color-bg-darkest: #0a0e1a;
+  --color-bg-dark: #1a1e2e;
+  --color-bg-medium: #2a2e3e;
+  --color-bg-light: #3a3e4e;
+  --color-bg-panel: #16213e;
+  --color-bg-overlay: rgba(0, 0, 0, 0.8);
+  --color-bg-overlay-light: rgba(0, 0, 0, 0.5);
+
+  /* === 文字颜色 === */
+  --color-text-primary: #d4d4d4;
+  --color-text-secondary: #aaa;
+  --color-text-muted: #888;
+  --color-text-dim: #666;
+  --color-text-gold: #FFD700;
+  --color-text-accent: #FF6B35;
+  --color-text-white: #fff;
+  --color-text-success: #4CAF50;
+  --color-text-danger: #ff4444;
+  --color-text-warning: #ffaa00;
+  --color-text-info: #4fc3f7;
+
+  /* === 边框颜色 === */
+  --color-border: #2a2e3e;
+  --color-border-light: #3a3e4e;
+  --color-border-gold: rgba(255, 215, 0, 0.3);
+  --color-border-accent: rgba(255, 107, 53, 0.3);
+
+  /* === 品质颜色（与 constants.ts RARITY_COLORS 保持一致）=== */
+  --rarity-common:    #9E9E9E;
+  --rarity-uncommon:  #4CAF50;
+  --rarity-rare:      #2196F3;
+  --rarity-epic:      #9C27B0;
+  --rarity-legendary: #FF9800;
+
+  /* === 灵根颜色（与 constants.ts SPIRIT_ROOT_COLORS 保持一致）=== */
+  --spirit-metal: #C0C0C0;
+  --spirit-wood:  #4CAF50;
+  --spirit-water: #2196F3;
+  --spirit-fire:  #F44336;
+  --spirit-earth: #FF9800;
+
+  /* === 属性颜色 === */
+  --stat-hp:    #ff6b6b;
+  --stat-mp:    #74b9ff;
+  --stat-atk:   #fd9644;
+  --stat-def:   #a29bfe;
+  --stat-speed: #55efc4;
+  --stat-crit:  #ffeaa7;
+  --stat-gold:  #fdcb6e;
+
+  /* === 字体大小 === */
+  --font-size-xs:  0.65rem;
+  --font-size-sm:  0.75rem;
+  --font-size-md:  0.85rem;
+  --font-size-base: 0.9rem;
+  --font-size-lg:  1rem;
+  --font-size-xl:  1.1rem;
+  --font-size-2xl: 1.2rem;
+  --font-size-3xl: 1.4rem;
+
+  /* === 间距 === */
+  --spacing-xs:  2px;
+  --spacing-sm:  4px;
+  --spacing-md:  8px;
+  --spacing-lg:  12px;
+  --spacing-xl:  16px;
+  --spacing-2xl: 20px;
+  --spacing-3xl: 24px;
+
+  /* === 圆角 === */
+  --radius-sm:   3px;
+  --radius-md:   6px;
+  --radius-lg:   8px;
+  --radius-xl:   12px;
+  --radius-full: 50%;
+
+  /* === 阴影 === */
+  --shadow-sm:     0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md:     0 2px 8px rgba(0,0,0,0.4);
+  --shadow-lg:     0 4px 16px rgba(0,0,0,0.5);
+  --shadow-gold:   0 0 8px rgba(255, 215, 0, 0.3);
+  --shadow-accent: 0 0 8px rgba(255, 107, 53, 0.3);
+
+  /* === z-index === */
+  --z-modal: 1000;
+  --z-toast: 2000;
+  --z-debug: 9999;
+
+  /* === 过渡动画 === */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -3458,218 +3561,4 @@ body {
 
 .btn-danger:active {
   transform: scale(0.97);
-}
-
-/* ============================================================
-   T0067 — 任务面板样式
-   ============================================================ */
-
-.quest-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.quest-empty {
-  text-align: center;
-  color: #888;
-  padding: 24px 0;
-  font-style: italic;
-}
-
-.quest-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-/* ── 任务卡片 ── */
-
-.quest-card {
-  background: rgba(20, 20, 40, 0.6);
-  border: 1px solid #444;
-  border-radius: 6px;
-  padding: 8px 10px;
-  transition: border-color 0.2s;
-}
-
-.quest-card:hover {
-  border-color: #888;
-}
-
-.quest-card-header {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 4px;
-}
-
-.quest-card-icon {
-  font-size: 1.1em;
-}
-
-.quest-card-name {
-  font-weight: bold;
-  color: #e0d8c0;
-  flex: 1;
-}
-
-.quest-category-tag {
-  font-size: 0.72em;
-  padding: 1px 6px;
-  border-radius: 3px;
-  font-weight: bold;
-}
-
-.quest-category-tag[data-cat="main"]     { background: #e6ac00; color: #1a1a00; }
-.quest-category-tag[data-cat="side"]     { background: #4a9eff; color: #001a40; }
-.quest-category-tag[data-cat="daily"]    { background: #59b300; color: #0a1a00; }
-.quest-category-tag[data-cat="bounty"]   { background: #ff6b35; color: #1a0800; }
-.quest-category-tag[data-cat="dialogue"] { background: #c080ff; color: #1a0033; }
-.quest-category-tag[data-cat="event"]    { background: #ff4d6a; color: #1a000a; }
-
-.quest-card-body {
-  margin-left: 2px;
-}
-
-.quest-card-desc {
-  color: #aaa;
-  font-size: 0.88em;
-  margin-bottom: 6px;
-}
-
-.quest-step-info {
-  color: #ccc;
-  font-size: 0.85em;
-  margin-bottom: 4px;
-}
-
-.quest-step-name {
-  color: #e6d9a8;
-}
-
-.quest-card-actions {
-  display: flex;
-  gap: 6px;
-  margin-top: 6px;
-}
-
-.quest-completed-info {
-  color: #888;
-  font-size: 0.82em;
-  margin-top: 2px;
-}
-
-/* ── 目标进度行 ── */
-
-.quest-objective-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.85em;
-  padding: 2px 0;
-  color: #ccc;
-}
-
-.quest-objective-check {
-  width: 14px;
-  text-align: center;
-  flex-shrink: 0;
-}
-
-.quest-objective-desc {
-  flex: 1;
-}
-
-.quest-objective-count {
-  color: #aaa;
-  font-size: 0.9em;
-  white-space: nowrap;
-}
-
-.quest-objective-pct {
-  color: #888;
-  font-size: 0.82em;
-  width: 32px;
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.quest-progress-bar {
-  width: 60px;
-  height: 6px;
-  background: #333;
-  border-radius: 3px;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.quest-progress-fill {
-  height: 100%;
-  border-radius: 3px;
-  background: linear-gradient(90deg, #4a9eff, #80c0ff);
-  transition: width 0.3s ease;
-}
-
-.quest-objective-row.completed .quest-objective-desc,
-.quest-objective-row.completed .quest-objective-count {
-  color: #6a6;
-  text-decoration: line-through;
-}
-
-.quest-deliver-btn {
-  font-size: 0.75em;
-  padding: 1px 6px;
-}
-
-/* ── 奖励预览 ── */
-
-.quest-reward-preview {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  flex-wrap: wrap;
-  font-size: 0.82em;
-  color: #c8b888;
-  margin-top: 4px;
-}
-
-.quest-reward-label {
-  color: #888;
-}
-
-.quest-reward-items {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-/* ── 追踪器 ── */
-
-.quest-tracker {
-  margin-top: 8px;
-  padding: 6px 8px;
-  background: rgba(20, 20, 40, 0.5);
-  border: 1px solid #555;
-  border-radius: 4px;
-  font-size: 0.82em;
-}
-
-.quest-tracker-title {
-  color: #e6d9a8;
-  font-weight: bold;
-  margin-bottom: 3px;
-}
-
-.quest-tracker-step {
-  color: #aaa;
-  font-size: 0.92em;
-  margin-bottom: 2px;
-}
-
-/* ── NPC 任务标记 ── */
-
-.npc-quest-marker {
-  margin-left: 4px;
-  font-size: 0.9em;
 }

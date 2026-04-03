@@ -1,0 +1,16 @@
+/* ============================================================
+   CapacityBar.css — 容量/进度条组件样式
+   布局样式定义在 App.css (.capacity-bar-wrapper / .capacity-bar / .capacity-bar-fill)
+   此文件补充 CSS 变量注入用于动态填充色
+   ============================================================ */
+
+/*
+ * 填充色由组件通过 style prop 注入 --capacity-fill-color CSS 变量。
+ * 默认回退值使用 --rarity-uncommon (#4CAF50)。
+ *
+ * 用法：
+ *   <div class="capacity-bar-fill" style="--capacity-fill-color: #F44336; width: 75%" />
+ */
+.capacity-bar-fill {
+  background: var(--capacity-fill-color, var(--rarity-uncommon));
+}

@@ -2,6 +2,7 @@
 // ShopBuyItem.tsx — 商店买入物品行
 // ============================================================
 
+import './ShopBuyItem.css';
 import type { ItemDef } from '../../../game/registry';
 import { RARITY_COLORS } from '../../shared';
 
@@ -16,9 +17,9 @@ interface ShopBuyItemProps {
 
 export default function ShopBuyItem({ itemId, def, price, originalPrice, canAfford, onBuy }: ShopBuyItemProps) {
   return (
-    <div className="shop-item" style={{ borderLeftColor: RARITY_COLORS[def.rarity] }}>
+    <div className="shop-item" style={{ '--rarity-color': RARITY_COLORS[def.rarity] } as React.CSSProperties}>
       <div className="shop-item-info">
-        <span className="shop-item-name" style={{ color: RARITY_COLORS[def.rarity] }}>
+        <span className="shop-item-name">
           {def.name}
         </span>
         <span className="shop-item-desc">{def.description}</span>

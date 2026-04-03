@@ -1,0 +1,31 @@
+/* ============================================================
+   FloatingPanel.css — 可拖拽浮动窗口组件样式
+   主要样式定义在 App.css (.floating-panel / .floating-panel-header 等)
+   此文件使用 CSS 变量强化主题一致性
+   ============================================================ */
+
+/*
+ * 动态位置（left / top / width）由拖拽逻辑计算，
+ * 必须保留为 inline style。此处不做覆盖。
+ *
+ * 浮动面板 z-index 与 App.css --z-modal 对齐。
+ */
+.floating-panel {
+  z-index: var(--z-modal);
+  left: var(--panel-left);
+  top: var(--panel-top);
+  width: var(--panel-width);
+}
+
+.floating-panel-title {
+  color: var(--color-text-gold);
+}
+
+.floating-panel-close {
+  color: var(--color-text-dim);
+  transition: all var(--transition-fast);
+}
+
+.floating-panel-close:hover {
+  color: var(--color-text-danger);
+}

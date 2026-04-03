@@ -1,0 +1,195 @@
+/* ============================================================
+   NpcDetailModal.css — NPC 详情浮窗样式
+   ============================================================ */
+
+/* 遮罩层 */
+.npc-detail-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 弹窗主体 */
+.npc-detail-modal {
+  background: var(--color-bg-dark);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.2rem;
+  width: 320px;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+/* 头部：表情 + 名称 + 关闭按钮 */
+.npc-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.npc-detail-emoji {
+  font-size: 2rem;
+}
+
+.npc-detail-name {
+  font-weight: bold;
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+}
+
+.npc-detail-title {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+.npc-detail-close {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/* 基本信息 */
+.npc-detail-info {
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.6;
+}
+
+.npc-detail-description {
+  font-size: 0.72rem;
+  color: #777;
+  margin-top: 0.2rem;
+}
+
+/* 好感度区域 */
+.npc-detail-affinity {
+  margin: 0.6rem 0;
+}
+
+.npc-detail-affinity-label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.npc-detail-affinity-value {
+  color: var(--rel-color, var(--color-accent));
+}
+
+.npc-detail-affinity-status {
+  margin-left: var(--spacing-sm);
+  color: var(--rel-color, var(--color-accent));
+}
+
+/* 好感度进度条 */
+.npc-affinity-track {
+  background: #333;
+  border-radius: var(--radius-sm);
+  height: 8px;
+  overflow: hidden;
+}
+
+.npc-affinity-fill {
+  width: var(--bar-pct, 0%);
+  height: 100%;
+  background: var(--rel-color, var(--color-accent));
+  transition: width 0.3s;
+  border-radius: var(--radius-sm);
+}
+
+/* 交谈消息气泡 */
+.npc-chat-bubble {
+  background: #252540;
+  border-radius: var(--radius-md);
+  padding: 0.4rem 0.6rem;
+  font-size: 0.78rem;
+  color: #e0c060;
+  margin-bottom: var(--spacing-sm);
+  border: 1px solid var(--color-border);
+}
+
+/* 交互按钮区 */
+.npc-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: var(--spacing-sm);
+}
+
+.npc-detail-actions .btn {
+  font-size: var(--font-size-xs);
+}
+
+.npc-btn-disabled {
+  opacity: 0.4;
+}
+
+.npc-btn-gift {
+  opacity: var(--gift-opacity, 0.5);
+}
+
+.npc-btn-gift:not(:disabled) {
+  opacity: 1;
+}
+
+/* ── NPC 任务区域 ── */
+
+.npc-quest-section {
+  margin-bottom: 0.5rem;
+  border-top: 1px solid #444;
+  padding-top: 0.5rem;
+}
+
+.npc-quest-section-title {
+  font-size: 0.82rem;
+  color: #e6d9a8;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.npc-quest-item {
+  border-radius: 4px;
+  padding: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.npc-quest-item-turnin {
+  background: #1a2a1a;
+  border: 1px solid #4a4;
+}
+
+.npc-quest-item-available {
+  background: #252540;
+  border: 1px solid #555;
+}
+
+.npc-quest-item-name {
+  font-size: 0.8rem;
+  color: #e6d9a8;
+}
+
+.npc-quest-item-name-turnin {
+  color: #8f8;
+}
+
+.npc-quest-item-desc {
+  font-size: 0.72rem;
+  color: #aaa;
+}
+
+.npc-quest-item-btn {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+}

@@ -2,6 +2,7 @@
 // panels/npc/NpcCard.tsx — NPC 卡片组件
 // ============================================================
 
+import './NpcCard.css';
 import { REALMS } from '../../../game/data';
 import type { NpcDef, NpcRelationLevel } from '../../../game/types';
 import { NPC_RELATION_CN, NPC_RELATION_COLORS, NPC_RELATION_EMOJI } from '../../shared/constants';
@@ -26,39 +27,26 @@ export default function NpcCard({ npc, relationLevel, affinity, met, hasQuest, h
     <div
       className="npc-card"
       onClick={onClick}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.5rem',
-        padding: '0.5rem 0.6rem',
-        borderRadius: 6,
-        border: '1px solid #444',
-        cursor: 'pointer',
-        transition: 'border-color 0.15s',
-        background: '#1a1a2e',
-      }}
-      onMouseEnter={e => (e.currentTarget.style.borderColor = relColor)}
-      onMouseLeave={e => (e.currentTarget.style.borderColor = '#444')}
+      style={{ '--rel-color': relColor } as React.CSSProperties}
     >
-      <span style={{ fontSize: '1.4rem' }}>{npc.emoji}</span>
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#e0e0e0' }}>
+      <span className="npc-card-emoji">{npc.emoji}</span>
+      <div className="npc-card-info">
+        <div className="npc-card-name">
           {npc.name}{hasTurnIn && <span className="npc-quest-marker">❓</span>}{hasQuest && <span className="npc-quest-marker">📜</span>}
         </div>
-        <div style={{ fontSize: '0.72rem', color: '#888' }}>
-          {realmName}期
-        </div>
+        <div className="npc-card-realm">{realmName}期</div>
       </div>
-      <div style={{ textAlign: 'right', fontSize: '0.75rem' }}>
+      <div className="npc-card-relation">
         {met ? (
-          <span style={{ color: relColor }}>
+          <span className="npc-card-relation-label">
             {relEmoji} {relLabel}
-            <span style={{ fontSize: '0.65rem', marginLeft: 4, color: '#888' }}>({affinity})</span>
+            <span className="npc-card-affinity">({affinity})</span>
           </span>
         ) : (
-          <span style={{ color: '#666' }}>未邂逅</span>
+          <span className="npc-card-unmet">未邂逅</span>
         )}
       </div>
     </div>
   );
 }
+

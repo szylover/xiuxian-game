@@ -1,0 +1,22 @@
+/* ============================================================
+   CollapsiblePanel.css — 可折叠面板组件样式
+   主要样式定义在 App.css (.panel-toggle / .panel-content 等)
+   此文件使用 CSS 变量强化主题一致性
+   ============================================================ */
+
+/*
+ * CollapsiblePanel 是纯结构组件，样式由调用方传入的 className 决定。
+ * 通用折叠按钮 (.panel-toggle) 样式在 App.css 中定义。
+ */
+
+/* 折叠按钮与全局主题颜色对齐 */
+.panel-toggle {
+  color: var(--color-text-secondary);
+  background: var(--color-bg-dark);
+  border-color: var(--color-border-light);
+  transition: background var(--transition-fast);
+}
+
+.panel-toggle:hover {
+  background: #252a3e;
+}

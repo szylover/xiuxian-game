@@ -1,0 +1,82 @@
+/* ============================================================
+   DebugStatsTab.css — 数值标签页样式
+   ============================================================ */
+
+/* Section heading (used by SectionTitle component) */
+.debug-section-heading {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: 6px;
+  margin-bottom: 2px;
+  font-weight: bold;
+  border-bottom: 1px solid #333;
+  padding-bottom: 2px;
+}
+
+/* Realm / region selector row */
+.debug-realm-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  margin-bottom: 4px;
+}
+
+/* Full-width label inside realm group */
+.debug-realm-label {
+  font-size: var(--font-size-xs);
+  width: 100%;
+}
+
+/* Sized variant for realm / region buttons */
+.debug-btn-sm {
+  padding: 2px 6px;
+  font-size: var(--font-size-xs);
+}
+
+/* Tiny variant used in combat-tracker buttons */
+.debug-btn-tiny {
+  padding: 1px 4px;
+  font-size: 0.65rem;
+}
+
+/* ── Combat tracker box ── */
+.debug-tracker-box {
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 6px 8px;
+  margin: 4px 0;
+  font-size: 0.73rem;
+}
+
+.debug-tracker-label {
+  font-weight: bold;
+  font-size: var(--font-size-xs);
+}
+
+.debug-tracker-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 8px;
+  margin-top: 4px;
+}
+
+.debug-tracker-cell {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.debug-tracker-stat {
+  color: #aaa;
+  font-size: var(--font-size-xs);
+}
+
+.debug-tracker-stat strong {
+  color: #fff;
+}
+
+.debug-tracker-dim {
+  color: #777;
+  font-size: 0.65rem;
+}

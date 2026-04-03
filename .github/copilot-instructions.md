@@ -112,6 +112,8 @@ git worktree add ../xiuxian-T0065 feat/T0065-text-centralization
 - **文件拆分**：`src/game/` 和 `src/components/` 下的文件过大时应拆分为子文件或子目录；文件夹内文件过多时应按功能分组为子目录。具体阈值由开发者自行判断，保持单文件职责清晰、可读性好
 - **组件最小化**：React 组件应尽可能小，禁止在一个 `return` 里写大段内联 JSX。重复出现的 UI 模式（折叠面板、标签栏、容量条、物品卡片等）必须抽成 `src/components/shared/` 下的独立组件复用；业务子组件按功能放入对应子目录（如 `inventory/`、`shop/`、`equipment/`）。常量（品质颜色、属性中文名等）统一放 `shared/constants.ts`，禁止在多个文件中重复定义
 - **SVG/图片资源外置**：SVG、图片等静态资源禁止内联在 TSX 组件中，必须存放为独立文件（`public/avatars/`、`public/icons/` 等），组件通过 `<img src="...">` 引用。保持组件代码与视觉资源分离
+- **TS/TSX 禁止内联 CSS（T0068）**：**禁止**在 `.ts`/`.tsx` 文件中写 `style={{ ... }}` 内联样式（除以下唯一例外）。每个有样式需求的组件**必须**有同名 `.css` 伴随文件（如 `Button.tsx` + `Button.css`），样式全部写入 CSS 文件，组件通过 `className` 引用。**唯一允许的例外**：运行时动态计算的值（如百分比宽度、由 JS 逻辑决定的颜色）必须使用 CSS 变量注入模式：`style={{ '--my-var': runtimeValue } as React.CSSProperties}`，然后在 CSS 中用 `var(--my-var)` 引用。
+- **CSS 变量优先（T0068）**：颜色、字号、间距、圆角、阴影等设计 token 必须统一使用 `App.css` `:root` 中定义的 CSS 变量（如 `var(--color-gold)`、`var(--font-size-sm)`、`var(--spacing-md)`），**禁止**在组件 CSS 或 TS 文件中硬编码十六进制颜色或魔法数字。新增颜色/尺寸 token 时先在 `:root` 中定义再使用。当前已定义变量见 `src/App.css` 顶部 `:root` 块。
 - **纯前端**：零后端依赖，所有状态存 `localStorage`，可直接部署到 Azure Static Web Apps
 - **React + TypeScript**：使用 React（Vite 构建）开发，使用 TypeScript，构建产物部署到 Azure SWA
 - **渐进增强**：先跑通核心循环（修炼→战斗→突破），再叠加子系统

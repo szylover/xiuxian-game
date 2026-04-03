@@ -3,6 +3,7 @@
 // ============================================================
 
 import { useState } from 'react';
+import './QuestPanel.css';
 import type { Player } from '../../game/player';
 import { getQuestState, getDiscoveredQuests, getTrackedQuestInfo } from '../../game/quest';
 import { getQuestChainDef, getNpcDef } from '../../game/registry';
@@ -56,7 +57,7 @@ export default function QuestPanel({
           <div className="quest-tracker">
             <div className="quest-tracker-title">📜 {def.name}</div>
             {isPending ? (
-              <div className="quest-tracker-step" style={{ color: '#8f8' }}>
+              <div className="quest-tracker-step quest-tracker-step-pending">
                 {QUEST_TEXTS.pendingTurnInHint(getNpcDef(def.turnInNpcId ?? '')?.name ?? '???')}
               </div>
             ) : (

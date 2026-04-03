@@ -1,0 +1,12 @@
+/* ============================================================
+   InventoryItem.css — 背包物品卡片样式
+   ============================================================ */
+
+/* 通过 CSS var 注入稀有度颜色 */
+.inventory-item {
+  border-left-color: var(--rarity-color, #9E9E9E);
+}
+
+.inventory-item .item-name {
+  color: var(--rarity-color, #9E9E9E);
+}

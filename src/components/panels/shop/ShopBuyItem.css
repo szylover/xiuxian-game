@@ -1,0 +1,11 @@
+/* ============================================================
+   ShopBuyItem.css — 商店购买物品行样式
+   ============================================================ */
+
+.shop-item {
+  border-left-color: var(--rarity-color, #9E9E9E);
+}
+
+.shop-item .shop-item-name {
+  color: var(--rarity-color, #9E9E9E);
+}

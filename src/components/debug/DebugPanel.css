@@ -1,0 +1,195 @@
+/* ============================================================
+   DebugPanel.css — 调试面板主体（各功能标签页）样式
+   ============================================================ */
+
+/* ── Shared tab layout helpers ── */
+
+/* Tiny button variant (shared across debug tabs) */
+.debug-btn-tiny {
+  padding: 1px 4px;
+  font-size: 0.65rem;
+}
+
+/* Column-start flex block used inside tab sections */
+.debug-tab-col {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.debug-tab-col-sm {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+}
+
+.debug-tab-col-mt {
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 0.6rem;
+}
+
+/* Bold label inside debug-row */
+.debug-label-bold {
+  font-weight: bold;
+}
+
+/* Wrapped btns row with larger gap */
+.debug-btns-wrap {
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+/* Small margin-top row */
+.debug-row-mt-sm {
+  margin-top: 0.5rem;
+}
+
+.debug-row-mt-xs {
+  margin-top: 0.4rem;
+}
+
+/* ── Technique tab ── */
+
+/* Monospace passive-bonus summary line (green) */
+.debug-technique-bonus {
+  font-size: 0.75rem;
+  color: #4CAF50;
+  margin-top: 0.25rem;
+  font-family: monospace;
+}
+
+/* "No techniques yet" message */
+.debug-technique-empty {
+  font-size: 0.75rem;
+  color: #9E9E9E;
+  margin-top: 0.25rem;
+}
+
+/* Container for per-technique cards */
+.debug-technique-list {
+  margin-top: 0.6rem;
+}
+
+/* Bordered technique card */
+.debug-technique-card {
+  margin-top: 0.3rem;
+  font-size: 0.73rem;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 0.3rem 0.5rem;
+}
+
+/* Technique name row */
+.debug-technique-card-name {
+  color: #ccc;
+  margin-bottom: 0.15rem;
+}
+
+/* Unlocked passive count badge */
+.debug-technique-unlocked-count {
+  color: #4CAF50;
+  margin-left: 0.5rem;
+}
+
+/* Passive effect lines */
+.debug-passive-effect {
+  padding-left: 0.5rem;
+}
+
+.debug-passive-effect--unlocked {
+  color: #81C784;
+}
+
+.debug-passive-effect--locked {
+  color: #757575;
+}
+
+/* ── Divine arts tab ── */
+
+/* Monospace status block */
+.debug-divine-status {
+  font-size: 0.75rem;
+  font-family: monospace;
+  color: #ccc;
+}
+
+/* Active art ID highlight */
+.debug-divine-active-id {
+  color: #f1c40f;
+}
+
+/* Aptitude list container */
+.debug-divine-aptitude-list {
+  margin-top: 0.6rem;
+}
+
+/* Aptitude row spacing */
+.debug-aptitude-row {
+  margin-top: 0.25rem;
+}
+
+/* Element-coloured button / label tints */
+.debug-element-fire    { color: #e74c3c; }
+.debug-element-thunder { color: #f1c40f; }
+.debug-element-water   { color: #3498db; }
+.debug-element-wind    { color: #1abc9c; }
+.debug-element-earth   { color: #795548; }
+.debug-element-wood    { color: #27ae60; }
+.debug-element-metal   { color: #DAA520; }
+
+/* ── Achievement tab ── */
+
+/* Unlocked IDs display */
+.debug-achievement-ids {
+  font-size: 0.72rem;
+  color: #FFD700;
+  font-family: monospace;
+  word-break: break-all;
+}
+
+/* Count summary */
+.debug-achievement-count {
+  font-size: var(--font-size-xs);
+  color: #888;
+  margin-top: 0.1rem;
+}
+
+/* ── Bottleneck tab ── */
+
+/* Info summary block */
+.debug-bn-info {
+  font-size: 0.75rem;
+  color: #ccc;
+}
+
+/* List container */
+.debug-bn-list {
+  margin-top: 0.5rem;
+}
+
+/* Individual bottleneck card */
+.debug-bn-card {
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 6px 8px;
+  margin-bottom: 4px;
+  font-size: 0.73rem;
+}
+
+/* Status text variants */
+.debug-bn-status--unlocked { color: #4CAF50; }
+.debug-bn-status--active   { color: #ff9800; }
+.debug-bn-status--inactive { color: #888; }
+
+/* Progress line */
+.debug-bn-progress {
+  color: #aaa;
+}
+
+/* Actions row */
+.debug-bn-actions {
+  display: flex;
+  gap: 0.3rem;
+  margin-top: 4px;
+}

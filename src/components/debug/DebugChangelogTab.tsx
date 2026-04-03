@@ -4,41 +4,37 @@
 // ============================================================
 
 import { CHANGELOG, CURRENT_VERSION } from '../../data/changelog';
+import './DebugChangelogTab.css';
 
 export default function DebugChangelogTab() {
   return (
     <div className="debug-stats">
-      <div className="debug-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.2rem', marginBottom: '0.4rem' }}>
-        <span className="debug-label" style={{ fontWeight: 'bold' }}>📋 当前版本</span>
-        <span style={{ fontSize: '0.85rem', color: '#4CAF50', fontFamily: 'monospace', fontWeight: 'bold' }}>
+      <div className="debug-row debug-changelog-header">
+        <span className="debug-label debug-changelog-header-label">📋 当前版本</span>
+        <span className="debug-changelog-current-ver">
           v{CURRENT_VERSION}
         </span>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', maxHeight: '400px', overflowY: 'auto' }}>
+      <div className="debug-changelog-list">
         {CHANGELOG.map((entry) => (
           <div
             key={entry.version}
-            style={{
-              border: '1px solid #333',
-              borderRadius: '4px',
-              padding: '0.4rem 0.6rem',
-              backgroundColor: entry.version === CURRENT_VERSION ? 'rgba(76,175,80,0.08)' : 'transparent',
-            }}
+            className={`debug-changelog-entry${entry.version === CURRENT_VERSION ? ' debug-changelog-entry--current' : ''}`}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.2rem' }}>
-              <span style={{ fontSize: '0.8rem', color: entry.version === CURRENT_VERSION ? '#4CAF50' : '#aaa', fontFamily: 'monospace', fontWeight: 'bold' }}>
+            <div className="debug-changelog-entry-top">
+              <span className={`debug-changelog-ver${entry.version === CURRENT_VERSION ? ' debug-changelog-ver--current' : ''}`}>
                 v{entry.version}
                 {entry.version === CURRENT_VERSION && (
-                  <span style={{ fontSize: '0.68rem', color: '#81C784', marginLeft: '0.4rem' }}>← 当前</span>
+                  <span className="debug-changelog-badge">← 当前</span>
                 )}
               </span>
-              <span style={{ fontSize: '0.7rem', color: '#666' }}>{entry.date}</span>
+              <span className="debug-changelog-date">{entry.date}</span>
             </div>
-            <div style={{ fontSize: '0.78rem', color: '#ccc', marginBottom: '0.2rem' }}>{entry.title}</div>
-            <ul style={{ margin: 0, paddingLeft: '1rem', listStyle: 'disc' }}>
+            <div className="debug-changelog-title">{entry.title}</div>
+            <ul className="debug-changelog-items-list">
               {entry.items.map((item, i) => (
-                <li key={i} style={{ fontSize: '0.72rem', color: '#888', lineHeight: '1.5' }}>{item}</li>
+                <li key={i} className="debug-changelog-item">{item}</li>
               ))}
             </ul>
           </div>

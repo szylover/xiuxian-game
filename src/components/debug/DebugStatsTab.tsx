@@ -7,6 +7,7 @@ import type { Player } from '../../game/player';
 import { REALMS } from '../../game/data';
 import { getAllBodyRealmDefs, getAllRegions } from '../../game/registry';
 import { getMapState } from '../../game/map';
+import './DebugStatsTab.css';
 
 // 可编辑数值行
 function StatEditor({ label, value, deltas, onChange }: { label: string; value: number; deltas: number[]; onChange: (v: number) => void }) {
@@ -30,7 +31,7 @@ function StatEditor({ label, value, deltas, onChange }: { label: string; value: 
 }
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
-  return <div style={{ fontSize: '0.7rem', color: '#888', marginTop: 6, marginBottom: 2, fontWeight: 'bold', borderBottom: '1px solid #333', paddingBottom: 2 }}>{children}</div>;
+  return <div className="debug-section-heading">{children}</div>;
 }
 
 const RESOURCE_FIELDS = [
@@ -81,36 +82,33 @@ interface DebugStatsTabProps {
 }
 
 export default function DebugStatsTab({ player, onSetStat, onFullRestore, onDebugTravel, onSetTracking }: DebugStatsTabProps) {
-  const btnStyle = { padding: '2px 6px', fontSize: '0.7rem' } as const;
-  const tinyBtnStyle = { padding: '1px 4px', fontSize: '0.65rem' } as const;
-
   return (
     <div className="debug-stats">
       {/* ── 快捷控制区 ── */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.2rem', marginBottom: 4 }}>
-        <span className="debug-label" style={{ fontSize: '0.7rem', width: '100%' }}>🏔️ 境界</span>
+      <div className="debug-realm-group">
+        <span className="debug-label debug-realm-label">🏔️ 境界</span>
         {REALMS.map((r, i) => (
-          <button key={i} className={`btn debug-btn ${player.realmIndex === i ? 'debug-active' : ''}`}
-            onClick={() => onSetStat('realmIndex', i)} style={btnStyle}>{r.name}</button>
+          <button key={i} className={`btn debug-btn debug-btn-sm ${player.realmIndex === i ? 'debug-active' : ''}`}
+            onClick={() => onSetStat('realmIndex', i)}>{r.name}</button>
         ))}
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.2rem', marginBottom: 4 }}>
-        <span className="debug-label" style={{ fontSize: '0.7rem', width: '100%' }}>💪 体修境界</span>
+      <div className="debug-realm-group">
+        <span className="debug-label debug-realm-label">💪 体修境界</span>
         {getAllBodyRealmDefs().map((r) => (
-          <button key={r.index} className={`btn debug-btn ${player.bodyRealmIndex === r.index ? 'debug-active' : ''}`}
-            onClick={() => onSetStat('bodyRealmIndex', r.index)} style={btnStyle}>{r.name}</button>
+          <button key={r.index} className={`btn debug-btn debug-btn-sm ${player.bodyRealmIndex === r.index ? 'debug-active' : ''}`}
+            onClick={() => onSetStat('bodyRealmIndex', r.index)}>{r.name}</button>
         ))}
       </div>
 
       {onDebugTravel && (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.2rem', marginBottom: 4 }}>
-          <span className="debug-label" style={{ fontSize: '0.7rem', width: '100%' }}>📍 当前区域</span>
+        <div className="debug-realm-group">
+          <span className="debug-label debug-realm-label">📍 当前区域</span>
           {getAllRegions().sort((a, b) => a.minRealm - b.minRealm).map((r) => {
             const isCurrent = getMapState(player).currentRegionId === r.id;
             return (
-              <button key={r.id} className={`btn debug-btn ${isCurrent ? 'debug-active' : ''}`}
-                onClick={() => onDebugTravel(r.id)} style={btnStyle}>{r.emoji} {r.name}</button>
+              <button key={r.id} className={`btn debug-btn debug-btn-sm ${isCurrent ? 'debug-active' : ''}`}
+                onClick={() => onDebugTravel(r.id)}>{r.emoji} {r.name}</button>
             );
           })}
         </div>
@@ -121,25 +119,25 @@ export default function DebugStatsTab({ player, onSetStat, onFullRestore, onDebu
       </div>
 
       {/* ── 战斗追踪 ── */}
-      <div style={{ border: '1px solid #444', borderRadius: 4, padding: '6px 8px', margin: '4px 0', fontSize: '0.73rem' }}>
-        <span className="debug-label" style={{ fontWeight: 'bold', fontSize: '0.7rem' }}>⚔️ 战斗追踪</span>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px 8px', marginTop: 4 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 3, flexWrap: 'wrap' }}>
-            <span style={{ color: '#aaa', fontSize: '0.7rem' }}>击杀: <strong style={{ color: '#fff' }}>{player.tracking.killCount}</strong></span>
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">⚔️ 战斗追踪</span>
+        <div className="debug-tracker-grid">
+          <div className="debug-tracker-cell">
+            <span className="debug-tracker-stat">击杀: <strong>{player.tracking.killCount}</strong></span>
             {[10, 50].map(d => (
-              <button key={d} className="btn debug-btn" style={tinyBtnStyle}
+              <button key={d} className="btn debug-btn debug-btn-tiny"
                 onClick={() => onSetTracking?.('killCount', player.tracking.killCount + d)}>+{d}</button>
             ))}
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 3, flexWrap: 'wrap' }}>
-            <span style={{ color: '#aaa', fontSize: '0.7rem' }}>Boss: <strong style={{ color: '#fff' }}>{player.tracking.bossKillCount}</strong></span>
+          <div className="debug-tracker-cell">
+            <span className="debug-tracker-stat">Boss: <strong>{player.tracking.bossKillCount}</strong></span>
             {[5, 10].map(d => (
-              <button key={d} className="btn debug-btn" style={tinyBtnStyle}
+              <button key={d} className="btn debug-btn debug-btn-tiny"
                 onClick={() => onSetTracking?.('bossKillCount', player.tracking.bossKillCount + d)}>+{d}</button>
             ))}
           </div>
-          <div style={{ color: '#777', fontSize: '0.65rem' }}>连续修炼: {player.tracking.consecutiveCultivates}</div>
-          <div style={{ color: '#777', fontSize: '0.65rem' }}>突破失败: {player.tracking.consecutiveBreakthroughFails}</div>
+          <div className="debug-tracker-dim">连续修炼: {player.tracking.consecutiveCultivates}</div>
+          <div className="debug-tracker-dim">突破失败: {player.tracking.consecutiveBreakthroughFails}</div>
         </div>
       </div>
 

@@ -1,0 +1,16 @@
+/* ============================================================
+   SmithingPanel.css — 炼器面板样式
+   ============================================================ */
+
+/* 炼器配方卡片：橙色主题 */
+.recipe-card-smith {
+  border-left-color: #FF9800;
+}
+
+.recipe-card-smith .recipe-name {
+  color: #FFB74D;
+}
+
+.recipe-card-smith .recipe-output {
+  color: #FFB74D;
+}

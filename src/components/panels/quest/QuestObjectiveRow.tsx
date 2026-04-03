@@ -2,6 +2,8 @@
 // quest/QuestObjectiveRow.tsx — 单条目标进度行
 // ============================================================
 
+import './QuestObjectiveRow.css';
+
 interface QuestObjectiveRowProps {
   description: string;
   current: number;
@@ -21,8 +23,8 @@ export default function QuestObjectiveRow({ description, current, target, comple
           <span className="quest-objective-count">({current}/{target})</span>
           <div className="quest-progress-bar">
             <div
-              className="quest-progress-fill"
-              style={{ width: `${pct}%`, background: completed ? '#59b300' : '#4a9eff' }}
+              className={`quest-progress-fill ${completed ? 'quest-progress-fill-done' : 'quest-progress-fill-active'}`}
+              style={{ width: `${pct}%` }}
             />
           </div>
           <span className="quest-objective-pct">{pct}%</span>

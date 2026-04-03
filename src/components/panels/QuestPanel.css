@@ -1,0 +1,49 @@
+/* ============================================================
+   QuestPanel.css — 任务面板样式
+   ============================================================ */
+
+.quest-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quest-empty {
+  text-align: center;
+  color: #888;
+  padding: 24px 0;
+  font-style: italic;
+}
+
+.quest-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── 追踪器 ── */
+
+.quest-tracker {
+  margin-top: 8px;
+  padding: 6px 8px;
+  background: rgba(20, 20, 40, 0.5);
+  border: 1px solid #555;
+  border-radius: 4px;
+  font-size: 0.82em;
+}
+
+.quest-tracker-title {
+  color: #e6d9a8;
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
+.quest-tracker-step {
+  color: #aaa;
+  font-size: 0.92em;
+  margin-bottom: 2px;
+}
+
+.quest-tracker-step-pending {
+  color: #8f8;
+}

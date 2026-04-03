@@ -4,6 +4,7 @@
 
 import { RARITY_COLORS } from '../shared';
 import type { ItemRarity } from '../../game/registry';
+import './DebugItemRow.css';
 
 interface DebugItemRowProps {
   id: string;
@@ -16,8 +17,8 @@ interface DebugItemRowProps {
 
 export default function DebugItemRow({ id, name, rarity, qty, onQtyChange, onGive }: DebugItemRowProps) {
   return (
-    <div className="debug-item-row">
-      <span className="debug-item-name" style={{ color: RARITY_COLORS[rarity] }}>{name}</span>
+    <div className="debug-item-row" style={{ '--rarity-color': RARITY_COLORS[rarity] } as React.CSSProperties}>
+      <span className="debug-item-name">{name}</span>
       <input
         type="number"
         className="debug-qty-input"

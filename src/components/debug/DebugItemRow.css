@@ -1,0 +1,10 @@
+/* ============================================================
+   DebugItemRow.css — 物品行样式
+   ============================================================ */
+
+/* Item name uses CSS variable for dynamic rarity colour.
+   Layout properties live in App.css .debug-item-name.     */
+.debug-item-name {
+  /* Rarity colour injected via --rarity-color CSS variable on parent */
+  color: var(--rarity-color, #9E9E9E);
+}

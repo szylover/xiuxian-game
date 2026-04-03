@@ -1,0 +1,90 @@
+/* ============================================================
+   DebugNpcTab.css — NPC 调试标签页样式
+   ============================================================ */
+
+/* Header block: column layout */
+.debug-npc-header {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.debug-npc-header-label {
+  font-weight: bold;
+}
+
+/* Info text block */
+.debug-npc-info {
+  font-size: 0.75rem;
+  color: #ccc;
+}
+
+/* Control buttons bar */
+.debug-npc-controls-bar {
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.4rem;
+}
+
+/* Relation list container */
+.debug-npc-list {
+  margin-top: 0.6rem;
+}
+
+.debug-npc-list-label {
+  font-weight: bold;
+}
+
+/* Individual NPC card */
+.debug-npc-card {
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 6px 8px;
+  margin-bottom: 4px;
+  font-size: 0.73rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* NPC name — met vs not met */
+.debug-npc-name-met {
+  color: #fff;
+  min-width: 5rem;
+}
+
+.debug-npc-name-unmet {
+  color: #666;
+  min-width: 5rem;
+}
+
+/* Relation level badges (one per NpcRelationLevel) */
+.debug-npc-rel {
+  font-size: var(--font-size-xs);
+}
+.debug-npc-rel-hostile      { color: #F44336; }
+.debug-npc-rel-cold         { color: #9E9E9E; }
+.debug-npc-rel-stranger     { color: #FFFFFF; }
+.debug-npc-rel-acquaintance { color: #FFEB3B; }
+.debug-npc-rel-friend       { color: #4CAF50; }
+.debug-npc-rel-close_friend { color: #2196F3; }
+.debug-npc-rel-soulmate     { color: #E91E63; }
+
+/* Affinity number */
+.debug-npc-affinity {
+  color: #aaa;
+  font-size: var(--font-size-xs);
+}
+
+/* Controls cluster pushed to the right */
+.debug-npc-control-group {
+  display: flex;
+  gap: 0.2rem;
+  margin-left: auto;
+}
+
+/* Narrow input for direct affinity entry */
+.debug-npc-input-narrow {
+  width: 3rem;
+}
