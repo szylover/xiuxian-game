@@ -39,6 +39,7 @@ npx tsc --noEmit && npx vite build
   ```
 - [ ] **`.github/copilot-instructions.md`** 项目目录树 — 如果目录结构变了就更新
 - [ ] **`staticwebapp.config.json`** — 如有需要则更新
+- [ ] **新任务追踪**：如果本次改动引入了新的任务/系统（在 roadmap 中新增了 T 编号），用 `gh issue create` 创建对应的 GitHub Issue 并打上对应 label（核心循环/事件系统/物品与经济/功法与技能/世界与地图/社交与NPC/进阶机制/UI体验/部署与体验/DLC内容包/DLC扩展包）
 
 ### 3. Git 工作流（禁止直接 push 到 main，必须走 PR）
 
