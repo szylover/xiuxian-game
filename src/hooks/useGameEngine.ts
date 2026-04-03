@@ -28,6 +28,7 @@ import { checkQuestTimeouts, checkQuestDiscovery, tickQuestObjectives, setTracke
 import { UI_LABELS } from '../data/texts/ui-labels';
 import { SPIRIT_ROOT_CN, SEPARATOR, NONE_TEXT } from '../data/texts/common';
 import { tickAffinityDecay } from '../game/npc';
+import { useChronicle } from './useChronicle';
 
 // Re-export types so existing imports still work
 export type { CombatModalState, DeathModalState } from './useCombatModal';
@@ -45,6 +46,7 @@ export function useGameEngine(
   const playerRef = useRef<Player | null>(null);
   const currentSlotRef = useRef(0);
   const { toast, showToast, dismiss: dismissToast } = useToast();
+  const chronicle = useChronicle();
 
   // 异步加载游戏数据（代码分割，仅首次调用）
   useEffect(() => {
@@ -94,7 +96,9 @@ export function useGameEngine(
     }).join(SEPARATOR) || NONE_TEXT;
     addLog(UI_LABELS.spiritRootDetails(rootList), 'system');
     addLog(UI_LABELS.playerStats(p.luck, p.comprehension, p.charisma), 'system');
-  }, [addLog]);
+    // T0068: 开始新轮回
+    chronicle.startNewIncarnation(p);
+  }, [addLog, chronicle]);
 
   // ── 加载存档 ──
   const loadGame = useCallback((slotIndex = 0) => {
@@ -201,9 +205,16 @@ export function useGameEngine(
               deathCount: ds.deathCount,
             },
           });
+          // T0068: 记录死亡事件（可能复活）
+          chronicle.recordDeath();
+          chronicle.recordEvent('death', death.player, death.gameOverReason);
         } else {
           setGameOver(true);
           setGameOverReason(death.gameOverReason);
+          // T0068: 无复活手段，直接归档
+          chronicle.recordDeath();
+          chronicle.recordEvent('death', death.player, death.gameOverReason);
+          chronicle.finalizeCurrentIncarnation(death.player, 'died');
         }
       }
       return death.player;
@@ -218,6 +229,10 @@ export function useGameEngine(
         setGameOver(true);
         setGameOverReason(death.gameOverReason || UI_LABELS.lifespanDeathReason(Math.floor(updated.age), REALMS[updated.realmIndex].name));
         addLog(UI_LABELS.lifespanDeath(Math.floor(updated.age)), 'system');
+        // T0068: 寿元耗尽归档
+        chronicle.recordDeath();
+        chronicle.recordEvent('death', updated, UI_LABELS.lifespanDeathReason(Math.floor(updated.age), REALMS[updated.realmIndex].name));
+        chronicle.finalizeCurrentIncarnation(updated, 'died');
       }
     }
 
@@ -291,6 +306,7 @@ export function useGameEngine(
     acceptQuest, abandonQuest, deliverQuestItem, turnInQuest,
   } = useSystemActions({
     player, addLog, setPlayer, setGameOver, setGameOverReason, setDeathModal,
+    chronicleHooks: { recordEvent: chronicle.recordEvent, syncSnapshot: chronicle.syncSnapshot },
   });
 
   // ── T0040: 复活回调 ──
@@ -299,17 +315,24 @@ export function useGameEngine(
       if (!prev) return prev;
       const result = applyRevival(prev, method);
       for (const log of result.logs) addLog(log, 'system');
+      // T0068: 记录复活事件
+      chronicle.recordRevive();
+      chronicle.recordEvent('revival', result.player, `复活（${method.name}）`, { revivalMethod: method.id });
       return result.player;
     });
     setDeathModal(null);
-  }, [addLog, setPlayer]);
+  }, [addLog, setPlayer, chronicle]);
 
   // ── T0040: 死亡弹窗关闭（无复活→游戏结束）──
   const handleDeathModalClose = useCallback(() => {
     setDeathModal(null);
     setGameOver(true);
     setGameOverReason(UI_LABELS.gameOverFallback);
-  }, []);
+    // T0068: 归档当前轮回
+    if (playerRef.current) {
+      chronicle.finalizeCurrentIncarnation(playerRef.current, 'died');
+    }
+  }, [chronicle]);
 
   // ── 删档 ──
   const deleteSave = useCallback(() => {
@@ -382,6 +405,9 @@ export function useGameEngine(
     handleDeathModalClose,
     exitGame,
     currentSlot: currentSlotRef.current,
+    // T0068: 修仙履历
+    chronicle: chronicle.chronicle,
+    chronicleActions: chronicle,
     // Debug: 直接修改 player（仅 debug 模式使用）
     debugSetPlayer: setPlayer,
   };

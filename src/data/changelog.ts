@@ -12,6 +12,18 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.10.0',
+    date: '2026-04-03',
+    title: '修仙履历系统（T0068）',
+    items: [
+      '新增跨局永久保存的修仙履历系统（Cultivation Chronicle）',
+      '记录每轮回的关键事件：境界突破、渡劫、死亡、复活、体修突破',
+      '履历独立于存档系统，不随删档消失',
+      '新增履历面板：可查看历代轮回摘要 + 关键事件时间线',
+      '右栏成就分组新增「修仙履历」按钮',
+    ],
+  },
+  {
     version: '1.9.0',
     date: '2026-04-03',
     title: '中央区域场景视图重构（T0069）',
