@@ -10,10 +10,7 @@
   color: #4FC3F7;
 }
 
-/* 区域卡片：边框颜色通过 CSS 变量注入 */
-.technique-card {
-  border-left-color: var(--region-border-color, #555);
-}
+/* 区域卡片：边框颜色通过 CSS 变量注入（App.css .technique-card 已通过 --region-border-color 变量支持） */
 
 /* 区域在当前 */
 .region-current-label {
@@ -57,7 +54,11 @@
   color: #666;
 }
 
-/* 区域类型标签 */
+/* 区域类型标签（继承 .technique-type 的外形，覆盖颜色为 muted） */
 .region-type-label {
+  font-size: 0.7rem;
   color: var(--color-muted);
+  background: #1a1e2e;
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
 }

@@ -60,13 +60,13 @@
   color: #f1c40f;
 }
 
-/* 元素资质调试按钮 */
-.debug-btn-fire { color: var(--color-danger) !important; }
-.debug-btn-water { color: var(--color-info) !important; }
-.debug-btn-thunder { color: #f1c40f !important; }
-.debug-btn-wind { color: var(--color-success) !important; }
-.debug-btn-earth { color: var(--color-warning) !important; }
-.debug-btn-metal { color: #C0C0C0 !important; }
+/* 元素资质调试按钮（双类选择器提升优先级，避免 !important） */
+.debug-btn.debug-btn-fire { color: var(--color-danger); }
+.debug-btn.debug-btn-water { color: var(--color-info); }
+.debug-btn.debug-btn-thunder { color: #f1c40f; }
+.debug-btn.debug-btn-wind { color: var(--color-success); }
+.debug-btn.debug-btn-earth { color: var(--color-warning); }
+.debug-btn.debug-btn-metal { color: #C0C0C0; }
 
 /* 加粗调试标签 */
 .debug-label-bold {

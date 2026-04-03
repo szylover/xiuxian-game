@@ -222,7 +222,7 @@ function RegionCard({ region, isCurrent, isUnlocked, travelCost, canAfford, real
         <span className={`technique-name ${isUnlocked ? 'region-name-unlocked' : 'region-name-locked'}`}>
           {region.emoji} {region.name}
         </span>
-        <span className="technique-type region-type-label">
+        <span className="region-type-label">
           {realmName}
         </span>
         {isCurrent && <span className="technique-active-badge">📍 当前</span>}

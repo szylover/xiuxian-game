@@ -92,7 +92,7 @@ export default function StatusPanel({ player }: StatusPanelProps) {
           <StatRow icon="📈" label="气修修为" value={player.exp} max={REALMS[player.realmIndex + 1]?.expReq} />
           <StatRow icon="🔮" label="灵力" value={player.mp} max={player.maxMp} color={STAT_COLORS.mp} />
           <StatRow icon="🧠" label="念力" value={player.mentalPower} max={player.maxMentalPower} color={STAT_COLORS.mental} />
-          <div className="section-divider" />
+          <div className="status-section-divider" />
           <StatRow icon="💪" label="体修境界" value={`【${bodyRealm?.name ?? '凡躯'}】`} />
           <StatRow icon="📈" label="体修修为" value={player.bodyRealmExp} max={nextBodyRealm?.expReq} />
           <StatRow icon="💪" label="体魄" value={player.physique} max={player.maxPhysique} color={STAT_COLORS.physique} />

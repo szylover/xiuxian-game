@@ -111,13 +111,13 @@
   font-size: 0.78rem;
   color: #e0c060;
   margin-bottom: 0.5rem;
-  border: 1px solid var(--color-border-light);
+  border: 1px solid var(--color-border-lighter);
 }
 
 /* 任务区域 */
 .npc-quest-section {
   margin-bottom: 0.5rem;
-  border-top: 1px solid var(--color-border-light);
+  border-top: 1px solid var(--color-border-lighter);
   padding-top: 0.5rem;
 }
 
