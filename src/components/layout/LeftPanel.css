@@ -1,0 +1,44 @@
+/* ============================================================
+   LeftPanel.css — 左侧栏辅助样式
+   ============================================================ */
+
+/* 境界名称：大乘高亮 */
+.left-realm--golden {
+  color: var(--color-gold);
+}
+
+/* 瓶颈标签 */
+.bottleneck-badge {
+  font-size: 0.7em;
+  background: #4a2800;
+  color: #ff9800;
+  border: 1px solid #ff9800;
+  border-radius: var(--radius-sm);
+  padding: 1px 5px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+/* 当前区域提示 */
+.left-region {
+  font-size: 0.85em;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+/* 修为/体修进度条填充（宽度由 CSS 变量控制） */
+.left-exp-fill {
+  width: var(--fill-width, 0%);
+}
+
+/* 体修进度条使用体魄颜色 */
+.left-body-exp-fill {
+  background: #FF6D00 !important;
+}
+
+/* 体魄不足警告 */
+.left-physique-warning {
+  font-size: 0.75em;
+  color: #FF9800;
+  margin-top: 2px;
+}

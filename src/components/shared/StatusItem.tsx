@@ -3,6 +3,8 @@
 // 用于 StatusBar 中重复的 icon + value + tooltip 模式
 // ============================================================
 
+import './StatusItem.css';
+
 interface StatusItemProps {
   icon: string;
   text: string;

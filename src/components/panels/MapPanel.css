@@ -1,0 +1,83 @@
+/* ============================================================
+   MapPanel.css — 地图面板样式
+   ============================================================ */
+
+/* 树状缩进（通过 CSS var 注入 depth * 16px） */
+.region-tree-node {
+  margin-left: var(--tree-indent, 0px);
+}
+
+/* 当前所在区域名称（面板头部）— 覆盖 divine-active-name 可能的颜色 */
+.map-current-region-name {
+  color: #4FC3F7 !important;
+}
+
+/* 容器节点标题（可折叠） */
+.region-container-title {
+  user-select: none;
+  margin-top: 0.4rem;
+  cursor: default;
+}
+
+.region-container-title.is-clickable {
+  cursor: pointer;
+}
+
+/* 容器节点折叠图标 */
+.region-collapse-icon {
+  margin-right: 4px;
+  font-size: 0.85em;
+}
+
+/* 容器节点锁定标记 */
+.region-container-lock {
+  color: #FF9800;
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+/* 区域卡片动态左边框（通过 CSS var 注入） */
+.region-card-colored {
+  border-left-color: var(--region-border-color, #555);
+}
+
+/* 卡片内折叠按钮 */
+.region-card-toggle {
+  cursor: pointer;
+  margin-right: 4px;
+  font-size: 0.9em;
+  user-select: none;
+}
+
+/* 区域名称：已解锁 */
+.region-name-unlocked {
+  color: #e0e0e0;
+}
+
+/* 区域名称：未解锁 */
+.region-name-locked {
+  color: #666;
+}
+
+/* 区域境界标签 */
+.region-realm-label {
+  color: #9E9E9E;
+}
+
+/* 卡片内锁定图标 */
+.region-card-lock-icon {
+  color: #FF9800;
+  font-size: 0.8em;
+}
+
+/* 当前位置文本 */
+.region-current-text {
+  color: #4FC3F7;
+  font-size: 0.85em;
+}
+
+/* 未解锁提示文本 */
+.region-locked-text {
+  color: #FF9800;
+  font-size: 0.85em;
+}

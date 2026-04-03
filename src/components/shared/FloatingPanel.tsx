@@ -4,6 +4,7 @@
 // ============================================================
 
 import { useState, useRef, useCallback, useEffect, type ReactNode } from 'react';
+import './FloatingPanel.css';
 
 interface FloatingPanelProps {
   title: string;
@@ -60,10 +61,10 @@ export default function FloatingPanel({
       ref={panelRef}
       className="floating-panel"
       style={{
-        left: pos.x,
-        top: pos.y,
-        width,
-      }}
+        '--panel-left': `${pos.x}px`,
+        '--panel-top': `${pos.y}px`,
+        '--panel-width': typeof width === 'number' ? `${width}px` : width,
+      } as React.CSSProperties}
     >
       <div
         className="floating-panel-header"

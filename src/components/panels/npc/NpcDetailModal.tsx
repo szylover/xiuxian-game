@@ -3,6 +3,7 @@
 // ============================================================
 
 import { useState } from 'react';
+import './NpcDetailModal.css';
 import type { Player } from '../../../game/player';
 import type { NpcDef, NpcRelationLevel } from '../../../game/types';
 import { REALMS } from '../../../game/data';
@@ -57,87 +58,77 @@ export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift }:
 
   return (
     <>
-      <div style={{
-        position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-        background: 'rgba(0,0,0,0.5)', zIndex: 1000,
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-      }} onClick={onClose}>
+      <div
+        className="npc-detail-overlay"
+        onClick={onClose}
+        style={{ '--rel-color': relColor } as React.CSSProperties}
+      >
         <div
-          style={{
-            background: '#1a1a2e', border: '1px solid #555', borderRadius: 8,
-            padding: '1rem 1.2rem', width: 320, maxHeight: '80vh', overflow: 'auto',
-          }}
+          className="npc-detail-modal"
           onClick={e => e.stopPropagation()}
         >
           {/* 头部 */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
-            <span style={{ fontSize: '2rem' }}>{npc.emoji}</span>
+          <div className="npc-detail-header">
+            <span className="npc-detail-emoji">{npc.emoji}</span>
             <div>
-              <div style={{ fontWeight: 'bold', fontSize: '1rem', color: '#e0e0e0' }}>{npc.name}</div>
-              {npc.title && <div style={{ fontSize: '0.72rem', color: '#888' }}>{npc.title}</div>}
+              <div className="npc-detail-name">{npc.name}</div>
+              {npc.title && <div className="npc-detail-title">{npc.title}</div>}
             </div>
-            <button onClick={onClose} style={{ marginLeft: 'auto', background: 'none', border: 'none', color: '#888', cursor: 'pointer', fontSize: '1.2rem' }}>✕</button>
+            <button className="npc-detail-close" onClick={onClose}>✕</button>
           </div>
 
           {/* 基本信息 */}
-          <div style={{ fontSize: '0.78rem', color: '#aaa', marginBottom: '0.5rem', lineHeight: 1.6 }}>
+          <div className="npc-detail-info">
             <div>境界：{realmName}期</div>
             <div>性格：{personalityCN}</div>
-            <div style={{ fontSize: '0.72rem', color: '#777', marginTop: '0.2rem' }}>{npc.description}</div>
+            <div className="npc-detail-description">{npc.description}</div>
           </div>
 
           {/* 好感度条 */}
-          <div style={{ margin: '0.6rem 0' }}>
-            <div style={{ fontSize: '0.75rem', color: '#ccc', marginBottom: '0.25rem' }}>
-              好感度 <span style={{ color: relColor }}>{rel.affinity}</span>/{maxAffinity}
-              <span style={{ marginLeft: '0.5rem', color: relColor }}>{relEmoji} {relLabel}</span>
+          <div className="npc-detail-affinity">
+            <div className="npc-detail-affinity-label">
+              好感度{' '}
+              <span className="npc-detail-affinity-value">{rel.affinity}</span>/{maxAffinity}
+              <span className="npc-detail-affinity-status">{relEmoji} {relLabel}</span>
             </div>
-            <div style={{ background: '#333', borderRadius: 4, height: 8, overflow: 'hidden' }}>
-              <div style={{
-                width: `${barPct}%`,
-                height: '100%',
-                background: relColor,
-                transition: 'width 0.3s',
-                borderRadius: 4,
-              }} />
+            <div className="npc-affinity-track">
+              <div
+                className="npc-affinity-fill"
+                style={{ '--bar-pct': `${barPct}%` } as React.CSSProperties}
+              />
             </div>
           </div>
 
           {/* 交谈消息 */}
           {chatMsg && (
-            <div style={{
-              background: '#252540', borderRadius: 6, padding: '0.4rem 0.6rem',
-              fontSize: '0.78rem', color: '#e0c060', marginBottom: '0.5rem',
-              border: '1px solid #444',
-            }}>
+            <div className="npc-chat-bubble">
               {npc.emoji} {npc.name}：{chatMsg}
             </div>
           )}
 
           {/* 交互按钮 */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginTop: '0.5rem' }}>
+          <div className="npc-detail-actions">
             {!rel.met ? (
-              <button className="btn" onClick={() => onMeet(npc.id)} style={{ fontSize: '0.8rem' }}>
+              <button className="btn" onClick={() => onMeet(npc.id)}>
                 👋 邂逅
               </button>
             ) : (
               <>
-                <button className="btn" onClick={handleChat} style={{ fontSize: '0.8rem' }}>
+                <button className="btn" onClick={handleChat}>
                   💬 交谈
                 </button>
                 <button
-                  className="btn"
+                  className="btn npc-btn-gift"
                   disabled={!canGift}
                   onClick={() => setShowGiftModal(true)}
-                  style={{ fontSize: '0.8rem', opacity: canGift ? 1 : 0.5 }}
                   title={giftOnCd ? `冷却中，还需 ${cdMonths} 个月` : '选择物品赠送'}
                 >
                   🎁 赠礼{giftOnCd ? `（${cdMonths}月）` : ''}
                 </button>
-                <button className="btn" disabled style={{ fontSize: '0.8rem', opacity: 0.4 }} title="T0064 论道系统待接入">
+                <button className="btn npc-btn-disabled" disabled title="T0064 论道系统待接入">
                   📖 论道
                 </button>
-                <button className="btn" disabled style={{ fontSize: '0.8rem', opacity: 0.4 }} title="T0028 切磋系统待实现">
+                <button className="btn npc-btn-disabled" disabled title="T0028 切磋系统待实现">
                   ⚔️ 切磋
                 </button>
               </>
@@ -157,3 +148,4 @@ export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift }:
     </>
   );
 }
+

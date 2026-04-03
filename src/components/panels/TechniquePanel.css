@@ -1,0 +1,40 @@
+/* ============================================================
+   TechniquePanel.css — 功法面板样式
+   ============================================================ */
+
+/* 过滤按钮栏 */
+.technique-filter-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+}
+
+/* 小型过滤按钮 */
+.btn-technique-filter {
+  font-size: 0.78em;
+  padding: 2px 8px;
+}
+
+/* 带上边距的分区标题 */
+.technique-section-title-spaced {
+  margin-top: 0.6rem;
+}
+
+/* 功法/神通卡片动态左边框色（通过 CSS var 注入） */
+.technique-card-colored {
+  border-left-color: var(--card-accent-color, #9E9E9E);
+}
+
+/* 功法名称动态颜色 */
+.technique-card-colored .technique-name {
+  color: var(--card-accent-color, #9E9E9E);
+}
+
+/* 灵根标签动态颜色（通过 CSS var 注入） */
+.technique-root-tag {
+  color: var(--root-tag-color, #9E9E9E);
+  border-color: var(--root-tag-color, #9E9E9E);
+}
+.technique-progress-fill {
+  width: var(--progress-pct, 0%);
+}

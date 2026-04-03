@@ -3,6 +3,8 @@
 // 用于背包分类、商店买卖、调试面板等场景
 // ============================================================
 
+import './TabBar.css';
+
 interface Tab<T extends string> {
   key: T;
   label: string;

@@ -1,0 +1,16 @@
+/* ============================================================
+   CombatModal.css — 战斗弹窗组件样式
+   主要样式定义在 App.css (.combat-modal-overlay / .combat-modal 等)
+   此文件处理 CSS 变量注入用于动态动画延迟
+   ============================================================ */
+
+/*
+ * 战利品行动画延迟通过 --loot-anim-delay CSS 变量注入，
+ * 覆盖 App.css 中的 :nth-child 静态延迟规则。
+ *
+ * 用法：
+ *   <div class="combat-modal-loot-row" style="--loot-anim-delay: 0.15s" />
+ */
+.combat-modal-loot-row {
+  animation-delay: var(--loot-anim-delay, 0s);
+}

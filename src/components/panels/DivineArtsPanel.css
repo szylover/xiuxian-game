@@ -1,0 +1,78 @@
+/* ============================================================
+   DivineArtsPanel.css — 神通面板样式
+   ============================================================ */
+
+/* 当前激活神通名称颜色 */
+.divine-active-name {
+  color: var(--card-accent-color, var(--color-gold, #FFD700));
+}
+
+/* 过滤按钮栏（复用 TechniquePanel 模式） */
+.technique-filter-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+}
+
+.btn-technique-filter {
+  font-size: 0.78em;
+  padding: 2px 8px;
+}
+
+/* 带上边距的分区标题 */
+.technique-section-title-spaced {
+  margin-top: 0.6rem;
+}
+
+/* 神通卡片动态颜色（通过 CSS var 注入） */
+.divine-card-colored {
+  border-left-color: var(--card-accent-color, #9E9E9E);
+}
+
+.divine-card-colored .technique-name {
+  color: var(--card-accent-color, #9E9E9E);
+}
+
+.divine-card-colored .technique-type {
+  color: var(--card-accent-color, #9E9E9E);
+}
+
+/* 神通卡片 MP/CD/触发率文本 */
+.divine-card-meta {
+  color: #aaa;
+}
+
+/* 神通资质行 */
+.divine-aptitude-label {
+  color: #9E9E9E;
+  font-size: 0.78rem;
+}
+
+/* 资质数值：足够/不足 */
+.divine-apt-value-ok {
+  color: #4CAF50;
+}
+
+.divine-apt-value-low {
+  color: #e74c3c;
+}
+
+/* 可学状态颜色（通过 CSS var） */
+.divine-apt-value-accent {
+  color: var(--card-accent-color, #4CAF50);
+}
+
+/* 未学神通卡片：条件不足时半透明 */
+.technique-card-dim {
+  opacity: 0.7;
+}
+
+/* 未学神通：技能类型锁定颜色 */
+.type-locked {
+  color: #757575 !important;
+}
+
+/* 效果标签：锁定时半透明 */
+.divine-effect-tag-dim {
+  opacity: 0.6;
+}

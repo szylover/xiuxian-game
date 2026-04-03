@@ -4,6 +4,7 @@
 // ============================================================
 
 import type { ReactNode } from 'react';
+import './CollapsiblePanel.css';
 
 interface CollapsiblePanelProps {
   className: string;

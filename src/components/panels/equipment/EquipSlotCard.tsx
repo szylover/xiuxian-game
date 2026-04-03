@@ -2,6 +2,7 @@
 // EquipSlotCard.tsx — 装备槽位卡片
 // ============================================================
 
+import './EquipSlotCard.css';
 import type { EquipSlot, EquipDef } from '../../../game/registry';
 import { RARITY_COLORS, SLOT_ICONS, statsCN } from '../../shared';
 import { getSlotName } from '../../../game/equipment';
@@ -20,7 +21,10 @@ export default function EquipSlotCard({ slot, def, onUnequip }: EquipSlotCardPro
         <span className="slot-label">{getSlotName(slot)}</span>
         {def ? (
           <>
-            <span className="slot-equip-name" style={{ color: RARITY_COLORS[def.rarity] }}>
+            <span
+              className="slot-equip-name"
+              style={{ '--rarity-color': RARITY_COLORS[def.rarity] } as React.CSSProperties}
+            >
               {def.name}
             </span>
             <span className="slot-stats">

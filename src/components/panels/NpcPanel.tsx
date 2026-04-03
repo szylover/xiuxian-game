@@ -12,6 +12,7 @@ import { getAllNpcDefs } from '../../game/registry';
 import type { NpcDef } from '../../game/types';
 import NpcCard from './npc/NpcCard';
 import NpcDetailModal from './npc/NpcDetailModal';
+import './NpcPanel.css';
 
 const TABS = [
   { key: 'region' as const, label: '当前区域', icon: '📍' },
@@ -40,13 +41,13 @@ export default function NpcPanel({ player, onMeetNpc, onGiveGift }: NpcPanelProp
   const renderNpcList = (npcs: NpcDef[], emptyMsg: string) => {
     if (npcs.length === 0) {
       return (
-        <div style={{ textAlign: 'center', color: '#666', padding: '1.5rem 0', fontSize: '0.8rem' }}>
+        <div className="npc-list-empty">
           {emptyMsg}
         </div>
       );
     }
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+      <div className="npc-list-container">
         {npcs.map(npc => {
           const rel = getRelation(player, npc.id);
           return (
@@ -75,8 +76,8 @@ export default function NpcPanel({ player, onMeetNpc, onGiveGift }: NpcPanelProp
       />
 
       {tab === 'region' && (
-        <div style={{ padding: '0.4rem 0' }}>
-          <div style={{ fontSize: '0.72rem', color: '#888', marginBottom: '0.4rem' }}>
+        <div className="npc-tab-section">
+          <div className="npc-tab-hint">
             📍 当前区域：{region?.emoji} {region?.name ?? '未知'}
           </div>
           {renderNpcList(regionNpcs, '当前区域无 NPC')}
@@ -84,8 +85,8 @@ export default function NpcPanel({ player, onMeetNpc, onGiveGift }: NpcPanelProp
       )}
 
       {tab === 'contacts' && (
-        <div style={{ padding: '0.4rem 0' }}>
-          <div style={{ fontSize: '0.72rem', color: '#888', marginBottom: '0.4rem' }}>
+        <div className="npc-tab-section">
+          <div className="npc-tab-hint">
             已邂逅 {contactNpcs.length} 位修士
           </div>
           {renderNpcList(contactNpcs, '尚未邂逅任何人')}

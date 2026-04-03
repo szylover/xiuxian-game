@@ -1,0 +1,11 @@
+/* ============================================================
+   StatusItem.css — 状态栏单项组件样式
+   主要样式定义在 App.css (.status-item)
+   此文件使用 CSS 变量确保颜色一致性
+   ============================================================ */
+
+.status-item {
+  font-size: var(--font-size-md);
+  white-space: nowrap;
+  color: var(--color-text-primary);
+}

@@ -6,6 +6,7 @@
 import { REALMS } from '../../game/data';
 import type { DeathModalState } from '../../hooks/useGameEngine';
 import type { RevivalMethodDef } from '../../game/types';
+import './DeathModal.css';
 
 interface DeathModalProps {
   state: DeathModalState;

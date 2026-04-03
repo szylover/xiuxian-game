@@ -6,12 +6,18 @@
 import type { ItemRarity, ItemCategory, EquipSlot } from '../../game/registry';
 
 // ── 品质颜色映射 ──
+// ⚠️ 这里的颜色值必须与 App.css :root 中的 CSS 变量保持一致：
+//   common → --rarity-common: #9E9E9E
+//   uncommon → --rarity-uncommon: #4CAF50
+//   rare → --rarity-rare: #2196F3
+//   epic → --rarity-epic: #9C27B0
+//   legendary → --rarity-legendary: #FF9800
 export const RARITY_COLORS: Record<ItemRarity, string> = {
   common:    '#9E9E9E',
   uncommon:  '#4CAF50',
   rare:      '#2196F3',
   epic:      '#9C27B0',
-  legendary: '#FFD700',
+  legendary: '#FF9800',  // 橙色（与 --rarity-legendary 一致）
 };
 
 // ── 品质中文标签 ──
@@ -77,12 +83,18 @@ export function statsCN(stats: Record<string, number | undefined>): string {
 import { SPIRIT_ROOT_CN } from '../../data/texts/common';
 export { SPIRIT_ROOT_CN };
 
+// ⚠️ 这里的颜色值必须与 App.css :root 中的 CSS 变量保持一致：
+//   metal → --spirit-metal: #C0C0C0
+//   wood  → --spirit-wood:  #4CAF50
+//   water → --spirit-water: #2196F3
+//   fire  → --spirit-fire:  #F44336
+//   earth → --spirit-earth: #FF9800
 export const SPIRIT_ROOT_COLORS: Record<string, string> = {
-  metal: '#C0C0C0',  // 银色
-  wood:  '#4CAF50',  // 绿色
-  water: '#2196F3',  // 蓝色
-  fire:  '#F44336',  // 红色
-  earth: '#FF9800',  // 橙色
+  metal: '#C0C0C0',  // 银色 (--spirit-metal)
+  wood:  '#4CAF50',  // 绿色 (--spirit-wood)
+  water: '#2196F3',  // 蓝色 (--spirit-water)
+  fire:  '#F44336',  // 红色 (--spirit-fire)
+  earth: '#FF9800',  // 橙色 (--spirit-earth)
 };
 
 export const SPIRIT_ROOT_ICONS: Record<string, string> = {

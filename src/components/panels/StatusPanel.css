@@ -1,0 +1,32 @@
+/* ============================================================
+   StatusPanel.css — 状态面板样式
+   ============================================================ */
+
+/* 可折叠分区标题 */
+.panel-section h3 {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* 折叠/展开图标 */
+.section-toggle-icon {
+  font-size: 0.85em;
+  margin-right: 4px;
+}
+
+/* 分隔线 */
+.section-divider {
+  border: none;
+  border-top: 1px solid #333;
+  margin: 6px 0;
+}
+
+/* 无灵根文本 */
+.root-tag-muted {
+  color: #9E9E9E;
+}
+
+/* 灵根标签动态颜色 */
+.root-tag-colored {
+  color: var(--root-color, #9E9E9E);
+}

@@ -1,0 +1,124 @@
+/* ============================================================
+   ActionPanel.css — 操作面板样式
+   ============================================================ */
+
+/* 体修突破按钮 */
+.btn-break-body {
+  border-color: #FF9800;
+}
+
+/* 瓶颈提示条 */
+.bottleneck-bar {
+  background: linear-gradient(135deg, #4a2800, #2a1500);
+  border: 1px solid #ff9800;
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin: 4px 0;
+  cursor: pointer;
+  font-size: 12px;
+  color: #ffcc80;
+}
+
+.bottleneck-bar-progress {
+  margin-left: 8px;
+  color: #aaa;
+}
+
+.bottleneck-bar-hint {
+  float: right;
+  color: #888;
+  font-size: 11px;
+}
+
+/* 瓶颈弹窗遮罩 */
+.bottleneck-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal, 1000);
+}
+
+/* 瓶颈弹窗内容 */
+.bottleneck-modal-content {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border: 2px solid #ff9800;
+  border-radius: 12px;
+  padding: 20px 24px;
+  max-width: 420px;
+  width: 90%;
+  color: #e0e0e0;
+}
+
+.bottleneck-modal-title {
+  color: #ff9800;
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.bottleneck-modal-desc {
+  font-size: 13px;
+  color: #ccc;
+  margin: 0 0 12px;
+  line-height: 1.6;
+}
+
+.bottleneck-modal-hint {
+  font-size: 12px;
+  color: #aaa;
+  margin: 0 0 12px;
+  font-style: italic;
+}
+
+.bottleneck-modal-methods {
+  font-size: 13px;
+}
+
+.bottleneck-modal-methods-title {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #ffcc80;
+}
+
+.bottleneck-modal-method-row {
+  padding: 3px 0;
+  color: #ddd;
+}
+
+/* 坚韧修炼进度条 */
+.bottleneck-progress-track {
+  background: #333;
+  border-radius: 4px;
+  height: 6px;
+  margin-top: 3px;
+  overflow: hidden;
+}
+
+.bottleneck-progress-fill {
+  background: #ff9800;
+  height: 100%;
+  width: var(--progress-pct, 0%);
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+
+/* 关闭按钮 */
+.bottleneck-modal-close {
+  margin-top: 16px;
+  width: 100%;
+  padding: 8px;
+  background: #333;
+  border: 1px solid #555;
+  border-radius: 6px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.bottleneck-modal-close:hover {
+  background: #444;
+}

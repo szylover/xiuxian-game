@@ -1,0 +1,106 @@
+/* ============================================================
+   GiftModal.css — 赠礼弹窗样式
+   ============================================================ */
+
+/* 遮罩层 */
+.gift-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-bg-overlay);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 弹窗主体 */
+.gift-modal {
+  background: var(--color-bg-dark);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  width: 340px;
+  max-height: 60vh;
+  overflow: auto;
+}
+
+/* 标题 */
+.gift-modal-title {
+  font-weight: bold;
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+}
+
+/* 空背包提示 */
+.gift-modal-empty {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  text-align: center;
+  padding: var(--spacing-md);
+}
+
+/* 物品列表 */
+.gift-item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+/* 单个物品行 */
+.gift-item-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  background: transparent;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.gift-item-row:hover {
+  border-color: var(--color-border-gold);
+}
+
+.gift-item-row.gift-item-selected {
+  border-color: #4CAF50;
+  background: #1e3a1e;
+}
+
+/* 物品名（颜色由稀有度 CSS 变量控制） */
+.gift-item-name {
+  color: var(--item-rarity-color, var(--color-text-secondary));
+  font-size: var(--font-size-xs);
+  flex: 1;
+}
+
+/* 偏好标签（颜色由 CSS 变量控制） */
+.gift-pref-label {
+  font-size: 0.65rem;
+  color: var(--pref-color, var(--color-text-muted));
+  white-space: nowrap;
+}
+
+/* 底部操作区 */
+.gift-modal-footer {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: 0.8rem;
+  justify-content: flex-end;
+}
+
+.gift-modal-footer .btn {
+  font-size: var(--font-size-xs);
+}
+
+.gift-btn-confirm {
+  opacity: var(--confirm-opacity, 0.5);
+}
+
+.gift-btn-confirm:not(:disabled) {
+  opacity: 1;
+}

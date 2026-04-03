@@ -9,6 +9,7 @@ import { groupByRound } from './combat/CombatBattleLog';
 import CombatHeader from './combat/CombatHeader';
 import CombatBattleLog from './combat/CombatBattleLog';
 import CombatFooter from './combat/CombatFooter';
+import './CombatModal.css';
 
 interface CombatModalProps {
   state: CombatModalState;
@@ -136,7 +137,11 @@ export default function CombatModal({ state, onNext, onClose }: CombatModalProps
           </div>
           {loot.length > 0 ? (
             loot.map((item, i) => (
-              <div key={i} className="combat-modal-loot-row" style={{ animationDelay: `${(i + 2) * 0.05}s` }}>
+              <div
+                key={i}
+                className="combat-modal-loot-row"
+                style={{ '--loot-anim-delay': `${(i + 2) * 0.05}s` } as React.CSSProperties}
+              >
                 <span className="combat-modal-loot-icon">{item.icon}</span>
                 <span>{item.name}</span>
                 <span className="combat-modal-loot-amount">×{item.amount}</span>

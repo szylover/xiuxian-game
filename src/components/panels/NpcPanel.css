@@ -1,0 +1,26 @@
+/* ============================================================
+   NpcPanel.css — NPC 面板样式
+   ============================================================ */
+
+.npc-list-empty {
+  text-align: center;
+  color: var(--color-text-dim);
+  padding: 1.5rem 0;
+  font-size: var(--font-size-sm);
+}
+
+.npc-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.npc-tab-section {
+  padding: 0.4rem 0;
+}
+
+.npc-tab-hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-bottom: 0.4rem;
+}

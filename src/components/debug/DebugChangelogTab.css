@@ -1,0 +1,96 @@
+/* ============================================================
+   DebugChangelogTab.css — 更新日志标签页样式
+   ============================================================ */
+
+/* Header section */
+.debug-changelog-header {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.debug-changelog-header-label {
+  font-weight: bold;
+}
+
+/* Current version number */
+.debug-changelog-current-ver {
+  font-size: 0.85rem;
+  color: #4CAF50;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+/* Scrollable entry list */
+.debug-changelog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Version entry card */
+.debug-changelog-entry {
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+}
+
+.debug-changelog-entry--current {
+  background-color: rgba(76, 175, 80, 0.08);
+}
+
+/* Entry header row */
+.debug-changelog-entry-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.2rem;
+}
+
+/* Version label in entry */
+.debug-changelog-ver {
+  font-size: 0.8rem;
+  color: #aaa;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.debug-changelog-ver--current {
+  color: #4CAF50;
+}
+
+/* "← 当前" badge */
+.debug-changelog-badge {
+  font-size: 0.68rem;
+  color: #81C784;
+  margin-left: 0.4rem;
+}
+
+/* Date */
+.debug-changelog-date {
+  font-size: var(--font-size-xs);
+  color: #666;
+}
+
+/* Entry title */
+.debug-changelog-title {
+  font-size: 0.78rem;
+  color: #ccc;
+  margin-bottom: 0.2rem;
+}
+
+/* Items list */
+.debug-changelog-items-list {
+  margin: 0;
+  padding-left: 1rem;
+  list-style: disc;
+}
+
+.debug-changelog-item {
+  font-size: 0.72rem;
+  color: #888;
+  line-height: 1.5;
+}

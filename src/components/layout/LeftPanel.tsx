@@ -2,6 +2,7 @@
 // layout/LeftPanel.tsx — 左栏：头像 + 道号 + 境界 + 核心属性
 // ============================================================
 
+import './LeftPanel.css';
 import type { Player } from '../../game/player';
 import { REALMS } from '../../game/data';
 import { getActiveBottlenecks, ensureBottleneckState } from '../../game/bottleneck';
@@ -45,25 +46,16 @@ export default function LeftPanel({ player, activePanel, onSelectPanel }: LeftPa
       <div className="left-avatar-area">
         <Avatar avatarId={player.avatar} realmIndex={player.realmIndex} size={100} />
         <div className="left-name">{player.name}</div>
-        <div className="left-realm" style={{ color: realm.name.includes('大乘') ? '#FFD700' : undefined }}>
+        <div className={`left-realm${realm.name.includes('大乘') ? ' left-realm--golden' : ''}`}>
           【{realm.name}】
           {activeBns.length > 0 && (
-            <span style={{
-              fontSize: '0.7em',
-              background: '#4a2800',
-              color: '#ff9800',
-              border: '1px solid #ff9800',
-              borderRadius: 4,
-              padding: '1px 5px',
-              marginLeft: 4,
-              verticalAlign: 'middle',
-            }}>
+            <span className="bottleneck-badge">
               {UI_LABELS.bottleneck}
             </span>
           )}
         </div>
         {currentRegion && (
-          <div style={{ fontSize: '0.85em', color: '#9E9E9E', marginTop: 2 }}>
+          <div className="left-region">
             📍 {currentRegion.emoji} {currentRegion.name}
           </div>
         )}
@@ -111,7 +103,7 @@ export default function LeftPanel({ player, activePanel, onSelectPanel }: LeftPa
           <span>{player.exp}{nextRealm ? `/${nextRealm.expReq}` : ''}</span>
         </div>
         <div className="left-exp-bar">
-          <div className="left-exp-fill" style={{ width: `${expProgress}%` }} />
+          <div className="left-exp-fill" style={{ '--fill-width': `${expProgress}%` } as React.CSSProperties} />
         </div>
 
         {/* T0062 体修境界 + 修为 */}
@@ -120,10 +112,10 @@ export default function LeftPanel({ player, activePanel, onSelectPanel }: LeftPa
           <span>【{bodyRealm?.name ?? '凡躯'}】{player.bodyRealmExp}{nextBodyRealm ? `/${nextBodyRealm.expReq}` : ''}</span>
         </div>
         <div className="left-exp-bar">
-          <div className="left-exp-fill" style={{ width: `${bodyExpProgress}%`, background: STAT_COLORS.physique }} />
+          <div className="left-exp-fill left-body-exp-fill" style={{ '--fill-width': `${bodyExpProgress}%` } as React.CSSProperties} />
         </div>
         {nextBodyRealm && player.bodyRealmExp >= nextBodyRealm.expReq && player.physique < player.maxPhysique * 0.8 && (
-          <div style={{ fontSize: '0.75em', color: '#FF9800', marginTop: 2 }}>
+          <div className="left-physique-warning">
             ⚠️ 体魄不足（需 {Math.ceil(player.maxPhysique * 0.8)}），休息或战斗可恢复
           </div>
         )}

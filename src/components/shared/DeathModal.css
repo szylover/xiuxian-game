@@ -1,0 +1,44 @@
+/* ============================================================
+   DeathModal.css — 死亡弹窗组件样式
+   主要样式定义在 App.css (.death-modal / .death-modal-header 等)
+   此文件使用 CSS 变量强化主题一致性
+   ============================================================ */
+
+/*
+ * DeathModal 的样式基于 .combat-modal 扩展，
+ * 覆盖颜色使用语义化 CSS 变量。
+ */
+
+.death-modal {
+  border-color: #8b0000;
+  box-shadow: 0 0 30px rgba(139, 0, 0, 0.5);
+}
+
+.death-modal-header {
+  color: var(--color-text-danger) !important;
+}
+
+.death-modal-cause {
+  color: var(--color-text-secondary);
+}
+
+.death-modal-info {
+  color: var(--color-text-secondary);
+  background: var(--color-bg-overlay-light);
+}
+
+.death-modal-section-title {
+  color: #d4a843;
+}
+
+.death-modal-revival-name {
+  color: var(--color-text-success);
+}
+
+.death-modal-revival-desc {
+  color: var(--color-text-muted);
+}
+
+.death-modal-no-revival {
+  color: var(--color-text-danger);
+}

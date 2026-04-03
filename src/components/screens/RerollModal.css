@@ -1,0 +1,27 @@
+/* ============================================================
+   RerollModal.css — 随机属性面板动态颜色与进度条
+   ============================================================ */
+
+/* 灵根组合徽章颜色 */
+.combo-badge-sm {
+  color: var(--combo-color, var(--color-gold));
+  border-color: var(--combo-color, var(--color-gold));
+}
+
+/* 灵根名称颜色 */
+.root-label {
+  color: var(--root-color, var(--color-text-secondary));
+}
+
+/* 通用进度条填充：宽度 + 颜色均由 CSS 变量控制 */
+.reroll-bar-fill,
+.reroll-apt-bar-fill {
+  width: var(--bar-width, 0%);
+  background-color: var(--bar-color, var(--color-accent));
+}
+
+/* 数值文本颜色 */
+.reroll-val,
+.reroll-apt-val {
+  color: var(--val-color, var(--color-text-secondary));
+}

@@ -1,0 +1,7 @@
+/* ============================================================
+   ToastContainer.css — Toast 消息条动态左边框色
+   ============================================================ */
+
+.toast-bar {
+  border-left-color: var(--toast-border-color, var(--color-accent));
+}

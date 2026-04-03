@@ -1,0 +1,12 @@
+/* ============================================================
+   ShopSellItem.css — 商店出售物品行样式
+   ============================================================ */
+
+/* 与 ShopBuyItem 共享相同的 CSS var 模式（.shop-item 类） */
+.shop-item {
+  border-left-color: var(--rarity-color, #9E9E9E);
+}
+
+.shop-item .shop-item-name {
+  color: var(--rarity-color, #9E9E9E);
+}

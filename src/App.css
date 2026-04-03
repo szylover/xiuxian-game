@@ -2,6 +2,109 @@
    App.css — 修仙之路 全局样式
    ============================================================ */
 
+/* ── CSS 自定义属性（全局设计令牌）── */
+:root {
+  /* === 主题颜色 === */
+  --color-gold: #FFD700;
+  --color-gold-dim: #b8960c;
+  --color-accent: #FF6B35;
+  --color-accent-dim: #cc5520;
+
+  /* === 背景色 === */
+  --color-bg-darkest: #0a0e1a;
+  --color-bg-dark: #1a1e2e;
+  --color-bg-medium: #2a2e3e;
+  --color-bg-light: #3a3e4e;
+  --color-bg-panel: #16213e;
+  --color-bg-overlay: rgba(0, 0, 0, 0.8);
+  --color-bg-overlay-light: rgba(0, 0, 0, 0.5);
+
+  /* === 文字颜色 === */
+  --color-text-primary: #d4d4d4;
+  --color-text-secondary: #aaa;
+  --color-text-muted: #888;
+  --color-text-dim: #666;
+  --color-text-gold: #FFD700;
+  --color-text-accent: #FF6B35;
+  --color-text-white: #fff;
+  --color-text-success: #4CAF50;
+  --color-text-danger: #ff4444;
+  --color-text-warning: #ffaa00;
+  --color-text-info: #4fc3f7;
+
+  /* === 边框颜色 === */
+  --color-border: #2a2e3e;
+  --color-border-light: #3a3e4e;
+  --color-border-gold: rgba(255, 215, 0, 0.3);
+  --color-border-accent: rgba(255, 107, 53, 0.3);
+
+  /* === 品质颜色（与 constants.ts RARITY_COLORS 保持一致）=== */
+  --rarity-common:    #9E9E9E;
+  --rarity-uncommon:  #4CAF50;
+  --rarity-rare:      #2196F3;
+  --rarity-epic:      #9C27B0;
+  --rarity-legendary: #FF9800;
+
+  /* === 灵根颜色（与 constants.ts SPIRIT_ROOT_COLORS 保持一致）=== */
+  --spirit-metal: #C0C0C0;
+  --spirit-wood:  #4CAF50;
+  --spirit-water: #2196F3;
+  --spirit-fire:  #F44336;
+  --spirit-earth: #FF9800;
+
+  /* === 属性颜色 === */
+  --stat-hp:    #ff6b6b;
+  --stat-mp:    #74b9ff;
+  --stat-atk:   #fd9644;
+  --stat-def:   #a29bfe;
+  --stat-speed: #55efc4;
+  --stat-crit:  #ffeaa7;
+  --stat-gold:  #fdcb6e;
+
+  /* === 字体大小 === */
+  --font-size-xs:  0.65rem;
+  --font-size-sm:  0.75rem;
+  --font-size-md:  0.85rem;
+  --font-size-base: 0.9rem;
+  --font-size-lg:  1rem;
+  --font-size-xl:  1.1rem;
+  --font-size-2xl: 1.2rem;
+  --font-size-3xl: 1.4rem;
+
+  /* === 间距 === */
+  --spacing-xs:  2px;
+  --spacing-sm:  4px;
+  --spacing-md:  8px;
+  --spacing-lg:  12px;
+  --spacing-xl:  16px;
+  --spacing-2xl: 20px;
+  --spacing-3xl: 24px;
+
+  /* === 圆角 === */
+  --radius-sm:   3px;
+  --radius-md:   6px;
+  --radius-lg:   8px;
+  --radius-xl:   12px;
+  --radius-full: 50%;
+
+  /* === 阴影 === */
+  --shadow-sm:     0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md:     0 2px 8px rgba(0,0,0,0.4);
+  --shadow-lg:     0 4px 16px rgba(0,0,0,0.5);
+  --shadow-gold:   0 0 8px rgba(255, 215, 0, 0.3);
+  --shadow-accent: 0 0 8px rgba(255, 107, 53, 0.3);
+
+  /* === z-index === */
+  --z-modal: 1000;
+  --z-toast: 2000;
+  --z-debug: 9999;
+
+  /* === 过渡动画 === */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
 * {
   margin: 0;
   padding: 0;

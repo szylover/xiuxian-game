@@ -1,0 +1,62 @@
+/* ============================================================
+   NpcCard.css — NPC 卡片样式（含 hover 动态边框色）
+   ============================================================ */
+
+.npc-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 0.5rem 0.6rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+  background: var(--color-bg-dark);
+}
+
+/* hover 时使用关系颜色（由 CSS 变量注入） */
+.npc-card:hover {
+  border-color: var(--rel-color, var(--color-border-gold));
+}
+
+/* NPC 表情 */
+.npc-card-emoji {
+  font-size: 1.4rem;
+}
+
+/* NPC 信息区 */
+.npc-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.npc-card-name {
+  font-weight: bold;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+.npc-card-realm {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+/* 右侧关系区 */
+.npc-card-relation {
+  text-align: right;
+  font-size: 0.75rem;
+}
+
+.npc-card-relation-label {
+  color: var(--rel-color, var(--color-text-secondary));
+}
+
+.npc-card-affinity {
+  font-size: 0.65rem;
+  margin-left: 4px;
+  color: var(--color-text-muted);
+}
+
+.npc-card-unmet {
+  color: #666;
+}

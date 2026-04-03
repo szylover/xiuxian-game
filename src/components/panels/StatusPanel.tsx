@@ -3,6 +3,7 @@
 // 数据驱动渲染：主修属性优先，折叠"更多"展示全部属性
 // ============================================================
 
+import './StatusPanel.css';
 import { useState } from 'react';
 import { getSpiritRootGrade, getSpiritRootDisplay, formatAge } from '../../game/player';
 import type { Player } from '../../game/player';
@@ -24,9 +25,8 @@ function Section({ title, defaultOpen = false, children }: { title: string; defa
     <div className="panel-section">
       <h3
         onClick={() => setOpen(!open)}
-        style={{ cursor: 'pointer', userSelect: 'none' }}
       >
-        <span style={{ fontSize: '0.85em', marginRight: 4 }}>{open ? '▼' : '▶'}</span>
+        <span className="section-toggle-icon">{open ? '▼' : '▶'}</span>
         {title}
       </h3>
       {open && children}
@@ -94,7 +94,7 @@ export default function StatusPanel({ player }: StatusPanelProps) {
           <StatRow icon="📈" label="气修修为" value={player.exp} max={REALMS[player.realmIndex + 1]?.expReq} />
           <StatRow icon="🔮" label="灵力" value={player.mp} max={player.maxMp} color={STAT_COLORS.mp} />
           <StatRow icon="🧠" label="念力" value={player.mentalPower} max={player.maxMentalPower} color={STAT_COLORS.mental} />
-          <div style={{ borderTop: '1px solid #333', margin: '6px 0' }} />
+          <div className="section-divider" />
           <StatRow icon="💪" label="体修境界" value={`【${bodyRealm?.name ?? '凡躯'}】`} />
           <StatRow icon="📈" label="体修修为" value={player.bodyRealmExp} max={nextBodyRealm?.expReq} />
           <StatRow icon="💪" label="体魄" value={player.physique} max={player.maxPhysique} color={STAT_COLORS.physique} />
@@ -137,10 +137,14 @@ export default function StatusPanel({ player }: StatusPanelProps) {
           {player.spiritRoots && (
             <div className="spirit-roots-info">
               {player.spiritRoots.roots.length === 0 ? (
-                <div className="root-tag" style={{ color: '#9E9E9E' }}>无灵根之体</div>
+                <div className="root-tag root-tag-muted">无灵根之体</div>
               ) : (
                 player.spiritRoots.roots.map(root => (
-                  <div key={root.type} className="root-tag" style={{ color: SPIRIT_ROOT_COLORS[root.type] }}>
+                  <div
+                    key={root.type}
+                    className="root-tag root-tag-colored"
+                    style={{ '--root-color': SPIRIT_ROOT_COLORS[root.type] } as React.CSSProperties}
+                  >
                     {SPIRIT_ROOT_ICONS[root.type]} {SPIRIT_ROOT_CN[root.type]}灵根 {root.affinity}
                   </div>
                 ))

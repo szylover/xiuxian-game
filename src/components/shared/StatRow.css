@@ -1,0 +1,16 @@
+/* ============================================================
+   StatRow.css — 属性行组件样式
+   布局样式定义在 App.css (.stat-row / .stat-label / .stat-value / .stat-bar / .stat-bar-fill)
+   此文件补充 CSS 变量注入用于动态填充色
+   ============================================================ */
+
+/*
+ * 填充色由组件通过 style prop 注入 --stat-bar-color CSS 变量。
+ * 默认回退值使用 --rarity-uncommon (#4CAF50)。
+ *
+ * 用法：
+ *   <div class="stat-bar-fill" style="--stat-bar-color: #2196F3; width: 80%" />
+ */
+.stat-bar-fill {
+  background: var(--stat-bar-color, var(--rarity-uncommon));
+}
