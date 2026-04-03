@@ -1,0 +1,6 @@
+/* ToastContainer.css — 消息提示条样式 (T0068)
+   toast-bar 左边框颜色通过 CSS 变量注入 */
+
+.toast-bar {
+  border-left-color: var(--toast-border-color, #aaa);
+}

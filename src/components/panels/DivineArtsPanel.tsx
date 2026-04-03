@@ -14,6 +14,7 @@ import {
 } from '../../game/divine-arts';
 import { REALMS } from '../../game/data';
 import { useState } from 'react';
+import './DivineArtsPanel.css';
 
 interface DivineArtsPanelProps {
   player: Player;
@@ -42,11 +43,10 @@ export default function DivineArtsPanel({ player, onLearn, onActivate, onDeactiv
   return (
     <div className="technique-panel">
       {/* 过滤开关 */}
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 4 }}>
+      <div className="divine-filter-row">
         <button
-          className={`btn ${filterAvailable ? 'btn-technique-activate' : 'btn-technique'}`}
+          className={`btn divine-filter-btn ${filterAvailable ? 'btn-technique-activate' : 'btn-technique'}`}
           onClick={() => setFilterAvailable(!filterAvailable)}
-          style={{ fontSize: '0.78em', padding: '2px 8px' }}
         >
           {filterAvailable ? '✅ 只看可学' : '👁️ 全部'}
         </button>
@@ -58,7 +58,7 @@ export default function DivineArtsPanel({ player, onLearn, onActivate, onDeactiv
         {activeArtDef ? (
           <span
             className="divine-active-name"
-            style={{ color: ELEMENT_COLOR[activeArtDef.element] }}
+            style={{ '--element-color': ELEMENT_COLOR[activeArtDef.element] } as React.CSSProperties}
           >
             {ELEMENT_EMOJI[activeArtDef.element]} 【{activeArtDef.name}】
             <span className="divine-active-element">
@@ -99,7 +99,7 @@ export default function DivineArtsPanel({ player, onLearn, onActivate, onDeactiv
       {/* 可学 / 锁定神通 */}
       {displayUnlearned.length > 0 && (
         <>
-          <div className="technique-section-title" style={{ marginTop: '0.6rem' }}>
+          <div className="technique-section-title divine-section-title-spaced">
             📚 可学神通{filterAvailable ? '（已筛选）' : ''}
           </div>
           <div className="technique-list">
@@ -142,25 +142,25 @@ function DivineArtCard({ def, isActive, aptitude, canActivate, onActivate, onDea
 
   return (
     <div
-      className={`technique-card ${isActive ? 'technique-active' : ''}`}
-      style={{ borderLeftColor: color }}
+      className={`technique-card divine-art-card ${isActive ? 'technique-active' : ''}`}
+      style={{ '--element-color': color } as React.CSSProperties}
     >
       <div className="technique-header">
-        <span className="technique-name" style={{ color }}>
+        <span className="technique-name divine-art-name">
           {emoji} {def.name}
         </span>
-        <span className="technique-type" style={{ color }}>{cn}系</span>
+        <span className="technique-type divine-art-type">{cn}系</span>
         {isActive && <span className="technique-active-badge">✨ 已激活</span>}
       </div>
       <div className="technique-level">
-        <span style={{ color: '#aaa' }}>
+        <span className="divine-art-stats">
           MP: {def.mpCost} · CD: {def.cooldown}回合 · 触发率: {Math.round(def.triggerRate * 100)}%
         </span>
       </div>
       <div className="divine-aptitude-row">
-        <span style={{ color: '#9E9E9E', fontSize: '0.78rem' }}>
+        <span className="divine-aptitude-info">
           {cn}灵根资质：
-          <strong style={{ color }}>{aptitude}</strong>
+          <strong className="divine-aptitude-value">{aptitude}</strong>
           {' '}（加成 ×{calcDisplayPower(aptitude, def).toFixed(2)}）
         </span>
       </div>
@@ -207,23 +207,23 @@ function UnlearnedDivineArtCard({ def, aptitude, canLearn, reason, onLearn }: Un
 
   return (
     <div
-      className="technique-card technique-learnable"
-      style={{ borderLeftColor: color, opacity: canLearn ? 1 : 0.7 }}
+      className={`technique-card technique-learnable ${canLearn ? '' : 'divine-art-card-locked'}`}
+      style={{ '--element-color': ELEMENT_COLOR[def.element] } as React.CSSProperties}
     >
       <div className="technique-header">
-        <span className="technique-name" style={{ color }}>
+        <span className={`technique-name divine-art-name ${canLearn ? '' : 'divine-art-type-locked'}`}>
           {emoji} {def.name}
         </span>
-        <span className="technique-type" style={{ color: canLearn ? color : '#757575' }}>{cn}系</span>
+        <span className={`technique-type divine-art-type ${canLearn ? '' : 'divine-art-type-locked'}`}>{cn}系</span>
       </div>
       <div className="technique-level">
-        <span style={{ color: '#aaa' }}>
+        <span className="divine-art-stats">
           MP: {def.mpCost} · CD: {def.cooldown}回合 · 触发率: {Math.round(def.triggerRate * 100)}%
         </span>
       </div>
       <div className="divine-aptitude-row">
-        <span style={{ color: '#9E9E9E', fontSize: '0.78rem' }}>
-          {cn}灵根资质：<strong style={{ color: aptitude >= def.minAptitude ? '#4CAF50' : '#e74c3c' }}>{aptitude}</strong>
+        <span className="divine-aptitude-info">
+          {cn}灵根资质：<strong className={aptitude >= def.minAptitude ? 'divine-aptitude-value-ok' : 'divine-aptitude-value-fail'}>{aptitude}</strong>
           / 需要 {def.minAptitude} · 境界需求：{REALMS[def.minRealm]?.name ?? def.minRealm}期
         </span>
       </div>
@@ -231,7 +231,7 @@ function UnlearnedDivineArtCard({ def, aptitude, canLearn, reason, onLearn }: Un
       {def.effects && def.effects.length > 0 && (
         <div className="divine-effects">
           {def.effects.map((eff, i) => (
-            <span key={i} className="divine-effect-tag" style={{ opacity: 0.6 }}>
+            <span key={i} className="divine-effect-tag divine-effect-tag-locked">
               {formatEffect(eff)}
             </span>
           ))}

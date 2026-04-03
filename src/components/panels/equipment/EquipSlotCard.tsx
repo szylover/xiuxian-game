@@ -5,6 +5,7 @@
 import type { EquipSlot, EquipDef } from '../../../game/registry';
 import { RARITY_COLORS, SLOT_ICONS, statsCN } from '../../shared';
 import { getSlotName } from '../../../game/equipment';
+import './EquipSlotCard.css';
 
 interface EquipSlotCardProps {
   slot: EquipSlot;
@@ -20,7 +21,7 @@ export default function EquipSlotCard({ slot, def, onUnequip }: EquipSlotCardPro
         <span className="slot-label">{getSlotName(slot)}</span>
         {def ? (
           <>
-            <span className="slot-equip-name" style={{ color: RARITY_COLORS[def.rarity] }}>
+            <span className="slot-equip-name" style={{ '--rarity-color': RARITY_COLORS[def.rarity] } as React.CSSProperties}>
               {def.name}
             </span>
             <span className="slot-stats">

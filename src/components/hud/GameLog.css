@@ -1,0 +1,6 @@
+/* GameLog.css — 游戏日志样式 (T0068)
+   log-entry 使用 CSS 变量控制颜色 */
+
+.log-entry {
+  color: var(--entry-color, var(--color-text-body));
+}

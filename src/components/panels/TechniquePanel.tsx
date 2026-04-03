@@ -10,6 +10,7 @@ import { getLearnableTechniques, calcTechniqueExpGain, getEffectiveMaxLevel, cal
 import { RARITY_COLORS, SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS } from '../shared';
 import type { TechniqueRarity } from '../../game/registry';
 import { useState } from 'react';
+import './TechniquePanel.css';
 
 const TECHNIQUE_TYPE_CN: Record<string, string> = {
   sword: '剑法', blade: '刀法', fist: '拳法',
@@ -31,7 +32,7 @@ function SpiritRootTag({ rootType, affinity }: { rootType: string; affinity?: nu
   return (
     <span
       className="technique-root-tag"
-      style={{ color, borderColor: color }}
+      style={{ '--root-color': color } as React.CSSProperties}
       title={affinity !== undefined ? `${cn}灵根 亲和度 ${affinity}` : `${cn}灵根`}
     >
       {icon} {cn}
@@ -57,11 +58,10 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
   return (
     <div className="technique-panel">
       {/* 过滤开关 */}
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 4 }}>
+      <div className="technique-filter-row">
         <button
-          className={`btn ${filterAvailable ? 'btn-technique-activate' : 'btn-technique'}`}
+          className={`btn technique-filter-btn ${filterAvailable ? 'btn-technique-activate' : 'btn-technique'}`}
           onClick={() => setFilterAvailable(!filterAvailable)}
-          style={{ fontSize: '0.78em', padding: '2px 8px' }}
         >
           {filterAvailable ? '✅ 只看可学' : '👁️ 全部'}
         </button>
@@ -99,10 +99,10 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
               <div
                 key={slot.techniqueId}
                 className={`technique-card ${isActive ? 'technique-active' : ''}`}
-                style={{ borderLeftColor: RARITY_COLORS[def.rarity as TechniqueRarity] || '#9E9E9E' }}
+                style={{ '--rarity-color': RARITY_COLORS[def.rarity as TechniqueRarity] || '#9E9E9E' } as React.CSSProperties}
               >
                 <div className="technique-header">
-                  <span className="technique-name" style={{ color: RARITY_COLORS[def.rarity as TechniqueRarity] }}>
+                  <span className="technique-name">
                     {def.name}
                   </span>
                   <span className="technique-type">{TECHNIQUE_TYPE_CN[def.type] ?? def.type}</span>
@@ -145,7 +145,7 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                 </div>
                 {!isMaxLevel && (
                   <div className="technique-progress">
-                    <div className="technique-progress-fill" style={{ width: `${(slot.exp / def.expPerLevel) * 100}%` }} />
+                    <div className="technique-progress-fill" style={{ '--bar-width': `${(slot.exp / def.expPerLevel) * 100}%` } as React.CSSProperties} />
                   </div>
                 )}
                 <div className="technique-desc">{def.description}</div>
@@ -191,7 +191,7 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
       {/* 可学功法 */}
       {displayLearnable.length > 0 && (
         <>
-          <div className="technique-section-title" style={{ marginTop: '0.6rem' }}>📚 可学功法{filterAvailable ? '（已筛选）' : ''}</div>
+          <div className="technique-section-title technique-available-title">📚 可学功法{filterAvailable ? '（已筛选）' : ''}</div>
           <div className="technique-list">
             {displayLearnable.map(def => {
               const effectiveMax = getEffectiveMaxLevel(player, def);
@@ -204,10 +204,10 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                 <div
                   key={def.id}
                   className={`technique-card technique-learnable ${!hasRequired ? 'technique-locked' : ''}`}
-                  style={{ borderLeftColor: RARITY_COLORS[def.rarity as TechniqueRarity] || '#9E9E9E' }}
+                  style={{ '--rarity-color': RARITY_COLORS[def.rarity as TechniqueRarity] || '#9E9E9E' } as React.CSSProperties}
                 >
                   <div className="technique-header">
-                    <span className="technique-name" style={{ color: RARITY_COLORS[def.rarity as TechniqueRarity] }}>
+                    <span className="technique-name">
                       {def.name}
                     </span>
                     <span className="technique-type">{TECHNIQUE_TYPE_CN[def.type] ?? def.type}</span>

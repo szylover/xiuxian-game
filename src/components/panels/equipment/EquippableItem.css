@@ -1,0 +1,9 @@
+/* EquippableItem.css — 可装备物品行样式 (T0068) */
+
+.equip-inv-item {
+  border-left-color: var(--rarity-color, var(--rarity-common));
+}
+
+.equip-inv-name {
+  color: var(--rarity-color, var(--rarity-common));
+}

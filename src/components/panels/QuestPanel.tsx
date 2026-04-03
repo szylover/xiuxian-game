@@ -9,6 +9,7 @@ import { getQuestChainDef, getNpcDef } from '../../game/registry';
 import { TabBar } from '../shared';
 import { QUEST_TEXTS } from '../../data/texts/quest';
 import QuestCard from './quest/QuestCard';
+import './QuestPanel.css';
 
 const TABS = [
   { key: 'active' as const, label: QUEST_TEXTS.tabActive, icon: '📌' },
@@ -56,7 +57,7 @@ export default function QuestPanel({
           <div className="quest-tracker">
             <div className="quest-tracker-title">📜 {def.name}</div>
             {isPending ? (
-              <div className="quest-tracker-step" style={{ color: '#8f8' }}>
+              <div className="quest-tracker-step quest-tracker-step-complete">
                 {QUEST_TEXTS.pendingTurnInHint(getNpcDef(def.turnInNpcId ?? '')?.name ?? '???')}
               </div>
             ) : (

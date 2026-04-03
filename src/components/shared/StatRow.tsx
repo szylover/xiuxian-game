@@ -3,6 +3,8 @@
 // 用于 StatusPanel 基础属性 / 战斗属性 / 先天属性展示
 // ============================================================
 
+import './StatRow.css';
+
 interface StatRowProps {
   icon: string;
   label: string;
@@ -19,7 +21,7 @@ export function StatRow({ icon, label, value, max, color }: StatRowProps) {
       <span className="stat-value">{value}{max ? `/${max}` : ''}</span>
       {pct !== null && (
         <div className="stat-bar">
-          <div className="stat-bar-fill" style={{ width: `${pct}%`, background: color || '#4CAF50' }} />
+          <div className="stat-bar-fill" style={{ '--bar-width': `${pct}%`, '--bar-color': color || '#4CAF50' } as React.CSSProperties} />
         </div>
       )}
     </div>
@@ -45,7 +47,7 @@ export function AptitudeBar({ label, value }: AptitudeBarProps) {
       <span className="stat-label">{label}</span>
       <span className="stat-value">{value}</span>
       <div className="stat-bar">
-        <div className="stat-bar-fill" style={{ width: `${value}%`, background: color }} />
+        <div className="stat-bar-fill" style={{ '--bar-width': `${value}%`, '--bar-color': color } as React.CSSProperties} />
       </div>
     </div>
   );

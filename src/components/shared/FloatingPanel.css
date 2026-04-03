@@ -1,0 +1,7 @@
+/* FloatingPanel.css — 浮动面板 CSS 变量注入 (T0068)
+   布局定位通过 CSS 变量注入：
+   --panel-x: 水平位置
+   --panel-y: 垂直位置
+   --panel-width: 宽度
+   基础样式定义在 App.css .floating-panel
+*/

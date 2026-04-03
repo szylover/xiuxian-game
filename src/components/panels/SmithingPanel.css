@@ -1,0 +1,13 @@
+/* SmithingPanel.css — 炼器面板样式 (T0068) */
+
+.recipe-card {
+  border-left-color: var(--color-warning);
+}
+
+.recipe-name {
+  color: #FFB74D;
+}
+
+.recipe-output {
+  color: #FFB74D;
+}

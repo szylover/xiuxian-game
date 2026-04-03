@@ -1,0 +1,87 @@
+/* GiftModal.css — 赠礼弹窗样式 (T0068) */
+
+.gift-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--color-bg-overlay);
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gift-modal-content {
+  background: var(--color-bg-dark);
+  border: 1px solid var(--color-border-mid);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  width: 340px;
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.gift-modal-title {
+  font-weight: bold;
+  margin-bottom: 0.6rem;
+  font-size: var(--font-size-md);
+}
+
+.gift-modal-empty {
+  color: var(--color-text-dim);
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.gift-modal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.gift-item-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  background: transparent;
+}
+
+.gift-item-row.selected {
+  border-color: var(--color-success);
+  background: #1e3a1e;
+}
+
+.gift-item-name {
+  color: var(--rarity-color, var(--rarity-common));
+  font-size: 0.8rem;
+  flex: 1;
+}
+
+.gift-item-pref {
+  font-size: 0.65rem;
+  white-space: nowrap;
+  color: var(--pref-color, var(--color-text-muted));
+}
+
+.gift-modal-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+  justify-content: flex-end;
+}
+
+.gift-modal-btn {
+  font-size: 0.8rem;
+}
+
+.gift-confirm-btn {
+  font-size: 0.8rem;
+}
+
+.gift-confirm-btn:disabled {
+  opacity: 0.5;
+}

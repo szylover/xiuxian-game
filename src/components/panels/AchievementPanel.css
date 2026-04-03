@@ -1,0 +1,33 @@
+/* AchievementPanel.css — 成就面板样式 (T0068) */
+
+/* 未解锁时图标半透明 */
+.achievement-card-icon {
+  opacity: var(--icon-opacity, 1);
+}
+
+/* 成就名：解锁金色，未解锁暗灰 */
+.achievement-unlocked .achievement-card-name {
+  color: var(--color-gold);
+}
+
+.achievement-locked .achievement-card-name {
+  color: var(--color-text-dark);
+}
+
+/* 描述：解锁灰色，未解锁更暗 */
+.achievement-unlocked .achievement-card-desc {
+  color: var(--color-text-muted);
+}
+
+.achievement-locked .achievement-card-desc {
+  color: #555;
+}
+
+/* 奖励描述：解锁绿色，未解锁暗色 */
+.achievement-unlocked .achievement-card-bonus {
+  color: #8BC34A;
+}
+
+.achievement-locked .achievement-card-bonus {
+  color: #444;
+}

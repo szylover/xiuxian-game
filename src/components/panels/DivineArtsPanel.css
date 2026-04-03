@@ -1,0 +1,76 @@
+/* DivineArtsPanel.css — 神通面板样式 (T0068) */
+
+/* 激活神通名称颜色 */
+.divine-active-name {
+  color: var(--element-color, var(--color-info));
+}
+
+/* 已学神通卡片：元素颜色通过 CSS 变量注入 */
+.divine-art-card {
+  border-left-color: var(--element-color, var(--color-info));
+}
+
+.divine-art-name {
+  color: var(--element-color, var(--color-info));
+}
+
+.divine-art-type {
+  color: var(--element-color, var(--color-info));
+}
+
+.divine-art-type-locked {
+  color: #757575;
+}
+
+/* 资质信息 */
+.divine-aptitude-info {
+  color: var(--color-muted);
+  font-size: 0.78rem;
+}
+
+.divine-aptitude-value {
+  color: var(--element-color, var(--color-info));
+  font-weight: bold;
+}
+
+.divine-aptitude-value-ok {
+  color: var(--color-success);
+  font-weight: bold;
+}
+
+.divine-aptitude-value-fail {
+  color: var(--color-danger);
+  font-weight: bold;
+}
+
+/* MP/CD/触发率信息 */
+.divine-art-stats {
+  color: var(--color-text-muted);
+}
+
+/* 过滤按钮行 */
+.divine-filter-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+}
+
+.divine-filter-btn {
+  font-size: 0.78em;
+  padding: 2px 8px;
+}
+
+/* 未解锁神通效果标签透明度 */
+.divine-effect-tag-locked {
+  opacity: 0.6;
+}
+
+/* 可学神通卡片透明度 */
+.divine-art-card-locked {
+  opacity: 0.7;
+}
+
+/* 神通小节标题间距 */
+.divine-section-title-spaced {
+  margin-top: 0.6rem;
+}

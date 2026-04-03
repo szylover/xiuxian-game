@@ -4,6 +4,7 @@
 
 import type { ItemDef, ItemRarity } from '../../../game/registry';
 import { RARITY_COLORS, RARITY_LABELS } from '../../shared';
+import './InventoryItem.css';
 
 interface InventorySlot {
   itemId: string;
@@ -20,10 +21,10 @@ export default function InventoryItem({ slot, def, onUseItem }: InventoryItemPro
   return (
     <div
       className="inventory-item"
-      style={{ borderLeftColor: RARITY_COLORS[def.rarity] }}
+      style={{ '--rarity-color': RARITY_COLORS[def.rarity] } as React.CSSProperties}
     >
       <div className="item-info">
-        <span className="item-name" style={{ color: RARITY_COLORS[def.rarity] }}>
+        <span className="item-name">
           {def.name}
           <span className="item-rarity">[{RARITY_LABELS[def.rarity]}]</span>
         </span>

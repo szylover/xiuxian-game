@@ -2,6 +2,8 @@
 // layout/Avatar.tsx — 头像组件（外部 SVG 文件 + 境界边框）
 // ============================================================
 
+import './Avatar.css';
+
 const REALM_BORDER_COLORS: Record<number, string> = {
   0: '#9E9E9E', // 凡人
   1: '#9E9E9E', // 练气
@@ -31,13 +33,13 @@ export default function Avatar({ avatarId, realmIndex, size = 100 }: AvatarProps
     <div
       className="avatar-frame"
       style={{
-        width: size,
-        height: size,
-        borderColor,
-        boxShadow: `0 0 12px ${borderColor}44, inset 0 0 8px ${borderColor}22`,
-      }}
+        '--avatar-size': `${size}px`,
+        '--avatar-img-size': `${size * 0.85}px`,
+        '--avatar-border-color': borderColor,
+        '--avatar-shadow': `0 0 12px ${borderColor}44, inset 0 0 8px ${borderColor}22`,
+      } as React.CSSProperties}
     >
-      <img src={src} alt="头像" className="avatar-img" width={size * 0.85} height={size * 0.85} />
+      <img src={src} alt="头像" className="avatar-img" />
     </div>
   );
 }

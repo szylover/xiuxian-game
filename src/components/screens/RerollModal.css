@@ -1,0 +1,6 @@
+/* RerollModal.css — 随机属性弹窗样式 (T0068) */
+
+/* 灵根名称颜色通过 CSS 变量注入 */
+.spirit-root-label {
+  color: var(--root-color, var(--color-muted));
+}

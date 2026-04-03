@@ -4,6 +4,7 @@
 
 import type { ToastMessage } from '../../hooks/useToast';
 import { LOG_COLORS } from '../../hooks/useGameLog';
+import './ToastContainer.css';
 
 interface ToastBarProps {
   toast: ToastMessage | null;
@@ -16,7 +17,7 @@ export default function ToastContainer({ toast, onDismiss }: ToastBarProps) {
   return (
     <div
       className={`toast-bar ${toast.fading ? 'toast-fade-out' : 'toast-fade-in'}`}
-      style={{ borderLeftColor: LOG_COLORS[toast.category] || LOG_COLORS.default }}
+      style={{ '--toast-border-color': LOG_COLORS[toast.category] || LOG_COLORS.default } as React.CSSProperties}
       onClick={onDismiss}
     >
       {toast.text}

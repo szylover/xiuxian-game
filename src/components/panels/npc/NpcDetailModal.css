@@ -1,0 +1,190 @@
+/* NpcDetailModal.css — NPC 详情弹窗样式 (T0068) */
+
+.npc-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.npc-modal-content {
+  background: var(--color-bg-dark);
+  border: 1px solid var(--color-border-mid);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.2rem;
+  width: 320px;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.npc-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.npc-modal-emoji {
+  font-size: var(--font-size-2em);
+}
+
+.npc-modal-title-block {
+  flex: 1;
+}
+
+.npc-modal-name {
+  font-weight: bold;
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+}
+
+.npc-modal-title-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-dim);
+}
+
+.npc-modal-close-btn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--color-text-dim);
+  cursor: pointer;
+  font-size: var(--font-size-2xl);
+}
+
+.npc-modal-info {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.npc-modal-description {
+  font-size: var(--font-size-sm);
+  color: #777;
+  margin-top: 0.2rem;
+}
+
+/* 好感度条 */
+.npc-affinity-section {
+  margin: 0.6rem 0;
+}
+
+.npc-affinity-label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.npc-affinity-value {
+  color: var(--rel-color, var(--color-text-primary));
+}
+
+.npc-affinity-rel {
+  margin-left: 0.5rem;
+  color: var(--rel-color, var(--color-text-primary));
+}
+
+.npc-affinity-track {
+  background: #333;
+  border-radius: var(--radius-sm);
+  height: 8px;
+  overflow: hidden;
+}
+
+.npc-affinity-fill {
+  height: 100%;
+  border-radius: var(--radius-sm);
+  transition: width 0.3s;
+  width: var(--affinity-width, 0%);
+  background: var(--rel-color, var(--color-info));
+}
+
+/* 聊天消息 */
+.npc-chat-bubble {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  padding: 0.4rem 0.6rem;
+  font-size: 0.78rem;
+  color: #e0c060;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--color-border-light);
+}
+
+/* 任务区域 */
+.npc-quest-section {
+  margin-bottom: 0.5rem;
+  border-top: 1px solid var(--color-border-light);
+  padding-top: 0.5rem;
+}
+
+.npc-quest-section-title {
+  font-size: 0.82rem;
+  color: #e6d9a8;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.npc-quest-turnin-card {
+  background: #1a2a1a;
+  border: 1px solid #4a4;
+  border-radius: var(--radius-sm);
+  padding: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.npc-quest-turnin-name {
+  font-size: 0.8rem;
+  color: #8f8;
+}
+
+.npc-quest-available-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-mid);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.npc-quest-available-name {
+  font-size: 0.8rem;
+  color: #e6d9a8;
+}
+
+.npc-quest-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.npc-quest-btn {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+}
+
+/* 交互按钮 */
+.npc-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.npc-action-btn {
+  font-size: 0.8rem;
+}
+
+.npc-action-btn-disabled {
+  font-size: 0.8rem;
+  opacity: 0.4;
+}
+
+.npc-gift-btn {
+  font-size: 0.8rem;
+}
+
+.npc-gift-btn-on-cd {
+  opacity: 0.5;
+}

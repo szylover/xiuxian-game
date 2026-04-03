@@ -10,6 +10,7 @@ import { rollSpiritRoots } from '../../game/spirit-root';
 import type { Aptitudes } from '../../game/player/types';
 import { SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS, COMBO_CN, APTITUDE_CN } from '../shared/constants';
 import FloatingPanel from '../shared/FloatingPanel';
+import './RerollModal.css';
 
 // ── 可锁定属性 key ──
 type LockableKey =
@@ -132,7 +133,7 @@ export default function RerollModal({ preview, onConfirm, onClose }: RerollModal
           <div className="reroll-section-title">灵根</div>
           <div className="reroll-row reroll-row-combo">
             <span className="reroll-row-label">灵根组合</span>
-            <span className="combo-badge-sm" style={{ color: comboColor, borderColor: comboColor }}>
+            <span className="combo-badge-sm" style={{ '--combo-color': comboColor } as React.CSSProperties}>
               {comboCN}
             </span>
             <span className="reroll-mult">×{mult}</span>
@@ -148,10 +149,10 @@ export default function RerollModal({ preview, onConfirm, onClose }: RerollModal
               <div key={root.type} className="reroll-row">
                 <span className="reroll-row-label">
                   <span className="root-icon-sm">{SPIRIT_ROOT_ICONS[root.type]}</span>
-                  <span style={{ color: SPIRIT_ROOT_COLORS[root.type] }}>{SPIRIT_ROOT_CN[root.type]}灵根</span>
+                  <span style={{ '--root-color': SPIRIT_ROOT_COLORS[root.type] } as React.CSSProperties} className="spirit-root-label">{SPIRIT_ROOT_CN[root.type]}灵根</span>
                 </span>
                 <div className="reroll-bar">
-                  <div className="reroll-bar-fill" style={{ width: `${root.affinity}%`, backgroundColor: SPIRIT_ROOT_COLORS[root.type] }} />
+                  <div className="reroll-bar-fill" style={{ '--bar-width': `${root.affinity}%`, '--bar-color': SPIRIT_ROOT_COLORS[root.type] } as React.CSSProperties} />
                 </div>
                 <span className="reroll-val">{root.affinity}</span>
                 <LockButton lockKey={`root:${root.type}` as LockableKey} locks={locks} onToggle={toggleLock} />
@@ -167,9 +168,9 @@ export default function RerollModal({ preview, onConfirm, onClose }: RerollModal
             <div key={key} className="reroll-row">
               <span className="reroll-row-label">{label}</span>
               <div className="reroll-bar">
-                <div className="reroll-bar-fill" style={{ width: `${val}%`, backgroundColor: valColor(val) }} />
+                <div className="reroll-bar-fill" style={{ '--bar-width': `${val}%`, '--bar-color': valColor(val) } as React.CSSProperties} />
               </div>
-              <span className="reroll-val" style={{ color: valColor(val) }}>{val}</span>
+              <span className="reroll-val" style={{ '--val-color': valColor(val) } as React.CSSProperties}>{val}</span>
               <LockButton lockKey={key} locks={locks} onToggle={toggleLock} />
             </div>
           ))}
@@ -188,9 +189,9 @@ export default function RerollModal({ preview, onConfirm, onClose }: RerollModal
                     <div key={key} className="reroll-apt-cell">
                       <span className="reroll-apt-name">{APTITUDE_CN[key]}</span>
                       <div className="reroll-apt-bar">
-                        <div className="reroll-apt-bar-fill" style={{ width: `${val}%`, backgroundColor: valColor(val) }} />
+                        <div className="reroll-apt-bar-fill" style={{ '--bar-width': `${val}%`, '--bar-color': valColor(val) } as React.CSSProperties} />
                       </div>
-                      <span className="reroll-apt-val" style={{ color: valColor(val) }}>{val}</span>
+                      <span className="reroll-apt-val" style={{ '--val-color': valColor(val) } as React.CSSProperties}>{val}</span>
                       <LockButton lockKey={`apt:${key}` as LockableKey} locks={locks} onToggle={toggleLock} />
                     </div>
                   );
@@ -207,9 +208,9 @@ export default function RerollModal({ preview, onConfirm, onClose }: RerollModal
             <div key={key} className="reroll-row">
               <span className="reroll-row-label">{label}</span>
               <div className="reroll-bar">
-                <div className="reroll-bar-fill" style={{ width: `${val}%`, backgroundColor: valColor(val) }} />
+                <div className="reroll-bar-fill" style={{ '--bar-width': `${val}%`, '--bar-color': valColor(val) } as React.CSSProperties} />
               </div>
-              <span className="reroll-val" style={{ color: valColor(val) }}>{val}</span>
+              <span className="reroll-val" style={{ '--val-color': valColor(val) } as React.CSSProperties}>{val}</span>
               <LockButton lockKey={key} locks={locks} onToggle={toggleLock} />
             </div>
           ))}

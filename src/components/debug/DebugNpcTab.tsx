@@ -4,6 +4,7 @@ import { getAllNpcDefs } from '../../game/registry';
 import { getNpcState, calcRelationLevel } from '../../game/npc';
 import type { NpcSystemState, NpcRelation } from '../../game/types';
 import { NPC_RELATION_CN, NPC_RELATION_COLORS } from '../shared/constants';
+import './DebugNpcTab.css';
 
 interface Props {
   player: Player;
@@ -81,15 +82,15 @@ export default function DebugNpcTab({ player, onUpdate }: Props) {
 
   return (
     <div className="debug-stats">
-      <div className="debug-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.4rem' }}>
-        <span className="debug-label" style={{ fontWeight: 'bold' }}>👥 NPC 系统调试</span>
-        <div style={{ fontSize: '0.75rem', color: '#ccc' }}>
+      <div className="debug-row debug-row-column">
+        <span className="debug-label debug-label-bold">👥 NPC 系统调试</span>
+        <div className="debug-npc-info">
           <div>已注册 NPC：{allNpcs.length}</div>
           <div>已邂逅：{npcState.discoveredNpcs.length}</div>
         </div>
       </div>
 
-      <div className="debug-row" style={{ flexWrap: 'wrap', gap: '0.3rem', marginTop: '0.4rem' }}>
+      <div className="debug-row debug-row-wrap debug-row-spaced">
         <button className="btn debug-btn" onClick={meetAll}>👋 全部邂逅</button>
         <button className="btn debug-btn" onClick={resetAll}>🗑️ 重置 NPC 状态</button>
         <button className="btn debug-btn" onClick={() => setAllAffinity(90)}>❤️ 全部设为知己</button>
@@ -97,36 +98,32 @@ export default function DebugNpcTab({ player, onUpdate }: Props) {
         <button className="btn debug-btn" onClick={() => setAllAffinity(-60)}>💢 全部设为敌对</button>
       </div>
 
-      <div style={{ marginTop: '0.6rem' }}>
-        <span className="debug-label" style={{ fontWeight: 'bold' }}>📋 NPC 好感度</span>
+      <div className="debug-npc-section-title">
+        <span className="debug-label debug-label-bold">📋 NPC 好感度</span>
         {allNpcs.map(npc => {
           const rel = npcState.relations[npc.id];
           const affinity = rel?.affinity ?? 0;
           const level = rel ? rel.relationLevel : 'stranger';
           const met = rel?.met ?? false;
           return (
-            <div key={npc.id} style={{
-              border: '1px solid #444', borderRadius: 4, padding: '6px 8px', marginBottom: 4, fontSize: '0.73rem',
-              display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap',
-            }}>
+            <div key={npc.id} className="debug-npc-row">
               <span>{npc.emoji}</span>
-              <span style={{ color: met ? '#fff' : '#666', minWidth: '5rem' }}>{npc.name}</span>
-              <span style={{ color: NPC_RELATION_COLORS[level], fontSize: '0.7rem' }}>
+              <span className={met ? 'debug-npc-name-met' : 'debug-npc-name-unmet'}>{npc.name}</span>
+              <span className="debug-npc-relation" style={{ '--rel-color': NPC_RELATION_COLORS[level] } as React.CSSProperties}>
                 {NPC_RELATION_CN[level]}
               </span>
-              <span style={{ color: '#aaa', fontSize: '0.7rem' }}>({affinity})</span>
-              <div style={{ display: 'flex', gap: '0.2rem', marginLeft: 'auto' }}>
+              <span className="debug-npc-affinity">({affinity})</span>
+              <div className="debug-npc-actions">
                 {[-30, -10, 10, 30].map(d => (
-                  <button key={d} className="btn debug-btn" style={{ padding: '1px 4px', fontSize: '0.65rem' }}
+                  <button key={d} className="btn debug-btn debug-npc-btn-sm"
                     onClick={() => setAffinity(npc.id, affinity + d)}>
                     {d > 0 ? `+${d}` : d}
                   </button>
                 ))}
                 <input
                   type="number"
-                  className="debug-input-sm"
+                  className="debug-input-sm debug-npc-input"
                   placeholder="="
-                  style={{ width: '3rem' }}
                   onKeyDown={e => {
                     if (e.key === 'Enter') setAffinity(npc.id, Number((e.target as HTMLInputElement).value) || 0);
                   }}

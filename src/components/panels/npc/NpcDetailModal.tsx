@@ -12,6 +12,7 @@ import { NPC_RELATION_CN, NPC_RELATION_COLORS, NPC_RELATION_EMOJI, NPC_PERSONALI
 import { QUEST_TEXTS } from '../../../data/texts/quest';
 import QuestRewardPreview from '../quest/QuestRewardPreview';
 import GiftModal from './GiftModal';
+import './NpcDetailModal.css';
 
 interface NpcDetailModalProps {
   player: Player;
@@ -64,59 +65,43 @@ export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift, o
 
   return (
     <>
-      <div style={{
-        position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-        background: 'rgba(0,0,0,0.5)', zIndex: 1000,
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-      }} onClick={onClose}>
+      <div className="npc-modal-overlay" onClick={onClose}>
         <div
-          style={{
-            background: '#1a1a2e', border: '1px solid #555', borderRadius: 8,
-            padding: '1rem 1.2rem', width: 320, maxHeight: '80vh', overflow: 'auto',
-          }}
+          className="npc-modal-content"
           onClick={e => e.stopPropagation()}
+          style={{ '--rel-color': relColor } as React.CSSProperties}
         >
           {/* 头部 */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
-            <span style={{ fontSize: '2rem' }}>{npc.emoji}</span>
-            <div>
-              <div style={{ fontWeight: 'bold', fontSize: '1rem', color: '#e0e0e0' }}>{npc.name}</div>
-              {npc.title && <div style={{ fontSize: '0.72rem', color: '#888' }}>{npc.title}</div>}
+          <div className="npc-modal-header">
+            <span className="npc-modal-emoji">{npc.emoji}</span>
+            <div className="npc-modal-title-block">
+              <div className="npc-modal-name">{npc.name}</div>
+              {npc.title && <div className="npc-modal-title-text">{npc.title}</div>}
             </div>
-            <button onClick={onClose} style={{ marginLeft: 'auto', background: 'none', border: 'none', color: '#888', cursor: 'pointer', fontSize: '1.2rem' }}>✕</button>
+            <button onClick={onClose} className="npc-modal-close-btn">✕</button>
           </div>
 
           {/* 基本信息 */}
-          <div style={{ fontSize: '0.78rem', color: '#aaa', marginBottom: '0.5rem', lineHeight: 1.6 }}>
+          <div className="npc-modal-info">
             <div>境界：{realmName}期</div>
             <div>性格：{personalityCN}</div>
-            <div style={{ fontSize: '0.72rem', color: '#777', marginTop: '0.2rem' }}>{npc.description}</div>
+            <div className="npc-modal-description">{npc.description}</div>
           </div>
 
           {/* 好感度条 */}
-          <div style={{ margin: '0.6rem 0' }}>
-            <div style={{ fontSize: '0.75rem', color: '#ccc', marginBottom: '0.25rem' }}>
-              好感度 <span style={{ color: relColor }}>{rel.affinity}</span>/{maxAffinity}
-              <span style={{ marginLeft: '0.5rem', color: relColor }}>{relEmoji} {relLabel}</span>
+          <div className="npc-affinity-section">
+            <div className="npc-affinity-label">
+              好感度 <span className="npc-affinity-value">{rel.affinity}</span>/{maxAffinity}
+              <span className="npc-affinity-rel">{relEmoji} {relLabel}</span>
             </div>
-            <div style={{ background: '#333', borderRadius: 4, height: 8, overflow: 'hidden' }}>
-              <div style={{
-                width: `${barPct}%`,
-                height: '100%',
-                background: relColor,
-                transition: 'width 0.3s',
-                borderRadius: 4,
-              }} />
+            <div className="npc-affinity-track">
+              <div className="npc-affinity-fill" style={{ '--affinity-width': `${barPct}%` } as React.CSSProperties} />
             </div>
           </div>
 
           {/* 交谈消息 */}
           {chatMsg && (
-            <div style={{
-              background: '#252540', borderRadius: 6, padding: '0.4rem 0.6rem',
-              fontSize: '0.78rem', color: '#e0c060', marginBottom: '0.5rem',
-              border: '1px solid #444',
-            }}>
+            <div className="npc-chat-bubble">
               {npc.emoji} {npc.name}：{chatMsg}
             </div>
           )}
@@ -126,26 +111,26 @@ export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift, o
             const { available, pendingTurnIn } = getQuestsForNpc(player, npc.id);
             if (available.length === 0 && pendingTurnIn.length === 0) return null;
             return (
-              <div style={{ marginBottom: '0.5rem', borderTop: '1px solid #444', paddingTop: '0.5rem' }}>
-                <div style={{ fontSize: '0.82rem', color: '#e6d9a8', fontWeight: 'bold', marginBottom: '0.3rem' }}>
+              <div className="npc-quest-section">
+                <div className="npc-quest-section-title">
                   {QUEST_TEXTS.npcQuestsTitle}
                 </div>
                 {pendingTurnIn.map(({ def }) => (
-                  <div key={def.id} style={{ background: '#1a2a1a', border: '1px solid #4a4', borderRadius: 4, padding: '0.4rem', marginBottom: '0.3rem' }}>
-                    <div style={{ fontSize: '0.8rem', color: '#8f8' }}>{def.icon} {def.name} ✅</div>
-                    <div style={{ fontSize: '0.72rem', color: '#aaa' }}>{def.description}</div>
+                  <div key={def.id} className="npc-quest-turnin-card">
+                    <div className="npc-quest-turnin-name">{def.icon} {def.name} ✅</div>
+                    <div className="npc-quest-desc">{def.description}</div>
                     <QuestRewardPreview reward={def.rewards} />
-                    <button className="btn btn-sm btn-primary" onClick={() => onTurnInQuest(def.id)} style={{ marginTop: '0.3rem', fontSize: '0.75rem' }}>
+                    <button className="btn btn-sm btn-primary npc-quest-btn" onClick={() => onTurnInQuest(def.id)}>
                       {QUEST_TEXTS.npcQuestTurnIn}
                     </button>
                   </div>
                 ))}
                 {available.map(def => (
-                  <div key={def.id} style={{ background: '#252540', border: '1px solid #555', borderRadius: 4, padding: '0.4rem', marginBottom: '0.3rem' }}>
-                    <div style={{ fontSize: '0.8rem', color: '#e6d9a8' }}>{def.icon} {def.name}</div>
-                    <div style={{ fontSize: '0.72rem', color: '#aaa' }}>{def.description}</div>
+                  <div key={def.id} className="npc-quest-available-card">
+                    <div className="npc-quest-available-name">{def.icon} {def.name}</div>
+                    <div className="npc-quest-desc">{def.description}</div>
                     <QuestRewardPreview reward={def.rewards} />
-                    <button className="btn btn-sm btn-primary" onClick={() => onAcceptQuest(def.id)} style={{ marginTop: '0.3rem', fontSize: '0.75rem' }}>
+                    <button className="btn btn-sm btn-primary npc-quest-btn" onClick={() => onAcceptQuest(def.id)}>
                       {QUEST_TEXTS.npcQuestAccept}
                     </button>
                   </div>
@@ -155,29 +140,28 @@ export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift, o
           })()}
 
           {/* 交互按钮 */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginTop: '0.5rem' }}>
+          <div className="npc-action-buttons">
             {!rel.met ? (
-              <button className="btn" onClick={() => onMeet(npc.id)} style={{ fontSize: '0.8rem' }}>
+              <button className="btn npc-action-btn" onClick={() => onMeet(npc.id)}>
                 👋 邂逅
               </button>
             ) : (
               <>
-                <button className="btn" onClick={handleChat} style={{ fontSize: '0.8rem' }}>
+                <button className="btn npc-action-btn" onClick={handleChat}>
                   💬 交谈
                 </button>
                 <button
-                  className="btn"
+                  className={`btn npc-gift-btn ${canGift ? '' : 'npc-gift-btn-on-cd'}`}
                   disabled={!canGift}
                   onClick={() => setShowGiftModal(true)}
-                  style={{ fontSize: '0.8rem', opacity: canGift ? 1 : 0.5 }}
                   title={giftOnCd ? `冷却中，还需 ${cdMonths} 个月` : '选择物品赠送'}
                 >
                   🎁 赠礼{giftOnCd ? `（${cdMonths}月）` : ''}
                 </button>
-                <button className="btn" disabled style={{ fontSize: '0.8rem', opacity: 0.4 }} title="T0064 论道系统待接入">
+                <button className="btn npc-action-btn-disabled" disabled title="T0064 论道系统待接入">
                   📖 论道
                 </button>
-                <button className="btn" disabled style={{ fontSize: '0.8rem', opacity: 0.4 }} title="T0028 切磋系统待实现">
+                <button className="btn npc-action-btn-disabled" disabled title="T0028 切磋系统待实现">
                   ⚔️ 切磋
                 </button>
               </>

@@ -1,0 +1,5 @@
+/* DebugItemRow.css — 调试物品行样式 (T0068) */
+
+.debug-item-name {
+  color: var(--rarity-color, var(--rarity-common));
+}

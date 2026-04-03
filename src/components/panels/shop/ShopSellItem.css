@@ -1,0 +1,9 @@
+/* ShopSellItem.css — 商店卖出物品行样式 (T0068) */
+
+.shop-item {
+  border-left-color: var(--rarity-color, var(--rarity-common));
+}
+
+.shop-item-name {
+  color: var(--rarity-color, var(--rarity-common));
+}

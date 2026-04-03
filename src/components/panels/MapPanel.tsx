@@ -10,6 +10,7 @@ import { getAllRegions } from '../../game/registry';
 import { getMapState, calcTravelCost, checkRegionAccess } from '../../game/map';
 import { REALMS } from '../../game/data';
 import { getBodyRealmDef } from '../../game/registry';
+import './MapPanel.css';
 
 interface MapPanelProps {
   player: Player;
@@ -75,7 +76,7 @@ export default function MapPanel({ player, onTravel }: MapPanelProps) {
         {(() => {
           const cur = allRegions.find(r => r.id === state.currentRegionId);
           return cur ? (
-            <span className="divine-active-name" style={{ color: '#4FC3F7' }}>
+            <span className="divine-active-name divine-active-name-location">
               {cur.emoji} {cur.name}
             </span>
           ) : (
@@ -131,7 +132,7 @@ function RegionTreeNode({ node, depth, player, currentRegionId, collapsed, onTog
 
   return (
     <>
-      <div style={{ marginLeft: depth * 16 }}>
+      <div className="region-tree-node" style={{ '--tree-indent': `${depth * 16}px` } as React.CSSProperties}>
         <RegionCard
           region={region}
           isCurrent={isCurrent}
@@ -183,15 +184,14 @@ function RegionCard({ region, isCurrent, isUnlocked, travelCost, canAfford, real
   if (region.isContainer) {
     return (
       <div
-        className="technique-section-title"
+        className={`technique-section-title region-container-toggle ${hasChildren ? '' : 'region-container-no-children'}`}
         onClick={hasChildren ? onToggle : undefined}
-        style={{ cursor: hasChildren ? 'pointer' : 'default', userSelect: 'none', marginTop: '0.4rem' }}
       >
         {hasChildren && (
-          <span style={{ marginRight: 4, fontSize: '0.85em' }}>{isCollapsed ? '▶' : '▼'}</span>
+          <span className="region-collapse-arrow">{isCollapsed ? '▶' : '▼'}</span>
         )}
         {region.emoji} {region.name}
-        {!isUnlocked && <span style={{ color: '#FF9800', fontSize: '0.8em', marginLeft: 6 }}>🔒</span>}
+        {!isUnlocked && <span className="region-lock-icon">🔒</span>}
       </div>
     );
   }
@@ -207,26 +207,26 @@ function RegionCard({ region, isCurrent, isUnlocked, travelCost, canAfford, real
   return (
     <div
       className={`technique-card ${isCurrent ? 'technique-active' : ''}`}
-      style={{ borderLeftColor: borderColor }}
+      style={{ '--region-border-color': borderColor } as React.CSSProperties}
     >
       <div className="technique-header">
         {/* 折叠按钮 */}
         {hasChildren && (
           <span
             onClick={onToggle}
-            style={{ cursor: 'pointer', marginRight: 4, fontSize: '0.9em', userSelect: 'none' }}
+            className="region-collapse-arrow"
           >
             {isCollapsed ? '▶' : '▼'}
           </span>
         )}
-        <span className="technique-name" style={{ color: isUnlocked ? '#e0e0e0' : '#666' }}>
+        <span className={`technique-name ${isUnlocked ? 'region-name-unlocked' : 'region-name-locked'}`}>
           {region.emoji} {region.name}
         </span>
-        <span className="technique-type" style={{ color: '#9E9E9E' }}>
+        <span className="technique-type region-type-label">
           {realmName}
         </span>
         {isCurrent && <span className="technique-active-badge">📍 当前</span>}
-        {!isUnlocked && <span style={{ color: '#FF9800', fontSize: '0.8em' }}>🔒</span>}
+        {!isUnlocked && <span className="region-lock-icon">🔒</span>}
       </div>
       <div className="technique-desc">{region.description}</div>
       {tags.length > 0 && (
@@ -238,7 +238,7 @@ function RegionCard({ region, isCurrent, isUnlocked, travelCost, canAfford, real
       )}
       <div className="technique-actions">
         {isCurrent ? (
-          <span style={{ color: '#4FC3F7', fontSize: '0.85em' }}>📍 您在这里</span>
+          <span className="region-current-label">📍 您在这里</span>
         ) : isUnlocked ? (
           <button
             className="btn btn-technique-activate"
@@ -249,7 +249,7 @@ function RegionCard({ region, isCurrent, isUnlocked, travelCost, canAfford, real
             🗺️ 前往（{travelCost}精力）
           </button>
         ) : (
-          <span style={{ color: '#FF9800', fontSize: '0.85em' }}>
+          <span className="region-locked-label">
             🔒 需达到 {realmName}(气修){bodyRealmName ? ` 或 ${bodyRealmName}(体修)` : ''}
           </span>
         )}

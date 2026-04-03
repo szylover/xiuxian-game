@@ -8,6 +8,7 @@ import { getAllAchievementDefs } from '../../game/registry';
 import { getAchievementState, getAchievementRecalcBonus } from '../../game/achievement/engine';
 import type { AchievementCategory, AchievementRecalcBonus, AchievementOnceBonus } from '../../game/achievement/types';
 import { TabBar } from '../shared';
+import './AchievementPanel.css';
 
 type TabKey = 'all' | AchievementCategory;
 
@@ -106,23 +107,23 @@ export default function AchievementPanel({ player }: AchievementPanelProps) {
               key={ach.id}
               className={`achievement-card ${isUnlocked ? 'achievement-unlocked' : 'achievement-locked'}`}
             >
-              <div className="achievement-card-icon" style={{ opacity: isUnlocked ? 1 : 0.35 }}>
+              <div className="achievement-card-icon" style={{ '--icon-opacity': isUnlocked ? 1 : 0.35 } as React.CSSProperties}>
                 {ach.icon}
               </div>
               <div className="achievement-card-body">
                 <div className="achievement-card-header">
-                  <span className="achievement-card-name" style={{ color: isUnlocked ? '#FFD700' : '#666' }}>
+                  <span className="achievement-card-name">
                     {showHidden ? '???' : ach.name}
                   </span>
                   <span className="achievement-card-status">
                     {isUnlocked ? '✅' : '🔒'}
                   </span>
                 </div>
-                <div className="achievement-card-desc" style={{ color: isUnlocked ? '#aaa' : '#555' }}>
+                <div className="achievement-card-desc">
                   {showHidden ? '???' : ach.description}
                 </div>
                 {ach.bonusDescription && (
-                  <div className="achievement-card-bonus" style={{ color: isUnlocked ? '#8BC34A' : '#444' }}>
+                  <div className="achievement-card-bonus">
                     {ach.bonusDescription}
                   </div>
                 )}

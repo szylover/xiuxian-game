@@ -1,0 +1,33 @@
+/* TechniquePanel.css — 功法面板样式 (T0068) */
+
+/* 灵根标签：颜色通过 CSS 变量注入 */
+.technique-root-tag {
+  color: var(--root-color, var(--color-muted));
+  border-color: var(--root-color, var(--color-muted));
+}
+
+/* 功法卡片：品质边框和名称颜色通过 CSS 变量注入 */
+.technique-card {
+  border-left-color: var(--rarity-color, var(--rarity-common));
+}
+
+.technique-name {
+  color: var(--rarity-color, var(--rarity-common));
+}
+
+/* 过滤按钮 */
+.technique-filter-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+}
+
+.technique-filter-btn {
+  font-size: 0.78em;
+  padding: 2px 8px;
+}
+
+/* 可学功法标题 */
+.technique-available-title {
+  margin-top: 0.6rem;
+}

@@ -106,6 +106,12 @@ git worktree add ../xiuxian-T0065 feat/T0065-text-centralization
 
 - **UI 全中文**：所有面向玩家的文字必须使用中文，禁止出现英文属性名（如 atk → 攻击，hp → 体力，mp → 灵力，def → 防御，speed → 速度，critRate → 暴击，moveSpeed → 移速）
 - **文案集中管理（禁止 magic string）**：所有面向玩家的中文文本（日志模板、系统提示、UI 标签、属性名映射等）**必须**定义在 `src/data/texts/` 下对应的模块文件中，逻辑代码和组件通过 `import { XXX_TEXTS } from '@/data/texts'` 引用。**禁止**在 `src/game/`、`src/hooks/`、`src/components/` 中内联硬编码中文字符串。新增系统时须同步在 `src/data/texts/` 下新建对应文案文件并在 `index.ts` 中 re-export。静态文本用 `string`，动态模板用函数 `(...args) => string`。详见 `docs/specs/T0065-text-centralization.md`
+- **CSS 规范（T0068）**：
+  - **禁止内联 CSS**：TSX/TS 组件中禁止出现硬编码的 `style={{ color: '#xxx', fontSize: 'xxx' }}` 等内联样式
+  - **伴生 CSS 文件**：每个有样式的 TSX 组件必须有同名 `.css` 伴生文件（`Button.tsx` → `Button.css`），并在组件中 `import './Button.css'`
+  - **设计 Token 集中**：颜色、字体、间距等设计 token 统一定义在 `src/App.css` 的 `:root {}` 中以 `--` 前缀定义（如 `--color-danger`、`--stat-hp`、`--rarity-epic` 等）
+  - **动态值注入**：动态值（如进度条宽度、品质颜色）必须用 CSS 变量注入：`style={{ '--bar-width': \`${pct}%\` } as React.CSSProperties}`，CSS 中用 `width: var(--bar-width)` 引用
+  - **主题切换**：不同主题/模式通过 CSS 选择器（如 `[data-theme="dark"]`）覆盖 `:root` 变量值
 - **数据驱动**：所有游戏数值集中在 `src/data/` 下，逻辑层通过数据表驱动行为
 - **系统 ≠ 内容**：系统是纯逻辑壳子（背包/炼丹/装备/商店/战斗…），所有具体内容（物品/丹药/装备/妖兽/功法/配方/商品…）通过 `registerDLC()` 挂载到全局注册表，核心包也是 DLC（namespace: `core`）。详见 `docs/roadmap.md` 扩展性约定
 - **模块分离**：每个系统（属性/战斗/事件/炼丹/…）独立模块，通过 React 组件 + 自定义 Hook 暴露接口

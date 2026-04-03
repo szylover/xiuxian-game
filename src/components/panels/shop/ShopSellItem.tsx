@@ -4,6 +4,7 @@
 
 import type { ItemDef } from '../../../game/registry';
 import { RARITY_COLORS } from '../../shared';
+import './ShopSellItem.css';
 
 interface InventorySlot {
   itemId: string;
@@ -18,9 +19,9 @@ interface ShopSellItemProps {
 
 export default function ShopSellItem({ slot, def, onSell }: ShopSellItemProps) {
   return (
-    <div className="shop-item" style={{ borderLeftColor: RARITY_COLORS[def.rarity] }}>
+    <div className="shop-item" style={{ '--rarity-color': RARITY_COLORS[def.rarity] } as React.CSSProperties}>
       <div className="shop-item-info">
-        <span className="shop-item-name" style={{ color: RARITY_COLORS[def.rarity] }}>
+        <span className="shop-item-name">
           {def.name} <span className="shop-item-count">×{slot.count}</span>
         </span>
       </div>

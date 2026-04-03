@@ -1,0 +1,38 @@
+/* LeftPanel.css — 左侧面板样式 (T0068) */
+
+/* 境界名（大乘时金色） */
+.left-realm-ascension {
+  color: var(--color-gold);
+}
+
+/* 瓶颈标签 */
+.bottleneck-badge {
+  display: inline-block;
+  font-size: 0.7em;
+  background: #4a2800;
+  color: #ff9800;
+  border: 1px solid #ff9800;
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+/* 当前区域显示 */
+.left-region-info {
+  font-size: 0.85em;
+  color: var(--color-muted);
+  margin-top: 2px;
+}
+
+/* 体修修为条（继承 left-exp-fill 但可加颜色覆盖） */
+.left-exp-fill-physique {
+  background: var(--bar-color, var(--stat-physique));
+}
+
+/* 体魄警告文字 */
+.left-physique-warn {
+  font-size: 0.75em;
+  color: var(--color-warning);
+  margin-top: 2px;
+}

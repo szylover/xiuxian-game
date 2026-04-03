@@ -1,0 +1,7 @@
+/* Avatar.css — 头像组件样式 (T0068)
+   头像边框颜色、大小通过 CSS 变量注入 */
+
+.avatar-img {
+  width: var(--avatar-img-size, 85px);
+  height: var(--avatar-img-size, 85px);
+}

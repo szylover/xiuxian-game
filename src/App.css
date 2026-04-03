@@ -2,6 +2,109 @@
    App.css — 修仙之路 全局样式
    ============================================================ */
 
+/* ── 设计 Token（T0068）── */
+:root {
+  /* 基础背景色 */
+  --color-bg-body:    #0a0e1a;
+  --color-bg-panel:   #1a1e2e;
+  --color-bg-card:    #252540;
+  --color-bg-dark:    #1a1a2e;
+  --color-bg-overlay: rgba(0,0,0,0.6);
+
+  /* 边框色 */
+  --color-border:       #333;
+  --color-border-light: #444;
+  --color-border-mid:   #555;
+
+  /* 文字色 */
+  --color-text-primary:   #e0e0e0;
+  --color-text-secondary: #ccc;
+  --color-text-muted:     #aaa;
+  --color-text-dim:       #888;
+  --color-text-dark:      #666;
+  --color-text-body:      #d4d4d4;
+
+  /* 语义色 */
+  --color-danger:  #e74c3c;
+  --color-warning: #FF9800;
+  --color-success: #4CAF50;
+  --color-info:    #2196F3;
+  --color-gold:    #FFD700;
+  --color-purple:  #9C27B0;
+  --color-muted:   #9E9E9E;
+
+  /* 品质颜色 */
+  --rarity-common:    #9E9E9E;
+  --rarity-uncommon:  #4CAF50;
+  --rarity-rare:      #2196F3;
+  --rarity-epic:      #9C27B0;
+  --rarity-legendary: #FFD700;
+
+  /* 属性颜色 */
+  --stat-hp:            #F44336;
+  --stat-mp:            #2196F3;
+  --stat-stamina:       #FFC107;
+  --stat-mental:        #9C27B0;
+  --stat-lifespan:      #FF9800;
+  --stat-mood:          #E91E63;
+  --stat-health:        #4CAF50;
+  --stat-luck:          #4CAF50;
+  --stat-comprehension: #2196F3;
+  --stat-charisma:      #FF9800;
+  --stat-physique:      #FF6D00;
+  --stat-exp:           #00BCD4;
+
+  /* 境界边框颜色 */
+  --realm-color-0: #9E9E9E;
+  --realm-color-1: #9E9E9E;
+  --realm-color-2: #4CAF50;
+  --realm-color-3: #2196F3;
+  --realm-color-4: #9C27B0;
+  --realm-color-5: #FFD700;
+  --realm-color-6: #FFD700;
+  --realm-color-7: #FFD700;
+
+  /* 日志颜色 */
+  --log-system:    #aaa;
+  --log-combat:    #ef5350;
+  --log-explore:   #4CAF50;
+  --log-adventure: #FFD700;
+  --log-daily:     #64B5F6;
+  --log-default:   #d4d4d4;
+
+  /* NPC 关系颜色 */
+  --rel-hostile:      #F44336;
+  --rel-cold:         #9E9E9E;
+  --rel-stranger:     #FFFFFF;
+  --rel-acquaintance: #FFEB3B;
+  --rel-friend:       #4CAF50;
+  --rel-close-friend: #2196F3;
+  --rel-soulmate:     #E91E63;
+
+  /* 字体大小 */
+  --font-size-xs:   0.68rem;
+  --font-size-sm:   0.72rem;
+  --font-size-base: 0.85rem;
+  --font-size-md:   0.9rem;
+  --font-size-lg:   1rem;
+  --font-size-xl:   1.1rem;
+  --font-size-2xl:  1.2rem;
+  --font-size-2em:  2rem;
+
+  /* 圆角 */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  /* 间距 */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -539,7 +642,7 @@ body {
 }
 
 .avatar-frame {
-  border: 3px solid #9E9E9E;
+  border: 3px solid var(--avatar-border-color, #9E9E9E);
   border-radius: 12px;
   background: #0a0e1a;
   display: flex;
@@ -547,6 +650,9 @@ body {
   justify-content: center;
   transition: border-color 0.3s, box-shadow 0.3s;
   overflow: hidden;
+  width: var(--avatar-size, 100px);
+  height: var(--avatar-size, 100px);
+  box-shadow: var(--avatar-shadow, none);
 }
 
 .avatar-img {
@@ -599,7 +705,8 @@ body {
 
 .left-exp-fill {
   height: 100%;
-  background: linear-gradient(90deg, #4CAF50, #8BC34A);
+  width: var(--bar-width, 0%);
+  background: var(--bar-color, linear-gradient(90deg, #4CAF50, #8BC34A));
   transition: width 0.3s;
 }
 
@@ -756,6 +863,9 @@ body {
 /* ── 浮动面板 ── */
 .floating-panel {
   position: fixed;
+  left: var(--panel-x, 50%);
+  top: var(--panel-y, 50%);
+  width: var(--panel-width, 340px);
   z-index: 200;
   background: #12162a;
   border: 1px solid #333;
@@ -947,6 +1057,7 @@ body {
 
 .exp-bar-fill {
   height: 100%;
+  width: var(--bar-width, 0%);
   background: linear-gradient(90deg, #4CAF50, #8BC34A);
   transition: width 0.3s;
 }
@@ -1093,7 +1204,7 @@ body {
 .toast-bar {
   background: rgba(18, 22, 42, 0.85);
   border: 1px solid #2a2e3e;
-  border-left: 3px solid #aaa;
+  border-left: 3px solid var(--toast-border-color, #aaa);
   border-radius: 4px;
   padding: 4px 16px;
   font-size: 0.78rem;
@@ -1258,6 +1369,7 @@ body {
   padding: 0.2rem 0;
   border-bottom: 1px solid #151525;
   line-height: 1.5;
+  color: var(--entry-color, #d4d4d4);
 }
 
 .log-empty {
@@ -1865,7 +1977,7 @@ body {
 .technique-card {
   background: #0e1020;
   border: 1px solid #1e2235;
-  border-left: 3px solid #9E9E9E;
+  border-left: 3px solid var(--rarity-color, var(--region-border-color, #9E9E9E));
   border-radius: 4px;
   padding: 0.5rem;
 }
@@ -1925,6 +2037,7 @@ body {
 
 .technique-progress-fill {
   height: 100%;
+  width: var(--bar-width, 0%);
   background: linear-gradient(90deg, #4CAF50, #8BC34A);
   transition: width 0.3s;
 }
@@ -2459,6 +2572,7 @@ body {
   background: #131630;
   border-radius: 4px;
   animation: combatSlideIn 0.3s ease both;
+  animation-delay: var(--loot-delay, 0s);
 }
 
 .combat-modal-loot-row:nth-child(1) { animation-delay: 0s; }
@@ -2514,6 +2628,7 @@ body {
   height: 100%;
   border-radius: 5px;
   min-width: 2px;
+  width: var(--bar-width, 0%);
 }
 
 .hpbar-animate {
@@ -3106,6 +3221,8 @@ body {
 .reroll-bar-fill {
   height: 100%;
   border-radius: 4px;
+  width: var(--bar-width, 0%);
+  background-color: var(--bar-color, #4CAF50);
   transition: width 0.3s ease;
 }
 
@@ -3113,7 +3230,7 @@ body {
   font-size: 0.78rem;
   text-align: right;
   font-weight: 600;
-  color: #bbb;
+  color: var(--val-color, #bbb);
 }
 
 .reroll-mult {
@@ -3124,7 +3241,8 @@ body {
 .combo-badge-sm {
   font-size: 0.82rem;
   font-weight: bold;
-  border: 1px solid currentColor;
+  color: var(--combo-color, currentColor);
+  border: 1px solid var(--combo-color, currentColor);
   border-radius: 5px;
   padding: 0.1rem 0.5rem;
   letter-spacing: 1px;
@@ -3187,6 +3305,8 @@ body {
 .reroll-apt-bar-fill {
   height: 100%;
   border-radius: 3px;
+  width: var(--bar-width, 0%);
+  background-color: var(--bar-color, #4CAF50);
   transition: width 0.3s ease;
 }
 
@@ -3194,6 +3314,7 @@ body {
   font-size: 0.7rem;
   font-weight: 600;
   text-align: right;
+  color: var(--val-color, #bbb);
 }
 
 /* ── 底部 ── */
@@ -3607,7 +3728,8 @@ body {
 .quest-progress-fill {
   height: 100%;
   border-radius: 3px;
-  background: linear-gradient(90deg, #4a9eff, #80c0ff);
+  background: var(--fill-color, linear-gradient(90deg, #4a9eff, #80c0ff));
+  width: var(--fill-width, 0%);
   transition: width 0.3s ease;
 }
 

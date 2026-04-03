@@ -1,0 +1,62 @@
+/* DebugNpcTab.css — NPC 调试标签页样式 (T0068) */
+
+.debug-npc-section-title {
+  margin-top: 0.6rem;
+}
+
+.debug-npc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 0.25rem;
+}
+
+.debug-npc-row {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 2px 4px;
+  font-size: 0.72rem;
+}
+
+.debug-npc-name-met {
+  color: #fff;
+  min-width: 5rem;
+}
+
+.debug-npc-name-unmet {
+  color: var(--color-text-dark);
+  min-width: 5rem;
+}
+
+.debug-npc-relation {
+  font-size: 0.7rem;
+  color: var(--rel-color, var(--color-text-primary));
+}
+
+.debug-npc-affinity {
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+}
+
+.debug-npc-actions {
+  display: flex;
+  gap: 0.2rem;
+  margin-left: auto;
+}
+
+.debug-npc-btn-sm {
+  padding: 1px 4px;
+  font-size: 0.65rem;
+}
+
+.debug-npc-input {
+  width: 3rem;
+}
+
+.debug-npc-info {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}

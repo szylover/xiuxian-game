@@ -9,6 +9,7 @@ import { getAllSmithingRecipes, getItemDef, getEquipDef } from '../../game/regis
 import { canSmith, calcSmithingSuccessRate } from '../../game/smithing';
 import { getItemCount } from '../../game/inventory';
 import { CapacityBar } from '../shared';
+import './SmithingPanel.css';
 
 interface SmithingPanelProps {
   player: Player;
@@ -21,9 +22,9 @@ function SmithingCard({ recipe, player, onSmith }: { recipe: SmithingRecipeDef; 
   const outputDef = getItemDef(recipe.outputItemId) ?? getEquipDef(recipe.outputItemId);
 
   return (
-    <div className={`recipe-card ${craftable ? '' : 'recipe-disabled'}`} style={{ borderLeftColor: '#FF9800' }}>
+    <div className={`recipe-card ${craftable ? '' : 'recipe-disabled'}`}>
       <div className="recipe-header">
-        <span className="recipe-name" style={{ color: '#FFB74D' }}>{recipe.name}</span>
+        <span className="recipe-name">{recipe.name}</span>
         <span className="recipe-rate">{(successRate * 100).toFixed(0)}%</span>
       </div>
       <div className="recipe-desc">{recipe.description}</div>
@@ -43,7 +44,7 @@ function SmithingCard({ recipe, player, onSmith }: { recipe: SmithingRecipeDef; 
         </span>
       </div>
       <div className="recipe-footer">
-        <span className="recipe-output" style={{ color: '#FFB74D' }}>→ {outputDef?.name ?? recipe.outputItemId}</span>
+        <span className="recipe-output">→ {outputDef?.name ?? recipe.outputItemId}</span>
         <span className="recipe-cost">🧠{recipe.mentalCost}</span>
         <button
           className="btn btn-smith"

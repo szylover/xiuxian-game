@@ -1,0 +1,116 @@
+/* ActionPanel.css — 操作面板样式 (T0068) */
+
+/* 体修突破按钮 - 橙色边框 */
+.btn-body-break {
+  border-color: var(--color-warning) !important;
+}
+
+/* 瓶颈提示条 */
+.bottleneck-bar {
+  background: linear-gradient(135deg, #4a2800, #2a1500);
+  border: 1px solid var(--color-warning);
+  border-radius: var(--radius-md);
+  padding: 6px 10px;
+  margin: 4px 0;
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  color: #ffcc80;
+}
+
+.bottleneck-bar strong {
+  color: #ffcc80;
+}
+
+.bottleneck-bar-progress {
+  margin-left: 8px;
+  color: var(--color-text-dim);
+}
+
+.bottleneck-bar-hint {
+  float: right;
+  color: var(--color-text-dark);
+  font-size: 11px;
+}
+
+/* 瓶颈详情弹窗 */
+.bottleneck-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.bottleneck-modal-content {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border: 2px solid var(--color-warning);
+  border-radius: var(--radius-xl);
+  padding: 20px 24px;
+  max-width: 420px;
+  width: 90%;
+  color: var(--color-text-primary);
+}
+
+.bottleneck-modal-title {
+  color: var(--color-warning);
+  margin: 0 0 8px;
+  font-size: var(--font-size-lg);
+}
+
+.bottleneck-modal-desc {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin: 0 0 12px;
+  line-height: 1.6;
+}
+
+.bottleneck-modal-hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin: 0 0 12px;
+  font-style: italic;
+}
+
+.bottleneck-modal-methods {
+  font-size: var(--font-size-base);
+}
+
+.bottleneck-modal-methods-title {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #ffcc80;
+}
+
+.bottleneck-modal-method {
+  padding: 3px 0;
+  color: var(--color-text-primary);
+}
+
+.bottleneck-method-progress-track {
+  background: #333;
+  border-radius: var(--radius-sm);
+  height: 6px;
+  margin-top: 3px;
+  overflow: hidden;
+}
+
+.bottleneck-method-progress-fill {
+  background: var(--color-warning);
+  height: 100%;
+  border-radius: var(--radius-sm);
+  transition: width 0.3s;
+  width: var(--progress-width, 0%);
+}
+
+.bottleneck-modal-close-btn {
+  margin-top: 16px;
+  width: 100%;
+  padding: 8px;
+  background: #333;
+  border: 1px solid #555;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}

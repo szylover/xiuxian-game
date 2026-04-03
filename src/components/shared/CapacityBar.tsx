@@ -3,6 +3,8 @@
 // 用于背包容量、念力条等场景
 // ============================================================
 
+import './CapacityBar.css';
+
 interface CapacityBarProps {
   current: number;
   max: number;
@@ -32,9 +34,9 @@ export default function CapacityBar({
         <div
           className="capacity-bar-fill"
           style={{
-            width: `${pct}%`,
-            background: warnOnFull && isFull ? warningColor : color,
-          }}
+            '--bar-width': `${pct}%`,
+            '--bar-color': warnOnFull && isFull ? warningColor : color,
+          } as React.CSSProperties}
         />
       </div>
     </div>

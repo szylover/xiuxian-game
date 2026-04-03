@@ -8,6 +8,7 @@ import { LOG_COLORS, groupLogsByTime } from '../../hooks/useGameLog';
 import { MONTH_NAMES } from '../../game/data';
 import { TabBar } from '../shared';
 import { UI_LABELS } from '../../data/texts/ui-labels';
+import './GameLog.css';
 
 interface GameLogProps {
   logs: LogEntry[];
@@ -135,7 +136,7 @@ export default function GameLog({ logs, currentYear = 1, currentMonth = 1 }: Gam
                           <div
                             key={entry.id}
                             className="log-entry"
-                            style={{ color: LOG_COLORS[entry.category] || LOG_COLORS.default }}
+                            style={{ '--entry-color': LOG_COLORS[entry.category] || LOG_COLORS.default } as React.CSSProperties}
                           >
                             {entry.text}
                           </div>

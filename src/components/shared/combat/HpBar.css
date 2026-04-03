@@ -1,0 +1,8 @@
+/* combat/HpBar.css — HP/MP 条样式 (T0068) */
+
+.hpbar-fill {
+  height: 100%;
+  border-radius: 3px;
+  width: var(--bar-width, 0%);
+  /* 颜色由 .hpbar-red/.hpbar-blue/.hpbar-gray 控制 */
+}

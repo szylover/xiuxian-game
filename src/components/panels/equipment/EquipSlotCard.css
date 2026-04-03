@@ -1,0 +1,5 @@
+/* EquipSlotCard.css — 装备槽位卡片样式 (T0068) */
+
+.slot-equip-name {
+  color: var(--rarity-color, var(--rarity-common));
+}

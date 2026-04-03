@@ -1,0 +1,23 @@
+/* StatusPanel.css — 状态面板样式 (T0068) */
+
+/* 可折叠分区标题 */
+.panel-section h3 {
+  cursor: pointer;
+  user-select: none;
+}
+
+.panel-section-arrow {
+  font-size: 0.85em;
+  margin-right: 4px;
+}
+
+/* 分隔线 */
+.section-divider {
+  border-top: 1px solid var(--color-border);
+  margin: 6px 0;
+}
+
+/* 灵根标签颜色（通过 CSS 变量注入） */
+.root-tag {
+  color: var(--root-color, var(--color-muted));
+}

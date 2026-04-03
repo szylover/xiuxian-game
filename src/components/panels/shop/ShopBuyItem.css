@@ -1,0 +1,10 @@
+/* ShopBuyItem.css — 商店买入物品行样式 (T0068)
+   品质颜色通过 CSS 变量注入 */
+
+.shop-item {
+  border-left-color: var(--rarity-color, var(--rarity-common));
+}
+
+.shop-item-name {
+  color: var(--rarity-color, var(--rarity-common));
+}

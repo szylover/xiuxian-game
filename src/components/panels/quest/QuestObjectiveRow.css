@@ -1,0 +1,9 @@
+/* QuestObjectiveRow.css — 任务目标行样式 (T0068) */
+
+.quest-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--fill-color, #4a9eff);
+  width: var(--fill-width, 0%);
+  transition: width 0.3s ease;
+}

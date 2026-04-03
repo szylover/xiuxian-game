@@ -22,6 +22,7 @@ import DebugStatsTab from './DebugStatsTab';
 import DebugItemsTab from './DebugItemsTab';
 import DebugChangelogTab from './DebugChangelogTab';
 import DebugNpcTab from './DebugNpcTab';
+import './DebugPanel.css';
 
 interface DebugPanelProps {
   player: Player;
@@ -260,9 +261,9 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
 
         {tab === 'technique' && (
           <div className="debug-stats">
-            <div className="debug-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.4rem' }}>
-              <span className="debug-label" style={{ fontWeight: 'bold' }}>🔮 功法被动调试</span>
-              <div className="debug-btns" style={{ flexWrap: 'wrap', gap: '0.4rem' }}>
+            <div className="debug-row debug-row-column">
+              <span className="debug-label debug-label-bold">🔮 功法被动调试</span>
+              <div className="debug-btns debug-btns-wrap">
                 <button
                   className="btn debug-btn"
                   onClick={forceUpgradeActiveTechnique}
@@ -282,9 +283,9 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
             </div>
 
             {/* 当前被动加成汇总 */}
-            <div className="debug-row" style={{ flexDirection: 'column', alignItems: 'flex-start', marginTop: '0.6rem' }}>
-              <span className="debug-label" style={{ fontWeight: 'bold' }}>📊 当前被动加成汇总</span>
-              <div style={{ fontSize: '0.75rem', color: '#4CAF50', marginTop: '0.25rem', fontFamily: 'monospace' }}>
+            <div className="debug-row debug-row-column debug-row-spaced">
+              <span className="debug-label debug-label-bold">📊 当前被动加成汇总</span>
+              <div className="debug-passive-summary">
                 {Object.entries(getAllTechniquePassiveBonus(player))
                   .filter(([, v]) => v)
                   .map(([k, v]) => `${k}: +${v}`)
@@ -293,10 +294,10 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
             </div>
 
             {/* 各功法被动详情 */}
-            <div style={{ marginTop: '0.6rem' }}>
-              <span className="debug-label" style={{ fontWeight: 'bold' }}>📖 各功法被动状态</span>
+            <div className="debug-row-spaced">
+              <span className="debug-label debug-label-bold">📖 各功法被动状态</span>
               {player.techniques.length === 0 && (
-                <div style={{ fontSize: '0.75rem', color: '#9E9E9E', marginTop: '0.25rem' }}>尚未习得任何功法</div>
+                <div className="debug-passive-list-row debug-text-muted">尚未习得任何功法</div>
               )}
               {player.techniques.map(slot => {
                 const allDefs = getAllTechniqueDefs();
@@ -304,17 +305,17 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
                 if (!def?.passiveEffects?.length) return null;
                 const unlocked = def.passiveEffects.filter(pe => slot.level >= pe.minLevel);
                 return (
-                  <div key={slot.techniqueId} style={{ marginTop: '0.3rem', fontSize: '0.73rem', border: '1px solid #333', borderRadius: '4px', padding: '0.3rem 0.5rem' }}>
-                    <div style={{ color: '#ccc', marginBottom: '0.15rem' }}>
+                  <div key={slot.techniqueId} className="debug-passive-list-row">
+                    <div className="debug-passive-tech-name">
                       {def.name} Lv.{slot.level}/{def.maxLevel}
-                      <span style={{ color: '#4CAF50', marginLeft: '0.5rem' }}>
+                      <span className="debug-passive-level">
                         ({unlocked.length}/{def.passiveEffects.length} 已解锁)
                       </span>
                     </div>
                     {def.passiveEffects.map((pe, i) => {
                       const isUnlocked = slot.level >= pe.minLevel;
                       return (
-                        <div key={i} style={{ color: isUnlocked ? '#81C784' : '#757575', paddingLeft: '0.5rem' }}>
+                        <div key={i} className={isUnlocked ? 'debug-passive-unlocked' : 'debug-passive-locked'}>
                           {isUnlocked ? '● ' : '○ '}Lv{pe.minLevel} {pe.description}
                         </div>
                       );
@@ -329,13 +330,13 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
         {tab === 'divine' && (
           <div className="debug-stats">
             {/* 神通状态概览 */}
-            <div className="debug-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.3rem' }}>
-              <span className="debug-label" style={{ fontWeight: 'bold' }}>🌟 神通系统状态</span>
+            <div className="debug-row debug-row-column">
+              <span className="debug-label debug-label-bold">🌟 神通系统状态</span>
               {(() => {
                 const daState = getDivineArtsState(player);
                 return (
-                  <div style={{ fontSize: '0.75rem', fontFamily: 'monospace', color: '#ccc' }}>
-                    <div>激活神通：<span style={{ color: '#f1c40f' }}>{daState.activeArtId ?? '无'}</span></div>
+                  <div className="debug-divine-state">
+                    <div>激活神通：<span className="debug-divine-active">{daState.activeArtId ?? '无'}</span></div>
                     <div>已学神通：{daState.learned.length > 0
                       ? daState.learned.map(s => {
                           const def = getAllDivineArtDefs().find(d => d.id === s.artId);
@@ -349,7 +350,7 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
             </div>
 
             {/* 一键学习全部神通 */}
-            <div className="debug-row" style={{ marginTop: '0.5rem' }}>
+            <div className="debug-row debug-row-spaced">
               <button
                 className="btn debug-btn"
                 onClick={learnAllDivineArts}
@@ -360,39 +361,39 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
             </div>
 
             {/* 快速设置资质 */}
-            <div className="debug-row" style={{ marginTop: '0.5rem', flexWrap: 'wrap', gap: '0.3rem' }}>
+            <div className="debug-row debug-row-spaced debug-row-wrap">
               <span className="debug-label">⚡ 快速设置：</span>
-              <button className="btn debug-btn" onClick={() => setElementAptitude('fire', 100)} style={{ color: '#e74c3c' }}>
+              <button className="btn debug-btn debug-btn-fire" onClick={() => setElementAptitude('fire', 100)}>
                 🔥火=100
               </button>
-              <button className="btn debug-btn" onClick={() => setElementAptitude('thunder', 60)} style={{ color: '#f1c40f' }}>
+              <button className="btn debug-btn debug-btn-thunder" onClick={() => setElementAptitude('thunder', 60)}>
                 ⚡雷=60
               </button>
-              <button className="btn debug-btn" onClick={() => setElementAptitude('water', 50)} style={{ color: '#3498db' }}>
+              <button className="btn debug-btn debug-btn-water" onClick={() => setElementAptitude('water', 50)}>
                 💧水=50
               </button>
-              <button className="btn debug-btn" onClick={() => setElementAptitude('wind', 50)} style={{ color: '#1abc9c' }}>
+              <button className="btn debug-btn debug-btn-wind" onClick={() => setElementAptitude('wind', 50)}>
                 🌪️风=50
               </button>
-              <button className="btn debug-btn" onClick={() => setElementAptitude('earth', 50)} style={{ color: '#795548' }}>
+              <button className="btn debug-btn debug-btn-earth" onClick={() => setElementAptitude('earth', 50)}>
                 🪨土=50
               </button>
-              <button className="btn debug-btn" onClick={() => setElementAptitude('wood', 50)} style={{ color: '#27ae60' }}>
+              <button className="btn debug-btn debug-btn-wood" onClick={() => setElementAptitude('wood', 50)}>
                 🌿木=50
               </button>
-              <button className="btn debug-btn" onClick={() => setElementAptitude('metal', 60)} style={{ color: '#DAA520' }}>
+              <button className="btn debug-btn debug-btn-metal" onClick={() => setElementAptitude('metal', 60)}>
                 ⚔️金=60
               </button>
             </div>
 
             {/* 七系灵根资质当前数值（含金系，对应 T0056 五行） */}
-            <div style={{ marginTop: '0.6rem' }}>
-              <span className="debug-label" style={{ fontWeight: 'bold' }}>📊 七系灵根资质</span>
+            <div className="debug-aptitude-section">
+              <span className="debug-label debug-label-bold">📊 七系灵根资质</span>
               {(['fire', 'water', 'thunder', 'wind', 'earth', 'wood', 'metal'] as const).map(el => {
                 const val = (player.aptitudes as unknown as Record<string, number>)[el] ?? 0;
                 return (
-                  <div key={el} className="debug-row" style={{ marginTop: '0.25rem' }}>
-                    <span className="debug-label" style={{ color: ELEMENT_COLOR[el] }}>
+                  <div key={el} className="debug-row debug-aptitude-row">
+                    <span className="debug-label debug-element-label" style={{ '--element-color': ELEMENT_COLOR[el] } as React.CSSProperties}>
                       {ELEMENT_EMOJI[el]} {ELEMENT_CN[el]}灵根：<strong>{val}</strong>
                     </span>
                     <div className="debug-btns">
@@ -424,20 +425,20 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
         {tab === 'achievement' && (
           <div className="debug-stats">
             {/* 已解锁列表 */}
-            <div className="debug-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.25rem' }}>
-              <span className="debug-label" style={{ fontWeight: 'bold' }}>🏆 已解锁成就</span>
-              <div style={{ fontSize: '0.72rem', color: '#FFD700', fontFamily: 'monospace', wordBreak: 'break-all' }}>
+            <div className="debug-row debug-row-column">
+              <span className="debug-label debug-label-bold">🏆 已解锁成就</span>
+              <div className="debug-achievement-ids">
                 {getAchievementState(player).unlockedIds.join(', ') || '（无）'}
               </div>
-              <div style={{ fontSize: '0.7rem', color: '#888', marginTop: '0.1rem' }}>
+              <div className="debug-achievement-hint">
                 已解锁 {getAchievementState(player).unlockedIds.length} / {getAllAchievementDefs().length}
               </div>
             </div>
 
             {/* 操作按钮 */}
-            <div className="debug-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.4rem', marginTop: '0.4rem' }}>
-              <span className="debug-label" style={{ fontWeight: 'bold' }}>🔧 成就操作</span>
-              <div className="debug-btns" style={{ flexWrap: 'wrap', gap: '0.4rem' }}>
+            <div className="debug-row debug-row-column debug-row-spaced">
+              <span className="debug-label debug-label-bold">🔧 成就操作</span>
+              <div className="debug-btns debug-btns-wrap">
                 <button className="btn debug-btn" onClick={unlockAllAchievements} title="解锁所有注册成就并叠加一次性加成">
                   🌟 解锁全部成就
                 </button>
@@ -456,29 +457,27 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
           const bnState = (player.systems.bottleneck ?? { active: {}, unlocked: {} }) as BottleneckState;
           return (
             <div className="debug-stats">
-              <div className="debug-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.4rem' }}>
-                <span className="debug-label" style={{ fontWeight: 'bold' }}>🚧 瓶颈系统调试</span>
-                <div style={{ fontSize: '0.75rem', color: '#ccc' }}>
+              <div className="debug-row debug-row-column">
+                <span className="debug-label debug-label-bold">🚧 瓶颈系统调试</span>
+                <div className="debug-bottleneck-info">
                   <div>已注册瓶颈：{allBnDefs.length}</div>
                   <div>激活中：{Object.keys(bnState.active).length}</div>
                   <div>已解锁：{Object.keys(bnState.unlocked).length}</div>
                 </div>
               </div>
-              <div style={{ marginTop: '0.5rem' }}>
+              <div className="debug-bottleneck-section">
                 {allBnDefs.map(def => {
                   const isActive = !!bnState.active[def.id];
                   const isUnlocked = !!bnState.unlocked[def.id];
                   const status = isUnlocked ? '✅ 已解锁' : isActive ? '⚠️ 激活中' : '⬜ 未触发';
                   const progress = bnState.active[def.id]?.progress.persistenceCultivationCount ?? 0;
                   return (
-                    <div key={def.id} style={{
-                      border: '1px solid #444', borderRadius: 4, padding: '6px 8px', marginBottom: 4, fontSize: '0.73rem',
-                    }}>
-                      <div style={{ color: isUnlocked ? '#4CAF50' : isActive ? '#ff9800' : '#888' }}>
+                    <div key={def.id} className="debug-bottleneck-row">
+                      <div className={isUnlocked ? 'debug-bottleneck-name-unlocked' : isActive ? 'debug-bottleneck-name-active' : 'debug-bottleneck-name-inactive'}>
                         {status} {def.name} ({def.id})
                       </div>
-                      {isActive && <div style={{ color: '#aaa' }}>坚韧进度：{progress}</div>}
-                      <div style={{ display: 'flex', gap: '0.3rem', marginTop: 4 }}>
+                      {isActive && <div className="debug-bottleneck-progress">坚韧进度：{progress}</div>}
+                      <div className="debug-bottleneck-actions">
                         {!isActive && !isUnlocked && (
                           <button className="btn debug-btn" onClick={() => {
                             onUpdate(prev => {

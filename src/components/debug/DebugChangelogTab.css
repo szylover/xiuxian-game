@@ -1,0 +1,83 @@
+/* DebugChangelogTab.css — 更新日志标签页样式 (T0068) */
+
+.debug-changelog-header {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.debug-current-version {
+  font-size: 0.85rem;
+  color: var(--color-success);
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.debug-changelog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.debug-changelog-entry {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.6rem;
+}
+
+.debug-changelog-entry-current {
+  background-color: rgba(76,175,80,0.08);
+}
+
+.debug-changelog-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.2rem;
+}
+
+.debug-version-current {
+  font-size: 0.8rem;
+  color: var(--color-success);
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.debug-version-old {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.debug-current-badge {
+  font-size: 0.68rem;
+  color: #81C784;
+  margin-left: 0.4rem;
+}
+
+.debug-entry-date {
+  font-size: 0.7rem;
+  color: var(--color-text-dark);
+}
+
+.debug-entry-title {
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.2rem;
+}
+
+.debug-entry-items {
+  margin: 0;
+  padding-left: 1rem;
+  list-style: disc;
+}
+
+.debug-entry-item {
+  font-size: 0.72rem;
+  color: var(--color-text-dim);
+  line-height: 1.5;
+}

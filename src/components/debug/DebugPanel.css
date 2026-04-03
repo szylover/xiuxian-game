@@ -1,0 +1,152 @@
+/* DebugPanel.css — 调试面板样式 (T0068) */
+
+/* 功法被动调试区 */
+.debug-row-column {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.debug-btns-wrap {
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+/* 当前被动加成汇总 */
+.debug-passive-summary {
+  font-size: 0.75rem;
+  color: var(--color-success);
+  margin-top: 0.25rem;
+  font-family: monospace;
+}
+
+/* 功法被动状态列表 */
+.debug-passive-list-row {
+  margin-top: 0.3rem;
+  font-size: 0.73rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.5rem;
+}
+
+.debug-passive-tech-name {
+  color: var(--color-text-secondary);
+  margin-bottom: 0.15rem;
+}
+
+.debug-passive-level {
+  color: var(--color-success);
+  margin-left: 0.5rem;
+}
+
+.debug-passive-unlocked {
+  color: #81C784;
+  padding-left: 0.5rem;
+}
+
+.debug-passive-locked {
+  color: #757575;
+  padding-left: 0.5rem;
+}
+
+/* 神通系统状态 */
+.debug-divine-state {
+  font-size: 0.75rem;
+  font-family: monospace;
+  color: var(--color-text-secondary);
+}
+
+.debug-divine-active {
+  color: #f1c40f;
+}
+
+/* 元素资质调试按钮 */
+.debug-btn-fire { color: var(--color-danger) !important; }
+.debug-btn-water { color: var(--color-info) !important; }
+.debug-btn-thunder { color: #f1c40f !important; }
+.debug-btn-wind { color: var(--color-success) !important; }
+.debug-btn-earth { color: var(--color-warning) !important; }
+.debug-btn-metal { color: #C0C0C0 !important; }
+
+/* 加粗调试标签 */
+.debug-label-bold {
+  font-weight: bold;
+}
+
+/* 七系灵根资质 */
+.debug-aptitude-row {
+  margin-top: 0.25rem;
+}
+
+.debug-element-label {
+  color: var(--element-color, var(--color-muted));
+}
+
+.debug-aptitude-section {
+  margin-top: 0.6rem;
+}
+
+/* 成就 */
+.debug-achievement-ids {
+  font-size: 0.72rem;
+  color: var(--color-gold);
+  font-family: monospace;
+  word-break: break-all;
+}
+
+.debug-achievement-hint {
+  font-size: 0.7rem;
+  color: var(--color-text-dim);
+  margin-top: 0.1rem;
+}
+
+/* 瓶颈 */
+.debug-bottleneck-info {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.debug-bottleneck-section {
+  margin-top: 0.5rem;
+}
+
+.debug-bottleneck-row {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 6px;
+  margin-bottom: 4px;
+  font-size: 0.72rem;
+}
+
+.debug-bottleneck-name-active {
+  color: var(--color-warning);
+}
+
+.debug-bottleneck-name-unlocked {
+  color: var(--color-success);
+}
+
+.debug-bottleneck-name-inactive {
+  color: var(--color-text-dim);
+}
+
+.debug-bottleneck-progress {
+  color: var(--color-text-muted);
+}
+
+.debug-bottleneck-actions {
+  display: flex;
+  gap: 0.3rem;
+  margin-top: 4px;
+}
+
+
+.debug-row-wrap {
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+/* 文字颜色 muted */
+.debug-text-muted {
+  color: var(--color-muted);
+}

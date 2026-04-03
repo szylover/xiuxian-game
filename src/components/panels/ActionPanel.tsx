@@ -13,6 +13,7 @@ import { getActiveBottlenecks } from '../../game/bottleneck';
 import type { BottleneckDef, BottleneckState } from '../../game/types';
 import { getBottleneckDef } from '../../game/registry';
 import { useState } from 'react';
+import './ActionPanel.css';
 
 interface ActionPanelProps {
   player: Player;
@@ -119,11 +120,10 @@ export default function ActionPanel({ player, onCultivate, onFight, onExplore, o
       {/* 体修突破 */}
       {showBodyBreak && (
         <button
-          className="btn btn-action btn-break"
+          className="btn btn-action btn-break btn-body-break"
           onClick={onBodyBreakthrough}
           disabled={!bodyBt.canAttempt}
           title={bodyBreakTitle}
-          style={{ borderColor: '#FF9800' }}
         >
           🔥 体修突破 → {bodyBt.nextRealm!.name}
         </button>
@@ -141,24 +141,14 @@ export default function ActionPanel({ player, onCultivate, onFight, onExplore, o
             key={def.id}
             className="bottleneck-bar"
             onClick={() => setShowBottleneckModal(def.id)}
-            style={{
-              background: 'linear-gradient(135deg, #4a2800, #2a1500)',
-              border: '1px solid #ff9800',
-              borderRadius: 6,
-              padding: '6px 10px',
-              margin: '4px 0',
-              cursor: 'pointer',
-              fontSize: 12,
-              color: '#ffcc80',
-            }}
           >
             ⚠️ <strong>{def.name}</strong>
             {persistMethod && (
-              <span style={{ marginLeft: 8, color: '#aaa' }}>
+              <span className="bottleneck-bar-progress">
                 坚韧修炼 {progress}/{total}
               </span>
             )}
-            <span style={{ float: 'right', color: '#888', fontSize: 11 }}>点击详情</span>
+            <span className="bottleneck-bar-hint">点击详情</span>
           </div>
         );
       })}
@@ -170,36 +160,24 @@ export default function ActionPanel({ player, onCultivate, onFight, onExplore, o
         const entry = bnState.active[showBottleneckModal];
         return (
           <div
-            style={{
-              position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-              background: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              zIndex: 1000,
-            }}
+            className="bottleneck-modal-overlay"
             onClick={() => setShowBottleneckModal(null)}
           >
             <div
-              style={{
-                background: 'linear-gradient(135deg, #1a1a2e, #16213e)',
-                border: '2px solid #ff9800',
-                borderRadius: 12,
-                padding: '20px 24px',
-                maxWidth: 420,
-                width: '90%',
-                color: '#e0e0e0',
-              }}
+              className="bottleneck-modal-content"
               onClick={e => e.stopPropagation()}
             >
-              <h3 style={{ color: '#ff9800', margin: '0 0 8px', fontSize: 16 }}>
+              <h3 className="bottleneck-modal-title">
                 🚧 {def.name}
               </h3>
-              <p style={{ fontSize: 13, color: '#ccc', margin: '0 0 12px', lineHeight: 1.6 }}>
+              <p className="bottleneck-modal-desc">
                 {def.description}
               </p>
-              <p style={{ fontSize: 12, color: '#aaa', margin: '0 0 12px', fontStyle: 'italic' }}>
+              <p className="bottleneck-modal-hint">
                 💡 {def.hint}
               </p>
-              <div style={{ fontSize: 13 }}>
-                <div style={{ fontWeight: 'bold', marginBottom: 6, color: '#ffcc80' }}>解锁方式（任意一种即可）：</div>
+              <div className="bottleneck-modal-methods">
+                <div className="bottleneck-modal-methods-title">解锁方式（任意一种即可）：</div>
                 {def.unlockMethods.map((m, i) => {
                   const icons: Record<string, string> = {
                     quest: '📜', combat: '⚔️', discourse: '💬', epiphany: '✨', persistence: '🔁', overflow: '🌊',
@@ -214,19 +192,16 @@ export default function ActionPanel({ player, onCultivate, onFight, onExplore, o
                     desc = `坚韧修炼 ${progress}/${m.cultivationCount} 次`;
                   }
                   return (
-                    <div key={i} style={{ padding: '3px 0', color: '#ddd' }}>
+                    <div key={i} className="bottleneck-modal-method">
                       {icons[m.type] ?? '⬜'} {desc}
                       {m.type === 'persistence' && entry && (
-                        <div style={{
-                          background: '#333', borderRadius: 4, height: 6, marginTop: 3, overflow: 'hidden',
-                        }}>
-                          <div style={{
-                            background: '#ff9800',
-                            height: '100%',
-                            width: `${Math.min(100, ((entry.progress.persistenceCultivationCount ?? 0) / m.cultivationCount) * 100)}%`,
-                            borderRadius: 4,
-                            transition: 'width 0.3s',
-                          }} />
+                        <div className="bottleneck-method-progress-track">
+                          <div
+                            className="bottleneck-method-progress-fill"
+                            style={{
+                              '--progress-width': `${Math.min(100, ((entry.progress.persistenceCultivationCount ?? 0) / m.cultivationCount) * 100)}%`,
+                            } as React.CSSProperties}
+                          />
                         </div>
                       )}
                     </div>
@@ -235,10 +210,7 @@ export default function ActionPanel({ player, onCultivate, onFight, onExplore, o
               </div>
               <button
                 onClick={() => setShowBottleneckModal(null)}
-                style={{
-                  marginTop: 16, width: '100%', padding: '8px', background: '#333',
-                  border: '1px solid #555', borderRadius: 6, color: '#ccc', cursor: 'pointer',
-                }}
+                className="bottleneck-modal-close-btn"
               >
                 关闭
               </button>

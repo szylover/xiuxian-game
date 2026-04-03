@@ -6,6 +6,7 @@ import { useState, useRef } from 'react';
 import type { SaveSlotPreview } from '../../hooks/useSaveLoad';
 import { getSaveSlotExportData, importSaveSlot, deleteSaveSlot, listSaveSlots } from '../../hooks/useSaveLoad';
 import { REALMS } from '../../game/data';
+import './SaveManagerPanel.css';
 
 interface SaveManagerPanelProps {
   onNewGame: (slotIndex: number) => void;
@@ -84,10 +85,10 @@ export default function SaveManagerPanel({ onNewGame, onLoadGame, dataReady, dat
   return (
     <div className="save-manager">
       <input
+        className="save-file-input-hidden"
         ref={fileInputRef}
         type="file"
         accept=".json"
-        style={{ display: 'none' }}
         onChange={handleFileChange}
       />
 

@@ -1,0 +1,63 @@
+/* MapPanel.css — 地图面板样式 (T0068) */
+
+/* 树状区域缩进（通过 CSS 变量注入深度） */
+.region-tree-node {
+  margin-left: var(--tree-indent, 0px);
+}
+
+/* 当前位置名称 */
+.divine-active-name-location {
+  color: #4FC3F7;
+}
+
+/* 区域卡片：边框颜色通过 CSS 变量注入 */
+.technique-card {
+  border-left-color: var(--region-border-color, #555);
+}
+
+/* 区域在当前 */
+.region-current-label {
+  color: #4FC3F7;
+  font-size: 0.85em;
+}
+
+/* 区域锁定提示 */
+.region-locked-label {
+  color: var(--color-warning);
+  font-size: 0.85em;
+}
+
+/* 容器节点折叠按钮 */
+.region-container-toggle {
+  cursor: pointer;
+  user-select: none;
+  margin-top: 0.4rem;
+}
+
+/* 可点击折叠箭头 */
+.region-collapse-arrow {
+  margin-right: 4px;
+  font-size: 0.85em;
+  cursor: pointer;
+  user-select: none;
+}
+
+.region-lock-icon {
+  color: var(--color-warning);
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+
+/* 区域名颜色（解锁/锁定） */
+.region-name-unlocked {
+  color: #e0e0e0;
+}
+
+.region-name-locked {
+  color: #666;
+}
+
+/* 区域类型标签 */
+.region-type-label {
+  color: var(--color-muted);
+}
