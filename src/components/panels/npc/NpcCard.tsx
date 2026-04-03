@@ -11,10 +11,12 @@ interface NpcCardProps {
   relationLevel: NpcRelationLevel;
   affinity: number;
   met: boolean;
+  hasQuest?: boolean;
+  hasTurnIn?: boolean;
   onClick: () => void;
 }
 
-export default function NpcCard({ npc, relationLevel, affinity, met, onClick }: NpcCardProps) {
+export default function NpcCard({ npc, relationLevel, affinity, met, hasQuest, hasTurnIn, onClick }: NpcCardProps) {
   const realmName = REALMS[npc.realmIndex]?.name ?? '???';
   const relColor = NPC_RELATION_COLORS[relationLevel];
   const relEmoji = NPC_RELATION_EMOJI[relationLevel];
@@ -41,7 +43,7 @@ export default function NpcCard({ npc, relationLevel, affinity, met, onClick }: 
       <span style={{ fontSize: '1.4rem' }}>{npc.emoji}</span>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#e0e0e0' }}>
-          {npc.name}
+          {npc.name}{hasTurnIn && <span className="npc-quest-marker">❓</span>}{hasQuest && <span className="npc-quest-marker">📜</span>}
         </div>
         <div style={{ fontSize: '0.72rem', color: '#888' }}>
           {realmName}期

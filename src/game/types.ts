@@ -669,6 +669,16 @@ export type QuestChainCategory =
   | 'dialogue'
   | 'event';
 
+/** 任务发现来源 */
+export type QuestDiscoverSource =
+  | { type: 'npc'; npcId: string }
+  | { type: 'exploration'; chance?: number }
+  | { type: 'combat_drop'; monsterId: string; chance?: number }
+  | { type: 'region_enter'; regionId: string }
+  | { type: 'realm_reach'; realmIndex: number }
+  | { type: 'quest_complete'; questId: string }
+  | { type: 'auto' };
+
 /** 任务链定义 */
 export interface QuestChainDef {
   id: string;
@@ -680,7 +690,9 @@ export interface QuestChainDef {
   steps: QuestStep[];
   rewards: QuestReward;
   repeatable?: boolean;
-  autoAccept?: boolean;
+  repeatCooldown?: number;             // 可重复任务的冷却时间（月），默认无冷却
+  discoverSource: QuestDiscoverSource;
+  turnInNpcId?: string;
   failOnDeath?: boolean;
   onCompleteEventId?: string;
   maxConcurrent?: number;
@@ -707,6 +719,7 @@ export interface QuestChainProgress {
 /** 任务状态 */
 export type QuestStatus =
   | 'active'
+  | 'pending_turnin'
   | 'completed'
   | 'failed'
   | 'abandoned';
@@ -725,6 +738,8 @@ export interface QuestSystemState {
     reason: string;
   }>;
   abandonedQuests: string[];
+  discoveredQuests: string[];
+  trackedQuestId?: string;
   actionCounters: {
     explore: number;
     cultivate: number;
