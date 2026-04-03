@@ -17,8 +17,7 @@ export interface DLCMeta {
 /** 所有可用 DLC 包的元信息列表（按加载顺序排列） */
 export const ALL_DLCS: DLCMeta[] = [
   CORE_DLC_META,
-  // 新 DLC 在此追加，如:
-  // { id: 'cp-01', name: '凡人修仙', description: '...', version: '1.0.0', type: 'content-pack', required: false },
+  { id: 'cp-01', name: '凡人修仙', description: '致敬凡人流 — 新增功法·物品·妖兽·NPC·任务链', version: '0.1.0', type: 'content-pack', required: false },
 ];
 
 /** 获取默认启用的 DLC ID 列表 */

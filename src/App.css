@@ -125,15 +125,16 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  height: 100vh;
+  min-height: 100vh;
   overflow-y: auto;
-  gap: 1rem;
-  padding: 2rem 1rem 3rem;
+  gap: 0.6rem;
+  padding: 1rem 1rem 2rem;
   box-sizing: border-box;
 }
 
 .game-title {
-  font-size: 3rem;
+  font-size: 2.4rem;
+  margin: 0;
   background: linear-gradient(135deg, #ffd700, #ff6b35);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -239,39 +240,120 @@ body {
 }
 .btn-reroll:hover { background: linear-gradient(135deg, #3a4a6c, #2a3a5c); filter: brightness(1.1); }
 
-/* ── DLC 选择器 ── */
-.dlc-selector {
-  width: 100%;
+/* ── DLC 内容包管理 ── */
+.dlc-toggle-btn {
+  position: fixed;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  background: var(--color-bg-dark);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-md) var(--spacing-lg);
-  background: var(--color-bg-darkest);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  z-index: 50;
+  transition: all 0.2s;
 }
 
-.dlc-selector-title {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-md);
+.dlc-toggle-btn:hover {
+  background: var(--color-bg-medium);
+  color: var(--color-text-white);
+  border-color: var(--color-text-gold);
+}
+
+.dlc-panel-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg-overlay-light);
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 60px var(--spacing-lg) var(--spacing-lg);
+}
+
+.dlc-panel {
+  background: var(--color-bg-darkest);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  width: 360px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.dlc-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--font-size-lg);
   font-weight: bold;
+  color: var(--color-text-white);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dlc-panel-close {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: var(--font-size-md);
+}
+
+.dlc-panel-close:hover {
+  color: var(--color-text-danger);
+  border-color: var(--color-text-danger);
 }
 
 .dlc-option {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  padding: var(--spacing-sm) 0;
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  font-size: var(--font-size-sm);
+  transition: background 0.15s;
+}
+
+.dlc-option:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.dlc-option-required {
+  opacity: 0.7;
+  cursor: default;
 }
 
 .dlc-option input[type="checkbox"] {
   accent-color: var(--color-gold);
+  flex-shrink: 0;
+}
+
+.dlc-option-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  min-width: 0;
 }
 
 .dlc-option-name {
   color: var(--color-text-white);
   font-weight: bold;
-  white-space: nowrap;
+  font-size: var(--font-size-sm);
+}
+
+.dlc-option-version {
+  color: var(--color-text-dim);
+  font-weight: normal;
+  font-size: var(--font-size-xs);
 }
 
 .dlc-option-desc {
@@ -279,6 +361,16 @@ body {
   font-size: var(--font-size-xs);
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.dlc-option-badge {
+  background: rgba(76, 175, 80, 0.2);
+  color: var(--color-text-success);
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  margin-left: auto;
 }
 
 /* ── 天赋摘要 ── */

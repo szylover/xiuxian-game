@@ -25,6 +25,7 @@ export default function StartScreen({ onNewGame, onLoadGame, dataReady, dataErro
   const [appearance, setAppearance] = useState(0);
   const [preview, setPreview] = useState<PreviewRoll>(() => rollPreview());
   const [showReroll, setShowReroll] = useState(false);
+  const [showDLCPanel, setShowDLCPanel] = useState(false);
   const [enabledDLCs, setEnabledDLCs] = useState<Set<string>>(() =>
     new Set(ALL_DLCS.filter(d => d.required).map(d => d.id))
   );
@@ -36,8 +37,6 @@ export default function StartScreen({ onNewGame, onLoadGame, dataReady, dataErro
       return next;
     });
   };
-
-  const optionalDLCs = ALL_DLCS.filter(d => !d.required);
 
   const handleGenderChange = (g: 'male' | 'female') => {
     setGender(g);
@@ -57,6 +56,34 @@ export default function StartScreen({ onNewGame, onLoadGame, dataReady, dataErro
   if (view === 'create') {
     return (
       <div className="start-screen">
+        <button className="dlc-toggle-btn" onClick={() => setShowDLCPanel(p => !p)} title="内容包管理">
+          📦 内容包 ({enabledDLCs.size}/{ALL_DLCS.length})
+        </button>
+        {showDLCPanel && (
+          <div className="dlc-panel-overlay" onClick={() => setShowDLCPanel(false)}>
+            <div className="dlc-panel" onClick={e => e.stopPropagation()}>
+              <div className="dlc-panel-header">
+                <span>📦 内容包管理</span>
+                <button className="dlc-panel-close" onClick={() => setShowDLCPanel(false)}>✕</button>
+              </div>
+              {ALL_DLCS.map(dlc => (
+                <label key={dlc.id} className={`dlc-option ${dlc.required ? 'dlc-option-required' : ''}`}>
+                  <input
+                    type="checkbox"
+                    checked={enabledDLCs.has(dlc.id)}
+                    onChange={() => !dlc.required && toggleDLC(dlc.id)}
+                    disabled={dlc.required}
+                  />
+                  <div className="dlc-option-info">
+                    <span className="dlc-option-name">{dlc.name} <span className="dlc-option-version">v{dlc.version}</span></span>
+                    <span className="dlc-option-desc">{dlc.description}</span>
+                  </div>
+                  {dlc.required && <span className="dlc-option-badge">必选</span>}
+                </label>
+              ))}
+            </div>
+          </div>
+        )}
         <h1 className="game-title">🏔️ 修仙之路</h1>
         <p className="subtitle">踏入修仙世界，逆天改命</p>
 
@@ -112,24 +139,6 @@ export default function StartScreen({ onNewGame, onLoadGame, dataReady, dataErro
           <button className="btn btn-reroll" onClick={() => setShowReroll(true)}>
             🎲 随机属性
           </button>
-
-          {/* ── DLC 内容包选择 ── */}
-          {optionalDLCs.length > 0 && (
-            <div className="dlc-selector">
-              <div className="dlc-selector-title">📦 内容包</div>
-              {optionalDLCs.map(dlc => (
-                <label key={dlc.id} className="dlc-option">
-                  <input
-                    type="checkbox"
-                    checked={enabledDLCs.has(dlc.id)}
-                    onChange={() => toggleDLC(dlc.id)}
-                  />
-                  <span className="dlc-option-name">{dlc.name}</span>
-                  <span className="dlc-option-desc">{dlc.description}</span>
-                </label>
-              ))}
-            </div>
-          )}
         </div>
 
         {/* ── 操作按钮 ── */}
@@ -156,6 +165,34 @@ export default function StartScreen({ onNewGame, onLoadGame, dataReady, dataErro
 
   return (
     <div className="start-screen">
+      <button className="dlc-toggle-btn" onClick={() => setShowDLCPanel(p => !p)} title="内容包管理">
+        📦 内容包 ({enabledDLCs.size}/{ALL_DLCS.length})
+      </button>
+      {showDLCPanel && (
+        <div className="dlc-panel-overlay" onClick={() => setShowDLCPanel(false)}>
+          <div className="dlc-panel" onClick={e => e.stopPropagation()}>
+            <div className="dlc-panel-header">
+              <span>📦 内容包管理</span>
+              <button className="dlc-panel-close" onClick={() => setShowDLCPanel(false)}>✕</button>
+            </div>
+            {ALL_DLCS.map(dlc => (
+              <label key={dlc.id} className={`dlc-option ${dlc.required ? 'dlc-option-required' : ''}`}>
+                <input
+                  type="checkbox"
+                  checked={enabledDLCs.has(dlc.id)}
+                  onChange={() => !dlc.required && toggleDLC(dlc.id)}
+                  disabled={dlc.required}
+                />
+                <div className="dlc-option-info">
+                  <span className="dlc-option-name">{dlc.name} <span className="dlc-option-version">v{dlc.version}</span></span>
+                  <span className="dlc-option-desc">{dlc.description}</span>
+                </div>
+                {dlc.required && <span className="dlc-option-badge">必选</span>}
+              </label>
+            ))}
+          </div>
+        </div>
+      )}
       <h1 className="game-title">🏔️ 修仙之路</h1>
       <p className="subtitle">踏入修仙世界，逆天改命</p>
       <SaveManagerPanel
