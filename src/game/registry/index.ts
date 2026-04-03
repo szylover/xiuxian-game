@@ -20,6 +20,9 @@ export type {
   RegionDef, MapSystemState,
   BottleneckDef, BottleneckUnlockMethod, BottleneckState,
   NpcDef, NpcDisposition, NpcRole, NpcPersonality, NpcRelation, NpcRelationLevel, NpcSystemState,
+  QuestObjectiveType, QuestObjective, QuestReward, QuestStep, QuestChainCondition,
+  QuestChainCategory, QuestChainDef, QuestObjectiveProgress, QuestChainProgress,
+  QuestStatus, QuestSystemState, QuestTrigger,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
@@ -47,6 +50,7 @@ export {
   getRegion, getAllRegions,
   getBottleneckDef, getAllBottleneckDefs, getBottlenecksForRealm, getBottlenecksForBodyRealm, getBottlenecksForTechnique,
   getNpcDef, getAllNpcDefs, getNpcsByRegionTags, getNpcsByRole, getNpcsByDisposition,
+  getQuestChainDef, getAllQuestChainDefs, getQuestChainsByCategory,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

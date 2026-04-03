@@ -24,6 +24,7 @@ import type { RevivalMethodDef } from '../game/types';
 import { checkAchievements } from '../game/achievement/engine';
 import { loadSaveSlot, writeSaveSlot, deleteSaveSlot } from './useSaveLoad';
 import { refreshUnlockedRegions } from '../game/map';
+import { checkQuestTimeouts, checkAutoAcceptQuests, tickQuestObjectives } from '../game/quest';
 import { UI_LABELS } from '../data/texts/ui-labels';
 import { SPIRIT_ROOT_CN, SEPARATOR, NONE_TEXT } from '../data/texts/common';
 import { tickAffinityDecay } from '../game/npc';
@@ -245,6 +246,21 @@ export function useGameEngine(
     if (crossedYear) {
       updated = tickAffinityDecay(updated);
     }
+
+    // T0057: 任务超时检查
+    const questTimeoutResult = checkQuestTimeouts(updated);
+    updated = questTimeoutResult.player;
+    for (const log of questTimeoutResult.logs) addLog(log, 'system');
+
+    // T0057: 自动接取任务检查
+    const questAutoResult = checkAutoAcceptQuests(updated);
+    updated = questAutoResult.player;
+    for (const log of questAutoResult.logs) addLog(log, 'system');
+
+    // T0057: time_tick 触发（survive_months 目标）
+    const questTickResult = tickQuestObjectives(updated, { type: 'time_tick' as const });
+    updated = questTickResult.player;
+    for (const log of questTickResult.logs) addLog(log, 'system');
 
     return updated;
   }, [addLog, gameOver]);

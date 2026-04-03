@@ -18,6 +18,7 @@ import { restorePhysique, gainBodyRealmExp, tryBodyRealmBreakthrough } from '../
 import { getTechniqueDef } from '../game/registry';
 import { ensureBottleneckState, getActiveBottlenecks, tickPersistenceCultivation, tryBattleUnlock, tryEpiphanyUnlock, tryOverflowUnlock } from '../game/bottleneck';
 import { getNpcsInRegion, meetNpc as meetNpcFn } from '../game/npc';
+import { tickQuestObjectives, checkAutoAcceptQuests } from '../game/quest';
 import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef, RegionDef } from '../game/types';
 import type { LogCategory } from './useGameLog';
 import { COMBAT_TEXTS } from '../data/texts/combat';
@@ -156,6 +157,11 @@ export function useCoreActions(deps: CoreActionDeps) {
         queueLog(overflowResult.log, 'system');
       }
 
+      // T0057: 修炼后推进任务目标
+      const questResult = tickQuestObjectives(p, { type: 'cultivate' });
+      p = questResult.player;
+      queueLogs(questResult.logs, 'system');
+
       p = advanceTime(p, 'cultivate');
 
       pendingRef.current = { msgs: [], categories: [] };
@@ -272,6 +278,14 @@ export function useCoreActions(deps: CoreActionDeps) {
             loot.push({ icon: '⚔️', name: eDef?.name ?? dropId, amount: 1 });
           }
         }
+
+        // T0057: 战斗胜利后推进任务目标（kill_monster + combat）
+        const questKill = tickQuestObjectives(p, { type: 'kill_monster', monsterId: monster.id });
+        p = questKill.player;
+        queueLogs(questKill.logs, 'system');
+        const questCombat = tickQuestObjectives(p, { type: 'combat' });
+        p = questCombat.player;
+        queueLogs(questCombat.logs, 'system');
       } else if (result.winner === 'monster') {
         // T0040: 通过死亡系统处理战斗失败
         const isBoss = monster.realmIndex >= p.realmIndex + 2;
@@ -392,6 +406,15 @@ export function useCoreActions(deps: CoreActionDeps) {
           exploreMsg += ` ${meetResult.message}`;
         }
       }
+
+      // T0057: 探索后推进任务目标
+      const questExplore = tickQuestObjectives(p, { type: 'explore' });
+      p = questExplore.player;
+      queueLogs(questExplore.logs, 'system');
+      // Also check item_change (explore may drop items)
+      const questItemChange = tickQuestObjectives(p, { type: 'item_change' });
+      p = questItemChange.player;
+      queueLogs(questItemChange.logs, 'system');
 
       queueLog(exploreMsg, exploreMsg.includes('【奇遇】') ? 'adventure' : 'explore');
 
