@@ -117,7 +117,8 @@ git worktree add ../xiuxian-T0065 feat/T0065-text-centralization
 - **纯前端**：零后端依赖，所有状态存 `localStorage`，可直接部署到 Azure Static Web Apps
 - **React + TypeScript**：使用 React（Vite 构建）开发，使用 TypeScript，构建产物部署到 Azure SWA
 - **渐进增强**：先跑通核心循环（修炼→战斗→突破），再叠加子系统
-- **DLC 扩展性**：事件/物品/丹药/装备/妖兽/功法/配方/商品均通过 `registerDLC()` 注册到全局表；ID 用命名空间（`core:xxx` / `dlc-N:xxx`）；触发条件为谓词函数 `(player) => boolean`
+- **DLC 扩展性**：事件/物品/丹药/装备/妖兽/功法/配方/商品均通过 `registerDLC()` 注册到全局表；ID 用命名空间（`core:xxx` / `cp-01:xxx`）；触发条件为谓词函数 `(player) => boolean`
+- **DLC 目录组织**：所有游戏数据按 DLC 包分文件夹存放在 `src/data/dlc/` 下。每个 DLC 一个独立文件夹，内含 JSON 数据文件 + `manifest.ts`（元信息 + 注册入口）。`core` 包为基础包（始终加载），其他 DLC 在开始界面可勾选挂载。详见下方「DLC 目录结构」。
 
 ---
 
@@ -228,24 +229,36 @@ xiuxian-game/
     │   ├── combat/                #     战斗子模块
     │   ├── breakthrough/          #     突破子模块
     │   └── tribulation/           #     渡劫子模块
-    ├── data/                      #   游戏数据（JSON/TS）
-    │   ├── core-events.json       #     1036 个核心事件数据
-    │   ├── core-items.json        #     核心物品定义（丹药/材料/杂物/护命道具）
-    │   ├── core-equips.json       #     核心装备定义
-    │   ├── core-recipes.json      #     炼丹配方
-    │   ├── core-shop.json         #     商店商品
-    │   ├── core-smithing.json     #     炼器配方
-    │   ├── core-techniques.json   #     功法定义
-    │   ├── core-quests.json       #     任务链定义（T0057）
-    │   ├── core-breakthrough.ts   #     突破需求 + 渡劫定义
+    ├── data/                      #   游戏数据
     │   ├── changelog.ts           #     版本更新日志（每次 merge PR 时同步追加）
-    │   └── texts/                 #     中文文案集中管理（禁止 magic string）
-    │       ├── index.ts           #       barrel re-export
-    │       ├── common.ts          #       通用映射（属性名/品质名/灵根名/元素名/境界名）
-    │       ├── combat.ts          #       战斗系统文案
-    │       ├── cultivation.ts     #       修炼系统文案
-    │       ├── quest.ts           #       任务链系统文案（T0057）
-    │       └── ...                #       各系统对应文案文件（新增系统须同步新建）
+    │   ├── texts/                 #     中文文案集中管理（禁止 magic string）
+    │   │   ├── index.ts           #       barrel re-export
+    │   │   ├── common.ts          #       通用映射（属性名/品质名/灵根名/元素名/境界名）
+    │   │   ├── combat.ts          #       战斗系统文案
+    │   │   ├── cultivation.ts     #       修炼系统文案
+    │   │   ├── quest.ts           #       任务链系统文案（T0057）
+    │   │   └── ...                #       各系统对应文案文件（新增系统须同步新建）
+    │   └── dlc/                   #     DLC 数据包（每个 DLC 一个文件夹）
+    │       ├── core/              #       基础包（必选，始终加载）
+    │       │   ├── manifest.ts    #         DLC 元信息 + registerDLC 入口
+    │       │   ├── events.json    #         核心事件数据
+    │       │   ├── items.json     #         物品定义
+    │       │   ├── equips.json    #         装备定义
+    │       │   ├── recipes.json   #         炼丹配方
+    │       │   ├── shop.json      #         商店商品
+    │       │   ├── smithing.json  #         炼器配方
+    │       │   ├── techniques.json#         功法定义
+    │       │   ├── quests.json    #         任务链定义
+    │       │   ├── realms.json    #         境界定义
+    │       │   ├── regions.json   #         区域定义
+    │       │   ├── npcs.json      #         NPC 定义
+    │       │   └── ...            #         其他数据文件
+    │       └── cp-01-fanren/      #       内容包：凡人修仙（可选）
+    │           ├── manifest.ts    #         DLC 元信息 + registerDLC 入口
+    │           ├── events.json    #         事件
+    │           ├── items.json     #         物品
+    │           ├── techniques.json#         功法
+    │           └── ...            #         其他数据文件
     └── hooks/                     #   自定义 React Hooks
         ├── useGameEngine.ts       #     游戏引擎 Hook（状态管理 + 存档）
         ├── useCoreActions.ts      #     核心行为 Hook（修炼/战斗/探索/休息）
