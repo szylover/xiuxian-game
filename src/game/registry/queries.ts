@@ -2,7 +2,7 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory } from '../types';
 import type { SpiritRootType } from '../spirit-root';
 import type { AchievementDef } from '../achievement/types';
 import {
@@ -11,7 +11,7 @@ import {
   techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
   monsterRegistry, divineArtRegistry, achievementRegistry,
   bodyRealmRegistry, spiritRootBodyBonusRegistry, realmRegistry, regionRegistry,
-  bottleneckRegistry, npcRegistry,
+  bottleneckRegistry, npcRegistry, questChainRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -141,4 +141,12 @@ export function getNpcsByRole(role: NpcRole): NpcDef[] {
 }
 export function getNpcsByDisposition(disposition: NpcDisposition): NpcDef[] {
   return Array.from(npcRegistry.values()).filter(npc => npc.disposition === disposition);
+}
+
+// ── 任务链（T0057）──
+
+export function getQuestChainDef(id: string): QuestChainDef | undefined { return questChainRegistry.get(id); }
+export function getAllQuestChainDefs(): QuestChainDef[] { return Array.from(questChainRegistry.values()); }
+export function getQuestChainsByCategory(category: QuestChainCategory): QuestChainDef[] {
+  return Array.from(questChainRegistry.values()).filter(q => q.category === category);
 }

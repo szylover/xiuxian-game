@@ -19,7 +19,8 @@ import { tryBodyRealmBreakthrough } from '../game/body-cultivation';
 import { meetNpc as meetNpcFn, giveGift as giveGiftFn } from '../game/npc';
 import { recalcStats } from '../game/player';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
-import { getEquipDef, getTechniqueDef } from '../game/registry';
+import { getEquipDef, getTechniqueDef, getRecipe, getSmithingRecipe } from '../game/registry';
+import { tickQuestObjectives, acceptQuest as acceptQuestFn, abandonQuest as abandonQuestFn, deliverQuestItem as deliverQuestItemFn } from '../game/quest';
 import type { EquipSlot } from '../game/registry';
 import type { LogCategory } from './useGameLog';
 import type { DeathModalState } from './useGameEngine';
@@ -61,8 +62,25 @@ export function useSystemActions(deps: SystemActionDeps) {
 
   // ── T0013: 炼丹 ──
   const craft = useCallback((recipeId: string) => {
-    execAction(p => performAlchemy(p, recipeId));
-  }, [execAction]);
+    let craftMsg = '';
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = performAlchemy(prev, recipeId);
+      craftMsg = result.message;
+      let p = result.player;
+      // T0057: 炼丹成功后推进 craft_item 目标
+      if (result.message && !result.message.includes('❌') && !result.message.includes('⚠️')) {
+        const recipeDef = getRecipe(recipeId);
+        if (recipeDef) {
+          const questResult = tickQuestObjectives(p, { type: 'craft_item', recipeId, outputItemId: recipeDef.outputItemId });
+          p = questResult.player;
+          for (const log of questResult.logs) addLog(log, 'system');
+        }
+      }
+      return p;
+    });
+    if (craftMsg) addLog(craftMsg, 'system');
+  }, [addLog, setPlayer]);
 
   // ── T0014: 装备 ──
   const equip = useCallback((equipId: string) => {
@@ -98,8 +116,25 @@ export function useSystemActions(deps: SystemActionDeps) {
 
   // ── T0016: 炼器 ──
   const smith = useCallback((recipeId: string) => {
-    execAction(p => performSmithing(p, recipeId));
-  }, [execAction]);
+    let smithMsg = '';
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = performSmithing(prev, recipeId);
+      smithMsg = result.message;
+      let p = result.player;
+      // T0057: 炼器成功后推进 craft_item 目标
+      if (result.message && !result.message.includes('❌') && !result.message.includes('⚠️')) {
+        const recipeDef = getSmithingRecipe(recipeId);
+        if (recipeDef) {
+          const questResult = tickQuestObjectives(p, { type: 'craft_item', recipeId, outputItemId: recipeDef.outputItemId });
+          p = questResult.player;
+          for (const log of questResult.logs) addLog(log, 'system');
+        }
+      }
+      return p;
+    });
+    if (smithMsg) addLog(smithMsg, 'system');
+  }, [addLog, setPlayer]);
 
   // ── T0029: 突破系统重构 ──
   const breakthrough = useCallback(() => {
@@ -164,8 +199,22 @@ export function useSystemActions(deps: SystemActionDeps) {
 
   // ── T0021: 区域移动 ──
   const travel = useCallback((regionId: string) => {
-    execAction(p => travelToFn(p, regionId));
-  }, [execAction]);
+    let travelMsg = '';
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = travelToFn(prev, regionId);
+      travelMsg = result.message;
+      let p = result.player;
+      // T0057: 移动后推进 reach_region 目标
+      if (result.message && !result.message.includes('❌') && !result.message.includes('⚠️')) {
+        const questResult = tickQuestObjectives(p, { type: 'reach_region', regionId });
+        p = questResult.player;
+        for (const log of questResult.logs) addLog(log, 'system');
+      }
+      return p;
+    });
+    if (travelMsg) addLog(travelMsg, 'system');
+  }, [addLog, setPlayer]);
 
   // ── T0059: 体修突破（手动） ──
   const bodyBreakthrough = useCallback(() => {
@@ -180,8 +229,20 @@ export function useSystemActions(deps: SystemActionDeps) {
 
   // ── T0025: NPC 邂逅 ──
   const meetNpc = useCallback((npcId: string) => {
-    execAction(p => meetNpcFn(p, npcId));
-  }, [execAction]);
+    let meetMsg = '';
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = meetNpcFn(prev, npcId);
+      meetMsg = result.message;
+      let p = result.player;
+      // T0057: NPC 交互后推进 talk_npc 目标
+      const questResult = tickQuestObjectives(p, { type: 'talk_npc', npcId });
+      p = questResult.player;
+      for (const log of questResult.logs) addLog(log, 'system');
+      return p;
+    });
+    if (meetMsg) addLog(meetMsg, 'system');
+  }, [addLog, setPlayer]);
 
   // ── T0025: NPC 赠礼 ──
   const giveGift = useCallback((npcId: string, itemId: string) => {
@@ -190,6 +251,34 @@ export function useSystemActions(deps: SystemActionDeps) {
       return { player: result.player, message: result.message };
     });
   }, [execAction]);
+
+  // ── T0057: 任务链操作 ──
+  const acceptQuest = useCallback((questId: string) => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = acceptQuestFn(prev, questId);
+      for (const log of result.logs) addLog(log, 'system');
+      return result.player;
+    });
+  }, [addLog, setPlayer]);
+
+  const abandonQuest = useCallback((questId: string) => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = abandonQuestFn(prev, questId);
+      for (const log of result.logs) addLog(log, 'system');
+      return result.player;
+    });
+  }, [addLog, setPlayer]);
+
+  const deliverQuestItem = useCallback((questId: string, objectiveIndex: number) => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = deliverQuestItemFn(prev, questId, objectiveIndex);
+      for (const log of result.logs) addLog(log, 'system');
+      return result.player;
+    });
+  }, [addLog, setPlayer]);
 
   return {
     useItem: useItemAction,
@@ -210,5 +299,8 @@ export function useSystemActions(deps: SystemActionDeps) {
     bodyBreakthrough,
     meetNpc,
     giveGift,
+    acceptQuest,
+    abandonQuest,
+    deliverQuestItem,
   };
 }

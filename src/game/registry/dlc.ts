@@ -9,7 +9,7 @@ import {
   techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
   monsterRegistry, divineArtRegistry, achievementRegistry,
   bodyRealmRegistry, spiritRootBodyBonusRegistry, realmRegistry, regionRegistry,
-  bottleneckRegistry, npcRegistry,
+  bottleneckRegistry, npcRegistry, questChainRegistry,
 } from './stores';
 
 export function registerDLC(pack: DLCPack): void {
@@ -34,6 +34,7 @@ export function registerDLC(pack: DLCPack): void {
   if (pack.regions) for (const rg of pack.regions) regionRegistry.set(rg.id, rg);
   if (pack.bottlenecks) for (const bn of pack.bottlenecks) bottleneckRegistry.set(bn.id, bn);
   if (pack.npcs) for (const npc of pack.npcs) npcRegistry.set(npc.id, npc);
+  if (pack.questChains) for (const qc of pack.questChains) questChainRegistry.set(qc.id, qc);
 }
 
 export function unregisterDLC(packId: string): void {
@@ -59,6 +60,7 @@ export function unregisterDLC(packId: string): void {
   if (pack.regions) for (const rg of pack.regions) regionRegistry.delete(rg.id);
   if (pack.bottlenecks) for (const bn of pack.bottlenecks) bottleneckRegistry.delete(bn.id);
   if (pack.npcs) for (const npc of pack.npcs) npcRegistry.delete(npc.id);
+  if (pack.questChains) for (const qc of pack.questChains) questChainRegistry.delete(qc.id);
   dlcRegistry.delete(packId);
 }
 

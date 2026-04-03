@@ -11,8 +11,10 @@ import type { NpcDef } from './types';
 import { getCurrentRegion } from './map';
 import { loadEventsFromJson } from './event-loader';
 import { loadItemsFromJson } from './item-loader';
+import { loadQuestsFromJson } from './quest-loader';
 import type { JsonEvent } from './event-loader';
 import type { JsonItem } from './item-loader';
+import type { JsonQuestChain } from './quest-loader';
 import { CORE_BREAKTHROUGH_REQS, CORE_TRIBULATIONS } from '../data/core-breakthrough';
 import { CORE_DIVINE_ARTS } from '../data/core-divine-arts';
 import { CORE_BODY_REALMS, CORE_SPIRIT_ROOT_BODY_BONUSES } from '../data/core-body-config';
@@ -248,6 +250,7 @@ export async function registerCoreEvents(): Promise<void> {
     { default: coreTechniquesJson },
     { default: coreRegionsJson },
     { default: coreNpcsJson },
+    { default: coreQuestsJson },
   ] = await Promise.all([
     import('../data/core-events.json'),
     import('../data/core-items.json'),
@@ -258,6 +261,7 @@ export async function registerCoreEvents(): Promise<void> {
     import('../data/core-techniques.json'),
     import('../data/core-regions.json'),
     import('../data/core-npcs.json'),
+    import('../data/core-quests.json'),
   ]);
 
   const pack = loadEventsFromJson(coreEventsJson as JsonEvent[], {
@@ -271,6 +275,7 @@ export async function registerCoreEvents(): Promise<void> {
   const equips = coreEquipsJson as EquipDef[];
   const smithingRecipes = coreSmithingJson as SmithingRecipeDef[];
   const techniques = coreTechniquesJson as TechniqueDef[];
+  const questChains = loadQuestsFromJson(coreQuestsJson as JsonQuestChain[]);
   registerDLC({
     ...pack,
     items,
@@ -292,6 +297,7 @@ export async function registerCoreEvents(): Promise<void> {
     regions: coreRegionsJson as RegionDef[],
     bottlenecks: CORE_BOTTLENECKS,
     npcs: coreNpcsJson as NpcDef[],
+    questChains,
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }

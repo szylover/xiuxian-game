@@ -1,0 +1,417 @@
+[
+  {
+    "id": "core:quest_first_hunt",
+    "name": "初次历练",
+    "description": "前辈吩咐你去青云镇外斩杀几只野狼，锻炼实战能力。",
+    "icon": "⚔️",
+    "category": "main",
+    "condition": {
+      "minRealm": 0,
+      "regionTags": ["beginner"]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "前往野外",
+        "description": "动身前往青云镇外的荒野地带。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "core:wilderness",
+            "description": "前往荒野"
+          }
+        ],
+        "dialogueSnippet": "前辈语重心长道：「修仙之路非纸上谈兵，去荒野走走吧。」"
+      },
+      {
+        "id": "step_2",
+        "name": "斩杀野狼",
+        "description": "在荒野中斩杀 3 只野狼。",
+        "objectives": [
+          {
+            "type": "kill_monster",
+            "targetId": "core:wild_wolf",
+            "count": 3,
+            "description": "斩杀野狼 (0/3)"
+          }
+        ],
+        "rewards": {
+          "exp": 50,
+          "gold": 30
+        }
+      },
+      {
+        "id": "step_3",
+        "name": "回城复命",
+        "description": "返回青云镇向前辈复命。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "core:qingyun_town",
+            "description": "返回青云镇"
+          }
+        ],
+        "dialogueSnippet": "前辈满意地点头：「不错，果然有几分修行的天赋。」"
+      }
+    ],
+    "rewards": {
+      "exp": 100,
+      "gold": 50,
+      "items": [
+        { "itemId": "core:hp_pill", "count": 5 }
+      ]
+    },
+    "autoAccept": true,
+    "repeatable": false
+  },
+  {
+    "id": "core:quest_wolf_bounty",
+    "name": "悬赏：荒野狼患",
+    "description": "青云镇猎户悬赏：近日荒野狼群异常活跃，斩杀 5 只野狼可领取赏金。",
+    "icon": "🏷️",
+    "category": "bounty",
+    "condition": {
+      "minRealm": 0,
+      "regionId": "core:qingyun_town"
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "斩杀野狼",
+        "description": "前往荒野斩杀 5 只野狼，回镇领取赏金。",
+        "objectives": [
+          {
+            "type": "kill_monster",
+            "targetId": "core:wild_wolf",
+            "count": 5,
+            "description": "斩杀野狼 (0/5)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "gold": 120,
+      "items": [
+        { "itemId": "core:iron_ore", "count": 3 }
+      ]
+    },
+    "repeatable": true
+  },
+  {
+    "id": "core:quest_elder_wisdom",
+    "name": "长老的教诲",
+    "description": "青云镇的张长老似乎有话要对你说，前去拜访一番。",
+    "icon": "💬",
+    "category": "dialogue",
+    "condition": {
+      "minRealm": 1,
+      "requiredQuests": ["core:quest_first_hunt"]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "拜访张长老",
+        "description": "前往青云镇与张长老交谈。",
+        "objectives": [
+          {
+            "type": "talk_npc",
+            "targetId": "core:elder_zhang",
+            "description": "与张长老交谈"
+          }
+        ],
+        "dialogueSnippet": "张长老抚须叹道：「孩子，修仙一途如逆水行舟。老夫有几句心得，你且听来……」"
+      },
+      {
+        "id": "step_2",
+        "name": "聆听教诲",
+        "description": "修炼 3 次以验证张长老所授之法。",
+        "objectives": [
+          {
+            "type": "cultivate_count",
+            "count": 3,
+            "description": "修炼 (0/3)"
+          }
+        ],
+        "dialogueSnippet": "张长老微微点头：「去吧，以修炼印证老夫所言，方能真正领悟。」"
+      },
+      {
+        "id": "step_3",
+        "name": "回禀长老",
+        "description": "再次与张长老交谈，汇报修炼心得。",
+        "objectives": [
+          {
+            "type": "talk_npc",
+            "targetId": "core:elder_zhang",
+            "description": "向张长老汇报"
+          }
+        ],
+        "dialogueSnippet": "张长老欣慰一笑：「孺子可教也。这本《清心诀》便赠予你，望你日后勤加修行。」"
+      }
+    ],
+    "rewards": {
+      "exp": 60,
+      "statBonus": { "comprehension": 2 }
+    }
+  },
+  {
+    "id": "core:quest_gather_herbs",
+    "name": "采药基础",
+    "description": "收集灵芝和雪莲，了解炼丹的入门材料。",
+    "icon": "🌿",
+    "category": "side",
+    "condition": {
+      "minRealm": 1,
+      "requiredQuests": ["core:quest_first_hunt"]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "收集灵芝",
+        "description": "在探索中收集 3 株灵芝。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "core:herb_lingzhi",
+            "count": 3,
+            "description": "收集灵芝 (0/3)"
+          }
+        ]
+      },
+      {
+        "id": "step_2",
+        "name": "收集雪莲",
+        "description": "收集 2 株雪莲。比灵芝更稀少，需要一些运气。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "core:herb_snow_lotus",
+            "count": 2,
+            "description": "收集雪莲 (0/2)"
+          }
+        ],
+        "rewards": {
+          "exp": 30
+        }
+      }
+    ],
+    "rewards": {
+      "exp": 80,
+      "gold": 40,
+      "items": [
+        { "itemId": "core:hp_pill", "count": 3 }
+      ]
+    }
+  },
+  {
+    "id": "core:quest_basic_training",
+    "name": "修炼入门",
+    "description": "静心打坐，感受灵气流转，踏出修仙第一步。",
+    "icon": "🧘",
+    "category": "main",
+    "condition": {
+      "minRealm": 0
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "初次修炼",
+        "description": "修炼 2 次，感受灵气在经脉中的运转。",
+        "objectives": [
+          {
+            "type": "cultivate_count",
+            "count": 2,
+            "description": "修炼 (0/2)"
+          }
+        ],
+        "dialogueSnippet": "盘膝而坐，闭目凝神，天地灵气缓缓涌入体内……",
+        "rewards": {
+          "exp": 20,
+          "gold": 10
+        }
+      },
+      {
+        "id": "step_2",
+        "name": "巩固根基",
+        "description": "再修炼 3 次，将灵气稳固在丹田之中。",
+        "objectives": [
+          {
+            "type": "cultivate_count",
+            "count": 3,
+            "description": "修炼 (0/3)"
+          }
+        ],
+        "dialogueSnippet": "丹田中灵气渐渐凝实，修为稳步提升。"
+      }
+    ],
+    "rewards": {
+      "exp": 50,
+      "gold": 30,
+      "items": [
+        { "itemId": "core:mp_pill", "count": 3 }
+      ]
+    },
+    "autoAccept": true,
+    "repeatable": false
+  },
+  {
+    "id": "core:quest_explore_surroundings",
+    "name": "初探天地",
+    "description": "四处走走看看，了解周围的环境与机缘。",
+    "icon": "🗺️",
+    "category": "side",
+    "condition": {
+      "minRealm": 0
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "四处探索",
+        "description": "探索 3 次，看看周围有什么有趣的事物。",
+        "objectives": [
+          {
+            "type": "explore_count",
+            "count": 3,
+            "description": "探索 (0/3)"
+          }
+        ],
+        "dialogueSnippet": "出门在外，处处皆是机缘。",
+        "rewards": {
+          "exp": 15
+        }
+      },
+      {
+        "id": "step_2",
+        "name": "深入探索",
+        "description": "继续探索 3 次，寻找更多机缘。",
+        "objectives": [
+          {
+            "type": "explore_count",
+            "count": 3,
+            "description": "探索 (0/3)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 60,
+      "gold": 50,
+      "items": [
+        { "itemId": "core:spirit_stone_shard", "count": 2 }
+      ]
+    },
+    "autoAccept": true,
+    "repeatable": false
+  },
+  {
+    "id": "core:quest_combat_trial",
+    "name": "实战试炼",
+    "description": "光靠修炼还不够，实战才是最好的磨砺。",
+    "icon": "⚔️",
+    "category": "side",
+    "condition": {
+      "minRealm": 0
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "初次交锋",
+        "description": "与妖兽战斗 2 次，积累实战经验。",
+        "objectives": [
+          {
+            "type": "combat_count",
+            "count": 2,
+            "description": "战斗 (0/2)"
+          }
+        ],
+        "dialogueSnippet": "纸上得来终觉浅，绝知此事要躬行。",
+        "rewards": {
+          "exp": 20
+        }
+      },
+      {
+        "id": "step_2",
+        "name": "百炼成钢",
+        "description": "再战斗 3 次，磨砺战斗技巧。",
+        "objectives": [
+          {
+            "type": "combat_count",
+            "count": 3,
+            "description": "战斗 (0/3)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 80,
+      "gold": 60,
+      "items": [
+        { "itemId": "core:hp_pill", "count": 5 },
+        { "itemId": "core:stamina_pill", "count": 2 }
+      ]
+    },
+    "autoAccept": true,
+    "repeatable": false
+  },
+  {
+    "id": "core:quest_daily_cultivation",
+    "name": "每日修炼",
+    "description": "日复一日的修炼是修仙者的日常功课。",
+    "icon": "☀️",
+    "category": "daily",
+    "condition": {
+      "minRealm": 0
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "日常修炼",
+        "description": "修炼 2 次，完成今日功课。",
+        "objectives": [
+          {
+            "type": "cultivate_count",
+            "count": 2,
+            "description": "修炼 (0/2)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 30,
+      "gold": 20
+    },
+    "repeatable": true,
+    "autoAccept": true
+  },
+  {
+    "id": "core:quest_survival",
+    "name": "岁月如梭",
+    "description": "在这修仙世界中安然存活一段时间。",
+    "icon": "⏳",
+    "category": "side",
+    "condition": {
+      "minRealm": 0
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "初涉红尘",
+        "description": "在修仙世界中生存 6 个月。",
+        "objectives": [
+          {
+            "type": "survive_months",
+            "count": 6,
+            "description": "存活 (0/6 月)"
+          }
+        ],
+        "dialogueSnippet": "能在这危机四伏的世界中存活，本身就是一种修炼。"
+      }
+    ],
+    "rewards": {
+      "exp": 40,
+      "gold": 30,
+      "statBonus": { "luck": 1 }
+    },
+    "autoAccept": true,
+    "repeatable": false
+  }
+]
