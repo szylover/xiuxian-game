@@ -16,111 +16,39 @@
   padding: var(--spacing-2xl);
 }
 
-/* ── 轮回卡片 ── */
+/* ── 角色摘要 ── */
 
-.chronicle-card {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background: var(--color-bg-darkest);
-  overflow: hidden;
-}
-
-.chronicle-card-header {
+.chronicle-summary {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-md) var(--spacing-lg);
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.chronicle-card-header:hover {
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.chronicle-card-header.expanded {
-  border-bottom: 1px solid var(--color-border);
-}
-
-.chronicle-card-main {
-  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-bg-darkest);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
 }
 
-.chronicle-card-no {
-  color: var(--color-text-dim);
-  font-size: var(--font-size-xs);
-  min-width: 28px;
-}
-
-.chronicle-card-name {
+.chronicle-summary-name {
   color: var(--color-text-white);
   font-weight: bold;
   font-size: var(--font-size-md);
 }
 
-.chronicle-card-realm {
+.chronicle-summary-realm {
   color: var(--color-text-gold);
   font-size: var(--font-size-sm);
 }
 
-.chronicle-card-meta {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  font-size: var(--font-size-xs);
-}
-
-.chronicle-outcome {
-  padding: var(--spacing-xs) var(--spacing-md);
-  border-radius: var(--radius-sm);
-  font-weight: bold;
-}
-
-.outcome-died {
-  color: var(--color-text-danger);
-  background: rgba(255, 68, 68, 0.1);
-  border: 1px solid rgba(255, 68, 68, 0.3);
-}
-
-.outcome-ascended {
-  color: var(--color-text-gold);
-  background: rgba(255, 215, 0, 0.1);
-  border: 1px solid rgba(255, 215, 0, 0.3);
-}
-
-.outcome-active {
-  color: var(--color-text-success);
-  background: rgba(76, 175, 80, 0.1);
-  border: 1px solid rgba(76, 175, 80, 0.3);
-}
-
-.chronicle-card-age,
-.chronicle-card-duration {
-  color: var(--color-text-muted);
-}
-
-.chronicle-expand-arrow {
-  color: var(--color-text-dim);
-  font-size: var(--font-size-xs);
-  margin-left: var(--spacing-sm);
-}
-
-/* ── 详情区 ── */
-
-.chronicle-card-detail {
-  padding: var(--spacing-lg);
-}
-
-.chronicle-stats {
-  display: flex;
-  gap: var(--spacing-xl);
-  font-size: var(--font-size-xs);
+.chronicle-summary-age {
   color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-lg);
-  padding-bottom: var(--spacing-md);
-  border-bottom: 1px solid var(--color-border);
+  font-size: var(--font-size-sm);
+}
+
+.chronicle-summary-stats {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  margin-left: auto;
 }
 
 .chronicle-no-events {

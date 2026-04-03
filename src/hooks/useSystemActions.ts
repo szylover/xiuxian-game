@@ -21,7 +21,7 @@ import { recalcStats } from '../game/player';
 import { REALMS } from '../game/data';
 import type { ChronicleEventType } from '../game/chronicle';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
-import { getEquipDef, getTechniqueDef, getRecipe, getSmithingRecipe } from '../game/registry';
+import { getEquipDef, getTechniqueDef, getRecipe, getSmithingRecipe, getQuestChainDef } from '../game/registry';
 import { tickQuestObjectives, acceptQuest as acceptQuestFn, abandonQuest as abandonQuestFn, deliverQuestItem as deliverQuestItemFn, checkQuestDiscovery, setTrackedQuest as setTrackedQuestFn, turnInQuest as turnInQuestFn } from '../game/quest';
 import type { EquipSlot } from '../game/registry';
 import type { LogCategory } from './useGameLog';
@@ -193,7 +193,7 @@ export function useSystemActions(deps: SystemActionDeps) {
         addLog(BREAKTHROUGH_TEXTS.bottleneckHint, 'system');
       }
     }
-  }, [player, addLog, setPlayer, setGameOver, setGameOverReason]);
+  }, [player, addLog, setPlayer, setGameOver, setGameOverReason, chronicleHooks]);
 
   // ── T0017: 功法 ──
   const learn = useCallback((techniqueId: string) => {
@@ -334,10 +334,18 @@ export function useSystemActions(deps: SystemActionDeps) {
       if (!prev) return prev;
       const result = turnInQuestFn(prev, questId);
       questLogs = result.logs;
+      // T0068: 记录任务完成事件
+      if (result.logs.some(l => l.includes('🎉'))) {
+        const questDef = getQuestChainDef(questId);
+        chronicleHooks?.recordEvent('achievement_unlocked', result.player,
+          `完成任务「${questDef?.name ?? questId}」`,
+          { questId, questName: questDef?.name },
+        );
+      }
       return result.player;
     });
     setTimeout(() => { for (const log of questLogs) addLog(log, 'system'); }, 0);
-  }, [addLog, setPlayer]);
+  }, [addLog, setPlayer, chronicleHooks]);
 
   const setTrackedQuest = useCallback((questId: string | null) => {
     setPlayer(prev => {
