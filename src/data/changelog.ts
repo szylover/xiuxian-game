@@ -12,6 +12,18 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.8.0',
+    date: '2026-04-03',
+    title: 'CSS 外置与全局变量体系（T0068）',
+    items: [
+      '禁止 TSX 内联 CSS：所有组件样式提取到同名 .css 伴随文件',
+      '建立全局 CSS 变量体系（App.css :root），统一颜色/字号/间距/圆角/阴影 token',
+      '运行时动态值使用 CSS 变量注入模式：style={{ \'--var\': value }}',
+      '新增约 40 个组件级 .css 文件',
+      'App.css 精简：移除已外置的组件样式块',
+    ],
+  },
+  {
     version: '1.7.0',
     date: '2026-04-03',
     title: 'WoW 风格任务面板（T0067）',
