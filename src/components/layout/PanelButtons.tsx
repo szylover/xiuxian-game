@@ -47,8 +47,6 @@ const PANEL_GROUPS: PanelGroup[] = [
   {
     label: g.world,
     panels: [
-      { key: 'map', icon: p.map.icon, label: p.map.title },
-      { key: 'npc', icon: p.npc.icon, label: p.npc.title },
       { key: 'quest', icon: p.quest.icon, label: p.quest.title },
     ],
   },

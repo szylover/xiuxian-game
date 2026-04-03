@@ -1,0 +1,141 @@
+/* ============================================================
+   SceneExits.css — 出口导航样式（T0069）
+   ============================================================ */
+
+.scene-exits {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  background: var(--color-bg-darkest);
+}
+
+.scene-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+}
+
+.scene-section-title {
+  font-size: var(--font-size-md);
+  font-weight: bold;
+  color: var(--color-text-secondary);
+}
+
+.scene-section-action {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-xs) var(--spacing-md);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.scene-section-action:hover {
+  color: var(--color-text-info);
+  border-color: var(--color-text-info);
+}
+
+.scene-exits-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.scene-exit-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+  transition: background 0.15s;
+}
+
+.scene-exit-item:last-child {
+  border-bottom: none;
+}
+
+.scene-exit-item:hover:not(.scene-exit-locked) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.scene-exit-locked {
+  opacity: 0.5;
+}
+
+.scene-exit-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+}
+
+.scene-exit-dir {
+  color: var(--color-text-dim);
+  font-size: var(--font-size-xs);
+  min-width: 14px;
+}
+
+.scene-exit-emoji {
+  font-size: var(--font-size-md);
+}
+
+.scene-exit-name {
+  color: var(--color-text-primary);
+}
+
+.scene-exit-cost {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  margin-left: var(--spacing-sm);
+}
+
+.scene-exit-lock {
+  color: var(--color-text-dim);
+  font-size: var(--font-size-xs);
+  margin-left: var(--spacing-sm);
+}
+
+.scene-exit-btn {
+  background: var(--color-bg-dark);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-info);
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-xs) var(--spacing-md);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.scene-exit-btn:hover:not(:disabled) {
+  background: var(--color-bg-medium);
+  border-color: var(--color-text-info);
+}
+
+.scene-exit-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.scene-exits-empty {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-dim);
+  padding: var(--spacing-md);
+  font-style: italic;
+}
+
+.scene-exits-more {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  text-align: center;
+}
+
+.scene-exits-more:hover {
+  color: var(--color-text-info);
+}

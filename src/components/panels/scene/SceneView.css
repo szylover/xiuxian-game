@@ -1,0 +1,14 @@
+/* ============================================================
+   SceneView.css — 场景视图样式（T0069）
+   ============================================================ */
+
+.scene-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) var(--color-bg-dark);
+  gap: 0.4rem;
+  padding: 0.3rem;
+}

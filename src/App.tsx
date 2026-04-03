@@ -8,9 +8,9 @@ import { useGameLog } from './hooks/useGameLog';
 import type { CreatePlayerOptions } from './game/player';
 import StartScreen from './components/screens/StartScreen';
 import GameOverScreen from './components/screens/GameOverScreen';
-import GameLog from './components/hud/GameLog';
+import LogDrawer from './components/hud/LogDrawer';
 import ToastContainer from './components/hud/ToastContainer';
-import ActionPanel from './components/panels/ActionPanel';
+import SceneView from './components/panels/scene/SceneView';
 import DebugPanel from './components/debug/DebugPanel';
 import GameLayout from './components/layout/GameLayout';
 import LeftPanel from './components/layout/LeftPanel';
@@ -25,6 +25,7 @@ export default function App() {
   const engine = useGameEngine(addLog, addLogs);
   const [activePanel, setActivePanel] = useState<PanelKey | null>(null);
   const [showExitConfirm, setShowExitConfirm] = useState(false);
+  const [logDrawerOpen, setLogDrawerOpen] = useState(false);
 
   // 切换面板：点击已选中的按钮则收起
   const handleSelectPanel = (key: PanelKey) => {
@@ -77,19 +78,23 @@ export default function App() {
           />
         }
         center={
-          <>
-            <ActionPanel
-              player={engine.player}
-              onCultivate={engine.cultivate}
-              onFight={engine.fight}
-              onExplore={engine.explore}
-              onRest={engine.rest}
-              onBreakthrough={engine.breakthrough}
-              onBodyBreakthrough={engine.bodyBreakthrough}
-              gameOver={engine.gameOver}
-            />
-            <GameLog logs={logs} currentYear={engine.player.gameYear} currentMonth={engine.player.gameMonth} />
-          </>
+          <SceneView
+            player={engine.player}
+            onCultivate={engine.cultivate}
+            onFight={engine.fight}
+            onExplore={engine.explore}
+            onRest={engine.rest}
+            onBreakthrough={engine.breakthrough}
+            onBodyBreakthrough={engine.bodyBreakthrough}
+            onOpenLog={() => setLogDrawerOpen(true)}
+            onTravel={engine.travel}
+            onSelectPanel={handleSelectPanel}
+            onMeetNpc={engine.meetNpc}
+            onGiveGift={engine.giveGift}
+            onAcceptQuest={engine.acceptQuest}
+            onTurnInQuest={engine.turnInQuest}
+            gameOver={engine.gameOver}
+          />
         }
         right={
           <RightPanel
@@ -136,6 +141,15 @@ export default function App() {
             />
           )}
         </>}
+      />
+
+      {/* T0069: 日志抽屉 */}
+      <LogDrawer
+        open={logDrawerOpen}
+        onClose={() => setLogDrawerOpen(false)}
+        logs={logs}
+        currentYear={engine.player.gameYear}
+        currentMonth={engine.player.gameMonth}
       />
 
       {/* T0038: 退出确认弹窗 */}

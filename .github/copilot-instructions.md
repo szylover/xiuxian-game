@@ -154,7 +154,8 @@ xiuxian-game/
     ├── components/                #   UI 组件（按功能分目录，每个 .tsx 有同名 .css 伴随文件）
     │   ├── hud/                   #     常驻 HUD 组件
     │   │   ├── StatusBar.tsx      #       顶部状态栏
-    │   │   └── GameLog.tsx        #       游戏日志面板
+    │   │   ├── GameLog.tsx        #       游戏日志面板
+    │   │   └── LogDrawer.tsx      #       日志侧边抽屉（T0069）
     │   ├── layout/                #     布局组件
     │   │   ├── GameLayout.tsx     #       三栏游戏布局
     │   │   ├── LeftPanel.tsx      #       左侧面板（头像+核心属性）
@@ -173,7 +174,13 @@ xiuxian-game/
     │   │   ├── shop/              #       商店子组件
     │   │   ├── equipment/         #       装备子组件
     │   │   ├── quest/             #       任务子组件（QuestCard/ObjectiveRow/RewardPreview）
-    │   │   └── npc/               #       NPC 子组件（NpcCard/NpcDetailModal/GiftModal）
+    │   │   ├── npc/               #       NPC 子组件（NpcCard/NpcDetailModal/GiftModal）
+    │   │   └── scene/             #       场景视图子组件（T0069）
+    │   │       ├── SceneView.tsx   #         场景视图容器
+    │   │       ├── SceneHeader.tsx #         区域标题栏
+    │   │       ├── SceneNpcs.tsx   #         当前区域 NPC 展示
+    │   │       ├── SceneExits.tsx  #         出口导航
+    │   │       └── SceneFooter.tsx #         底部状态栏（瓶颈+任务+日志按钮）
     │   ├── screens/               #     全屏页面
     │   │   ├── StartScreen.tsx    #       开始界面
     │   │   └── GameOverScreen.tsx #       游戏结束画面
