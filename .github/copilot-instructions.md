@@ -150,8 +150,8 @@ xiuxian-game/
 └── src/                           # React 源码
     ├── main.tsx                   #   React 入口（挂载 <App />）
     ├── App.tsx                    #   根组件（路由/界面切换）
-    ├── App.css                    #   全局样式
-    ├── components/                #   UI 组件（按功能分目录）
+    ├── App.css                    #   全局样式 + :root CSS 变量定义
+    ├── components/                #   UI 组件（按功能分目录，每个 .tsx 有同名 .css 伴随文件）
     │   ├── hud/                   #     常驻 HUD 组件
     │   │   ├── StatusBar.tsx      #       顶部状态栏
     │   │   └── GameLog.tsx        #       游戏日志面板
@@ -167,9 +167,13 @@ xiuxian-game/
     │   │   ├── EquipmentPanel.tsx #       装备面板
     │   │   ├── ShopPanel.tsx      #       商店面板
     │   │   ├── SmithingPanel.tsx  #       炼器面板
+    │   │   ├── QuestPanel.tsx     #       任务面板（T0067）
+    │   │   ├── NpcPanel.tsx       #       NPC 面板
     │   │   ├── inventory/         #       背包子组件
     │   │   ├── shop/              #       商店子组件
-    │   │   └── equipment/         #       装备子组件
+    │   │   ├── equipment/         #       装备子组件
+    │   │   ├── quest/             #       任务子组件（QuestCard/ObjectiveRow/RewardPreview）
+    │   │   └── npc/               #       NPC 子组件（NpcCard/NpcDetailModal/GiftModal）
     │   ├── screens/               #     全屏页面
     │   │   ├── StartScreen.tsx    #       开始界面
     │   │   └── GameOverScreen.tsx #       游戏结束画面

@@ -135,6 +135,7 @@
 | [T0066](https://github.com/szylover/xiuxian-game/issues/139) | 数据文件 TS→JSON 迁移 | — | — | ✅ |
 | [T0039](https://github.com/szylover/xiuxian-game/issues/109) | 新手引导 | T0001 | — | ⬜ |
 | [T0059b](https://github.com/szylover/xiuxian-game/issues/90) | 数据懒加载 & Bundle 分割 | — | [spec](specs/T0059-data-lazy-loading.md) | ✅ |
+| [T0068](https://github.com/szylover/xiuxian-game/issues/161) | CSS 外置与全局变量体系（TSX 禁止内联样式） | — | — | ✅ |
 
 ---
 
