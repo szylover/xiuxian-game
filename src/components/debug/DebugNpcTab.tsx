@@ -2,6 +2,7 @@ import type { Player } from '../../game/player';
 import { recalcStats } from '../../game/player';
 import { getAllNpcDefs } from '../../game/registry';
 import { getNpcState, calcRelationLevel } from '../../game/npc';
+import { getDialogueState, resetDialogueState } from '../../game/dialogue';
 import type { NpcSystemState, NpcRelation } from '../../game/types';
 import { NPC_RELATION_CN } from '../shared/constants';
 import './DebugNpcTab.css';
@@ -132,6 +133,21 @@ export default function DebugNpcTab({ player, onUpdate }: Props) {
             </div>
           );
         })}
+      </div>
+
+      {/* ── 对话系统调试 ── */}
+      <div className="debug-npc-list">
+        <span className="debug-label debug-npc-list-label">💬 对话系统</span>
+        <div className="debug-npc-card">
+          <span>已触发: {getDialogueState(player).triggeredOnce.length} 条</span>
+          <span>冷却中: {Object.keys(getDialogueState(player).lastTriggerAge).length} 条</span>
+          <span>Flags: {Object.keys(getDialogueState(player).flags).length} 个</span>
+        </div>
+        <div className="debug-npc-card">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => {
+            onUpdate(prev => prev ? resetDialogueState(prev) : prev);
+          }}>🔄 重置所有对话</button>
+        </div>
       </div>
     </div>
   );

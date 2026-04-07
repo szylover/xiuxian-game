@@ -201,6 +201,7 @@ xiuxian-game/
     │       ├── StatusItem.tsx     #       状态栏单项
     │       ├── CombatModal.tsx    #       战斗弹窗
     │       ├── DeathModal.tsx     #       死亡弹窗（T0040）
+    │       ├── DialogueModal.tsx   #       对话弹窗（T0026）
     │       └── FloatingPanel.tsx  #       浮动面板
     ├── game/                      #   游戏逻辑（纯 TS，不依赖 React）
     │   ├── types.ts               #     全局类型定义（DLC/装备/死亡等）
@@ -220,6 +221,8 @@ xiuxian-game/
     │   ├── technique.ts           #     功法系统
     │   ├── quest.ts               #     任务链系统（T0057）
     │   ├── quest-loader.ts        #     JSON 任务链加载器
+    │   ├── dialogue.ts            #     对话系统核心逻辑（T0026）
+    │   ├── dialogue-loader.ts     #     JSON 对话加载器
     │   ├── registry/              #     全局注册表（DLC 扩展核心）
     │   │   ├── index.ts           #       barrel re-export
     │   │   ├── stores.ts          #       注册表存储（Map）
@@ -237,6 +240,7 @@ xiuxian-game/
     │   │   ├── combat.ts          #       战斗系统文案
     │   │   ├── cultivation.ts     #       修炼系统文案
     │   │   ├── quest.ts           #       任务链系统文案（T0057）
+    │   │   ├── dialogue.ts        #       对话系统文案（T0026）
     │   │   └── ...                #       各系统对应文案文件（新增系统须同步新建）
     │   └── dlc/                   #     DLC 数据包（每个 DLC 一个文件夹）
     │       ├── core/              #       基础包（必选，始终加载）
@@ -252,6 +256,10 @@ xiuxian-game/
     │       │   ├── realms.json    #         境界定义
     │       │   ├── regions.json   #         区域定义
     │       │   ├── npcs.json      #         NPC 定义
+    │       │   ├── dialogues/      #         对话数据（按 NPC 拆分，T0026）
+    │       │   │   ├── qingyun-elder.json  # 青云长老对话
+    │       │   │   ├── idle-chat.json      # 闲聊池
+    │       │   │   └── ...                 # 每个 NPC 一个文件
     │       │   └── ...            #         其他数据文件
     │       └── cp-01-fanren/      #       内容包：凡人修仙（可选）
     │           ├── manifest.ts    #         DLC 元信息 + registerDLC 入口

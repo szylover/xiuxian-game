@@ -85,7 +85,7 @@
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
 | [T0025](https://github.com/szylover/xiuxian-game/issues/97) | NPC 系统 | T0001 | — | ✅ |
-| [T0026](https://github.com/szylover/xiuxian-game/issues/98) | 对话系统 | T0025 | [spec](specs/T0026-dialogue-system.md) | 📐 |
+| [T0026](https://github.com/szylover/xiuxian-game/issues/98) | 对话系统 | T0025 | [spec](specs/T0026-dialogue-system.md) | ✅ |
 | [T0027](https://github.com/szylover/xiuxian-game/issues/99) | 门派系统 | T0025, T0017 | — | ⬜ |
 | [T0028](https://github.com/szylover/xiuxian-game/issues/100) | PvP 切磋 | T0025, T0003 | — | ⬜ |
 | [T0048](https://github.com/szylover/xiuxian-game/issues/111) | 道侣双修系统 | T0025, T0026 | — | ⬜ |
