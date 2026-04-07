@@ -46,7 +46,7 @@ export default function App() {
   if (!engine.player) {
     return (
       <StartScreen
-        onNewGame={(options: CreatePlayerOptions & { slotIndex?: number }) => { clearLogs(); engine.newGame(options); }}
+        onNewGame={(options: CreatePlayerOptions & { slotIndex?: number; enabledDLCs?: string[] }) => { clearLogs(); engine.newGame(options); }}
         onLoadGame={(slotIndex: number) => { clearLogs(); engine.loadGame(slotIndex); }}
         dataReady={engine.dataReady}
         dataError={engine.dataError}

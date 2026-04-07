@@ -36,6 +36,11 @@ export function getAllShopGoods(): ShopGoodsDef[] {
   return shopGoodsRegistry;
 }
 
+/** 清空商品注册表（切换 DLC 前调用） */
+export function clearShopGoods(): void {
+  shopGoodsRegistry.length = 0;
+}
+
 /** T0021: 按当前区域过滤商品（无 regionTags 的商品在所有区域可见） */
 export function getShopGoodsForRegion(player: Player): ShopGoodsDef[] {
   const region = getCurrentRegion(player);

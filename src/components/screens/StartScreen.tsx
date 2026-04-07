@@ -6,12 +6,12 @@ import { useState } from 'react';
 import type { CreatePlayerOptions } from '../../game/player';
 import { rollPreview } from '../../game/player/create';
 import type { PreviewRoll } from '../../game/player/create';
-import { ALL_DLCS } from '../../data/dlc';
+import { ALL_DLCS, getDefaultEnabledDLCs } from '../../data/dlc';
 import RerollModal from './RerollModal';
 import SaveManagerPanel from './SaveManagerPanel';
 
 interface StartScreenProps {
-  onNewGame: (options: CreatePlayerOptions & { slotIndex?: number }) => void;
+  onNewGame: (options: CreatePlayerOptions & { slotIndex?: number; enabledDLCs?: string[] }) => void;
   onLoadGame: (slotIndex: number) => void;
   dataReady: boolean;
   dataError?: boolean;
@@ -27,7 +27,7 @@ export default function StartScreen({ onNewGame, onLoadGame, dataReady, dataErro
   const [showReroll, setShowReroll] = useState(false);
   const [showDLCPanel, setShowDLCPanel] = useState(false);
   const [enabledDLCs, setEnabledDLCs] = useState<Set<string>>(() =>
-    new Set(ALL_DLCS.filter(d => d.required).map(d => d.id))
+    new Set(getDefaultEnabledDLCs())
   );
 
   const toggleDLC = (id: string) => {
@@ -45,7 +45,7 @@ export default function StartScreen({ onNewGame, onLoadGame, dataReady, dataErro
 
   const handleConfirm = () => {
     const finalName = name.trim() || '无名散修';
-    onNewGame({ name: finalName, gender, appearance, preview, slotIndex: selectedSlot });
+    onNewGame({ name: finalName, gender, appearance, preview, slotIndex: selectedSlot, enabledDLCs: Array.from(enabledDLCs) });
   };
 
   const handleNewGameSlot = (slotIndex: number) => {
@@ -67,20 +67,19 @@ export default function StartScreen({ onNewGame, onLoadGame, dataReady, dataErro
                 <button className="dlc-panel-close" onClick={() => setShowDLCPanel(false)}>✕</button>
               </div>
               {ALL_DLCS.map(dlc => (
-                <label key={dlc.id} className={`dlc-option ${dlc.required ? 'dlc-option-required' : ''}`}>
+                <label key={dlc.id} className="dlc-option">
                   <input
                     type="checkbox"
                     checked={enabledDLCs.has(dlc.id)}
-                    onChange={() => !dlc.required && toggleDLC(dlc.id)}
-                    disabled={dlc.required}
+                    onChange={() => toggleDLC(dlc.id)}
                   />
                   <div className="dlc-option-info">
                     <span className="dlc-option-name">{dlc.name} <span className="dlc-option-version">v{dlc.version}</span></span>
                     <span className="dlc-option-desc">{dlc.description}</span>
                   </div>
-                  {dlc.required && <span className="dlc-option-badge">必选</span>}
                 </label>
               ))}
+              {enabledDLCs.size === 0 && <div className="dlc-warning">⚠️ 至少选择一个内容包</div>}
             </div>
           </div>
         )}
@@ -143,8 +142,8 @@ export default function StartScreen({ onNewGame, onLoadGame, dataReady, dataErro
 
         {/* ── 操作按钮 ── */}
         <div className="form-actions create-char-actions">
-          <button className="btn btn-primary" onClick={handleConfirm} disabled={!dataReady}>
-            {dataError ? '⚠️ 数据加载失败' : dataReady ? '✨ 开始修炼' : '⏳ 加载中…'}
+          <button className="btn btn-primary" onClick={handleConfirm} disabled={!dataReady || enabledDLCs.size === 0}>
+            {dataError ? '⚠️ 数据加载失败' : !dataReady ? '⏳ 加载中…' : enabledDLCs.size === 0 ? '⚠️ 请选择内容包' : '✨ 开始修炼'}
           </button>
           <button className="btn btn-secondary" onClick={() => setView('slots')}>
             ← 返回
@@ -176,20 +175,19 @@ export default function StartScreen({ onNewGame, onLoadGame, dataReady, dataErro
               <button className="dlc-panel-close" onClick={() => setShowDLCPanel(false)}>✕</button>
             </div>
             {ALL_DLCS.map(dlc => (
-              <label key={dlc.id} className={`dlc-option ${dlc.required ? 'dlc-option-required' : ''}`}>
+              <label key={dlc.id} className="dlc-option">
                 <input
                   type="checkbox"
                   checked={enabledDLCs.has(dlc.id)}
-                  onChange={() => !dlc.required && toggleDLC(dlc.id)}
-                  disabled={dlc.required}
+                  onChange={() => toggleDLC(dlc.id)}
                 />
                 <div className="dlc-option-info">
                   <span className="dlc-option-name">{dlc.name} <span className="dlc-option-version">v{dlc.version}</span></span>
                   <span className="dlc-option-desc">{dlc.description}</span>
                 </div>
-                {dlc.required && <span className="dlc-option-badge">必选</span>}
               </label>
             ))}
+            {enabledDLCs.size === 0 && <div className="dlc-warning">⚠️ 至少选择一个内容包</div>}
           </div>
         </div>
       )}

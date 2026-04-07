@@ -12,7 +12,8 @@ import { createPlayer, getSpiritRootDisplay } from '../game/player';
 import type { Player } from '../game/player';
 import type { CreatePlayerOptions } from '../game/player';
 import { REALMS, ACTION_COSTS } from '../game/data';
-import { registerCoreEvents, triggerDailyEvent } from '../game/events';
+import { loadDLCs } from '../data/dlc';
+import { triggerDailyEvent } from '../game/events';
 import type { LogCategory } from './useGameLog';
 import { useToast } from './useToast';
 import { useCoreActions } from './useCoreActions';
@@ -50,15 +51,9 @@ export function useGameEngine(
   const { toast, showToast, dismiss: dismissToast } = useToast();
   const chronicle = useChronicle();
 
-  // 异步加载游戏数据（代码分割，仅首次调用）
-  useEffect(() => {
-    registerCoreEvents()
-      .then(() => setDataReady(true))
-      .catch((err) => {
-        console.error('[xiuxian] 游戏数据加载失败', err);
-        setDataError(true);
-      });
-  }, []);
+  // T0074: 不再无条件加载 core DLC；改为 newGame/loadGame 时按需加载
+  // dataReady 初始为 true（StartScreen 不需要等数据），实际加载在用户操作时触发
+  useEffect(() => { setDataReady(true); }, []);
 
   // 同步 playerRef
   useEffect(() => { playerRef.current = player; }, [player]);
@@ -82,10 +77,18 @@ export function useGameEngine(
   }, [rawAddLogs, showToast]);
 
   // ── 新游戏 ──
-  const newGame = useCallback((options: CreatePlayerOptions & { slotIndex?: number }) => {
+  const newGame = useCallback(async (options: CreatePlayerOptions & { slotIndex?: number; enabledDLCs?: string[] }) => {
+    const dlcIds = options.enabledDLCs ?? ['core'];
+    try {
+      await loadDLCs(dlcIds);
+    } catch (err) {
+      console.error('[xiuxian] DLC 加载失败', err);
+      setDataError(true);
+      return;
+    }
     const slotIndex = options.slotIndex ?? 0;
     currentSlotRef.current = slotIndex;
-    let p = createPlayer(options);
+    let p = createPlayer({ ...options, enabledDLCs: dlcIds });
     const rootDisplay = getSpiritRootDisplay(p.spiritRoots);
     writeSaveSlot(slotIndex, p);
     setPlayer(p);
@@ -103,10 +106,21 @@ export function useGameEngine(
   }, [addLog, chronicle]);
 
   // ── 加载存档 ──
-  const loadGame = useCallback((slotIndex = 0) => {
+  const loadGame = useCallback(async (slotIndex = 0) => {
     currentSlotRef.current = slotIndex;
     const saved = loadSaveSlot(slotIndex);
     if (saved) {
+      // T0074: 按存档中的 DLC 列表加载（旧存档默认 core）
+      const dlcIds = saved.enabledDLCs ?? ['core'];
+      try {
+        await loadDLCs(dlcIds);
+      } catch (err) {
+        console.error('[xiuxian] DLC 加载失败', err);
+        setDataError(true);
+        return false;
+      }
+      // 补全旧存档的 enabledDLCs 字段
+      if (!saved.enabledDLCs) saved.enabledDLCs = dlcIds;
       // T0021: 根据境界刷新解锁区域（旧存档可能境界已高）
       const withRegions = refreshUnlockedRegions(saved);
       // T0071: 恢复程序化装备实例到全局查询表

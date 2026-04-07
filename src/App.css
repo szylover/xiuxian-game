@@ -373,6 +373,13 @@ body {
   margin-left: auto;
 }
 
+.dlc-warning {
+  color: var(--color-text-warning);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  padding: var(--spacing-sm);
+}
+
 /* ── 天赋摘要 ── */
 .talent-summary {
   color: #aaa;

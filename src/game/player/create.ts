@@ -37,6 +37,7 @@ export interface CreatePlayerOptions {
   gender: 'male' | 'female';
   appearance: number;
   preview?: PreviewRoll; // 可选：允许外部传入预先随机好的属性
+  enabledDLCs?: string[]; // T0074: 本局加载的 DLC 列表
   /** @deprecated use preview instead */
   spiritRoots?: PlayerSpiritRoots;
 }
@@ -153,6 +154,8 @@ export function createPlayer(options: CreatePlayerOptions): Player {
     // T0059 体修
     physique: 0, maxPhysique: 50, bodyRealmIndex: 0, bodyRealmExp: 0,
     physiqueDmgReduce: 0, bodyTempering: 0,
+    // T0074 DLC 列表
+    enabledDLCs: options.enabledDLCs ?? ['core'],
   };
 }
 
