@@ -184,10 +184,10 @@ export function startDialogue(
   const dlgState = getDialogueState(player);
   const logs: string[] = [];
 
-  // 标记 once 对话
-  const newTriggeredOnce = def.once
-    ? [...dlgState.triggeredOnce, def.id]
-    : dlgState.triggeredOnce;
+  // 标记已触发（所有对话都记录，用于前置依赖检查）
+  const newTriggeredOnce = dlgState.triggeredOnce.includes(def.id)
+    ? dlgState.triggeredOnce
+    : [...dlgState.triggeredOnce, def.id];
 
   // 记录冷却
   const newLastTriggerAge = { ...dlgState.lastTriggerAge, [def.id]: player.age };
