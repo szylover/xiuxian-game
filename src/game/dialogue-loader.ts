@@ -69,6 +69,7 @@ interface JsonDialogueCondition {
   requiredItems?: { itemId: string; count: number }[];
   hasNpcFlag?: { key: string; value: unknown };
   hasDialogueFlag?: { key: string; value: unknown };
+  requiredDialogues?: string[];
 }
 
 export interface JsonDialogueChain {
@@ -169,6 +170,7 @@ function parseCondition(cond?: JsonDialogueCondition | null): DialogueCondition 
     requiredItems: cond.requiredItems,
     hasNpcFlag: cond.hasNpcFlag,
     hasDialogueFlag: cond.hasDialogueFlag,
+    requiredDialogues: cond.requiredDialogues,
   };
 }
 

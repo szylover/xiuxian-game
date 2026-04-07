@@ -60,7 +60,8 @@
       "condition": {
         "minAffinity": 20,
         "minRealm": 2,
-        "relationLevel": ["friend", "close_friend", "soulmate"]
+        "relationLevel": ["friend", "close_friend", "soulmate"],
+        "requiredDialogues": ["core:dlg_elder_first_meet"]
       },
       "startNodeId": "n1",
       "tags": ["lore", "gift"],
@@ -258,7 +259,8 @@
       "condition": {
         "minAffinity": 30,
         "relationLevel": ["friend", "close_friend", "soulmate"],
-        "minRealm": 3
+        "minRealm": 3,
+        "requiredDialogues": ["core:dlg_elder_first_meet"]
       },
       "startNodeId": "n1",
       "tags": ["lore", "mystery"],

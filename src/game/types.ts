@@ -831,6 +831,7 @@ export interface DialogueCondition {
   requiredItems?: { itemId: string; count: number }[];
   hasNpcFlag?: { key: string; value: unknown };
   hasDialogueFlag?: { key: string; value: unknown };
+  requiredDialogues?: string[];           // 前置对话链 ID（必须已触发才解锁）
   custom?: (p: Player) => boolean;
 }
 

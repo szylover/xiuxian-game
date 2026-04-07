@@ -97,6 +97,12 @@ function checkDialogueCondition(player: Player, def: DialogueChainDef): boolean 
     if (dlgState.flags[cond.hasDialogueFlag.key] !== cond.hasDialogueFlag.value) return false;
   }
 
+  if (cond.requiredDialogues?.length) {
+    for (const reqId of cond.requiredDialogues) {
+      if (!dlgState.triggeredOnce.includes(reqId)) return false;
+    }
+  }
+
   if (cond.custom && !cond.custom(player)) return false;
 
   return true;
