@@ -1,0 +1,143 @@
+{
+  "breakthroughReqs": [
+    {
+      "id": "cp-01:bt_0_1",
+      "fromRealmIndex": 0,
+      "toRealmIndex": 1,
+      "itemCosts": [],
+      "conditions": [],
+      "requiresTribulation": false,
+      "baseSuccessRate": 0.75,
+      "description": "偶然机缘之下感应天地灵气，踏入炼气修行之路。"
+    },
+    {
+      "id": "cp-01:bt_1_2",
+      "fromRealmIndex": 1,
+      "toRealmIndex": 2,
+      "itemCosts": [
+        { "itemId": "cp-01:breakthrough_lianqi", "count": 1 },
+        { "itemId": "cp-01:herb_lingcao", "count": 5 }
+      ],
+      "conditions": [],
+      "requiresTribulation": false,
+      "baseSuccessRate": 0.55,
+      "description": "以引气散与灵草凝练根基，筑基成功方为真正修士。"
+    },
+    {
+      "id": "cp-01:bt_2_3",
+      "fromRealmIndex": 2,
+      "toRealmIndex": 3,
+      "itemCosts": [
+        { "itemId": "cp-01:foundation_pill", "count": 1 },
+        { "itemId": "cp-01:herb_xuanlian", "count": 5 }
+      ],
+      "conditions": [],
+      "requiresTribulation": false,
+      "baseSuccessRate": 0.45,
+      "description": "筑基丹与玄莲子催化灵力凝丹，结成金丹。百年修行，成败在此一举。"
+    },
+    {
+      "id": "cp-01:bt_3_4",
+      "fromRealmIndex": 3,
+      "toRealmIndex": 4,
+      "itemCosts": [
+        { "itemId": "cp-01:core_formation_stone", "count": 1 },
+        { "itemId": "cp-01:monster_core", "count": 5 },
+        { "itemId": "cp-01:herb_tianhuo", "count": 3 }
+      ],
+      "conditions": [
+        {
+          "id": "cp-01:cond_kill_40",
+          "description": "击杀妖兽 ≥ 40",
+          "field": "tracking.killCount",
+          "op": ">=",
+          "value": 40
+        }
+      ],
+      "requiresTribulation": false,
+      "baseSuccessRate": 0.35,
+      "description": "金丹化婴，以结丹凝结石与妖丹为引，须历经足够战斗磨练。"
+    },
+    {
+      "id": "cp-01:bt_4_5",
+      "fromRealmIndex": 4,
+      "toRealmIndex": 5,
+      "itemCosts": [
+        { "itemId": "cp-01:nascent_soul_formation_pill", "count": 1 },
+        { "itemId": "cp-01:herb_wanling", "count": 3 },
+        { "itemId": "cp-01:golden_thunder_bamboo_leaf", "count": 2 }
+      ],
+      "conditions": [
+        {
+          "id": "cp-01:cond_defeat_higher",
+          "description": "曾击败过高境界敌人",
+          "field": "tracking.defeatedHigherRealm",
+          "op": "==",
+          "value": true
+        }
+      ],
+      "requiresTribulation": false,
+      "baseSuccessRate": 0.30,
+      "description": "元婴化神，须以元婴化形丹与万灵果为引，金雷竹叶凝聚雷灵之力助突破。"
+    },
+    {
+      "id": "cp-01:bt_5_6",
+      "fromRealmIndex": 5,
+      "toRealmIndex": 6,
+      "itemCosts": [
+        { "itemId": "cp-01:deity_transform_dew", "count": 1 },
+        { "itemId": "cp-01:integration_pill", "count": 1 },
+        { "itemId": "cp-01:celestial_jade", "count": 3 }
+      ],
+      "conditions": [],
+      "requiresTribulation": true,
+      "description": "化神合体，天劫降临。以化神仙露和合体灵丹稳固道基，仙玉凝聚天地灵力，渡过三九天劫方得合体。"
+    },
+    {
+      "id": "cp-01:bt_6_7",
+      "fromRealmIndex": 6,
+      "toRealmIndex": 7,
+      "itemCosts": [
+        { "itemId": "cp-01:mahayana_scroll", "count": 3 },
+        { "itemId": "cp-01:celestial_jade", "count": 5 }
+      ],
+      "conditions": [],
+      "requiresTribulation": true,
+      "description": "参悟大乘心法残卷，以仙玉引渡五九天劫，成则大乘圆满，败则万劫不复。"
+    }
+  ],
+  "tribulations": [
+    {
+      "id": "cp-01:tribulation_heiti",
+      "name": "三九天劫",
+      "description": "九道天雷交织落下，电光遮天蔽日，化神修士的终极考验……",
+      "forRealmIndex": 5,
+      "waves": [
+        { "name": "第一道黑雷", "hp": 5500,  "atk": 380,  "def": 160, "speed": 42 },
+        { "name": "第二道黑雷", "hp": 6500,  "atk": 480,  "def": 190, "speed": 46, "specialEffect": { "type": "dot",       "value": 55,  "description": "黑雷焚体，每回合额外 55 伤害" } },
+        { "name": "第三道裂地雷", "hp": 7500, "atk": 550,  "def": 210, "speed": 48, "specialEffect": { "type": "debuff_def", "value": 25,  "description": "裂地雷击，降低防御 25%" } },
+        { "name": "风雷劫",     "hp": 8500,  "atk": 650,  "def": 220, "speed": 52, "specialEffect": { "type": "debuff_atk", "value": 20,  "description": "风雷交加，攻击降低 20%" } }
+      ],
+      "rewards": { "bonusExp": 6000, "items": [{ "itemId": "cp-01:mahayana_scroll", "count": 1 }] },
+      "failureType": "realm_drop",
+      "failureDescription": "三九天劫反噬，道基动摇，修为跌落元婴期！"
+    },
+    {
+      "id": "cp-01:tribulation_wujiu",
+      "name": "五九天劫",
+      "description": "紫金雷柱贯穿天际，天火心魔齐至，传说中的飞升大劫……",
+      "forRealmIndex": 6,
+      "waves": [
+        { "name": "第一道紫金雷", "hp": 11000, "atk": 850,  "def": 420, "speed": 62 },
+        { "name": "第二道紫金雷", "hp": 13000, "atk": 950,  "def": 440, "speed": 64, "specialEffect": { "type": "dot",        "value": 90,  "description": "紫金雷灼，每回合 90 伤害" } },
+        { "name": "天火焚身劫",   "hp": 15000, "atk": 1050, "def": 460, "speed": 66, "specialEffect": { "type": "heal_block", "value": 0,   "description": "天火焚身，无法恢复" } },
+        { "name": "心魔化身劫",   "hp": 13000, "atk": 1200, "def": 380, "speed": 70, "specialEffect": { "type": "debuff_atk", "value": 35,  "description": "心魔化身，攻击降低 35%" } },
+        { "name": "风雷天火合劫", "hp": 17000, "atk": 1350, "def": 500, "speed": 72, "specialEffect": { "type": "debuff_def", "value": 40,  "description": "风雷天火合击，防御降低 40%" } },
+        { "name": "混沌雷罚",     "hp": 22000, "atk": 1600, "def": 520, "speed": 78, "specialEffect": { "type": "dot",        "value": 130, "description": "混沌雷罚，每回合 130 伤害" } }
+      ],
+      "rewards": { "bonusExp": 55000, "items": [{ "itemId": "cp-01:celestial_jade", "count": 3 }] },
+      "failureType": "become_loose_immortal",
+      "failureDescription": "五九天劫之下道基崩碎，肉身湮灭，元婴出逃，沦为散仙……"
+    }
+  ]
+}

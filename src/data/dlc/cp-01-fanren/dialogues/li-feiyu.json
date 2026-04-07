@@ -1,0 +1,440 @@
+[
+  {
+    "id": "cp-01:dlg_lifeiyu_first_meet",
+    "npcId": "cp-01:npc_li_feiyu",
+    "name": "厉飞雨初见",
+    "priority": 100,
+    "once": true,
+    "condition": {
+      "minAffinity": 0,
+      "relationLevel": ["stranger", "acquaintance"]
+    },
+    "startNodeId": "n1",
+    "tags": ["greeting", "lore"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「嘿！你也是黄枫谷的弟子？看你面生得很，新来的？我叫厉飞雨，以后有什么事尽管找我——只要不是让我坐那儿打坐就行！」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "⚔️ 厉兄好爽快！在下初入黄枫谷，还请多关照。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 8 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 你不喜欢打坐？那你怎么修炼？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "😒 这么吵闹，真的是修士吗？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": -5 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「哈哈哈！关照不敢当，但打架的时候吼一声，我厉飞雨第一个上！来，这几枚黄龙丹你拿着，新人刚来什么都缺，老大哥给你接个风！」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:hp_pill", "count": 5 },
+            { "itemId": "cp-01:stamina_pill", "count": 3 }
+          ]
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「打坐那种事让韩立去干就好了，我更喜欢实战！跟妖兽打一架学到的东西，比坐一个月禅顶用！你看我这身伤疤，每一道都是从战斗中得来的经验！」",
+        "choices": [
+          {
+            "id": "c3a",
+            "text": "💪 好男儿就该这样！",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c3b",
+            "text": "😅 韩立？你认识韩立？",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 3 }
+          }
+        ]
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「哼！看不起人是不是？修士就得像个木头一样不说话？那种无趣的活法我可受不了！走走走，没话说就别浪费我的时间！」"
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「韩立是我最好的兄弟！别看他整天一副老好人的样子，真到了关键时刻，比谁都靠得住！这几枚丹药你拿着，算是看在韩立的份上。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:hp_pill", "count": 3 }]
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_lifeiyu_qixuan",
+    "npcId": "cp-01:npc_li_feiyu",
+    "name": "厉飞雨谈七玄门",
+    "priority": 90,
+    "once": true,
+    "condition": {
+      "minAffinity": 15,
+      "minRealm": 0,
+      "relationLevel": ["acquaintance", "friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_lifeiyu_first_meet"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你知道七玄门吗？我和韩立最初就是七玄门的弟子。那个小门派虽然穷得叮当响，但里面的人都挺实在。可惜后来被魔道的人盯上了……」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "⚔️ 那场血战是怎么回事？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "😞 被灭门了吗？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "🤔 你和韩立在七玄门就是好友？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 3 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「血战……那一天我永远忘不了。魔道的人突袭七玄门，掌门和长老们拼死抵抗，我和韩立背靠背杀出一条血路。我记得身上中了七八处伤，韩立把他仅有的疗伤丹药全给了我。」",
+        "choices": [
+          {
+            "id": "c2a",
+            "text": "🙏 你们的感情真深厚。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2b",
+            "text": "😤 那些魔道的人太可恶了！",
+            "nextNodeId": "n6",
+            "effects": { "affinityChange": 5 }
+          }
+        ]
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「算是半灭吧。掌门战死了，多数弟子也没了。我和韩立还有几个人侥幸逃出来，后来辗转到了黄枫谷。那些死去的同门……我有时候做梦还能梦到他们。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:qixuan_token", "count": 1 }],
+          "expChange": 80
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「那可不，我们两个是七玄门的难兄难弟！他搞药我打架，配合得天衣无缝。他脑子比我好使，我拳头比他硬——完美组合！哈哈哈！」",
+        "effects": { "expChange": 50 }
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「嘿，大老爷们儿别说什么感情不感情的，怪肉麻。他是我的兄弟，我这条命有一半是他捡回来的，我记着就行了。这枚令牌是七玄门的遗物，你拿着当个纪念。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:qixuan_token", "count": 1 }],
+          "expChange": 100
+        }
+      },
+      {
+        "id": "n6",
+        "type": "npc_talk",
+        "text": "「嘿！说得好！等我修为够了，一定要找那帮魔修算账！一个都不放过！——虽然韩立总说让我冷静，但有些仇不报怎么咽得下这口气！」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:iron_ore", "count": 5 }],
+          "expChange": 80
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_lifeiyu_brotherhood",
+    "npcId": "cp-01:npc_li_feiyu",
+    "name": "兄弟情义",
+    "priority": 80,
+    "once": true,
+    "condition": {
+      "minAffinity": 30,
+      "minRealm": 1,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_lifeiyu_qixuan"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「说起来你跟韩立有点像——不是说长相，是那种……稳当劲儿。韩立这人什么都好，就是太谨慎了。有时候我真想拽着他的衣领喊一句：'别想那么多，干就完了！'」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "😂 韩前辈确实很谨慎。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 也许正是因为谨慎，他才活到了现在。",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "💪 我更像你，喜欢直接干！",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 8 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「谨慎？他那叫苟！不过苟也有苟的好处。我每次冲动的时候，他都在后面给我兜底。我不在的时候……你帮我盯着他点，别让他一个人承担太多。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:hp_pill", "count": 5 }],
+          "expChange": 100
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「……你说得对。他活到现在，确实靠的是那份谨慎。有时候我也想——如果我能像他一样沉得住气，是不是就不会受那么多伤。不过……那就不是厉飞雨了。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:exp_pill", "count": 2 }],
+          "expChange": 120
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「哈哈哈！好小子，对我脾气！来来来，这几块玄铁矿你拿着，是我前几天打妖兽掉的。以后一起去闯荡，酒肉兄弟不嫌多！」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:iron_ore", "count": 8 },
+            { "itemId": "cp-01:monster_fang", "count": 5 }
+          ],
+          "expChange": 80
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_lifeiyu_combat_talk",
+    "npcId": "cp-01:npc_li_feiyu",
+    "name": "厉飞雨谈战斗",
+    "priority": 70,
+    "once": true,
+    "condition": {
+      "minAffinity": 20,
+      "minRealm": 1,
+      "relationLevel": ["acquaintance", "friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_lifeiyu_first_meet"]
+    },
+    "startNodeId": "n1",
+    "tags": ["advice", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你最近有没有跟妖兽交过手？修仙不光靠打坐，实战才是检验修为的最好方式！」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "⚔️ 打过，但总感觉差点意思。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2",
+            "text": "🙏 请教战斗技巧。",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c3",
+            "text": "😅 打不过怎么办？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 0 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「差点意思？那说明你还不够凶！战斗的时候不能犹豫——看准机会就全力出手，一击不中立马拉开距离。别学韩立那种磨磨蹭蹭的打法，直接正面硬刚！」",
+        "choices": [
+          {
+            "id": "c2a",
+            "text": "💪 受教了！就该这样打！",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2b",
+            "text": "🤔 硬刚不怕受伤吗？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 0 }
+          }
+        ]
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「技巧？我的技巧就三条：一、先下手为强；二、打不过就跑；三、跑不掉就拼命。简单粗暴但管用！当然啦，韩立那家伙会说我只会蛮干，但战场上想太多反而要命。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:stamina_pill", "count": 5 }],
+          "expChange": 120
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「打不过就跑呗！大丈夫能屈能伸，留得青山在不怕没柴烧。不过跑之前至少要打一下试试——万一打得过呢？这几枚培元丹你拿着，关键时刻补充体力。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:stamina_pill", "count": 3 }],
+          "expChange": 60
+        }
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「好！就喜欢你这股劲！来，这几枚丹药和妖牙是我打妖兽攒的，你拿去用。以后咱们一起去狩猎妖兽，看谁杀得多！」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:hp_pill", "count": 5 },
+            { "itemId": "cp-01:monster_fang", "count": 8 }
+          ],
+          "expChange": 150
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_lifeiyu_farewell",
+    "npcId": "cp-01:npc_li_feiyu",
+    "name": "厉飞雨的嘱托",
+    "priority": 50,
+    "once": true,
+    "condition": {
+      "minAffinity": 45,
+      "minRealm": 2,
+      "relationLevel": ["close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_lifeiyu_brotherhood"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「我要去一趟前线了。六派和魔道又起了冲突，黄枫谷的弟子分批出战。我已经报了名。」（厉飞雨的表情罕见地严肃了起来）",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "😰 厉兄！这太危险了！",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "💪 我也去！我们一起上！",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 8 }
+          },
+          {
+            "id": "c3",
+            "text": "🤔 为什么要去？你修为还不够……",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 0 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「危险？哈，打架不就是我的强项吗！不过……万一我回不来，帮我跟韩立说一声——让他少苟一点，该出手时就出手。别什么事都自己扛着。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:life_talisman", "count": 1 },
+            { "itemId": "cp-01:hp_pill", "count": 10 }
+          ],
+          "expChange": 200
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「你？不行！你修为还差点，去了是送死。不过——你这份义气，老子记下了！等我回来请你喝酒！这把刀和丹药你先收着，万一我不在的时候你遇到麻烦，能自保。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:iron_ore", "count": 10 },
+            { "itemId": "cp-01:hp_pill", "count": 10 },
+            { "itemId": "cp-01:stamina_pill", "count": 5 }
+          ],
+          "expChange": 300
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「够不够的，上了战场再说。有些事不是修为够不够的问题，是必须有人站出来。韩立老说我冲动——可如果所有人都跟他一样等着、看着，那谁来挡在前面？」",
+        "choices": [
+          {
+            "id": "c4a",
+            "text": "🙏 厉兄……你一定要活着回来。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 10 }
+          },
+          {
+            "id": "c4b",
+            "text": "😤 你说得对。有些事必须有人做。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 8 }
+          }
+        ]
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「放心！厉飞雨这条命没那么容易丢！你替我看好韩立那小子——他太习惯一个人扛所有事了。好了，不说了，这些东西你收好。下次见面，我请你吃大餐！」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:life_talisman", "count": 2 },
+            { "itemId": "cp-01:exp_pill", "count": 3 }
+          ],
+          "expChange": 250
+        }
+      }
+    ]
+  }
+]

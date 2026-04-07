@@ -1,0 +1,802 @@
+[
+  {
+    "id": "cp-01:dlg_hanli_first_meet",
+    "npcId": "cp-01:npc_han_li",
+    "name": "韩立初见",
+    "priority": 100,
+    "once": true,
+    "condition": {
+      "minAffinity": 0,
+      "relationLevel": ["stranger", "acquaintance"]
+    },
+    "startNodeId": "n1",
+    "tags": ["greeting", "lore"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「……你是哪个宗门的？初次见面，不必紧张，我没有恶意。在这修仙界，能多一个不想杀你的人，已是难得。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🙏 在下是散修，久仰韩前辈大名。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 你看起来很普通，真的是那个韩立？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": -3 }
+          },
+          {
+            "id": "c3",
+            "text": "😶 前辈是黄枫谷的弟子？为何独自一人？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 2 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「什么大名，不过是运气好活到了现在罢了。修行之路凶险万分，你能活着就是最大的本事。这几枚黄龙丹你拿着，关键时刻能保命。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:hp_pill", "count": 3 }]
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「……普通就对了。越是不起眼，越能活得久。我师父墨大夫当年收我入门，也说我资质平平。可活到最后的，偏偏是我这种人。」",
+        "choices": [
+          {
+            "id": "c3a",
+            "text": "🙏 受教了，看来低调才是生存之道。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3b",
+            "text": "👋 原来如此，告辞。"
+          }
+        ]
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「独处惯了。在修仙界闯荡这么多年，我学到的第一条道理就是——别轻易相信任何人，也别让任何人看透你的底牌。」",
+        "choices": [
+          {
+            "id": "c4a",
+            "text": "🙏 前辈说得有理，在下记住了。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c4b",
+            "text": "😅 那前辈岂不是很孤独？"
+          }
+        ]
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「嗯，你倒是个会听话的。修行路上遇到什么难处，可以来找我。这几枚黄龙丹先拿着。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:hp_pill", "count": 3 }]
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_hanli_cultivation_talk",
+    "npcId": "cp-01:npc_han_li",
+    "name": "韩立谈修炼",
+    "priority": 90,
+    "once": true,
+    "condition": {
+      "minAffinity": 15,
+      "minRealm": 1,
+      "relationLevel": ["acquaintance", "friend", "close_friend"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "advice"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「修炼一途，最忌好高骛远。我当年灵根驳杂，旁人都说我修仙无望，可我硬是靠着一股韧劲走到了今天。功法不在多而在精，灵丹不在好而在对症。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🙏 请韩前辈传授修炼心得。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2",
+            "text": "💊 有没有什么捷径？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": -2 }
+          },
+          {
+            "id": "c3",
+            "text": "🤔 灵根驳杂也能走这么远？怎么做到的？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 5 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「所谓心得，不过四个字——活着就好。别跟人比天赋、比宝物，就比谁活得久。这枚筑基丹你拿着，修炼时辅助用。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:exp_pill", "count": 2 }],
+          "expChange": 100
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「捷径？我走的每一步都是从死人堆里爬出来的。七玄门血战、堕魔谷搏命、乱星海漂泊……你要是不怕死，那倒确实是最快的修炼方式。」",
+        "choices": [
+          {
+            "id": "c3a",
+            "text": "😰 听起来太可怕了，还是踏踏实实修炼吧。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 2 }
+          },
+          {
+            "id": "c3b",
+            "text": "💪 我不怕！请前辈指路。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 0 }
+          }
+        ]
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「无非是当别人在斗法的时候，我在炼丹；当别人在炫耀的时候，我在苦修。天赋不够，就用时间和耐心来凑。到头来你会发现——那些天才大多死在了半路上。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:exp_pill", "count": 3 }],
+          "expChange": 150
+        }
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「……年轻人，勇气可嘉，但别拿命去赌。先把根基打牢，再去经历那些生死考验也不迟。这个拿着。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:lianqi_pill", "count": 1 }],
+          "expChange": 80
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_hanli_golden_thunder",
+    "npcId": "cp-01:npc_han_li",
+    "name": "韩立谈金雷竹",
+    "priority": 80,
+    "once": true,
+    "condition": {
+      "minAffinity": 30,
+      "minRealm": 2,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_hanli_cultivation_talk"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你可知道什么是金雷竹？此物吸收天地雷灵之力生长，千年方成一节。当年我辗转数地、历经生死才收齐七十二根竹节，炼成了青竹蜂云剑。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🎋 青竹蜂云剑？听说能化作漫天剑雨，雷光四溅！",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "💰 金雷竹这么珍贵，一根值多少灵石？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": -1 }
+          },
+          {
+            "id": "c3",
+            "text": "🤔 七十二根竹节……前辈收集了多久？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 3 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「不错，看来你见识不浅。青竹蜂云剑是我毕生心血所系，这些飞剑跟了我无数年，转战天南、乱星海、灵界……每一把剑上都染了数不清的血。这几片金雷竹叶拿去吧。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:golden_thunder_bamboo_leaf", "count": 2 }],
+          "expChange": 300
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「……灵石？有些东西不是灵石能衡量的。这些飞剑之所以强大，不光因为材料珍贵，更因为每一根竹节背后都有一段生死故事。」"
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「断断续续，大概用了两三百年吧。从天南到乱星海，从乱星海到灵界……中间几次差点丧命。不过，这世上值得花一辈子去做的事，本来就不多。」",
+        "choices": [
+          {
+            "id": "c4a",
+            "text": "🙏 两三百年……前辈的毅力令人敬佩。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c4b",
+            "text": "😮 我也想拥有一套这样的飞剑！",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 0 }
+          }
+        ]
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「飞剑不是拥有就行的，你得驾驭得了它。先把修为提上去吧。这几片竹叶给你当护身符用。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:golden_thunder_bamboo_leaf", "count": 1 }],
+          "expChange": 100
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_hanli_qixuan_trial",
+    "npcId": "cp-01:npc_han_li",
+    "name": "七玄门旧事",
+    "priority": 75,
+    "once": true,
+    "condition": {
+      "minAffinity": 25,
+      "minRealm": 1,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_hanli_cultivation_talk"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你知道七玄门吗？我最初就是在七玄门入的道。说来可笑，当年我进七玄门，连修仙是什么都不知道，只想让家里人过上好日子。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🏛️ 七玄门？听说已经被灭了……",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 2 }
+          },
+          {
+            "id": "c2",
+            "text": "⚔️ 听说七玄门经历过一场大血战？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "👤 前辈既然出身七玄门，为何后来去了黄枫谷？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 2 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「是啊，七玄门后来被灭了。小门小派在修仙界就像荒野里的灵草，大风一来就连根拔起。我那时年纪小，靠着墨大夫教的保命手段才活了下来。」",
+        "choices": [
+          {
+            "id": "c2a",
+            "text": "😞 前辈节哀……那些同门没白死。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2b",
+            "text": "🤔 墨大夫是什么人？",
+            "nextNodeId": "n6",
+            "effects": { "affinityChange": 2 }
+          }
+        ]
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「那一战，我和厉飞雨并肩作战。厉飞雨是我在七玄门唯一的挚友，他性子急、爱冲动，但对朋友掏心掏肺。那次血战中他受了重伤护我……要不是他，我可能早就死了。」",
+        "choices": [
+          {
+            "id": "c3a",
+            "text": "⚔️ 厉飞雨？他后来怎么样了？",
+            "nextNodeId": "n7",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3b",
+            "text": "🙏 前辈与厉前辈的情谊令人感动。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 5 }
+          }
+        ]
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「七玄门太小了，根本无法在天南六派的夹缝中生存。后来我机缘巧合进了黄枫谷，才算有了个落脚之地。不过说是落脚，也不过是找了一棵大一点的树罢了。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:qixuan_token", "count": 1 }],
+          "expChange": 80
+        }
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「……罢了，往事不提。这枚七玄门令牌是当年留下的，留着也没什么用了，给你当个纪念吧。修仙路上，若遇到真心待你的人，千万珍惜。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:qixuan_token", "count": 1 }],
+          "expChange": 120
+        }
+      },
+      {
+        "id": "n6",
+        "type": "npc_talk",
+        "text": "「墨大夫是我的启蒙恩师。他精通医术和毒术，教了我不少保命的手段。虽然后来发现他收我为徒另有目的，但他教的那些东西确实救了我无数次。」",
+        "effects": { "expChange": 80 }
+      },
+      {
+        "id": "n7",
+        "type": "npc_talk",
+        "text": "「他……也来了黄枫谷。不过他修为进境比我慢，毕竟他是那种宁可自己受伤也要护住朋友的人。如果你见到他，帮我带句话——让他少冲动、多动脑。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:hp_pill", "count": 5 }],
+          "expChange": 100
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_hanli_duo_mo_valley",
+    "npcId": "cp-01:npc_han_li",
+    "name": "堕魔谷经历",
+    "priority": 70,
+    "once": true,
+    "condition": {
+      "minAffinity": 35,
+      "minRealm": 2,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_hanli_golden_thunder"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你听说过堕魔谷吗？当年天南六派联合进攻魔道，我也被卷了进去。那地方……即使现在回想起来，都觉得后怕。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "😨 堕魔谷？那是什么地方？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 2 }
+          },
+          {
+            "id": "c2",
+            "text": "⚔️ 天南正魔大战？前辈是参与者？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c3",
+            "text": "💎 听说堕魔谷里有很多宝物？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": -1 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「堕魔谷是上古大能陨落之地，充斥着残留的魔气和远古禁制。天南正道六派与魔道在那里爆发了一场大战——结丹期、元婴期的修士像韭菜一样倒下。」",
+        "choices": [
+          {
+            "id": "c2a",
+            "text": "😰 那前辈是怎么活下来的？",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2b",
+            "text": "🙏 听起来太惨烈了……",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 2 }
+          }
+        ]
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「岂止是参与者。我在那里遇到了一个上古魔修的残魂，还机缘巧合得到了远古修士的传承。不过代价也很大——差点死在里面不说，还结下了几个难缠的仇家。」",
+        "choices": [
+          {
+            "id": "c3a",
+            "text": "🤔 远古传承？是什么样的传承？",
+            "nextNodeId": "n6",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3b",
+            "text": "😬 仇家？什么样的仇家？",
+            "nextNodeId": "n7",
+            "effects": { "affinityChange": 2 }
+          }
+        ]
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「宝物？在那种地方想着宝物的人，十有八九都已经变成了枯骨。记住——命永远比宝物重要。」"
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「说来你可能不信——靠苟。别人冲锋的时候我躲在暗处观察，别人争夺宝物的时候我悄悄潜行。等到大家打得两败俱伤，我才现身收拾残局。虽然不光彩，但管用。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:calming_talisman", "count": 2 }],
+          "expChange": 200
+        }
+      },
+      {
+        "id": "n6",
+        "type": "npc_talk",
+        "text": "「具体内容不便多言，总之那些远古修士的功法和炼器之术远超天南的水平。我的青竹蜂云剑能越级杀敌，除了金雷竹的材质，炼制手法也是关键。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:jade_slip", "count": 3 }],
+          "expChange": 250
+        }
+      },
+      {
+        "id": "n7",
+        "type": "npc_talk",
+        "text": "「王蝉、辛老祖……这些化神期的老魔头，哪个不是树敌无数。可偏偏他们还盯上了我。你若修为到了那个层次，也要小心——修仙界这口汤里，鱼大了就容易被盯上。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:life_talisman", "count": 1 }],
+          "expChange": 150
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_hanli_luanxing_sea",
+    "npcId": "cp-01:npc_han_li",
+    "name": "乱星海冒险",
+    "priority": 65,
+    "once": true,
+    "condition": {
+      "minAffinity": 40,
+      "minRealm": 3,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_hanli_duo_mo_valley"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「堕魔谷之后，我离开天南去了乱星海。那片海域广袤无垠，岛屿星罗棋布。星宫与妙音门两大势力明争暗斗，我在那里闯荡了百余年。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🌊 乱星海？为什么要离开天南？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2",
+            "text": "🏛️ 星宫和妙音门？那是什么门派？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 2 }
+          },
+          {
+            "id": "c3",
+            "text": "🗺️ 前辈走过这么多地方，印象最深的是什么？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 5 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「一来是金雷竹的线索指向乱星海，二来天南的仇家太多了。有时候离开不是逃避，而是为了活着回来。在乱星海我收集齐了青竹蜂云剑的竹节，也结识了不少奇人异士。」",
+        "choices": [
+          {
+            "id": "c2a",
+            "text": "🤔 在乱星海遇到过什么危险？",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2b",
+            "text": "🙏 为了集齐金雷竹，前辈辛苦了。",
+            "nextNodeId": "n6",
+            "effects": { "affinityChange": 5 }
+          }
+        ]
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「星宫是乱星海最大的修仙势力，宫主文斯月化神期修为，手段高明。妙音门则是一群女修组成的门派，擅长音攻和魅惑之术——跟她们打交道，耳朵和心神都得守好。」",
+        "choices": [
+          {
+            "id": "c3a",
+            "text": "😳 音攻和魅惑？听起来很厉害。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 0 }
+          },
+          {
+            "id": "c3b",
+            "text": "🙏 前辈在那里是如何立足的？",
+            "nextNodeId": "n6",
+            "effects": { "affinityChange": 3 }
+          }
+        ]
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「印象最深的……大概是在乱星海的一座无名小岛上，我独自枯坐了三年，参悟一门遁术。那三年里只有海浪声相伴，我第一次觉得修仙这条路，真的很孤独。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:luanxing_chart", "count": 1 }],
+          "expChange": 300
+        }
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「海底有上古禁制、有凶猛的海妖、还有数不清的争斗。最危险的一次是被数十条蛟龙围攻，靠着遁术和青竹蜂云剑才杀出重围。这张航图标注了安全航线，你若有缘去那里，或许用得上。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:luanxing_chart", "count": 1 }],
+          "expChange": 200
+        }
+      },
+      {
+        "id": "n6",
+        "type": "npc_talk",
+        "text": "「立足？无非两个字——低调。在任何地方都一样，实力不够就藏好自己，实力够了再出手也不迟。这张航图和灵石碎片你拿着。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:luanxing_chart", "count": 1 },
+            { "itemId": "cp-01:spirit_stone_shard", "count": 10 }
+          ],
+          "expChange": 250
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_hanli_spirit_realm",
+    "npcId": "cp-01:npc_han_li",
+    "name": "灵界见闻",
+    "priority": 55,
+    "once": true,
+    "condition": {
+      "minAffinity": 50,
+      "minRealm": 4,
+      "relationLevel": ["close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_hanli_luanxing_sea"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你修为到了这个境界，也该知道了——人界之上还有灵界。灵界的灵气浓度是人界的百倍，但危险也是百倍。那里的修士最低都是炼虚期起步，人界的元婴修士到了那里只能算蝼蚁。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "😮 灵界？前辈去过？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 那里有什么不同？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "😰 蝼蚁……那前辈在灵界怎么生存？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 5 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「不是我想去的，是空间风暴将我传送到了灵界。初到灵界时我只是大乘期的修为，而灵界的真仙、玄仙比比皆是。我用了数千年才在灵界站稳脚跟。」",
+        "choices": [
+          {
+            "id": "c2a",
+            "text": "😮 数千年！前辈的意志真是惊人。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2b",
+            "text": "🤔 灵界也有势力争斗吗？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 2 }
+          }
+        ]
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「灵界的天地法则更完善，功法也更深奥。在人界修炼到极致不过大乘期，但在灵界可以触摸到天道。另外灵界的妖族和魔族实力远超人界，三族之间的战争从未停歇。」",
+        "choices": [
+          {
+            "id": "c3a",
+            "text": "🙏 前辈能在三族之间周旋，实在了不起。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c3b",
+            "text": "💪 我也想去灵界看看！",
+            "nextNodeId": "n6",
+            "effects": { "affinityChange": 0 }
+          }
+        ]
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「还是老办法——苟。初到灵界，我在一座荒山上隐居了百年修炼。后来加入了人族的烟波宗，借着宗门的庇护慢慢提升修为。直到渡过真仙劫，才算真正在灵界立足。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:celestial_jade", "count": 1 }],
+          "expChange": 500
+        }
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「意志算不上，不过是不想死罢了。这块仙玉是灵界特产，蕴含的灵力远超人界灵石，对你目前的修炼大有裨益。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:celestial_jade", "count": 2 },
+            { "itemId": "cp-01:enlightenment_pill", "count": 1 }
+          ],
+          "expChange": 800
+        }
+      },
+      {
+        "id": "n6",
+        "type": "npc_talk",
+        "text": "「以你现在的修为去灵界就是送死。先把人界的事做好吧，等你渡过大乘期的天劫，自然有机会飞升灵界。这几块仙玉先拿着修炼用。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:celestial_jade", "count": 1 }],
+          "expChange": 400
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_hanli_life_philosophy",
+    "npcId": "cp-01:npc_han_li",
+    "name": "韩立的修仙观",
+    "priority": 50,
+    "once": true,
+    "condition": {
+      "minAffinity": 60,
+      "minRealm": 3,
+      "relationLevel": ["close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_hanli_luanxing_sea"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你知道吗？我原本只是一个山村里的穷小子。家里几亩薄田，吃了上顿没下顿。我拜入七玄门，最初的想法不过是想让父母和弟妹不挨饿。所谓修仙，不过是凡人挣扎求存的另一种方式。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🙏 凡人也可修仙，平凡中见不凡。这就是前辈的道？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 10 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 前辈觉得修仙到底图什么？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c3",
+            "text": "😞 前辈的家人后来……",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 3 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「……你说得比我好。我这一路走来，从没想过什么大道、什么天命，就是一步一步往前走。遇到危险就躲，躲不过就拼。你也一样——不需要天赋异禀，只需要一颗不肯放弃的心。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:nascent_soul_formation_pill", "count": 1 },
+            { "itemId": "cp-01:longevity_pill", "count": 1 }
+          ],
+          "expChange": 1000
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「图什么？最初图温饱，后来图活命，再后来……大概就是想看看修仙这条路的尽头到底是什么。长生不老？飞升仙界？也许到了那一天我才知道答案。不过走到这一步，我已经不后悔了。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:enlightenment_pill", "count": 1 }],
+          "expChange": 600
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「……修仙者寿元悠长，凡人却只有数十载。等我有能力回去的时候，他们早已不在了。这是修仙路上最残酷的代价——你会比你在意的所有人都活得久。」",
+        "choices": [
+          {
+            "id": "c4a",
+            "text": "🙏 前辈……",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c4b",
+            "text": "😢 这就是修仙者的宿命吗？",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 5 }
+          }
+        ]
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「别难过。正因为生命有限，才要珍惜当下。这枚延寿丹和元婴化形丹你收好——活久一点，多看看这个世界。这是我能给你的最好忠告。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:longevity_pill", "count": 1 },
+            { "itemId": "cp-01:nascent_soul_formation_pill", "count": 1 }
+          ],
+          "expChange": 800
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,254 @@
+[
+  {
+    "id": "cp-01:quest_huang_feng_initiation",
+    "name": "黄枫谷入门",
+    "description": "你初入黄枫谷，需要完成一系列入门试炼以证明自已的资质。",
+    "icon": "🍂",
+    "category": "main",
+    "condition": { "minRealm": 0 },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "前往黄枫谷",
+        "description": "动身前往黄枫谷报到。",
+        "objectives": [
+          { "type": "reach_region", "targetId": "cp-01:huang_feng_valley", "description": "前往黄枫谷" }
+        ],
+        "dialogueSnippet": "你背着简单的包袱，踏上前往黄枫谷的山路。"
+      },
+      {
+        "id": "step_2",
+        "name": "修炼基础",
+        "description": "按照长老的吩咐修炼 3 次，熟悉基本功法。",
+        "objectives": [
+          { "type": "cultivate_count", "count": 3, "description": "修炼 (0/3)" }
+        ],
+        "rewards": { "exp": 30 },
+        "dialogueSnippet": "雷万鹤长老说道：「先修炼几次，看看你的底子如何。」"
+      },
+      {
+        "id": "step_3",
+        "name": "采集灵草",
+        "description": "前往太南谷采集灵草，完成入门任务。",
+        "objectives": [
+          { "type": "collect_item", "targetId": "cp-01:herb_lingcao", "count": 2, "description": "采集灵草 (0/2)" }
+        ],
+        "dialogueSnippet": "雷万鹤长老吩咐道：「去太南谷采些灵草回来，顺便锻炼一下。」"
+      }
+    ],
+    "rewards": {
+      "exp": 80,
+      "gold": 30,
+      "items": [
+        { "itemId": "cp-01:hp_pill", "count": 5 },
+        { "itemId": "cp-01:mp_pill", "count": 3 }
+      ]
+    },
+    "discoverSource": { "type": "auto" },
+    "turnInNpcId": "cp-01:npc_lei_wanhe",
+    "repeatable": false
+  },
+  {
+    "id": "cp-01:quest_blood_forbidden",
+    "name": "血禁地试炼",
+    "description": "为了证明实力，前往血禁地斩杀妖兽，这是筑基前的必经试炼。",
+    "icon": "🩸",
+    "category": "main",
+    "condition": {
+      "minRealm": 1,
+      "requiredQuests": ["cp-01:quest_huang_feng_initiation"]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "前往血禁地",
+        "description": "血禁地位于天南偏远之处，前往那里。",
+        "objectives": [
+          { "type": "reach_region", "targetId": "cp-01:blood_forbidden", "description": "前往血禁地" }
+        ]
+      },
+      {
+        "id": "step_2",
+        "name": "斩杀嗜血蝠",
+        "description": "在血禁地中斩杀 5 只嗜血蝠。",
+        "objectives": [
+          { "type": "kill_monster", "targetId": "cp-01:bloodline_bat", "count": 5, "description": "斩杀嗜血蝠 (0/5)" }
+        ],
+        "rewards": { "exp": 60 }
+      },
+      {
+        "id": "step_3",
+        "name": "返回黄枫谷",
+        "description": "带着战利品返回黄枫谷复命。",
+        "objectives": [
+          { "type": "reach_region", "targetId": "cp-01:huang_feng_valley", "description": "返回黄枫谷" }
+        ],
+        "dialogueSnippet": "雷万鹤长老赞许道：「不错，你已有筑基的资格了。」"
+      }
+    ],
+    "rewards": {
+      "exp": 150,
+      "gold": 80,
+      "items": [
+        { "itemId": "cp-01:exp_pill", "count": 3 }
+      ]
+    },
+    "discoverSource": { "type": "npc", "npcId": "cp-01:npc_lei_wanhe" },
+    "turnInNpcId": "cp-01:npc_lei_wanhe",
+    "repeatable": false
+  },
+  {
+    "id": "cp-01:quest_luanxinghai_exploration",
+    "name": "乱星海探索",
+    "description": "为了寻找突破瓶颈的灵药，你决定前往乱星海一探究竟。",
+    "icon": "🌊",
+    "category": "main",
+    "condition": {
+      "minRealm": 2,
+      "requiredQuests": ["cp-01:quest_blood_forbidden"]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "前往魁星岛",
+        "description": "乘船前往乱星海中的魁星岛。",
+        "objectives": [
+          { "type": "reach_region", "targetId": "cp-01:kuixing_island", "description": "前往魁星岛" }
+        ],
+        "dialogueSnippet": "你登上前往乱星海的法舟，海风咸腥，前路未卜。"
+      },
+      {
+        "id": "step_2",
+        "name": "收集灵材",
+        "description": "在乱星海各岛屿间收集稀有灵材。",
+        "objectives": [
+          { "type": "collect_item", "targetId": "cp-01:sand_crystal", "count": 3, "description": "收集流沙晶 (0/3)" },
+          { "type": "collect_item", "targetId": "cp-01:monster_core", "count": 2, "description": "收集妖丹 (0/2)" }
+        ],
+        "rewards": { "exp": 100 }
+      },
+      {
+        "id": "step_3",
+        "name": "拜访石坚",
+        "description": "魁星岛上的散修商人石坚或许知道灵药的下落。",
+        "objectives": [
+          { "type": "talk_npc", "targetId": "cp-01:npc_shi_jian", "description": "与石坚交谈" }
+        ],
+        "dialogueSnippet": "石坚抚着下巴说道：「你要找的东西……或许翠浪岛上有线索。」"
+      }
+    ],
+    "rewards": {
+      "exp": 300,
+      "gold": 150,
+      "items": [
+        { "itemId": "cp-01:luanxing_chart", "count": 1 },
+        { "itemId": "cp-01:lianqi_pill", "count": 2 }
+      ]
+    },
+    "discoverSource": { "type": "npc", "npcId": "cp-01:npc_old_xuan" },
+    "turnInNpcId": "cp-01:npc_shi_jian",
+    "repeatable": false
+  },
+  {
+    "id": "cp-01:quest_devilfall_valley",
+    "name": "堕魔谷秘闻",
+    "description": "传说堕魔谷深处藏有远古修士的洞府，其中封印着惊天宝物。",
+    "icon": "💀",
+    "category": "main",
+    "condition": {
+      "minRealm": 3,
+      "requiredQuests": ["cp-01:quest_luanxinghai_exploration"]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "前往堕魔谷",
+        "description": "准备充足后，进入堕魔谷。",
+        "objectives": [
+          { "type": "reach_region", "targetId": "cp-01:devilfall_valley", "description": "前往堕魔谷" }
+        ],
+        "dialogueSnippet": "堕魔谷入口处阴气森森，深渊般的裂谷令人不寒而栗。"
+      },
+      {
+        "id": "step_2",
+        "name": "斩杀深渊妖兽",
+        "description": "堕魔谷中妖兽横行，需斩杀 3 只海蛟方能深入。",
+        "objectives": [
+          { "type": "kill_monster", "targetId": "cp-01:sea_serpent", "count": 3, "description": "斩杀海蛟 (0/3)" }
+        ],
+        "rewards": { "exp": 200 }
+      },
+      {
+        "id": "step_3",
+        "name": "探索洞府",
+        "description": "深入堕魔谷最深处，寻找传说中的远古洞府。",
+        "objectives": [
+          { "type": "explore_count", "count": 5, "description": "探索堕魔谷 (0/5)" }
+        ],
+        "dialogueSnippet": "你在谷底发现了一座被禁制封印的洞府大门，上面刻满了远古符文。"
+      }
+    ],
+    "rewards": {
+      "exp": 800,
+      "gold": 400,
+      "items": [
+        { "itemId": "cp-01:golden_core_pill", "count": 2 },
+        { "itemId": "cp-01:mystery_fragment", "count": 3 }
+      ]
+    },
+    "discoverSource": { "type": "npc", "npcId": "cp-01:npc_nangong_wan" },
+    "turnInNpcId": "cp-01:npc_nangong_wan",
+    "repeatable": false
+  },
+  {
+    "id": "cp-01:quest_spirit_realm_ascension",
+    "name": "灵界之旅",
+    "description": "修为达到化神期后，传送至灵界探索更广阔的天地。",
+    "icon": "✨",
+    "category": "main",
+    "condition": {
+      "minRealm": 5,
+      "requiredQuests": ["cp-01:quest_devilfall_valley"]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "前往天渊城",
+        "description": "抵达灵界后，先前往天渊城落脚。",
+        "objectives": [
+          { "type": "reach_region", "targetId": "cp-01:tianyuan_city", "description": "前往天渊城" }
+        ],
+        "dialogueSnippet": "灵界灵气浓郁十倍于下界，修炼之路将在这里更上一层楼。"
+      },
+      {
+        "id": "step_2",
+        "name": "修炼适应",
+        "description": "在灵界适应新的灵气环境，修炼 5 次。",
+        "objectives": [
+          { "type": "cultivate_count", "count": 5, "description": "修炼 (0/5)" }
+        ],
+        "rewards": { "exp": 500 }
+      },
+      {
+        "id": "step_3",
+        "name": "拜见紫灵仙子",
+        "description": "灵界名修紫灵仙子或许能指点你的修炼之路。",
+        "objectives": [
+          { "type": "talk_npc", "targetId": "cp-01:npc_fairy_violet", "description": "拜见紫灵仙子" }
+        ],
+        "dialogueSnippet": "紫灵仙子微微颔首：「能从下界飞升至此，你的资质已超乎常人。修炼之路漫漫，且行且珍惜。」"
+      }
+    ],
+    "rewards": {
+      "exp": 2000,
+      "gold": 1000,
+      "items": [
+        { "itemId": "cp-01:nascent_soul_pill", "count": 1 },
+        { "itemId": "cp-01:celestial_jade", "count": 5 }
+      ]
+    },
+    "discoverSource": { "type": "auto" },
+    "turnInNpcId": "cp-01:npc_fairy_violet",
+    "repeatable": false
+  }
+]

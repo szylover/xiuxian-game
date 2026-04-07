@@ -1,0 +1,279 @@
+[
+  {
+    "id": "cp-01:dlg_mocaihuan_first_meet",
+    "npcId": "cp-01:npc_mo_caihuan",
+    "name": "墨彩环初见",
+    "priority": 100,
+    "once": true,
+    "condition": {
+      "minAffinity": 0,
+      "relationLevel": ["stranger", "acquaintance"]
+    },
+    "startNodeId": "n1",
+    "tags": ["greeting", "lore"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「啊，你好。你也是来灵药谷采集灵草的吗？小心脚下的紫苔藓，踩上去会中毒的。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🙏 多谢提醒！在下对灵草不太了解，还请指教。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "🌿 你认识很多灵草？你是灵药谷的人？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "😎 中毒而已，我不怕。",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": -3 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「不客气。灵草的种类繁多，光是天南地区就有数百种。你要是感兴趣，这些灵草和青元草你可以拿去研究。初学者先从辨别药性开始，切忌贪多嚼不烂。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:herb_lingcao", "count": 8 },
+            { "itemId": "cp-01:qingyuan_herb", "count": 5 }
+          ]
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「嗯，我是墨彩环，在灵药谷已经待了好些年了。这片谷地虽然偏僻，但灵草种类丰富，是修习丹道的好去处。你看那边山壁上的青元草，就是黄枫谷的特产。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:qingyuan_herb", "count": 3 }],
+          "expChange": 50
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「……这种紫苔藓的毒可不是闹着玩的，中了之后三日内灵力无法运转。你若不信，可以试试。不过我可不负责解毒。」"
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_mocaihuan_herbs",
+    "npcId": "cp-01:npc_mo_caihuan",
+    "name": "墨彩环谈炼丹材料",
+    "priority": 90,
+    "once": true,
+    "condition": {
+      "minAffinity": 15,
+      "minRealm": 1,
+      "relationLevel": ["acquaintance", "friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_mocaihuan_first_meet"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你有在学炼丹吗？炼丹最重要的环节其实不是炼制过程，而是选材。同样的灵草，生长年限不同、产地不同，效果可以差出十倍。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "📖 怎么判断灵草的品质？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "🌿 有什么珍稀灵草推荐？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "💰 灵草值钱吗？哪种最贵？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": -1 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「主要看三点：根须的颜色——越深越好；叶片的光泽——灵气充盈的灵草叶片会微微发光；还有气味——好的灵草闻起来会有一股清甜的灵气。这些玄莲子和灵草你拿去对比看看。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:herb_xuanlian", "count": 5 },
+            { "itemId": "cp-01:herb_lingcao", "count": 10 }
+          ],
+          "expChange": 150
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「珍稀的……万灵果算是了，不过那东西万年才结一次果，可遇不可求。天火花也不错，长在地火脉上，采集极为危险。日常修炼的话，玄莲子足够用了，性价比最高。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:herb_xuanlian", "count": 3 },
+            { "itemId": "cp-01:herb_tianhuo", "count": 1 }
+          ],
+          "expChange": 120
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「值钱当然值钱，但灵草不是为了卖钱而存在的。它们是大地的恩赐，采药时取之有度、留根再生，这是灵药谷弟子的基本素养。」",
+        "effects": { "expChange": 50 }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_mocaihuan_valley_tales",
+    "npcId": "cp-01:npc_mo_caihuan",
+    "name": "灵药谷见闻",
+    "priority": 80,
+    "once": true,
+    "condition": {
+      "minAffinity": 25,
+      "minRealm": 1,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_mocaihuan_herbs"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「灵药谷虽然不大，但藏着很多秘密。谷底有一处千年药池，泡过的灵草品质能提升一个等级。不过那里有一条看守的蛟蛇，一般人靠近不了。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🐍 蛟蛇？你没有被攻击过吗？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 千年药池……可以偷偷去吗？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": -2 }
+          },
+          {
+            "id": "c3",
+            "text": "🌿 你在谷里待了多久了？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 5 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「被攻击过一次。不过那条蛟蛇通人性，我每次去附近都会带些灵果投喂，时间久了它就不攻击我了。跟灵兽相处，最重要的是耐心和尊重。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:spirit_water", "count": 3 }],
+          "expChange": 100
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「偷偷去？你想送命吗？那条蛟蛇的修为起码相当于筑基后期，你确定打得过？还是老老实实用正常灵草修炼吧。」"
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「快三十年了。原本只是来采药，后来发现这里安静得出奇，很适合修炼和研究丹方。外面的修仙界太乱了，门派争斗、魔道入侵……不如留在这里与灵草为伴。这些灵泉水是谷里的特产，你拿着吧。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:spirit_water", "count": 5 },
+            { "itemId": "cp-01:herb_lingcao", "count": 15 }
+          ],
+          "expChange": 150
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_mocaihuan_cultivation_world",
+    "npcId": "cp-01:npc_mo_caihuan",
+    "name": "墨彩环谈修仙界",
+    "priority": 70,
+    "once": true,
+    "condition": {
+      "minAffinity": 35,
+      "minRealm": 2,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_mocaihuan_valley_tales"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你最近修为进步不少。不过修为高了，面临的危险也更大了。天南修仙界表面平静，实际上暗流涌动——六派之间勾心斗角，魔道势力虎视眈眈。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🤔 你觉得六派和魔道谁会赢？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2",
+            "text": "🙏 修仙界真的很危险吗？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c3",
+            "text": "😑 只要修为够强，这些都不是问题。",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": -2 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「谁赢都好，苦的都是底层弟子。大能们的争斗，哪顾得上小修士的死活。我只希望灵药谷能远离那些纷争。这些丹材你收好，不管外面怎么乱，炼好丹才是正事。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:herb_xuanlian", "count": 8 },
+            { "itemId": "cp-01:herb_tianhuo", "count": 2 }
+          ],
+          "expChange": 200
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「危险是真的。韩立那样厉害的人，都说自己是靠运气活下来的。不过我觉得只要不主动招惹是非，安安静静修炼，哪怕活不到长生，也能过个安稳人生。这些东西你拿着，多保重。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:health_pill", "count": 3 },
+            { "itemId": "cp-01:spirit_water", "count": 5 }
+          ],
+          "expChange": 180
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「修为够强？元婴期的修士也会陨落，化神期的大能也会栽跟头。在这个世界里，没有绝对安全的修为。希望你不要用生命去验证这个道理。」",
+        "effects": { "expChange": 80 }
+      }
+    ]
+  }
+]

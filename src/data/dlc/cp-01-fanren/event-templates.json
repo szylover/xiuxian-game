@@ -1,0 +1,1281 @@
+[
+  {
+    "id": "cp-01:tpl_find_resource",
+    "category": "explore",
+    "tone": "good",
+    "weight": 28,
+    "namePattern": "发现{resource}",
+    "messagePattern": "{emoji} 在{location}发现一处{resource}，获得 {amount} 灵石！",
+    "effectsPattern": { "gold": "{amount}" },
+    "variableSlots": ["resource", "emoji", "location", "amount"],
+    "varConstraints": {
+      "resource": { "pool": "cp-01:pool_resources" },
+      "location": { "pool": "cp-01:pool_locations" },
+      "amount": { "pool": "cp-01:pool_amounts_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_encounter_elder",
+    "category": "explore",
+    "tone": "good",
+    "weight": 18,
+    "namePattern": "{elder}指点",
+    "messagePattern": "📖 偶遇{elder}，{teaching_action}，获得 {exp} 修为！",
+    "effectsPattern": { "exp": "{exp}" },
+    "variableSlots": ["elder", "teaching_action", "exp"],
+    "varConstraints": {
+      "elder": { "pool": "cp-01:pool_elders" },
+      "teaching_action": { "pool": "cp-01:pool_teaching_actions" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" }
+    },
+    "condition": { "minRealm": 1 }
+  },
+  {
+    "id": "cp-01:tpl_herb_discovery",
+    "category": "explore",
+    "tone": "good",
+    "weight": 24,
+    "namePattern": "采集{herb}",
+    "messagePattern": "🌿 在{location}发现{adj}{herb}，摘取后精神一振，恢复 {mp_gain} 灵力！",
+    "effectsPattern": { "mp": "{mp_gain}" },
+    "variableSlots": ["herb", "location", "adj", "mp_gain"],
+    "varConstraints": {
+      "herb": { "pool": "cp-01:pool_herbs" },
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "mp_gain": { "pool": "cp-01:pool_amounts_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_treasure_chest",
+    "category": "explore",
+    "tone": "good",
+    "weight": 8,
+    "namePattern": "储物袋！",
+    "messagePattern": "🎁 在{location}发现一个{adj}储物袋，打开后获得 {amount} 灵石！",
+    "effectsPattern": { "gold": "{amount}" },
+    "variableSlots": ["location", "adj", "amount"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "amount": { "pool": "cp-01:pool_amounts_medium" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_meditation_spot",
+    "category": "explore",
+    "tone": "good",
+    "weight": 18,
+    "namePattern": "灵气浓郁之地",
+    "messagePattern": "🧘 在{location}找到一处{adj}修炼宝地，静坐片刻，获得 {exp} 修为！",
+    "effectsPattern": { "exp": "{exp}" },
+    "variableSlots": ["location", "adj", "exp"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_spirit_spring",
+    "category": "explore",
+    "tone": "good",
+    "weight": 12,
+    "namePattern": "灵泉",
+    "messagePattern": "💧 在{location}发现一处{adj}灵泉，饮用后恢复 {hp_gain} 体力和 {mp_gain} 灵力！",
+    "effectsPattern": { "hp": "{hp_gain}", "mp": "{mp_gain}" },
+    "variableSlots": ["location", "adj", "hp_gain", "mp_gain"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "hp_gain": { "pool": "cp-01:pool_amounts_small" },
+      "mp_gain": { "pool": "cp-01:pool_amounts_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_fellow_cultivator",
+    "category": "explore",
+    "tone": "good",
+    "weight": 14,
+    "namePattern": "切磋修炼",
+    "messagePattern": "🤝 在{location}遇到{fellow}，{exchange_action}，获得 {exp} 修为和 {gold} 灵石！",
+    "effectsPattern": { "exp": "{exp}", "gold": "{gold}" },
+    "variableSlots": ["location", "fellow", "exchange_action", "exp", "gold"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "fellow": { "pool": "cp-01:pool_fellows" },
+      "exchange_action": { "pool": "cp-01:pool_exchange_actions" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" },
+      "gold": { "pool": "cp-01:pool_amounts_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_stamina_restore",
+    "category": "explore",
+    "tone": "good",
+    "weight": 15,
+    "namePattern": "灵果充饥",
+    "messagePattern": "🍇 在{location}发现{adj}灵果，食用后恢复 {stamina_gain} 精力！",
+    "effectsPattern": { "stamina": "{stamina_gain}" },
+    "variableSlots": ["location", "adj", "stamina_gain"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "stamina_gain": { "pool": "cp-01:pool_stamina_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_lucky_find",
+    "category": "explore",
+    "tone": "good",
+    "weight": 5,
+    "namePattern": "福缘降临",
+    "messagePattern": "🍀 在{location}{lucky_event}，意外获得 {gold} 灵石！",
+    "effectsPattern": { "gold": "{gold}" },
+    "variableSlots": ["location", "lucky_event", "gold"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "lucky_event": { "pool": "cp-01:pool_lucky_events" },
+      "gold": { "pool": "cp-01:pool_amounts_medium" }
+    },
+    "condition": { "minLuck": 60 }
+  },
+  {
+    "id": "cp-01:tpl_sect_discovery",
+    "category": "explore",
+    "tone": "good",
+    "weight": 10,
+    "namePattern": "{sect}秘传",
+    "messagePattern": "📜 在{location}发现{sect}弟子遗落的{adj}玉简，参悟后获得 {exp} 修为！",
+    "effectsPattern": { "exp": "{exp}" },
+    "variableSlots": ["location", "sect", "adj", "exp"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "sect": { "pool": "cp-01:pool_sect_names" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_beast_material",
+    "category": "explore",
+    "tone": "good",
+    "weight": 12,
+    "namePattern": "拾取{material}",
+    "messagePattern": "🦴 在{location}发现{adj}{material}，可作炼器材料，价值 {amount} 灵石！",
+    "effectsPattern": { "gold": "{amount}" },
+    "variableSlots": ["location", "adj", "material", "amount"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "material": { "pool": "cp-01:pool_beast_materials" },
+      "amount": { "pool": "cp-01:pool_amounts_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_blessing_pool",
+    "category": "explore",
+    "tone": "good",
+    "weight": 8,
+    "namePattern": "{blessing}",
+    "messagePattern": "✨ 在{location}感受到一股祥和之气，{blessing}，恢复 {hp_gain} 体力！",
+    "effectsPattern": { "hp": "{hp_gain}" },
+    "variableSlots": ["location", "blessing", "hp_gain"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "blessing": { "pool": "cp-01:pool_blessing_effects" },
+      "hp_gain": { "pool": "cp-01:pool_amounts_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_artifact_resonance",
+    "category": "explore",
+    "tone": "good",
+    "weight": 6,
+    "namePattern": "法宝共鸣",
+    "messagePattern": "🔮 在{location}，身上的法宝突然与{artifact}残影产生共鸣，获得 {exp} 修为！",
+    "effectsPattern": { "exp": "{exp}" },
+    "variableSlots": ["location", "artifact", "exp"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "artifact": { "pool": "cp-01:pool_artifacts" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" }
+    },
+    "condition": { "minRealm": 2 }
+  },
+  {
+    "id": "cp-01:tpl_cultivation_method",
+    "category": "explore",
+    "tone": "good",
+    "weight": 10,
+    "namePattern": "感悟修法",
+    "messagePattern": "💡 在{location}尝试{method}，灵光一闪，获得 {exp} 修为！",
+    "effectsPattern": { "exp": "{exp}" },
+    "variableSlots": ["location", "method", "exp"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "method": { "pool": "cp-01:pool_cultivation_methods" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_island_treasure",
+    "category": "explore",
+    "tone": "good",
+    "weight": 7,
+    "namePattern": "岛屿宝藏",
+    "messagePattern": "🏝️ 在{location}的海滩上发现{adj}储物袋，内有 {amount} 灵石和{herb}！",
+    "effectsPattern": { "gold": "{amount}", "mood": "5" },
+    "variableSlots": ["location", "adj", "amount", "herb"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "amount": { "pool": "cp-01:pool_amounts_medium" },
+      "herb": { "pool": "cp-01:pool_herbs" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_ambush",
+    "category": "explore",
+    "tone": "bad",
+    "weight": 16,
+    "namePattern": "{enemy}伏击",
+    "messagePattern": "⚔️ {enemy}从{hiding_spot}中窜出偷袭，损失 {hp_loss} 体力！",
+    "effectsPattern": { "hp": "-{hp_loss}" },
+    "variableSlots": ["enemy", "hiding_spot", "hp_loss"],
+    "varConstraints": {
+      "enemy": { "pool": "cp-01:pool_enemies" },
+      "hiding_spot": { "pool": "cp-01:pool_hiding_spots" },
+      "hp_loss": { "pool": "cp-01:pool_damage_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_trap",
+    "category": "explore",
+    "tone": "bad",
+    "weight": 12,
+    "namePattern": "误入{trap}",
+    "messagePattern": "💥 在{location}不慎触发{trap}，受到冲击，损失 {hp_loss} 体力！",
+    "effectsPattern": { "hp": "-{hp_loss}" },
+    "variableSlots": ["trap", "location", "hp_loss"],
+    "varConstraints": {
+      "trap": { "pool": "cp-01:pool_traps" },
+      "location": { "pool": "cp-01:pool_locations" },
+      "hp_loss": { "pool": "cp-01:pool_damage_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_thief",
+    "category": "explore",
+    "tone": "bad",
+    "weight": 10,
+    "namePattern": "遭遇劫修",
+    "messagePattern": "🦹 在{location}遭遇{enemy}，被{steal_action}，损失 {gold} 灵石！",
+    "effectsPattern": { "gold": "-{gold}" },
+    "variableSlots": ["location", "enemy", "steal_action", "gold"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "enemy": { "pool": "cp-01:pool_enemies" },
+      "steal_action": { "pool": "cp-01:pool_steal_actions" },
+      "gold": { "pool": "cp-01:pool_amounts_small" }
+    },
+    "condition": { "minGold": 10 }
+  },
+  {
+    "id": "cp-01:tpl_lost_path",
+    "category": "explore",
+    "tone": "bad",
+    "weight": 16,
+    "namePattern": "迷路",
+    "messagePattern": "😵 在{location}迷失方向，{lost_consequence}，消耗 {stamina_loss} 精力。",
+    "effectsPattern": { "stamina": "-{stamina_loss}" },
+    "variableSlots": ["location", "lost_consequence", "stamina_loss"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "lost_consequence": { "pool": "cp-01:pool_lost_consequences" },
+      "stamina_loss": { "pool": "cp-01:pool_stamina_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_poison_fog",
+    "category": "explore",
+    "tone": "bad",
+    "weight": 10,
+    "namePattern": "瘴气弥漫",
+    "messagePattern": "☠️ 在{location}误入{adj}瘴气区域，{poison_effect}，损失 {hp_loss} 体力和 {health_loss} 气血！",
+    "effectsPattern": { "hp": "-{hp_loss}", "health": "-{health_loss}" },
+    "variableSlots": ["location", "adj", "poison_effect", "hp_loss", "health_loss"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "poison_effect": { "pool": "cp-01:pool_poison_effects" },
+      "hp_loss": { "pool": "cp-01:pool_damage_small" },
+      "health_loss": { "pool": "cp-01:pool_health_loss" }
+    },
+    "condition": { "minRealm": 1 }
+  },
+  {
+    "id": "cp-01:tpl_curse_effect",
+    "category": "explore",
+    "tone": "bad",
+    "weight": 6,
+    "namePattern": "诅咒侵袭",
+    "messagePattern": "💀 在{location}触碰到上古诅咒残留，{curse}，损失 {hp_loss} 体力！",
+    "effectsPattern": { "hp": "-{hp_loss}", "mood": "-5" },
+    "variableSlots": ["location", "curse", "hp_loss"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "curse": { "pool": "cp-01:pool_curse_effects" },
+      "hp_loss": { "pool": "cp-01:pool_damage_medium" }
+    },
+    "condition": { "minRealm": 2 }
+  },
+  {
+    "id": "cp-01:tpl_qi_deviation",
+    "category": "explore",
+    "tone": "bad",
+    "weight": 8,
+    "namePattern": "走火入魔",
+    "messagePattern": "🔥 在{location}修炼时灵力暴走，{curse}，损失 {hp_loss} 体力和 {mp_loss} 灵力！",
+    "effectsPattern": { "hp": "-{hp_loss}", "mp": "-{mp_loss}" },
+    "variableSlots": ["location", "curse", "hp_loss", "mp_loss"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "curse": { "pool": "cp-01:pool_curse_effects" },
+      "hp_loss": { "pool": "cp-01:pool_damage_small" },
+      "mp_loss": { "pool": "cp-01:pool_damage_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_beast_attack",
+    "category": "explore",
+    "tone": "bad",
+    "weight": 14,
+    "namePattern": "{enemy}来袭",
+    "messagePattern": "🐾 {enemy}突然从{hiding_spot}窜出，激烈搏斗后负伤，损失 {hp_loss} 体力和 {health_loss} 气血！",
+    "effectsPattern": { "hp": "-{hp_loss}", "health": "-{health_loss}" },
+    "variableSlots": ["enemy", "hiding_spot", "hp_loss", "health_loss"],
+    "varConstraints": {
+      "enemy": { "pool": "cp-01:pool_enemies" },
+      "hiding_spot": { "pool": "cp-01:pool_hiding_spots" },
+      "hp_loss": { "pool": "cp-01:pool_damage_small" },
+      "health_loss": { "pool": "cp-01:pool_health_loss" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_storm_damage",
+    "category": "explore",
+    "tone": "bad",
+    "weight": 8,
+    "namePattern": "暴风袭击",
+    "messagePattern": "🌪️ 在{location}遭遇{weather}，{weather_effect}，损失 {hp_loss} 体力！",
+    "effectsPattern": { "hp": "-{hp_loss}", "mood": "-3" },
+    "variableSlots": ["location", "weather", "weather_effect", "hp_loss"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "weather": { "pool": "cp-01:pool_bad_weather" },
+      "weather_effect": { "pool": "cp-01:pool_bad_weather_effects" },
+      "hp_loss": { "pool": "cp-01:pool_damage_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_sandstorm",
+    "category": "explore",
+    "tone": "bad",
+    "weight": 8,
+    "namePattern": "沙暴来袭",
+    "messagePattern": "🏜️ 在{location}遭遇狂沙蔽日，{lost_consequence}，消耗 {stamina_loss} 精力和 {hp_loss} 体力！",
+    "effectsPattern": { "stamina": "-{stamina_loss}", "hp": "-{hp_loss}" },
+    "variableSlots": ["location", "lost_consequence", "stamina_loss", "hp_loss"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "lost_consequence": { "pool": "cp-01:pool_lost_consequences" },
+      "stamina_loss": { "pool": "cp-01:pool_stamina_amounts" },
+      "hp_loss": { "pool": "cp-01:pool_damage_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_spirit_disruption",
+    "category": "explore",
+    "tone": "bad",
+    "weight": 7,
+    "namePattern": "灵力紊乱",
+    "messagePattern": "⚠️ 在{location}附近灵力场异常波动，体内灵力受到干扰，损失 {mp_loss} 灵力！",
+    "effectsPattern": { "mp": "-{mp_loss}" },
+    "variableSlots": ["location", "mp_loss"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "mp_loss": { "pool": "cp-01:pool_damage_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_robbed_by_demon",
+    "category": "explore",
+    "tone": "bad",
+    "weight": 6,
+    "namePattern": "魔修掠夺",
+    "messagePattern": "😈 在{location}遭遇{enemy}，被强行索取修炼资源，损失 {gold} 灵石！",
+    "effectsPattern": { "gold": "-{gold}", "mood": "-8" },
+    "variableSlots": ["location", "enemy", "gold"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "enemy": { "pool": "cp-01:pool_enemies" },
+      "gold": { "pool": "cp-01:pool_amounts_small" }
+    },
+    "condition": { "minGold": 15, "minRealm": 1 }
+  },
+  {
+    "id": "cp-01:tpl_scenic_view",
+    "category": "explore",
+    "tone": "neutral",
+    "weight": 18,
+    "namePattern": "{scenery}",
+    "messagePattern": "🏔️ 在{location}驻足欣赏{scenery}，心旷神怡，心情提升 {mood_gain}！",
+    "effectsPattern": { "mood": "{mood_gain}" },
+    "variableSlots": ["location", "scenery", "mood_gain"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "scenery": { "pool": "cp-01:pool_scenery" },
+      "mood_gain": { "pool": "cp-01:pool_mood_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_wanderer_trade",
+    "category": "explore",
+    "tone": "neutral",
+    "weight": 12,
+    "namePattern": "游商交易",
+    "messagePattern": "🏪 {elder}路过，提出以物换物，你用 {cost} 灵石换得一件{adj}宝物，获得 {exp} 修为！",
+    "effectsPattern": { "gold": "-{cost}", "exp": "{exp}" },
+    "variableSlots": ["elder", "cost", "adj", "exp"],
+    "varConstraints": {
+      "elder": { "pool": "cp-01:pool_elders" },
+      "cost": { "pool": "cp-01:pool_amounts_small" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" }
+    },
+    "condition": { "minGold": 20 }
+  },
+  {
+    "id": "cp-01:tpl_ruins_explore",
+    "category": "explore",
+    "tone": "neutral",
+    "weight": 10,
+    "namePattern": "遗迹探索",
+    "messagePattern": "🔍 在{location}发现{adj}{ruin}，虽无宝物但有所感悟，获得 {exp} 修为。",
+    "effectsPattern": { "exp": "{exp}" },
+    "variableSlots": ["location", "adj", "ruin", "exp"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "ruin": { "pool": "cp-01:pool_ruins" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_weather_observation",
+    "category": "explore",
+    "tone": "neutral",
+    "weight": 10,
+    "namePattern": "天象异变",
+    "messagePattern": "🌙 在{location}观察到{weather}，{weather_effect}。",
+    "effectsPattern": { "mood": "{mood_gain}" },
+    "variableSlots": ["location", "weather", "weather_effect", "mood_gain"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "weather": { "pool": "cp-01:pool_good_weather" },
+      "weather_effect": { "pool": "cp-01:pool_weather_effects" },
+      "mood_gain": { "pool": "cp-01:pool_mood_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_stranger_meeting",
+    "category": "explore",
+    "tone": "neutral",
+    "weight": 14,
+    "namePattern": "偶遇旅人",
+    "messagePattern": "🚶 在{location}偶遇{fellow}，{exchange_action}，心情 +{mood_gain}。",
+    "effectsPattern": { "mood": "{mood_gain}" },
+    "variableSlots": ["location", "fellow", "exchange_action", "mood_gain"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "fellow": { "pool": "cp-01:pool_fellows" },
+      "exchange_action": { "pool": "cp-01:pool_exchange_actions" },
+      "mood_gain": { "pool": "cp-01:pool_mood_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_sect_rumor",
+    "category": "explore",
+    "tone": "neutral",
+    "weight": 8,
+    "namePattern": "{sect}传闻",
+    "messagePattern": "📖 在{location}听闻{sect}的{adj}传闻，对修仙界多了几分了解。",
+    "effectsPattern": { "mood": "3" },
+    "variableSlots": ["location", "sect", "adj"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "sect": { "pool": "cp-01:pool_sect_names" },
+      "adj": { "pool": "cp-01:pool_adjectives" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_beast_tracks",
+    "category": "explore",
+    "tone": "neutral",
+    "weight": 12,
+    "namePattern": "妖兽踪迹",
+    "messagePattern": "🐾 在{location}发现{enemy}的踪迹，提高了警惕但未遭遇危险。",
+    "effectsPattern": {},
+    "variableSlots": ["location", "enemy"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "enemy": { "pool": "cp-01:pool_enemies" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_map_fragment",
+    "category": "explore",
+    "tone": "neutral",
+    "weight": 6,
+    "namePattern": "地图碎片",
+    "messagePattern": "🗺️ 在{location}拾到一片{adj}地图碎片，上面标注着{adv_location}的方位。",
+    "effectsPattern": { "exp": "5" },
+    "variableSlots": ["location", "adj", "adv_location"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "adv_location": { "pool": "cp-01:pool_adventure_locations" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_realm_insight",
+    "category": "explore",
+    "tone": "neutral",
+    "weight": 8,
+    "namePattern": "境界感悟",
+    "messagePattern": "🧘 在{location}冥想时，隐约感受到{realm_flavor}的气息，若有所悟。",
+    "effectsPattern": { "exp": "{exp}" },
+    "variableSlots": ["location", "realm_flavor", "exp"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "realm_flavor": { "pool": "cp-01:pool_realms_flavor" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_ancient_ruin",
+    "category": "adventure",
+    "tone": "good",
+    "weight": 8,
+    "namePattern": "探索{ruin}",
+    "messagePattern": "🏛️ 在{adv_location}发现{adj}{ruin}！深入探索后，获得 {gold} 灵石和 {exp} 修为！",
+    "effectsPattern": { "gold": "{gold}", "exp": "{exp}" },
+    "variableSlots": ["ruin", "adv_location", "adj", "gold", "exp"],
+    "varConstraints": {
+      "ruin": { "pool": "cp-01:pool_ruins" },
+      "adv_location": { "pool": "cp-01:pool_adventure_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "gold": { "pool": "cp-01:pool_amounts_medium" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" }
+    },
+    "condition": { "minRealm": 1 }
+  },
+  {
+    "id": "cp-01:tpl_cave_inheritance",
+    "category": "adventure",
+    "tone": "good",
+    "weight": 5,
+    "namePattern": "洞府传承",
+    "messagePattern": "🏛️ 在{adv_location}发现{adj}古修洞府，洞中{artifact}残影指引修炼，获得 {exp} 修为！",
+    "effectsPattern": { "exp": "{exp}" },
+    "variableSlots": ["adv_location", "adj", "artifact", "exp"],
+    "varConstraints": {
+      "adv_location": { "pool": "cp-01:pool_adventure_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "artifact": { "pool": "cp-01:pool_artifacts" },
+      "exp": { "pool": "cp-01:pool_exp_large" }
+    },
+    "condition": { "minRealm": 2 }
+  },
+  {
+    "id": "cp-01:tpl_ancient_scripture",
+    "category": "adventure",
+    "tone": "good",
+    "weight": 6,
+    "namePattern": "古卷残篇",
+    "messagePattern": "📜 在{adv_location}发现{adj}古卷残篇，研读后领悟{insight_result}，获得 {exp} 修为！",
+    "effectsPattern": { "exp": "{exp}" },
+    "variableSlots": ["adv_location", "adj", "insight_result", "exp"],
+    "varConstraints": {
+      "adv_location": { "pool": "cp-01:pool_adventure_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "insight_result": { "pool": "cp-01:pool_insight_results" },
+      "exp": { "pool": "cp-01:pool_exp_large" }
+    },
+    "condition": { "minRealm": 2 }
+  },
+  {
+    "id": "cp-01:tpl_fairy_remnant",
+    "category": "adventure",
+    "tone": "good",
+    "weight": 3,
+    "namePattern": "仙人残念",
+    "messagePattern": "✨ 在{adv_location}偶遇{elder}的残念，{teaching_action}，获得 {exp} 修为和 {gold} 灵石！",
+    "effectsPattern": { "exp": "{exp}", "gold": "{gold}" },
+    "variableSlots": ["adv_location", "elder", "teaching_action", "exp", "gold"],
+    "varConstraints": {
+      "adv_location": { "pool": "cp-01:pool_adventure_locations" },
+      "elder": { "pool": "cp-01:pool_elders" },
+      "teaching_action": { "pool": "cp-01:pool_teaching_actions" },
+      "exp": { "pool": "cp-01:pool_exp_large" },
+      "gold": { "pool": "cp-01:pool_amounts_medium" }
+    },
+    "condition": { "minRealm": 3 }
+  },
+  {
+    "id": "cp-01:tpl_treasure_trove",
+    "category": "adventure",
+    "tone": "good",
+    "weight": 4,
+    "namePattern": "宝藏发现",
+    "messagePattern": "💎 在{adv_location}破开{adj}禁制，发现前人留下的宝藏！获得 {gold} 灵石！",
+    "effectsPattern": { "gold": "{gold}", "mood": "10" },
+    "variableSlots": ["adv_location", "adj", "gold"],
+    "varConstraints": {
+      "adv_location": { "pool": "cp-01:pool_adventure_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "gold": { "pool": "cp-01:pool_amounts_large" }
+    },
+    "condition": { "minRealm": 1 }
+  },
+  {
+    "id": "cp-01:tpl_spirit_beast_bond",
+    "category": "adventure",
+    "tone": "good",
+    "weight": 4,
+    "namePattern": "灵兽结缘",
+    "messagePattern": "🐾 在{adv_location}遇到一只{adj}灵兽，与之结缘，心情大好！获得 {exp} 修为，心情 +{mood_gain}！",
+    "effectsPattern": { "exp": "{exp}", "mood": "{mood_gain}" },
+    "variableSlots": ["adv_location", "adj", "exp", "mood_gain"],
+    "varConstraints": {
+      "adv_location": { "pool": "cp-01:pool_adventure_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" },
+      "mood_gain": { "pool": "cp-01:pool_mood_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_secret_realm_entry",
+    "category": "adventure",
+    "tone": "good",
+    "weight": 3,
+    "namePattern": "秘境入口",
+    "messagePattern": "🌀 在{adv_location}发现一处{adj}秘境入口，短暂探索后获得 {exp} 修为和 {gold} 灵石！",
+    "effectsPattern": { "exp": "{exp}", "gold": "{gold}" },
+    "variableSlots": ["adv_location", "adj", "exp", "gold"],
+    "varConstraints": {
+      "adv_location": { "pool": "cp-01:pool_adventure_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "exp": { "pool": "cp-01:pool_exp_large" },
+      "gold": { "pool": "cp-01:pool_amounts_medium" }
+    },
+    "condition": { "minRealm": 2 }
+  },
+  {
+    "id": "cp-01:tpl_artifact_fragment",
+    "category": "adventure",
+    "tone": "good",
+    "weight": 4,
+    "namePattern": "{artifact}残片",
+    "messagePattern": "🔮 在{adv_location}发现{artifact}的残片，蕴含{adj}灵力，获得 {exp} 修为！",
+    "effectsPattern": { "exp": "{exp}", "gold": "{gold}" },
+    "variableSlots": ["adv_location", "artifact", "adj", "exp", "gold"],
+    "varConstraints": {
+      "adv_location": { "pool": "cp-01:pool_adventure_locations" },
+      "artifact": { "pool": "cp-01:pool_artifacts" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" },
+      "gold": { "pool": "cp-01:pool_amounts_small" }
+    },
+    "condition": { "minRealm": 1 }
+  },
+  {
+    "id": "cp-01:tpl_demon_illusion",
+    "category": "adventure",
+    "tone": "bad",
+    "weight": 5,
+    "namePattern": "心魔幻境",
+    "messagePattern": "😰 在{adv_location}陷入{adj}心魔幻境，{curse}，损失 {hp_loss} 体力和 {mood_loss} 心情！",
+    "effectsPattern": { "hp": "-{hp_loss}", "mood": "-{mood_loss}" },
+    "variableSlots": ["adv_location", "adj", "curse", "hp_loss", "mood_loss"],
+    "varConstraints": {
+      "adv_location": { "pool": "cp-01:pool_adventure_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "curse": { "pool": "cp-01:pool_curse_effects" },
+      "hp_loss": { "pool": "cp-01:pool_damage_medium" },
+      "mood_loss": { "pool": "cp-01:pool_mood_amounts" }
+    },
+    "condition": { "minRealm": 2 }
+  },
+  {
+    "id": "cp-01:tpl_forbidden_seal",
+    "category": "adventure",
+    "tone": "bad",
+    "weight": 4,
+    "namePattern": "上古禁制反噬",
+    "messagePattern": "💥 在{adv_location}触碰{adj}上古禁制，灵力反噬，损失 {hp_loss} 体力和 {health_loss} 气血！",
+    "effectsPattern": { "hp": "-{hp_loss}", "health": "-{health_loss}" },
+    "variableSlots": ["adv_location", "adj", "hp_loss", "health_loss"],
+    "varConstraints": {
+      "adv_location": { "pool": "cp-01:pool_adventure_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "hp_loss": { "pool": "cp-01:pool_damage_medium" },
+      "health_loss": { "pool": "cp-01:pool_health_loss" }
+    },
+    "condition": { "minRealm": 1 }
+  },
+  {
+    "id": "cp-01:tpl_trapped_formation",
+    "category": "adventure",
+    "tone": "bad",
+    "weight": 4,
+    "namePattern": "困阵",
+    "messagePattern": "🔒 在{adv_location}被{adj}阵法困住，耗费大量精力方才脱困，损失 {stamina_loss} 精力！",
+    "effectsPattern": { "stamina": "-{stamina_loss}", "mood": "-5" },
+    "variableSlots": ["adv_location", "adj", "stamina_loss"],
+    "varConstraints": {
+      "adv_location": { "pool": "cp-01:pool_adventure_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "stamina_loss": { "pool": "cp-01:pool_stamina_amounts" }
+    },
+    "condition": { "minRealm": 1 }
+  },
+  {
+    "id": "cp-01:tpl_demon_cultivator_attack",
+    "category": "adventure",
+    "tone": "bad",
+    "weight": 3,
+    "namePattern": "魔修偷袭",
+    "messagePattern": "👿 在{adv_location}遭到{enemy}偷袭，{poison_effect}，损失 {hp_loss} 体力！",
+    "effectsPattern": { "hp": "-{hp_loss}", "mood": "-10" },
+    "variableSlots": ["adv_location", "enemy", "poison_effect", "hp_loss"],
+    "varConstraints": {
+      "adv_location": { "pool": "cp-01:pool_adventure_locations" },
+      "enemy": { "pool": "cp-01:pool_enemies" },
+      "poison_effect": { "pool": "cp-01:pool_poison_effects" },
+      "hp_loss": { "pool": "cp-01:pool_damage_medium" }
+    },
+    "condition": { "minRealm": 2 }
+  },
+  {
+    "id": "cp-01:tpl_void_rift",
+    "category": "adventure",
+    "tone": "bad",
+    "weight": 2,
+    "namePattern": "虚空裂缝",
+    "messagePattern": "🌀 在{adv_location}遭遇虚空裂缝，时空乱流卷入，{curse}，损失 {hp_loss} 体力！",
+    "effectsPattern": { "hp": "-{hp_loss}", "stamina": "-10" },
+    "variableSlots": ["adv_location", "curse", "hp_loss"],
+    "varConstraints": {
+      "adv_location": { "pool": "cp-01:pool_adventure_locations" },
+      "curse": { "pool": "cp-01:pool_curse_effects" },
+      "hp_loss": { "pool": "cp-01:pool_damage_medium" }
+    },
+    "condition": { "minRealm": 4 }
+  },
+  {
+    "id": "cp-01:tpl_weather_blessing",
+    "category": "daily",
+    "tone": "good",
+    "weight": 16,
+    "namePattern": "{weather}降临",
+    "messagePattern": "🌤️ {weather}，天地灵气充沛，{weather_effect}，心情舒畅！",
+    "effectsPattern": { "mood": "{mood_gain}" },
+    "variableSlots": ["weather", "weather_effect", "mood_gain"],
+    "varConstraints": {
+      "weather": { "pool": "cp-01:pool_good_weather" },
+      "weather_effect": { "pool": "cp-01:pool_weather_effects" },
+      "mood_gain": { "pool": "cp-01:pool_mood_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_bad_weather",
+    "category": "daily",
+    "tone": "bad",
+    "weight": 14,
+    "namePattern": "{weather}侵袭",
+    "messagePattern": "🌧️ {weather}突如其来，{weather_effect}，心情低落。",
+    "effectsPattern": { "mood": "-{mood_loss}" },
+    "variableSlots": ["weather", "weather_effect", "mood_loss"],
+    "varConstraints": {
+      "weather": { "pool": "cp-01:pool_bad_weather" },
+      "weather_effect": { "pool": "cp-01:pool_bad_weather_effects" },
+      "mood_loss": { "pool": "cp-01:pool_mood_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_insight",
+    "category": "daily",
+    "tone": "good",
+    "weight": 15,
+    "namePattern": "修炼顿悟",
+    "messagePattern": "💡 {insight_trigger}，{insight_result}，获得 {exp} 修为！",
+    "effectsPattern": { "exp": "{exp}" },
+    "variableSlots": ["insight_trigger", "insight_result", "exp"],
+    "varConstraints": {
+      "insight_trigger": { "pool": "cp-01:pool_insight_triggers" },
+      "insight_result": { "pool": "cp-01:pool_insight_results" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_dream_revelation",
+    "category": "daily",
+    "tone": "good",
+    "weight": 10,
+    "namePattern": "梦中启示",
+    "messagePattern": "🌙 梦中{dream_scene}，{dream_result}，获得 {exp} 修为，心情提升 {mood_gain}！",
+    "effectsPattern": { "exp": "{exp}", "mood": "{mood_gain}" },
+    "variableSlots": ["dream_scene", "dream_result", "exp", "mood_gain"],
+    "varConstraints": {
+      "dream_scene": { "pool": "cp-01:pool_dream_scenes" },
+      "dream_result": { "pool": "cp-01:pool_dream_results" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" },
+      "mood_gain": { "pool": "cp-01:pool_mood_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_health_recover",
+    "category": "daily",
+    "tone": "good",
+    "weight": 12,
+    "namePattern": "调息养生",
+    "messagePattern": "💚 {health_action}，气血恢复 {health_gain}！",
+    "effectsPattern": { "health": "{health_gain}" },
+    "variableSlots": ["health_action", "health_gain"],
+    "varConstraints": {
+      "health_action": { "pool": "cp-01:pool_health_actions" },
+      "health_gain": { "pool": "cp-01:pool_health_gain" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_night_terror",
+    "category": "daily",
+    "tone": "bad",
+    "weight": 8,
+    "namePattern": "噩梦缠身",
+    "messagePattern": "😰 夜间{nightmare_scene}，{nightmare_effect}，心情下降 {mood_loss}。",
+    "effectsPattern": { "mood": "-{mood_loss}" },
+    "variableSlots": ["nightmare_scene", "nightmare_effect", "mood_loss"],
+    "varConstraints": {
+      "nightmare_scene": { "pool": "cp-01:pool_nightmare_scenes" },
+      "nightmare_effect": { "pool": "cp-01:pool_nightmare_effects" },
+      "mood_loss": { "pool": "cp-01:pool_mood_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_cultivation_practice",
+    "category": "daily",
+    "tone": "good",
+    "weight": 14,
+    "namePattern": "功法参悟",
+    "messagePattern": "📖 {method}，对功法有了更深领悟，获得 {exp} 修为！",
+    "effectsPattern": { "exp": "{exp}" },
+    "variableSlots": ["method", "exp"],
+    "varConstraints": {
+      "method": { "pool": "cp-01:pool_cultivation_methods" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_tea_meditation",
+    "category": "daily",
+    "tone": "good",
+    "weight": 10,
+    "namePattern": "品茶论道",
+    "messagePattern": "🍵 泡了一壶{adj}灵茶品茗，{insight_result}，心情 +{mood_gain}！",
+    "effectsPattern": { "mood": "{mood_gain}", "health": "2" },
+    "variableSlots": ["adj", "insight_result", "mood_gain"],
+    "varConstraints": {
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "insight_result": { "pool": "cp-01:pool_insight_results" },
+      "mood_gain": { "pool": "cp-01:pool_mood_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_stargazing",
+    "category": "daily",
+    "tone": "good",
+    "weight": 8,
+    "namePattern": "夜观星象",
+    "messagePattern": "🌟 夜间观察到{weather}，{insight_result}，获得 {exp} 修为！",
+    "effectsPattern": { "exp": "{exp}", "mood": "3" },
+    "variableSlots": ["weather", "insight_result", "exp"],
+    "varConstraints": {
+      "weather": { "pool": "cp-01:pool_good_weather" },
+      "insight_result": { "pool": "cp-01:pool_insight_results" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_sect_event",
+    "category": "daily",
+    "tone": "neutral",
+    "weight": 10,
+    "namePattern": "{sect}消息",
+    "messagePattern": "📮 收到{sect}传来的消息，{exchange_action}，对修仙界动态有了新了解。",
+    "effectsPattern": { "mood": "3" },
+    "variableSlots": ["sect", "exchange_action"],
+    "varConstraints": {
+      "sect": { "pool": "cp-01:pool_sect_names" },
+      "exchange_action": { "pool": "cp-01:pool_exchange_actions" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_body_training",
+    "category": "daily",
+    "tone": "good",
+    "weight": 10,
+    "namePattern": "体修锤炼",
+    "messagePattern": "💪 {health_action}，身体素质有所提升，气血恢复 {health_gain}！",
+    "effectsPattern": { "health": "{health_gain}", "stamina": "-5" },
+    "variableSlots": ["health_action", "health_gain"],
+    "varConstraints": {
+      "health_action": { "pool": "cp-01:pool_health_actions" },
+      "health_gain": { "pool": "cp-01:pool_health_gain" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_alchemy_experiment",
+    "category": "daily",
+    "tone": "neutral",
+    "weight": 8,
+    "namePattern": "炼丹尝试",
+    "messagePattern": "🧪 尝试炼制{herb}，虽未成功但积累了经验，获得 {exp} 修为。",
+    "effectsPattern": { "exp": "{exp}" },
+    "variableSlots": ["herb", "exp"],
+    "varConstraints": {
+      "herb": { "pool": "cp-01:pool_herbs" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_item_discovery",
+    "category": "explore",
+    "tone": "good",
+    "weight": 10,
+    "namePattern": "拾得{item}",
+    "messagePattern": "{emoji} 在{location}拾得{adj}{item}，价值 {amount} 灵石！",
+    "effectsPattern": { "gold": "{amount}" },
+    "variableSlots": ["item", "emoji", "location", "adj", "amount"],
+    "varConstraints": {
+      "item": { "pool": "cp-01:pool_item_names" },
+      "emoji": { "pool": "cp-01:pool_emojis_good" },
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "amount": { "pool": "cp-01:pool_amounts_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_mysterious_fog",
+    "category": "adventure",
+    "tone": "neutral",
+    "weight": 8,
+    "namePattern": "迷雾奇遇",
+    "messagePattern": "🌫️ 在{adv_location}遭遇{adj}迷雾，雾中{fog_event}，获得 {exp} 修为！",
+    "effectsPattern": { "exp": "{exp}" },
+    "variableSlots": ["adv_location", "adj", "fog_event", "exp"],
+    "varConstraints": {
+      "adv_location": { "pool": "cp-01:pool_adventure_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "fog_event": { "pool": "cp-01:pool_fog_events" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_hp_recovery",
+    "category": "explore",
+    "tone": "good",
+    "weight": 14,
+    "namePattern": "发现灵药",
+    "messagePattern": "🧪 在{location}发现{adj}{herb}，服用后恢复 {hp_gain} 体力！",
+    "effectsPattern": { "hp": "{hp_gain}" },
+    "variableSlots": ["location", "adj", "herb", "hp_gain"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "herb": { "pool": "cp-01:pool_herbs" },
+      "hp_gain": { "pool": "cp-01:pool_amounts_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_gold_exp_mixed",
+    "category": "explore",
+    "tone": "good",
+    "weight": 10,
+    "namePattern": "意外收获",
+    "messagePattern": "{emoji} 在{location}的{adj}角落发现前人遗留之物，获得 {gold} 灵石和 {exp} 修为！",
+    "effectsPattern": { "gold": "{gold}", "exp": "{exp}" },
+    "variableSlots": ["emoji", "location", "adj", "gold", "exp"],
+    "varConstraints": {
+      "emoji": { "pool": "cp-01:pool_emojis_good" },
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "gold": { "pool": "cp-01:pool_amounts_small" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_mood_stamina_loss",
+    "category": "explore",
+    "tone": "bad",
+    "weight": 10,
+    "namePattern": "疲惫不堪",
+    "messagePattern": "😵 在{location}长时间跋涉，{lost_consequence}，心情 -{mood_loss}，精力 -{stamina_loss}。",
+    "effectsPattern": { "mood": "-{mood_loss}", "stamina": "-{stamina_loss}" },
+    "variableSlots": ["location", "lost_consequence", "mood_loss", "stamina_loss"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "lost_consequence": { "pool": "cp-01:pool_lost_consequences" },
+      "mood_loss": { "pool": "cp-01:pool_mood_amounts" },
+      "stamina_loss": { "pool": "cp-01:pool_stamina_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_dual_element_storm",
+    "category": "explore",
+    "tone": "bad",
+    "weight": 5,
+    "namePattern": "元素风暴",
+    "messagePattern": "⚡ 在{location}遭遇{weather}引发的元素风暴，{curse}，损失 {hp_loss} 体力和 {mp_loss} 灵力！",
+    "effectsPattern": { "hp": "-{hp_loss}", "mp": "-{mp_loss}" },
+    "variableSlots": ["location", "weather", "curse", "hp_loss", "mp_loss"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "weather": { "pool": "cp-01:pool_bad_weather" },
+      "curse": { "pool": "cp-01:pool_curse_effects" },
+      "hp_loss": { "pool": "cp-01:pool_damage_small" },
+      "mp_loss": { "pool": "cp-01:pool_damage_small" }
+    },
+    "condition": { "minRealm": 2 }
+  },
+  {
+    "id": "cp-01:tpl_formation_practice",
+    "category": "daily",
+    "tone": "neutral",
+    "weight": 8,
+    "namePattern": "阵法演练",
+    "messagePattern": "🔯 研习{sect}流传的{adj}阵法，有所收获，获得 {exp} 修为。",
+    "effectsPattern": { "exp": "{exp}" },
+    "variableSlots": ["sect", "adj", "exp"],
+    "varConstraints": {
+      "sect": { "pool": "cp-01:pool_sect_names" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_spirit_rain",
+    "category": "daily",
+    "tone": "good",
+    "weight": 8,
+    "namePattern": "灵雨洗礼",
+    "messagePattern": "🌧️ 天降灵雨，{blessing}，恢复 {hp_gain} 体力和 {mp_gain} 灵力！",
+    "effectsPattern": { "hp": "{hp_gain}", "mp": "{mp_gain}" },
+    "variableSlots": ["blessing", "hp_gain", "mp_gain"],
+    "varConstraints": {
+      "blessing": { "pool": "cp-01:pool_blessing_effects" },
+      "hp_gain": { "pool": "cp-01:pool_amounts_small" },
+      "mp_gain": { "pool": "cp-01:pool_amounts_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_restless_night",
+    "category": "daily",
+    "tone": "bad",
+    "weight": 8,
+    "namePattern": "辗转难眠",
+    "messagePattern": "😔 夜间{nightmare_scene}，{nightmare_effect}，精力 -{stamina_loss}。",
+    "effectsPattern": { "stamina": "-{stamina_loss}" },
+    "variableSlots": ["nightmare_scene", "nightmare_effect", "stamina_loss"],
+    "varConstraints": {
+      "nightmare_scene": { "pool": "cp-01:pool_nightmare_scenes" },
+      "nightmare_effect": { "pool": "cp-01:pool_nightmare_effects" },
+      "stamina_loss": { "pool": "cp-01:pool_stamina_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_exploration_nothing",
+    "category": "explore",
+    "tone": "neutral",
+    "weight": 20,
+    "namePattern": "平淡无奇",
+    "messagePattern": "🚶 在{location}探索了一番，{scenery}尽收眼底，但未发现特别之物。",
+    "effectsPattern": {},
+    "variableSlots": ["location", "scenery"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "scenery": { "pool": "cp-01:pool_scenery" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_spirit_vein_meditation",
+    "category": "explore",
+    "tone": "good",
+    "weight": 8,
+    "namePattern": "灵脉吐纳",
+    "messagePattern": "🌟 在{location}发现地下{adj}灵脉，就地打坐吐纳，获得 {exp} 修为和 {mp_gain} 灵力！",
+    "effectsPattern": { "exp": "{exp}", "mp": "{mp_gain}" },
+    "variableSlots": ["location", "adj", "exp", "mp_gain"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "exp": { "pool": "cp-01:pool_exp_amounts" },
+      "mp_gain": { "pool": "cp-01:pool_amounts_small" }
+    },
+    "condition": { "minRealm": 1 }
+  },
+  {
+    "id": "cp-01:tpl_comprehension_boost",
+    "category": "daily",
+    "tone": "good",
+    "weight": 6,
+    "namePattern": "悟性通明",
+    "messagePattern": "🧠 {insight_trigger}，突然{blessing}，获得 {exp} 修为！",
+    "effectsPattern": { "exp": "{exp}", "mood": "5" },
+    "variableSlots": ["insight_trigger", "blessing", "exp"],
+    "varConstraints": {
+      "insight_trigger": { "pool": "cp-01:pool_insight_triggers" },
+      "blessing": { "pool": "cp-01:pool_blessing_effects" },
+      "exp": { "pool": "cp-01:pool_exp_large" }
+    },
+    "condition": { "minRealm": 2 }
+  },
+  {
+    "id": "cp-01:tpl_material_trade",
+    "category": "explore",
+    "tone": "neutral",
+    "weight": 8,
+    "namePattern": "灵材交换",
+    "messagePattern": "🔄 在{location}遇到{fellow}，以 {cost} 灵石交换了{material}，小有收获。",
+    "effectsPattern": { "gold": "-{cost}", "exp": "5" },
+    "variableSlots": ["location", "fellow", "cost", "material"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "fellow": { "pool": "cp-01:pool_fellows" },
+      "cost": { "pool": "cp-01:pool_amounts_small" },
+      "material": { "pool": "cp-01:pool_beast_materials" }
+    },
+    "condition": { "minGold": 10 }
+  },
+  {
+    "id": "cp-01:tpl_hidden_cave",
+    "category": "explore",
+    "tone": "good",
+    "weight": 7,
+    "namePattern": "隐秘洞穴",
+    "messagePattern": "🕳️ 在{location}发现一处{adj}隐秘洞穴，内有前人遗留的灵石，获得 {amount} 灵石！",
+    "effectsPattern": { "gold": "{amount}" },
+    "variableSlots": ["location", "adj", "amount"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "amount": { "pool": "cp-01:pool_amounts_medium" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_sect_disciple_help",
+    "category": "explore",
+    "tone": "good",
+    "weight": 10,
+    "namePattern": "同门援手",
+    "messagePattern": "🤝 在{location}遇到{sect}同门，互相帮助后恢复 {hp_gain} 体力，心情 +{mood_gain}！",
+    "effectsPattern": { "hp": "{hp_gain}", "mood": "{mood_gain}" },
+    "variableSlots": ["location", "sect", "hp_gain", "mood_gain"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "sect": { "pool": "cp-01:pool_sect_names" },
+      "hp_gain": { "pool": "cp-01:pool_amounts_small" },
+      "mood_gain": { "pool": "cp-01:pool_mood_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_wild_beast_flee",
+    "category": "explore",
+    "tone": "neutral",
+    "weight": 12,
+    "namePattern": "妖兽遁走",
+    "messagePattern": "🐾 在{location}发现{enemy}的踪迹，但对方察觉到你后迅速遁走，虚惊一场。",
+    "effectsPattern": { "mood": "-2" },
+    "variableSlots": ["location", "enemy"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "enemy": { "pool": "cp-01:pool_enemies" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_poisoned_water",
+    "category": "explore",
+    "tone": "bad",
+    "weight": 7,
+    "namePattern": "毒水误饮",
+    "messagePattern": "🥤 在{location}误饮了{adj}毒水，{poison_effect}，损失 {hp_loss} 体力！",
+    "effectsPattern": { "hp": "-{hp_loss}", "health": "-2" },
+    "variableSlots": ["location", "adj", "poison_effect", "hp_loss"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "poison_effect": { "pool": "cp-01:pool_poison_effects" },
+      "hp_loss": { "pool": "cp-01:pool_damage_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_spirit_beast_rescue",
+    "category": "explore",
+    "tone": "good",
+    "weight": 5,
+    "namePattern": "救助灵兽",
+    "messagePattern": "🐾 在{location}发现一只受伤的{adj}灵兽幼崽，救助后获得感激，心情 +{mood_gain}，灵石 +{amount}！",
+    "effectsPattern": { "mood": "{mood_gain}", "gold": "{amount}" },
+    "variableSlots": ["location", "adj", "mood_gain", "amount"],
+    "varConstraints": {
+      "location": { "pool": "cp-01:pool_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "mood_gain": { "pool": "cp-01:pool_mood_amounts" },
+      "amount": { "pool": "cp-01:pool_amounts_small" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_meditation_disturbance",
+    "category": "daily",
+    "tone": "bad",
+    "weight": 10,
+    "namePattern": "修炼受扰",
+    "messagePattern": "😤 修炼中被{weather}打断，{bad_weather_effect}，精力 -{stamina_loss}。",
+    "effectsPattern": { "stamina": "-{stamina_loss}", "mood": "-3" },
+    "variableSlots": ["weather", "bad_weather_effect", "stamina_loss"],
+    "varConstraints": {
+      "weather": { "pool": "cp-01:pool_bad_weather" },
+      "bad_weather_effect": { "pool": "cp-01:pool_bad_weather_effects" },
+      "stamina_loss": { "pool": "cp-01:pool_stamina_amounts" }
+    }
+  },
+  {
+    "id": "cp-01:tpl_ancient_talisman",
+    "category": "adventure",
+    "tone": "good",
+    "weight": 4,
+    "namePattern": "上古符箓",
+    "messagePattern": "📜 在{adv_location}发现一张{adj}上古符箓，激活后灵力涌入体内，获得 {exp} 修为和 {mp_gain} 灵力！",
+    "effectsPattern": { "exp": "{exp}", "mp": "{mp_gain}" },
+    "variableSlots": ["adv_location", "adj", "exp", "mp_gain"],
+    "varConstraints": {
+      "adv_location": { "pool": "cp-01:pool_adventure_locations" },
+      "adj": { "pool": "cp-01:pool_adjectives" },
+      "exp": { "pool": "cp-01:pool_exp_large" },
+      "mp_gain": { "pool": "cp-01:pool_amounts_small" }
+    },
+    "condition": { "minRealm": 1 }
+  }
+]

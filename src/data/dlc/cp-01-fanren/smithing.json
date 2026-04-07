@@ -1,0 +1,154 @@
+[
+  {
+    "id": "cp-01:smith_wooden_sword",
+    "name": "削制木剑",
+    "description": "简单的木剑",
+    "inputs": [{ "itemId": "cp-01:iron_ore", "count": 2 }],
+    "goldCost": 5,
+    "outputItemId": "cp-01:wooden_sword",
+    "baseSuccessRate": 0.8,
+    "mentalCost": 3,
+    "minRealm": 0
+  },
+  {
+    "id": "cp-01:smith_huang_feng_robe",
+    "name": "缝制弟子袍",
+    "description": "黄枫谷弟子法袍",
+    "inputs": [{ "itemId": "cp-01:iron_ore", "count": 3 }],
+    "goldCost": 8,
+    "outputItemId": "cp-01:huang_feng_robe",
+    "baseSuccessRate": 0.75,
+    "mentalCost": 3,
+    "minRealm": 0
+  },
+  {
+    "id": "cp-01:smith_iron_sword",
+    "name": "锻造玄铁剑",
+    "description": "玄铁矿锻造灵剑",
+    "inputs": [
+      { "itemId": "cp-01:iron_ore", "count": 8 },
+      { "itemId": "cp-01:monster_fang", "count": 3 }
+    ],
+    "goldCost": 30,
+    "outputItemId": "cp-01:iron_sword",
+    "baseSuccessRate": 0.5,
+    "mentalCost": 10,
+    "minRealm": 1
+  },
+  {
+    "id": "cp-01:smith_spirit_silk_robe",
+    "name": "编织灵蚕丝衣",
+    "description": "灵蚕丝编织的法衣",
+    "inputs": [
+      { "itemId": "cp-01:iron_ore", "count": 5 },
+      { "itemId": "cp-01:ice_silkworm_thread", "count": 2 }
+    ],
+    "goldCost": 30,
+    "outputItemId": "cp-01:spirit_silk_robe",
+    "baseSuccessRate": 0.5,
+    "mentalCost": 10,
+    "minRealm": 1
+  },
+  {
+    "id": "cp-01:smith_wind_boots",
+    "name": "锻造御风靴",
+    "description": "附御风法阵的灵靴",
+    "inputs": [
+      { "itemId": "cp-01:iron_ore", "count": 5 },
+      { "itemId": "cp-01:monster_fang", "count": 2 }
+    ],
+    "goldCost": 25,
+    "outputItemId": "cp-01:wind_boots",
+    "baseSuccessRate": 0.5,
+    "mentalCost": 10,
+    "minRealm": 1
+  },
+  {
+    "id": "cp-01:smith_spirit_crown",
+    "name": "锻造灵冕",
+    "description": "灵石镶嵌的冠冕",
+    "inputs": [
+      { "itemId": "cp-01:iron_ore", "count": 5 },
+      { "itemId": "cp-01:spirit_stone_shard", "count": 8 }
+    ],
+    "goldCost": 25,
+    "outputItemId": "cp-01:spirit_crown",
+    "baseSuccessRate": 0.5,
+    "mentalCost": 10,
+    "minRealm": 1
+  },
+  {
+    "id": "cp-01:smith_azure_cloud_sword",
+    "name": "锻造碧云剑",
+    "description": "碧云剑，剑光如云",
+    "inputs": [
+      { "itemId": "cp-01:mithril_ore", "count": 5 },
+      { "itemId": "cp-01:monster_fang", "count": 5 },
+      { "itemId": "cp-01:monster_core", "count": 2 }
+    ],
+    "goldCost": 80,
+    "outputItemId": "cp-01:azure_cloud_sword",
+    "baseSuccessRate": 0.35,
+    "mentalCost": 20,
+    "minRealm": 2
+  },
+  {
+    "id": "cp-01:smith_scarlet_soul_armor",
+    "name": "锻造赤魂甲",
+    "description": "赤炼魂火淬炼的灵甲",
+    "inputs": [
+      { "itemId": "cp-01:mithril_ore", "count": 8 },
+      { "itemId": "cp-01:monster_core", "count": 3 }
+    ],
+    "goldCost": 100,
+    "outputItemId": "cp-01:scarlet_soul_armor",
+    "baseSuccessRate": 0.3,
+    "mentalCost": 20,
+    "minRealm": 2
+  },
+  {
+    "id": "cp-01:smith_golden_thunder_sword",
+    "name": "炼制青竹蜂云剑",
+    "description": "以金雷竹叶和星陨铁锻造传说飞剑",
+    "inputs": [
+      { "itemId": "cp-01:golden_thunder_bamboo_leaf", "count": 3 },
+      { "itemId": "cp-01:star_iron", "count": 5 },
+      { "itemId": "cp-01:monster_core", "count": 5 }
+    ],
+    "goldCost": 250,
+    "outputItemId": "cp-01:golden_thunder_sword",
+    "baseSuccessRate": 0.2,
+    "mentalCost": 30,
+    "minRealm": 2
+  },
+  {
+    "id": "cp-01:smith_deep_sea_armor",
+    "name": "锻造深海玄甲",
+    "description": "深海蛟龙鳞片锻造的重铠",
+    "inputs": [
+      { "itemId": "cp-01:star_iron", "count": 8 },
+      { "itemId": "cp-01:monster_core", "count": 4 },
+      { "itemId": "cp-01:beast_blood", "count": 5 }
+    ],
+    "goldCost": 150,
+    "outputItemId": "cp-01:deep_sea_armor",
+    "baseSuccessRate": 0.25,
+    "mentalCost": 25,
+    "minRealm": 3
+  },
+  {
+    "id": "cp-01:smith_nascent_soul_sword",
+    "name": "锻造元婴法剑",
+    "description": "元婴期本命法剑",
+    "inputs": [
+      { "itemId": "cp-01:star_iron", "count": 12 },
+      { "itemId": "cp-01:monster_core", "count": 6 },
+      { "itemId": "cp-01:celestial_jade", "count": 2 }
+    ],
+    "goldCost": 400,
+    "outputItemId": "cp-01:nascent_soul_sword",
+    "baseSuccessRate": 0.2,
+    "mentalCost": 30,
+    "minRealm": 4
+  }
+]

@@ -1,0 +1,274 @@
+[
+  {
+    "id": "cp-01:dlg_oldxuan_first_meet",
+    "npcId": "cp-01:npc_old_xuan",
+    "name": "玄老初见",
+    "priority": 100,
+    "once": true,
+    "condition": {
+      "minAffinity": 0,
+      "minRealm": 3,
+      "relationLevel": ["stranger", "acquaintance"]
+    },
+    "startNodeId": "n1",
+    "tags": ["greeting", "lore"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「嗯……你的修为不错，能见到我说明你已经有一定的实力了。我是黄枫谷的太上长老，世人称我玄老。你有什么事？」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🙏 晚辈拜见玄老前辈！久仰大名。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 太上长老？您就是那位修为通天的玄老？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "😎 前辈好，晚辈想讨教几招。",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 0 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「不必多礼。老夫已经活了太久，什么大名小名的，都是浮云。能看到年轻一辈的修士成长起来，比什么都让我高兴。这几枚丹药你拿着，好好修炼。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:golden_core_pill", "count": 2 },
+            { "itemId": "cp-01:mood_pill", "count": 3 }
+          ],
+          "expChange": 300
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「修为通天谈不上。活得久了，修为自然就高了。修仙这条路，走得快不如走得稳，走得稳不如走得久。你若记住这一点，日后成就不可限量。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:golden_core_pill", "count": 1 }],
+          "expChange": 200
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「呵呵，讨教？以你的修为跟老夫动手，怕是三招都接不下。不过你这份胆量倒值得赞赏。来，先吃颗丹药补补，以后有的是机会。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:hp_pill", "count": 5 }],
+          "expChange": 100
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_oldxuan_sect_history",
+    "npcId": "cp-01:npc_old_xuan",
+    "name": "玄老谈黄枫谷历史",
+    "priority": 90,
+    "once": true,
+    "condition": {
+      "minAffinity": 20,
+      "minRealm": 3,
+      "relationLevel": ["acquaintance", "friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_oldxuan_first_meet"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「黄枫谷立派至今已有三千余年。当年开派祖师在此地发现了一脉灵泉，方才选址建宗。三千年来风风雨雨，六派格局几经变迁，黄枫谷能存续至今，靠的不是最强的实力，而是最稳健的行事。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🏛️ 黄枫谷在六派中居什么位置？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 三千年……前辈见证了多少沧桑？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c3",
+            "text": "⚔️ 黄枫谷跟魔道交过手吗？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 2 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「在六派中，黄枫谷的实力居中偏上。论底蕴不如青虚宗，论高阶修士不如掩月宗，论阵法不如天仙门。但黄枫谷胜在人才辈出——韩立就是最好的例子。一个灵根驳杂的少年，硬是走到了天南修仙界的巅峰。」",
+        "effects": { "expChange": 150 }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「老夫活了一千两百年，亲眼见过五次正魔大战、三次秘境开启、无数天才的崛起和陨落。你知道什么最恐怖吗？不是魔修，不是天劫——是时间。它会带走你认识的每一个人。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:longevity_pill", "count": 1 }],
+          "expChange": 300
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「何止交过手。最近一次正魔大战中黄枫谷折损了三位结丹期长老、数十名筑基弟子。韩立在那一战中表现突出，几乎以一己之力稳住了局势。」",
+        "effects": { "expChange": 120 }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_oldxuan_great_dao",
+    "npcId": "cp-01:npc_old_xuan",
+    "name": "修仙大道",
+    "priority": 80,
+    "once": true,
+    "condition": {
+      "minAffinity": 35,
+      "minRealm": 4,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_oldxuan_sect_history"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你修为已入元婴之境，算是踏入了修仙大道的门槛。但别得意——元婴之上还有化神、合体、大乘。每一步都是天堑，无数修士在这条路上倒下了。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🙏 请前辈指点突破之法。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 前辈已经是化神期了吗？化神之上又是什么？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "💪 我会一步步走上去的。",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 2 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「突破没有捷径。唯一的建议是——道心要稳。每个境界突破时都会有心魔考验，心魔来源于你内心的执念和恐惧。放下执念，直面恐惧，方能通过。这枚悟道丹有助于稳固道心。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:enlightenment_pill", "count": 1 },
+            { "itemId": "cp-01:nascent_soul_formation_pill", "count": 1 }
+          ],
+          "expChange": 500
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「化神之上是合体，合体之上是大乘，大乘之上……传说是飞升仙界。不过老夫一生修为止步化神巅峰，合体期的门槛始终无法跨过。也许这就是我的极限了。但你不一样——你还年轻。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:deity_transform_dew", "count": 1 }],
+          "expChange": 600
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「好。有这份决心就好。记住——修仙不是一个人的事。韩立之所以能走这么远，不只是因为他谨慎，更因为他在关键时刻从不放弃身边的人。你也要如此。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:golden_core_pill", "count": 3 }],
+          "expChange": 400
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_oldxuan_six_sects",
+    "npcId": "cp-01:npc_old_xuan",
+    "name": "六派形势",
+    "priority": 75,
+    "once": true,
+    "condition": {
+      "minAffinity": 30,
+      "minRealm": 3,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_oldxuan_sect_history"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「天南六派——黄枫谷、掩月宗、天仙门、青虚宗、落日宗、极阴岛。六派表面上联合抗魔，实际上各怀心思。你在外行走时要格外小心。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🤔 哪些门派比较友善？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2",
+            "text": "⚠️ 哪些门派要特别提防？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "⚔️ 魔道的实力如何？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 2 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「掩月宗和天仙门与我黄枫谷关系尚可。掩月宗的南宫婉——韩立的道侣——是个好姑娘。天仙门擅长阵法，做事比较讲规矩。其余的嘛……见面客气几句就行，别掏心掏肺。」",
+        "effects": { "expChange": 150 }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「极阴岛最可疑。他们的功法阴气颇重，与魔道有些相似。还有落日宗——宗主野心不小，一直想统合六派。你若遇到他们的人，多留个心眼。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:jade_slip", "count": 2 }],
+          "expChange": 180
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「魔道的实力不可小觑。合欢宗的辛老祖、黑杀宗的王蝉，都是化神期的老魔头。每一个都城府极深、手段残忍。正道六派联合起来也只能堪堪对峙，未必能稳赢。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:life_talisman", "count": 1 }],
+          "expChange": 200
+        }
+      }
+    ]
+  }
+]

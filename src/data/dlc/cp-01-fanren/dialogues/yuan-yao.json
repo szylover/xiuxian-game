@@ -1,0 +1,355 @@
+[
+  {
+    "id": "cp-01:dlg_yuanyao_first_meet",
+    "npcId": "cp-01:npc_yuan_yao",
+    "name": "元瑶初见",
+    "priority": 100,
+    "once": true,
+    "condition": {
+      "minAffinity": 0,
+      "minRealm": 3,
+      "relationLevel": ["stranger", "acquaintance"]
+    },
+    "startNodeId": "n1",
+    "tags": ["greeting", "lore"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你……怎么会来这种地方？这里阴气太重，凡人和低修为的修士待久了会折寿的。」（一个面容苍白如玉的女子从黑雾中缓缓现身）",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "😰 前辈……您是鬼修？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 2 }
+          },
+          {
+            "id": "c2",
+            "text": "🙏 在下误入此地，还请指条明路。",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c3",
+            "text": "😎 阴气？无所谓，我不怕。",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": -3 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「鬼修……也算吧。我修习的是鬼道秘术，不过跟你们想象中的恶鬼不同。鬼道一途，不过是修仙的另一条路罢了。你既然不怕我，说明你心性不错。」",
+        "choices": [
+          {
+            "id": "c2a",
+            "text": "🙏 闻道有先后，修行不论正邪。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 8 }
+          },
+          {
+            "id": "c2b",
+            "text": "🤔 鬼道……是怎样的修行路？",
+            "nextNodeId": "n6",
+            "effects": { "affinityChange": 5 }
+          }
+        ]
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「往东走三百里就是灵脉清澈之地。不过……你既然来了，不如坐一会儿。这里虽然阴气重，但很安静。修仙界太吵了，我倒是喜欢这份清净。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:calming_talisman", "count": 2 }],
+          "expChange": 100
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「不怕？你应该怕。在这片阴域里，有无数怨灵游荡，它们可分不清敌我。你若继续逞强，后果自负。」"
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「……你是第一个这么说的人。多数修士看到鬼修，不是逃就是打。你的胸襟不错，这枚魂灯送你，里面封印着一缕魂火，危急时可护你神魂。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:soul_lamp", "count": 1 }],
+          "expChange": 200
+        }
+      },
+      {
+        "id": "n6",
+        "type": "npc_talk",
+        "text": "「鬼道修行，以吸收天地间的阴气和怨灵之力来提升修为。比正道修仙快，但代价也大——你会越来越接近死亡。不过对我来说，死亡并不可怕。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:calming_talisman", "count": 3 }],
+          "expChange": 150
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_yuanyao_ghost_cultivation",
+    "npcId": "cp-01:npc_yuan_yao",
+    "name": "鬼道修行",
+    "priority": 85,
+    "once": true,
+    "condition": {
+      "minAffinity": 20,
+      "minRealm": 3,
+      "relationLevel": ["acquaintance", "friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_yuanyao_first_meet"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你对鬼道修行感兴趣？大多数人避之不及的东西，你倒是愿意了解。鬼道并非邪道——正如韩立所言，天道之下，没有绝对的正邪之分，只有强弱之别。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🤔 鬼道修行有什么特殊之处？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "😰 你说越修越接近死亡，不怕吗？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "🙏 你认识韩立？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 3 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「鬼道修行可以操控怨灵为己用，还能修炼阴魂分身。到了高深境界，甚至可以预知死亡、行走阴曹地府。不过最大的代价是——你会逐渐失去凡人的情感。快乐、悲伤、愤怒……都会变得越来越淡。」",
+        "choices": [
+          {
+            "id": "c2a",
+            "text": "😢 失去情感……那活着还有什么意义？",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 8 }
+          },
+          {
+            "id": "c2b",
+            "text": "🤔 那你现在还能感受到情感吗？",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 5 }
+          }
+        ]
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「怕？我连死都死过一次了，还有什么好怕的。（苦笑）我原本已经死了，是一位大能用鬼道秘术将我的魂魄留住。从那以后，我就不算活人也不算死人……算是阴阳之间的存在吧。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:mystery_fragment", "count": 1 }],
+          "expChange": 200
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「韩立……嗯，我跟他有过一段交情。那个人看似冷漠，心底其实很善良。他是少数几个不因我修习鬼道就排斥我的人。」",
+        "effects": { "expChange": 80 }
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「……还能感受到一些。比如现在，跟你说话的时候，我觉得不那么冷了。也许这就是为什么我愿意留在人间——哪怕能感受到的越来越少，也好过什么都感受不到。这枚秘境碎片你拿着，里面蕴含着空间法则的残片。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:mystery_fragment", "count": 2 }],
+          "expChange": 250
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_yuanyao_netherworld",
+    "npcId": "cp-01:npc_yuan_yao",
+    "name": "阴曹地府",
+    "priority": 70,
+    "once": true,
+    "condition": {
+      "minAffinity": 40,
+      "minRealm": 4,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_yuanyao_ghost_cultivation"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你修为到了这个层次，应该能感应到了——这个世界的深处还有一个幽暗的空间，凡人称之为阴曹地府。那里有数不清的鬼灵和冥界生物，还有……传说中的轮回。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "😮 轮回？真的存在吗？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 你去过阴曹地府？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "😰 那种地方……太可怕了。",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 0 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「存在。我亲眼见过轮回的入口。那是一条巨大的河流，河水漆黑如墨，无数魂魄在其中沉浮。渡过那条河的魂魄会忘记前世，投胎转世。但修仙者可以抗拒轮回——这就是修仙的终极意义之一。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:soul_lamp", "count": 1 }],
+          "expChange": 400
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「去过。跟韩立一起去的。那一次是为了寻找一味只生长在冥界的灵药——彼岸花。那种花开在忘川河畔，花瓣如血，只有鬼修才能采摘。」",
+        "choices": [
+          {
+            "id": "c3a",
+            "text": "🌺 彼岸花……这名字好凄美。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c3b",
+            "text": "🤔 你和韩立一起去冥界，不害怕吗？",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 3 }
+          }
+        ]
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「可怕？对你们来说是的。但对我来说，那里反而像是归处。不过我还不想回去——这个世界还有值得留恋的东西。」",
+        "effects": { "expChange": 100 }
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「有韩立在身边，不那么害怕。那个人就是有一种让人安心的力量。虽然他嘴上不说，但每次遇到危险他都会冲在前面。这枚魂灯和秘境碎片你拿着——万一有一天你也要涉足冥界，能保你一命。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:soul_lamp", "count": 1 },
+            { "itemId": "cp-01:mystery_fragment", "count": 2 }
+          ],
+          "expChange": 500
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_yuanyao_past",
+    "npcId": "cp-01:npc_yuan_yao",
+    "name": "元瑶的过去",
+    "priority": 60,
+    "once": true,
+    "condition": {
+      "minAffinity": 50,
+      "minRealm": 4,
+      "relationLevel": ["close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_yuanyao_ghost_cultivation"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你……想知道我的过去吗？」（元瑶的眼中罕见地闪过一丝犹豫）",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🙏 如果你愿意说的话。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 8 }
+          },
+          {
+            "id": "c2",
+            "text": "😊 每个人都有不想被提起的往事，不必勉强。",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 10 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「我原本是一个普通的修士家族的女儿。家族被灭，我被仇人追杀至死。一位鬼道大能路过时救了我的魂魄，但……代价是我再也回不去凡人的身体了。从那之后，我就以半鬼半人的状态活着。」",
+        "choices": [
+          {
+            "id": "c2a",
+            "text": "😢 太残忍了……你恨那些仇人吗？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2b",
+            "text": "🙏 你已经很坚强了。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 8 }
+          }
+        ]
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「……（微笑）你真好。不像修仙界那些人，总想着窥探别人的秘密。也罢，你真心待我，我也不藏着了——我原本已经死了，是鬼道秘术给了我第二次存在的机会。虽然算不上活着，但我珍惜这份存在。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:mystery_fragment", "count": 3 },
+            { "itemId": "cp-01:soul_lamp", "count": 1 }
+          ],
+          "expChange": 600
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「恨？最初恨得不得了。但时间久了，恨意就淡了。鬼道修行的副作用之一——情感会慢慢消退。有时候我甚至觉得这是一种解脱。不过……跟你说话的时候，我好像又能感受到一些什么了。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:mystery_fragment", "count": 2 }],
+          "expChange": 400
+        }
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「坚强……也许吧。活下去需要理由，而你就是我继续留在这个世界的理由之一。这些东西你收好，在这条修行路上，要好好活着。替我多感受一些这个世界的温暖。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:mystery_fragment", "count": 3 },
+            { "itemId": "cp-01:longevity_pill", "count": 1 }
+          ],
+          "expChange": 600
+        }
+      }
+    ]
+  }
+]
