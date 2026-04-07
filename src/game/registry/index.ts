@@ -37,6 +37,7 @@ export type {
 } from '../achievement/types';
 
 export { registerDLC, unregisterDLC, getDLC, getAllDLCs } from './dlc';
+export { clearAllRegistries } from './stores';
 export {
   registerEvent, registerEvents, getEvent, getEventsByCategory,
   getItemDef, getItemDefsByCategory, getAllItemDefs,

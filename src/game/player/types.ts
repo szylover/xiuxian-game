@@ -101,6 +101,7 @@ export interface Player {
   bodyRealmExp: number;                    // 当前体修修为
   physiqueDmgReduce: number;               // 体魄减伤%（上限50）
   bodyTempering: number;                   // 淬体次数
+  enabledDLCs: string[];                   // T0074 本局加载的 DLC ID 列表
 }
 
 export interface SpiritRootGrade {

@@ -50,3 +50,45 @@ export const monsterTemplateRegistry = new Map<string, MonsterTemplate>();
 export const mutationDefRegistry = new Map<string, MutationDef>();
 export const techniqueTraitRegistry = new Map<string, TechniqueTraitDef>();
 export const techniqueInstanceRegistry = new Map<string, TechniqueInstance>();
+
+/** 清空所有注册表（切换 DLC 前调用） */
+export function clearAllRegistries(): void {
+  dlcRegistry.clear();
+  eventRegistry.clear();
+  itemDefRegistry.clear();
+  recipeRegistry.clear();
+  equipRegistry.clear();
+  smithingRecipeRegistry.clear();
+  breakthroughReqRegistry.clear();
+  tribulationRegistry.clear();
+  techniqueRegistry.clear();
+  deathTriggerRegistry.clear();
+  lifeSaverRegistry.clear();
+  revivalRegistry.clear();
+  monsterRegistry.clear();
+  divineArtRegistry.clear();
+  achievementRegistry.clear();
+  bodyRealmRegistry.clear();
+  spiritRootBodyBonusRegistry.clear();
+  realmRegistry.clear();
+  regionRegistry.clear();
+  bottleneckRegistry.clear();
+  npcRegistry.clear();
+  questChainRegistry.clear();
+  dialogueRegistry.clear();
+  // idleChatRegistry is a plain object — clear all keys
+  for (const key of Object.keys(idleChatRegistry)) {
+    delete idleChatRegistry[key];
+  }
+  triggeredOnce.clear();
+  cooldowns.clear();
+  eventTemplateRegistry.clear();
+  variablePoolRegistry.clear();
+  equipTemplateRegistry.clear();
+  affixDefRegistry.clear();
+  generatedEquipRegistry.clear();
+  monsterTemplateRegistry.clear();
+  mutationDefRegistry.clear();
+  techniqueTraitRegistry.clear();
+  techniqueInstanceRegistry.clear();
+}

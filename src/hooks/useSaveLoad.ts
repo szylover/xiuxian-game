@@ -110,6 +110,10 @@ function applyCompatFixes(p: Player): Player {
       eventCounter: 0,
     };
   }
+  // T0074: enabledDLCs 向后兼容
+  if (!p.enabledDLCs) {
+    p.enabledDLCs = ['core'];
+  }
   return p;
 }
 
