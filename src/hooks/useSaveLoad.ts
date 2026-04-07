@@ -103,6 +103,13 @@ function applyCompatFixes(p: Player): Player {
   if (!p.systems['bottleneck']) {
     p.systems['bottleneck'] = { active: {}, unlocked: {} };
   }
+  // T0070: 程序化事件系统向后兼容
+  if (!p.systems['procedural']) {
+    p.systems['procedural'] = {
+      masterSeed: (Math.random() * 0xFFFFFFFF) >>> 0,
+      eventCounter: 0,
+    };
+  }
   return p;
 }
 

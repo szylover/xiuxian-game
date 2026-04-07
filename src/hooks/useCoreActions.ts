@@ -13,12 +13,14 @@ import { triggerExploreEvent } from '../game/events';
 import { addItem } from '../game/inventory';
 import { getItemDef, getAllMonsters } from '../game/registry';
 import { getCurrentRegion } from '../game/map';
+import { generateMonsterVariant } from '../game/procedural';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
 import { restorePhysique, gainBodyRealmExp, tryBodyRealmBreakthrough } from '../game/body-cultivation';
 import { getTechniqueDef } from '../game/registry';
 import { ensureBottleneckState, getActiveBottlenecks, tickPersistenceCultivation, tryBattleUnlock, tryEpiphanyUnlock, tryOverflowUnlock } from '../game/bottleneck';
 import { getNpcsInRegion, meetNpc as meetNpcFn } from '../game/npc';
 import { tickQuestObjectives, checkQuestDiscovery } from '../game/quest';
+import { generateEquip } from '../game/procedural';
 import type { DeathTriggerDef, DeathSeverity, RevivalMethodDef, RegionDef } from '../game/types';
 import type { LogCategory } from './useGameLog';
 import { COMBAT_TEXTS } from '../data/texts/combat';
@@ -207,12 +209,24 @@ export function useCoreActions(deps: CoreActionDeps) {
         }
         return true;
       });
-      if (eligible.length === 0) {
+
+      // T0072: 50% 概率使用程序化妖兽变体
+      let monster: import('../game/types').MonsterDef | undefined;
+      const procResult = Math.random() < 0.5
+        ? generateMonsterVariant(p, { regionTags })
+        : null;
+      if (procResult) {
+        p = procResult.player;
+        monster = procResult.monster;
+      } else if (eligible.length > 0) {
+        monster = eligible[Math.floor(Math.random() * eligible.length)];
+      }
+
+      if (!monster) {
         pendingRef.current = { msgs: [], categories: [] };
         queueLog(COMBAT_TEXTS.noMonster, 'combat');
         return p;
       }
-      const monster = eligible[Math.floor(Math.random() * eligible.length)];
       const result = runCombat(p, monster);
 
       // 收集战利品用于弹窗展示
@@ -276,6 +290,19 @@ export function useCoreActions(deps: CoreActionDeps) {
             p = p2;
             const eDef = getItemDef(dropId);
             loot.push({ icon: '⚔️', name: eDef?.name ?? dropId, amount: 1 });
+          }
+        }
+
+        // T0071: 程序化装备掉落（8% 概率）
+        if (Math.random() < 0.08) {
+          const genResult = generateEquip(p);
+          if (genResult) {
+            p = genResult.player;
+            const { player: p2, added } = addItem(p, genResult.instance.instanceId, 1);
+            if (added > 0) {
+              p = p2;
+              loot.push({ icon: '🔮', name: genResult.instance.finalName, amount: 1 });
+            }
           }
         }
 

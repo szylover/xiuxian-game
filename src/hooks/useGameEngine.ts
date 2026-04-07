@@ -28,6 +28,8 @@ import { checkQuestTimeouts, checkQuestDiscovery, tickQuestObjectives, setTracke
 import { UI_LABELS } from '../data/texts/ui-labels';
 import { SPIRIT_ROOT_CN, SEPARATOR, NONE_TEXT } from '../data/texts/common';
 import { tickAffinityDecay } from '../game/npc';
+import { restoreGeneratedEquips } from '../game/procedural';
+import { restoreTechniqueInstances } from '../game/procedural';
 import { useChronicle } from './useChronicle';
 
 // Re-export types so existing imports still work
@@ -107,6 +109,10 @@ export function useGameEngine(
     if (saved) {
       // T0021: 根据境界刷新解锁区域（旧存档可能境界已高）
       const withRegions = refreshUnlockedRegions(saved);
+      // T0071: 恢复程序化装备实例到全局查询表
+      restoreGeneratedEquips(withRegions);
+      // T0073: 恢复程序化功法实例到全局查询表
+      restoreTechniqueInstances(withRegions);
       setPlayer(withRegions);
       setGameOver(false);
       setGameOverReason('');

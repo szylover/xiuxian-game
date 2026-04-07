@@ -6,7 +6,7 @@
 import type { Player } from './player';
 import { registerDLC, triggerEvent } from './registry';
 import type { RecipeDef, EquipDef, SmithingRecipeDef, TechniqueDef, DeathTriggerDef, LifeSaverDef, RevivalMethodDef, MonsterDef } from './registry';
-import type { RegionDef, NpcDef, IdleChatPool } from './types';
+import type { RegionDef, NpcDef, IdleChatPool, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, MonsterTemplate, MutationDef, TechniqueTraitDef } from './types';
 import { getCurrentRegion } from './map';
 import { loadEventsFromJson } from './event-loader';
 import { loadItemsFromJson } from './item-loader';
@@ -16,6 +16,8 @@ import type { JsonEvent } from './event-loader';
 import type { JsonItem } from './item-loader';
 import type { JsonQuestChain } from './quest-loader';
 import type { JsonDialogueChain } from './dialogue-loader';
+import { triggerProceduralEvent } from './procedural';
+import { loadMonsterTemplatesFromJson, loadMutationDefsFromJson } from './procedural/monster-loader';
 import { CORE_BREAKTHROUGH_REQS, CORE_TRIBULATIONS } from '../data/dlc/core/breakthrough';
 import { CORE_DIVINE_ARTS } from '../data/dlc/core/divine-arts';
 import { CORE_BODY_REALMS, CORE_SPIRIT_ROOT_BODY_BONUSES } from '../data/dlc/core/body-config';
@@ -253,6 +255,13 @@ export async function registerCoreEvents(): Promise<void> {
     { default: coreRegionsJson },
     { default: coreNpcsJson },
     { default: coreQuestsJson },
+    { default: coreEventTemplatesJson },
+    { default: coreEventVocabJson },
+    { default: coreEquipTemplatesJson },
+    { default: coreAffixesJson },
+    { default: coreMonsterTemplatesJson },
+    { default: coreMutationsJson },
+    { default: coreTechniqueTraitsJson },
   ] = await Promise.all([
     import('../data/dlc/core/events.json'),
     import('../data/dlc/core/items.json'),
@@ -264,6 +273,13 @@ export async function registerCoreEvents(): Promise<void> {
     import('../data/dlc/core/regions.json'),
     import('../data/dlc/core/npcs.json'),
     import('../data/dlc/core/quests.json'),
+    import('../data/dlc/core/event-templates.json'),
+    import('../data/dlc/core/event-vocab.json'),
+    import('../data/dlc/core/equip-templates.json'),
+    import('../data/dlc/core/affixes.json'),
+    import('../data/dlc/core/monster-templates.json'),
+    import('../data/dlc/core/mutations.json'),
+    import('../data/dlc/core/technique-traits.json'),
   ]);
 
   // 对话文件按 NPC 拆分，批量加载 dialogues/*.json（排除 idle-chat.json）
@@ -311,11 +327,18 @@ export async function registerCoreEvents(): Promise<void> {
     questChains,
     dialogues,
     idleChat: idleChatJson as IdleChatPool,
+    eventTemplates: coreEventTemplatesJson as unknown as EventTemplate[],
+    variablePools: coreEventVocabJson as unknown as VariablePool[],
+    equipBaseTemplates: coreEquipTemplatesJson as unknown as EquipBaseTemplate[],
+    affixDefs: coreAffixesJson as unknown as AffixDef[],
+    monsterTemplates: loadMonsterTemplatesFromJson(coreMonsterTemplatesJson as unknown as MonsterTemplate[]),
+    mutations: loadMutationDefsFromJson(coreMutationsJson as unknown as MutationDef[]),
+    techniqueTraits: coreTechniqueTraitsJson as unknown as TechniqueTraitDef[],
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }
 
-// ── 探索入口（T0021: 区域感知）──
+// ── 探索入口（T0021: 区域感知 + T0070: 程序化事件）──
 export function triggerExploreEvent(player: Player): { player: Player; message: string } {
   const region = getCurrentRegion(player);
   const regionTags = region?.regionTags;
@@ -328,6 +351,14 @@ export function triggerExploreEvent(player: Player): { player: Player; message: 
     }
   }
 
+  // 20% 概率触发程序化事件（T0070）
+  if (Math.random() < 0.20) {
+    const procResult = triggerProceduralEvent(player, 'explore', regionTags);
+    if (procResult) {
+      return { player: procResult.player, message: procResult.message };
+    }
+  }
+
   const result = triggerEvent('explore', player, regionTags);
   if (!result) {
     return { player, message: '🚶 四处探索了一番，未发现什么特别的东西。' };
@@ -335,8 +366,16 @@ export function triggerExploreEvent(player: Player): { player: Player; message: 
   return { player: result.player, message: result.message };
 }
 
-// ── 日常事件入口 ──
+// ── 日常事件入口（T0070: 程序化日常事件）──
 export function triggerDailyEvent(player: Player): { player: Player; message: string } | null {
+  // 15% 概率触发程序化日常事件
+  if (Math.random() < 0.15) {
+    const procResult = triggerProceduralEvent(player, 'daily');
+    if (procResult) {
+      return { player: procResult.player, message: procResult.message };
+    }
+  }
+
   const result = triggerEvent('daily', player);
   if (!result || !result.message) return null;
   return { player: result.player, message: result.message };

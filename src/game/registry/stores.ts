@@ -8,6 +8,10 @@ import type {
   DeathTriggerDef, LifeSaverDef, RevivalMethodDef, MonsterDef, DivineArtDef,
   BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef,
   NpcDef, QuestChainDef, DialogueChainDef, IdleChatPool,
+  EventTemplate, VariablePool,
+  EquipBaseTemplate, AffixDef, GeneratedEquipInstance,
+  MonsterTemplate, MutationDef,
+  TechniqueTraitDef, TechniqueInstance,
 } from '../types';
 import type { AchievementDef } from '../achievement/types';
 
@@ -37,3 +41,12 @@ export const dialogueRegistry = new Map<string, DialogueChainDef>();
 export const idleChatRegistry: IdleChatPool = {};
 export const triggeredOnce = new Set<string>();
 export const cooldowns = new Map<string, number>();
+export const eventTemplateRegistry = new Map<string, EventTemplate>();
+export const variablePoolRegistry = new Map<string, VariablePool>();
+export const equipTemplateRegistry = new Map<string, EquipBaseTemplate>();
+export const affixDefRegistry = new Map<string, AffixDef>();
+export const generatedEquipRegistry = new Map<string, GeneratedEquipInstance>();
+export const monsterTemplateRegistry = new Map<string, MonsterTemplate>();
+export const mutationDefRegistry = new Map<string, MutationDef>();
+export const techniqueTraitRegistry = new Map<string, TechniqueTraitDef>();
+export const techniqueInstanceRegistry = new Map<string, TechniqueInstance>();

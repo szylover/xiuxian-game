@@ -11,6 +11,7 @@ import { gainBodyRealmExp } from './body-cultivation';
 import { checkBottleneck, activateBottleneck, ensureBottleneckState, getActiveBottlenecks, tickPersistenceCultivation } from './bottleneck';
 import { TECHNIQUE_TEXTS } from '../data/texts/technique';
 import { SPIRIT_ROOT_CN } from '../data/texts/common';
+import { generateTechniqueInstance, getTraitBonus } from './procedural';
 
 // ── 功法类型 → 资质字段映射 ──
 const TYPE_APTITUDE_MAP: Record<string, keyof Player['aptitudes']> = {
@@ -77,15 +78,22 @@ export function learnTechnique(player: Player, techniqueId: string): { player: P
     return { player, message: TECHNIQUE_TEXTS.alreadyLearned(def.name) };
   }
 
-  const newSlot: TechniqueSlot = { techniqueId, level: 1, exp: 0 };
+  // T0073: 生成功法词条实例
+  const { player: p2, instance } = generateTechniqueInstance(player, techniqueId, def.type);
+
+  const newSlot: TechniqueSlot = { techniqueId, level: 1, exp: 0, instanceId: instance.instanceId };
   const p = {
-    ...player,
-    techniques: [...player.techniques, newSlot],
+    ...p2,
+    techniques: [...p2.techniques, newSlot],
     // 如果没有激活功法，自动激活
-    activeTechniqueId: player.activeTechniqueId ?? techniqueId,
+    activeTechniqueId: p2.activeTechniqueId ?? techniqueId,
   };
 
-  return { player: p, message: TECHNIQUE_TEXTS.learned(def.name) };
+  const traitMsg = instance.traits.length > 0
+    ? TECHNIQUE_TEXTS.traitsGenerated(instance.traits.length, TECHNIQUE_TEXTS.qualityName(instance.qualityOverride))
+    : '';
+
+  return { player: p, message: TECHNIQUE_TEXTS.learned(def.name) + traitMsg };
 }
 
 // ── 修炼功法（增加熟练度，可能升级）──
@@ -243,6 +251,19 @@ export function getActiveTechniqueBonus(player: Player): TechniqueStatBonus {
   if (b.critDmgMultiplier) bonus.critDmgMultiplier = +(b.critDmgMultiplier * lvl).toFixed(2);
   if (b.hp) bonus.hp = Math.floor(b.hp * lvl);
   if (b.mp) bonus.mp = Math.floor(b.mp * lvl);
+
+  // T0073: 叠加功法词条加成
+  const traitBonus = getTraitBonus(slot.instanceId);
+  for (const key of Object.keys(traitBonus) as (keyof TechniqueStatBonus)[]) {
+    const val = traitBonus[key];
+    if (val !== undefined) {
+      if (key === 'critDmgMultiplier') {
+        bonus.critDmgMultiplier = +((bonus.critDmgMultiplier ?? 0) + (val as number)).toFixed(2);
+      } else {
+        (bonus[key] as number) = ((bonus[key] as number) ?? 0) + (val as number);
+      }
+    }
+  }
 
   return bonus;
 }
