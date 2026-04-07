@@ -2,7 +2,7 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, AffixPosition, EquipSlot, GeneratedEquipInstance, MonsterTemplate, MutationDef, MutationType, TechniqueTraitDef, TechniqueTraitTier, TechniqueInstance } from '../types';
 import type { SpiritRootType } from '../spirit-root';
 import type { AchievementDef } from '../achievement/types';
 import {
@@ -12,6 +12,10 @@ import {
   monsterRegistry, divineArtRegistry, achievementRegistry,
   bodyRealmRegistry, spiritRootBodyBonusRegistry, realmRegistry, regionRegistry,
   bottleneckRegistry, npcRegistry, questChainRegistry, dialogueRegistry, idleChatRegistry,
+  eventTemplateRegistry, variablePoolRegistry,
+  equipTemplateRegistry, affixDefRegistry, generatedEquipRegistry,
+  monsterTemplateRegistry, mutationDefRegistry,
+  techniqueTraitRegistry, techniqueInstanceRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -25,7 +29,32 @@ export function getEventsByCategory(category: EventCategory): GameEvent[] {
 
 // ── 物品 ──
 
-export function getItemDef(id: string) { return itemDefRegistry.get(id); }
+export function getItemDef(id: string) {
+  const staticDef = itemDefRegistry.get(id);
+  if (staticDef) return staticDef;
+  // T0071: 程序化装备也可作为物品查询
+  if (id.startsWith('proc-equip:')) {
+    const inst = generatedEquipRegistry.get(id);
+    if (inst) {
+      const template = equipTemplateRegistry.get(inst.baseTemplateId);
+      if (template) {
+        const tier = getQualityTier(inst.quality);
+        return {
+          id: inst.instanceId,
+          name: inst.finalName,
+          category: template.slot === 'weapon' ? 'weapon' : template.slot === 'accessory1' || template.slot === 'accessory2' ? 'accessory' : 'armor',
+          rarity: tier.rarity,
+          description: inst.description,
+          stackable: false,
+          maxStack: 1,
+          usable: false,
+          sellPrice: inst.finalSellPrice,
+        } as import('../types').ItemDef;
+      }
+    }
+  }
+  return undefined;
+}
 export function getItemDefsByCategory(category: ItemCategory) {
   return Array.from(itemDefRegistry.values()).filter(i => i.category === category);
 }
@@ -38,7 +67,19 @@ export function getAllRecipes() { return Array.from(recipeRegistry.values()); }
 
 // ── 装备 ──
 
-export function getEquipDef(id: string) { return equipRegistry.get(id); }
+export function getEquipDef(id: string) {
+  const staticDef = equipRegistry.get(id);
+  if (staticDef) return staticDef;
+  // T0071: 回退查询程序化生成的装备
+  const inst = generatedEquipRegistry.get(id);
+  if (inst) {
+    const template = equipTemplateRegistry.get(inst.baseTemplateId);
+    if (template) {
+      return instanceToEquipDef(inst, template);
+    }
+  }
+  return undefined;
+}
 export function getAllEquipDefs() { return Array.from(equipRegistry.values()); }
 
 // ── 炼器配方 ──
@@ -159,3 +200,119 @@ export function getDialoguesByNpc(npcId: string): DialogueChainDef[] {
   return Array.from(dialogueRegistry.values()).filter(d => d.npcId === npcId);
 }
 export function getIdleChatPool(): Record<string, string[]> { return idleChatRegistry; }
+
+// ── 程序化事件模板（T0070）──
+
+export function getEventTemplate(id: string): EventTemplate | undefined { return eventTemplateRegistry.get(id); }
+export function getAllEventTemplates(): EventTemplate[] { return Array.from(eventTemplateRegistry.values()); }
+export function getEventTemplatesByCategory(category: EventCategory): EventTemplate[] {
+  return Array.from(eventTemplateRegistry.values()).filter(t => t.category === category);
+}
+
+// ── 变量词库（T0070）──
+
+export function getVariablePool(id: string): VariablePool | undefined { return variablePoolRegistry.get(id); }
+export function getAllVariablePools(): VariablePool[] { return Array.from(variablePoolRegistry.values()); }
+export function getVariablePoolsByVariable(variable: string): VariablePool[] {
+  return Array.from(variablePoolRegistry.values()).filter(p => p.variable === variable);
+}
+
+// ── 装备模板（T0071）──
+
+export function getEquipTemplate(id: string): EquipBaseTemplate | undefined { return equipTemplateRegistry.get(id); }
+export function getAllEquipTemplates(): EquipBaseTemplate[] { return Array.from(equipTemplateRegistry.values()); }
+export function getEquipTemplatesBySlot(slot: EquipSlot): EquipBaseTemplate[] {
+  return Array.from(equipTemplateRegistry.values()).filter(t => t.slot === slot);
+}
+
+// ── 词缀（T0071）──
+
+export function getAffixDef(id: string): AffixDef | undefined { return affixDefRegistry.get(id); }
+export function getAllAffixDefs(): AffixDef[] { return Array.from(affixDefRegistry.values()); }
+export function getAffixesByPosition(position: AffixPosition): AffixDef[] {
+  return Array.from(affixDefRegistry.values()).filter(a => a.position === position);
+}
+
+// ── 程序化装备实例（T0071）──
+
+export function getGeneratedEquip(instanceId: string): GeneratedEquipInstance | undefined {
+  return generatedEquipRegistry.get(instanceId);
+}
+export function registerGeneratedEquip(inst: GeneratedEquipInstance): void {
+  generatedEquipRegistry.set(inst.instanceId, inst);
+}
+export function removeGeneratedEquip(instanceId: string): void {
+  generatedEquipRegistry.delete(instanceId);
+}
+export function getAllGeneratedEquips(): GeneratedEquipInstance[] {
+  return Array.from(generatedEquipRegistry.values());
+}
+export function clearAllGeneratedEquips(): void {
+  generatedEquipRegistry.clear();
+}
+
+// ── T0071 辅助：实例 → EquipDef 桥接 ──
+
+import type { EquipDef } from '../types';
+import { getQualityTier } from '../procedural/rarity';
+
+function instanceToEquipDef(inst: GeneratedEquipInstance, template: EquipBaseTemplate): EquipDef {
+  const tier = getQualityTier(inst.quality);
+  return {
+    id: inst.instanceId,
+    name: inst.finalName,
+    slot: template.slot,
+    rarity: tier.rarity,
+    description: inst.description,
+    stats: inst.finalStats,
+    minRealm: template.minRealm,
+    sellPrice: inst.finalSellPrice,
+    techType: template.techType,
+  };
+}
+
+// ── 妖兽模板（T0072）──
+
+export function getMonsterTemplate(id: string): MonsterTemplate | undefined { return monsterTemplateRegistry.get(id); }
+export function getAllMonsterTemplates(): MonsterTemplate[] { return Array.from(monsterTemplateRegistry.values()); }
+export function getMonsterTemplatesByRealm(realmIndex: number): MonsterTemplate[] {
+  return Array.from(monsterTemplateRegistry.values()).filter(t => {
+    if (t.minRealm !== undefined && realmIndex < t.minRealm) return false;
+    if (t.maxRealm !== undefined && realmIndex > t.maxRealm) return false;
+    return true;
+  });
+}
+
+// ── 变异定义（T0072）──
+
+export function getMutationDef(id: string): MutationDef | undefined { return mutationDefRegistry.get(id); }
+export function getAllMutationDefs(): MutationDef[] { return Array.from(mutationDefRegistry.values()); }
+export function getMutationDefsByType(type: MutationType): MutationDef[] {
+  return Array.from(mutationDefRegistry.values()).filter(m => m.type === type);
+}
+
+// ── 功法词条（T0073）──
+
+export function getTechniqueTraitDef(id: string): TechniqueTraitDef | undefined { return techniqueTraitRegistry.get(id); }
+export function getAllTechniqueTraitDefs(): TechniqueTraitDef[] { return Array.from(techniqueTraitRegistry.values()); }
+export function getTechniqueTraitsByTier(tier: TechniqueTraitTier): TechniqueTraitDef[] {
+  return Array.from(techniqueTraitRegistry.values()).filter(t => t.tier === tier);
+}
+
+// ── 功法词条实例（T0073）──
+
+export function getTechniqueInstance(instanceId: string): TechniqueInstance | undefined {
+  return techniqueInstanceRegistry.get(instanceId);
+}
+export function registerTechniqueInstance(inst: TechniqueInstance): void {
+  techniqueInstanceRegistry.set(inst.instanceId, inst);
+}
+export function removeTechniqueInstance(instanceId: string): void {
+  techniqueInstanceRegistry.delete(instanceId);
+}
+export function getAllTechniqueInstances(): TechniqueInstance[] {
+  return Array.from(techniqueInstanceRegistry.values());
+}
+export function clearAllTechniqueInstances(): void {
+  techniqueInstanceRegistry.clear();
+}

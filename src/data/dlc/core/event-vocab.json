@@ -1,0 +1,467 @@
+[
+  {
+    "id": "core:pool_resources",
+    "namespace": "core",
+    "variable": "resource",
+    "entries": [
+      { "value": "灵石矿", "linkedValues": { "emoji": "💎" }, "weight": 3 },
+      { "value": "铁矿", "linkedValues": { "emoji": "⛏️" }, "weight": 2 },
+      { "value": "灵草丛", "linkedValues": { "emoji": "🌿" }, "weight": 2 },
+      { "value": "玄铁矿脉", "linkedValues": { "emoji": "🔩" }, "weight": 1, "minRealm": 2 },
+      { "value": "星陨石", "linkedValues": { "emoji": "☄️" }, "weight": 1, "minRealm": 4 },
+      { "value": "碧玉矿", "linkedValues": { "emoji": "💚" }, "weight": 2, "minRealm": 1 },
+      { "value": "紫晶石", "linkedValues": { "emoji": "🔮" }, "weight": 1, "minRealm": 3 }
+    ]
+  },
+  {
+    "id": "core:pool_locations",
+    "namespace": "core",
+    "variable": "location",
+    "entries": [
+      { "value": "山谷深处", "weight": 3, "regionTags": ["mountain", "valley"] },
+      { "value": "密林之中", "weight": 3, "regionTags": ["wilderness"] },
+      { "value": "河畔", "weight": 2 },
+      { "value": "古洞穴内", "weight": 2, "regionTags": ["mountain"] },
+      { "value": "废弃矿井中", "weight": 1, "regionTags": ["wasteland"] },
+      { "value": "竹林小径", "weight": 2 },
+      { "value": "悬崖绝壁旁", "weight": 1, "regionTags": ["mountain", "dangerous"] },
+      { "value": "溪流源头", "weight": 2 },
+      { "value": "荒废道观中", "weight": 1 },
+      { "value": "桃花林间", "weight": 2 },
+      { "value": "古树根下", "weight": 2 },
+      { "value": "瀑布之后", "weight": 1, "regionTags": ["mountain", "valley"] }
+    ]
+  },
+  {
+    "id": "core:pool_amounts_small",
+    "namespace": "core",
+    "variable": "amount",
+    "entries": [
+      { "value": "5", "weight": 3 },
+      { "value": "10", "weight": 5 },
+      { "value": "15", "weight": 4 },
+      { "value": "20", "weight": 3 },
+      { "value": "30", "weight": 2, "minRealm": 1 },
+      { "value": "50", "weight": 1, "minRealm": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_amounts_medium",
+    "namespace": "core",
+    "variable": "amount",
+    "entries": [
+      { "value": "30", "weight": 3 },
+      { "value": "50", "weight": 4 },
+      { "value": "80", "weight": 3, "minRealm": 1 },
+      { "value": "100", "weight": 2, "minRealm": 2 },
+      { "value": "150", "weight": 1, "minRealm": 3 }
+    ]
+  },
+  {
+    "id": "core:pool_elders",
+    "namespace": "core",
+    "variable": "elder",
+    "entries": [
+      { "value": "一位白发长老", "weight": 3 },
+      { "value": "云游散仙", "weight": 2 },
+      { "value": "龟仙前辈", "weight": 1 },
+      { "value": "隐世剑修", "weight": 2, "minRealm": 2 },
+      { "value": "上古遗魂", "weight": 1, "minRealm": 4 },
+      { "value": "采药老翁", "weight": 3 },
+      { "value": "游方道人", "weight": 2 },
+      { "value": "退隐宗师", "weight": 1, "minRealm": 3 }
+    ]
+  },
+  {
+    "id": "core:pool_exp_amounts",
+    "namespace": "core",
+    "variable": "exp",
+    "entries": [
+      { "value": "5", "weight": 3 },
+      { "value": "10", "weight": 5 },
+      { "value": "15", "weight": 4 },
+      { "value": "20", "weight": 3, "minRealm": 1 },
+      { "value": "30", "weight": 2, "minRealm": 2 },
+      { "value": "50", "weight": 1, "minRealm": 3 }
+    ]
+  },
+  {
+    "id": "core:pool_exp_amounts_large",
+    "namespace": "core",
+    "variable": "exp",
+    "entries": [
+      { "value": "30", "weight": 3 },
+      { "value": "50", "weight": 4, "minRealm": 1 },
+      { "value": "80", "weight": 3, "minRealm": 2 },
+      { "value": "120", "weight": 2, "minRealm": 3 },
+      { "value": "200", "weight": 1, "minRealm": 4 }
+    ]
+  },
+  {
+    "id": "core:pool_enemies",
+    "namespace": "core",
+    "variable": "enemy",
+    "entries": [
+      { "value": "一只野狼", "weight": 3 },
+      { "value": "一条毒蛇", "weight": 2 },
+      { "value": "山贼", "weight": 3 },
+      { "value": "妖蝎", "weight": 2, "minRealm": 1 },
+      { "value": "邪修", "weight": 1, "minRealm": 2 },
+      { "value": "黑风盗", "weight": 2 },
+      { "value": "阴魂", "weight": 1, "minRealm": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_hiding_spots",
+    "namespace": "core",
+    "variable": "hiding_spot",
+    "entries": [
+      { "value": "草丛", "weight": 3 },
+      { "value": "岩石缝隙", "weight": 2 },
+      { "value": "树冠", "weight": 2 },
+      { "value": "地洞", "weight": 2 },
+      { "value": "暗影", "weight": 1, "minRealm": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_damage_small",
+    "namespace": "core",
+    "variable": "hp_loss",
+    "entries": [
+      { "value": "5", "weight": 3 },
+      { "value": "10", "weight": 5 },
+      { "value": "15", "weight": 3 },
+      { "value": "20", "weight": 2, "minRealm": 1 },
+      { "value": "30", "weight": 1, "minRealm": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_herbs",
+    "namespace": "core",
+    "variable": "herb",
+    "entries": [
+      { "value": "灵芝", "weight": 2 },
+      { "value": "紫花草", "weight": 3 },
+      { "value": "九叶莲", "weight": 1, "minRealm": 1 },
+      { "value": "天心草", "weight": 2 },
+      { "value": "碧萝花", "weight": 2 },
+      { "value": "火灵果", "weight": 1, "minRealm": 2 },
+      { "value": "冰魄兰", "weight": 1, "minRealm": 3 }
+    ]
+  },
+  {
+    "id": "core:pool_adjectives",
+    "namespace": "core",
+    "variable": "adj",
+    "entries": [
+      { "value": "闪烁着微光的", "weight": 3 },
+      { "value": "散发着灵气的", "weight": 3 },
+      { "value": "古老的", "weight": 2 },
+      { "value": "神秘的", "weight": 2 },
+      { "value": "上品", "weight": 1, "minRealm": 2 },
+      { "value": "极品", "weight": 1, "minRealm": 4 },
+      { "value": "被苔藓覆盖的", "weight": 2 },
+      { "value": "散发着幽香的", "weight": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_traps",
+    "namespace": "core",
+    "variable": "trap",
+    "entries": [
+      { "value": "陷坑", "weight": 3 },
+      { "value": "毒刺阵", "weight": 2 },
+      { "value": "落石机关", "weight": 2 },
+      { "value": "禁制阵法", "weight": 1, "minRealm": 2 },
+      { "value": "爆炎符", "weight": 1, "minRealm": 1 }
+    ]
+  },
+  {
+    "id": "core:pool_good_weather",
+    "namespace": "core",
+    "variable": "weather",
+    "entries": [
+      { "value": "灵雨普降", "weight": 3 },
+      { "value": "紫气东来", "weight": 2 },
+      { "value": "晴空万里", "weight": 3 },
+      { "value": "月华如水", "weight": 2 },
+      { "value": "霞光满天", "weight": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_weather_effects",
+    "namespace": "core",
+    "variable": "weather_effect",
+    "entries": [
+      { "value": "修炼倍感顺畅", "weight": 3 },
+      { "value": "灵台清明", "weight": 2 },
+      { "value": "身心放松", "weight": 3 },
+      { "value": "灵感涌现", "weight": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_bad_weather",
+    "namespace": "core",
+    "variable": "weather",
+    "entries": [
+      { "value": "暴风骤雨", "weight": 3 },
+      { "value": "阴气弥漫", "weight": 2 },
+      { "value": "雷暴交加", "weight": 2 },
+      { "value": "毒雾笼罩", "weight": 1, "minRealm": 1 },
+      { "value": "寒潮来袭", "weight": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_bad_weather_effects",
+    "namespace": "core",
+    "variable": "weather_effect",
+    "entries": [
+      { "value": "修炼受阻", "weight": 3 },
+      { "value": "灵气混乱", "weight": 2 },
+      { "value": "身体不适", "weight": 2 },
+      { "value": "心绪不宁", "weight": 3 }
+    ]
+  },
+  {
+    "id": "core:pool_mood_amounts",
+    "namespace": "core",
+    "variable": "mood_gain",
+    "entries": [
+      { "value": "3", "weight": 3 },
+      { "value": "5", "weight": 5 },
+      { "value": "8", "weight": 3 },
+      { "value": "10", "weight": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_ruins",
+    "namespace": "core",
+    "variable": "ruin",
+    "entries": [
+      { "value": "上古遗迹", "weight": 2 },
+      { "value": "废弃洞府", "weight": 3 },
+      { "value": "古战场遗址", "weight": 2 },
+      { "value": "仙人遗冢", "weight": 1, "minRealm": 3 },
+      { "value": "远古阵法残迹", "weight": 1, "minRealm": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_lost_consequences",
+    "namespace": "core",
+    "variable": "lost_consequence",
+    "entries": [
+      { "value": "在原地打转了许久", "weight": 3 },
+      { "value": "走了许多冤枉路", "weight": 3 },
+      { "value": "费了好大力气才找到出路", "weight": 2 },
+      { "value": "几乎精疲力竭", "weight": 1 }
+    ]
+  },
+  {
+    "id": "core:pool_stamina_amounts",
+    "namespace": "core",
+    "variable": "stamina_loss",
+    "entries": [
+      { "value": "5", "weight": 3 },
+      { "value": "10", "weight": 4 },
+      { "value": "15", "weight": 3 },
+      { "value": "20", "weight": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_insight_triggers",
+    "namespace": "core",
+    "variable": "insight_trigger",
+    "entries": [
+      { "value": "观察落叶飘零", "weight": 3 },
+      { "value": "聆听溪水潺潺", "weight": 3 },
+      { "value": "仰望繁星点点", "weight": 2 },
+      { "value": "感受清风拂面", "weight": 2 },
+      { "value": "凝视烛火摇曳", "weight": 2 },
+      { "value": "品茶静思", "weight": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_insight_results",
+    "namespace": "core",
+    "variable": "insight_result",
+    "entries": [
+      { "value": "对天地之道有了新的感悟", "weight": 3 },
+      { "value": "心境豁然开朗", "weight": 3 },
+      { "value": "体内灵气运转更为顺畅", "weight": 2 },
+      { "value": "隐约触碰到了修炼的门槛", "weight": 2 },
+      { "value": "感悟到了一丝道韵", "weight": 1, "minRealm": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_fellows",
+    "namespace": "core",
+    "variable": "fellow",
+    "entries": [
+      { "value": "一位同阶修士", "weight": 3 },
+      { "value": "一名游历散修", "weight": 3 },
+      { "value": "一位剑修少年", "weight": 2 },
+      { "value": "一名丹修前辈", "weight": 1, "minRealm": 1 },
+      { "value": "一位体修壮士", "weight": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_exchange_actions",
+    "namespace": "core",
+    "variable": "exchange_action",
+    "entries": [
+      { "value": "互相切磋了一番", "weight": 3 },
+      { "value": "交换了修炼心得", "weight": 3 },
+      { "value": "讨论了功法要诀", "weight": 2 },
+      { "value": "分享了探索发现", "weight": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_steal_actions",
+    "namespace": "core",
+    "variable": "steal_action",
+    "entries": [
+      { "value": "趁不备偷走了钱袋", "weight": 3 },
+      { "value": "强行索要过路费", "weight": 2 },
+      { "value": "设下圈套骗取财物", "weight": 2 },
+      { "value": "以武力胁迫交出灵石", "weight": 1 }
+    ]
+  },
+  {
+    "id": "core:pool_poison_effects",
+    "namespace": "core",
+    "variable": "poison_effect",
+    "entries": [
+      { "value": "毒气入体", "weight": 3 },
+      { "value": "头晕目眩", "weight": 3 },
+      { "value": "气息紊乱", "weight": 2 },
+      { "value": "经脉受损", "weight": 1, "minRealm": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_health_loss",
+    "namespace": "core",
+    "variable": "health_loss",
+    "entries": [
+      { "value": "2", "weight": 3 },
+      { "value": "3", "weight": 4 },
+      { "value": "5", "weight": 3 },
+      { "value": "8", "weight": 1, "minRealm": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_dream_scenes",
+    "namespace": "core",
+    "variable": "dream_scene",
+    "entries": [
+      { "value": "置身云海之巅", "weight": 3 },
+      { "value": "与仙人论道", "weight": 2 },
+      { "value": "重回幼年修炼之地", "weight": 2 },
+      { "value": "驾鹤穿越星河", "weight": 1, "minRealm": 2 },
+      { "value": "于太虚幻境参悟", "weight": 1, "minRealm": 3 }
+    ]
+  },
+  {
+    "id": "core:pool_dream_results",
+    "namespace": "core",
+    "variable": "dream_result",
+    "entries": [
+      { "value": "醒来后灵台清明", "weight": 3 },
+      { "value": "隐约记住了几句口诀", "weight": 2 },
+      { "value": "对修炼之道有了新理解", "weight": 3 },
+      { "value": "体内灵气微微涌动", "weight": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_nightmare_scenes",
+    "namespace": "core",
+    "variable": "nightmare_scene",
+    "entries": [
+      { "value": "梦到被妖兽追赶", "weight": 3 },
+      { "value": "梦到修为尽失", "weight": 2 },
+      { "value": "梦到坠入万丈深渊", "weight": 2 },
+      { "value": "梦到心魔现身", "weight": 1, "minRealm": 2 },
+      { "value": "梦到渡劫失败", "weight": 1, "minRealm": 3 }
+    ]
+  },
+  {
+    "id": "core:pool_nightmare_effects",
+    "namespace": "core",
+    "variable": "nightmare_effect",
+    "entries": [
+      { "value": "惊醒后久久不能平静", "weight": 3 },
+      { "value": "冷汗淋漓", "weight": 2 },
+      { "value": "心神不宁", "weight": 3 },
+      { "value": "整日提不起精神", "weight": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_lucky_events",
+    "namespace": "core",
+    "variable": "lucky_event",
+    "entries": [
+      { "value": "捡到前人遗留的储物袋", "weight": 2 },
+      { "value": "发现了一处无主灵石矿", "weight": 2 },
+      { "value": "地上发现散落的灵石", "weight": 3 },
+      { "value": "路遇富商赠礼", "weight": 1 }
+    ]
+  },
+  {
+    "id": "core:pool_scenery",
+    "namespace": "core",
+    "variable": "scenery",
+    "entries": [
+      { "value": "壮丽山河", "weight": 3 },
+      { "value": "落日余晖", "weight": 3 },
+      { "value": "云海翻涌", "weight": 2 },
+      { "value": "飞瀑流泉", "weight": 2 },
+      { "value": "星空璀璨", "weight": 2 },
+      { "value": "花海如画", "weight": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_teaching_actions",
+    "namespace": "core",
+    "variable": "teaching_action",
+    "entries": [
+      { "value": "指点修炼要诀", "weight": 3 },
+      { "value": "传授了一段口诀", "weight": 2 },
+      { "value": "讲解了一番天地之理", "weight": 2 },
+      { "value": "演示了几招身法", "weight": 2 },
+      { "value": "分享了突破心得", "weight": 1, "minRealm": 2 }
+    ]
+  },
+  {
+    "id": "core:pool_fog_events",
+    "namespace": "core",
+    "variable": "fog_event",
+    "entries": [
+      { "value": "隐约看到了一道人影", "weight": 3 },
+      { "value": "听到了远古的诵经声", "weight": 2 },
+      { "value": "感受到了奇异的灵力波动", "weight": 2 },
+      { "value": "发现了一块刻有符文的石碑", "weight": 1 }
+    ]
+  },
+  {
+    "id": "core:pool_health_actions",
+    "namespace": "core",
+    "variable": "health_action",
+    "entries": [
+      { "value": "调息打坐一番", "weight": 3 },
+      { "value": "以灵气温养经脉", "weight": 2 },
+      { "value": "练习养生功法", "weight": 2 },
+      { "value": "服用了草药汤剂", "weight": 2 },
+      { "value": "以内力调理伤势", "weight": 1, "minRealm": 1 }
+    ]
+  },
+  {
+    "id": "core:pool_health_gain",
+    "namespace": "core",
+    "variable": "health_gain",
+    "entries": [
+      { "value": "2", "weight": 3 },
+      { "value": "3", "weight": 4 },
+      { "value": "5", "weight": 3 },
+      { "value": "8", "weight": 1, "minRealm": 1 }
+    ]
+  }
+]

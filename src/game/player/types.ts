@@ -46,6 +46,7 @@ export interface TechniqueSlot {
   techniqueId: string;       // 功法定义 ID
   level: number;             // 当前等级（1 起步）
   exp: number;               // 当前熟练度（升级后清零）
+  instanceId?: string;       // T0073 关联的词条实例 ID（可选，无则为无词条版本）
 }
 
 export interface Player {

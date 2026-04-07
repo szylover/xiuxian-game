@@ -19,4 +19,12 @@ export const TECHNIQUE_TEXTS = {
   activateNotLearnedName: (name: string) => `❌ 尚未学会 ${name}`,
   deactivate: (name: string) => `❎ 取消激活 ${name}`,
   activate: (name: string) => `⚔️ 切换功法为 ${name}`,
+  // T0073: 功法词条
+  traitsGenerated: (count: number, quality: string) => ` 🎲 ${quality}功法，附带 ${count} 条词条！`,
+  qualityName: (rarity: string) => {
+    const map: Record<string, string> = {
+      common: '凡品', uncommon: '灵品', rare: '地品', epic: '天品', legendary: '仙品',
+    };
+    return map[rarity] ?? rarity;
+  },
 } as const;

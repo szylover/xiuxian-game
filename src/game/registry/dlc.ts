@@ -10,6 +10,10 @@ import {
   monsterRegistry, divineArtRegistry, achievementRegistry,
   bodyRealmRegistry, spiritRootBodyBonusRegistry, realmRegistry, regionRegistry,
   bottleneckRegistry, npcRegistry, questChainRegistry, dialogueRegistry, idleChatRegistry,
+  eventTemplateRegistry, variablePoolRegistry,
+  equipTemplateRegistry, affixDefRegistry,
+  monsterTemplateRegistry, mutationDefRegistry,
+  techniqueTraitRegistry,
 } from './stores';
 
 export function registerDLC(pack: DLCPack): void {
@@ -41,6 +45,13 @@ export function registerDLC(pack: DLCPack): void {
       idleChatRegistry[personality] = [...(idleChatRegistry[personality] ?? []), ...lines];
     }
   }
+  if (pack.eventTemplates) for (const t of pack.eventTemplates) eventTemplateRegistry.set(t.id, t);
+  if (pack.variablePools) for (const vp of pack.variablePools) variablePoolRegistry.set(vp.id, vp);
+  if (pack.equipBaseTemplates) for (const t of pack.equipBaseTemplates) equipTemplateRegistry.set(t.id, t);
+  if (pack.affixDefs) for (const a of pack.affixDefs) affixDefRegistry.set(a.id, a);
+  if (pack.monsterTemplates) for (const mt of pack.monsterTemplates) monsterTemplateRegistry.set(mt.id, mt);
+  if (pack.mutations) for (const md of pack.mutations) mutationDefRegistry.set(md.id, md);
+  if (pack.techniqueTraits) for (const tt of pack.techniqueTraits) techniqueTraitRegistry.set(tt.id, tt);
 }
 
 export function unregisterDLC(packId: string): void {
@@ -69,6 +80,13 @@ export function unregisterDLC(packId: string): void {
   if (pack.questChains) for (const qc of pack.questChains) questChainRegistry.delete(qc.id);
   if (pack.dialogues) for (const d of pack.dialogues) dialogueRegistry.delete(d.id);
   // Note: idleChat removal is approximate — shared pool entries are not individually tracked
+  if (pack.eventTemplates) for (const t of pack.eventTemplates) eventTemplateRegistry.delete(t.id);
+  if (pack.variablePools) for (const vp of pack.variablePools) variablePoolRegistry.delete(vp.id);
+  if (pack.equipBaseTemplates) for (const t of pack.equipBaseTemplates) equipTemplateRegistry.delete(t.id);
+  if (pack.affixDefs) for (const a of pack.affixDefs) affixDefRegistry.delete(a.id);
+  if (pack.monsterTemplates) for (const mt of pack.monsterTemplates) monsterTemplateRegistry.delete(mt.id);
+  if (pack.mutations) for (const md of pack.mutations) mutationDefRegistry.delete(md.id);
+  if (pack.techniqueTraits) for (const tt of pack.techniqueTraits) techniqueTraitRegistry.delete(tt.id);
   dlcRegistry.delete(packId);
 }
 

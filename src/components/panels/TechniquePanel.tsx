@@ -7,9 +7,11 @@ import './TechniquePanel.css';
 import type { Player } from '../../game/player';
 import { getTechniqueDef } from '../../game/registry';
 import type { TechniqueDef, PassiveEffect } from '../../game/registry';
+import { getTechniqueInstance, getTechniqueTraitDef } from '../../game/registry';
 import { getLearnableTechniques, calcTechniqueExpGain, getEffectiveMaxLevel, calcAptitudeBonus } from '../../game/technique';
 import { RARITY_COLORS, SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS } from '../shared';
 import type { TechniqueRarity } from '../../game/registry';
+import { TECHNIQUE_QUALITY_CONFIG } from '../../game/procedural';
 import { useState } from 'react';
 
 const TECHNIQUE_TYPE_CN: Record<string, string> = {
@@ -87,6 +89,11 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
             const matchRoot = def.spiritRootElement
               ? player.spiritRoots?.roots.find(r => r.type === def.spiritRootElement)
               : undefined;
+            // T0073: 词条实例品质
+            const techInstance = slot.instanceId ? getTechniqueInstance(slot.instanceId) : undefined;
+            const qualityCfg = techInstance
+              ? TECHNIQUE_QUALITY_CONFIG.find(c => c.rarity === techInstance.qualityOverride)
+              : undefined;
             const rootBoostText = matchRoot
               ? `×${(1 + matchRoot.affinity / 100).toFixed(1)}`
               : undefined;
@@ -105,6 +112,11 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                   <span className="technique-name">
                     {def.name}
                   </span>
+                  {qualityCfg && (
+                    <span className="technique-quality-badge" title={`${qualityCfg.displayName}品质，附带 ${techInstance?.traits.length ?? 0} 条词条`}>
+                      {qualityCfg.displayName}
+                    </span>
+                  )}
                   <span className="technique-type">{TECHNIQUE_TYPE_CN[def.type] ?? def.type}</span>
                   {def.spiritRootElement && (
                     <SpiritRootTag
@@ -168,6 +180,8 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                     ))}
                   </div>
                 )}
+                {/* 词条区块（T0073）*/}
+                <TraitSection instanceId={slot.instanceId} />
                 <div className="technique-actions">
                   {!isMaxLevel && (
                     <button className="btn btn-technique" onClick={() => onPractice(slot.techniqueId)}>
@@ -295,5 +309,38 @@ function formatBonus(def: TechniqueDef): string {
   if (b.hp) parts.push(`体力+${b.hp}`);
   if (b.mp) parts.push(`灵力+${b.mp}`);
   return parts.join(' ') || '无';
+}
+
+// ── 词条展示区块（T0073）──
+const TIER_ICONS: Record<string, string> = { minor: '◇', major: '◆', legendary: '★' };
+const TIER_COLORS: Record<string, string> = { minor: 'var(--color-quality-common)', major: 'var(--color-quality-rare)', legendary: 'var(--color-quality-legendary)' };
+
+function TraitSection({ instanceId }: { instanceId?: string }) {
+  if (!instanceId) return null;
+  const instance = getTechniqueInstance(instanceId);
+  if (!instance || instance.traits.length === 0) return null;
+
+  return (
+    <div className="technique-trait-section">
+      <div className="technique-trait-title">🎲 词条</div>
+      {instance.traits.map((slot, i) => {
+        const traitDef = getTechniqueTraitDef(slot.traitId);
+        const name = traitDef?.name ?? slot.traitId;
+        const desc = traitDef?.description.replace('{value}', String(slot.finalValue)) ?? `${slot.stat} +${slot.finalValue}`;
+        return (
+          <div
+            key={i}
+            className="technique-trait-row"
+            style={{ '--trait-color': TIER_COLORS[slot.tier] ?? TIER_COLORS.minor } as React.CSSProperties}
+            title={desc}
+          >
+            <span className="technique-trait-icon">{TIER_ICONS[slot.tier] ?? '◇'}</span>
+            <span className="technique-trait-name">{name}</span>
+            <span className="technique-trait-value">{desc}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 

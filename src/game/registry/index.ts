@@ -25,6 +25,11 @@ export type {
   QuestStatus, QuestSystemState, QuestTrigger,
   DialogueNodeType, DialogueEffect, DialogueChoiceCondition, DialogueChoice,
   DialogueNode, DialogueCondition, DialogueChainDef, DialogueSystemState, IdleChatPool,
+  JsonEventCondition, VarConstraint, EventTemplate, VariableEntry, VariablePool, ProceduralEventState,
+  AffixPosition, ProceduralEquipQuality, EquipBaseTemplate, AffixDef, GeneratedEquipInstance, ProceduralItemState,
+  MutationType, MonsterTemplate, MutationDef, ProceduralMonsterState,
+  TechniqueTraitDef, TechniqueTraitTier, TechniqueTraitSlot, TechniqueInstance,
+  TechniqueQualityConfig, ProceduralTechniqueState,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
@@ -54,6 +59,15 @@ export {
   getNpcDef, getAllNpcDefs, getNpcsByRegionTags, getNpcsByRole, getNpcsByDisposition,
   getQuestChainDef, getAllQuestChainDefs, getQuestChainsByCategory,
   getDialogueDef, getAllDialogueDefs, getDialoguesByNpc, getIdleChatPool,
+  getEventTemplate, getAllEventTemplates, getEventTemplatesByCategory,
+  getVariablePool, getAllVariablePools, getVariablePoolsByVariable,
+  getEquipTemplate, getAllEquipTemplates, getEquipTemplatesBySlot,
+  getAffixDef, getAllAffixDefs, getAffixesByPosition,
+  getGeneratedEquip, registerGeneratedEquip, removeGeneratedEquip, getAllGeneratedEquips, clearAllGeneratedEquips,
+  getMonsterTemplate, getAllMonsterTemplates, getMonsterTemplatesByRealm,
+  getMutationDef, getAllMutationDefs, getMutationDefsByType,
+  getTechniqueTraitDef, getAllTechniqueTraitDefs, getTechniqueTraitsByTier,
+  getTechniqueInstance, registerTechniqueInstance, removeTechniqueInstance, getAllTechniqueInstances, clearAllTechniqueInstances,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

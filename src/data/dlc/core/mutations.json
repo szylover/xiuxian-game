@@ -1,0 +1,170 @@
+[
+  {
+    "id": "core:mut_fire",
+    "type": "element",
+    "name": "火焰",
+    "namePrefix": "火焰",
+    "weight": 10,
+    "element": "fire",
+    "elementResists": { "fire": 0.5 },
+    "statModifiers": { "atk": 1.2 },
+    "expBonus": 1.1,
+    "emojiOverride": "🔥"
+  },
+  {
+    "id": "core:mut_ice",
+    "type": "element",
+    "name": "寒冰",
+    "namePrefix": "寒冰",
+    "weight": 8,
+    "element": "water",
+    "elementResists": { "water": 0.5 },
+    "statModifiers": { "def": 1.3 },
+    "expBonus": 1.1
+  },
+  {
+    "id": "core:mut_thunder",
+    "type": "element",
+    "name": "雷电",
+    "namePrefix": "雷电",
+    "weight": 7,
+    "element": "thunder",
+    "elementResists": { "thunder": 0.5 },
+    "statModifiers": { "speed": 1.3, "atk": 1.1 },
+    "expBonus": 1.15
+  },
+  {
+    "id": "core:mut_wind",
+    "type": "element",
+    "name": "疾风",
+    "namePrefix": "疾风",
+    "weight": 8,
+    "element": "wind",
+    "elementResists": { "wind": 0.4 },
+    "statModifiers": { "speed": 1.4, "moveSpeed": 1.3 },
+    "expBonus": 1.1
+  },
+  {
+    "id": "core:mut_earth",
+    "type": "element",
+    "name": "厚土",
+    "namePrefix": "厚土",
+    "weight": 7,
+    "element": "earth",
+    "elementResists": { "earth": 0.5 },
+    "statModifiers": { "hp": 1.3, "def": 1.2 },
+    "expBonus": 1.1
+  },
+  {
+    "id": "core:mut_wood",
+    "type": "element",
+    "name": "灵木",
+    "namePrefix": "灵木",
+    "weight": 6,
+    "element": "wood",
+    "elementResists": { "wood": 0.5 },
+    "statModifiers": { "hp": 1.2 },
+    "expBonus": 1.05
+  },
+  {
+    "id": "core:mut_metal",
+    "type": "element",
+    "name": "金刚",
+    "namePrefix": "金刚",
+    "weight": 6,
+    "element": "metal",
+    "elementResists": { "metal": 0.5 },
+    "statModifiers": { "def": 1.4, "atk": 1.1 },
+    "expBonus": 1.15
+  },
+  {
+    "id": "core:mut_brute",
+    "type": "stat_boost",
+    "name": "蛮力",
+    "namePrefix": "蛮力",
+    "weight": 12,
+    "statModifiers": { "atk": 1.4, "speed": 0.9 },
+    "expBonus": 1.15
+  },
+  {
+    "id": "core:mut_armored",
+    "type": "stat_boost",
+    "name": "坚甲",
+    "namePrefix": "坚甲",
+    "weight": 10,
+    "statModifiers": { "def": 1.5, "hp": 1.2 },
+    "expBonus": 1.2
+  },
+  {
+    "id": "core:mut_swift",
+    "type": "stat_boost",
+    "name": "迅捷",
+    "namePrefix": "迅捷",
+    "weight": 10,
+    "statModifiers": { "speed": 1.4, "moveSpeed": 1.3, "hp": 0.9 },
+    "expBonus": 1.1
+  },
+  {
+    "id": "core:mut_berserk",
+    "type": "stat_boost",
+    "name": "狂暴",
+    "namePrefix": "狂暴",
+    "weight": 8,
+    "statModifiers": { "atk": 1.5, "critRate": 1.5, "def": 0.8 },
+    "expBonus": 1.25
+  },
+  {
+    "id": "core:mut_mountain",
+    "type": "region_adapt",
+    "name": "山地",
+    "namePrefix": "山地",
+    "weight": 8,
+    "statModifiers": { "def": 1.2, "speed": 0.95 },
+    "regionTags": ["mountain"],
+    "expBonus": 1.05
+  },
+  {
+    "id": "core:mut_swamp",
+    "type": "region_adapt",
+    "name": "沼泽",
+    "namePrefix": "沼泽",
+    "weight": 7,
+    "statModifiers": { "hp": 1.2, "moveSpeed": 0.85 },
+    "regionTags": ["valley", "herb"],
+    "expBonus": 1.05
+  },
+  {
+    "id": "core:mut_abyss",
+    "type": "region_adapt",
+    "name": "幽谷",
+    "namePrefix": "幽谷",
+    "weight": 6,
+    "statModifiers": { "atk": 1.15, "critRate": 1.2 },
+    "regionTags": ["mystic", "dangerous"],
+    "expBonus": 1.1
+  },
+  {
+    "id": "core:mut_elite",
+    "type": "elite",
+    "name": "精英",
+    "namePrefix": "精英",
+    "weight": 0,
+    "statModifiers": { "hp": 2.0, "atk": 1.5, "def": 1.5, "speed": 1.2 },
+    "expBonus": 2.0,
+    "goldBonus": 2.5,
+    "exclusive": true,
+    "lootBonus": 1.5
+  },
+  {
+    "id": "core:mut_boss",
+    "type": "boss",
+    "name": "王",
+    "nameSuffix": "王",
+    "weight": 0,
+    "statModifiers": { "hp": 5.0, "atk": 2.5, "def": 2.0, "speed": 1.5 },
+    "expBonus": 5.0,
+    "goldBonus": 5.0,
+    "exclusive": true,
+    "lootBonus": 3.0
+  }
+]

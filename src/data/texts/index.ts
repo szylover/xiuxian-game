@@ -17,3 +17,4 @@ export { EXPLORE_TEXTS } from './explore';
 export { UI_LABELS } from './ui-labels';
 export { QUEST_TEXTS } from './quest';
 export { DIALOGUE_TEXTS } from './dialogue';
+export { PROCEDURAL_TEXTS } from './procedural';

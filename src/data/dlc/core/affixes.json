@@ -1,0 +1,416 @@
+[
+  {
+    "id": "core:affix_flame",
+    "position": "prefix",
+    "name": "烈焰",
+    "description": "附带灼热之力",
+    "statBonus": { "atk": 5 },
+    "weight": 10,
+    "slotRestriction": ["weapon"]
+  },
+  {
+    "id": "core:affix_ice",
+    "position": "prefix",
+    "name": "寒冰",
+    "description": "寒气侵骨",
+    "statBonus": { "atk": 3, "speed": 2 },
+    "weight": 8,
+    "slotRestriction": ["weapon"],
+    "excludeAffixes": ["core:affix_flame"]
+  },
+  {
+    "id": "core:affix_iron",
+    "position": "prefix",
+    "name": "玄铁",
+    "description": "玄铁铸造，坚不可摧",
+    "statBonus": { "def": 5 },
+    "weight": 12
+  },
+  {
+    "id": "core:affix_thunder",
+    "position": "prefix",
+    "name": "雷霆",
+    "description": "雷霆之威，势不可挡",
+    "statBonus": { "atk": 6, "critRate": 1 },
+    "weight": 6,
+    "slotRestriction": ["weapon"],
+    "excludeAffixes": ["core:affix_flame", "core:affix_ice"]
+  },
+  {
+    "id": "core:affix_wind",
+    "position": "prefix",
+    "name": "清风",
+    "description": "风之轻灵",
+    "statBonus": { "speed": 4, "moveSpeed": 2 },
+    "weight": 9
+  },
+  {
+    "id": "core:affix_earth",
+    "position": "prefix",
+    "name": "厚土",
+    "description": "厚土之力，坚如磐石",
+    "statBonus": { "def": 4, "hp": 15 },
+    "weight": 10
+  },
+  {
+    "id": "core:affix_wood",
+    "position": "prefix",
+    "name": "灵木",
+    "description": "灵木之精，生机盎然",
+    "statBonus": { "hp": 20, "mp": 10 },
+    "weight": 8
+  },
+  {
+    "id": "core:affix_gold",
+    "position": "prefix",
+    "name": "精金",
+    "description": "精金锻造，锐不可当",
+    "statBonus": { "atk": 4, "def": 2 },
+    "weight": 7
+  },
+  {
+    "id": "core:affix_blood",
+    "position": "prefix",
+    "name": "血魄",
+    "description": "血气凝聚，杀气腾腾",
+    "statBonus": { "atk": 7, "hp": -10 },
+    "weight": 5,
+    "slotRestriction": ["weapon"]
+  },
+  {
+    "id": "core:affix_shadow",
+    "position": "prefix",
+    "name": "暗影",
+    "description": "暗影笼罩，神出鬼没",
+    "statBonus": { "speed": 5, "critRate": 2 },
+    "weight": 6
+  },
+  {
+    "id": "core:affix_spirit",
+    "position": "prefix",
+    "name": "灵韵",
+    "description": "灵气充盈",
+    "statBonus": { "mp": 20 },
+    "weight": 10
+  },
+  {
+    "id": "core:affix_jade",
+    "position": "prefix",
+    "name": "碧玉",
+    "description": "温润如玉，灵气流转",
+    "statBonus": { "mp": 15, "def": 2 },
+    "weight": 8,
+    "slotRestriction": ["accessory1", "accessory2", "helmet"]
+  },
+  {
+    "id": "core:affix_phoenix",
+    "position": "prefix",
+    "name": "凤凰",
+    "description": "凤凰涅槃之力",
+    "statBonus": { "atk": 8, "hp": 20 },
+    "weight": 3,
+    "minRealm": 3
+  },
+  {
+    "id": "core:affix_dragon",
+    "position": "prefix",
+    "name": "龙魂",
+    "description": "蕴含真龙气息",
+    "statBonus": { "atk": 10, "def": 5 },
+    "weight": 2,
+    "minRealm": 4
+  },
+  {
+    "id": "core:affix_starlight",
+    "position": "prefix",
+    "name": "星辉",
+    "description": "星光璀璨，灵力澎拜",
+    "statBonus": { "mp": 30, "critRate": 2 },
+    "weight": 4,
+    "minRealm": 3
+  },
+  {
+    "id": "core:affix_mountain",
+    "position": "prefix",
+    "name": "岩山",
+    "description": "山岳之重，镇压万物",
+    "statBonus": { "def": 8, "speed": -2 },
+    "weight": 7,
+    "slotRestriction": ["armor", "helmet"]
+  },
+  {
+    "id": "core:affix_cloud",
+    "position": "prefix",
+    "name": "流云",
+    "description": "轻若浮云",
+    "statBonus": { "speed": 3, "moveSpeed": 3 },
+    "weight": 8,
+    "slotRestriction": ["boots", "armor"]
+  },
+  {
+    "id": "core:affix_moonlight",
+    "position": "prefix",
+    "name": "月华",
+    "description": "月华如水，宁神静心",
+    "statBonus": { "mp": 15, "critResist": 3 },
+    "weight": 6
+  },
+  {
+    "id": "core:affix_ancient",
+    "position": "prefix",
+    "name": "上古",
+    "description": "上古遗物，威能不减",
+    "statBonus": { "atk": 6, "def": 4, "hp": 10 },
+    "weight": 2,
+    "minRealm": 4
+  },
+  {
+    "id": "core:affix_crimson",
+    "position": "prefix",
+    "name": "赤霄",
+    "description": "赤霄之气，烈焰灼心",
+    "statBonus": { "atk": 8, "critDmgMultiplier": 0.1 },
+    "weight": 4,
+    "slotRestriction": ["weapon"],
+    "minRealm": 2
+  },
+  {
+    "id": "core:affix_frost",
+    "position": "prefix",
+    "name": "霜华",
+    "description": "霜寒入骨",
+    "statBonus": { "def": 3, "speed": 3 },
+    "weight": 7
+  },
+  {
+    "id": "core:affix_divine",
+    "position": "prefix",
+    "name": "神妙",
+    "description": "神妙莫测之力",
+    "statBonus": { "atk": 5, "mp": 15, "critRate": 1 },
+    "weight": 3,
+    "minRealm": 3
+  },
+  {
+    "id": "core:affix_silk",
+    "position": "prefix",
+    "name": "天蚕",
+    "description": "天蚕丝织就，轻柔坚韧",
+    "statBonus": { "def": 4, "speed": 2 },
+    "weight": 6,
+    "slotRestriction": ["armor"]
+  },
+  {
+    "id": "core:affix_tiger",
+    "position": "prefix",
+    "name": "虎啸",
+    "description": "虎啸生威",
+    "statBonus": { "atk": 6, "critDmgMultiplier": 0.05 },
+    "weight": 5,
+    "slotRestriction": ["weapon"]
+  },
+  {
+    "id": "core:affix_tortoise",
+    "position": "prefix",
+    "name": "玄武",
+    "description": "玄武护体，牢不可破",
+    "statBonus": { "def": 6, "hp": 25 },
+    "weight": 4,
+    "slotRestriction": ["armor", "helmet"],
+    "minRealm": 2
+  },
+  {
+    "id": "core:affix_mist",
+    "position": "prefix",
+    "name": "迷雾",
+    "description": "雾气缭绕，难以捉摸",
+    "statBonus": { "critResist": 4, "speed": 2 },
+    "weight": 6
+  },
+  {
+    "id": "core:affix_soul",
+    "position": "prefix",
+    "name": "噬魂",
+    "description": "噬魂夺魄",
+    "statBonus": { "atk": 4, "mp": 10 },
+    "weight": 5,
+    "slotRestriction": ["weapon"],
+    "minRealm": 2
+  },
+  {
+    "id": "core:affix_dawn",
+    "position": "prefix",
+    "name": "破晓",
+    "description": "晨光初现，驱散黑暗",
+    "statBonus": { "atk": 4, "hp": 15, "mp": 5 },
+    "weight": 5,
+    "minRealm": 1
+  },
+  {
+    "id": "core:affix_breaker",
+    "position": "suffix",
+    "name": "破甲",
+    "description": "无视部分防御",
+    "statBonus": { "atk": 3, "critRate": 2 },
+    "weight": 6,
+    "slotRestriction": ["weapon"]
+  },
+  {
+    "id": "core:affix_guardian",
+    "position": "suffix",
+    "name": "守护",
+    "description": "守护灵力，提升防御",
+    "statBonus": { "def": 3, "hp": 20 },
+    "weight": 10,
+    "slotRestriction": ["armor", "helmet"]
+  },
+  {
+    "id": "core:affix_swift",
+    "position": "suffix",
+    "name": "疾风",
+    "description": "轻若无物，行动如风",
+    "statBonus": { "speed": 5, "moveSpeed": 3 },
+    "weight": 7
+  },
+  {
+    "id": "core:affix_slayer",
+    "position": "suffix",
+    "name": "屠魔",
+    "description": "斩妖除魔",
+    "statBonus": { "atk": 5, "critDmgMultiplier": 0.05 },
+    "weight": 4,
+    "slotRestriction": ["weapon"],
+    "minRealm": 2
+  },
+  {
+    "id": "core:affix_resilience",
+    "position": "suffix",
+    "name": "坚韧",
+    "description": "坚不可摧",
+    "statBonus": { "hp": 30, "def": 2 },
+    "weight": 8
+  },
+  {
+    "id": "core:affix_mana_surge",
+    "position": "suffix",
+    "name": "灵泉",
+    "description": "灵力涌动不息",
+    "statBonus": { "mp": 25 },
+    "weight": 7
+  },
+  {
+    "id": "core:affix_precision",
+    "position": "suffix",
+    "name": "精准",
+    "description": "一击必中",
+    "statBonus": { "critRate": 4 },
+    "weight": 5
+  },
+  {
+    "id": "core:affix_fortify",
+    "position": "suffix",
+    "name": "强固",
+    "description": "固若金汤",
+    "statBonus": { "def": 5, "critResist": 3 },
+    "weight": 6,
+    "slotRestriction": ["armor", "helmet", "boots"]
+  },
+  {
+    "id": "core:affix_agility",
+    "position": "suffix",
+    "name": "灵巧",
+    "description": "身如游鱼",
+    "statBonus": { "speed": 3, "critRate": 1 },
+    "weight": 7
+  },
+  {
+    "id": "core:affix_vitality",
+    "position": "suffix",
+    "name": "生机",
+    "description": "生生不息",
+    "statBonus": { "hp": 40 },
+    "weight": 6
+  },
+  {
+    "id": "core:affix_devastation",
+    "position": "suffix",
+    "name": "毁灭",
+    "description": "毁天灭地之力",
+    "statBonus": { "atk": 8, "critDmgMultiplier": 0.1 },
+    "weight": 2,
+    "slotRestriction": ["weapon"],
+    "minRealm": 3
+  },
+  {
+    "id": "core:affix_harmony",
+    "position": "suffix",
+    "name": "调和",
+    "description": "阴阳调和，气息平稳",
+    "statBonus": { "hp": 15, "mp": 15 },
+    "weight": 8
+  },
+  {
+    "id": "core:affix_featherlight",
+    "position": "suffix",
+    "name": "轻羽",
+    "description": "轻如鸿毛",
+    "statBonus": { "moveSpeed": 5, "speed": 2 },
+    "weight": 6,
+    "slotRestriction": ["boots"]
+  },
+  {
+    "id": "core:affix_warding",
+    "position": "suffix",
+    "name": "辟邪",
+    "description": "辟邪护身",
+    "statBonus": { "critResist": 5, "def": 2 },
+    "weight": 5,
+    "slotRestriction": ["accessory1", "accessory2"]
+  },
+  {
+    "id": "core:affix_insight",
+    "position": "suffix",
+    "name": "悟道",
+    "description": "洞察万物",
+    "statBonus": { "mp": 20, "critRate": 2 },
+    "weight": 4,
+    "minRealm": 2
+  },
+  {
+    "id": "core:affix_ethereal",
+    "position": "suffix",
+    "name": "飘渺",
+    "description": "虚无缥缈，难以触及",
+    "statBonus": { "speed": 4, "critResist": 3 },
+    "weight": 5,
+    "minRealm": 2
+  },
+  {
+    "id": "core:affix_bloodthirst",
+    "position": "suffix",
+    "name": "嗜血",
+    "description": "嗜血成性",
+    "statBonus": { "atk": 6, "hp": -15, "critDmgMultiplier": 0.08 },
+    "weight": 3,
+    "slotRestriction": ["weapon"],
+    "minRealm": 2
+  },
+  {
+    "id": "core:affix_blessing",
+    "position": "suffix",
+    "name": "祝福",
+    "description": "受到祝福，万事顺遂",
+    "statBonus": { "hp": 10, "mp": 10, "def": 2, "speed": 1 },
+    "weight": 4,
+    "minRealm": 1
+  },
+  {
+    "id": "core:affix_titan",
+    "position": "suffix",
+    "name": "巨力",
+    "description": "力拔山兮",
+    "statBonus": { "atk": 6, "def": 3 },
+    "weight": 4,
+    "minRealm": 2
+  }
+]
