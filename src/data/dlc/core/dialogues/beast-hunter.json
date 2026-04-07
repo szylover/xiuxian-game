@@ -1,0 +1,44 @@
+[
+  {
+    "id": "core:dlg_beast_hunter_challenge",
+    "npcId": "core:npc_beast_hunter",
+    "name": "猎妖人切磋",
+    "priority": 50,
+    "cooldown": 6,
+    "condition": {
+      "minAffinity": 30,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "minRealm": 2
+    },
+    "startNodeId": "n1",
+    "tags": ["combat"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「嘿！看你实力不错，要不来过两招？别怕，点到为止！」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "⚔️ 好！来就来！",
+            "nextNodeId": "n2",
+            "effects": {
+              "affinityChange": 5,
+              "triggerCombatNpcId": "core:npc_beast_hunter"
+            }
+          },
+          {
+            "id": "c2",
+            "text": "🙅 今天身体不适，改日再战。",
+            "effects": { "affinityChange": -1 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「哈哈！痛快！那就开始吧——」"
+      }
+    ]
+  }
+]

@@ -1,0 +1,103 @@
+[
+  {
+    "id": "core:dlg_elder_first_meet",
+    "npcId": "core:npc_qingyun_elder",
+    "name": "青云长老初见",
+    "priority": 100,
+    "once": true,
+    "condition": {
+      "minAffinity": 0,
+      "relationLevel": ["stranger", "acquaintance"]
+    },
+    "startNodeId": "n1",
+    "tags": ["greeting", "lore"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「年轻人，初入修途，前路漫漫。你可有什么想要请教的？」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🙏 请长老指点修行之道。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "💰 有没有什么好处？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": -2 }
+          },
+          {
+            "id": "c3",
+            "text": "👋 多谢，告辞。"
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「好，就凭你这份心性。这两枚回灵丹送你，修炼之余用得上。记住：修行如逆水行舟，不进则退。」",
+        "effects": {
+          "giveItems": [{ "itemId": "core:hp_pill", "count": 2 }]
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「哼，修行之路若只图好处，迟早走错路。去吧，自己好好想想。」"
+      }
+    ]
+  },
+  {
+    "id": "core:dlg_elder_realm2_advice",
+    "npcId": "core:npc_qingyun_elder",
+    "name": "青云长老突破建议",
+    "priority": 80,
+    "once": true,
+    "condition": {
+      "minAffinity": 20,
+      "minRealm": 2,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["core:dlg_elder_first_meet"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「嗯，你的修为有所精进，已入金丹之境。接下来的路更加艰难，须以心志坚如磐石。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🙏 请长老赐教。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2",
+            "text": "💪 晚辈自有把握！",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": -1 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「善。这几枚筑基丹虽不稀罕，但对你突破下一境界或有助益。切记，修行不可急功近利。」",
+        "effects": {
+          "giveItems": [{ "itemId": "core:spirit_stone_shard", "count": 3 }],
+          "expChange": 200
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「年轻气盛……也罢，碰壁之后自会明白。去吧。」"
+      }
+    ]
+  }
+]
