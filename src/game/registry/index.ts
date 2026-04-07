@@ -23,6 +23,8 @@ export type {
   QuestObjectiveType, QuestObjective, QuestReward, QuestStep, QuestChainCondition,
   QuestChainCategory, QuestChainDef, QuestObjectiveProgress, QuestChainProgress,
   QuestStatus, QuestSystemState, QuestTrigger,
+  DialogueNodeType, DialogueEffect, DialogueChoiceCondition, DialogueChoice,
+  DialogueNode, DialogueCondition, DialogueChainDef, DialogueSystemState, IdleChatPool,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
@@ -51,6 +53,7 @@ export {
   getBottleneckDef, getAllBottleneckDefs, getBottlenecksForRealm, getBottlenecksForBodyRealm, getBottlenecksForTechnique,
   getNpcDef, getAllNpcDefs, getNpcsByRegionTags, getNpcsByRole, getNpcsByDisposition,
   getQuestChainDef, getAllQuestChainDefs, getQuestChainsByCategory,
+  getDialogueDef, getAllDialogueDefs, getDialoguesByNpc, getIdleChatPool,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

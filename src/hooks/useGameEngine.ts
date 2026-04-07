@@ -308,6 +308,7 @@ export function useGameEngine(
     travel, bodyBreakthrough,
     meetNpc, giveGift,
     acceptQuest, abandonQuest, deliverQuestItem, turnInQuest,
+    startDialogue, dialogueSelectChoice, dialogueAdvance,
   } = useSystemActions({
     player, addLog, setPlayer, setGameOver, setGameOverReason, setDeathModal,
     chronicleHooks: { recordEvent: chronicle.recordEvent, syncSnapshot: chronicle.syncSnapshot },
@@ -399,6 +400,9 @@ export function useGameEngine(
     deliverQuestItem,
     turnInQuest,
     setTrackedQuest,
+    startDialogue,
+    dialogueSelectChoice,
+    dialogueAdvance,
     toast,
     dismissToast,
     combatModal,

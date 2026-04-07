@@ -12,9 +12,11 @@ import { getCurrentRegion } from './map';
 import { loadEventsFromJson } from './event-loader';
 import { loadItemsFromJson } from './item-loader';
 import { loadQuestsFromJson } from './quest-loader';
+import { loadDialoguesFromJson } from './dialogue-loader';
 import type { JsonEvent } from './event-loader';
 import type { JsonItem } from './item-loader';
 import type { JsonQuestChain } from './quest-loader';
+import type { JsonDialogueData } from './dialogue-loader';
 import { CORE_BREAKTHROUGH_REQS, CORE_TRIBULATIONS } from '../data/dlc/core/breakthrough';
 import { CORE_DIVINE_ARTS } from '../data/dlc/core/divine-arts';
 import { CORE_BODY_REALMS, CORE_SPIRIT_ROOT_BODY_BONUSES } from '../data/dlc/core/body-config';
@@ -252,6 +254,7 @@ export async function registerCoreEvents(): Promise<void> {
     { default: coreRegionsJson },
     { default: coreNpcsJson },
     { default: coreQuestsJson },
+    { default: coreDialoguesJson },
   ] = await Promise.all([
     import('../data/dlc/core/events.json'),
     import('../data/dlc/core/items.json'),
@@ -263,6 +266,7 @@ export async function registerCoreEvents(): Promise<void> {
     import('../data/dlc/core/regions.json'),
     import('../data/dlc/core/npcs.json'),
     import('../data/dlc/core/quests.json'),
+    import('../data/dlc/core/dialogues.json'),
   ]);
 
   const pack = loadEventsFromJson(coreEventsJson as JsonEvent[], CORE_DLC_META);
@@ -272,6 +276,8 @@ export async function registerCoreEvents(): Promise<void> {
   const smithingRecipes = coreSmithingJson as SmithingRecipeDef[];
   const techniques = coreTechniquesJson as TechniqueDef[];
   const questChains = loadQuestsFromJson(coreQuestsJson as JsonQuestChain[]);
+  const dialogueData = coreDialoguesJson as JsonDialogueData;
+  const dialogues = loadDialoguesFromJson(dialogueData.dialogues);
   registerDLC({
     ...pack,
     items,
@@ -294,6 +300,8 @@ export async function registerCoreEvents(): Promise<void> {
     bottlenecks: CORE_BOTTLENECKS,
     npcs: coreNpcsJson as NpcDef[],
     questChains,
+    dialogues,
+    idleChat: dialogueData.idleChat,
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }
