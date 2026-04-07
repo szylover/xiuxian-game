@@ -53,6 +53,13 @@ interface RightPanelProps {
   onAbandonQuest: (questId: string) => void;
   onDeliverQuestItem: (questId: string, objectiveIndex: number) => void;
   onTrackQuest: (questId: string | null) => void;
+  onStartDialogue: (dialogueId: string) => { node: import('../../game/types').DialogueNode | null };
+  onDialogueSelectChoice: (dialogueId: string, nodeId: string, choiceId: string) => {
+    nextNode: import('../../game/types').DialogueNode | null; logs: string[]; combatTrigger?: string; questTrigger?: string;
+  };
+  onDialogueAdvance: (dialogueId: string, currentNodeId: string) => {
+    nextNode: import('../../game/types').DialogueNode | null; logs: string[]; combatTrigger?: string; questTrigger?: string;
+  };
   onTurnInQuest: (questId: string) => void;
   chronicle: CultivationChronicle;
 }
@@ -66,6 +73,7 @@ export default function RightPanel({
   onMeetNpc, onGiveGift,
   onAcceptQuest, onAbandonQuest, onDeliverQuestItem, onTrackQuest,
   onTurnInQuest,
+  onStartDialogue, onDialogueSelectChoice, onDialogueAdvance,
   chronicle,
 }: RightPanelProps) {
   const closePanel = () => onSelectPanel(activePanel!);
@@ -91,7 +99,7 @@ export default function RightPanel({
           {activePanel === 'equipment' && <EquipmentPanel player={player} onEquip={onEquip} onUnequip={onUnequip} />}
           {activePanel === 'achievement' && <AchievementPanel player={player} />}
           {activePanel === 'map' && <MapPanel player={player} onTravel={onTravel} />}
-          {activePanel === 'npc' && <NpcPanel player={player} onMeetNpc={onMeetNpc} onGiveGift={onGiveGift} onAcceptQuest={onAcceptQuest} onTurnInQuest={onTurnInQuest} />}
+          {activePanel === 'npc' && <NpcPanel player={player} onMeetNpc={onMeetNpc} onGiveGift={onGiveGift} onAcceptQuest={onAcceptQuest} onTurnInQuest={onTurnInQuest} onStartDialogue={onStartDialogue} onDialogueSelectChoice={onDialogueSelectChoice} onDialogueAdvance={onDialogueAdvance} />}
           {activePanel === 'quest' && <QuestPanel player={player} onAcceptQuest={onAcceptQuest} onAbandonQuest={onAbandonQuest} onDeliverQuestItem={onDeliverQuestItem} onTrackQuest={onTrackQuest} />}
           {activePanel === 'chronicle' && <ChroniclePanel chronicle={chronicle} />}
         </FloatingPanel>

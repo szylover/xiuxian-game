@@ -1,0 +1,55 @@
+[
+  {
+    "id": "core:dlg_market_chen_gossip",
+    "npcId": "core:npc_market_chen",
+    "name": "陈掌柜打听消息",
+    "priority": 40,
+    "cooldown": 6,
+    "condition": {
+      "minAffinity": 10,
+      "relationLevel": ["acquaintance", "friend", "close_friend", "soulmate"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gossip"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「嘿嘿，又来啦？最近打听到了些有趣的消息，要不要听听？」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "👂 愿闻其详。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 2 }
+          },
+          {
+            "id": "c2",
+            "text": "💰 消息值多少钱？",
+            "nextNodeId": "n3"
+          },
+          {
+            "id": "c3",
+            "text": "👋 今天没心情。",
+            "effects": { "affinityChange": -1 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「听说北边荒原深处最近妖兽异动频繁，可能有什么宝物出世。你若有胆量，不妨去看看。不过可别说是我告诉你的！」",
+        "effects": {
+          "expChange": 50,
+          "setDialogueFlag": { "key": "chen_gossip_heard", "value": true }
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「哈哈，做生意就是要精打细算。算了，不收你钱——下次多在我店里买点东西就行。」",
+        "nextNodeId": "n2"
+      }
+    ]
+  }
+]

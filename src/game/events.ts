@@ -6,15 +6,16 @@
 import type { Player } from './player';
 import { registerDLC, triggerEvent } from './registry';
 import type { RecipeDef, EquipDef, SmithingRecipeDef, TechniqueDef, DeathTriggerDef, LifeSaverDef, RevivalMethodDef, MonsterDef } from './registry';
-import type { RegionDef } from './types';
-import type { NpcDef } from './types';
+import type { RegionDef, NpcDef, IdleChatPool } from './types';
 import { getCurrentRegion } from './map';
 import { loadEventsFromJson } from './event-loader';
 import { loadItemsFromJson } from './item-loader';
 import { loadQuestsFromJson } from './quest-loader';
+import { loadDialoguesFromJson } from './dialogue-loader';
 import type { JsonEvent } from './event-loader';
 import type { JsonItem } from './item-loader';
 import type { JsonQuestChain } from './quest-loader';
+import type { JsonDialogueChain } from './dialogue-loader';
 import { CORE_BREAKTHROUGH_REQS, CORE_TRIBULATIONS } from '../data/dlc/core/breakthrough';
 import { CORE_DIVINE_ARTS } from '../data/dlc/core/divine-arts';
 import { CORE_BODY_REALMS, CORE_SPIRIT_ROOT_BODY_BONUSES } from '../data/dlc/core/body-config';
@@ -265,6 +266,20 @@ export async function registerCoreEvents(): Promise<void> {
     import('../data/dlc/core/quests.json'),
   ]);
 
+  // 对话文件按 NPC 拆分，批量加载 dialogues/*.json（排除 idle-chat.json）
+  const dialogueModules = import.meta.glob<{ default: JsonDialogueChain[] }>(
+    '../data/dlc/core/dialogues/!(idle-chat).json',
+    { eager: true },
+  );
+  const allDialogueChains: JsonDialogueChain[] = [];
+  for (const mod of Object.values(dialogueModules)) {
+    allDialogueChains.push(...mod.default);
+  }
+  const dialogues = loadDialoguesFromJson(allDialogueChains);
+
+  // 闲聊池单独加载
+  const { default: idleChatJson } = await import('../data/dlc/core/dialogues/idle-chat.json');
+
   const pack = loadEventsFromJson(coreEventsJson as JsonEvent[], CORE_DLC_META);
   const items = loadItemsFromJson(coreItemsJson as JsonItem[]);
   const recipes = coreRecipesJson as RecipeDef[];
@@ -294,6 +309,8 @@ export async function registerCoreEvents(): Promise<void> {
     bottlenecks: CORE_BOTTLENECKS,
     npcs: coreNpcsJson as NpcDef[],
     questChains,
+    dialogues,
+    idleChat: idleChatJson as IdleChatPool,
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }

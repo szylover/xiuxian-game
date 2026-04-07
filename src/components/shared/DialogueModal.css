@@ -1,0 +1,149 @@
+/* ============================================================
+   DialogueModal.css — 对话弹窗样式（T0026）
+   ============================================================ */
+
+.dialogue-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+  animation: dialogue-fade-in var(--transition-fast);
+}
+
+@keyframes dialogue-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.dialogue-modal {
+  background: var(--color-bg-dark);
+  border: 1px solid var(--color-border-gold);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg), var(--shadow-gold);
+  width: 90%;
+  max-width: 480px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── 头部：NPC 信息 ── */
+
+.dialogue-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  background: var(--color-bg-medium);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dialogue-speaker-emoji {
+  font-size: var(--font-size-3xl);
+}
+
+.dialogue-speaker-info {
+  flex: 1;
+}
+
+.dialogue-speaker-name {
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  color: var(--color-text-gold);
+}
+
+.dialogue-speaker-title {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* ── 对话文本区 ── */
+
+.dialogue-body {
+  flex: 1;
+  padding: var(--spacing-xl);
+  overflow-y: auto;
+  min-height: 80px;
+}
+
+.dialogue-text {
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.dialogue-narration {
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+/* ── 效果反馈 ── */
+
+.dialogue-effects {
+  padding: 0 var(--spacing-xl);
+}
+
+.dialogue-effect-item {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-success);
+  padding: var(--spacing-xs) 0;
+}
+
+/* ── 选项区域 ── */
+
+.dialogue-choices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.dialogue-choice-btn {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-bg-medium);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.dialogue-choice-btn:hover {
+  background: var(--color-bg-light);
+  border-color: var(--color-gold-dim);
+  color: var(--color-text-gold);
+}
+
+/* ── 底部按钮 ── */
+
+.dialogue-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.dialogue-continue-btn {
+  padding: var(--spacing-md) var(--spacing-2xl);
+  background: var(--color-bg-medium);
+  border: 1px solid var(--color-border-gold);
+  border-radius: var(--radius-md);
+  color: var(--color-text-gold);
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.dialogue-continue-btn:hover {
+  background: var(--color-bg-light);
+  box-shadow: var(--shadow-gold);
+}

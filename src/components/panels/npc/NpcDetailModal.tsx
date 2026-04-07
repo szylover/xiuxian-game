@@ -5,14 +5,17 @@
 import { useState } from 'react';
 import './NpcDetailModal.css';
 import type { Player } from '../../../game/player';
-import type { NpcDef, NpcRelationLevel } from '../../../game/types';
+import type { NpcDef, NpcRelationLevel, DialogueChainDef, DialogueNode } from '../../../game/types';
 import { REALMS } from '../../../game/data';
 import { getRelation, getNpcState, GIFT_CD } from '../../../game/npc';
 import { getQuestsForNpc } from '../../../game/quest';
+import { getTopDialogue, getIdleChat } from '../../../game/dialogue';
 import { NPC_RELATION_CN, NPC_RELATION_COLORS, NPC_RELATION_EMOJI, NPC_PERSONALITY_CN } from '../../shared/constants';
 import { QUEST_TEXTS } from '../../../data/texts/quest';
+import { DIALOGUE_TEXTS } from '../../../data/texts/dialogue';
 import QuestRewardPreview from '../quest/QuestRewardPreview';
 import GiftModal from './GiftModal';
+import DialogueModal from '../../shared/DialogueModal';
 
 interface NpcDetailModalProps {
   player: Player;
@@ -22,11 +25,23 @@ interface NpcDetailModalProps {
   onGift: (npcId: string, itemId: string) => void;
   onAcceptQuest: (questId: string) => void;
   onTurnInQuest: (questId: string) => void;
+  onStartDialogue: (dialogueId: string) => { node: DialogueNode | null };
+  onDialogueSelectChoice: (dialogueId: string, nodeId: string, choiceId: string) => {
+    nextNode: DialogueNode | null; logs: string[]; combatTrigger?: string; questTrigger?: string;
+  };
+  onDialogueAdvance: (dialogueId: string, currentNodeId: string) => {
+    nextNode: DialogueNode | null; logs: string[]; combatTrigger?: string; questTrigger?: string;
+  };
 }
 
-export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift, onAcceptQuest, onTurnInQuest }: NpcDetailModalProps) {
+export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift, onAcceptQuest, onTurnInQuest, onStartDialogue, onDialogueSelectChoice, onDialogueAdvance }: NpcDetailModalProps) {
   const [showGiftModal, setShowGiftModal] = useState(false);
   const [chatMsg, setChatMsg] = useState<string | null>(null);
+  const [dialogueState, setDialogueState] = useState<{
+    def: DialogueChainDef;
+    node: DialogueNode;
+    effectLogs: string[];
+  } | null>(null);
 
   const rel = getRelation(player, npc.id);
   const npcState = getNpcState(player);
@@ -46,21 +61,48 @@ export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift, o
 
   const barPct = Math.max(0, Math.min(100, ((rel.affinity + 100) / (maxAffinity + 100)) * 100));
 
-  const CHAT_LINES: Record<string, string[]> = {
-    gentle:       ['「修行之路，贵在坚持。」', '「心怀善念，自有天助。」', '「前辈有何指教？」'],
-    cold:         ['「……」', '「无事勿扰。」', '「你还不够资格。」'],
-    hot_tempered: ['「废话少说！有事快讲！」', '「哼，又来了。」', '「要切磋就痛快点！」'],
-    cunning:      ['「嘿嘿，有好东西吗？」', '「做生意讲个诚信。」', '「这笔买卖不亏。」'],
-    righteous:    ['「正义之道，不可偏废。」', '「守护弱者，乃修士本分。」', '「你心中有正气。」'],
-    mysterious:   ['「天机不可泄露……」', '「或许……某日你会明白。」', '「有缘再见。」'],
-  };
+  const topDialogue = getTopDialogue(player, npc.id);
 
   const handleChat = () => {
     if (!rel.met) return;
-    const lines = CHAT_LINES[npc.personality] ?? ['「你好。」'];
-    setChatMsg(lines[Math.floor(Math.random() * lines.length)]);
-    // T0067: 交谈也触发 NPC 交互（推进任务目标 + 发现任务）
+    if (topDialogue) {
+      // 有可用对话链 → 启动对话弹窗
+      const result = onStartDialogue(topDialogue.id);
+      if (result.node) {
+        setDialogueState({ def: topDialogue, node: result.node, effectLogs: [] });
+      }
+    } else {
+      // 无可用对话链 → 闲聊
+      const msg = getIdleChat(npc.id, npc.personality);
+      setChatMsg(msg);
+    }
+    // 交谈也触发 NPC 交互（推进任务目标 + 发现任务）
     onMeet(npc.id);
+  };
+
+  const handleDialogueSelectChoice = (choiceId: string) => {
+    if (!dialogueState) return;
+    const result = onDialogueSelectChoice(dialogueState.def.id, dialogueState.node.id, choiceId);
+    if (result.nextNode) {
+      setDialogueState({ def: dialogueState.def, node: result.nextNode, effectLogs: result.logs });
+    } else {
+      // 对话结束
+      setDialogueState(null);
+    }
+  };
+
+  const handleDialogueContinue = () => {
+    if (!dialogueState) return;
+    const result = onDialogueAdvance(dialogueState.def.id, dialogueState.node.id);
+    if (result.nextNode) {
+      setDialogueState({ def: dialogueState.def, node: result.nextNode, effectLogs: result.logs });
+    } else {
+      setDialogueState(null);
+    }
+  };
+
+  const handleDialogueEnd = () => {
+    setDialogueState(null);
   };
 
   return (
@@ -155,7 +197,7 @@ export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift, o
             ) : (
               <>
                 <button className="btn" onClick={handleChat}>
-                  💬 交谈
+                  {topDialogue ? DIALOGUE_TEXTS.chatBtnHasDialogue : DIALOGUE_TEXTS.chatBtnIdle}
                 </button>
                 <button
                   className="btn npc-btn-gift"
@@ -183,6 +225,18 @@ export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift, o
           npc={npc}
           onGift={(itemId) => onGift(npc.id, itemId)}
           onClose={() => setShowGiftModal(false)}
+        />
+      )}
+
+      {dialogueState && (
+        <DialogueModal
+          player={player}
+          dialogueDef={dialogueState.def}
+          currentNode={dialogueState.node}
+          effectLogs={dialogueState.effectLogs}
+          onSelectChoice={handleDialogueSelectChoice}
+          onContinue={handleDialogueContinue}
+          onEnd={handleDialogueEnd}
         />
       )}
     </>

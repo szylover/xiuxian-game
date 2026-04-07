@@ -19,11 +19,18 @@ interface SceneNpcsProps {
   onGiveGift: (npcId: string, itemId: string) => void;
   onAcceptQuest: (questId: string) => void;
   onTurnInQuest: (questId: string) => void;
+  onStartDialogue: (dialogueId: string) => { node: import('../../../game/types').DialogueNode | null };
+  onDialogueSelectChoice: (dialogueId: string, nodeId: string, choiceId: string) => {
+    nextNode: import('../../../game/types').DialogueNode | null; logs: string[]; combatTrigger?: string; questTrigger?: string;
+  };
+  onDialogueAdvance: (dialogueId: string, currentNodeId: string) => {
+    nextNode: import('../../../game/types').DialogueNode | null; logs: string[]; combatTrigger?: string; questTrigger?: string;
+  };
   onOpenContacts: (key: PanelKey) => void;
 }
 
 export default function SceneNpcs({
-  player, onMeetNpc, onGiveGift, onAcceptQuest, onTurnInQuest, onOpenContacts,
+  player, onMeetNpc, onGiveGift, onAcceptQuest, onTurnInQuest, onStartDialogue, onDialogueSelectChoice, onDialogueAdvance, onOpenContacts,
 }: SceneNpcsProps) {
   const [selectedNpc, setSelectedNpc] = useState<NpcDef | null>(null);
   const npcs = getNpcsInRegion(player);
@@ -73,6 +80,9 @@ export default function SceneNpcs({
           onGift={onGiveGift}
           onAcceptQuest={onAcceptQuest}
           onTurnInQuest={onTurnInQuest}
+          onStartDialogue={onStartDialogue}
+          onDialogueSelectChoice={onDialogueSelectChoice}
+          onDialogueAdvance={onDialogueAdvance}
         />
       )}
     </div>

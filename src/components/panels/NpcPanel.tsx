@@ -10,7 +10,7 @@ import { getNpcsInRegion, getRelation, getNpcState } from '../../game/npc';
 import { getCurrentRegion } from '../../game/map';
 import { getAllNpcDefs } from '../../game/registry';
 import { getQuestsForNpc } from '../../game/quest';
-import type { NpcDef } from '../../game/types';
+import type { NpcDef, DialogueNode } from '../../game/types';
 import NpcCard from './npc/NpcCard';
 import NpcDetailModal from './npc/NpcDetailModal';
 import './NpcPanel.css';
@@ -26,9 +26,16 @@ interface NpcPanelProps {
   onGiveGift: (npcId: string, itemId: string) => void;
   onAcceptQuest: (questId: string) => void;
   onTurnInQuest: (questId: string) => void;
+  onStartDialogue: (dialogueId: string) => { node: DialogueNode | null };
+  onDialogueSelectChoice: (dialogueId: string, nodeId: string, choiceId: string) => {
+    nextNode: DialogueNode | null; logs: string[]; combatTrigger?: string; questTrigger?: string;
+  };
+  onDialogueAdvance: (dialogueId: string, currentNodeId: string) => {
+    nextNode: DialogueNode | null; logs: string[]; combatTrigger?: string; questTrigger?: string;
+  };
 }
 
-export default function NpcPanel({ player, onMeetNpc, onGiveGift, onAcceptQuest, onTurnInQuest }: NpcPanelProps) {
+export default function NpcPanel({ player, onMeetNpc, onGiveGift, onAcceptQuest, onTurnInQuest, onStartDialogue, onDialogueSelectChoice, onDialogueAdvance }: NpcPanelProps) {
   const [tab, setTab] = useState<'region' | 'contacts'>('region');
   const [selectedNpc, setSelectedNpc] = useState<NpcDef | null>(null);
 
@@ -119,6 +126,9 @@ export default function NpcPanel({ player, onMeetNpc, onGiveGift, onAcceptQuest,
           onGift={(npcId, itemId) => { onGiveGift(npcId, itemId); }}
           onAcceptQuest={(questId) => { onAcceptQuest(questId); }}
           onTurnInQuest={(questId) => { onTurnInQuest(questId); }}
+          onStartDialogue={onStartDialogue}
+          onDialogueSelectChoice={onDialogueSelectChoice}
+          onDialogueAdvance={onDialogueAdvance}
         />
       )}
     </div>

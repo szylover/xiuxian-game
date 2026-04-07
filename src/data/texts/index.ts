@@ -16,3 +16,4 @@ export { BODY_CULTIVATION_TEXTS } from './body-cultivation';
 export { EXPLORE_TEXTS } from './explore';
 export { UI_LABELS } from './ui-labels';
 export { QUEST_TEXTS } from './quest';
+export { DIALOGUE_TEXTS } from './dialogue';

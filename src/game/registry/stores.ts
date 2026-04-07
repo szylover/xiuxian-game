@@ -7,7 +7,7 @@ import type {
   SmithingRecipeDef, BreakthroughReqDef, TribulationDef, DLCPack, TechniqueDef,
   DeathTriggerDef, LifeSaverDef, RevivalMethodDef, MonsterDef, DivineArtDef,
   BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef,
-  NpcDef, QuestChainDef,
+  NpcDef, QuestChainDef, DialogueChainDef, IdleChatPool,
 } from '../types';
 import type { AchievementDef } from '../achievement/types';
 
@@ -33,5 +33,7 @@ export const regionRegistry = new Map<string, RegionDef>();
 export const bottleneckRegistry = new Map<string, BottleneckDef>();
 export const npcRegistry = new Map<string, NpcDef>();
 export const questChainRegistry = new Map<string, QuestChainDef>();
+export const dialogueRegistry = new Map<string, DialogueChainDef>();
+export const idleChatRegistry: IdleChatPool = {};
 export const triggeredOnce = new Set<string>();
 export const cooldowns = new Map<string, number>();

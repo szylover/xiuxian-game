@@ -12,6 +12,20 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.11.0',
+    date: '2026-04-07',
+    title: '对话系统（T0026）',
+    items: [
+      '新增 NPC 对话系统 — 与 NPC 进行有分支、有后果的多轮对话',
+      '对话树模型：DAG 节点结构支持多分支选项和条件过滤',
+      '丰富效果系统：对话选项可改变好感度、赠送/消耗物品、触发任务/战斗',
+      '闲聊退化：无可用对话链时按性格随机闲聊，替换旧硬编码',
+      '核心包自带 6 条基础对话链（初见/指点/切磋/打探/交易/神秘暗示）',
+      '新增 DialogueModal 对话弹窗组件',
+      'DLC 可通过 registerDLC 注册自定义对话内容',
+    ],
+  },
+  {
     version: '1.10.0',
     date: '2026-04-03',
     title: '修仙履历系统（T0068）',

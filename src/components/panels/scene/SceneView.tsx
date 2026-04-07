@@ -27,6 +27,13 @@ interface SceneViewProps {
   onGiveGift: (npcId: string, itemId: string) => void;
   onAcceptQuest: (questId: string) => void;
   onTurnInQuest: (questId: string) => void;
+  onStartDialogue: (dialogueId: string) => { node: import('../../../game/types').DialogueNode | null };
+  onDialogueSelectChoice: (dialogueId: string, nodeId: string, choiceId: string) => {
+    nextNode: import('../../../game/types').DialogueNode | null; logs: string[]; combatTrigger?: string; questTrigger?: string;
+  };
+  onDialogueAdvance: (dialogueId: string, currentNodeId: string) => {
+    nextNode: import('../../../game/types').DialogueNode | null; logs: string[]; combatTrigger?: string; questTrigger?: string;
+  };
   gameOver: boolean;
 }
 
@@ -45,6 +52,9 @@ export default function SceneView({
   onGiveGift,
   onAcceptQuest,
   onTurnInQuest,
+  onStartDialogue,
+  onDialogueSelectChoice,
+  onDialogueAdvance,
   gameOver,
 }: SceneViewProps) {
   return (
@@ -59,6 +69,9 @@ export default function SceneView({
         onGiveGift={onGiveGift}
         onAcceptQuest={onAcceptQuest}
         onTurnInQuest={onTurnInQuest}
+        onStartDialogue={onStartDialogue}
+        onDialogueSelectChoice={onDialogueSelectChoice}
+        onDialogueAdvance={onDialogueAdvance}
         onOpenContacts={onSelectPanel}
       />
 

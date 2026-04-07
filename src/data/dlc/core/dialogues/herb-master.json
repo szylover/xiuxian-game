@@ -1,0 +1,56 @@
+[
+  {
+    "id": "core:dlg_herb_master_trade",
+    "npcId": "core:npc_herb_master",
+    "name": "灵药谷药师论药",
+    "priority": 50,
+    "cooldown": 12,
+    "condition": {
+      "minAffinity": 10,
+      "relationLevel": ["acquaintance", "friend", "close_friend", "soulmate"]
+    },
+    "startNodeId": "n1",
+    "tags": ["trade", "lore"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「嗯？你来了。最近采到了不少灵草，要不要聊聊灵药之道？」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🌿 请教灵药知识。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2",
+            "text": "💊 有没有多余的灵草分我些？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": -1 }
+          },
+          {
+            "id": "c3",
+            "text": "👋 下次再来请教。"
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「灵药讲究天时地利，采摘时辰至关重要。这些灵草是我多余的，你拿去练练手吧。」",
+        "effects": {
+          "giveItems": [{ "itemId": "core:spirit_herb", "count": 2 }]
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「哼，灵草可不是随便能要的。不过看在你还算有诚意的份上，给你一株吧。」",
+        "effects": {
+          "giveItems": [{ "itemId": "core:spirit_herb", "count": 1 }]
+        }
+      }
+    ]
+  }
+]

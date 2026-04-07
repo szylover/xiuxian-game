@@ -9,7 +9,7 @@ import {
   techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
   monsterRegistry, divineArtRegistry, achievementRegistry,
   bodyRealmRegistry, spiritRootBodyBonusRegistry, realmRegistry, regionRegistry,
-  bottleneckRegistry, npcRegistry, questChainRegistry,
+  bottleneckRegistry, npcRegistry, questChainRegistry, dialogueRegistry, idleChatRegistry,
 } from './stores';
 
 export function registerDLC(pack: DLCPack): void {
@@ -35,6 +35,12 @@ export function registerDLC(pack: DLCPack): void {
   if (pack.bottlenecks) for (const bn of pack.bottlenecks) bottleneckRegistry.set(bn.id, bn);
   if (pack.npcs) for (const npc of pack.npcs) npcRegistry.set(npc.id, npc);
   if (pack.questChains) for (const qc of pack.questChains) questChainRegistry.set(qc.id, qc);
+  if (pack.dialogues) for (const d of pack.dialogues) dialogueRegistry.set(d.id, d);
+  if (pack.idleChat) {
+    for (const [personality, lines] of Object.entries(pack.idleChat)) {
+      idleChatRegistry[personality] = [...(idleChatRegistry[personality] ?? []), ...lines];
+    }
+  }
 }
 
 export function unregisterDLC(packId: string): void {
@@ -61,6 +67,8 @@ export function unregisterDLC(packId: string): void {
   if (pack.bottlenecks) for (const bn of pack.bottlenecks) bottleneckRegistry.delete(bn.id);
   if (pack.npcs) for (const npc of pack.npcs) npcRegistry.delete(npc.id);
   if (pack.questChains) for (const qc of pack.questChains) questChainRegistry.delete(qc.id);
+  if (pack.dialogues) for (const d of pack.dialogues) dialogueRegistry.delete(d.id);
+  // Note: idleChat removal is approximate — shared pool entries are not individually tracked
   dlcRegistry.delete(packId);
 }
 

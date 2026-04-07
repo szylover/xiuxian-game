@@ -2,7 +2,7 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef } from '../types';
 import type { SpiritRootType } from '../spirit-root';
 import type { AchievementDef } from '../achievement/types';
 import {
@@ -11,7 +11,7 @@ import {
   techniqueRegistry, deathTriggerRegistry, lifeSaverRegistry, revivalRegistry,
   monsterRegistry, divineArtRegistry, achievementRegistry,
   bodyRealmRegistry, spiritRootBodyBonusRegistry, realmRegistry, regionRegistry,
-  bottleneckRegistry, npcRegistry, questChainRegistry,
+  bottleneckRegistry, npcRegistry, questChainRegistry, dialogueRegistry, idleChatRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -150,3 +150,12 @@ export function getAllQuestChainDefs(): QuestChainDef[] { return Array.from(ques
 export function getQuestChainsByCategory(category: QuestChainCategory): QuestChainDef[] {
   return Array.from(questChainRegistry.values()).filter(q => q.category === category);
 }
+
+// ── 对话链（T0026）──
+
+export function getDialogueDef(id: string): DialogueChainDef | undefined { return dialogueRegistry.get(id); }
+export function getAllDialogueDefs(): DialogueChainDef[] { return Array.from(dialogueRegistry.values()); }
+export function getDialoguesByNpc(npcId: string): DialogueChainDef[] {
+  return Array.from(dialogueRegistry.values()).filter(d => d.npcId === npcId);
+}
+export function getIdleChatPool(): Record<string, string[]> { return idleChatRegistry; }

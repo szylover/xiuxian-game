@@ -93,6 +93,9 @@ export default function App() {
             onGiveGift={engine.giveGift}
             onAcceptQuest={engine.acceptQuest}
             onTurnInQuest={engine.turnInQuest}
+            onStartDialogue={engine.startDialogue}
+            onDialogueSelectChoice={engine.dialogueSelectChoice}
+            onDialogueAdvance={engine.dialogueAdvance}
             gameOver={engine.gameOver}
           />
         }
@@ -122,6 +125,9 @@ export default function App() {
             onDeliverQuestItem={engine.deliverQuestItem}
             onTrackQuest={engine.setTrackedQuest}
             onTurnInQuest={engine.turnInQuest}
+            onStartDialogue={engine.startDialogue}
+            onDialogueSelectChoice={engine.dialogueSelectChoice}
+            onDialogueAdvance={engine.dialogueAdvance}
             chronicle={engine.chronicle}
           />
         }
