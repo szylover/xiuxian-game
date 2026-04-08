@@ -16,10 +16,11 @@
   padding: var(--spacing-sm) 0;
   scrollbar-width: thin;
   scrollbar-color: var(--color-border) transparent;
+  flex-wrap: wrap;
 }
 
 .scene-npcs-list .npc-card {
-  min-width: 100px;
+  min-width: 80px;
   flex-shrink: 0;
 }
 

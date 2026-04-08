@@ -62,21 +62,22 @@ export default function SceneView({
       {/* 区域标题栏 */}
       <SceneHeader player={player} />
 
-      {/* 此地之人 */}
-      <SceneNpcs
-        player={player}
-        onMeetNpc={onMeetNpc}
-        onGiveGift={onGiveGift}
-        onAcceptQuest={onAcceptQuest}
-        onTurnInQuest={onTurnInQuest}
-        onStartDialogue={onStartDialogue}
-        onDialogueSelectChoice={onDialogueSelectChoice}
-        onDialogueAdvance={onDialogueAdvance}
-        onOpenContacts={onSelectPanel}
-      />
+      {/* 此地之人 + 出口导航 并排 */}
+      <div className="scene-row">
+        <SceneNpcs
+          player={player}
+          onMeetNpc={onMeetNpc}
+          onGiveGift={onGiveGift}
+          onAcceptQuest={onAcceptQuest}
+          onTurnInQuest={onTurnInQuest}
+          onStartDialogue={onStartDialogue}
+          onDialogueSelectChoice={onDialogueSelectChoice}
+          onDialogueAdvance={onDialogueAdvance}
+          onOpenContacts={onSelectPanel}
+        />
 
-      {/* 出口导航 */}
-      <SceneExits player={player} onTravel={onTravel} onOpenMap={onSelectPanel} />
+        <SceneExits player={player} onTravel={onTravel} onOpenMap={onSelectPanel} />
+      </div>
 
       {/* 操作按钮区 */}
       <ActionPanel

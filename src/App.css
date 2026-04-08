@@ -748,6 +748,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .game-layout {
@@ -757,6 +758,8 @@ body {
   flex: 1;
   padding: 0 0.5rem 0.5rem;
   min-height: 0;
+  min-width: 0;
+  overflow: hidden;
 }
 
 /* ── 左栏 ── */
@@ -891,6 +894,8 @@ body {
   flex-direction: column;
   height: calc(100vh - 16px);
   min-height: 0;
+  min-width: 0;
+  overflow: hidden;
 }
 
 /* ── 右栏 ── */
