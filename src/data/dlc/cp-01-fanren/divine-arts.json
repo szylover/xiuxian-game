@@ -1,0 +1,123 @@
+[
+  {
+    "id": "cp-01:divine_purple_flame",
+    "name": "紫婴火",
+    "element": "fire",
+    "description": "凝聚元婴之火化为紫色烈焰，灼烧敌人肉身与元神，威力随境界提升。传自天南某古修洞府。",
+    "minRealm": 2,
+    "minAptitude": 35,
+    "mpCost": 45,
+    "dmgMultiplier": 2.8,
+    "hitCount": 1,
+    "cooldown": 3,
+    "triggerRate": 0.40,
+    "aptitudeScaling": 1.1,
+    "effects": [
+      { "type": "dot", "value": 20, "duration": 3 }
+    ]
+  },
+  {
+    "id": "cp-01:divine_ice_cone",
+    "name": "寒冰锥术",
+    "element": "water",
+    "description": "凝结水灵之力化为冰锥连射，冰寒刺骨，削弱敌方攻击与速度。掩月宗秘传神通。",
+    "minRealm": 1,
+    "minAptitude": 30,
+    "mpCost": 38,
+    "dmgMultiplier": 1.3,
+    "hitCount": 3,
+    "cooldown": 3,
+    "triggerRate": 0.40,
+    "aptitudeScaling": 1.0,
+    "effects": [
+      { "type": "debuff_atk", "value": 10, "duration": 2 },
+      { "type": "heal_self", "value": 20, "duration": 1 }
+    ]
+  },
+  {
+    "id": "cp-01:divine_golden_thunder",
+    "name": "金雷竹剑阵",
+    "element": "thunder",
+    "description": "以金雷竹炼制的飞剑组成剑阵，雷光闪烁间连斩敌身，穿透护体灵光。韩立成名神通。",
+    "minRealm": 2,
+    "minAptitude": 40,
+    "mpCost": 55,
+    "dmgMultiplier": 1.5,
+    "hitCount": 4,
+    "cooldown": 3,
+    "triggerRate": 0.38,
+    "defPenetration": 0.4,
+    "aptitudeScaling": 1.1,
+    "effects": [
+      { "type": "debuff_def", "value": 12, "duration": 2 }
+    ]
+  },
+  {
+    "id": "cp-01:divine_spirit_wind",
+    "name": "神风遁术",
+    "element": "wind",
+    "description": "驱动风灵之力化为无形利刃，身随风动连续攻击，速度越快威力越强。",
+    "minRealm": 1,
+    "minAptitude": 30,
+    "mpCost": 40,
+    "dmgMultiplier": 0.65,
+    "hitCount": 6,
+    "cooldown": 2,
+    "triggerRate": 0.45,
+    "aptitudeScaling": 1.0
+  },
+  {
+    "id": "cp-01:divine_yellow_sand",
+    "name": "黄沙大手印",
+    "element": "earth",
+    "description": "以土灵之力凝成巨大沙掌拍下，护身碎甲兼备，天南修士常见的护体神通。",
+    "minRealm": 2,
+    "minAptitude": 35,
+    "mpCost": 35,
+    "dmgMultiplier": 1.3,
+    "hitCount": 1,
+    "cooldown": 4,
+    "triggerRate": 0.35,
+    "aptitudeScaling": 1.0,
+    "effects": [
+      { "type": "shield_self", "value": 30, "duration": 3 },
+      { "type": "debuff_def", "value": 12, "duration": 2 }
+    ]
+  },
+  {
+    "id": "cp-01:divine_myriad_wood",
+    "name": "万木回春",
+    "element": "wood",
+    "description": "催动木灵之力令万木生长，藤蔓缠身腐蚀敌人，同时回复自身气血。灵药谷秘传神通。",
+    "minRealm": 1,
+    "minAptitude": 30,
+    "mpCost": 32,
+    "dmgMultiplier": 1.0,
+    "hitCount": 1,
+    "cooldown": 2,
+    "triggerRate": 0.42,
+    "aptitudeScaling": 1.0,
+    "effects": [
+      { "type": "dot", "value": 25, "duration": 4 },
+      { "type": "heal_self", "value": 30, "duration": 1 }
+    ]
+  },
+  {
+    "id": "cp-01:divine_flying_sword",
+    "name": "青竹蜂云剑诀",
+    "element": "metal",
+    "description": "操纵七十二口青竹蜂云剑化为剑阵，金光万丈，剑气穿甲破敌。韩立赖以成名的御剑术。",
+    "minRealm": 2,
+    "minAptitude": 35,
+    "mpCost": 48,
+    "dmgMultiplier": 1.2,
+    "hitCount": 4,
+    "cooldown": 2,
+    "triggerRate": 0.40,
+    "defPenetration": 0.3,
+    "aptitudeScaling": 1.1,
+    "effects": [
+      { "type": "debuff_def", "value": 10, "duration": 2 }
+    ]
+  }
+]

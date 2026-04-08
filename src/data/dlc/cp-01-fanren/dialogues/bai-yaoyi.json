@@ -1,0 +1,235 @@
+[
+  {
+    "id": "cp-01:dlg_baiyaoyi_first_meet",
+    "npcId": "cp-01:npc_bai_yaoyi",
+    "name": "白瑶依初见",
+    "priority": 100,
+    "once": true,
+    "condition": {
+      "minAffinity": 0,
+      "minRealm": 3,
+      "relationLevel": ["stranger", "acquaintance"]
+    },
+    "startNodeId": "n1",
+    "tags": ["greeting", "lore"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「……」（一个浑身散发着寒气的白衣女子冷冷地看了你一眼）「你是谁？这里是北极殿的地盘，外人不得擅入。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🙏 在下误入宝地，还请白仙子见谅。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2",
+            "text": "❄️ 好冷……你修习的是寒冰之道？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c3",
+            "text": "😎 我路过的，不必这么紧张吧？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": -3 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「误入？罢了，看你没有恶意。我是北极殿的白瑶依。你若是跟韩立认识的话，我可以网开一面——他托过我关照他的朋友。」",
+        "choices": [
+          {
+            "id": "c2a",
+            "text": "🤔 你认识韩前辈？",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2b",
+            "text": "🙏 多谢白仙子。",
+            "nextNodeId": "n6",
+            "effects": { "affinityChange": 3 }
+          }
+        ]
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「嗯，北极殿的功法以寒冰为主。我体内的寒冰灵力常年外溢，所以周围的温度会降低。不习惯的话，可以远一些。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:ice_silkworm_thread", "count": 1 }],
+          "expChange": 80
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「不紧张？你若再走深一些，北极殿的护山大阵就会启动。从冰棺里爬出来可不是什么好体验。」"
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「嗯，在乱星海合作过。他为人可靠，是少数几个我认可的男修。你若也值得信任，我不介意多一个朋友。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:mp_pill", "count": 3 }],
+          "expChange": 60
+        }
+      },
+      {
+        "id": "n6",
+        "type": "npc_talk",
+        "text": "「不必客气。这几枚冰蚕丝你拿着——北极殿特产，韧性极强，可做护甲内衬。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:ice_silkworm_thread", "count": 2 }]
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_baiyaoyi_ice_path",
+    "npcId": "cp-01:npc_bai_yaoyi",
+    "name": "冰修之道",
+    "priority": 85,
+    "once": true,
+    "condition": {
+      "minAffinity": 20,
+      "minRealm": 3,
+      "relationLevel": ["acquaintance", "friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_baiyaoyi_first_meet"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你对冰修之道感兴趣？北极殿的寒冰功法在修仙界独树一帜——我们不是简单地操控冰霜，而是将寒意融入神魂，达到心如止水的境界。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "❄️ 心如止水？听起来很厉害。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 整天这么冷，不会不舒服吗？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c3",
+            "text": "⚔️ 冰修在战斗中有什么优势？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 2 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「心如止水的好处是不容易被心魔侵扰。修仙者最大的敌人不是外敌，而是自己的心魔。北极殿弟子因为长年修习寒冰功法，心性特别稳固。当然代价是——我们不太擅长表达情感。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:calming_talisman", "count": 3 }],
+          "expChange": 200
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「……习惯了就好。刚开始修炼的时候确实很难受，整个人像泡在冰水里。但修炼到现在，寒冰已经成了身体的一部分。就像你呼吸空气一样自然。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:ice_silkworm_thread", "count": 3 }],
+          "expChange": 150
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「冰修的优势在于控制和封锁。寒冰可以冻结对手的灵力运转、减缓动作速度。对付速度型和灵力型修士特别有效。不过对付体修就比较吃力了——那些家伙体内气血太旺，冻不住。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:mp_pill", "count": 5 }],
+          "expChange": 180
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_baiyaoyi_fight_together",
+    "npcId": "cp-01:npc_bai_yaoyi",
+    "name": "并肩作战",
+    "priority": 70,
+    "once": true,
+    "condition": {
+      "minAffinity": 35,
+      "minRealm": 4,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_baiyaoyi_ice_path"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「最近北极殿收到情报，有一伙魔修在附近活动。我要去侦察，你……有兴趣一起来吗？」（这是白瑶依第一次主动邀请你）",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "⚔️ 当然！正好想活动活动筋骨。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 8 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 为什么找我？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "😰 魔修？会不会太危险了？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 0 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「好。你的反应比韩立爽快。那家伙每次都要思前想后半天。（罕见地微微一笑）这些丹药和冰蚕丝你先备上，战斗中受了伤可以用。出发前把装备检查好。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:hp_pill", "count": 8 },
+            { "itemId": "cp-01:ice_silkworm_thread", "count": 3 },
+            { "itemId": "cp-01:life_talisman", "count": 1 }
+          ],
+          "expChange": 300
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「因为你靠得住。北极殿的弟子大多修炼冰系功法，缺一个擅长近战或火系的搭档来弥补短板。你的战斗风格正好跟我互补。这些东西你拿着当作战斗准备。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:hp_pill", "count": 5 },
+            { "itemId": "cp-01:ice_silkworm_thread", "count": 2 }
+          ],
+          "expChange": 200
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「修仙之路本就充满危险。若连几个魔修都不敢面对，以后遇到更大的威胁怎么办？不过你不想去也没关系，我一个人也能应付。」",
+        "effects": { "expChange": 50 }
+      }
+    ]
+  }
+]

@@ -1,0 +1,229 @@
+[
+  {
+    "id": "cp-01:dlg_silvermoon_awakening",
+    "npcId": "cp-01:npc_silvermoon",
+    "name": "银月觉醒",
+    "priority": 100,
+    "once": true,
+    "condition": {
+      "minAffinity": 0,
+      "minRealm": 2,
+      "relationLevel": ["stranger", "acquaintance"]
+    },
+    "startNodeId": "n1",
+    "tags": ["greeting", "lore"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「嗯……你终于能感应到我了。我是银月，寄宿在这件法宝中的器灵。沉睡了很久很久，直到你的灵力唤醒了我。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "😮 器灵？法宝里竟然有灵智存在？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 你沉睡了多久？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "😎 器灵？能帮我打架吗？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": -2 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「器灵是法宝中诞生的灵智。当一件法宝承载了足够多的灵力和岁月，便有可能产生自我意识。我虽然没有实体，但可以感知外界、与主人交流。韩立也有一位器灵伙伴——他的青竹蜂云剑里就藏着一位。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:jade_slip", "count": 3 }],
+          "expChange": 150
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「具体多久我也不确定了……至少有数百年吧。上一任主人陨落之后，这件法宝辗转流落，我也跟着沉睡。你的灵力虽然不算很强，但很温润，才能把我唤醒。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:spirit_jade", "count": 1 }],
+          "expChange": 100
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「……打架？你的修为连驾驭这件法宝的十分之一都做不到，谈什么打架。先把修为提上去再说吧。」"
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_silvermoon_refining",
+    "npcId": "cp-01:npc_silvermoon",
+    "name": "银月谈炼器之道",
+    "priority": 85,
+    "once": true,
+    "condition": {
+      "minAffinity": 20,
+      "minRealm": 2,
+      "relationLevel": ["acquaintance", "friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_silvermoon_awakening"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你有在修习炼器吗？作为一个器灵，我对炼器之道可以说是最有发言权的。毕竟——我自己就是被'炼'出来的。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🔨 请指教！炼器有什么要领？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 器灵是怎么诞生的？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c3",
+            "text": "⚔️ 什么样的法宝最强？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 2 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「炼器最重要的是'意'。材料和火候只是基础，真正决定法宝品质的是炼器者注入的意念。你想炼一把剑，就要想象剑斩万物的锋芒；想炼一面盾，就要感受守护一切的决心。这些炼器材料你拿去练练手。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:iron_ore", "count": 10 },
+            { "itemId": "cp-01:mithril_ore", "count": 3 }
+          ],
+          "expChange": 200
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「器灵不是被'创造'的，而是自然诞生的。当一件法宝经历了足够多的战斗、吸收了足够多的灵力，加上一些机缘巧合……便有极小的概率产生灵智。韩立的青竹蜂云剑那位器灵，就是在无数次生死战斗中觉醒的。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:spirit_jade", "count": 2 }],
+          "expChange": 180
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「最强的法宝？不是材料最好的，也不是禁制最多的——而是跟主人最契合的。一件普通的飞剑配上顶尖的剑修，可以发挥出超越仙器的威力。反之，仙器落在普通人手里也不过是一块废铁。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:star_iron", "count": 1 }],
+          "expChange": 150
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_silvermoon_ancient_secrets",
+    "npcId": "cp-01:npc_silvermoon",
+    "name": "上古秘辛",
+    "priority": 70,
+    "once": true,
+    "condition": {
+      "minAffinity": 40,
+      "minRealm": 3,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_silvermoon_refining"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你的修为越来越高了，有些事我可以告诉你了。在数万年前，人界和灵界之间是相通的。那时候真仙可以随意降临人界，人界的灵气比现在浓郁百倍。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "😮 什么？人界和灵界曾经是相通的？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 后来为什么断了？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c3",
+            "text": "⚔️ 上古时代的修士比现在强吗？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 3 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「是的。那个时代被称为'上古仙道纪元'。后来发生了一场席卷两界的大战——灵界、人界、魔界三方混战，最终导致界壁破碎又重组，两界从此隔绝。」",
+        "choices": [
+          {
+            "id": "c2a",
+            "text": "😮 三界大战……那得多可怕。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2b",
+            "text": "🤔 还有魔界？那是什么地方？",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 3 }
+          }
+        ]
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「上古大战之后，一位超越真仙境界的存在以自身为代价重建了界壁，将三界隔开。从那以后，人界的灵气逐渐稀薄，真仙不再降临，修仙者的境界上限也大大降低。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:celestial_jade", "count": 1 }],
+          "expChange": 400
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「强得多。上古时代的普通修士相当于现在的元婴期，上古的大能放到现在就是合体甚至大乘级别。不过随着灵气衰退，修仙者的上限也在不断降低。韩立能飞升灵界，已经是数万年来的奇迹了。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:jade_slip", "count": 5 }],
+          "expChange": 350
+        }
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「那场大战的残留至今仍散布在人界各处——堕魔谷的魔气、各大秘境的禁制、还有像我这样残存的器灵。这块仙玉就是上古遗物，里面蕴含着极为纯净的灵力，你拿着修炼吧。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:celestial_jade", "count": 2 },
+            { "itemId": "cp-01:mystery_fragment", "count": 2 }
+          ],
+          "expChange": 500
+        }
+      }
+    ]
+  }
+]

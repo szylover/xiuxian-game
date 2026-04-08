@@ -1,0 +1,87 @@
+[
+  {
+    "id": "cp-01:mut_golden_thunder",
+    "type": "element",
+    "name": "金雷",
+    "namePrefix": "金雷",
+    "weight": 6,
+    "element": "thunder",
+    "elementResists": { "thunder": 0.5 },
+    "statModifiers": { "atk": 1.3, "speed": 1.1 },
+    "expBonus": 1.2,
+    "emojiOverride": "⚡"
+  },
+  {
+    "id": "cp-01:mut_dark_yin",
+    "type": "element",
+    "name": "玄阴",
+    "namePrefix": "玄阴",
+    "weight": 7,
+    "element": "water",
+    "elementResists": { "water": 0.4 },
+    "statModifiers": { "def": 1.2, "hp": 1.1 },
+    "expBonus": 1.1
+  },
+  {
+    "id": "cp-01:mut_blood_frenzy",
+    "type": "stat_boost",
+    "name": "嗜血",
+    "namePrefix": "嗜血",
+    "weight": 10,
+    "statModifiers": { "atk": 1.5, "def": 0.8 },
+    "expBonus": 1.2,
+    "emojiOverride": "🩸"
+  },
+  {
+    "id": "cp-01:mut_stone_shell",
+    "type": "stat_boost",
+    "name": "石甲",
+    "namePrefix": "石甲",
+    "weight": 9,
+    "statModifiers": { "def": 1.6, "hp": 1.3, "speed": 0.7 },
+    "expBonus": 1.25
+  },
+  {
+    "id": "cp-01:mut_phantom",
+    "type": "stat_boost",
+    "name": "幻影",
+    "namePrefix": "幻影",
+    "weight": 7,
+    "statModifiers": { "speed": 1.5, "critRate": 1.3 },
+    "expBonus": 1.15
+  },
+  {
+    "id": "cp-01:mut_celestial",
+    "type": "element",
+    "name": "灵化",
+    "namePrefix": "灵化",
+    "weight": 4,
+    "element": "wood",
+    "elementResists": { "wood": 0.5, "fire": -0.2 },
+    "statModifiers": { "hp": 1.4, "mp": 1.3 },
+    "expBonus": 1.3,
+    "minRealm": 3
+  },
+  {
+    "id": "cp-01:mut_ancient",
+    "type": "stat_boost",
+    "name": "远古",
+    "namePrefix": "远古",
+    "weight": 3,
+    "statModifiers": { "hp": 1.5, "atk": 1.3, "def": 1.3 },
+    "expBonus": 1.4,
+    "minRealm": 4
+  },
+  {
+    "id": "cp-01:mut_demonic",
+    "type": "element",
+    "name": "魔化",
+    "namePrefix": "魔化",
+    "weight": 5,
+    "element": "fire",
+    "elementResists": { "fire": 0.5 },
+    "statModifiers": { "atk": 1.4, "critDmgMultiplier": 1.3 },
+    "expBonus": 1.25,
+    "emojiOverride": "👿"
+  }
+]

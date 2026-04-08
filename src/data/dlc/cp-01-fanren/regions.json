@@ -1,0 +1,443 @@
+[
+  {
+    "id": "cp-01:tianan",
+    "name": "天南",
+    "emoji": "🌏",
+    "description": "天南大陆，凡人修仙界的主要舞台",
+    "minRealm": 0,
+    "regionTags": [],
+    "travelCostBase": 0,
+    "travelTimeMonths": 0,
+    "isContainer": true
+  },
+  {
+    "id": "cp-01:luanxinghai",
+    "name": "乱星海",
+    "emoji": "🌊",
+    "description": "乱星海，无数岛屿散布的广袤海域",
+    "minRealm": 2,
+    "regionTags": [],
+    "travelCostBase": 0,
+    "travelTimeMonths": 0,
+    "isContainer": true
+  },
+  {
+    "id": "cp-01:lingjie",
+    "name": "灵界",
+    "emoji": "✨",
+    "description": "灵界，灵气充沛的上界，化神以上修士方可踏入",
+    "minRealm": 4,
+    "regionTags": [],
+    "travelCostBase": 0,
+    "travelTimeMonths": 0,
+    "isContainer": true
+  },
+  {
+    "id": "cp-01:huang_feng_valley",
+    "name": "黄枫谷",
+    "emoji": "🍂",
+    "description": "天南七大修仙门派之一，韩立修仙的起点",
+    "minRealm": 0,
+    "parentId": "cp-01:tianan",
+    "regionTags": ["town", "sect", "safe"],
+    "travelCostBase": 0,
+    "travelTimeMonths": 1,
+    "safeZone": true,
+    "shopDiscount": 0,
+    "lootTable": [
+      { "itemId": "cp-01:spirit_stone_shard", "chance": 0.30 },
+      { "itemId": "cp-01:herb_lingcao", "chance": 0.15 },
+      { "itemId": "cp-01:hp_pill", "chance": 0.10 },
+      { "itemId": "cp-01:qingyuan_herb", "chance": 0.08 }
+    ]
+  },
+  {
+    "id": "cp-01:qixuan_sect",
+    "name": "七玄门",
+    "emoji": "⚔️",
+    "description": "天南七大修仙门派之一，以剑法闻名",
+    "minRealm": 0,
+    "parentId": "cp-01:tianan",
+    "regionTags": ["town", "sect"],
+    "travelCostBase": 10,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.1,
+    "lootTable": [
+      { "itemId": "cp-01:spirit_stone_shard", "chance": 0.25 },
+      { "itemId": "cp-01:iron_ore", "chance": 0.18 },
+      { "itemId": "cp-01:jade_slip", "chance": 0.10 },
+      { "itemId": "cp-01:monster_fang", "chance": 0.08 }
+    ]
+  },
+  {
+    "id": "cp-01:yue_kingdom",
+    "name": "越国",
+    "emoji": "🏯",
+    "description": "天南越国，凡人与低阶修士混居之地",
+    "minRealm": 0,
+    "parentId": "cp-01:tianan",
+    "regionTags": ["town", "kingdom"],
+    "travelCostBase": 5,
+    "travelTimeMonths": 1,
+    "lootTable": [
+      { "itemId": "cp-01:spirit_stone_shard", "chance": 0.28 },
+      { "itemId": "cp-01:herb_lingcao", "chance": 0.12 },
+      { "itemId": "cp-01:map_fragment", "chance": 0.06 },
+      { "itemId": "cp-01:hp_pill", "chance": 0.08 }
+    ]
+  },
+  {
+    "id": "cp-01:tainan_valley",
+    "name": "太南谷",
+    "emoji": "🌿",
+    "description": "灵药遍布的幽谷，炼丹师的圣地",
+    "minRealm": 1,
+    "parentId": "cp-01:tianan",
+    "regionTags": ["valley", "herb"],
+    "travelCostBase": 15,
+    "travelTimeMonths": 1,
+    "explorationBonus": 0.3,
+    "lootTable": [
+      { "itemId": "cp-01:herb_lingcao", "chance": 0.30 },
+      { "itemId": "cp-01:herb_xuanlian", "chance": 0.12 },
+      { "itemId": "cp-01:spirit_water", "chance": 0.18 },
+      { "itemId": "cp-01:qingyuan_herb", "chance": 0.10 },
+      { "itemId": "cp-01:spirit_stone_shard", "chance": 0.10 }
+    ]
+  },
+  {
+    "id": "cp-01:blood_forbidden",
+    "name": "血禁地",
+    "emoji": "🩸",
+    "description": "被鲜血浸染的禁地，危险与机遇并存",
+    "minRealm": 1,
+    "parentId": "cp-01:tianan",
+    "regionTags": ["dangerous", "wilderness"],
+    "travelCostBase": 20,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.3,
+    "lootTable": [
+      { "itemId": "cp-01:monster_fang", "chance": 0.22 },
+      { "itemId": "cp-01:monster_core", "chance": 0.08 },
+      { "itemId": "cp-01:beast_blood", "chance": 0.18 },
+      { "itemId": "cp-01:iron_ore", "chance": 0.15 },
+      { "itemId": "cp-01:spirit_stone_shard", "chance": 0.12 }
+    ]
+  },
+  {
+    "id": "cp-01:scarlet_trial",
+    "name": "赤炼试炼场",
+    "emoji": "🔥",
+    "description": "试炼之地，烈火淬炼修士意志",
+    "minRealm": 1,
+    "parentId": "cp-01:tianan",
+    "regionTags": ["mountain", "dangerous"],
+    "travelCostBase": 20,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.25,
+    "lootTable": [
+      { "itemId": "cp-01:iron_ore", "chance": 0.25 },
+      { "itemId": "cp-01:monster_fang", "chance": 0.20 },
+      { "itemId": "cp-01:monster_core", "chance": 0.06 },
+      { "itemId": "cp-01:herb_lingcao", "chance": 0.10 },
+      { "itemId": "cp-01:spirit_stone_shard", "chance": 0.12 }
+    ]
+  },
+  {
+    "id": "cp-01:jianzhou_capital",
+    "name": "剑洲城",
+    "emoji": "🏙️",
+    "description": "天南最大的修士交易城，商贾云集",
+    "minRealm": 2,
+    "parentId": "cp-01:tianan",
+    "regionTags": ["city", "trade"],
+    "travelCostBase": 25,
+    "travelTimeMonths": 1,
+    "shopDiscount": 0.1,
+    "lootTable": [
+      { "itemId": "cp-01:spirit_stone_shard", "chance": 0.22 },
+      { "itemId": "cp-01:jade_slip", "chance": 0.12 },
+      { "itemId": "cp-01:herb_xuanlian", "chance": 0.08 },
+      { "itemId": "cp-01:map_fragment", "chance": 0.06 }
+    ]
+  },
+  {
+    "id": "cp-01:mulan_grassland",
+    "name": "木兰草原",
+    "emoji": "🌾",
+    "description": "木兰异族的领地，战火纷飞的前线",
+    "minRealm": 2,
+    "parentId": "cp-01:tianan",
+    "regionTags": ["wilderness", "wasteland"],
+    "travelCostBase": 25,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.3,
+    "lootTable": [
+      { "itemId": "cp-01:iron_ore", "chance": 0.20 },
+      { "itemId": "cp-01:monster_fang", "chance": 0.18 },
+      { "itemId": "cp-01:monster_core", "chance": 0.10 },
+      { "itemId": "cp-01:beast_blood", "chance": 0.12 },
+      { "itemId": "cp-01:spirit_stone_shard", "chance": 0.10 }
+    ]
+  },
+  {
+    "id": "cp-01:tianlan_desert",
+    "name": "天澜沙漠",
+    "emoji": "🏜️",
+    "description": "荒芜的沙漠，传说有远古遗迹埋藏其中",
+    "minRealm": 2,
+    "parentId": "cp-01:tianan",
+    "regionTags": ["wasteland", "dangerous"],
+    "travelCostBase": 30,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.2,
+    "lootTable": [
+      { "itemId": "cp-01:sand_crystal", "chance": 0.22 },
+      { "itemId": "cp-01:iron_ore", "chance": 0.15 },
+      { "itemId": "cp-01:monster_core", "chance": 0.08 },
+      { "itemId": "cp-01:spirit_stone_shard", "chance": 0.12 },
+      { "itemId": "cp-01:map_fragment", "chance": 0.06 }
+    ]
+  },
+  {
+    "id": "cp-01:tainan_market",
+    "name": "太南小会",
+    "emoji": "🏪",
+    "description": "修士定期聚集的交易集会，货品齐全",
+    "minRealm": 2,
+    "parentId": "cp-01:tianan",
+    "regionTags": ["city", "trade", "safe"],
+    "travelCostBase": 20,
+    "travelTimeMonths": 1,
+    "safeZone": true,
+    "shopDiscount": 0.05,
+    "lootTable": [
+      { "itemId": "cp-01:spirit_stone_shard", "chance": 0.25 },
+      { "itemId": "cp-01:jade_slip", "chance": 0.15 },
+      { "itemId": "cp-01:herb_xuanlian", "chance": 0.08 },
+      { "itemId": "cp-01:hp_pill", "chance": 0.10 }
+    ]
+  },
+  {
+    "id": "cp-01:devilfall_valley",
+    "name": "堕魔谷",
+    "emoji": "💀",
+    "description": "远古魔修陨落之地，禁制重重，危机四伏",
+    "minRealm": 3,
+    "parentId": "cp-01:tianan",
+    "regionTags": ["mystic", "dangerous"],
+    "travelCostBase": 35,
+    "travelTimeMonths": 1,
+    "explorationBonus": 0.5,
+    "combatBonus": 0.4,
+    "lootTable": [
+      { "itemId": "cp-01:mystery_fragment", "chance": 0.20 },
+      { "itemId": "cp-01:herb_tianhuo", "chance": 0.10 },
+      { "itemId": "cp-01:monster_core", "chance": 0.15 },
+      { "itemId": "cp-01:jade_slip", "chance": 0.12 },
+      { "itemId": "cp-01:spirit_stone_shard", "chance": 0.10 }
+    ]
+  },
+  {
+    "id": "cp-01:kunwu_mountain",
+    "name": "昆吾山",
+    "emoji": "⛰️",
+    "description": "远古仙人遗迹所在，蕴藏无尽宝藏",
+    "minRealm": 3,
+    "parentId": "cp-01:tianan",
+    "regionTags": ["mountain", "mystic"],
+    "travelCostBase": 35,
+    "travelTimeMonths": 1,
+    "explorationBonus": 0.4,
+    "lootTable": [
+      { "itemId": "cp-01:mystery_fragment", "chance": 0.18 },
+      { "itemId": "cp-01:spirit_jade", "chance": 0.10 },
+      { "itemId": "cp-01:monster_core", "chance": 0.12 },
+      { "itemId": "cp-01:herb_tianhuo", "chance": 0.08 },
+      { "itemId": "cp-01:jade_slip", "chance": 0.10 }
+    ]
+  },
+  {
+    "id": "cp-01:kuixing_island",
+    "name": "魁星岛",
+    "emoji": "🏝️",
+    "description": "乱星海的贸易中心，各方修士汇聚于此",
+    "minRealm": 2,
+    "parentId": "cp-01:luanxinghai",
+    "regionTags": ["island", "trade", "safe"],
+    "travelCostBase": 25,
+    "travelTimeMonths": 2,
+    "safeZone": true,
+    "shopDiscount": 0.05,
+    "lootTable": [
+      { "itemId": "cp-01:spirit_stone_shard", "chance": 0.25 },
+      { "itemId": "cp-01:jade_slip", "chance": 0.12 },
+      { "itemId": "cp-01:herb_xuanlian", "chance": 0.08 },
+      { "itemId": "cp-01:map_fragment", "chance": 0.06 }
+    ]
+  },
+  {
+    "id": "cp-01:green_wave_island",
+    "name": "翠浪岛",
+    "emoji": "🌴",
+    "description": "灵草丰茂的海岛，炼丹师的天堂",
+    "minRealm": 2,
+    "parentId": "cp-01:luanxinghai",
+    "regionTags": ["island", "herb"],
+    "travelCostBase": 25,
+    "travelTimeMonths": 2,
+    "explorationBonus": 0.3,
+    "lootTable": [
+      { "itemId": "cp-01:herb_lingcao", "chance": 0.28 },
+      { "itemId": "cp-01:herb_xuanlian", "chance": 0.15 },
+      { "itemId": "cp-01:spirit_water", "chance": 0.18 },
+      { "itemId": "cp-01:spirit_stone_shard", "chance": 0.10 }
+    ]
+  },
+  {
+    "id": "cp-01:wanzhang_abyss",
+    "name": "万丈深渊",
+    "emoji": "🕳️",
+    "description": "海底深渊，黑暗中潜伏着远古异兽",
+    "minRealm": 3,
+    "parentId": "cp-01:luanxinghai",
+    "regionTags": ["dangerous", "mystic"],
+    "travelCostBase": 35,
+    "travelTimeMonths": 2,
+    "combatBonus": 0.4,
+    "lootTable": [
+      { "itemId": "cp-01:mystery_fragment", "chance": 0.22 },
+      { "itemId": "cp-01:monster_core", "chance": 0.15 },
+      { "itemId": "cp-01:spirit_jade", "chance": 0.08 },
+      { "itemId": "cp-01:beast_blood", "chance": 0.12 }
+    ]
+  },
+  {
+    "id": "cp-01:stormwind_sea",
+    "name": "风暴海域",
+    "emoji": "🌊",
+    "description": "风暴肆虐的海域，海妖出没之地",
+    "minRealm": 3,
+    "parentId": "cp-01:luanxinghai",
+    "regionTags": ["dangerous", "wilderness"],
+    "travelCostBase": 35,
+    "travelTimeMonths": 2,
+    "combatBonus": 0.35,
+    "lootTable": [
+      { "itemId": "cp-01:monster_fang", "chance": 0.20 },
+      { "itemId": "cp-01:monster_core", "chance": 0.12 },
+      { "itemId": "cp-01:beast_blood", "chance": 0.15 },
+      { "itemId": "cp-01:iron_ore", "chance": 0.12 },
+      { "itemId": "cp-01:spirit_stone_shard", "chance": 0.10 }
+    ]
+  },
+  {
+    "id": "cp-01:xinggong_palace",
+    "name": "星宫",
+    "emoji": "🌟",
+    "description": "乱星海最强势力，星宫所在之地",
+    "minRealm": 4,
+    "parentId": "cp-01:luanxinghai",
+    "regionTags": ["celestial", "sect"],
+    "travelCostBase": 40,
+    "travelTimeMonths": 2,
+    "shopDiscount": 0.1,
+    "lootTable": [
+      { "itemId": "cp-01:spirit_jade", "chance": 0.15 },
+      { "itemId": "cp-01:jade_slip", "chance": 0.12 },
+      { "itemId": "cp-01:spirit_stone_shard", "chance": 0.20 },
+      { "itemId": "cp-01:mystery_fragment", "chance": 0.08 }
+    ]
+  },
+  {
+    "id": "cp-01:tianyuan_city",
+    "name": "天渊城",
+    "emoji": "🏛️",
+    "description": "灵界第一大城，各族修士汇聚于此",
+    "minRealm": 4,
+    "parentId": "cp-01:lingjie",
+    "regionTags": ["city", "celestial"],
+    "travelCostBase": 40,
+    "travelTimeMonths": 3,
+    "shopDiscount": 0.1,
+    "lootTable": [
+      { "itemId": "cp-01:celestial_jade", "chance": 0.18 },
+      { "itemId": "cp-01:jade_slip", "chance": 0.12 },
+      { "itemId": "cp-01:spirit_stone_shard", "chance": 0.20 },
+      { "itemId": "cp-01:mystery_fragment", "chance": 0.08 }
+    ]
+  },
+  {
+    "id": "cp-01:deep_heaven_plateau",
+    "name": "深天高原",
+    "emoji": "☁️",
+    "description": "灵界偏远高原，灵兽横行",
+    "minRealm": 5,
+    "parentId": "cp-01:lingjie",
+    "regionTags": ["dangerous", "celestial"],
+    "travelCostBase": 45,
+    "travelTimeMonths": 3,
+    "combatBonus": 0.4,
+    "lootTable": [
+      { "itemId": "cp-01:celestial_jade", "chance": 0.15 },
+      { "itemId": "cp-01:monster_core", "chance": 0.18 },
+      { "itemId": "cp-01:herb_wanling", "chance": 0.06 },
+      { "itemId": "cp-01:spirit_jade", "chance": 0.10 }
+    ]
+  },
+  {
+    "id": "cp-01:thunder_continent",
+    "name": "雷霆大陆",
+    "emoji": "⚡",
+    "description": "雷霆不绝的大陆，蕴含天地雷力",
+    "minRealm": 5,
+    "parentId": "cp-01:lingjie",
+    "regionTags": ["dangerous", "wilderness"],
+    "travelCostBase": 45,
+    "travelTimeMonths": 3,
+    "combatBonus": 0.45,
+    "lootTable": [
+      { "itemId": "cp-01:celestial_jade", "chance": 0.12 },
+      { "itemId": "cp-01:golden_thunder_bamboo_leaf", "chance": 0.05 },
+      { "itemId": "cp-01:monster_core", "chance": 0.15 },
+      { "itemId": "cp-01:spirit_jade", "chance": 0.08 }
+    ]
+  },
+  {
+    "id": "cp-01:illusion_forest",
+    "name": "幻境林",
+    "emoji": "🌲",
+    "description": "充满幻术迷阵的森林，真假难辨",
+    "minRealm": 6,
+    "parentId": "cp-01:lingjie",
+    "regionTags": ["mystic", "dangerous"],
+    "travelCostBase": 50,
+    "travelTimeMonths": 3,
+    "explorationBonus": 0.5,
+    "combatBonus": 0.4,
+    "lootTable": [
+      { "itemId": "cp-01:herb_wanling", "chance": 0.10 },
+      { "itemId": "cp-01:mystery_fragment", "chance": 0.20 },
+      { "itemId": "cp-01:celestial_jade", "chance": 0.15 },
+      { "itemId": "cp-01:spirit_jade", "chance": 0.12 }
+    ]
+  },
+  {
+    "id": "cp-01:heavenly_court",
+    "name": "天庭遗迹",
+    "emoji": "🏰",
+    "description": "传说中的天庭遗址，蕴含无上机缘",
+    "minRealm": 7,
+    "parentId": "cp-01:lingjie",
+    "regionTags": ["celestial", "mystic"],
+    "travelCostBase": 60,
+    "travelTimeMonths": 3,
+    "explorationBonus": 0.6,
+    "lootTable": [
+      { "itemId": "cp-01:celestial_jade", "chance": 0.25 },
+      { "itemId": "cp-01:herb_wanling", "chance": 0.12 },
+      { "itemId": "cp-01:mystery_fragment", "chance": 0.18 },
+      { "itemId": "cp-01:spirit_jade", "chance": 0.15 }
+    ]
+  }
+]

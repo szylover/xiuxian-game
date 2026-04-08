@@ -1,0 +1,219 @@
+[
+  {
+    "id": "cp-01:recipe_hp_pill",
+    "name": "黄龙丹配方",
+    "description": "灵草炼制黄龙丹",
+    "inputs": [{ "itemId": "cp-01:herb_lingcao", "count": 2 }],
+    "outputItemId": "cp-01:hp_pill",
+    "outputCount": 2,
+    "baseSuccessRate": 0.7,
+    "mentalCost": 5,
+    "minRealm": 0,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "cp-01:recipe_mp_pill",
+    "name": "清灵丹配方",
+    "description": "灵草 + 灵石碎片炼制清灵丹",
+    "inputs": [
+      { "itemId": "cp-01:herb_lingcao", "count": 1 },
+      { "itemId": "cp-01:spirit_stone_shard", "count": 3 }
+    ],
+    "outputItemId": "cp-01:mp_pill",
+    "outputCount": 2,
+    "baseSuccessRate": 0.65,
+    "mentalCost": 8,
+    "minRealm": 0,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "cp-01:recipe_stamina_pill",
+    "name": "培元丹配方",
+    "description": "灵草炼制培元丹",
+    "inputs": [{ "itemId": "cp-01:herb_lingcao", "count": 1 }],
+    "outputItemId": "cp-01:stamina_pill",
+    "outputCount": 2,
+    "baseSuccessRate": 0.75,
+    "mentalCost": 5,
+    "minRealm": 0,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "cp-01:recipe_mood_pill",
+    "name": "宁心丹配方",
+    "description": "灵草 + 灵石碎片炼制宁心丹",
+    "inputs": [
+      { "itemId": "cp-01:herb_lingcao", "count": 1 },
+      { "itemId": "cp-01:spirit_stone_shard", "count": 2 }
+    ],
+    "outputItemId": "cp-01:mood_pill",
+    "outputCount": 2,
+    "baseSuccessRate": 0.7,
+    "mentalCost": 5,
+    "minRealm": 0,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "cp-01:recipe_health_pill",
+    "name": "驻颜丹配方",
+    "description": "灵草 + 青元草炼制驻颜丹",
+    "inputs": [
+      { "itemId": "cp-01:herb_lingcao", "count": 1 },
+      { "itemId": "cp-01:qingyuan_herb", "count": 1 }
+    ],
+    "outputItemId": "cp-01:health_pill",
+    "outputCount": 2,
+    "baseSuccessRate": 0.7,
+    "mentalCost": 5,
+    "minRealm": 0,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "cp-01:recipe_jichu_pill",
+    "name": "基础丹配方",
+    "description": "灵草炼制基础丹",
+    "inputs": [{ "itemId": "cp-01:herb_lingcao", "count": 2 }],
+    "outputItemId": "cp-01:jichu_pill",
+    "outputCount": 2,
+    "baseSuccessRate": 0.75,
+    "mentalCost": 5,
+    "minRealm": 0,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "cp-01:recipe_exp_pill",
+    "name": "筑基丹配方",
+    "description": "玄莲子 + 妖丹炼制筑基丹",
+    "inputs": [
+      { "itemId": "cp-01:herb_xuanlian", "count": 1 },
+      { "itemId": "cp-01:monster_core", "count": 1 }
+    ],
+    "outputItemId": "cp-01:exp_pill",
+    "outputCount": 1,
+    "baseSuccessRate": 0.5,
+    "mentalCost": 15,
+    "minRealm": 1,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "cp-01:recipe_lianqi_pill",
+    "name": "炼气丹配方",
+    "description": "玄莲子 + 青元草炼制炼气丹",
+    "inputs": [
+      { "itemId": "cp-01:herb_xuanlian", "count": 2 },
+      { "itemId": "cp-01:qingyuan_herb", "count": 2 }
+    ],
+    "outputItemId": "cp-01:lianqi_pill",
+    "outputCount": 1,
+    "baseSuccessRate": 0.45,
+    "mentalCost": 15,
+    "minRealm": 1,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "cp-01:recipe_spirit_water",
+    "name": "灵泉水配方",
+    "description": "灵石碎片提纯灵泉水",
+    "inputs": [{ "itemId": "cp-01:spirit_stone_shard", "count": 5 }],
+    "outputItemId": "cp-01:spirit_water",
+    "outputCount": 2,
+    "baseSuccessRate": 0.6,
+    "mentalCost": 10,
+    "minRealm": 1,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "cp-01:recipe_golden_core_pill",
+    "name": "结丹丹配方",
+    "description": "天火花 + 妖丹 + 玄莲子炼制结丹丹",
+    "inputs": [
+      { "itemId": "cp-01:herb_tianhuo", "count": 1 },
+      { "itemId": "cp-01:monster_core", "count": 2 },
+      { "itemId": "cp-01:herb_xuanlian", "count": 2 }
+    ],
+    "outputItemId": "cp-01:golden_core_pill",
+    "outputCount": 1,
+    "baseSuccessRate": 0.35,
+    "mentalCost": 20,
+    "minRealm": 2,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "cp-01:recipe_nascent_soul_pill",
+    "name": "元婴丹配方",
+    "description": "万灵果 + 天火花 + 妖丹炼制元婴丹",
+    "inputs": [
+      { "itemId": "cp-01:herb_wanling", "count": 1 },
+      { "itemId": "cp-01:herb_tianhuo", "count": 2 },
+      { "itemId": "cp-01:monster_core", "count": 3 }
+    ],
+    "outputItemId": "cp-01:nascent_soul_pill",
+    "outputCount": 1,
+    "baseSuccessRate": 0.25,
+    "mentalCost": 30,
+    "minRealm": 3,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "cp-01:recipe_enlightenment_pill",
+    "name": "悟道丹配方",
+    "description": "万灵果 + 仙玉 + 天火花炼制悟道丹",
+    "inputs": [
+      { "itemId": "cp-01:herb_wanling", "count": 2 },
+      { "itemId": "cp-01:celestial_jade", "count": 1 },
+      { "itemId": "cp-01:herb_tianhuo", "count": 3 }
+    ],
+    "outputItemId": "cp-01:enlightenment_pill",
+    "outputCount": 1,
+    "baseSuccessRate": 0.2,
+    "mentalCost": 35,
+    "minRealm": 4,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1, "excellent": 2 }
+  },
+  {
+    "id": "cp-01:recipe_longevity_pill",
+    "name": "延寿丹配方",
+    "description": "万灵果 + 灵玉炼制延寿丹",
+    "inputs": [
+      { "itemId": "cp-01:herb_wanling", "count": 1 },
+      { "itemId": "cp-01:spirit_jade", "count": 2 }
+    ],
+    "outputItemId": "cp-01:longevity_pill",
+    "outputCount": 1,
+    "baseSuccessRate": 0.3,
+    "mentalCost": 25,
+    "minRealm": 3,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  },
+  {
+    "id": "cp-01:recipe_full_restore_pill",
+    "name": "万灵归元丹配方",
+    "description": "万灵果 + 天火花 + 灵草炼制终极丹药",
+    "inputs": [
+      { "itemId": "cp-01:herb_wanling", "count": 3 },
+      { "itemId": "cp-01:herb_tianhuo", "count": 3 },
+      { "itemId": "cp-01:herb_lingcao", "count": 3 }
+    ],
+    "outputItemId": "cp-01:full_restore_pill",
+    "outputCount": 1,
+    "baseSuccessRate": 0.3,
+    "mentalCost": 30,
+    "minRealm": 3,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1, "excellent": 2 }
+  },
+  {
+    "id": "cp-01:recipe_longevity_pill_alt",
+    "name": "驻颜丹(高级)配方",
+    "description": "玄莲子 + 天火花炼制高级驻颜丹",
+    "inputs": [
+      { "itemId": "cp-01:herb_xuanlian", "count": 2 },
+      { "itemId": "cp-01:herb_tianhuo", "count": 1 }
+    ],
+    "outputItemId": "cp-01:health_pill",
+    "outputCount": 3,
+    "baseSuccessRate": 0.45,
+    "mentalCost": 15,
+    "minRealm": 2,
+    "qualityBonusMultipliers": { "normal": 1, "good": 1.5, "excellent": 2 }
+  }
+]

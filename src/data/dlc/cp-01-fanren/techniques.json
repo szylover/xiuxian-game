@@ -1,0 +1,582 @@
+[
+  {
+    "id": "cp-01:changchun_art",
+    "name": "长春功",
+    "type": "palm",
+    "rarity": "common",
+    "description": "黄枫谷入门功法，温养经脉，延年益寿。",
+    "minRealm": 0,
+    "maxLevel": 10,
+    "expPerLevel": 50,
+    "statBonusPerLevel": {
+      "hp": 8,
+      "def": 1
+    },
+    "aptitudeKey": "palm",
+    "passiveEffects": [
+      {
+        "minLevel": 3,
+        "stat": "hp",
+        "value": 30,
+        "description": "养生有术：体力 +30"
+      },
+      {
+        "minLevel": 7,
+        "stat": "def",
+        "value": 5,
+        "description": "长春护体：防御 +5"
+      }
+    ],
+    "bodyExpRate": 0.4
+  },
+  {
+    "id": "cp-01:seven_star_fist",
+    "name": "七星拳",
+    "type": "fist",
+    "rarity": "common",
+    "description": "七玄门基础拳法，拳走七星方位。",
+    "minRealm": 0,
+    "maxLevel": 10,
+    "expPerLevel": 50,
+    "statBonusPerLevel": {
+      "atk": 2,
+      "hp": 10
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "earth",
+    "passiveEffects": [
+      {
+        "minLevel": 3,
+        "stat": "hp",
+        "value": 30,
+        "description": "体魄强健：体力 +30"
+      },
+      {
+        "minLevel": 7,
+        "stat": "atk",
+        "value": 6,
+        "description": "七星贯通：攻击 +6"
+      }
+    ],
+    "activeSkill": {
+      "name": "七星连环击",
+      "description": "拳走七星，连环出击。",
+      "mpCost": 8,
+      "staminaCost": 3,
+      "dmgMultiplier": 1.0,
+      "hitCount": 3,
+      "cooldown": 1,
+      "triggerRate": 0.3
+    },
+    "bodyExpRate": 1.0
+  },
+  {
+    "id": "cp-01:luoyan_swordsmanship",
+    "name": "罗烟剑诀",
+    "type": "sword",
+    "rarity": "uncommon",
+    "description": "黄枫谷中阶剑法，剑势如烟，飘忽不定。",
+    "minRealm": 1,
+    "maxLevel": 15,
+    "expPerLevel": 80,
+    "statBonusPerLevel": {
+      "atk": 4,
+      "speed": 2
+    },
+    "aptitudeKey": "sword",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 3,
+        "stat": "speed",
+        "value": 6,
+        "description": "烟势初成：速度 +6"
+      },
+      {
+        "minLevel": 8,
+        "stat": "atk",
+        "value": 12,
+        "description": "罗烟贯穿：攻击 +12"
+      },
+      {
+        "minLevel": 12,
+        "stat": "critRate",
+        "value": 3,
+        "description": "烟锁暴击：暴击率 +3%"
+      }
+    ],
+    "activeSkill": {
+      "name": "罗烟三剑",
+      "description": "三道剑光如烟似雾，防不胜防。",
+      "mpCost": 15,
+      "staminaCost": 5,
+      "dmgMultiplier": 1.2,
+      "hitCount": 3,
+      "cooldown": 2,
+      "triggerRate": 0.35
+    },
+    "bodyExpRate": 0.2
+  },
+  {
+    "id": "cp-01:blood_shadow_evasion",
+    "name": "血影遁",
+    "type": "blade",
+    "rarity": "uncommon",
+    "description": "血禁地秘传刀法，以血为引，出刀如影。",
+    "minRealm": 1,
+    "maxLevel": 12,
+    "expPerLevel": 80,
+    "statBonusPerLevel": {
+      "atk": 5,
+      "speed": 1
+    },
+    "aptitudeKey": "blade",
+    "passiveEffects": [
+      {
+        "minLevel": 3,
+        "stat": "atk",
+        "value": 10,
+        "description": "血刃初启：攻击 +10"
+      },
+      {
+        "minLevel": 7,
+        "stat": "speed",
+        "value": 6,
+        "description": "血影步：速度 +6"
+      }
+    ],
+    "activeSkill": {
+      "name": "血遁斩",
+      "description": "化身血影，一刀斩敌。",
+      "mpCost": 12,
+      "staminaCost": 5,
+      "dmgMultiplier": 1.6,
+      "hitCount": 1,
+      "cooldown": 1,
+      "triggerRate": 0.3
+    },
+    "bodyExpRate": 0.4
+  },
+  {
+    "id": "cp-01:xuanyin_art",
+    "name": "玄阴功",
+    "type": "finger",
+    "rarity": "uncommon",
+    "description": "掩月宗玄阴指法，出指阴寒刺骨。",
+    "minRealm": 1,
+    "maxLevel": 15,
+    "expPerLevel": 80,
+    "statBonusPerLevel": {
+      "atk": 3,
+      "critRate": 1
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "water",
+    "passiveEffects": [
+      {
+        "minLevel": 3,
+        "stat": "critRate",
+        "value": 3,
+        "description": "阴指精准：暴击率 +3%"
+      },
+      {
+        "minLevel": 8,
+        "stat": "atk",
+        "value": 10,
+        "description": "玄阴蚀骨：攻击 +10"
+      },
+      {
+        "minLevel": 12,
+        "stat": "mp",
+        "value": 30,
+        "description": "阴力蓄积：灵力 +30"
+      }
+    ],
+    "activeSkill": {
+      "name": "玄阴指",
+      "description": "一指点出，阴寒入骨。",
+      "mpCost": 12,
+      "staminaCost": 4,
+      "dmgMultiplier": 1.4,
+      "hitCount": 1,
+      "cooldown": 1,
+      "triggerRate": 0.3
+    },
+    "bodyExpRate": 0.8
+  },
+  {
+    "id": "cp-01:great_divination",
+    "name": "大衍诀",
+    "type": "finger",
+    "rarity": "rare",
+    "description": "上古功法大衍诀，包罗万象，韩立修行主功法。",
+    "minRealm": 1,
+    "maxLevel": 20,
+    "expPerLevel": 100,
+    "statBonusPerLevel": {
+      "atk": 4,
+      "mp": 10,
+      "critRate": 1
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 3,
+        "stat": "mp",
+        "value": 40,
+        "description": "大衍归元：灵力 +40"
+      },
+      {
+        "minLevel": 8,
+        "stat": "atk",
+        "value": 18,
+        "description": "大衍凝神：攻击 +18"
+      },
+      {
+        "minLevel": 13,
+        "stat": "critRate",
+        "value": 5,
+        "description": "天机洞察：暴击率 +5%"
+      },
+      {
+        "minLevel": 18,
+        "stat": "critDmgMultiplier",
+        "value": 0.2,
+        "description": "大衍极致：暴击伤害 +20%"
+      }
+    ],
+    "activeSkill": {
+      "name": "大衍决指",
+      "description": "指法包罗万象，蕴含天地至理。",
+      "mpCost": 20,
+      "staminaCost": 6,
+      "dmgMultiplier": 1.5,
+      "hitCount": 2,
+      "cooldown": 2,
+      "triggerRate": 0.3
+    },
+    "bodyExpRate": 0.5
+  },
+  {
+    "id": "cp-01:golden_thunder_method",
+    "name": "青竹蜂云剑诀",
+    "type": "sword",
+    "rarity": "epic",
+    "description": "以金雷竹为引，驭使七十二口飞剑，威震天南。",
+    "minRealm": 2,
+    "maxLevel": 25,
+    "expPerLevel": 120,
+    "statBonusPerLevel": {
+      "atk": 6,
+      "speed": 2,
+      "critRate": 1
+    },
+    "aptitudeKey": "sword",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "atk",
+        "value": 25,
+        "description": "蜂云剑意：攻击 +25"
+      },
+      {
+        "minLevel": 10,
+        "stat": "speed",
+        "value": 10,
+        "description": "金雷流转：速度 +10"
+      },
+      {
+        "minLevel": 15,
+        "stat": "critRate",
+        "value": 5,
+        "description": "雷击精准：暴击率 +5%"
+      },
+      {
+        "minLevel": 20,
+        "stat": "critDmgMultiplier",
+        "value": 0.3,
+        "description": "金雷万刃：暴击伤害 +30%"
+      }
+    ],
+    "activeSkill": {
+      "name": "金雷万刃",
+      "description": "七十二口飞剑齐出，化为金雷万刃。",
+      "mpCost": 30,
+      "staminaCost": 10,
+      "dmgMultiplier": 1.5,
+      "hitCount": 5,
+      "cooldown": 3,
+      "triggerRate": 0.25
+    },
+    "bodyExpRate": 0.2
+  },
+  {
+    "id": "cp-01:nature_art",
+    "name": "造化功",
+    "type": "palm",
+    "rarity": "rare",
+    "description": "造化自然之力，攻守兼备的高阶掌法。",
+    "minRealm": 2,
+    "maxLevel": 20,
+    "expPerLevel": 100,
+    "statBonusPerLevel": {
+      "atk": 3,
+      "def": 3,
+      "hp": 10
+    },
+    "aptitudeKey": "palm",
+    "spiritRootElement": "wood",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "def",
+        "value": 15,
+        "description": "造化护体：防御 +15"
+      },
+      {
+        "minLevel": 10,
+        "stat": "hp",
+        "value": 100,
+        "description": "自然归元：体力 +100"
+      },
+      {
+        "minLevel": 15,
+        "stat": "atk",
+        "value": 20,
+        "description": "造化之威：攻击 +20"
+      }
+    ],
+    "activeSkill": {
+      "name": "造化归元",
+      "description": "借天地造化之力，攻击的同时恢复自身。",
+      "mpCost": 20,
+      "staminaCost": 6,
+      "dmgMultiplier": 1.3,
+      "hitCount": 1,
+      "cooldown": 2,
+      "triggerRate": 0.3,
+      "effect": {
+        "type": "heal_self",
+        "value": 50,
+        "duration": 1
+      }
+    },
+    "bodyExpRate": 0.6
+  },
+  {
+    "id": "cp-01:mulan_spear",
+    "name": "木兰枪法",
+    "type": "spear",
+    "rarity": "uncommon",
+    "description": "木兰族传承枪法，枪势刚猛。",
+    "minRealm": 2,
+    "maxLevel": 15,
+    "expPerLevel": 80,
+    "statBonusPerLevel": {
+      "atk": 4,
+      "def": 2
+    },
+    "aptitudeKey": "spear",
+    "spiritRootElement": "wood",
+    "passiveEffects": [
+      {
+        "minLevel": 3,
+        "stat": "atk",
+        "value": 12,
+        "description": "木兰枪势：攻击 +12"
+      },
+      {
+        "minLevel": 8,
+        "stat": "def",
+        "value": 8,
+        "description": "枪盾合一：防御 +8"
+      },
+      {
+        "minLevel": 12,
+        "stat": "hp",
+        "value": 60,
+        "description": "战意昂扬：体力 +60"
+      }
+    ],
+    "activeSkill": {
+      "name": "破军枪",
+      "description": "枪出如龙，一往无前。",
+      "mpCost": 18,
+      "staminaCost": 6,
+      "dmgMultiplier": 1.5,
+      "hitCount": 1,
+      "cooldown": 1,
+      "triggerRate": 0.3,
+      "effect": {
+        "type": "debuff_def",
+        "value": 5,
+        "duration": 2
+      }
+    },
+    "bodyExpRate": 0.3
+  },
+  {
+    "id": "cp-01:ice_flame_art",
+    "name": "冰焰功",
+    "type": "palm",
+    "rarity": "rare",
+    "description": "极寒极热两相交融，威力倍增。",
+    "minRealm": 3,
+    "maxLevel": 20,
+    "expPerLevel": 120,
+    "statBonusPerLevel": {
+      "atk": 5,
+      "mp": 8,
+      "critRate": 1
+    },
+    "aptitudeKey": "palm",
+    "spiritRootElement": "fire",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "atk",
+        "value": 20,
+        "description": "冰火交融：攻击 +20"
+      },
+      {
+        "minLevel": 10,
+        "stat": "mp",
+        "value": 60,
+        "description": "双元蓄力：灵力 +60"
+      },
+      {
+        "minLevel": 15,
+        "stat": "critRate",
+        "value": 5,
+        "description": "极致暴击：暴击率 +5%"
+      }
+    ],
+    "activeSkill": {
+      "name": "冰火双莲",
+      "description": "一掌冰火双莲齐出，烧灼冻结。",
+      "mpCost": 25,
+      "staminaCost": 8,
+      "dmgMultiplier": 1.8,
+      "hitCount": 2,
+      "cooldown": 3,
+      "triggerRate": 0.25
+    },
+    "bodyExpRate": 0.5
+  },
+  {
+    "id": "cp-01:skydevil_art",
+    "name": "天魔功",
+    "type": "blade",
+    "rarity": "epic",
+    "description": "天绝宗至高魔功，以天魔之力噬敌魂魄。",
+    "minRealm": 4,
+    "maxLevel": 25,
+    "expPerLevel": 150,
+    "statBonusPerLevel": {
+      "atk": 8,
+      "critRate": 2,
+      "critDmgMultiplier": 0.05
+    },
+    "aptitudeKey": "blade",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "atk",
+        "value": 30,
+        "description": "天魔之威：攻击 +30"
+      },
+      {
+        "minLevel": 10,
+        "stat": "critRate",
+        "value": 6,
+        "description": "魔念入侵：暴击率 +6%"
+      },
+      {
+        "minLevel": 15,
+        "stat": "critDmgMultiplier",
+        "value": 0.25,
+        "description": "天魔噬体：暴击伤害 +25%"
+      },
+      {
+        "minLevel": 20,
+        "stat": "atk",
+        "value": 50,
+        "description": "天魔化身：攻击 +50"
+      }
+    ],
+    "activeSkill": {
+      "name": "天魔噬魂",
+      "description": "释放天魔之力，噬夺敌人魂魄。",
+      "mpCost": 35,
+      "staminaCost": 12,
+      "dmgMultiplier": 2.2,
+      "hitCount": 1,
+      "cooldown": 3,
+      "triggerRate": 0.25
+    },
+    "bodyExpRate": 0.3
+  },
+  {
+    "id": "cp-01:heavenly_sword",
+    "name": "天剑术",
+    "type": "sword",
+    "rarity": "legendary",
+    "description": "传说中的天剑术，一剑可开天辟地。",
+    "minRealm": 5,
+    "maxLevel": 30,
+    "expPerLevel": 200,
+    "statBonusPerLevel": {
+      "atk": 10,
+      "speed": 3,
+      "critRate": 2,
+      "critDmgMultiplier": 0.05
+    },
+    "aptitudeKey": "sword",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "atk",
+        "value": 40,
+        "description": "天剑初现：攻击 +40"
+      },
+      {
+        "minLevel": 10,
+        "stat": "speed",
+        "value": 15,
+        "description": "天剑如风：速度 +15"
+      },
+      {
+        "minLevel": 15,
+        "stat": "critRate",
+        "value": 8,
+        "description": "天剑必中：暴击率 +8%"
+      },
+      {
+        "minLevel": 20,
+        "stat": "critDmgMultiplier",
+        "value": 0.4,
+        "description": "天剑极意：暴击伤害 +40%"
+      },
+      {
+        "minLevel": 25,
+        "stat": "atk",
+        "value": 80,
+        "description": "天地同斩：攻击 +80"
+      }
+    ],
+    "activeSkill": {
+      "name": "天地同斩",
+      "description": "一剑斩天地，万物俱灭。",
+      "mpCost": 50,
+      "staminaCost": 15,
+      "dmgMultiplier": 2.5,
+      "hitCount": 3,
+      "cooldown": 4,
+      "triggerRate": 0.2
+    },
+    "bodyExpRate": 0.2
+  }
+]

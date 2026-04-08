@@ -1,0 +1,116 @@
+[
+  {
+    "id": "cp-01:base_sword",
+    "baseName": "剑",
+    "slot": "weapon",
+    "baseStats": { "atk": 8 },
+    "minRealm": 0,
+    "baseSellPrice": 20,
+    "techType": ["sword"],
+    "descriptionPattern": "一把{prefix_desc}的{quality_adj}{baseName}，{suffix_desc}。"
+  },
+  {
+    "id": "cp-01:base_blade",
+    "baseName": "刀",
+    "slot": "weapon",
+    "baseStats": { "atk": 10, "speed": -1 },
+    "minRealm": 0,
+    "baseSellPrice": 22,
+    "techType": ["blade"],
+    "descriptionPattern": "一把{prefix_desc}的{quality_adj}{baseName}，{suffix_desc}。"
+  },
+  {
+    "id": "cp-01:base_spear",
+    "baseName": "枪",
+    "slot": "weapon",
+    "baseStats": { "atk": 9, "critRate": 2 },
+    "minRealm": 0,
+    "baseSellPrice": 24,
+    "techType": ["spear"],
+    "descriptionPattern": "一杆{prefix_desc}的{quality_adj}{baseName}，{suffix_desc}。"
+  },
+  {
+    "id": "cp-01:base_fist_gauntlet",
+    "baseName": "拳套",
+    "slot": "weapon",
+    "baseStats": { "atk": 7, "speed": 3 },
+    "minRealm": 0,
+    "baseSellPrice": 18,
+    "techType": ["fist"],
+    "descriptionPattern": "一副{prefix_desc}的{quality_adj}{baseName}，{suffix_desc}。"
+  },
+  {
+    "id": "cp-01:base_palm_glove",
+    "baseName": "掌套",
+    "slot": "weapon",
+    "baseStats": { "atk": 6, "mp": 10 },
+    "minRealm": 1,
+    "baseSellPrice": 26,
+    "techType": ["palm"],
+    "descriptionPattern": "一双{prefix_desc}的{quality_adj}{baseName}，{suffix_desc}。"
+  },
+  {
+    "id": "cp-01:base_finger_ring",
+    "baseName": "指环",
+    "slot": "weapon",
+    "baseStats": { "atk": 5, "mp": 12, "critRate": 1 },
+    "minRealm": 1,
+    "baseSellPrice": 28,
+    "techType": ["finger"],
+    "descriptionPattern": "一枚{prefix_desc}的{quality_adj}{baseName}，{suffix_desc}。"
+  },
+  {
+    "id": "cp-01:base_robe",
+    "baseName": "袍",
+    "slot": "armor",
+    "baseStats": { "def": 5, "hp": 30 },
+    "minRealm": 0,
+    "baseSellPrice": 18,
+    "descriptionPattern": "一件{prefix_desc}的{quality_adj}{baseName}，{suffix_desc}。"
+  },
+  {
+    "id": "cp-01:base_heavy_armor",
+    "baseName": "甲",
+    "slot": "armor",
+    "baseStats": { "def": 10, "hp": 50, "speed": -3 },
+    "minRealm": 1,
+    "baseSellPrice": 35,
+    "descriptionPattern": "一套{prefix_desc}的{quality_adj}{baseName}，{suffix_desc}。"
+  },
+  {
+    "id": "cp-01:base_crown",
+    "baseName": "冠",
+    "slot": "helmet",
+    "baseStats": { "def": 3, "mp": 15 },
+    "minRealm": 0,
+    "baseSellPrice": 15,
+    "descriptionPattern": "一顶{prefix_desc}的{quality_adj}{baseName}，{suffix_desc}。"
+  },
+  {
+    "id": "cp-01:base_boots",
+    "baseName": "靴",
+    "slot": "boots",
+    "baseStats": { "speed": 4, "moveSpeed": 2 },
+    "minRealm": 0,
+    "baseSellPrice": 16,
+    "descriptionPattern": "一双{prefix_desc}的{quality_adj}{baseName}，{suffix_desc}。"
+  },
+  {
+    "id": "cp-01:base_pendant",
+    "baseName": "佩",
+    "slot": "accessory1",
+    "baseStats": { "mp": 12, "critRate": 1 },
+    "minRealm": 0,
+    "baseSellPrice": 14,
+    "descriptionPattern": "一枚{prefix_desc}的{quality_adj}{baseName}，{suffix_desc}。"
+  },
+  {
+    "id": "cp-01:base_talisman",
+    "baseName": "符",
+    "slot": "accessory2",
+    "baseStats": { "def": 2, "critResist": 2 },
+    "minRealm": 0,
+    "baseSellPrice": 14,
+    "descriptionPattern": "一张{prefix_desc}的{quality_adj}{baseName}，{suffix_desc}。"
+  }
+]

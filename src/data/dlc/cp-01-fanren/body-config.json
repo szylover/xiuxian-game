@@ -1,0 +1,18 @@
+{
+  "bodyRealms": [
+    { "id": "cp-01:body_mortal",   "name": "凡躯",   "index": 0, "maxPhysique": 55,    "expReq": 0,      "physiqueDmgReduce": 0,  "hpBonus": 0,    "atkBonus": 0,   "defBonus": 0,   "description": "未经淬炼的凡人之躯。" },
+    { "id": "cp-01:body_copper",   "name": "铜甲",   "index": 1, "maxPhysique": 160,   "expReq": 120,    "physiqueDmgReduce": 2,  "hpBonus": 55,   "atkBonus": 6,   "defBonus": 6,   "description": "皮肤坚韧如铜甲，刀枪难入。" },
+    { "id": "cp-01:body_iron",     "name": "铁筋",   "index": 2, "maxPhysique": 420,   "expReq": 550,    "physiqueDmgReduce": 5,  "hpBonus": 160,  "atkBonus": 16,  "defBonus": 16,  "description": "筋脉如铁，力能拔山。" },
+    { "id": "cp-01:body_jade",     "name": "琉璃",   "index": 3, "maxPhysique": 1100,  "expReq": 2200,   "physiqueDmgReduce": 11, "hpBonus": 420,  "atkBonus": 42,  "defBonus": 38,  "description": "肉身如琉璃通透，刀剑难侵。" },
+    { "id": "cp-01:body_diamond",  "name": "金身",   "index": 4, "maxPhysique": 2600,  "expReq": 8500,   "physiqueDmgReduce": 19, "hpBonus": 1050, "atkBonus": 95,  "defBonus": 85,  "description": "金身不坏，力若蛟龙。" },
+    { "id": "cp-01:body_dragon",   "name": "蛟龙",   "index": 5, "maxPhysique": 6500,  "expReq": 32000,  "physiqueDmgReduce": 30, "hpBonus": 2600, "atkBonus": 210, "defBonus": 190, "description": "蛟龙之力灌体，肉身可渡天劫。" },
+    { "id": "cp-01:body_immortal", "name": "仙体",   "index": 6, "maxPhysique": 16000, "expReq": 110000, "physiqueDmgReduce": 42, "hpBonus": 6500, "atkBonus": 480, "defBonus": 420, "description": "仙体圆满，天地不灭则肉身不朽。" }
+  ],
+  "spiritRootBodyBonuses": [
+    { "rootType": "metal", "bodyExpMultiplier": 1.35, "physiqueRegenRate": 1.0 },
+    { "rootType": "earth", "bodyExpMultiplier": 1.15, "physiqueRegenRate": 1.3, "dmgReduceBonus": 3 },
+    { "rootType": "fire",  "bodyExpMultiplier": 1.25, "physiqueRegenRate": 1.0 },
+    { "rootType": "water", "bodyExpMultiplier": 1.0,  "physiqueRegenRate": 1.25, "hpBonusRate": 0.06 },
+    { "rootType": "wood",  "bodyExpMultiplier": 1.0,  "physiqueRegenRate": 1.15, "hpBonusRate": 0.16 }
+  ]
+}

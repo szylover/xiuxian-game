@@ -1,0 +1,529 @@
+[
+  {
+    "id": "cp-01:dlg_nangong_first_meet",
+    "npcId": "cp-01:npc_nangong_wan",
+    "name": "南宫婉初见",
+    "priority": 100,
+    "once": true,
+    "condition": {
+      "minAffinity": 0,
+      "minRealm": 2,
+      "relationLevel": ["stranger", "acquaintance"]
+    },
+    "startNodeId": "n1",
+    "tags": ["greeting", "lore"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你好，我是掩月宗的南宫婉。你也是来参加天南修士集会的吗？你的气息……倒是让我想起一个人。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🙏 见过南宫仙子，久仰掩月宗大名。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 想起谁？能说说吗？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "👀 掩月宗仙子果真气质不凡。",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 2 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「不必拘礼。修仙之人，以实力为尊，不看虚名。掩月宗虽是天南大派，但在修仙界这汪大海中，也不过是一片小小的岛屿。这几枚清灵丹送你，修炼之余补充灵力。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:mp_pill", "count": 3 }]
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「……一个故人罢了。他也像你一样，初见时看着平平无奇，谁知后来……呵，不说了。你身上有种让人安心的气质，跟他很像。」",
+        "choices": [
+          {
+            "id": "c3a",
+            "text": "🙏 仙子过奖了。不知这位故人是……",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c3b",
+            "text": "😊 能让仙子惦记的人，一定很特别。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 3 }
+          }
+        ]
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「气质这种东西，是修炼出来的，不是天生的。多修炼，你也会有的。这几枚清灵丹拿着。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:mp_pill", "count": 2 }]
+        }
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「他叫韩立，黄枫谷的弟子。你若有缘遇到他，会明白的。好了，这些清灵丹收着吧。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:mp_pill", "count": 3 }],
+          "expChange": 50
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_nangong_alchemy",
+    "npcId": "cp-01:npc_nangong_wan",
+    "name": "南宫婉谈炼丹",
+    "priority": 90,
+    "once": true,
+    "condition": {
+      "minAffinity": 20,
+      "minRealm": 2,
+      "relationLevel": ["acquaintance", "friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_nangong_first_meet"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你修炼之余，可有涉猎炼丹之道？丹药一途博大精深，我在掩月宗时就拜了宗门丹师学了数十年。火候掌控、药性配伍、炉鼎温控——每一样都是大学问。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "📖 在下正在学习炼丹，还请仙子指点。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 仙子最擅长炼什么丹？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "😅 炼丹太难了，我还是买丹药吧。",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 0 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「你这份心性不错。炼丹最重要的是心静如水——心浮气躁时宁可不炼。其次是认药，每味灵药的药性、产地、年份都会影响丹药品质。这几株丹材你拿去练手。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:herb_xuanlian", "count": 5 },
+            { "itemId": "cp-01:herb_lingcao", "count": 10 }
+          ],
+          "expChange": 150
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「我最擅长的是筑基丹和玄阴丹。筑基丹虽是低阶丹药，但要炼到上品极难；玄阴丹则是我修炼玄阴功的辅助丹药——这个嘛，一般人用不上。不过回复类丹药才是最实用的。」",
+        "choices": [
+          {
+            "id": "c3a",
+            "text": "🙏 能否请仙子炼几枚丹药给我？",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3b",
+            "text": "📖 可否教我几个实用配方？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          }
+        ]
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「买丹药……也不失为一种办法。只是到了高境界，你需要的丹药恐怕有钱也买不到。而且买来的丹药品质参差不齐，哪有自己炼的放心？未雨绸缪总没错。」"
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「呵，看在你诚心的份上。这几枚是我闲暇时炼制的，品质还算不错。不过下次你应该自己学着炼。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:hp_pill", "count": 5 },
+            { "itemId": "cp-01:mp_pill", "count": 5 }
+          ],
+          "expChange": 100
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_nangong_yanyue_sect",
+    "npcId": "cp-01:npc_nangong_wan",
+    "name": "掩月宗往事",
+    "priority": 80,
+    "once": true,
+    "condition": {
+      "minAffinity": 25,
+      "minRealm": 2,
+      "relationLevel": ["acquaintance", "friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_nangong_first_meet"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「掩月宗是天南六大宗之一，以阴属功法见长。我们宗门的女弟子居多，修炼的玄阴功更是专为女修所创。不过宗门里也有不少男弟子，只是功法不同罢了。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🏛️ 玄阴功是什么样的功法？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 掩月宗在六大宗中实力如何？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 2 }
+          },
+          {
+            "id": "c3",
+            "text": "😊 仙子在宗门中地位一定很高吧？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 0 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「玄阴功是掩月宗的镇宗之法，修炼时需引天地间至阴之气入体温养。修炼到大成境界，可操控阴寒之力冻结万物。不过此功法修炼极难，而且有一个致命的缺陷——修炼到化神期时，若不能渡过阴寒劫，便会被自身寒气反噬。」",
+        "choices": [
+          {
+            "id": "c2a",
+            "text": "😰 反噬？那仙子岂不是很危险？",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2b",
+            "text": "🙏 听起来是极厉害的功法。",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 2 }
+          }
+        ]
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「在天南六大宗中，掩月宗的实力中等偏上。虽不如黄枫谷底蕴深厚，但论阵法造诣和丹道水平，掩月宗可是首屈一指的。」",
+        "effects": { "expChange": 80 }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「地位？不过是修为还算可以罢了。在宗门里讲的是实力，不是辈分。我能做到的，就是不给师门丢人。」",
+        "effects": { "expChange": 60 }
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「……是有些危险。不过我既然选择了这条路，就做好了准备。玄阴功若修成，我便可接近化神境界；若修不成……那也是命。不必为我担心。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:ice_silkworm_thread", "count": 2 }],
+          "expChange": 150
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_nangong_about_hanli",
+    "npcId": "cp-01:npc_nangong_wan",
+    "name": "南宫婉谈韩立",
+    "priority": 70,
+    "once": true,
+    "condition": {
+      "minAffinity": 40,
+      "minRealm": 2,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_nangong_alchemy"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你……跟韩立见过面了吗？」（南宫婉的语气突然多了几分柔和）",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "😊 见过了，韩前辈为人低调谨慎。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "🤔 仙子和韩前辈是什么关系？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "😏 仙子提起他的时候，表情变了哦。",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": -2 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「低调谨慎……确实是他的性子。第一次见他的时候，我还以为他是个呆木头。谁想到后来堕魔谷一战，他一个人扛下了那么多事。修仙界的人都说他苟，可我知道那不是苟，是稳。」",
+        "choices": [
+          {
+            "id": "c2a",
+            "text": "🙏 看来仙子很了解韩前辈。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2b",
+            "text": "🤔 他真的那么厉害？",
+            "nextNodeId": "n6",
+            "effects": { "affinityChange": 2 }
+          }
+        ]
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「……关系？修仙者之间的关系，哪有凡人想的那么简单。我们是道侣——虽然聚少离多，但心意相通。在这修仙界，能有一个真心相待的人，已是莫大的福分。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:spirit_jade", "count": 1 }],
+          "expChange": 200
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「……你这人，观察力倒是不错。（微微一顿）他是我的道侣。不过这件事，不必到处去说。」",
+        "effects": { "expChange": 50 }
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「了解……也说不上。修仙者的寿命以百年计，我和他在一起的时间加起来，恐怕还不到十年。但有些人，不需要朝夕相处也能记住一辈子。这枚灵玉你拿着，算是我托你带给他的心意……如果你再见到他的话。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:spirit_jade", "count": 2 }],
+          "expChange": 200
+        }
+      },
+      {
+        "id": "n6",
+        "type": "npc_talk",
+        "text": "「厉害不厉害的，我不在意。我只知道在堕魔谷最危险的时候，他没有丢下我。在修仙界，愿意为别人犯险的人不多了。」",
+        "effects": { "expChange": 100 }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_nangong_closed_cultivation",
+    "npcId": "cp-01:npc_nangong_wan",
+    "name": "南宫婉闭关前夕",
+    "priority": 60,
+    "once": true,
+    "condition": {
+      "minAffinity": 35,
+      "minRealm": 3,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_nangong_yanyue_sect"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「我即将进入长期闭关，修炼玄阴功最后几层。这一关若过了，我便能迈入化神境界；若过不去……」（她的目光变得坚定）「不，一定能过。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🙏 仙子一定能成功。有什么我能帮忙的吗？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 8 }
+          },
+          {
+            "id": "c2",
+            "text": "😰 闭关多久？化神期的闭关不会有危险吧？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c3",
+            "text": "💪 等你出关时，我一定追上你的修为！",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 3 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「帮忙？你能平平安安地修炼下去，就是最大的帮忙了。修仙界里的人越来越少，我不希望又少一个朋友。这些丹材和冰蚕丝留给你，闭关期间我用不上了。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:ice_silkworm_thread", "count": 3 },
+            { "itemId": "cp-01:herb_xuanlian", "count": 8 }
+          ],
+          "expChange": 300
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「起码百年。至于危险……化神期闭关本身就是一次生死考验。玄阴功到了最后关头，体内的阴寒之气会像潮水一样涌来，若是抗不住就会走火入魔。不过我已经准备了足够的辅助丹药，应当无虞。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:calming_talisman", "count": 2 }],
+          "expChange": 200
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「呵，是你的风格。那我可不会手下留情。这枚灵玉权当作别——等我出关，你若修为没有长进，可就不好意思再来见我了。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:spirit_jade", "count": 2 }],
+          "expChange": 150
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_nangong_reunion",
+    "npcId": "cp-01:npc_nangong_wan",
+    "name": "重逢赠言",
+    "priority": 50,
+    "once": true,
+    "condition": {
+      "minAffinity": 50,
+      "minRealm": 4,
+      "relationLevel": ["close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_nangong_closed_cultivation"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「……我出关了。百年光阴如白驹过隙，外面已经变了很多。你……也变强了不少。」（南宫婉的目光温柔而欣慰）",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🙏 仙子出关了！恭喜突破化神！",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 8 }
+          },
+          {
+            "id": "c2",
+            "text": "😊 这些年我一直在修炼，就为了不被你甩太远。",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 10 }
+          },
+          {
+            "id": "c3",
+            "text": "🤔 闭关期间外面发生了很多事，仙子可要听听？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 3 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「化神……勉强算是成功了。不过离真正的大道还差得很远。这枚悟道丹是我闭关期间附带炼成的，对你现在的修为应当有帮助。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:enlightenment_pill", "count": 1 },
+            { "itemId": "cp-01:longevity_pill", "count": 1 }
+          ],
+          "expChange": 600
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「……你倒是变得会说话了。（微笑）修仙路上能有你这样的朋友，是我这些年来最大的收获。这些东西你收好，以后的路还长，我们都要好好走下去。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:enlightenment_pill", "count": 1 },
+            { "itemId": "cp-01:ice_silkworm_thread", "count": 5 },
+            { "itemId": "cp-01:spirit_jade", "count": 3 }
+          ],
+          "expChange": 800
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「外面的事……等以后慢慢说吧。我只关心一件事——韩立他……有消息吗？」",
+        "choices": [
+          {
+            "id": "c4a",
+            "text": "🙏 韩前辈一切安好，仙子不必担心。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 8 }
+          },
+          {
+            "id": "c4b",
+            "text": "😞 我也不太清楚他的近况……",
+            "nextNodeId": "n6",
+            "effects": { "affinityChange": 3 }
+          }
+        ]
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「……那就好。（长出一口气）他那个人，从来让人不放心。谢谢你告诉我。这枚延寿丹和悟道丹你拿着——活久一些，多替我看看这个世界。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:longevity_pill", "count": 1 },
+            { "itemId": "cp-01:enlightenment_pill", "count": 1 }
+          ],
+          "expChange": 700
+        }
+      },
+      {
+        "id": "n6",
+        "type": "npc_talk",
+        "text": "「……没关系，他活得比谁都久。那个人就像他自己说的——越不起眼，越能活得长。我相信他。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:spirit_jade", "count": 2 }],
+          "expChange": 400
+        }
+      }
+    ]
+  }
+]

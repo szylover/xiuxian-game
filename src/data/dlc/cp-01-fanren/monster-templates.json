@@ -1,0 +1,108 @@
+[
+  {
+    "id": "cp-01:tmpl_ink_serpent",
+    "baseName": "墨蛟",
+    "emoji": "🐍",
+    "baseStats": { "hp": 55, "atk": 13, "def": 4, "speed": 12, "moveSpeed": 10, "critRate": 8, "critResist": 2 },
+    "baseExpReward": 16,
+    "baseGoldReward": 9,
+    "element": "water",
+    "regionTags": ["wilderness", "valley", "island"],
+    "maxRealm": 5
+  },
+  {
+    "id": "cp-01:tmpl_twin_wolf",
+    "baseName": "妖狼",
+    "emoji": "🐺",
+    "baseStats": { "hp": 65, "atk": 11, "def": 6, "speed": 11, "moveSpeed": 9, "critRate": 6, "critResist": 3 },
+    "baseExpReward": 14,
+    "baseGoldReward": 8,
+    "regionTags": ["mountain", "wilderness", "wasteland"],
+    "maxRealm": 4
+  },
+  {
+    "id": "cp-01:tmpl_blood_bat",
+    "baseName": "嗜血蝠",
+    "emoji": "🦇",
+    "baseStats": { "hp": 35, "atk": 14, "def": 2, "speed": 17, "moveSpeed": 15, "critRate": 16, "critResist": 1 },
+    "baseExpReward": 15,
+    "baseGoldReward": 7,
+    "regionTags": ["dangerous", "mystic", "wasteland"],
+    "maxRealm": 5
+  },
+  {
+    "id": "cp-01:tmpl_giant_scorpion",
+    "baseName": "毒蝎",
+    "emoji": "🦂",
+    "baseStats": { "hp": 60, "atk": 15, "def": 9, "speed": 7, "moveSpeed": 5, "critRate": 12, "critResist": 4 },
+    "baseExpReward": 18,
+    "baseGoldReward": 10,
+    "regionTags": ["wasteland", "mountain", "dangerous"],
+    "maxRealm": 5
+  },
+  {
+    "id": "cp-01:tmpl_iron_turtle",
+    "baseName": "铁壳龟",
+    "emoji": "🐢",
+    "baseStats": { "hp": 120, "atk": 8, "def": 18, "speed": 3, "moveSpeed": 2, "critRate": 2, "critResist": 8, "critDmgMultiplier": 1.5 },
+    "baseExpReward": 22,
+    "baseGoldReward": 14,
+    "element": "earth",
+    "regionTags": ["island", "valley"],
+    "minRealm": 1
+  },
+  {
+    "id": "cp-01:tmpl_fire_crow",
+    "baseName": "火鸦",
+    "emoji": "🔥",
+    "baseStats": { "hp": 45, "atk": 16, "def": 4, "speed": 15, "moveSpeed": 13, "critRate": 10, "critResist": 2 },
+    "baseExpReward": 20,
+    "baseGoldReward": 12,
+    "element": "fire",
+    "regionTags": ["mountain", "dangerous"],
+    "minRealm": 1
+  },
+  {
+    "id": "cp-01:tmpl_wind_leopard",
+    "baseName": "风豹",
+    "emoji": "🐆",
+    "baseStats": { "hp": 50, "atk": 17, "def": 5, "speed": 20, "moveSpeed": 16, "critRate": 14, "critResist": 2, "critDmgMultiplier": 1.8 },
+    "baseExpReward": 25,
+    "baseGoldReward": 15,
+    "element": "wind",
+    "regionTags": ["wilderness", "mountain"],
+    "minRealm": 2
+  },
+  {
+    "id": "cp-01:tmpl_sea_serpent",
+    "baseName": "海蛟",
+    "emoji": "🐉",
+    "baseStats": { "hp": 90, "atk": 14, "def": 10, "speed": 9, "moveSpeed": 7, "critRate": 6, "critResist": 6 },
+    "baseExpReward": 28,
+    "baseGoldReward": 18,
+    "element": "water",
+    "regionTags": ["island", "dangerous"],
+    "minRealm": 2
+  },
+  {
+    "id": "cp-01:tmpl_thunder_roc",
+    "baseName": "雷鹏",
+    "emoji": "⚡",
+    "baseStats": { "hp": 70, "atk": 20, "def": 7, "speed": 18, "moveSpeed": 16, "critRate": 10, "critResist": 5, "critDmgMultiplier": 1.9 },
+    "baseExpReward": 35,
+    "baseGoldReward": 22,
+    "element": "thunder",
+    "regionTags": ["dangerous", "celestial", "mountain"],
+    "minRealm": 3
+  },
+  {
+    "id": "cp-01:tmpl_phantom_fox",
+    "baseName": "幻狐",
+    "emoji": "🦊",
+    "baseStats": { "hp": 40, "atk": 12, "def": 3, "speed": 19, "moveSpeed": 17, "critRate": 18, "critResist": 1 },
+    "baseExpReward": 17,
+    "baseGoldReward": 10,
+    "regionTags": ["mystic", "valley", "wilderness"],
+    "maxRealm": 5
+  }
+]

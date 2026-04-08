@@ -1,0 +1,108 @@
+[
+  {
+    "id": "cp-01:affix_golden_thunder",
+    "position": "prefix",
+    "name": "金雷",
+    "description": "蕴含金雷之力",
+    "statBonus": { "atk": 7, "critRate": 2 },
+    "weight": 6,
+    "slotRestriction": ["weapon"],
+    "excludeAffixes": ["cp-01:affix_dark_yin"]
+  },
+  {
+    "id": "cp-01:affix_dark_yin",
+    "position": "prefix",
+    "name": "玄阴",
+    "description": "阴寒之气缠绕",
+    "statBonus": { "atk": 4, "mp": 15 },
+    "weight": 8,
+    "slotRestriction": ["weapon"],
+    "excludeAffixes": ["cp-01:affix_golden_thunder"]
+  },
+  {
+    "id": "cp-01:affix_spirit_silk",
+    "position": "prefix",
+    "name": "灵蚕",
+    "description": "灵蚕丝编织，轻盈坚韧",
+    "statBonus": { "def": 4, "speed": 3 },
+    "weight": 9
+  },
+  {
+    "id": "cp-01:affix_star_iron",
+    "position": "prefix",
+    "name": "星陨",
+    "description": "星陨铁锻造，刚猛无匹",
+    "statBonus": { "atk": 6, "def": 3 },
+    "weight": 7,
+    "slotRestriction": ["weapon"]
+  },
+  {
+    "id": "cp-01:affix_beast_soul",
+    "position": "prefix",
+    "name": "兽魂",
+    "description": "融入妖兽精魂",
+    "statBonus": { "atk": 8, "hp": -15 },
+    "weight": 5,
+    "slotRestriction": ["weapon"]
+  },
+  {
+    "id": "cp-01:affix_jade",
+    "position": "prefix",
+    "name": "灵玉",
+    "description": "灵玉镶嵌，灵气流转",
+    "statBonus": { "mp": 20, "critResist": 2 },
+    "weight": 8
+  },
+  {
+    "id": "cp-01:affix_mithril",
+    "position": "prefix",
+    "name": "秘银",
+    "description": "秘银锻造，银光闪烁",
+    "statBonus": { "def": 6, "speed": 1 },
+    "weight": 10
+  },
+  {
+    "id": "cp-01:affix_ice_silk",
+    "position": "prefix",
+    "name": "冰蚕",
+    "description": "冰蚕丝编织，寒气逼人",
+    "statBonus": { "def": 3, "speed": 4, "mp": 10 },
+    "weight": 7
+  },
+  {
+    "id": "cp-01:affix_ancient",
+    "position": "suffix",
+    "name": "上古",
+    "description": "上古遗物，蕴含远古之力",
+    "statBonus": { "atk": 3, "def": 3, "hp": 20 },
+    "weight": 4,
+    "minRealm": 3
+  },
+  {
+    "id": "cp-01:affix_void",
+    "position": "suffix",
+    "name": "虚空",
+    "description": "虚空之力加持",
+    "statBonus": { "speed": 6, "critRate": 3 },
+    "weight": 3,
+    "minRealm": 4
+  },
+  {
+    "id": "cp-01:affix_celestial",
+    "position": "suffix",
+    "name": "仙灵",
+    "description": "仙灵之气萦绕",
+    "statBonus": { "mp": 25, "hp": 30 },
+    "weight": 4,
+    "minRealm": 4
+  },
+  {
+    "id": "cp-01:affix_demon_slayer",
+    "position": "suffix",
+    "name": "伏魔",
+    "description": "专克邪魔外道",
+    "statBonus": { "atk": 5, "critDmgMultiplier": 0.1 },
+    "weight": 5,
+    "slotRestriction": ["weapon"]
+  }
+]

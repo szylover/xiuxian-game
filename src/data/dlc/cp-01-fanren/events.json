@@ -1,0 +1,356 @@
+[
+  {
+    "id": "cp-01:find_lingcao",
+    "category": "explore",
+    "tone": "good",
+    "name": "发现灵草",
+    "weight": 25,
+    "effects": { "gold": 15 },
+    "message": "🌿 在山谷中发现一丛野生灵草，采集后获得 15 灵石！",
+    "regionTags": ["valley", "herb"]
+  },
+  {
+    "id": "cp-01:elder_guidance",
+    "category": "explore",
+    "tone": "good",
+    "name": "长老指点",
+    "weight": 18,
+    "effects": { "exp": 35 },
+    "message": "📖 偶遇黄枫谷一位长老，受到修炼指点，获得 35 修为！",
+    "regionTags": ["sect"]
+  },
+  {
+    "id": "cp-01:spirit_stone_vein",
+    "category": "explore",
+    "tone": "good",
+    "name": "灵石矿脉",
+    "weight": 20,
+    "effects": { "gold": 25 },
+    "message": "💎 在岩壁间发现一处小灵石矿脉，开采获得 25 灵石！",
+    "regionTags": ["mountain", "wasteland"]
+  },
+  {
+    "id": "cp-01:hidden_spring",
+    "category": "explore",
+    "tone": "good",
+    "name": "灵泉沐浴",
+    "weight": 12,
+    "effects": { "mp": 40, "mood": 10 },
+    "message": "🌊 发现一处隐秘灵泉，沐浴后灵力回涌，恢复 40 MP，心情 +10！",
+    "regionTags": ["valley", "herb"]
+  },
+  {
+    "id": "cp-01:ancient_cave_find",
+    "category": "explore",
+    "tone": "good",
+    "name": "古洞遗宝",
+    "weight": 8,
+    "effects": { "gold": 40, "exp": 20 },
+    "message": "🏛️ 在山崖间发现一处上古修士洞府残迹，拾得灵石 40 和修为 20！",
+    "regionTags": ["mountain", "dangerous"]
+  },
+  {
+    "id": "cp-01:bamboo_meditation",
+    "category": "explore",
+    "tone": "good",
+    "name": "竹林悟道",
+    "weight": 15,
+    "effects": { "exp": 25, "mood": 8 },
+    "message": "🎋 在金雷竹林间静坐冥想，灵台清明，获得 25 修为，心情 +8！",
+    "regionTags": ["sect", "valley"]
+  },
+  {
+    "id": "cp-01:fellow_disciple_exchange",
+    "category": "explore",
+    "tone": "good",
+    "name": "同门切磋",
+    "weight": 15,
+    "effects": { "exp": 20, "mood": 5 },
+    "message": "🤝 与同门弟子切磋修炼心得，互有裨益，修为 +20，心情 +5。"
+  },
+  {
+    "id": "cp-01:herb_garden_find",
+    "category": "explore",
+    "tone": "good",
+    "name": "灵药园",
+    "weight": 10,
+    "effects": { "gold": 20, "health": 10 },
+    "message": "🌿 发现一片野生灵药园，采集灵药获得 20 灵石，健康 +10！",
+    "regionTags": ["herb", "valley"]
+  },
+  {
+    "id": "cp-01:star_island_treasure",
+    "category": "explore",
+    "tone": "good",
+    "name": "岛屿宝藏",
+    "weight": 6,
+    "effects": { "gold": 60 },
+    "message": "🏝️ 在荒岛沙滩上发现前人埋藏的储物袋，获得 60 灵石！",
+    "regionTags": ["island"]
+  },
+  {
+    "id": "cp-01:desert_mirage",
+    "category": "explore",
+    "tone": "good",
+    "name": "沙漠灵泉",
+    "weight": 5,
+    "effects": { "hp": 50, "stamina": 20 },
+    "message": "🏜️ 在沙漠深处发现一处绿洲灵泉，恢复 50 HP 和 20 精力！",
+    "regionTags": ["wasteland"]
+  },
+  {
+    "id": "cp-01:monster_ambush",
+    "category": "explore",
+    "tone": "bad",
+    "name": "妖兽伏击",
+    "weight": 18,
+    "effects": { "hp": -35, "health": -5 },
+    "message": "🐺 被藏匿在草丛中的妖兽偷袭！HP -35，健康 -5。",
+    "regionTags": ["wilderness", "mountain"]
+  },
+  {
+    "id": "cp-01:poison_fog",
+    "category": "explore",
+    "tone": "bad",
+    "name": "瘴气弥漫",
+    "weight": 12,
+    "effects": { "health": -10, "mp": -20 },
+    "message": "☠️ 误入瘴气浓重的区域，毒气入体！健康 -10，灵力 -20。",
+    "regionTags": ["dangerous", "wasteland"]
+  },
+  {
+    "id": "cp-01:trap_formation",
+    "category": "explore",
+    "tone": "bad",
+    "name": "禁制困阵",
+    "weight": 10,
+    "effects": { "hp": -25, "stamina": -15 },
+    "message": "⚠️ 误触上古禁制阵法，灵力反噬！HP -25，精力 -15。",
+    "regionTags": ["dangerous", "mystic"]
+  },
+  {
+    "id": "cp-01:bandit_robbery",
+    "category": "explore",
+    "tone": "bad",
+    "name": "散修劫道",
+    "weight": 8,
+    "effects": { "gold": -20, "mood": -10 },
+    "message": "🗡️ 遭遇散修劫道，被抢走 20 灵石！心情 -10。",
+    "condition": { "minGold": 20 }
+  },
+  {
+    "id": "cp-01:inner_demon",
+    "category": "explore",
+    "tone": "bad",
+    "name": "心魔侵扰",
+    "weight": 5,
+    "effects": { "mood": -25, "mentalPower": -10 },
+    "message": "👿 修炼中心魔趁虚而入，心境动摇！心情 -25，念力 -10。",
+    "condition": { "maxMood": 39 }
+  },
+  {
+    "id": "cp-01:sea_storm",
+    "category": "explore",
+    "tone": "bad",
+    "name": "海上风暴",
+    "weight": 10,
+    "effects": { "hp": -30, "mood": -10 },
+    "message": "🌊 在海上遭遇风暴，法器受损！HP -30，心情 -10。",
+    "regionTags": ["island", "dangerous"]
+  },
+  {
+    "id": "cp-01:desert_sandstorm",
+    "category": "explore",
+    "tone": "bad",
+    "name": "沙暴侵袭",
+    "weight": 10,
+    "effects": { "hp": -20, "stamina": -15 },
+    "message": "🏜️ 突遇沙暴，狂沙蔽日！HP -20，精力 -15。",
+    "regionTags": ["wasteland"]
+  },
+  {
+    "id": "cp-01:cursed_ruins",
+    "category": "explore",
+    "tone": "bad",
+    "name": "诅咒遗迹",
+    "weight": 4,
+    "effects": { "hp": -45, "mood": -15 },
+    "message": "💀 闯入被诅咒的洞府遗迹，邪气侵体！HP -45，心情 -15。",
+    "regionTags": ["dangerous", "mystic"]
+  },
+  {
+    "id": "cp-01:lost_in_fog",
+    "category": "explore",
+    "tone": "bad",
+    "name": "迷雾迷失",
+    "weight": 12,
+    "effects": { "mood": -15, "stamina": -10 },
+    "message": "🌫️ 在迷雾中迷失方向，兜兜转转半日方出。心情 -15，精力 -10。"
+  },
+  {
+    "id": "cp-01:nothing_happen",
+    "category": "explore",
+    "tone": "neutral",
+    "name": "一无所获",
+    "weight": 22,
+    "effects": {},
+    "message": "🚶 四处探索了一番，未发现什么特别的东西。"
+  },
+  {
+    "id": "cp-01:scenic_view",
+    "category": "explore",
+    "tone": "neutral",
+    "name": "壮丽景观",
+    "weight": 10,
+    "effects": { "mood": 5 },
+    "message": "🏔️ 驻足欣赏天南大陆的壮丽山河，心情略有好转。心情 +5。"
+  },
+  {
+    "id": "cp-01:old_battlefield",
+    "category": "explore",
+    "tone": "neutral",
+    "name": "古修战场",
+    "weight": 6,
+    "effects": { "exp": 10 },
+    "message": "⚔️ 经过一处上古修士的古战场遗迹，感悟残留法意，修为 +10。",
+    "regionTags": ["dangerous", "mystic"]
+  },
+  {
+    "id": "cp-01:wandering_merchant",
+    "category": "explore",
+    "tone": "neutral",
+    "name": "游商路过",
+    "weight": 8,
+    "effects": { "mood": 3 },
+    "message": "🏪 偶遇一位走南闯北的游商，闲聊几句，心情 +3。"
+  },
+  {
+    "id": "cp-01:cave_inheritance",
+    "category": "adventure",
+    "tone": "good",
+    "name": "洞府传承",
+    "weight": 4,
+    "effects": { "exp": 80, "gold": 50 },
+    "message": "🏛️ 意外发现一处上古修士的洞府传承，获得功法残篇！修为 +80，灵石 +50。",
+    "condition": { "minRealm": 1 },
+    "regionTags": ["mountain", "mystic", "dangerous"]
+  },
+  {
+    "id": "cp-01:fairy_blessing",
+    "category": "adventure",
+    "tone": "good",
+    "name": "仙缘际遇",
+    "weight": 3,
+    "effects": { "exp": 120, "mood": 20 },
+    "message": "✨ 在灵气充沛之地偶遇仙人残影点化，获得 120 修为，心情 +20！",
+    "condition": { "minRealm": 2 },
+    "regionTags": ["celestial", "mystic"]
+  },
+  {
+    "id": "cp-01:ancient_formation",
+    "category": "adventure",
+    "tone": "good",
+    "name": "古阵遗宝",
+    "weight": 5,
+    "effects": { "gold": 80, "exp": 40 },
+    "message": "🔮 在秘境中破解一座上古阵法，获得宝物！灵石 +80，修为 +40。",
+    "condition": { "minRealm": 1 },
+    "regionTags": ["mystic", "dangerous"]
+  },
+  {
+    "id": "cp-01:spirit_beast_egg",
+    "category": "adventure",
+    "tone": "good",
+    "name": "灵兽蛋",
+    "weight": 3,
+    "effects": { "gold": 60, "mood": 15 },
+    "message": "🥚 在深山中发现一枚灵兽蛋，虽无法孵化但价值不菲。灵石 +60，心情 +15。",
+    "regionTags": ["mountain", "wilderness"]
+  },
+  {
+    "id": "cp-01:demon_illusion",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "心魔幻境",
+    "weight": 4,
+    "effects": { "mood": -30, "hp": -40 },
+    "message": "😰 陷入心魔幻境，在幻象中苦战许久方才脱身。心情 -30，HP -40。",
+    "condition": { "minRealm": 2 }
+  },
+  {
+    "id": "cp-01:ancient_seal_backlash",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "禁制反噬",
+    "weight": 3,
+    "effects": { "hp": -60, "health": -10 },
+    "message": "💥 触碰上古禁制，灵力反噬！HP -60，健康 -10。",
+    "condition": { "minRealm": 1 },
+    "regionTags": ["dangerous", "mystic"]
+  },
+  {
+    "id": "cp-01:trapped_in_formation",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "困阵牢笼",
+    "weight": 3,
+    "effects": { "stamina": -25, "mood": -15 },
+    "message": "🔒 被困于一座迷幻阵法中，耗费大量精力方才脱困。精力 -25，心情 -15。",
+    "condition": { "minRealm": 1 },
+    "regionTags": ["mystic", "dangerous"]
+  },
+  {
+    "id": "cp-01:daily_insight",
+    "category": "daily",
+    "tone": "good",
+    "name": "修炼顿悟",
+    "weight": 15,
+    "effects": { "exp": 20 },
+    "message": "💡 修炼中突然顿悟，对功法有了新的理解！修为 +20。"
+  },
+  {
+    "id": "cp-01:daily_stargazing",
+    "category": "daily",
+    "tone": "good",
+    "name": "夜观星象",
+    "weight": 10,
+    "effects": { "exp": 15, "mood": 5 },
+    "message": "🌟 夜间观察星象变化，领悟天地运行之理。修为 +15，心情 +5。"
+  },
+  {
+    "id": "cp-01:daily_tea_time",
+    "category": "daily",
+    "tone": "good",
+    "name": "品茶论道",
+    "weight": 12,
+    "effects": { "mood": 10, "health": 3 },
+    "message": "🍵 泡了一壶好茶静心品茗，身心舒畅。心情 +10，健康 +3。"
+  },
+  {
+    "id": "cp-01:daily_nightmare",
+    "category": "daily",
+    "tone": "bad",
+    "name": "噩梦缠身",
+    "weight": 8,
+    "effects": { "mood": -15 },
+    "message": "😰 夜间噩梦缠身，梦到渡劫失败，惊醒后久久不能平静。心情 -15。"
+  },
+  {
+    "id": "cp-01:daily_weather_blessing",
+    "category": "daily",
+    "tone": "good",
+    "name": "灵气潮汐",
+    "weight": 10,
+    "effects": { "exp": 10, "mood": 5 },
+    "message": "🌤️ 天地灵气潮汐涌动，修炼事半功倍！修为 +10，心情 +5。"
+  },
+  {
+    "id": "cp-01:daily_bad_weather",
+    "category": "daily",
+    "tone": "bad",
+    "name": "灵气枯竭",
+    "weight": 8,
+    "effects": { "mood": -8 },
+    "message": "🌧️ 天地灵气低迷，修炼毫无进展，心情烦闷。心情 -8。"
+  }
+]

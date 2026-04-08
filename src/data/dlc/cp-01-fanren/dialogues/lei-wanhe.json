@@ -1,0 +1,226 @@
+[
+  {
+    "id": "cp-01:dlg_leiwanhe_first_meet",
+    "npcId": "cp-01:npc_lei_wanhe",
+    "name": "雷万鹤收徒考验",
+    "priority": 100,
+    "once": true,
+    "condition": {
+      "minAffinity": 0,
+      "relationLevel": ["stranger", "acquaintance"]
+    },
+    "startNodeId": "n1",
+    "tags": ["greeting", "advice"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「站住。你是新来的弟子？让我看看你的灵根……嗯，资质平平，不过根基还算扎实。在黄枫谷，老夫最看重的不是天赋，而是勤勉和品性。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🙏 雷长老好！晚辈愿受指点。",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "😤 资质平平？韩立灵根驳杂不也修到了很高的境界？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c3",
+            "text": "🤔 品性比天赋更重要吗？",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 5 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「好。先考你一个问题——修炼遇到瓶颈时，你会怎么做？是硬冲还是等待？」",
+        "choices": [
+          {
+            "id": "c2a",
+            "text": "🧘 等待时机成熟再突破，欲速则不达。",
+            "nextNodeId": "n5",
+            "effects": { "affinityChange": 8 }
+          },
+          {
+            "id": "c2b",
+            "text": "💪 全力冲击，不试怎么知道行不行？",
+            "nextNodeId": "n6",
+            "effects": { "affinityChange": 0 }
+          }
+        ]
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「呵，拿韩立来说事？他是百年一遇的异数，你可不能跟他比。不过你有这个志气也不错。韩立的成功不是因为灵根好，而是因为他比谁都能忍耐、比谁都能坚持。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:exp_pill", "count": 2 }],
+          "expChange": 80
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「当然。天赋决定你能走多快，但品性决定你能走多远。我见过太多天才修士因为心性不稳走火入魔，也见过资质平庸的人靠着坚韧一步步攀上高峰。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:jade_slip", "count": 2 }],
+          "expChange": 100
+        }
+      },
+      {
+        "id": "n5",
+        "type": "npc_talk",
+        "text": "「好！这个答案老夫很满意。当年韩立也是这么回答的——他总说'活着比什么都重要'。你的心性跟他有几分相似。这几枚筑基丹你拿着，好好修炼。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:exp_pill", "count": 3 },
+            { "itemId": "cp-01:jade_slip", "count": 2 }
+          ],
+          "expChange": 150
+        }
+      },
+      {
+        "id": "n6",
+        "type": "npc_talk",
+        "text": "「冲劲有余，稳重不足。厉飞雨也是这个毛病——想当年他因为硬冲瓶颈差点经脉尽断。修行讲究的是循序渐进，不是逞匹夫之勇。这几枚丹药你拿着，先打好基础再说。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:exp_pill", "count": 2 }],
+          "expChange": 80
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_leiwanhe_teaching",
+    "npcId": "cp-01:npc_lei_wanhe",
+    "name": "雷万鹤传授经验",
+    "priority": 85,
+    "once": true,
+    "condition": {
+      "minAffinity": 20,
+      "minRealm": 1,
+      "relationLevel": ["acquaintance", "friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_leiwanhe_first_meet"]
+    },
+    "startNodeId": "n1",
+    "tags": ["advice", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「你最近修炼进度如何？老夫修习雷电之法多年，对突破经脉有些心得，或许对你有用。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🙏 请雷长老赐教！",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c2",
+            "text": "⚡ 雷电之法？那是什么功法？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 3 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「修炼时要注意三点：一、经脉运行灵力的路线要稳定，不可随意变更；二、突破前至少蓄力三日，确保灵力充盈；三、突破时心无旁骛，一鼓作气。韩立当年突破筑基时也是遵循这三条，一次成功。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:lianqi_pill", "count": 2 },
+            { "itemId": "cp-01:calming_talisman", "count": 2 }
+          ],
+          "expChange": 200
+        }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「雷电之法是老夫自创的功法，借天地雷灵之力淬炼经脉。威力极大，但修炼过程痛苦异常——每次运功都像被雷劈一样。不过正因为如此，老夫的经脉比同境界修士坚韧三倍。这几枚金雷竹叶你拿着感受一下雷灵之力。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:golden_thunder_bamboo_leaf", "count": 1 }],
+          "expChange": 180
+        }
+      }
+    ]
+  },
+  {
+    "id": "cp-01:dlg_leiwanhe_sect_politics",
+    "npcId": "cp-01:npc_lei_wanhe",
+    "name": "雷万鹤谈门派局势",
+    "priority": 75,
+    "once": true,
+    "condition": {
+      "minAffinity": 30,
+      "minRealm": 2,
+      "relationLevel": ["friend", "close_friend", "soulmate"],
+      "requiredDialogues": ["cp-01:dlg_leiwanhe_teaching"]
+    },
+    "startNodeId": "n1",
+    "tags": ["lore", "gift"],
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "npc_talk",
+        "text": "「最近门派内部有些不太平。几位结丹长老对资源分配有分歧，加上前线战事吃紧，弟子们人心浮动。你在外行走时要小心，别卷入门派纷争。」",
+        "choices": [
+          {
+            "id": "c1",
+            "text": "🤔 门派内部也有纷争？",
+            "nextNodeId": "n2",
+            "effects": { "affinityChange": 3 }
+          },
+          {
+            "id": "c2",
+            "text": "⚔️ 前线战事如何？",
+            "nextNodeId": "n3",
+            "effects": { "affinityChange": 5 }
+          },
+          {
+            "id": "c3",
+            "text": "🙏 多谢雷长老提醒。",
+            "nextNodeId": "n4",
+            "effects": { "affinityChange": 3 }
+          }
+        ]
+      },
+      {
+        "id": "n2",
+        "type": "npc_talk",
+        "text": "「有人的地方就有纷争，修仙宗门也不例外。修炼资源有限，谁都想多分一杯羹。不过只要玄老在一天，黄枫谷就不会乱到哪里去。你安心修炼就好。」",
+        "effects": { "expChange": 100 }
+      },
+      {
+        "id": "n3",
+        "type": "npc_talk",
+        "text": "「魔道最近蠢蠢欲动，几个大魔头频繁现身。厉飞雨已经去了前线——那小子虽然冲动，但打架确实是一把好手。你若修为再高些，我也会推荐你上前线历练。这几枚丹药和灵符你先备着。」",
+        "effects": {
+          "giveItems": [
+            { "itemId": "cp-01:lianqi_pill", "count": 2 },
+            { "itemId": "cp-01:life_talisman", "count": 1 }
+          ],
+          "expChange": 200
+        }
+      },
+      {
+        "id": "n4",
+        "type": "npc_talk",
+        "text": "「嗯。你是个知轻重的人。在修仙界，能审时度势比盲目冲动重要得多。保重。」",
+        "effects": {
+          "giveItems": [{ "itemId": "cp-01:exp_pill", "count": 3 }],
+          "expChange": 150
+        }
+      }
+    ]
+  }
+]

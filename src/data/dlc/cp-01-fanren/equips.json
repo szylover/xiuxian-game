@@ -1,0 +1,252 @@
+[
+  {
+    "id": "cp-01:wooden_sword",
+    "name": "木剑",
+    "slot": "weapon",
+    "rarity": "common",
+    "description": "普通木制练习剑，凡人习武之选",
+    "stats": { "atk": 5 },
+    "minRealm": 0,
+    "sellPrice": 10
+  },
+  {
+    "id": "cp-01:huang_feng_robe",
+    "name": "黄枫谷弟子袍",
+    "slot": "armor",
+    "rarity": "common",
+    "description": "黄枫谷弟子标配法袍，附有基础防护法阵",
+    "stats": { "def": 3, "hp": 20 },
+    "minRealm": 0,
+    "sellPrice": 12
+  },
+  {
+    "id": "cp-01:iron_sword",
+    "name": "玄铁剑",
+    "slot": "weapon",
+    "rarity": "uncommon",
+    "description": "玄铁锻造的灵剑，锋利异常",
+    "stats": { "atk": 12, "speed": 2 },
+    "minRealm": 1,
+    "sellPrice": 50
+  },
+  {
+    "id": "cp-01:spirit_silk_robe",
+    "name": "灵蚕丝衣",
+    "slot": "armor",
+    "rarity": "uncommon",
+    "description": "灵蚕丝编织的法衣，轻巧灵动",
+    "stats": { "def": 8, "speed": 3 },
+    "minRealm": 1,
+    "sellPrice": 55
+  },
+  {
+    "id": "cp-01:jade_pendant",
+    "name": "碧玉挂坠",
+    "slot": "accessory1",
+    "rarity": "uncommon",
+    "description": "温润碧玉雕琢的挂坠，助益灵力",
+    "stats": { "mp": 20, "critRate": 2 },
+    "minRealm": 1,
+    "sellPrice": 45
+  },
+  {
+    "id": "cp-01:spirit_crown",
+    "name": "灵冕",
+    "slot": "helmet",
+    "rarity": "uncommon",
+    "description": "灵石镶嵌的冠冕，提升灵力储量",
+    "stats": { "def": 6, "mp": 30 },
+    "minRealm": 1,
+    "sellPrice": 40
+  },
+  {
+    "id": "cp-01:wind_boots",
+    "name": "御风靴",
+    "slot": "boots",
+    "rarity": "uncommon",
+    "description": "附有御风法阵的灵靴",
+    "stats": { "speed": 5, "moveSpeed": 3 },
+    "minRealm": 1,
+    "sellPrice": 45
+  },
+  {
+    "id": "cp-01:thunder_ring",
+    "name": "雷霆指环",
+    "slot": "accessory1",
+    "rarity": "uncommon",
+    "description": "蕴含雷灵力的指环，提升暴击",
+    "stats": { "atk": 15, "critRate": 3 },
+    "minRealm": 2,
+    "sellPrice": 60
+  },
+  {
+    "id": "cp-01:ice_silk_boots",
+    "name": "冰蚕丝靴",
+    "slot": "boots",
+    "rarity": "uncommon",
+    "description": "冰蚕丝编织的灵靴，轻若无物",
+    "stats": { "speed": 6, "moveSpeed": 4 },
+    "minRealm": 2,
+    "sellPrice": 55
+  },
+  {
+    "id": "cp-01:azure_cloud_sword",
+    "name": "碧云剑",
+    "slot": "weapon",
+    "rarity": "rare",
+    "description": "碧云观传人所铸，剑光如云",
+    "stats": { "atk": 28, "speed": 4 },
+    "minRealm": 2,
+    "sellPrice": 150
+  },
+  {
+    "id": "cp-01:golden_thunder_sword",
+    "name": "青竹蜂云剑",
+    "slot": "weapon",
+    "rarity": "epic",
+    "description": "以金雷竹为引，青竹蜂酿制剑身，韩立成名法宝",
+    "stats": { "atk": 35, "critRate": 5, "speed": 5 },
+    "minRealm": 2,
+    "sellPrice": 500
+  },
+  {
+    "id": "cp-01:scarlet_soul_armor",
+    "name": "赤魂甲",
+    "slot": "armor",
+    "rarity": "rare",
+    "description": "赤炼魂火淬炼的灵甲，防御力惊人",
+    "stats": { "def": 22, "hp": 100 },
+    "minRealm": 2,
+    "sellPrice": 180
+  },
+  {
+    "id": "cp-01:mulan_shield",
+    "name": "木兰盾",
+    "slot": "accessory2",
+    "rarity": "uncommon",
+    "description": "木兰族战士所用盾牌，坚固耐用",
+    "stats": { "def": 15, "hp": 50 },
+    "minRealm": 2,
+    "sellPrice": 60
+  },
+  {
+    "id": "cp-01:elders_helmet",
+    "name": "长老冠",
+    "slot": "helmet",
+    "rarity": "rare",
+    "description": "门派长老所佩法冠，灵力充沛",
+    "stats": { "def": 18, "mp": 80 },
+    "minRealm": 3,
+    "sellPrice": 200
+  },
+  {
+    "id": "cp-01:star_amulet",
+    "name": "星辰护符",
+    "slot": "accessory2",
+    "rarity": "rare",
+    "description": "星宫出品的防御法器，能抵御暴击",
+    "stats": { "critResist": 8, "def": 12 },
+    "minRealm": 3,
+    "sellPrice": 180
+  },
+  {
+    "id": "cp-01:stormwind_ring",
+    "name": "风暴戒",
+    "slot": "accessory1",
+    "rarity": "rare",
+    "description": "风暴海域深处所得的灵戒",
+    "stats": { "atk": 20, "speed": 8, "critRate": 3 },
+    "minRealm": 3,
+    "sellPrice": 200
+  },
+  {
+    "id": "cp-01:deep_sea_armor",
+    "name": "深海玄甲",
+    "slot": "armor",
+    "rarity": "rare",
+    "description": "深海蛟龙鳞片锻造的重铠",
+    "stats": { "def": 30, "hp": 200, "physiqueDmgReduce": 2 },
+    "minRealm": 3,
+    "sellPrice": 250
+  },
+  {
+    "id": "cp-01:nascent_soul_sword",
+    "name": "元婴法剑",
+    "slot": "weapon",
+    "rarity": "epic",
+    "description": "元婴期高手祭炼的本命法剑",
+    "stats": { "atk": 180, "critDmgMultiplier": 0.3 },
+    "minRealm": 4,
+    "sellPrice": 800
+  },
+  {
+    "id": "cp-01:heavenly_boots",
+    "name": "天行靴",
+    "slot": "boots",
+    "rarity": "rare",
+    "description": "蕴含天地灵力的飞行法靴",
+    "stats": { "speed": 12, "moveSpeed": 8 },
+    "minRealm": 4,
+    "sellPrice": 300
+  },
+  {
+    "id": "cp-01:kunwu_mirror",
+    "name": "昆吾宝镜",
+    "slot": "accessory1",
+    "rarity": "epic",
+    "description": "昆吾山出土的宝镜，攻防一体",
+    "stats": { "critResist": 12, "mp": 200, "critRate": 5 },
+    "minRealm": 4,
+    "sellPrice": 600
+  },
+  {
+    "id": "cp-01:divine_robe",
+    "name": "化神法袍",
+    "slot": "armor",
+    "rarity": "epic",
+    "description": "化神期修士的法袍，灵力流转不息",
+    "stats": { "def": 200, "hp": 2000, "mp": 500 },
+    "minRealm": 5,
+    "sellPrice": 1200
+  },
+  {
+    "id": "cp-01:void_helmet",
+    "name": "虚空盔",
+    "slot": "helmet",
+    "rarity": "epic",
+    "description": "虚空材质锻造的头盔，坚不可摧",
+    "stats": { "def": 60, "hp": 800, "critResist": 10 },
+    "minRealm": 5,
+    "sellPrice": 800
+  },
+  {
+    "id": "cp-01:integration_blade",
+    "name": "合体期灵刃",
+    "slot": "weapon",
+    "rarity": "legendary",
+    "description": "合体期大能以天地灵气凝聚的灵刃",
+    "stats": { "atk": 850, "critRate": 10, "critDmgMultiplier": 0.5 },
+    "minRealm": 6,
+    "sellPrice": 3000
+  },
+  {
+    "id": "cp-01:celestial_pendant",
+    "name": "天仙佩",
+    "slot": "accessory2",
+    "rarity": "legendary",
+    "description": "天庭遗迹出土的仙家佩饰，全属性加成",
+    "stats": { "atk": 100, "def": 80, "hp": 1500, "mp": 800, "speed": 15, "critRate": 8 },
+    "minRealm": 6,
+    "sellPrice": 5000
+  },
+  {
+    "id": "cp-01:mahayana_robe",
+    "name": "大乘法衣",
+    "slot": "armor",
+    "rarity": "legendary",
+    "description": "大乘期修士的道袍，近乎无敌的防御",
+    "stats": { "def": 1000, "hp": 8000, "mp": 3000 },
+    "minRealm": 7,
+    "sellPrice": 8000
+  }
+]

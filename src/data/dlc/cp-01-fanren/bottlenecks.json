@@ -1,0 +1,96 @@
+[
+  {
+    "id": "cp-01:bn_zhuji",
+    "targetType": "realm",
+    "fromRealmIndex": 2,
+    "name": "筑基凝元瓶颈",
+    "description": "筑基已成，然灵力凝而不聚，结丹之路遥不可期。须以实战磨砺或沉心苦修方能突破。",
+    "hint": "击败铁壳龟等强敌，或在灵药谷苦修，可破此关。",
+    "unlockMethods": [
+      { "type": "combat",      "monsterId": "cp-01:iron_shell_turtle" },
+      { "type": "epiphany",    "locationTag": "", "baseChance": 0.09 },
+      { "type": "persistence", "cultivationCount": 70 }
+    ],
+    "unlockBonus": { "expBonus": 400 }
+  },
+  {
+    "id": "cp-01:bn_jiedan",
+    "targetType": "realm",
+    "fromRealmIndex": 3,
+    "name": "结丹化婴瓶颈",
+    "description": "金丹虽成，道心不稳，元婴难凝。须在生死间磨砺心志，方能金丹化婴。",
+    "hint": "击败海蛟或风豹等结丹期妖兽，或坚持苦修百余次。",
+    "unlockMethods": [
+      { "type": "combat",      "monsterId": "cp-01:sea_serpent" },
+      { "type": "epiphany",    "locationTag": "", "baseChance": 0.07 },
+      { "type": "persistence", "cultivationCount": 90 }
+    ],
+    "unlockBonus": { "expBonus": 800 }
+  },
+  {
+    "id": "cp-01:bn_yuanying",
+    "targetType": "realm",
+    "fromRealmIndex": 4,
+    "name": "元婴化神瓶颈",
+    "description": "元婴初成，神魂不稳，化神之途如隔天堑。须悟透天道一角，经历大劫方可破关。",
+    "hint": "击败雷鹏或寒蛟等元婴期妖兽，或在深渊秘境寻求顿悟。",
+    "unlockMethods": [
+      { "type": "combat",      "monsterId": "cp-01:thunder_roc" },
+      { "type": "epiphany",    "locationTag": "", "baseChance": 0.04 },
+      { "type": "persistence", "cultivationCount": 130 }
+    ],
+    "unlockBonus": { "expBonus": 2500 }
+  },
+  {
+    "id": "cp-01:bn_huashen",
+    "targetType": "realm",
+    "fromRealmIndex": 5,
+    "name": "化神证道瓶颈",
+    "description": "化神之后天道压力如山，寸步难行。非大机缘大毅力者不可逾越此劫。",
+    "hint": "斩杀虚空兽等化神期强敌，或苦修数百载方可证道。",
+    "unlockMethods": [
+      { "type": "combat",      "monsterId": "cp-01:void_beast" },
+      { "type": "epiphany",    "locationTag": "", "baseChance": 0.02 },
+      { "type": "persistence", "cultivationCount": 220 }
+    ],
+    "unlockBonus": { "expBonus": 10000 }
+  },
+  {
+    "id": "cp-01:bn_body_liuli",
+    "targetType": "body_realm",
+    "fromBodyRealmIndex": 3,
+    "name": "琉璃凝血瓶颈",
+    "description": "肉身如琉璃通透却气血不通，须以战斗淬炼方能突破金身之境。",
+    "hint": "击败火鸦等擅长近战的妖兽，或苦练体修功法。",
+    "unlockMethods": [
+      { "type": "combat",      "monsterId": "cp-01:flame_bird" },
+      { "type": "persistence", "cultivationCount": 65 }
+    ]
+  },
+  {
+    "id": "cp-01:bn_body_jinshen",
+    "targetType": "body_realm",
+    "fromBodyRealmIndex": 4,
+    "name": "金身化龙瓶颈",
+    "description": "金身虽成，却缺蛟龙之力灌注，难以蜕变为蛟龙之体。",
+    "hint": "击败海蛟或寒蛟可破此关，亦可以坚韧意志日夜磨砺。",
+    "unlockMethods": [
+      { "type": "combat",      "monsterId": "cp-01:ice_wyrm" },
+      { "type": "epiphany",    "locationTag": "", "baseChance": 0.04 },
+      { "type": "persistence", "cultivationCount": 110 }
+    ]
+  },
+  {
+    "id": "cp-01:bn_tech_changchun_lv5",
+    "targetType": "technique",
+    "techniqueId": "cp-01:changchun_art",
+    "atLevel": 5,
+    "name": "长春功瓶颈",
+    "description": "长春功已至五层，温养之力虽厚，却难寸进。需在灵地苦修或实战领悟。",
+    "hint": "探索灵药谷时可能灵光一现，或持续苦练方可突破。",
+    "unlockMethods": [
+      { "type": "epiphany",    "locationTag": "", "baseChance": 0.12 },
+      { "type": "persistence", "cultivationCount": 35 }
+    ]
+  }
+]

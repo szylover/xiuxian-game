@@ -1,0 +1,10 @@
+[
+  { "id": "cp-01:realm_mortal",         "name": "凡人", "index": 0, "expReq": 0,      "lifespanBonus": 0,     "hpBase": 100,   "mpBase": 25,    "atkBase": 7,    "defBase": 3,    "speedBase": 7,   "mentalBase": 15   },
+  { "id": "cp-01:realm_qi_condensing",  "name": "炼气", "index": 1, "expReq": 120,    "lifespanBonus": 500,   "hpBase": 180,   "mpBase": 55,    "atkBase": 14,   "defBase": 7,    "speedBase": 11,  "mentalBase": 35   },
+  { "id": "cp-01:realm_foundation",     "name": "筑基", "index": 2, "expReq": 600,    "lifespanBonus": 1000,  "hpBase": 450,   "mpBase": 130,   "atkBase": 32,   "defBase": 18,   "speedBase": 16,  "mentalBase": 70   },
+  { "id": "cp-01:realm_core_formation", "name": "结丹", "index": 3, "expReq": 2500,   "lifespanBonus": 2200,  "hpBase": 1100,  "mpBase": 350,   "atkBase": 75,   "defBase": 40,   "speedBase": 23,  "mentalBase": 130  },
+  { "id": "cp-01:realm_nascent_soul",   "name": "元婴", "index": 4, "expReq": 10000,  "lifespanBonus": 5500,  "hpBase": 2800,  "mpBase": 900,   "atkBase": 170,  "defBase": 90,   "speedBase": 33,  "mentalBase": 260  },
+  { "id": "cp-01:realm_deity_transform","name": "化神", "index": 5, "expReq": 35000,  "lifespanBonus": 11000, "hpBase": 6500,  "mpBase": 2200,  "atkBase": 380,  "defBase": 200,  "speedBase": 48,  "mentalBase": 520  },
+  { "id": "cp-01:realm_integration",    "name": "合体", "index": 6, "expReq": 120000, "lifespanBonus": 22000, "hpBase": 14000, "mpBase": 4500,  "atkBase": 850,  "defBase": 460,  "speedBase": 65,  "mentalBase": 1000 },
+  { "id": "cp-01:realm_mahayana",       "name": "大乘", "index": 7, "expReq": 400000, "lifespanBonus": 50000, "hpBase": 30000, "mpBase": 10000, "atkBase": 1800, "defBase": 1000, "speedBase": 90,  "mentalBase": 2200 }
+]
