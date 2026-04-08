@@ -39,22 +39,22 @@
 
 /* 神通卡片 MP/CD/触发率文本 */
 .divine-card-meta {
-  color: #aaa;
+  color: var(--color-text-secondary);
 }
 
 /* 神通资质行 */
 .divine-aptitude-label {
-  color: #9E9E9E;
+  color: var(--rarity-common);
   font-size: 0.78rem;
 }
 
 /* 资质数值：足够/不足 */
 .divine-apt-value-ok {
-  color: #4CAF50;
+  color: var(--color-text-success);
 }
 
 .divine-apt-value-low {
-  color: #e74c3c;
+  color: var(--color-element-fire);
 }
 
 /* 可学状态颜色（通过 CSS var） */
@@ -69,7 +69,7 @@
 
 /* 未学神通：技能类型锁定颜色 */
 .type-locked {
-  color: #757575 !important;
+  color: var(--color-text-muted) !important;
 }
 
 /* 效果标签：锁定时半透明 */

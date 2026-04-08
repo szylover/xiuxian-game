@@ -58,5 +58,5 @@
 }
 
 .npc-card-unmet {
-  color: #666;
+  color: var(--color-text-dim);
 }

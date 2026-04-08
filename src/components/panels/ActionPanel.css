@@ -4,7 +4,7 @@
 
 /* 体修突破按钮 */
 .btn-break-body {
-  border-color: #FF9800;
+  border-color: var(--rarity-legendary);
 }
 
 /* 外出按钮 */
@@ -16,24 +16,24 @@
 
 /* 瓶颈提示条 */
 .bottleneck-bar {
-  background: linear-gradient(135deg, #4a2800, #2a1500);
-  border: 1px solid #ff9800;
+  background: linear-gradient(135deg, var(--color-bg-warm-dark), var(--color-bg-warm-darker));
+  border: 1px solid var(--rarity-legendary);
   border-radius: 6px;
   padding: 6px 10px;
   margin: 4px 0;
   cursor: pointer;
   font-size: 12px;
-  color: #ffcc80;
+  color: var(--color-text-warm);
 }
 
 .bottleneck-bar-progress {
   margin-left: 8px;
-  color: #aaa;
+  color: var(--color-text-secondary);
 }
 
 .bottleneck-bar-hint {
   float: right;
-  color: #888;
+  color: var(--color-text-muted);
   font-size: 11px;
 }
 
@@ -53,31 +53,31 @@
 
 /* 瓶颈弹窗内容 */
 .bottleneck-modal-content {
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
-  border: 2px solid #ff9800;
+  background: linear-gradient(135deg, var(--color-bg-dark), var(--color-bg-panel));
+  border: 2px solid var(--rarity-legendary);
   border-radius: 12px;
   padding: 20px 24px;
   max-width: 420px;
   width: 90%;
-  color: #e0e0e0;
+  color: var(--color-text-primary);
 }
 
 .bottleneck-modal-title {
-  color: #ff9800;
+  color: var(--rarity-legendary);
   margin: 0 0 8px;
   font-size: 16px;
 }
 
 .bottleneck-modal-desc {
   font-size: 13px;
-  color: #ccc;
+  color: var(--color-text-primary);
   margin: 0 0 12px;
   line-height: 1.6;
 }
 
 .bottleneck-modal-hint {
   font-size: 12px;
-  color: #aaa;
+  color: var(--color-text-secondary);
   margin: 0 0 12px;
   font-style: italic;
 }
@@ -89,17 +89,17 @@
 .bottleneck-modal-methods-title {
   font-weight: bold;
   margin-bottom: 6px;
-  color: #ffcc80;
+  color: var(--color-text-warm);
 }
 
 .bottleneck-modal-method-row {
   padding: 3px 0;
-  color: #ddd;
+  color: var(--color-text-primary);
 }
 
 /* 坚韧修炼进度条 */
 .bottleneck-progress-track {
-  background: #333;
+  background: var(--color-border-dark);
   border-radius: 4px;
   height: 6px;
   margin-top: 3px;
@@ -107,7 +107,7 @@
 }
 
 .bottleneck-progress-fill {
-  background: #ff9800;
+  background: var(--rarity-legendary);
   height: 100%;
   width: var(--progress-pct, 0%);
   border-radius: 4px;
@@ -119,27 +119,27 @@
   margin-top: 16px;
   width: 100%;
   padding: 8px;
-  background: #333;
-  border: 1px solid #555;
+  background: var(--color-border-dark);
+  border: 1px solid var(--color-border-medium);
   border-radius: 6px;
-  color: #ccc;
+  color: var(--color-text-primary);
   cursor: pointer;
 }
 
 .bottleneck-modal-close:hover {
-  background: #444;
+  background: var(--color-border-dim);
 }
 
 /* T0033: 飞升按钮 */
 .btn-ascend {
-  background: linear-gradient(135deg, #3a2a00, #1a1200);
+  background: linear-gradient(135deg, var(--color-bg-warm-medium), var(--color-bg-warm-dim));
   border-color: var(--color-gold);
   color: var(--color-gold);
   font-weight: bold;
 }
 
 .btn-ascend:hover:not(:disabled) {
-  background: linear-gradient(135deg, #5a4200, #3a2a00);
+  background: linear-gradient(135deg, var(--color-bg-warm-highlight), var(--color-bg-warm-medium));
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
@@ -155,7 +155,7 @@
   margin: 4px 0;
   font-size: var(--font-size-sm);
   color: var(--color-gold);
-  background: linear-gradient(135deg, #2a2000, #1a1200);
+  background: linear-gradient(135deg, var(--color-bg-warm-muted), var(--color-bg-warm-dim));
   border: 1px solid var(--color-gold);
   border-radius: 6px;
   opacity: 0.8;

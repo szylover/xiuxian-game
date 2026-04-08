@@ -103,6 +103,48 @@
   --transition-fast: 0.15s ease;
   --transition-base: 0.3s ease;
   --transition-slow: 0.5s ease;
+
+  /* === 文字颜色补充 === */
+  --color-text-warm: #ffcc80;
+  --color-text-parchment: #e6d9a8;
+  --color-text-orange: #FFB74D;
+  --color-text-success-light: #81C784;
+  --color-text-success-bright: #88ff88;
+  --color-text-chat: #e0c060;
+
+  /* === 背景颜色补充 === */
+  --color-bg-success: #1e3a1e;
+  --color-bg-chat: #252540;
+  --color-bg-warm-dark: #4a2800;
+  --color-bg-warm-darker: #2a1500;
+  --color-bg-warm-medium: #3a2a00;
+  --color-bg-warm-dim: #1a1200;
+  --color-bg-warm-highlight: #5a4200;
+  --color-bg-warm-muted: #2a2000;
+
+  /* === 边框颜色补充 === */
+  --color-border-dark: #333;
+  --color-border-dim: #444;
+  --color-border-medium: #555;
+  --color-border-danger: #8b0000;
+
+  /* === 元素颜色 === */
+  --color-element-fire: #e74c3c;
+  --color-element-thunder: #f1c40f;
+  --color-element-water: #3498db;
+  --color-element-wind: #1abc9c;
+  --color-element-earth: #795548;
+  --color-element-wood: #27ae60;
+  --color-element-metal: #DAA520;
+
+  /* === NPC 关系颜色 === */
+  --color-npc-soulmate: #E91E63;
+  --color-npc-acquaintance: #FFEB3B;
+
+  /* === 进度条颜色 === */
+  --color-progress-complete: #59b300;
+  --color-progress-active: #4a9eff;
+  --color-progress-active-light: #80c0ff;
 }
 
 * {

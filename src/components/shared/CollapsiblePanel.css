@@ -18,5 +18,5 @@
 }
 
 .panel-toggle:hover {
-  background: #252a3e;
+  background: var(--color-bg-medium);
 }

@@ -10,9 +10,9 @@
 /* 瓶颈标签 */
 .bottleneck-badge {
   font-size: 0.7em;
-  background: #4a2800;
-  color: #ff9800;
-  border: 1px solid #ff9800;
+  background: var(--color-bg-warm-dark);
+  color: var(--rarity-legendary);
+  border: 1px solid var(--rarity-legendary);
   border-radius: var(--radius-sm);
   padding: 1px 5px;
   margin-left: 4px;
@@ -33,12 +33,12 @@
 
 /* 体修进度条使用体魄颜色 */
 .left-body-exp-fill {
-  background: #FF6D00 !important;
+  background: var(--color-accent) !important;
 }
 
 /* 体魄不足警告 */
 .left-physique-warning {
   font-size: 0.75em;
-  color: #FF9800;
+  color: var(--rarity-legendary);
   margin-top: 2px;
 }

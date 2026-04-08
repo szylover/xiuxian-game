@@ -10,7 +10,7 @@
  */
 
 .death-modal {
-  border-color: #8b0000;
+  border-color: var(--color-border-danger);
   box-shadow: 0 0 30px rgba(139, 0, 0, 0.5);
 }
 
@@ -28,7 +28,7 @@
 }
 
 .death-modal-section-title {
-  color: #d4a843;
+  color: var(--color-gold-dim);
 }
 
 .death-modal-revival-name {

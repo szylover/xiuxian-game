@@ -9,7 +9,7 @@
 
 /* 当前所在区域名称（面板头部）— 覆盖 divine-active-name 可能的颜色 */
 .map-current-region-name {
-  color: #4FC3F7 !important;
+  color: var(--color-text-info) !important;
 }
 
 /* 容器节点标题（可折叠） */
@@ -31,7 +31,7 @@
 
 /* 容器节点锁定标记 */
 .region-container-lock {
-  color: #FF9800;
+  color: var(--rarity-legendary);
   font-size: 0.8em;
   margin-left: 6px;
 }
@@ -51,33 +51,33 @@
 
 /* 区域名称：已解锁 */
 .region-name-unlocked {
-  color: #e0e0e0;
+  color: var(--color-text-primary);
 }
 
 /* 区域名称：未解锁 */
 .region-name-locked {
-  color: #666;
+  color: var(--color-text-dim);
 }
 
 /* 区域境界标签 */
 .region-realm-label {
-  color: #9E9E9E;
+  color: var(--rarity-common);
 }
 
 /* 卡片内锁定图标 */
 .region-card-lock-icon {
-  color: #FF9800;
+  color: var(--rarity-legendary);
   font-size: 0.8em;
 }
 
 /* 当前位置文本 */
 .region-current-text {
-  color: #4FC3F7;
+  color: var(--color-text-info);
   font-size: 0.85em;
 }
 
 /* 未解锁提示文本 */
 .region-locked-text {
-  color: #FF9800;
+  color: var(--rarity-legendary);
   font-size: 0.85em;
 }

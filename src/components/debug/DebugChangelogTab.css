@@ -17,7 +17,7 @@
 /* Current version number */
 .debug-changelog-current-ver {
   font-size: 0.85rem;
-  color: #4CAF50;
+  color: var(--color-text-success);
   font-family: monospace;
   font-weight: bold;
 }
@@ -33,7 +33,7 @@
 
 /* Version entry card */
 .debug-changelog-entry {
-  border: 1px solid #333;
+  border: 1px solid var(--color-border-dark);
   border-radius: 4px;
   padding: 0.4rem 0.6rem;
 }
@@ -53,32 +53,32 @@
 /* Version label in entry */
 .debug-changelog-ver {
   font-size: 0.8rem;
-  color: #aaa;
+  color: var(--color-text-secondary);
   font-family: monospace;
   font-weight: bold;
 }
 
 .debug-changelog-ver--current {
-  color: #4CAF50;
+  color: var(--color-text-success);
 }
 
 /* "← 当前" badge */
 .debug-changelog-badge {
   font-size: 0.68rem;
-  color: #81C784;
+  color: var(--color-text-success-light);
   margin-left: 0.4rem;
 }
 
 /* Date */
 .debug-changelog-date {
   font-size: var(--font-size-xs);
-  color: #666;
+  color: var(--color-text-dim);
 }
 
 /* Entry title */
 .debug-changelog-title {
   font-size: 0.78rem;
-  color: #ccc;
+  color: var(--color-text-primary);
   margin-bottom: 0.2rem;
 }
 
@@ -91,6 +91,6 @@
 
 .debug-changelog-item {
   font-size: 0.72rem;
-  color: #888;
+  color: var(--color-text-muted);
   line-height: 1.5;
 }
