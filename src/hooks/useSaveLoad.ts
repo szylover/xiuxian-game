@@ -6,6 +6,7 @@
 import type { Player, Aptitudes } from '../game/player';
 import { getSpiritRootGrade } from '../game/player';
 import type { PlayerSpiritRoots, SpiritRootType, SpiritRootCombo } from '../game/spirit-root';
+import { getAllRegions } from '../game/registry';
 
 export const SAVE_KEY = 'xiuxian_save';
 export const SAVE_SLOT_COUNT = 5;
@@ -93,9 +94,13 @@ function applyCompatFixes(p: Player): Player {
   }
   // T0021: 地图系统向后兼容
   if (!p.systems['map']) {
+    // 动态获取默认区域（兼容不同 DLC）
+    const allRegs = getAllRegions();
+    const safe = allRegs.find(r => r.safeZone && r.minRealm === 0);
+    const defaultId = safe?.id ?? allRegs.find(r => r.minRealm === 0)?.id ?? 'core:qingyun_town';
     p.systems['map'] = {
-      currentRegionId: 'core:qingyun_town',
-      unlockedRegions: ['core:qingyun_town'],
+      currentRegionId: defaultId,
+      unlockedRegions: [defaultId],
       travelCount: 0,
     };
   }

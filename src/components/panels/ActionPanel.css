@@ -7,6 +7,13 @@
   border-color: #FF9800;
 }
 
+/* 外出按钮 */
+.btn-map {
+  background: var(--color-bg-dark);
+  border-color: var(--color-text-info);
+  color: var(--color-text-info);
+}
+
 /* 瓶颈提示条 */
 .bottleneck-bar {
   background: linear-gradient(135deg, #4a2800, #2a1500);

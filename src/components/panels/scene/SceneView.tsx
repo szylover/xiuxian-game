@@ -8,8 +8,6 @@ import type { Player } from '../../../game/player';
 import type { PanelKey } from '../../layout/PanelButtons';
 import SceneHeader from './SceneHeader';
 import SceneNpcs from './SceneNpcs';
-import SceneExits from './SceneExits';
-import SceneFooter from './SceneFooter';
 import ActionPanel from '../ActionPanel';
 
 interface SceneViewProps {
@@ -75,9 +73,6 @@ export default function SceneView({
         onOpenContacts={onSelectPanel}
       />
 
-      {/* 出口导航 */}
-      <SceneExits player={player} onTravel={onTravel} onOpenMap={onSelectPanel} />
-
       {/* 操作按钮区 */}
       <ActionPanel
         player={player}
@@ -87,11 +82,9 @@ export default function SceneView({
         onRest={onRest}
         onBreakthrough={onBreakthrough}
         onBodyBreakthrough={onBodyBreakthrough}
+        onOpenMap={() => onSelectPanel('map')}
         gameOver={gameOver}
       />
-
-      {/* 底部状态栏 */}
-      <SceneFooter player={player} onOpenLog={onOpenLog} />
     </div>
   );
 }
