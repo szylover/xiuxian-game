@@ -12,6 +12,25 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.13.0',
+    date: '2026-04-08',
+    title: '仙道境界 — 飞升系统壳子（T0033）',
+    items: [
+      '新增飞升系统核心逻辑 — AscensionDef 数据驱动，支持凡→仙→洪荒三阶体系',
+      '扩展 RealmDef：新增 tier/ascensionRequired/tierTransition 可选字段（向后兼容）',
+      '新增 AscensionDef + AscensionState 类型，DLCPack 支持注册飞升定义',
+      '全局注册表新增 ascensionRegistry + 查询 API（getAscensionForRealm 等）',
+      '突破系统适配：到达阶层顶点时显示"飞升"按钮而非普通突破',
+      '无 CP-03 DLC 时大乘为终点，显示"已达当前天地法则极限"',
+      '飞升天劫支持：通过 tribulationId 绑定专用天劫定义',
+      '散仙机制：飞升天劫失败可化为散仙，无法再次正常飞升',
+      '修仙履历记录飞升成功/失败事件',
+      '状态栏显示阶层标签（仙·境界名）',
+      '调试面板新增飞升调试区：一键设为大乘满修为、切换散仙状态',
+      'JSON Loader：ascension-loader.ts 支持声明式条件编译',
+    ],
+  },
+  {
     version: '1.12.0',
     date: '2026-04-07',
     title: '程序化生成系统（T0070–T0073）',

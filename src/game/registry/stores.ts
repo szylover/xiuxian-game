@@ -12,6 +12,7 @@ import type {
   EquipBaseTemplate, AffixDef, GeneratedEquipInstance,
   MonsterTemplate, MutationDef,
   TechniqueTraitDef, TechniqueInstance,
+  AscensionDef,
 } from '../types';
 import type { AchievementDef } from '../achievement/types';
 
@@ -50,6 +51,7 @@ export const monsterTemplateRegistry = new Map<string, MonsterTemplate>();
 export const mutationDefRegistry = new Map<string, MutationDef>();
 export const techniqueTraitRegistry = new Map<string, TechniqueTraitDef>();
 export const techniqueInstanceRegistry = new Map<string, TechniqueInstance>();
+export const ascensionRegistry = new Map<string, AscensionDef>();
 
 /** 清空所有注册表（切换 DLC 前调用） */
 export function clearAllRegistries(): void {
@@ -91,4 +93,5 @@ export function clearAllRegistries(): void {
   mutationDefRegistry.clear();
   techniqueTraitRegistry.clear();
   techniqueInstanceRegistry.clear();
+  ascensionRegistry.clear();
 }

@@ -55,6 +55,11 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
   const setStat = (key: string, value: number) => {
     onUpdate(prev => {
       if (!prev) return prev;
+      // T0033: 切换散仙状态
+      if (key === '__toggleLooseImmortal') {
+        const death = (prev.systems.death ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, death: { ...death, isLooseImmortal: value === 1 } } };
+      }
       const p = { ...prev };
       (p as unknown as Record<string, number>)[key] = value;
       if (RECALC_KEYS.has(key)) return recalcStats(p);

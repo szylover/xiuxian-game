@@ -18,6 +18,7 @@ interface SceneViewProps {
   onRest: () => void;
   onBreakthrough: () => void;
   onBodyBreakthrough: () => void;
+  onAscend: () => void;
   onOpenLog: () => void;
   onTravel: (regionId: string) => void;
   onSelectPanel: (key: PanelKey) => void;
@@ -43,6 +44,7 @@ export default function SceneView({
   onRest,
   onBreakthrough,
   onBodyBreakthrough,
+  onAscend,
   onOpenLog,
   onTravel,
   onSelectPanel,
@@ -82,6 +84,7 @@ export default function SceneView({
         onRest={onRest}
         onBreakthrough={onBreakthrough}
         onBodyBreakthrough={onBodyBreakthrough}
+        onAscend={onAscend}
         onOpenMap={() => onSelectPanel('map')}
         gameOver={gameOver}
       />

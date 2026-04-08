@@ -6,8 +6,8 @@ import type { Player } from '../player';
 import { getNextRealm } from '../player';
 import { BREAKTHROUGH_BASE_RATE, BREAKTHROUGH_COMP_BONUS, BREAKTHROUGH_LUCK_BONUS } from '../data';
 import type { Realm } from '../data';
-import { getBreakthroughReq, getItemDef } from '../registry';
-import type { BreakthroughReqDef } from '../registry';
+import { getBreakthroughReq, getItemDef, getAscensionForRealm } from '../registry';
+import type { BreakthroughReqDef, AscensionDef } from '../registry';
 
 export interface ItemCheckResult { itemId: string; name: string; required: number; have: number; ready: boolean; }
 export interface CondCheckResult { id: string; description: string; ready: boolean; }
@@ -21,6 +21,10 @@ export interface BreakthroughStatus {
   conditionsReady: CondCheckResult[];
   requiresTribulation: boolean;
   successRate: number;
+  /** T0033: 下一步需要飞升（而非普通突破） */
+  requiresAscension: boolean;
+  /** T0033: 匹配的飞升定义 */
+  ascensionDef: AscensionDef | null;
 }
 
 export function getBreakthroughState(player: Player) {
@@ -38,7 +42,18 @@ export function setBreakthroughState(player: Player, state: ReturnType<typeof ge
 
 export function getBreakthroughStatus(player: Player): BreakthroughStatus {
   const nextRealm = getNextRealm(player);
-  if (!nextRealm) return { canAttempt: false, nextRealm: null, req: null, expReady: false, itemsReady: [], conditionsReady: [], requiresTribulation: false, successRate: 0 };
+
+  // T0033: 如果没有下一境界但有飞升定义，说明需要飞升
+  const ascDef = getAscensionForRealm(player.realmIndex);
+  if (!nextRealm && ascDef) {
+    return { canAttempt: false, nextRealm: null, req: null, expReady: false, itemsReady: [], conditionsReady: [], requiresTribulation: false, successRate: 0, requiresAscension: true, ascensionDef: ascDef };
+  }
+  if (!nextRealm) return { canAttempt: false, nextRealm: null, req: null, expReady: false, itemsReady: [], conditionsReady: [], requiresTribulation: false, successRate: 0, requiresAscension: false, ascensionDef: null };
+
+  // T0033: 如果下一境界需要飞升，标记 requiresAscension
+  if (nextRealm.ascensionRequired) {
+    return { canAttempt: false, nextRealm, req: null, expReady: false, itemsReady: [], conditionsReady: [], requiresTribulation: false, successRate: 0, requiresAscension: true, ascensionDef: ascDef ?? null };
+  }
 
   const req = getBreakthroughReq(player.realmIndex);
   const expReady = player.exp >= nextRealm.expReq;
@@ -61,5 +76,5 @@ export function getBreakthroughStatus(player: Player): BreakthroughStatus {
   const successRate = requiresTribulation ? 0 : Math.min(0.95, baseRate + player.comprehension * BREAKTHROUGH_COMP_BONUS + player.luck * BREAKTHROUGH_LUCK_BONUS + failBonus);
 
   const canAttempt = expReady && itemsReady.every(i => i.ready) && conditionsReady.every(c => c.ready);
-  return { canAttempt, nextRealm, req: req ?? null, expReady, itemsReady, conditionsReady, requiresTribulation, successRate };
+  return { canAttempt, nextRealm, req: req ?? null, expReady, itemsReady, conditionsReady, requiresTribulation, successRate, requiresAscension: false, ascensionDef: null };
 }

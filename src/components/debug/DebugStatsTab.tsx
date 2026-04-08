@@ -5,8 +5,9 @@
 
 import type { Player } from '../../game/player';
 import { REALMS } from '../../game/data';
-import { getAllBodyRealmDefs, getAllRegions } from '../../game/registry';
+import { getAllBodyRealmDefs, getAllRegions, getMaxRealmIndex, getAscensionForRealm } from '../../game/registry';
 import { getMapState } from '../../game/map';
+import { getAscensionState } from '../../game/ascension';
 import './DebugStatsTab.css';
 
 // 可编辑数值行
@@ -117,6 +118,34 @@ export default function DebugStatsTab({ player, onSetStat, onFullRestore, onDebu
       <div className="debug-row">
         <button className="btn debug-btn debug-full" onClick={onFullRestore}>🌟 全满</button>
       </div>
+
+      {/* ── T0033: 飞升调试 ── */}
+      {(() => {
+        const ascState = getAscensionState(player);
+        const maxIdx = getMaxRealmIndex();
+        const ascDef = getAscensionForRealm(player.realmIndex);
+        return (
+          <div className="debug-tracker-box">
+            <span className="debug-label debug-tracker-label">✨ 飞升调试</span>
+            <div className="debug-tracker-grid">
+              <div className="debug-tracker-dim">阶层: {ascState.currentTier} | 已飞升: {ascState.hasAscended ? '是' : '否'} | 失败: {ascState.ascensionFailCount}</div>
+            </div>
+            <div className="debug-btns" style={{ marginTop: '4px' }}>
+              {maxIdx >= 7 && (
+                <button className="btn debug-btn debug-btn-sm" onClick={() => {
+                  onSetStat('realmIndex', 7);
+                  if (ascDef) onSetStat('exp', ascDef.minExp);
+                }}>设为大乘满修为</button>
+              )}
+              <button className="btn debug-btn debug-btn-sm" onClick={() => {
+                const death = (player.systems.death ?? {}) as Record<string, unknown>;
+                const isLI = !death.isLooseImmortal;
+                onSetStat('__toggleLooseImmortal' as string, isLI ? 1 : 0);
+              }}>切换散仙: {((player.systems.death ?? {}) as { isLooseImmortal?: boolean }).isLooseImmortal ? '是' : '否'}</button>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* ── 战斗追踪 ── */}
       <div className="debug-tracker-box">

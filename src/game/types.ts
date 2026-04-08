@@ -354,6 +354,61 @@ export interface RealmDef {
   defBase: number;                // 基础防御
   speedBase: number;              // 基础速度
   mentalBase: number;             // 基础念力
+  // ── T0033 新增字段（可选，向后兼容）──
+  tier?: 'mortal' | 'immortal' | 'primordial';  // 境界阶层，缺省为 'mortal'
+  ascensionRequired?: boolean;    // 是否需要飞升才能进入此境界
+  tierTransition?: 'ascension' | 'primordial_ascension'; // 跨阶转换类型
+}
+
+// ── 飞升定义（T0033）──
+
+export type RealmTier = 'mortal' | 'immortal' | 'primordial';
+
+export interface AscensionItemCost {
+  itemId: string;
+  count: number;
+}
+
+export interface AscensionCondition {
+  id: string;
+  description: string;
+  check: (p: Player) => boolean;
+}
+
+export interface AscensionDef {
+  id: string;                         // 'cp-03:ascension_mortal_to_immortal'
+  name: string;                       // '飞升仙界'
+  description: string;                // '大乘圆满，天道感应，飞升仙界…'
+  fromTier: RealmTier;                // 源阶层
+  toTier: RealmTier;                  // 目标阶层
+  fromRealmIndex: number;             // 源阶层最高境界 index
+  toRealmIndex: number;               // 目标阶层最低境界 index
+  minExp: number;                     // 修为下限
+  itemCosts: AscensionItemCost[];     // 消耗物品
+  conditions: AscensionCondition[];   // 额外谓词条件
+  tribulationId?: string;             // 飞升天劫 ID
+  rewards: {
+    bonusExp: number;
+    lifespanBonus: number;
+    items: { itemId: string; count: number }[];
+  };
+  statReset?: {
+    hpMultiplier?: number;
+    mpMultiplier?: number;
+    expReset?: boolean;
+  };
+}
+
+export interface AscensionState {
+  hasAscended: boolean;
+  currentTier: RealmTier;
+  ascensionHistory: {
+    fromTier: string;
+    toTier: string;
+    atAge: number;
+    realmIndexBefore: number;
+  }[];
+  ascensionFailCount: number;
 }
 
 /** 灵根对体修的加成配置（数据驱动，通过 DLC 注册） */
@@ -405,6 +460,7 @@ export interface DLCPack {
   monsterTemplates?: MonsterTemplate[];      // T0072 妖兽基础模板
   mutations?: MutationDef[];                 // T0072 变异定义
   techniqueTraits?: TechniqueTraitDef[];     // T0073 功法词条定义
+  ascensions?: AscensionDef[];               // T0033 飞升定义
 }
 
 // ── 死亡系统类型定义 ──

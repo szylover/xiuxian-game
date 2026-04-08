@@ -9,10 +9,12 @@ import type { Player } from '../../game/player';
 import { ACTION_COSTS } from '../../game/data';
 import { getBreakthroughStatus } from '../../game/breakthrough';
 import { getBodyBreakthroughStatus } from '../../game/body-cultivation';
+import { getAscensionStatus } from '../../game/ascension';
 import { getCurrentRegion } from '../../game/map';
 import { getActiveBottlenecks } from '../../game/bottleneck';
 import type { BottleneckDef, BottleneckState } from '../../game/types';
-import { getBottleneckDef } from '../../game/registry';
+import { getBottleneckDef, getRealmDef } from '../../game/registry';
+import { ASCENSION_TEXTS } from '../../data/texts/ascension';
 import { useState } from 'react';
 
 interface ActionPanelProps {
@@ -23,11 +25,12 @@ interface ActionPanelProps {
   onRest: () => void;
   onBreakthrough: () => void;
   onBodyBreakthrough: () => void;
+  onAscend: () => void;
   onOpenMap?: () => void;
   gameOver: boolean;
 }
 
-export default function ActionPanel({ player, onCultivate, onFight, onExplore, onRest, onBreakthrough, onBodyBreakthrough, onOpenMap, gameOver }: ActionPanelProps) {
+export default function ActionPanel({ player, onCultivate, onFight, onExplore, onRest, onBreakthrough, onBodyBreakthrough, onAscend, onOpenMap, gameOver }: ActionPanelProps) {
   if (!player || gameOver) return null;
 
   const [showBottleneckModal, setShowBottleneckModal] = useState<string | null>(null);
@@ -55,7 +58,31 @@ export default function ActionPanel({ player, onCultivate, onFight, onExplore, o
     } else if (btStatus.requiresTribulation) qiBreakTitle = `气修突破至 ${nextRealm.name}（需渡劫）`;
     else qiBreakTitle = `气修突破至 ${nextRealm.name}（成功率 ${(btStatus.successRate * 100).toFixed(0)}%）`;
   }
-  const showQiBreak = nextRealm && btStatus.expReady;
+  const showQiBreak = nextRealm && btStatus.expReady && !btStatus.requiresAscension;
+
+  // ── T0033: 飞升状态 ──
+  const ascStatus = getAscensionStatus(player);
+  const showAscend = ascStatus.ascDef !== null;
+  let ascendTitle = '';
+  if (ascStatus.ascDef) {
+    if (ascStatus.isLooseImmortal) {
+      ascendTitle = ASCENSION_TEXTS.looseImmortalBlocked;
+    } else if (!ascStatus.expReady) {
+      ascendTitle = ASCENSION_TEXTS.expInsufficient(ascStatus.ascDef.minExp, player.exp);
+    } else if (!ascStatus.canAscend) {
+      const missing = [
+        ...ascStatus.itemsReady.filter(i => !i.ready).map(i => `${i.name} ×${i.required}`),
+        ...ascStatus.conditionsReady.filter(c => !c.ready).map(c => c.description),
+      ];
+      ascendTitle = `条件不足：${missing.join('，')}`;
+    } else {
+      const targetRealm = getRealmDef(ascStatus.ascDef.toRealmIndex);
+      ascendTitle = `${ascStatus.ascDef.name} → ${targetRealm?.name ?? '???'}`;
+    }
+  }
+
+  // T0033: 已达巅峰提示（无下一境界且无飞升定义）
+  const showPeakReached = !nextRealm && !ascStatus.ascDef;
 
   // ── 体修突破状态 ──
   const bodyBt = getBodyBreakthroughStatus(player);
@@ -125,6 +152,25 @@ export default function ActionPanel({ player, onCultivate, onFight, onExplore, o
           {btStatus.canAttempt && !btStatus.requiresTribulation && ` (${(btStatus.successRate * 100).toFixed(0)}%)`}
           {btStatus.requiresTribulation && ' (渡劫)'}
         </button>
+      )}
+
+      {/* T0033: 飞升按钮 */}
+      {showAscend && (
+        <button
+          className="btn btn-action btn-ascend"
+          onClick={onAscend}
+          disabled={!ascStatus.canAscend}
+          title={ascendTitle}
+        >
+          ✨ {ascStatus.ascDef!.name}
+        </button>
+      )}
+
+      {/* T0033: 已达巅峰 */}
+      {showPeakReached && (
+        <div className="peak-reached-label">
+          🏔️ {ASCENSION_TEXTS.peakReached}
+        </div>
       )}
 
       {/* 体修突破 */}
