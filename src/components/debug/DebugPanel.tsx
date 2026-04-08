@@ -62,7 +62,16 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
       }
       const p = { ...prev };
       (p as unknown as Record<string, number>)[key] = value;
-      if (RECALC_KEYS.has(key)) return recalcStats(p);
+      if (RECALC_KEYS.has(key)) {
+        const recalced = recalcStats(p);
+        // Debug 切境界时把当前值拉满到新上限
+        recalced.hp = recalced.maxHp;
+        recalced.mp = recalced.maxMp;
+        recalced.stamina = recalced.maxStamina;
+        recalced.mentalPower = recalced.maxMentalPower;
+        recalced.physique = recalced.maxPhysique;
+        return recalced;
+      }
       return p;
     });
   };
