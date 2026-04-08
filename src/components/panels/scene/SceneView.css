@@ -12,24 +12,9 @@
   padding: 0.3rem;
 }
 
-.scene-row {
-  display: flex;
-  gap: 0.4rem;
+.scene-view > .scene-npcs {
   flex: 1;
   min-height: 0;
-}
-
-.scene-row > .scene-npcs {
-  flex: 1;
-  min-width: 0;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-border) transparent;
-}
-
-.scene-row > .scene-exits {
-  flex: 1;
-  min-width: 0;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--color-border) transparent;

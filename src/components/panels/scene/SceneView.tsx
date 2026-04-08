@@ -8,7 +8,6 @@ import type { Player } from '../../../game/player';
 import type { PanelKey } from '../../layout/PanelButtons';
 import SceneHeader from './SceneHeader';
 import SceneNpcs from './SceneNpcs';
-import SceneExits from './SceneExits';
 import SceneFooter from './SceneFooter';
 import ActionPanel from '../ActionPanel';
 
@@ -62,22 +61,18 @@ export default function SceneView({
       {/* 区域标题栏 */}
       <SceneHeader player={player} />
 
-      {/* 此地之人 + 出口导航 并排 */}
-      <div className="scene-row">
-        <SceneNpcs
-          player={player}
-          onMeetNpc={onMeetNpc}
-          onGiveGift={onGiveGift}
-          onAcceptQuest={onAcceptQuest}
-          onTurnInQuest={onTurnInQuest}
-          onStartDialogue={onStartDialogue}
-          onDialogueSelectChoice={onDialogueSelectChoice}
-          onDialogueAdvance={onDialogueAdvance}
-          onOpenContacts={onSelectPanel}
-        />
-
-        <SceneExits player={player} onTravel={onTravel} onOpenMap={onSelectPanel} />
-      </div>
+      {/* 此地之人 */}
+      <SceneNpcs
+        player={player}
+        onMeetNpc={onMeetNpc}
+        onGiveGift={onGiveGift}
+        onAcceptQuest={onAcceptQuest}
+        onTurnInQuest={onTurnInQuest}
+        onStartDialogue={onStartDialogue}
+        onDialogueSelectChoice={onDialogueSelectChoice}
+        onDialogueAdvance={onDialogueAdvance}
+        onOpenContacts={onSelectPanel}
+      />
 
       {/* 操作按钮区 */}
       <ActionPanel
@@ -91,8 +86,8 @@ export default function SceneView({
         gameOver={gameOver}
       />
 
-      {/* 底部状态栏 */}
-      <SceneFooter player={player} onOpenLog={onOpenLog} />
+      {/* 底部状态栏 + 外出按钮 */}
+      <SceneFooter player={player} onOpenLog={onOpenLog} onOpenMap={() => onSelectPanel('map')} />
     </div>
   );
 }

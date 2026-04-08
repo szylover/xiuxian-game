@@ -13,9 +13,10 @@ import { getQuestChainDef } from '../../../game/registry';
 interface SceneFooterProps {
   player: Player;
   onOpenLog: () => void;
+  onOpenMap?: () => void;
 }
 
-export default function SceneFooter({ player, onOpenLog }: SceneFooterProps) {
+export default function SceneFooter({ player, onOpenLog, onOpenMap }: SceneFooterProps) {
   const bottlenecks = getActiveBottlenecks(player);
   const bn = bottlenecks[0]; // 只显示第一个激活的瓶颈
 
@@ -76,6 +77,11 @@ export default function SceneFooter({ player, onOpenLog }: SceneFooterProps) {
         )}
       </div>
 
+      {onOpenMap && (
+        <button className="scene-footer-map-btn" onClick={onOpenMap} title="查看可去之处">
+          🗺️ 外出
+        </button>
+      )}
       <button className="scene-footer-log-btn" onClick={onOpenLog} title="打开日志">
         📜 日志
       </button>

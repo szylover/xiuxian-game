@@ -64,6 +64,25 @@
   text-overflow: ellipsis;
 }
 
+.scene-footer-map-btn {
+  background: var(--color-bg-dark);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.scene-footer-map-btn:hover {
+  background: var(--color-bg-medium);
+  color: var(--color-text-info);
+  border-color: var(--color-text-info);
+  transform: scale(1.05);
+}
+
 .scene-footer-log-btn {
   background: var(--color-bg-dark);
   border: 1px solid var(--color-border);
