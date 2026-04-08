@@ -54,7 +54,7 @@
 /* Monospace passive-bonus summary line (green) */
 .debug-technique-bonus {
   font-size: 0.75rem;
-  color: #4CAF50;
+  color: var(--color-text-success);
   margin-top: 0.25rem;
   font-family: monospace;
 }
@@ -62,7 +62,7 @@
 /* "No techniques yet" message */
 .debug-technique-empty {
   font-size: 0.75rem;
-  color: #9E9E9E;
+  color: var(--rarity-common);
   margin-top: 0.25rem;
 }
 
@@ -75,20 +75,20 @@
 .debug-technique-card {
   margin-top: 0.3rem;
   font-size: 0.73rem;
-  border: 1px solid #333;
+  border: 1px solid var(--color-border-dark);
   border-radius: 4px;
   padding: 0.3rem 0.5rem;
 }
 
 /* Technique name row */
 .debug-technique-card-name {
-  color: #ccc;
+  color: var(--color-text-primary);
   margin-bottom: 0.15rem;
 }
 
 /* Unlocked passive count badge */
 .debug-technique-unlocked-count {
-  color: #4CAF50;
+  color: var(--color-text-success);
   margin-left: 0.5rem;
 }
 
@@ -98,11 +98,11 @@
 }
 
 .debug-passive-effect--unlocked {
-  color: #81C784;
+  color: var(--color-text-success-light);
 }
 
 .debug-passive-effect--locked {
-  color: #757575;
+  color: var(--color-text-muted);
 }
 
 /* ── Divine arts tab ── */
@@ -111,12 +111,12 @@
 .debug-divine-status {
   font-size: 0.75rem;
   font-family: monospace;
-  color: #ccc;
+  color: var(--color-text-primary);
 }
 
 /* Active art ID highlight */
 .debug-divine-active-id {
-  color: #f1c40f;
+  color: var(--color-element-thunder);
 }
 
 /* Aptitude list container */
@@ -130,20 +130,20 @@
 }
 
 /* Element-coloured button / label tints */
-.debug-element-fire    { color: #e74c3c; }
-.debug-element-thunder { color: #f1c40f; }
-.debug-element-water   { color: #3498db; }
-.debug-element-wind    { color: #1abc9c; }
-.debug-element-earth   { color: #795548; }
-.debug-element-wood    { color: #27ae60; }
-.debug-element-metal   { color: #DAA520; }
+.debug-element-fire    { color: var(--color-element-fire); }
+.debug-element-thunder { color: var(--color-element-thunder); }
+.debug-element-water   { color: var(--color-element-water); }
+.debug-element-wind    { color: var(--color-element-wind); }
+.debug-element-earth   { color: var(--color-element-earth); }
+.debug-element-wood    { color: var(--color-element-wood); }
+.debug-element-metal   { color: var(--color-element-metal); }
 
 /* ── Achievement tab ── */
 
 /* Unlocked IDs display */
 .debug-achievement-ids {
   font-size: 0.72rem;
-  color: #FFD700;
+  color: var(--color-gold);
   font-family: monospace;
   word-break: break-all;
 }
@@ -151,7 +151,7 @@
 /* Count summary */
 .debug-achievement-count {
   font-size: var(--font-size-xs);
-  color: #888;
+  color: var(--color-text-muted);
   margin-top: 0.1rem;
 }
 
@@ -160,7 +160,7 @@
 /* Info summary block */
 .debug-bn-info {
   font-size: 0.75rem;
-  color: #ccc;
+  color: var(--color-text-primary);
 }
 
 /* List container */
@@ -170,7 +170,7 @@
 
 /* Individual bottleneck card */
 .debug-bn-card {
-  border: 1px solid #444;
+  border: 1px solid var(--color-border-dim);
   border-radius: 4px;
   padding: 6px 8px;
   margin-bottom: 4px;
@@ -178,13 +178,13 @@
 }
 
 /* Status text variants */
-.debug-bn-status--unlocked { color: #4CAF50; }
-.debug-bn-status--active   { color: #ff9800; }
-.debug-bn-status--inactive { color: #888; }
+.debug-bn-status--unlocked { color: var(--color-text-success); }
+.debug-bn-status--active   { color: var(--rarity-legendary); }
+.debug-bn-status--inactive { color: var(--color-text-muted); }
 
 /* Progress line */
 .debug-bn-progress {
-  color: #aaa;
+  color: var(--color-text-secondary);
 }
 
 /* Actions row */

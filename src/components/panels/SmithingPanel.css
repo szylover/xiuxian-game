@@ -4,13 +4,13 @@
 
 /* 炼器配方卡片：橙色主题 */
 .recipe-card-smith {
-  border-left-color: #FF9800;
+  border-left-color: var(--rarity-legendary);
 }
 
 .recipe-card-smith .recipe-name {
-  color: #FFB74D;
+  color: var(--color-text-orange);
 }
 
 .recipe-card-smith .recipe-output {
-  color: #FFB74D;
+  color: var(--color-text-orange);
 }

@@ -14,7 +14,7 @@
 
 /* 成就名称颜色 */
 .achievement-locked .achievement-card-name {
-  color: #666;
+  color: var(--color-text-dim);
 }
 
 .achievement-unlocked .achievement-card-name {
@@ -23,7 +23,7 @@
 
 /* 成就描述颜色 */
 .achievement-locked .achievement-card-desc {
-  color: #555;
+  color: var(--color-border-medium);
 }
 
 .achievement-unlocked .achievement-card-desc {
@@ -32,9 +32,9 @@
 
 /* 成就奖励颜色 */
 .achievement-locked .achievement-card-bonus {
-  color: #444;
+  color: var(--color-border-dim);
 }
 
 .achievement-unlocked .achievement-card-bonus {
-  color: #8BC34A;
+  color: var(--color-text-success-light);
 }

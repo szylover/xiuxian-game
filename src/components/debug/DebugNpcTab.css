@@ -16,7 +16,7 @@
 /* Info text block */
 .debug-npc-info {
   font-size: 0.75rem;
-  color: #ccc;
+  color: var(--color-text-primary);
 }
 
 /* Control buttons bar */
@@ -37,7 +37,7 @@
 
 /* Individual NPC card */
 .debug-npc-card {
-  border: 1px solid #444;
+  border: 1px solid var(--color-border-dim);
   border-radius: 4px;
   padding: 6px 8px;
   margin-bottom: 4px;
@@ -50,12 +50,12 @@
 
 /* NPC name — met vs not met */
 .debug-npc-name-met {
-  color: #fff;
+  color: var(--color-text-white);
   min-width: 5rem;
 }
 
 .debug-npc-name-unmet {
-  color: #666;
+  color: var(--color-text-dim);
   min-width: 5rem;
 }
 
@@ -63,17 +63,17 @@
 .debug-npc-rel {
   font-size: var(--font-size-xs);
 }
-.debug-npc-rel-hostile      { color: #F44336; }
-.debug-npc-rel-cold         { color: #9E9E9E; }
-.debug-npc-rel-stranger     { color: #FFFFFF; }
-.debug-npc-rel-acquaintance { color: #FFEB3B; }
-.debug-npc-rel-friend       { color: #4CAF50; }
-.debug-npc-rel-close_friend { color: #2196F3; }
-.debug-npc-rel-soulmate     { color: #E91E63; }
+.debug-npc-rel-hostile      { color: var(--spirit-fire); }
+.debug-npc-rel-cold         { color: var(--rarity-common); }
+.debug-npc-rel-stranger     { color: var(--color-text-white); }
+.debug-npc-rel-acquaintance { color: var(--color-npc-acquaintance); }
+.debug-npc-rel-friend       { color: var(--rarity-uncommon); }
+.debug-npc-rel-close_friend { color: var(--rarity-rare); }
+.debug-npc-rel-soulmate     { color: var(--color-npc-soulmate); }
 
 /* Affinity number */
 .debug-npc-affinity {
-  color: #aaa;
+  color: var(--color-text-secondary);
   font-size: var(--font-size-xs);
 }
 

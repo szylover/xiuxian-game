@@ -67,8 +67,8 @@
 }
 
 .gift-item-row.gift-item-selected {
-  border-color: #4CAF50;
-  background: #1e3a1e;
+  border-color: var(--color-text-success);
+  background: var(--color-bg-success);
 }
 
 /* 物品名（颜色由稀有度 CSS 变量控制） */

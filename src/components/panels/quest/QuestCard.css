@@ -4,14 +4,14 @@
 
 .quest-card {
   background: rgba(20, 20, 40, 0.6);
-  border: 1px solid #444;
+  border: 1px solid var(--color-border-dim);
   border-radius: 6px;
   padding: 8px 10px;
   transition: border-color 0.2s;
 }
 
 .quest-card:hover {
-  border-color: #888;
+  border-color: var(--color-text-muted);
 }
 
 .quest-card-header {
@@ -27,7 +27,7 @@
 
 .quest-card-name {
   font-weight: bold;
-  color: #e0d8c0;
+  color: var(--color-text-parchment);
   flex: 1;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .quest-card-desc {
-  color: #aaa;
+  color: var(--color-text-secondary);
   font-size: 0.88em;
   margin-bottom: 6px;
 }
@@ -54,17 +54,17 @@
 }
 
 .quest-step-info {
-  color: #ccc;
+  color: var(--color-text-primary);
   font-size: 0.85em;
   margin-bottom: 4px;
 }
 
 .quest-step-name {
-  color: #e6d9a8;
+  color: var(--color-text-parchment);
 }
 
 .quest-step-name-pending {
-  color: #8f8;
+  color: var(--color-text-success-bright);
 }
 
 .quest-card-actions {
@@ -74,7 +74,7 @@
 }
 
 .quest-completed-info {
-  color: #888;
+  color: var(--color-text-muted);
   font-size: 0.82em;
   margin-top: 2px;
 }
@@ -91,12 +91,12 @@
   gap: 4px;
   flex-wrap: wrap;
   font-size: 0.82em;
-  color: #c8b888;
+  color: var(--color-text-parchment);
   margin-top: 4px;
 }
 
 .quest-reward-label {
-  color: #888;
+  color: var(--color-text-muted);
 }
 
 .quest-reward-items {

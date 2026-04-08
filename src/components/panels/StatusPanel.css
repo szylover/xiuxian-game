@@ -17,13 +17,13 @@
 /* 分隔线 */
 .section-divider {
   border: none;
-  border-top: 1px solid #333;
+  border-top: 1px solid var(--color-border-dark);
   margin: 6px 0;
 }
 
 /* 无灵根文本 */
 .root-tag-muted {
-  color: #9E9E9E;
+  color: var(--rarity-common);
 }
 
 /* 灵根标签动态颜色 */

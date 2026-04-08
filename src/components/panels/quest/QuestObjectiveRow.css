@@ -8,7 +8,7 @@
   gap: 6px;
   font-size: 0.85em;
   padding: 2px 0;
-  color: #ccc;
+  color: var(--color-text-primary);
 }
 
 .quest-objective-check {
@@ -22,13 +22,13 @@
 }
 
 .quest-objective-count {
-  color: #aaa;
+  color: var(--color-text-secondary);
   font-size: 0.9em;
   white-space: nowrap;
 }
 
 .quest-objective-pct {
-  color: #888;
+  color: var(--color-text-muted);
   font-size: 0.82em;
   width: 32px;
   text-align: right;
@@ -38,7 +38,7 @@
 .quest-progress-bar {
   width: 60px;
   height: 6px;
-  background: #333;
+  background: var(--color-border-dark);
   border-radius: 3px;
   overflow: hidden;
   flex-shrink: 0;
@@ -51,15 +51,15 @@
 }
 
 .quest-progress-fill-active {
-  background: linear-gradient(90deg, #4a9eff, #80c0ff);
+  background: linear-gradient(90deg, var(--color-progress-active), var(--color-progress-active-light));
 }
 
 .quest-progress-fill-done {
-  background: #59b300;
+  background: var(--color-progress-complete);
 }
 
 .quest-objective-row.completed .quest-objective-desc,
 .quest-objective-row.completed .quest-objective-count {
-  color: #6a6;
+  color: var(--color-text-success);
   text-decoration: line-through;
 }
