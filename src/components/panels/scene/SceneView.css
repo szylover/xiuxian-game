@@ -12,6 +12,10 @@
   padding: 0.3rem;
 }
 
+.scene-view > .scene-header {
+  flex-shrink: 0;
+}
+
 .scene-view > .scene-npcs {
   flex: 1;
   min-height: 0;
