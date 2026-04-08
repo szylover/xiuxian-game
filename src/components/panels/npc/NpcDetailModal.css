@@ -128,6 +128,14 @@
   margin-top: var(--spacing-sm);
 }
 
+.npc-not-here-hint {
+  width: 100%;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-dim);
+  font-style: italic;
+  margin-bottom: 0.2rem;
+}
+
 .npc-detail-actions .btn {
   font-size: var(--font-size-xs);
 }

@@ -28,6 +28,9 @@ export const CHANGELOG: ChangelogEntry[] = [
       '状态栏显示阶层标签（仙·境界名）',
       '调试面板新增飞升调试区：一键设为大乘满修为、切换散仙状态',
       'JSON Loader：ascension-loader.ts 支持声明式条件编译',
+      '调试面板切境界时自动拉满 HP/MP/精力等当前值',
+      '修复人脉总览可与不在当前区域的 NPC 交互的 bug',
+      'UI 优化：人脉总览按钮改为链接样式',
     ],
   },
   {

@@ -9,6 +9,36 @@
   background: var(--color-bg-darkest);
 }
 
+/* 区域内通用标题栏（与 SceneExits 共用 class 名） */
+.scene-npcs .scene-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+}
+
+.scene-npcs .scene-section-title {
+  font-size: var(--font-size-md);
+  font-weight: bold;
+  color: var(--color-text-secondary);
+}
+
+.scene-npcs .scene-section-action {
+  background: none;
+  border: none;
+  color: var(--color-text-info);
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  cursor: pointer;
+  transition: opacity 0.2s;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.scene-npcs .scene-section-action:hover {
+  opacity: 0.8;
+}
+
 .scene-npcs-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));

@@ -227,6 +227,8 @@ xiuxian-game/
     │   ├── quest-loader.ts        #     JSON 任务链加载器
     │   ├── dialogue.ts            #     对话系统核心逻辑（T0026）
     │   ├── dialogue-loader.ts     #     JSON 对话加载器
+    │   ├── ascension.ts           #     飞升系统核心逻辑（T0033）
+    │   ├── ascension-loader.ts    #     JSON 飞升定义加载器
     │   ├── registry/              #     全局注册表（DLC 扩展核心）
     │   │   ├── index.ts           #       barrel re-export
     │   │   ├── stores.ts          #       注册表存储（Map）
@@ -245,6 +247,7 @@ xiuxian-game/
     │   │   ├── cultivation.ts     #       修炼系统文案
     │   │   ├── quest.ts           #       任务链系统文案（T0057）
     │   │   ├── dialogue.ts        #       对话系统文案（T0026）
+    │   │   ├── ascension.ts       #       飞升系统文案（T0033）
     │   │   └── ...                #       各系统对应文案文件（新增系统须同步新建）
     │   └── dlc/                   #     DLC 数据包（每个 DLC 一个文件夹）
     │       ├── core/              #       基础包（必选，始终加载）

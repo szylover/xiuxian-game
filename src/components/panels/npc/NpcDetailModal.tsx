@@ -7,7 +7,7 @@ import './NpcDetailModal.css';
 import type { Player } from '../../../game/player';
 import type { NpcDef, NpcRelationLevel, DialogueChainDef, DialogueNode } from '../../../game/types';
 import { REALMS } from '../../../game/data';
-import { getRelation, getNpcState, GIFT_CD } from '../../../game/npc';
+import { getRelation, getNpcState, GIFT_CD, getNpcsInRegion } from '../../../game/npc';
 import { getQuestsForNpc } from '../../../game/quest';
 import { getTopDialogue, getIdleChat } from '../../../game/dialogue';
 import { NPC_RELATION_CN, NPC_RELATION_COLORS, NPC_RELATION_EMOJI, NPC_PERSONALITY_CN } from '../../shared/constants';
@@ -60,6 +60,9 @@ export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift, o
   const cdMonths = giftOnCd ? giftCdRemaining : 0;
 
   const barPct = Math.max(0, Math.min(100, ((rel.affinity + 100) / (maxAffinity + 100)) * 100));
+
+  // 检查 NPC 是否在当前区域
+  const isInRegion = getNpcsInRegion(player).some(n => n.id === npc.id);
 
   const topDialogue = getTopDialogue(player, npc.id);
 
@@ -190,20 +193,25 @@ export default function NpcDetailModal({ player, npc, onClose, onMeet, onGift, o
 
           {/* 交互按钮 */}
           <div className="npc-detail-actions">
+            {!isInRegion && rel.met && (
+              <div className="npc-not-here-hint">此人不在当前区域，无法交互</div>
+            )}
             {!rel.met ? (
-              <button className="btn" onClick={() => onMeet(npc.id)}>
+              <button className="btn" onClick={() => onMeet(npc.id)} disabled={!isInRegion}
+                title={!isInRegion ? '此人不在当前区域' : ''}>
                 👋 邂逅
               </button>
             ) : (
               <>
-                <button className="btn" onClick={handleChat}>
+                <button className="btn" onClick={handleChat} disabled={!isInRegion}
+                  title={!isInRegion ? '此人不在当前区域' : ''}>
                   {topDialogue ? DIALOGUE_TEXTS.chatBtnHasDialogue : DIALOGUE_TEXTS.chatBtnIdle}
                 </button>
                 <button
                   className="btn npc-btn-gift"
-                  disabled={!canGift}
+                  disabled={!canGift || !isInRegion}
                   onClick={() => setShowGiftModal(true)}
-                  title={giftOnCd ? `冷却中，还需 ${cdMonths} 个月` : '选择物品赠送'}
+                  title={!isInRegion ? '此人不在当前区域' : giftOnCd ? `冷却中，还需 ${cdMonths} 个月` : '选择物品赠送'}
                 >
                   🎁 赠礼{giftOnCd ? `（${cdMonths}月）` : ''}
                 </button>
