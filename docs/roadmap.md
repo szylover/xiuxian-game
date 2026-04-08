@@ -24,7 +24,7 @@
 
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
-| [T0001](https://github.com/szylover/xiuxian-game/issues/57) | 属性系统（四类属性） | — | [spec](specs/design-attribute-system.md) | ✅ |
+| [T0001](https://github.com/szylover/xiuxian-game/issues/57) | 属性系统（四类属性） | — | [spec](specs/57-attribute-system.md) | ✅ |
 | [T0002](https://github.com/szylover/xiuxian-game/issues/58) | 修炼系统 | T0001 | — | ✅ |
 | [T0003](https://github.com/szylover/xiuxian-game/issues/59) | 战斗系统 v2 | T0001 | — | ✅ |
 | [T0004](https://github.com/szylover/xiuxian-game/issues/60) | 境界突破 v1 | T0002 | — | ✅ |
@@ -43,7 +43,7 @@
 |----|------|------|------|------|
 | [T0007](https://github.com/szylover/xiuxian-game/issues/63) | 事件引擎（luck 加权随机） | T0001 | — | ✅ |
 | [T0008](https://github.com/szylover/xiuxian-game/issues/64) | 探索事件池（20+） | T0007 | — | ✅ |
-| [T0009](https://github.com/szylover/xiuxian-game/issues/65) | 奇遇系统 | T0007 | [spec](specs/design-novel-events.md) | ✅ |
+| [T0009](https://github.com/szylover/xiuxian-game/issues/65) | 奇遇系统 | T0007 | [spec](specs/65-novel-events.md) | ✅ |
 | [T0010](https://github.com/szylover/xiuxian-game/issues/66) | 日常事件 | T0007 | — | ✅ |
 | [T0011](https://github.com/szylover/xiuxian-game/issues/67) | 事件日志（分类/颜色/回溯） | T0007 | — | ✅ |
 | [T0057](https://github.com/szylover/xiuxian-game/issues/119) | 任务链系统（Quest Chain） | T0007, T0012, T0042, T0021 | [spec](specs/T0057-quest-chain.md) | ✅ |

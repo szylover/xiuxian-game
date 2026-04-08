@@ -148,8 +148,8 @@ xiuxian-game/
 │   ├── roadmap.md                 #   高层路线图（依赖图 + DLC 规划 + 扩展性约定）
 │   ├── test-guide.md              #   功能测试手册（每个功能的测试用例）
 │   ├── specs/                     #   设计文档存放目录
-│       ├── design-attribute-system.md
-│       ├── design-novel-events.md
+│       ├── 57-attribute-system.md
+│       ├── 65-novel-events.md
 │       ├── T0029-breakthrough-tribulation.md
 │       └── T0040-death-system.md
 └── src/                           # React 源码

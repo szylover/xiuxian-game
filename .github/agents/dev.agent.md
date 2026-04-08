@@ -46,7 +46,7 @@ tools: [read, edit, search, execute, todo]
 - 游戏逻辑和 UI 严格分离，`src/game/` 下的代码可以独立于 React 运行
 
 ### 属性系统
-参考 `docs/specs/design-attribute-system.md` 获取完整属性列表。实现时注意：
+参考 `docs/specs/57-attribute-system.md` 获取完整属性列表。实现时注意：
 - 基础属性 = 境界基础值 + 装备加成 + buff
 - 派生属性使用设计文档中定义的公式
 - 幸运（`luck`）必须通过 `adjustEventWeights()` 影响所有随机掷骰
