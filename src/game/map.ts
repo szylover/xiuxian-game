@@ -9,7 +9,15 @@ import type { RegionDef, MapSystemState } from './types';
 import { getRegion, getAllRegions } from './registry';
 import { MAP_TEXTS } from '../data/texts/map';
 
-const DEFAULT_REGION_ID = 'core:qingyun_town';
+/** 动态获取默认起始区域 ID（优先 safeZone，否则取 minRealmIndex=0 的第一个） */
+function getDefaultRegionId(): string {
+  const all = getAllRegions();
+  const safe = all.find(r => r.safeZone && r.minRealm === 0);
+  if (safe) return safe.id;
+  const starter = all.find(r => r.minRealm === 0);
+  if (starter) return starter.id;
+  return all[0]?.id ?? 'core:qingyun_town';
+}
 
 /**
  * 获取玩家最高修炼等级（取所有修炼路线中的最大值）
@@ -24,9 +32,10 @@ export function getMaxCultivationLevel(player: Player): number {
 export function getMapState(player: Player): MapSystemState {
   const state = player.systems?.['map'] as MapSystemState | undefined;
   if (state) return state;
+  const defaultId = getDefaultRegionId();
   return {
-    currentRegionId: DEFAULT_REGION_ID,
-    unlockedRegions: [DEFAULT_REGION_ID],
+    currentRegionId: defaultId,
+    unlockedRegions: [defaultId],
     travelCount: 0,
   };
 }
