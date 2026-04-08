@@ -1,186 +1,19 @@
 // ============================================================
-// game/bottleneck.ts — 瓶颈系统核心逻辑（T0064）
-// 瓶颈是修炼关键节点的"天花板"，阻止突破直到满足解锁条件。
-// 所有瓶颈定义通过 DLC 注册，系统代码只读注册表。
+// game/bottleneck/methods.ts — 6 种瓶颈解锁方式
+// (persistence / combat / epiphany / overflow / discourse / quest)
 // ============================================================
 
-import type { Player } from './player';
-import type { BottleneckDef, BottleneckState, BottleneckUnlockMethod } from './types';
-import { addItem } from './inventory';
+import type { Player } from '../player';
+import type { BottleneckDef, BottleneckState, BottleneckUnlockMethod } from '../types';
 import {
   getBottleneckDef,
   getAllBottleneckDefs,
-  getBottlenecksForRealm,
-  getBottlenecksForBodyRealm,
-  getBottlenecksForTechnique,
   getRealmDef,
   getBodyRealmDef,
-} from './registry';
-import { BOTTLENECK_TEXTS } from '../data/texts/bottleneck';
-
-// ── 存档兼容：确保 player.systems.bottleneck 存在 ──
-
-export function ensureBottleneckState(player: Player): Player {
-  const state = player.systems.bottleneck as BottleneckState | undefined;
-  if (state?.active && state?.unlocked) return player;
-  return {
-    ...player,
-    systems: {
-      ...player.systems,
-      bottleneck: { active: {}, unlocked: {} } satisfies BottleneckState,
-    },
-  };
-}
-
-function getState(player: Player): BottleneckState {
-  return (player.systems.bottleneck as BottleneckState) ?? { active: {}, unlocked: {} };
-}
-
-function setState(player: Player, state: BottleneckState): Player {
-  return { ...player, systems: { ...player.systems, bottleneck: state } };
-}
-
-// ── 查询当前激活的瓶颈 ──
-
-export function getActiveBottlenecks(player: Player): Array<{ def: BottleneckDef; entry: BottleneckState['active'][string] }> {
-  const state = getState(player);
-  const result: Array<{ def: BottleneckDef; entry: BottleneckState['active'][string] }> = [];
-  for (const [id, entry] of Object.entries(state.active)) {
-    const def = getBottleneckDef(id);
-    if (def) result.push({ def, entry });
-  }
-  return result;
-}
-
-// ── 检查瓶颈 ──
-// 返回 blocked=true 表示被瓶颈卡住，不能突破/升级
-
-export interface BottleneckCheckResult {
-  blocked: boolean;
-  bottleneckDef?: BottleneckDef;
-  isNewlyActivated?: boolean;
-}
-
-export function checkBottleneck(
-  player: Player,
-  targetType: 'realm' | 'body_realm' | 'technique',
-  index: number,
-  techniqueId?: string,
-): BottleneckCheckResult {
-  // 根据类型查询匹配的瓶颈定义
-  let defs: BottleneckDef[];
-  if (targetType === 'realm') {
-    defs = getBottlenecksForRealm(index);
-  } else if (targetType === 'body_realm') {
-    defs = getBottlenecksForBodyRealm(index);
-  } else {
-    defs = techniqueId ? getBottlenecksForTechnique(techniqueId, index) : [];
-  }
-
-  if (defs.length === 0) return { blocked: false };
-
-  const state = getState(player);
-
-  for (const def of defs) {
-    // 条件谓词不满足则跳过
-    if (def.condition && !def.condition(player)) continue;
-
-    // 已解锁则跳过
-    if (state.unlocked[def.id]) continue;
-
-    // 已激活或首次触碰 → blocked
-    return {
-      blocked: true,
-      bottleneckDef: def,
-      isNewlyActivated: !state.active[def.id],
-    };
-  }
-
-  return { blocked: false };
-}
-
-// ── 激活瓶颈（首次触碰时记录） ──
-
-export function activateBottleneck(player: Player, bottleneckId: string): { player: Player; log: string } {
-  const def = getBottleneckDef(bottleneckId);
-  if (!def) return { player, log: '' };
-
-  let p = ensureBottleneckState(player);
-  const state = getState(p);
-
-  // 已经激活或已解锁则忽略
-  if (state.active[bottleneckId] || state.unlocked[bottleneckId]) return { player: p, log: '' };
-
-  const newState: BottleneckState = {
-    ...state,
-    active: {
-      ...state.active,
-      [bottleneckId]: {
-        bottleneckId,
-        activatedAt: p.gameYear,
-        progress: { persistenceCultivationCount: 0 },
-      },
-    },
-  };
-
-  p = setState(p, newState);
-  const log = BOTTLENECK_TEXTS.activated(def.name, def.description);
-  return { player: p, log };
-}
-
-// ── 解锁瓶颈（通用入口） ──
-
-export function unlockBottleneck(
-  player: Player,
-  bottleneckId: string,
-  method: BottleneckUnlockMethod['type'],
-): { player: Player; log: string } {
-  const def = getBottleneckDef(bottleneckId);
-  if (!def) return { player, log: '' };
-
-  let p = ensureBottleneckState(player);
-  const state = getState(p);
-
-  // 未激活或已解锁则忽略
-  if (!state.active[bottleneckId] || state.unlocked[bottleneckId]) return { player: p, log: '' };
-
-  // 从 active 移除，记入 unlocked
-  const { [bottleneckId]: _, ...remainingActive } = state.active;
-  const newState: BottleneckState = {
-    active: remainingActive,
-    unlocked: {
-      ...state.unlocked,
-      [bottleneckId]: {
-        bottleneckId,
-        unlockedAt: p.gameYear,
-        method,
-      },
-    },
-  };
-  p = setState(p, newState);
-
-  // 发放解锁奖励
-  if (def.unlockBonus) {
-    if (def.unlockBonus.expBonus) p = { ...p, exp: p.exp + def.unlockBonus.expBonus };
-    if (def.unlockBonus.statBonus) {
-      for (const [key, val] of Object.entries(def.unlockBonus.statBonus)) {
-        if (val && key in p) {
-          (p as unknown as Record<string, number>)[key] = ((p as unknown as Record<string, number>)[key] ?? 0) + val;
-        }
-      }
-    }
-    if (def.unlockBonus.items) {
-      for (const item of def.unlockBonus.items) {
-        const result = addItem(p, item.itemId, item.count);
-        p = result.player;
-      }
-    }
-  }
-
-  const methodNames = BOTTLENECK_TEXTS.methodNames;
-  const log = BOTTLENECK_TEXTS.unlocked(def.name, methodNames[method]);
-  return { player: p, log };
-}
+} from '../registry';
+import { BOTTLENECK_TEXTS } from '../../data/texts/bottleneck';
+import { ensureBottleneckState, getState, setState } from './state';
+import { activateBottleneck, unlockBottleneck } from './checks';
 
 // ── 坚韧修炼：每次修炼时 tick ──
 
