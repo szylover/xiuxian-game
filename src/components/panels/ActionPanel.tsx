@@ -23,10 +23,11 @@ interface ActionPanelProps {
   onRest: () => void;
   onBreakthrough: () => void;
   onBodyBreakthrough: () => void;
+  onOpenMap?: () => void;
   gameOver: boolean;
 }
 
-export default function ActionPanel({ player, onCultivate, onFight, onExplore, onRest, onBreakthrough, onBodyBreakthrough, gameOver }: ActionPanelProps) {
+export default function ActionPanel({ player, onCultivate, onFight, onExplore, onRest, onBreakthrough, onBodyBreakthrough, onOpenMap, gameOver }: ActionPanelProps) {
   if (!player || gameOver) return null;
 
   const [showBottleneckModal, setShowBottleneckModal] = useState<string | null>(null);
@@ -102,6 +103,15 @@ export default function ActionPanel({ player, onCultivate, onFight, onExplore, o
       >
         💤 休息
       </button>
+      {onOpenMap && (
+        <button
+          className="btn btn-action btn-map"
+          onClick={onOpenMap}
+          title="查看可去之处"
+        >
+          🗺️ 外出
+        </button>
+      )}
 
       {/* 气修突破 */}
       {showQiBreak && (

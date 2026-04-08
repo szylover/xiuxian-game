@@ -8,7 +8,6 @@ import type { Player } from '../../../game/player';
 import type { PanelKey } from '../../layout/PanelButtons';
 import SceneHeader from './SceneHeader';
 import SceneNpcs from './SceneNpcs';
-import SceneFooter from './SceneFooter';
 import ActionPanel from '../ActionPanel';
 
 interface SceneViewProps {
@@ -83,11 +82,9 @@ export default function SceneView({
         onRest={onRest}
         onBreakthrough={onBreakthrough}
         onBodyBreakthrough={onBodyBreakthrough}
+        onOpenMap={() => onSelectPanel('map')}
         gameOver={gameOver}
       />
-
-      {/* 底部状态栏 + 外出按钮 */}
-      <SceneFooter player={player} onOpenLog={onOpenLog} onOpenMap={() => onSelectPanel('map')} />
     </div>
   );
 }
