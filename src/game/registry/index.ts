@@ -30,6 +30,7 @@ export type {
   MutationType, MonsterTemplate, MutationDef, ProceduralMonsterState,
   TechniqueTraitDef, TechniqueTraitTier, TechniqueTraitSlot, TechniqueInstance,
   TechniqueQualityConfig, ProceduralTechniqueState,
+  RealmTier, AscensionDef, AscensionItemCost, AscensionCondition, AscensionState,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
@@ -44,7 +45,7 @@ export {
   getRecipe, getAllRecipes,
   getEquipDef, getAllEquipDefs,
   getSmithingRecipe, getAllSmithingRecipes,
-  getBreakthroughReq, getTribulationDef,
+  getBreakthroughReq, getTribulationDef, getTribulationById,
   getTechniqueDef, getAllTechniqueDefs,
   getDeathTrigger, getAllDeathTriggers,
   getLifeSaver, getAllLifeSavers,
@@ -69,6 +70,7 @@ export {
   getMutationDef, getAllMutationDefs, getMutationDefsByType,
   getTechniqueTraitDef, getAllTechniqueTraitDefs, getTechniqueTraitsByTier,
   getTechniqueInstance, registerTechniqueInstance, removeTechniqueInstance, getAllTechniqueInstances, clearAllTechniqueInstances,
+  getAscensionDef, getAllAscensionDefs, getAscensionForRealm,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

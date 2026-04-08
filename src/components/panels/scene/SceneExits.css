@@ -24,18 +24,18 @@
 
 .scene-section-action {
   background: none;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  color: var(--color-text-muted);
+  border: none;
+  color: var(--color-text-dim);
   font-size: var(--font-size-xs);
-  padding: var(--spacing-xs) var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-sm);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: color 0.2s;
+  opacity: 0.7;
 }
 
 .scene-section-action:hover {
   color: var(--color-text-info);
-  border-color: var(--color-text-info);
+  opacity: 1;
 }
 
 .scene-exits-list {

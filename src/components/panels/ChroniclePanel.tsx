@@ -12,6 +12,8 @@ const EVENT_ICONS: Record<ChronicleEventType, string> = {
   body_realm_breakthrough: '🔥',
   tribulation_pass: '☁️',
   tribulation_fail: '⛈️',
+  ascension_success: '🌟',
+  ascension_fail: '💫',
   death: '💀',
   revival: '✨',
   first_boss_kill: '🗡️',

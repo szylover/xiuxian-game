@@ -105,7 +105,7 @@
 | [T0040](https://github.com/szylover/xiuxian-game/issues/80) | 死亡与复活系统 | T0001, T0003, T0012, T0018, T0044 | [spec](specs/T0040-death-system.md) | ✅ |
 | [T0031](https://github.com/szylover/xiuxian-game/issues/79) | 成就系统 | T0001 | [spec](specs/T0031-achievement.md) | ✅ |
 | [T0032](https://github.com/szylover/xiuxian-game/issues/102) | 排行榜 | T0031 | — | ⬜ |
-| [T0033](https://github.com/szylover/xiuxian-game/issues/103) | 仙道境界（飞升） | T0029, T0058 | [spec](specs/T0033-immortal-ascension.md) | 📐 |
+| [T0033](https://github.com/szylover/xiuxian-game/issues/103) | 仙道境界（飞升） | T0029, T0058 | [spec](specs/T0033-immortal-ascension.md) | ✅ |
 | [T0058](https://github.com/szylover/xiuxian-game/issues/88) | 境界表 DLC 化 | — | [spec](specs/T0058-realm-dlc.md) | ✅ |
 | [T0034](https://github.com/szylover/xiuxian-game/issues/104) | 洪荒终局 | T0033 | — | ⬜ |
 | [T0042](https://github.com/szylover/xiuxian-game/issues/82) | 年月历法系统 | T0001, T0005 | [spec](specs/T0042-calendar-system.md) | ✅ |

@@ -15,6 +15,8 @@ export type ChronicleEventType =
   | 'body_realm_breakthrough'
   | 'tribulation_pass'
   | 'tribulation_fail'
+  | 'ascension_success'
+  | 'ascension_fail'
   | 'death'
   | 'revival'
   | 'first_boss_kill'
@@ -74,6 +76,7 @@ const CURRENT_SCHEMA = 1;
 /** 事件是否为"关键"（超限丢弃时保留） */
 const CRITICAL_TYPES: Set<ChronicleEventType> = new Set([
   'death', 'game_over', 'realm_breakthrough', 'tribulation_pass', 'tribulation_fail',
+  'ascension_success', 'ascension_fail',
 ]);
 
 // ── 空状态 ──

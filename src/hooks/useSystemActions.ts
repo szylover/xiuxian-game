@@ -16,6 +16,7 @@ import { learnTechnique, practiceTechnique, activateTechnique } from '../game/te
 import { learnDivineArt as learnDivineArtFn, activateDivineArt as activateDivineArtFn, deactivateDivineArt as deactivateDivineArtFn } from '../game/divine-arts';
 import { travelTo as travelToFn } from '../game/map';
 import { tryBodyRealmBreakthrough } from '../game/body-cultivation';
+import { attemptAscension, applyAscensionSuccess, applyAscensionFailure } from '../game/ascension';
 import { meetNpc as meetNpcFn, giveGift as giveGiftFn } from '../game/npc';
 import { startDialogue as startDialogueFn, selectChoice as selectChoiceFn, advanceToNextNode as advanceToNextNodeFn, getTopDialogue, getIdleChat } from '../game/dialogue';
 import type { DialogueChainDef, DialogueNode } from '../game/types';
@@ -23,7 +24,7 @@ import { recalcStats } from '../game/player';
 import { REALMS } from '../game/data';
 import type { ChronicleEventType } from '../game/chronicle';
 import { checkDeathTriggers, applyDeath, getDeathSystemState } from '../game/death';
-import { getEquipDef, getTechniqueDef, getRecipe, getSmithingRecipe, getQuestChainDef } from '../game/registry';
+import { getEquipDef, getTechniqueDef, getRecipe, getSmithingRecipe, getQuestChainDef, getTribulationById, getRealmDef } from '../game/registry';
 import { tickQuestObjectives, acceptQuest as acceptQuestFn, abandonQuest as abandonQuestFn, deliverQuestItem as deliverQuestItemFn, checkQuestDiscovery, setTrackedQuest as setTrackedQuestFn, turnInQuest as turnInQuestFn } from '../game/quest';
 import type { EquipSlot } from '../game/registry';
 import type { LogCategory } from './useGameLog';
@@ -31,6 +32,7 @@ import type { DeathModalState } from './useGameEngine';
 import { UI_LABELS } from '../data/texts/ui-labels';
 import { BODY_CULTIVATION_TEXTS } from '../data/texts/body-cultivation';
 import { BREAKTHROUGH_TEXTS } from '../data/texts/breakthrough';
+import { ASCENSION_TEXTS } from '../data/texts/ascension';
 
 interface ChronicleHooks {
   recordEvent: (type: ChronicleEventType, player: Player, description: string, meta?: Record<string, unknown>) => void;
@@ -267,6 +269,67 @@ export function useSystemActions(deps: SystemActionDeps) {
     });
   }, [execAction, chronicleHooks]);
 
+  // ── T0033: 飞升 ──
+  const ascend = useCallback(() => {
+    if (!player) return;
+
+    const ascResult = attemptAscension(player);
+    let finalPlayer = ascResult.player;
+    const allLogs = [...ascResult.logs];
+
+    if (ascResult.triggerTribulation && ascResult.tribulationId) {
+      // 飞升天劫：通过 tribulationId 查找天劫定义并执行
+      const tribDef = getTribulationById(ascResult.tribulationId);
+      if (tribDef) {
+        const tribResult = runTribulationFn(finalPlayer);
+        finalPlayer = tribResult.player;
+        allLogs.push(...tribResult.logs);
+
+        if (!tribResult.success) {
+          // 飞升天劫失败
+          const failResult = applyAscensionFailure(finalPlayer, ascResult.ascDef!);
+          finalPlayer = failResult.player;
+          allLogs.push(...failResult.logs);
+
+          if (finalPlayer.hp <= 0) {
+            setGameOver(true);
+            setGameOverReason(ASCENSION_TEXTS.annihilated);
+            chronicleHooks?.recordEvent('ascension_fail', finalPlayer,
+              ASCENSION_TEXTS.chronicleAscensionFail(REALMS[player.realmIndex]?.name ?? '???'));
+          } else {
+            chronicleHooks?.recordEvent('ascension_fail', finalPlayer,
+              ASCENSION_TEXTS.chronicleAscensionFail(REALMS[player.realmIndex]?.name ?? '???'));
+          }
+        } else {
+          // 天劫通过 → 完成飞升
+          const successResult = applyAscensionSuccess(finalPlayer, ascResult.ascDef!);
+          finalPlayer = successResult.player;
+          allLogs.push(...successResult.logs);
+
+          const fromRealm = REALMS[player.realmIndex]?.name ?? '???';
+          const toRealm = getRealmDef(ascResult.ascDef!.toRealmIndex)?.name ?? '???';
+          chronicleHooks?.recordEvent('ascension_success', finalPlayer,
+            ASCENSION_TEXTS.chronicleAscension(fromRealm, toRealm),
+            { fromRealmIndex: player.realmIndex, toRealmIndex: ascResult.ascDef!.toRealmIndex });
+          chronicleHooks?.syncSnapshot(finalPlayer);
+        }
+      }
+    } else if (ascResult.success) {
+      // 无天劫直接成功
+      const fromRealm = REALMS[player.realmIndex]?.name ?? '???';
+      const toRealm = getRealmDef(ascResult.ascDef!.toRealmIndex)?.name ?? '???';
+      chronicleHooks?.recordEvent('ascension_success', finalPlayer,
+        ASCENSION_TEXTS.chronicleAscension(fromRealm, toRealm),
+        { fromRealmIndex: player.realmIndex, toRealmIndex: ascResult.ascDef!.toRealmIndex });
+      chronicleHooks?.syncSnapshot(finalPlayer);
+    }
+
+    setPlayer(finalPlayer);
+    for (const log of allLogs) {
+      addLog(log, 'system');
+    }
+  }, [player, addLog, setPlayer, setGameOver, setGameOverReason, chronicleHooks]);
+
   // ── T0025: NPC 邂逅 ──
   const meetNpc = useCallback((npcId: string) => {
     let meetMsg = '';
@@ -441,6 +504,7 @@ export function useSystemActions(deps: SystemActionDeps) {
     deactivateDivineArt,
     travel,
     bodyBreakthrough,
+    ascend,
     meetNpc,
     giveGift,
     acceptQuest,

@@ -2,7 +2,7 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, AffixPosition, EquipSlot, GeneratedEquipInstance, MonsterTemplate, MutationDef, MutationType, TechniqueTraitDef, TechniqueTraitTier, TechniqueInstance } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, AffixPosition, EquipSlot, GeneratedEquipInstance, MonsterTemplate, MutationDef, MutationType, TechniqueTraitDef, TechniqueTraitTier, TechniqueInstance, AscensionDef } from '../types';
 import type { SpiritRootType } from '../spirit-root';
 import type { AchievementDef } from '../achievement/types';
 import {
@@ -16,6 +16,7 @@ import {
   equipTemplateRegistry, affixDefRegistry, generatedEquipRegistry,
   monsterTemplateRegistry, mutationDefRegistry,
   techniqueTraitRegistry, techniqueInstanceRegistry,
+  ascensionRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -91,6 +92,10 @@ export function getAllSmithingRecipes() { return Array.from(smithingRecipeRegist
 
 export function getBreakthroughReq(fromRealmIndex: number) { return breakthroughReqRegistry.get(fromRealmIndex); }
 export function getTribulationDef(forRealmIndex: number) { return tribulationRegistry.get(forRealmIndex); }
+export function getTribulationById(id: string): import('../types').TribulationDef | undefined {
+  for (const t of tribulationRegistry.values()) { if (t.id === id) return t; }
+  return undefined;
+}
 
 // ── 功法 ──
 
@@ -315,4 +320,15 @@ export function getAllTechniqueInstances(): TechniqueInstance[] {
 }
 export function clearAllTechniqueInstances(): void {
   techniqueInstanceRegistry.clear();
+}
+
+// ── 飞升定义（T0033）──
+
+export function getAscensionDef(id: string): AscensionDef | undefined { return ascensionRegistry.get(id); }
+export function getAllAscensionDefs(): AscensionDef[] { return Array.from(ascensionRegistry.values()); }
+export function getAscensionForRealm(fromRealmIndex: number): AscensionDef | undefined {
+  for (const asc of ascensionRegistry.values()) {
+    if (asc.fromRealmIndex === fromRealmIndex) return asc;
+  }
+  return undefined;
 }

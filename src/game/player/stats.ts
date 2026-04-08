@@ -125,4 +125,9 @@ export function recalcStats(player: Player): Player {
 // ── 境界查询 ──
 
 export function getRealmInfo(player: Player) { return REALMS[player.realmIndex] || REALMS[0]; }
-export function getNextRealm(player: Player) { return REALMS[player.realmIndex + 1] || null; }
+export function getNextRealm(player: Player) {
+  const next = REALMS[player.realmIndex + 1] || null;
+  // T0033: 如果下一境界需要飞升，普通突破不可用
+  if (next?.ascensionRequired) return null;
+  return next;
+}

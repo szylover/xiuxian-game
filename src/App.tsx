@@ -86,6 +86,7 @@ export default function App() {
             onRest={engine.rest}
             onBreakthrough={engine.breakthrough}
             onBodyBreakthrough={engine.bodyBreakthrough}
+            onAscend={engine.ascend}
             onOpenLog={() => setLogDrawerOpen(true)}
             onTravel={engine.travel}
             onSelectPanel={handleSelectPanel}

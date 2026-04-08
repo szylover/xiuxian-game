@@ -8,6 +8,8 @@ import { getNextRealm, formatAge } from '../../game/player';
 import type { Player } from '../../game/player';
 import { StatusItem } from '../shared';
 import { UI_LABELS } from '../../data/texts/ui-labels';
+import { getAscensionState } from '../../game/ascension';
+import { ASCENSION_TEXTS } from '../../data/texts/ascension';
 
 interface StatusBarProps {
   player: Player;
@@ -18,13 +20,15 @@ export default function StatusBar({ player }: StatusBarProps) {
 
   const realm = REALMS[player.realmIndex];
   const nextRealm = getNextRealm(player);
+  const ascState = getAscensionState(player);
+  const tierLabel = ASCENSION_TEXTS.tierLabel(ascState.currentTier);
   const expProgress = nextRealm
     ? Math.min(100, (player.exp / nextRealm.expReq) * 100)
     : 100;
 
   return (
     <div className="status-bar">
-      <StatusItem icon="⛰️" text={`${player.name}【${realm.name}】`} title="道号 & 境界" />
+      <StatusItem icon="⛰️" text={`${player.name}【${tierLabel ? tierLabel + '·' : ''}${realm.name}】`} title="道号 & 境界" />
       <StatusItem icon="❤️" text={`${player.hp}/${player.maxHp}`} title={`HP ${player.hp}/${player.maxHp}`} />
       <StatusItem icon="🔮" text={`${player.mp}/${player.maxMp}`} title={`MP ${player.mp}/${player.maxMp}`} />
       <StatusItem icon="⚡" text={`${player.stamina}/${player.maxStamina}`} title={`精力 ${player.stamina}/${player.maxStamina}`} />
