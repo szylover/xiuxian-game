@@ -28,6 +28,7 @@ interface ActionPanelProps {
 }
 
 export default function ActionPanel({ player, onCultivate, onFight, onExplore, onRest, onBreakthrough, onBodyBreakthrough, onOpenMap, gameOver }: ActionPanelProps) {
+  console.log('[ActionPanel]', { hasPlayer: !!player, gameOver });
   if (!player || gameOver) return null;
 
   const [showBottleneckModal, setShowBottleneckModal] = useState<string | null>(null);

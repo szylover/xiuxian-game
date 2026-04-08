@@ -892,9 +892,9 @@ body {
 .center-panel {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 16px);
   min-height: 0;
   min-width: 0;
+  overflow: hidden;
 }
 
 /* ── 右栏 ── */
@@ -903,7 +903,7 @@ body {
   border: 1px solid #222;
   border-radius: 8px;
   padding: 0.6rem;
-  height: calc(100vh - 16px);
+  min-height: 0;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #333 #12162a;
