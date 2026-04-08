@@ -11,12 +11,15 @@ interface DebugItemsTabProps {
   getQty: (id: string) => number;
   onQtyChange: (id: string, v: number) => void;
   onGive: (id: string) => void;
+  onGiveAll: () => void;
 }
 
-export default function DebugItemsTab({ items, equips, getQty, onQtyChange, onGive }: DebugItemsTabProps) {
+export default function DebugItemsTab({ items, equips, getQty, onQtyChange, onGive, onGiveAll }: DebugItemsTabProps) {
   return (
     <div className="debug-items">
-      <div className="debug-section-title">📦 物品（点击添加）</div>
+      <div className="debug-section-title">📦 物品（点击添加）
+        <button className="btn debug-btn" onClick={onGiveAll}>📦 全部添加 ×10</button>
+      </div>
       <div className="debug-item-list">
         {items.map(item => (
           <DebugItemRow

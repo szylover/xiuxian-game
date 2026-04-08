@@ -114,6 +114,23 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
     });
   };
 
+  const giveAllItems = () => {
+    onUpdate(prev => {
+      if (!prev) return prev;
+      const totalSlots = allItems.length + allEquips.length;
+      let p = { ...prev, inventoryCapacity: Math.max(prev.inventoryCapacity, prev.inventory.length + totalSlots) };
+      for (const item of allItems) {
+        const result = addItem(p, item.id, 10);
+        p = result.player;
+      }
+      for (const eq of allEquips) {
+        const result = addItem(p, eq.id, 10);
+        p = result.player;
+      }
+      return p;
+    });
+  };
+
   // ── 功法调试操作 ──
   const forceUpgradeActiveTechnique = () => {
     onUpdate(prev => {
@@ -270,6 +287,7 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
             getQty={getQty}
             onQtyChange={setQty}
             onGive={giveItem}
+            onGiveAll={giveAllItems}
           />
         )}
 
