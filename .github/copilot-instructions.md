@@ -26,6 +26,7 @@
 
 - **禁止直接 push 到 main**。所有代码必须通过创建分支 + PR 合并的方式进入 main。
 - 分支命名：`feat/T0XXX-简要描述`、`fix/简要描述`、`chore/简要描述`
+  - 新任务（无 T 编号）：`feat/197-shop-in-scene`、`feat/198-karma-alignment`
 - PR 合并策略：squash merge
 - **文档归文档，代码归代码**：纯文档变更（`docs/`、`.github/` 下的 spec/task/roadmap 等）和代码变更（`src/`）必须在**不同的分支和 PR** 中提交，禁止混在同一个 PR 里。例如：@PM 产出的 Design Spec + 任务文件 + roadmap 更新走一个 `chore/` 分支；@Dev 的代码实现走另一个 `feat/` 分支。
 
@@ -61,7 +62,10 @@ git worktree add ../xiuxian-T0065 feat/T0065-text-centralization
 ## 任务管理
 
 - **GitHub Issues** 是任务的单一数据源（Single Source of Truth）：https://github.com/szylover/xiuxian-game/issues
-- 每个任务有唯一 ID（T0001–T9999），对应一个 GitHub Issue，用 label 标注分类
+- **任务 ID = Issue #编号**：新建任务直接用 GitHub Issue 的 `#number` 作为唯一标识（如 `#197`），不再分配 T 编号
+  - 历史任务（T0001–T0077）保留原 T 编号不改，spec 文件名和 Issue 标题中的 T 编号继续沿用
+  - 新任务的 spec 文件命名：`docs/specs/197-shop-in-scene.md`（Issue # + 短横线描述）
+  - 新任务的分支命名：`feat/197-shop-in-scene`
 - 任务状态通过 Issue 的 open/closed 管理，不再维护本地 task 文件
 - **`docs/roadmap.md`** 仅作为高层路线图和依赖关系参考，不再逐任务更新状态
 - **`docs/specs/`** 仍保留设计文档，Issue 中放指向 spec 的链接
