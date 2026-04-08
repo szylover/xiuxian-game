@@ -148,8 +148,8 @@ xiuxian-game/
 │   ├── roadmap.md                 #   高层路线图（依赖图 + DLC 规划 + 扩展性约定）
 │   ├── test-guide.md              #   功能测试手册（每个功能的测试用例）
 │   ├── specs/                     #   设计文档存放目录
-│       ├── design-attribute-system.md
-│       ├── design-novel-events.md
+│       ├── 57-attribute-system.md
+│       ├── 65-novel-events.md
 │       ├── T0029-breakthrough-tribulation.md
 │       └── T0040-death-system.md
 └── src/                           # React 源码
@@ -203,32 +203,40 @@ xiuxian-game/
     │       ├── CapacityBar.tsx    #       容量/进度条
     │       ├── StatRow.tsx        #       属性行 + 灵根资质条
     │       ├── StatusItem.tsx     #       状态栏单项
+    │       ├── combat/            #       战斗弹窗子组件（T0046）
     │       ├── CombatModal.tsx    #       战斗弹窗
     │       ├── DeathModal.tsx     #       死亡弹窗（T0040）
     │       ├── DialogueModal.tsx   #       对话弹窗（T0026）
     │       └── FloatingPanel.tsx  #       浮动面板
     ├── game/                      #   游戏逻辑（纯 TS，不依赖 React）
     │   ├── types.ts               #     全局类型定义（DLC/装备/死亡等）
-    │   ├── chronicle.ts           #     修仙履历系统核心逻辑（T0068）
-    │   ├── event-loader.ts        #     JSON 事件加载器（纯数据 → GameEvent）
-    │   ├── item-loader.ts         #     JSON 物品加载器（纯数据 → ItemDef）
-    │   ├── inventory.ts           #     背包系统（增删查用物品，容量管理）
     │   ├── data.ts                #     数据表（境界/妖兽/丹药/事件/…）
     │   ├── player.ts              #     玩家角色 & 属性系统
+    │   ├── spirit-root.ts         #     灵根系统
     │   ├── combat.ts              #     战斗系统入口
     │   ├── death.ts               #     死亡系统（T0040）
+    │   ├── inventory.ts           #     背包系统（增删查用物品，容量管理）
     │   ├── events.ts              #     事件内容注册（探索/奇遇/日常）
+    │   ├── event-loader.ts        #     JSON 事件加载器（纯数据 → GameEvent）
+    │   ├── item-loader.ts         #     JSON 物品加载器（纯数据 → ItemDef）
     │   ├── alchemy.ts             #     炼丹系统
     │   ├── equipment.ts           #     装备系统
     │   ├── shop.ts                #     商店系统
     │   ├── smithing.ts            #     炼器系统
     │   ├── technique.ts           #     功法系统
+    │   ├── divine-arts.ts         #     神通系统（元素体系，T0020）
+    │   ├── body-cultivation.ts    #     体修系统（T0059）
+    │   ├── bottleneck.ts          #     瓶颈系统（T0064）
+    │   ├── map.ts                 #     地图系统（T0021）
+    │   ├── npc.ts                 #     NPC 系统（T0025）
     │   ├── quest.ts               #     任务链系统（T0057）
     │   ├── quest-loader.ts        #     JSON 任务链加载器
     │   ├── dialogue.ts            #     对话系统核心逻辑（T0026）
     │   ├── dialogue-loader.ts     #     JSON 对话加载器
+    │   ├── chronicle.ts           #     修仙履历系统核心逻辑（T0068）
     │   ├── ascension.ts           #     飞升系统核心逻辑（T0033）
     │   ├── ascension-loader.ts    #     JSON 飞升定义加载器
+    │   ├── breakthrough-loader.ts #     JSON 突破需求加载器
     │   ├── registry/              #     全局注册表（DLC 扩展核心）
     │   │   ├── index.ts           #       barrel re-export
     │   │   ├── stores.ts          #       注册表存储（Map）
@@ -237,7 +245,9 @@ xiuxian-game/
     │   ├── player/                #     玩家子模块
     │   ├── combat/                #     战斗子模块
     │   ├── breakthrough/          #     突破子模块
-    │   └── tribulation/           #     渡劫子模块
+    │   ├── tribulation/           #     渡劫子模块
+    │   ├── achievement/           #     成就子模块（T0031）
+    │   └── procedural/            #     程序化生成子模块（T0070–T0073）
     ├── data/                      #   游戏数据
     │   ├── changelog.ts           #     版本更新日志（每次 merge PR 时同步追加）
     │   ├── texts/                 #     中文文案集中管理（禁止 magic string）
@@ -279,6 +289,8 @@ xiuxian-game/
         ├── useCoreActions.ts      #     核心行为 Hook（修炼/战斗/探索/休息）
         ├── useSystemActions.ts    #     系统行为 Hook（使用物品/炼丹/装备/商店/突破等）
         ├── useGameLog.ts          #     日志管理 Hook
-        └── useToast.ts            #     Toast 通知 Hook
+        ├── useToast.ts            #     Toast 通知 Hook
+        ├── useCombatModal.ts      #     战斗弹窗 Hook（T0046）
+        ├── useSaveLoad.ts         #     多存档 Hook（T0038）
         └── useChronicle.ts        #     修仙履历 Hook（T0068）
 ```

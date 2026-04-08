@@ -346,7 +346,7 @@ const playerAttributes = {
     fire: 30, water: 30, thunder: 30, wind: 30, earth: 30, wood: 30,
   },
 
-  // === 小说奇遇事件扩展（详见 design-novel-events.md）===
+  // === 小说奇遇事件扩展（详见 65-novel-events.md）===
   items: {},       // 已获得道具：zhangTianPing, xianFu, ziFu, guiYan, zhiRen, duTianArray, jiuHuLu
   passives: {},    // 已激活被动：changSheng, guiXi, hunter
   systems: {},     // 已解锁系统：zhuangbi, caiji, offlineGrind, zhuShen
