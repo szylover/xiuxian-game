@@ -34,8 +34,6 @@
 | [T0056](https://github.com/szylover/xiuxian-game/issues/87) | 初始随机属性系统 | T0001 | — | ✅ |
 | [T0077](https://github.com/szylover/xiuxian-game/issues/198) | 正邪系统（善恶阵营 karma） | T0001 | [spec](specs/198-karma-alignment.md) | 📐 |
 | [T0072](https://github.com/szylover/xiuxian-game/issues/183) | 程序化妖兽变体系统（境界缩放+属性变异） | T0003 | [spec](specs/T0072-procedural-monsters.md) | ✅ |
-| [T0047](https://github.com/szylover/xiuxian-game/issues/110) | 命格天赋系统 | T0001 | — | ⬜ |
-| [T0056](https://github.com/szylover/xiuxian-game/issues/87) | 初始随机属性系统 | T0001 | — | ✅ |
 
 ### 🏷️ 事件系统
 
@@ -48,7 +46,6 @@
 | [T0011](https://github.com/szylover/xiuxian-game/issues/67) | 事件日志（分类/颜色/回溯） | T0007 | — | ✅ |
 | [T0057](https://github.com/szylover/xiuxian-game/issues/119) | 任务链系统（Quest Chain） | T0007, T0012, T0042, T0021 | [spec](specs/T0057-quest-chain.md) | ✅ |
 | [T0070](https://github.com/szylover/xiuxian-game/issues/181) | 程序化事件生成引擎（模板+变量词库） | T0007 | [spec](specs/T0070-procedural-events.md) | ✅ |
-| [T0057](https://github.com/szylover/xiuxian-game/issues/119) | 任务链系统（Quest Chain） | T0007, T0012, T0042, T0021 | — | ⬜ |
 
 ### 🏷️ 物品与经济
 
@@ -61,7 +58,6 @@
 | [T0016](https://github.com/szylover/xiuxian-game/issues/72) | 炼器系统 | T0012, T0014 | — | ✅ |
 | [T0052](https://github.com/szylover/xiuxian-game/issues/115) | 拍卖行 | T0025, T0015 | [spec](specs/115-auction-house.md) | 📐 |
 | [T0071](https://github.com/szylover/xiuxian-game/issues/182) | 程序化物品词缀系统（随机装备+品质变体） | T0012, T0014 | [spec](specs/T0071-procedural-items.md) | ✅ |
-| [T0052](https://github.com/szylover/xiuxian-game/issues/115) | 拍卖行 | T0025, T0015 | — | ⬜ |
 
 ### 🏷️ 功法与技能
 
@@ -77,10 +73,6 @@
 | [T0059](https://github.com/szylover/xiuxian-game/issues/89) | 体修系统核心（体魄 · 体修境界 · 减伤） | T0001, T0003, T0017, T0019 | [spec](specs/T0059-body-cultivation.md) | ✅ |
 | [T0060](https://github.com/szylover/xiuxian-game/issues/120) | 体修武器内容（拳套 · 指环 · 手甲） | T0059, T0014, T0015 | [spec](specs/T0059-body-cultivation.md) | ✅ |
 | [T0061](https://github.com/szylover/xiuxian-game/issues/121) | 体修功法内容（高阶拳法 · 指法） | T0059, T0017 | [spec](specs/T0059-body-cultivation.md) | ✅ |
-| [T0049](https://github.com/szylover/xiuxian-game/issues/112) | 悟道顿悟系统 | T0002, T0017 | — | ⬜ |
-| [T0059](https://github.com/szylover/xiuxian-game/issues/89) | 体修系统核心（体魄 · 体修境界 · 减伤） | T0001, T0003, T0017, T0019 | [spec](specs/T0059-body-cultivation.md) | ✅ |
-| [T0060](https://github.com/szylover/xiuxian-game/issues/120) | 体修武器内容（拳套 · 指环 · 手甲） | T0059, T0014, T0015 | [spec](specs/T0059-body-cultivation.md) | ⬜ |
-| [T0061](https://github.com/szylover/xiuxian-game/issues/121) | 体修功法内容（高阶拳法 · 指法） | T0059, T0017 | [spec](specs/T0059-body-cultivation.md) | ⬜ |
 | [T0062](https://github.com/szylover/xiuxian-game/issues/91) | 体修 UI（境界行 · 体魄条 · Debug 面板） | T0059, T0041, T0046 | [spec](specs/T0059-body-cultivation.md) | ✅ |
 
 
@@ -93,10 +85,6 @@
 | [T0023](https://github.com/szylover/xiuxian-game/issues/95) | 秘境探索（限时副本） | T0021, T0003 | [spec](specs/95-secret-realm.md) | 📐 |
 | [T0024](https://github.com/szylover/xiuxian-game/issues/96) | 风水采矿 | T0021, T0012 | — | ⬜ |
 | [T0054](https://github.com/szylover/xiuxian-game/issues/117) | 历练悬赏任务 | T0021, T0025 | [spec](specs/117-bounty-quests.md) | 📐 |
-| [T0022](https://github.com/szylover/xiuxian-game/issues/94) | 区域事件 | T0007, T0021 | — | ⬜ |
-| [T0023](https://github.com/szylover/xiuxian-game/issues/95) | 秘境探索（限时副本） | T0021, T0003 | — | ⬜ |
-| [T0024](https://github.com/szylover/xiuxian-game/issues/96) | 风水采矿 | T0021, T0012 | — | ⬜ |
-| [T0054](https://github.com/szylover/xiuxian-game/issues/117) | 历练悬赏任务 | T0021, T0025 | — | ⬜ |
 
 ### 🏷️ 社交与NPC
 
@@ -109,13 +97,6 @@
 | [T0048](https://github.com/szylover/xiuxian-game/issues/111) | 道侣双修系统 | T0025, T0026 | [spec](specs/111-dual-cultivation.md) | 📐 |
 | [T0051](https://github.com/szylover/xiuxian-game/issues/114) | NPC AI 生态（世界模拟） | T0025, T0021 | [spec](specs/114-npc-ai-world.md) | 📐 |
 | [T0053](https://github.com/szylover/xiuxian-game/issues/116) | 宗门管理（自建宗门） | T0027, T0025, T0021 | [spec](specs/116-sect-management.md) | 📐 |
-| [T0025](https://github.com/szylover/xiuxian-game/issues/97) | NPC 系统 | T0001 | — | ⬜ |
-| [T0026](https://github.com/szylover/xiuxian-game/issues/98) | 对话系统 | T0025 | — | ⬜ |
-| [T0027](https://github.com/szylover/xiuxian-game/issues/99) | 门派系统 | T0025, T0017 | — | ⬜ |
-| [T0028](https://github.com/szylover/xiuxian-game/issues/100) | PvP 切磋 | T0025, T0003 | — | ⬜ |
-| [T0048](https://github.com/szylover/xiuxian-game/issues/111) | 道侣双修系统 | T0025, T0026 | — | ⬜ |
-| [T0051](https://github.com/szylover/xiuxian-game/issues/114) | NPC AI 生态（世界模拟） | T0025, T0021 | — | ⬜ |
-| [T0053](https://github.com/szylover/xiuxian-game/issues/116) | 宗门管理（自建宗门） | T0027, T0025, T0021 | — | ⬜ |
 
 ### 🏷️ 进阶机制
 
@@ -134,17 +115,6 @@
 | [T0064](https://github.com/szylover/xiuxian-game/issues/93) | 瓶颈系统（境界/功法卡点 + 多元解锁） | T0002, T0029, T0007, T0017, T0058 | [spec](specs/T0064-bottleneck-system.md) | ✅ |
 | [T0055](https://github.com/szylover/xiuxian-game/issues/118) | 天机榜（天骄排行） | T0025, T0003, T0051 | [spec](specs/118-celestial-rankings.md) | 📐 |
 | [T0068](https://github.com/szylover/xiuxian-game/issues/172) | 修仙履历系统（Cultivation Chronicle） | T0029, T0040, T0031, T0042, T0038 | [spec](specs/T0068-cultivation-chronicle.md) | ✅ |
-| [T0030](https://github.com/szylover/xiuxian-game/issues/101) | 转世重修 | T0029, T0040, T0056 | — | ⬜ |
-| [T0040](https://github.com/szylover/xiuxian-game/issues/80) | 死亡与复活系统 | T0001, T0003, T0012, T0018, T0044 | [spec](specs/T0040-death-system.md) | ✅ |
-| [T0031](https://github.com/szylover/xiuxian-game/issues/79) | 成就系统 | T0001 | [spec](specs/T0031-achievement.md) | ✅ |
-| [T0032](https://github.com/szylover/xiuxian-game/issues/102) | 排行榜 | T0031 | — | ⬜ |
-| [T0033](https://github.com/szylover/xiuxian-game/issues/103) | 仙道境界（飞升） | T0029, T0058 | — | ⬜ |
-| [T0058](https://github.com/szylover/xiuxian-game/issues/88) | 境界表 DLC 化 | — | [spec](specs/T0058-realm-dlc.md) | ✅ |
-| [T0034](https://github.com/szylover/xiuxian-game/issues/104) | 洪荒终局 | T0033 | — | ⬜ |
-| [T0042](https://github.com/szylover/xiuxian-game/issues/82) | 年月历法系统 | T0001, T0005 | [spec](specs/T0042-calendar-system.md) | ✅ |
-| [T0050](https://github.com/szylover/xiuxian-game/issues/113) | 心魔系统 | T0029 | — | ⬜ |
-| [T0064](https://github.com/szylover/xiuxian-game/issues/93) | 瓶颈系统（境界/功法卡点 + 多元解锁） | T0002, T0029, T0007, T0017, T0058 | [spec](specs/T0064-bottleneck-system.md) | 🔨 |
-| [T0055](https://github.com/szylover/xiuxian-game/issues/118) | 天机榜（天骄排行） | T0025, T0003, T0051 | — | ⬜ |
 
 ### 🏷️ 界面与体验
 
@@ -174,12 +144,6 @@
 | [T0059b](https://github.com/szylover/xiuxian-game/issues/90) | 数据懒加载 & Bundle 分割 | — | [spec](specs/T0059-data-lazy-loading.md) | ✅ |
 | [T0068](https://github.com/szylover/xiuxian-game/issues/161) | CSS 外置与全局变量体系（TSX 禁止内联样式） | — | — | ✅ |
 | [T0074](https://github.com/szylover/xiuxian-game/issues/195) | DLC 选择界面（开始界面 DLC 勾选 + CP-01） | — | [spec](specs/T0074-dlc-selection-cp01.md) | ✅ |
-| [T0035](https://github.com/szylover/xiuxian-game/issues/105) | Azure SWA CI/CD | — | — | ⬜ |
-| [T0036](https://github.com/szylover/xiuxian-game/issues/106) | PWA 支持 | T0035 | — | ⬜ |
-| [T0037](https://github.com/szylover/xiuxian-game/issues/107) | 音效系统 | — | — | ⬜ |
-| [T0038](https://github.com/szylover/xiuxian-game/issues/108) | 多存档 | — | — | ⬜ |
-| [T0039](https://github.com/szylover/xiuxian-game/issues/109) | 新手引导 | T0001 | — | ⬜ |
-| [T0059b](https://github.com/szylover/xiuxian-game/issues/90) | 数据懒加载 & Bundle 分割 | — | [spec](specs/T0059-data-lazy-loading.md) | ✅ |
 
 ---
 
