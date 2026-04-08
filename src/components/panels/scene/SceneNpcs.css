@@ -10,18 +10,14 @@
 }
 
 .scene-npcs-list {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: var(--spacing-md);
-  overflow-x: auto;
   padding: var(--spacing-sm) 0;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-border) transparent;
-  flex-wrap: wrap;
 }
 
 .scene-npcs-list .npc-card {
-  min-width: 80px;
-  flex-shrink: 0;
+  min-width: 0;
 }
 
 .scene-npcs-empty {

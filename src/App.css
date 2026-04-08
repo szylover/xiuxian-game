@@ -895,7 +895,6 @@ body {
   height: calc(100vh - 16px);
   min-height: 0;
   min-width: 0;
-  overflow: hidden;
 }
 
 /* ── 右栏 ── */
