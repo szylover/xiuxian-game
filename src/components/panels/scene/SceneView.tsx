@@ -9,7 +9,6 @@ import type { PanelKey } from '../../layout/PanelButtons';
 import SceneHeader from './SceneHeader';
 import SceneNpcs from './SceneNpcs';
 import ActionPanel from '../ActionPanel';
-import { getCurrentRegion, getMapState } from '../../../game/map';
 
 interface SceneViewProps {
   player: Player;
@@ -56,15 +55,6 @@ export default function SceneView({
   onDialogueAdvance,
   gameOver,
 }: SceneViewProps) {
-  const dbgRegion = getCurrentRegion(player);
-  const dbgMapState = getMapState(player);
-  console.log('[SceneView] render', {
-    gameOver,
-    regionId: dbgRegion?.id ?? 'NONE',
-    regionName: dbgRegion?.name ?? 'NONE',
-    mapState: dbgMapState,
-    playerSystems: Object.keys(player.systems),
-  });
   return (
     <div className="scene-view">
       {/* 区域标题栏 */}

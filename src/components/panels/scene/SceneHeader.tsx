@@ -13,7 +13,6 @@ interface SceneHeaderProps {
 
 export default function SceneHeader({ player }: SceneHeaderProps) {
   const region = getCurrentRegion(player);
-  console.log('[SceneHeader]', { region: region?.name ?? 'NULL', regionId: region?.id ?? 'NULL' });
   if (!region) return null;
 
   const tags: { icon: string; label: string; className: string }[] = [];
