@@ -1,14 +1,12 @@
 // ============================================================
 // SceneFooter.tsx — 底部状态栏（T0069）
-// 瓶颈提示 + 任务追踪摘要 + 日志打开按钮
+// 瓶颈提示 + 日志/外出按钮
 // ============================================================
 
 import './SceneFooter.css';
 import type { Player } from '../../../game/player';
 import { getActiveBottlenecks } from '../../../game/bottleneck';
 import type { BottleneckUnlockMethod } from '../../../game/types';
-import { getQuestState } from '../../../game/quest';
-import { getQuestChainDef } from '../../../game/registry';
 
 interface SceneFooterProps {
   player: Player;
@@ -18,32 +16,11 @@ interface SceneFooterProps {
 
 export default function SceneFooter({ player, onOpenLog, onOpenMap }: SceneFooterProps) {
   const bottlenecks = getActiveBottlenecks(player);
-  const bn = bottlenecks[0]; // 只显示第一个激活的瓶颈
-
-  const questState = getQuestState(player);
-  const trackedId = questState.trackedQuestId;
-  const trackedProgress = trackedId ? questState.activeQuests[trackedId] : undefined;
-  const trackedDef = trackedId ? getQuestChainDef(trackedId) : undefined;
-
-  // 获取当前任务步骤的简要描述
-  let trackedSummary = '';
-  if (trackedDef && trackedProgress) {
-    const step = trackedDef.steps[trackedProgress.currentStepIndex];
-    if (step) {
-      const obj = step.objectives[0];
-      if (obj) {
-        const objProgress = trackedProgress.objectiveProgress[0];
-        const current = objProgress?.currentCount ?? 0;
-        const total = obj.count ?? 1;
-        trackedSummary = `${obj.description} ${current}/${total}`;
-      }
-    }
-  }
+  const bn = bottlenecks[0];
 
   return (
     <div className="scene-footer">
       <div className="scene-footer-left">
-        {/* 瓶颈提示 */}
         {bn && (() => {
           const persistMethod = bn.def.unlockMethods.find(
             (m): m is Extract<BottleneckUnlockMethod, { type: 'persistence' }> => m.type === 'persistence'
@@ -68,13 +45,6 @@ export default function SceneFooter({ player, onOpenLog, onOpenMap }: SceneFoote
             </span>
           );
         })()}
-
-        {/* 任务追踪 */}
-        {trackedSummary && (
-          <span className="scene-footer-quest">
-            📋 {trackedSummary}
-          </span>
-        )}
       </div>
 
       {onOpenMap && (

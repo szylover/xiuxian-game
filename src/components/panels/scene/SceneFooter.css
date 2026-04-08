@@ -10,7 +10,7 @@
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
   border-top: 1px solid var(--color-border);
-  margin-top: auto;
+  flex-shrink: 0;
   gap: var(--spacing-md);
 }
 
