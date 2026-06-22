@@ -2,7 +2,7 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, AffixPosition, EquipSlot, GeneratedEquipInstance, MonsterTemplate, MutationDef, MutationType, TechniqueTraitDef, TechniqueTraitTier, TechniqueInstance, AscensionDef, RankingDimensionDef, RankingBoardKind, DestinyDef, TalentDef, TalentTreeNodeDef, BountyTemplateDef, SecretRealmDef, EnlightenmentInsightDef } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, AffixPosition, EquipSlot, GeneratedEquipInstance, MonsterTemplate, MutationDef, MutationType, TechniqueTraitDef, TechniqueTraitTier, TechniqueInstance, AscensionDef, RankingDimensionDef, RankingBoardKind, DestinyDef, TalentDef, TalentTreeNodeDef, BountyTemplateDef, SecretRealmDef, EnlightenmentInsightDef, SectDef } from '../types';
 import type { SpiritRootType } from '../spirit-root';
 import type { AchievementDef } from '../achievement/types';
 import {
@@ -18,7 +18,7 @@ import {
   techniqueTraitRegistry, techniqueInstanceRegistry,
   ascensionRegistry, rankingDimensionRegistry,
   destinyRegistry, talentRegistry, talentTreeNodeRegistry,
-  bountyTemplateRegistry, secretRealmRegistry, enlightenmentInsightRegistry,
+  bountyTemplateRegistry, secretRealmRegistry, enlightenmentInsightRegistry, sectRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -228,6 +228,11 @@ export function getEnlightenmentInsightDef(id: string): EnlightenmentInsightDef 
 export function getAllEnlightenmentInsightDefs(): EnlightenmentInsightDef[] {
   return Array.from(enlightenmentInsightRegistry.values()).sort((a, b) => a.requiredInsight - b.requiredInsight);
 }
+
+// ── 门派与宗门管理（#99/#116）──
+
+export function getSectDef(id: string): SectDef | undefined { return sectRegistry.get(id); }
+export function getAllSectDefs(): SectDef[] { return Array.from(sectRegistry.values()); }
 
 // ── 任务链（T0057）──
 

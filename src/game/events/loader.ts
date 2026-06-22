@@ -5,7 +5,7 @@
 import type { Player } from '../player';
 import { registerDLC } from '../registry';
 import type { RecipeDef, EquipDef, SmithingRecipeDef, TechniqueDef, DeathTriggerDef, LifeSaverDef, RevivalMethodDef, MonsterDef } from '../registry';
-import type { RegionDef, NpcDef, IdleChatPool, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, MonsterTemplate, MutationDef, TechniqueTraitDef, BountyTemplateDef, SecretRealmDef } from '../types';
+import type { RegionDef, NpcDef, IdleChatPool, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, MonsterTemplate, MutationDef, TechniqueTraitDef, BountyTemplateDef, SecretRealmDef, SectDef } from '../types';
 import { loadEventsFromJson } from '../event-loader';
 import { loadItemsFromJson } from '../item-loader';
 import { loadQuestsFromJson } from '../quest-loader';
@@ -264,6 +264,7 @@ export async function registerCoreEvents(): Promise<void> {
     { default: coreTechniqueTraitsJson },
     { default: coreBountiesJson },
     { default: coreSecretRealmsJson },
+    { default: coreSectsJson },
   ] = await Promise.all([
     import('../../data/dlc/core/events.json'),
     import('../../data/dlc/core/items.json'),
@@ -284,6 +285,7 @@ export async function registerCoreEvents(): Promise<void> {
     import('../../data/dlc/core/technique-traits.json'),
     import('../../data/dlc/core/bounties.json'),
     import('../../data/dlc/core/secret-realms.json'),
+    import('../../data/dlc/core/sects.json'),
   ]);
 
   // 对话文件按 NPC 拆分，批量加载 dialogues/*.json（排除 idle-chat.json）
@@ -345,6 +347,7 @@ export async function registerCoreEvents(): Promise<void> {
     bountyTemplates: coreBountiesJson as BountyTemplateDef[],
     secretRealms: coreSecretRealmsJson as SecretRealmDef[],
     enlightenmentInsights: CORE_ENLIGHTENMENT_INSIGHTS,
+    sects: coreSectsJson as SectDef[],
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }

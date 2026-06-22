@@ -93,11 +93,11 @@
 |----|------|------|------|------|
 | [T0025](https://github.com/szylover/xiuxian-game/issues/97) | NPC 系统 | T0001 | — | ✅ |
 | [T0026](https://github.com/szylover/xiuxian-game/issues/98) | 对话系统 | T0025 | [spec](specs/T0026-dialogue-system.md) | ✅ |
-| [T0027](https://github.com/szylover/xiuxian-game/issues/99) | 门派系统 | T0025, T0017 | [spec](specs/99-sect-system.md) | 📐 |
+| [T0027](https://github.com/szylover/xiuxian-game/issues/99) | 门派系统 | T0025, T0017 | [spec](specs/99-sect-system.md) | ✅ |
 | [T0028](https://github.com/szylover/xiuxian-game/issues/100) | PvP 切磋 | T0025, T0003 | — | ⬜ |
 | [T0048](https://github.com/szylover/xiuxian-game/issues/111) | 道侣双修系统 | T0025, T0026 | [spec](specs/111-dual-cultivation.md) | 📐 |
 | [T0051](https://github.com/szylover/xiuxian-game/issues/114) | NPC AI 生态（世界模拟） | T0025, T0021 | [spec](specs/114-npc-ai-world.md) | 📐 |
-| [T0053](https://github.com/szylover/xiuxian-game/issues/116) | 宗门管理（自建宗门） | T0027, T0025, T0021 | [spec](specs/116-sect-management.md) | 📐 |
+| [T0053](https://github.com/szylover/xiuxian-game/issues/116) | 宗门管理（自建宗门） | T0027, T0025, T0021 | [spec](specs/116-sect-management.md) | ✅ |
 
 ### 🏷️ 进阶机制
 

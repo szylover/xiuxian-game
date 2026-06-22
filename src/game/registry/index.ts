@@ -36,6 +36,7 @@ export type {
   BountyObjectiveType, BountyObjectiveDef, BountyTemplateDef, GeneratedBounty, ActiveBounty, BountySystemState,
   SecretRealmStageType, SecretRealmStageDef, SecretRealmDef, SecretRealmRun, SecretRealmSystemState,
   Alignment, KarmaSystemState, EnlightenmentInsightDef, EnlightenmentState, EnlightenmentBuff,
+  SectDef, SectRankDef, SectMissionDef, SectStoreItemDef, SectFacilityDef, SectSystemState, SectManagementState, SectMemberState,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
@@ -81,6 +82,7 @@ export {
   getBountyTemplateDef, getAllBountyTemplateDefs,
   getSecretRealmDef, getAllSecretRealmDefs,
   getEnlightenmentInsightDef, getAllEnlightenmentInsightDefs,
+  getSectDef, getAllSectDefs,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

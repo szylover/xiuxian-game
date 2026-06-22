@@ -14,6 +14,7 @@ import { getDestinyTalentEffects, ensureDestinyTalentState } from '../destiny';
 import type { DestinyTalentStatKey } from '../types';
 import { getAlignment } from '../karma';
 import { getEnlightenmentEffects } from '../enlightenment';
+import { getSectStatBonuses } from '../sect';
 
 // ── 灵根品级评定 ──
 
@@ -121,6 +122,7 @@ export function recalcStats(player: Player): Player {
   applyDestinyTalentStatEffects(p);
   applyEnlightenmentStatEffects(p);
   applyKarmaStatEffects(p);
+  applySectStatEffects(p);
 
   p.hp = Math.min(p.hp, p.maxHp);
   p.mp = Math.min(p.mp, p.maxMp);
@@ -128,6 +130,15 @@ export function recalcStats(player: Player): Player {
   p.mentalPower = Math.min(p.mentalPower, p.maxMentalPower);
   p.physique = Math.min(p.physique, p.maxPhysique);
   return p;
+}
+
+function applySectStatEffects(p: Player): void {
+  const bonuses = getSectStatBonuses(p);
+  if (bonuses.atk) p.atk += bonuses.atk;
+  if (bonuses.def) p.def += bonuses.def;
+  if (bonuses.speed) p.speed += bonuses.speed;
+  if (bonuses.hp) p.maxHp += bonuses.hp;
+  if (bonuses.mp) p.maxMp += bonuses.mp;
 }
 
 // ── 境界查询 ──

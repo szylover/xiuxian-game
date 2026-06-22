@@ -25,6 +25,7 @@ export const UI_LABELS = {
     divine:      { title: '神通', icon: '✨' },
     talent:     { title: '命格天赋', icon: '🌌' },
     enlightenment: { title: '悟道顿悟', icon: '🧠' },
+    sect:        { title: '门派宗门', icon: '🏯' },
     crafting:    { title: '炼制', icon: '🔥' },
     equipment:   { title: '装备', icon: '⚔️' },
     achievement: { title: '成就', icon: '🏆' },
@@ -44,6 +45,7 @@ export const UI_LABELS = {
     cultivation: '⚔️ 修行',
     achievement: '🏆 成就',
     world:       '🌍 世界',
+    sect:        '🏯 门派',
   },
 
   // ── 日志筛选标签 ──

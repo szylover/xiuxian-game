@@ -135,6 +135,16 @@ export default function App() {
             onUnlockTalentNode={engine.unlockTalentNode}
             onContemplateEnlightenment={engine.contemplateEnlightenment}
             onTriggerEnlightenment={engine.triggerEnlightenment}
+            onJoinSect={engine.joinSect}
+            onClaimSectStipend={engine.claimSectStipend}
+            onAdvanceSectRank={engine.advanceSectRank}
+            onCompleteSectMission={engine.completeSectMission}
+            onBuySectStoreItem={engine.buySectStoreItem}
+            onFoundSectManagement={engine.foundSectManagement}
+            onRecruitSectMember={engine.recruitSectMember}
+            onCollectSectYield={engine.collectSectYield}
+            onUpgradeSectFacility={engine.upgradeSectFacility}
+            onAssignSectMemberTask={engine.assignSectMemberTask}
             onTravel={engine.travel}
             onMeetNpc={engine.meetNpc}
             onGiveGift={engine.giveGift}

@@ -12,6 +12,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.21.0',
+    date: '2026-06-22',
+    title: '门派与宗门管理',
+    items: [
+      '新增门派系统，可拜入山门、积累贡献、领取月例、晋升身份并兑换门派资源',
+      '新增宗门管理玩法，支持开设堂口、招募弟子、分配事务、结算资源与升级设施',
+      '新增核心门派数据、门派宗门面板、修炼加成联动与 Debug 辅助测试入口',
+    ],
+  },
+  {
     version: '1.20.0',
     date: '2026-06-22',
     title: '悟道顿悟与正邪阵营',

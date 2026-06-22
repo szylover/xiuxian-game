@@ -1,0 +1,202 @@
+[
+  {
+    "id": "core:qingyun_sect",
+    "name": "青云宗",
+    "description": "立宗青云山，重清修与护道，门规宽正，擅长剑诀与养气。",
+    "alignment": "righteous",
+    "minRealm": 0,
+    "minKarma": -20,
+    "entryGold": 50,
+    "founderNpcIds": ["core:npc_qingyun_elder"],
+    "ranks": [
+      {
+        "id": "outer",
+        "name": "外门弟子",
+        "minContribution": 0,
+        "stipendGold": 20,
+        "stipendContribution": 10,
+        "cultivationBonus": 0.03,
+        "statBonuses": { "mp": 10 },
+        "techniqueIds": ["core:basic_sword"]
+      },
+      {
+        "id": "inner",
+        "name": "内门弟子",
+        "minContribution": 120,
+        "stipendGold": 55,
+        "stipendContribution": 18,
+        "cultivationBonus": 0.08,
+        "statBonuses": { "mp": 30, "def": 3 },
+        "techniqueIds": ["core:basic_sword", "core:swift_sword"]
+      },
+      {
+        "id": "elder",
+        "name": "执事长老",
+        "minContribution": 360,
+        "stipendGold": 120,
+        "stipendContribution": 30,
+        "cultivationBonus": 0.14,
+        "statBonuses": { "mp": 60, "def": 8, "speed": 2 },
+        "techniqueIds": ["core:basic_sword", "core:swift_sword", "core:heaven_sword"]
+      }
+    ],
+    "store": [
+      { "itemId": "core:mp_pill", "contributionCost": 35, "minRankId": "outer", "stockPerYear": 3 },
+      { "itemId": "core:jade_slip", "contributionCost": 70, "minRankId": "inner", "stockPerYear": 2 },
+      { "itemId": "core:enlightenment_pill", "contributionCost": 160, "minRankId": "elder", "stockPerYear": 1 }
+    ],
+    "missions": [
+      {
+        "id": "qingyun_patrol",
+        "title": "巡山护道",
+        "description": "巡视山门附近妖兽踪迹，安抚山下行商。",
+        "type": "patrol",
+        "minRankId": "outer",
+        "staminaCost": 15,
+        "reward": { "exp": 30, "gold": 20, "contribution": 25, "karmaChange": 2, "sectPrestige": 1 },
+        "repeatCooldownMonths": 2
+      },
+      {
+        "id": "qingyun_donate_lingzhi",
+        "title": "供奉灵芝",
+        "description": "丹房急需灵芝入炉，贡献者可记宗门功绩。",
+        "type": "donate_item",
+        "minRankId": "outer",
+        "itemCost": { "itemId": "core:herb_lingzhi", "count": 1 },
+        "reward": { "exp": 20, "contribution": 35, "sectPrestige": 2 },
+        "repeatCooldownMonths": 3
+      },
+      {
+        "id": "qingyun_manage_lecture",
+        "title": "主持早课",
+        "description": "为低阶弟子讲解吐纳法，稳固宗门根基。",
+        "type": "manage",
+        "minRankId": "inner",
+        "staminaCost": 20,
+        "reward": { "exp": 55, "gold": 40, "contribution": 45, "sectPrestige": 3 },
+        "repeatCooldownMonths": 4
+      }
+    ],
+    "facilities": [
+      {
+        "id": "scripture_pavilion",
+        "name": "藏经阁",
+        "description": "收藏功法札记，提升门人修行效率。",
+        "maxLevel": 3,
+        "upgradeCost": { "treasury": 180, "herbs": 10, "prestige": 5 },
+        "effects": { "cultivationBonus": 0.03, "recruitBonus": 2 }
+      },
+      {
+        "id": "spirit_field",
+        "name": "灵田",
+        "description": "种植灵草，供给丹房与弟子月例。",
+        "maxLevel": 3,
+        "upgradeCost": { "treasury": 160, "herbs": 15 },
+        "effects": { "herbYield": 4, "treasuryYield": 5 }
+      },
+      {
+        "id": "guardian_array",
+        "name": "护山阵",
+        "description": "稳固山门气脉，增强守备与声望。",
+        "maxLevel": 3,
+        "upgradeCost": { "treasury": 220, "ore": 18, "prestige": 8 },
+        "effects": { "oreYield": 2, "treasuryYield": 8 }
+      }
+    ]
+  },
+  {
+    "id": "core:loose_cultivator_alliance",
+    "name": "散修盟",
+    "description": "散修互助而成的松散盟会，不问正邪，但重交易与人脉。",
+    "alignment": "neutral",
+    "minRealm": 0,
+    "entryGold": 30,
+    "ranks": [
+      {
+        "id": "guest",
+        "name": "盟中客卿",
+        "minContribution": 0,
+        "stipendGold": 15,
+        "stipendContribution": 8,
+        "cultivationBonus": 0.02,
+        "statBonuses": { "speed": 1 },
+        "techniqueIds": ["core:basic_fist"]
+      },
+      {
+        "id": "deacon",
+        "name": "盟务执事",
+        "minContribution": 100,
+        "stipendGold": 45,
+        "stipendContribution": 16,
+        "cultivationBonus": 0.06,
+        "statBonuses": { "hp": 35, "speed": 2 },
+        "techniqueIds": ["core:basic_fist", "core:iron_fist"]
+      },
+      {
+        "id": "council",
+        "name": "议事长老",
+        "minContribution": 320,
+        "stipendGold": 100,
+        "stipendContribution": 28,
+        "cultivationBonus": 0.1,
+        "statBonuses": { "hp": 70, "speed": 4 },
+        "techniqueIds": ["core:basic_fist", "core:iron_fist"]
+      }
+    ],
+    "store": [
+      { "itemId": "core:hp_pill", "contributionCost": 30, "minRankId": "guest", "stockPerYear": 3 },
+      { "itemId": "core:map_fragment", "contributionCost": 90, "minRankId": "deacon", "stockPerYear": 1 },
+      { "itemId": "core:spirit_jade", "contributionCost": 150, "minRankId": "council", "stockPerYear": 1 }
+    ],
+    "missions": [
+      {
+        "id": "alliance_trade",
+        "title": "护送商队",
+        "description": "护送散修盟商队往来坊市，赚取盟内口碑。",
+        "type": "patrol",
+        "minRankId": "guest",
+        "staminaCost": 12,
+        "reward": { "exp": 25, "gold": 35, "contribution": 20, "sectPrestige": 1 },
+        "repeatCooldownMonths": 2
+      },
+      {
+        "id": "alliance_ore",
+        "title": "上交铁矿",
+        "description": "盟内炼器铺收购铁矿，以贡献折价。",
+        "type": "donate_item",
+        "minRankId": "guest",
+        "itemCost": { "itemId": "core:iron_ore", "count": 1 },
+        "reward": { "gold": 25, "contribution": 30, "sectPrestige": 1 },
+        "repeatCooldownMonths": 3
+      },
+      {
+        "id": "alliance_mediation",
+        "title": "调停争端",
+        "description": "为散修调停灵材分配纠纷，维系盟约。",
+        "type": "manage",
+        "minRankId": "deacon",
+        "staminaCost": 18,
+        "reward": { "exp": 50, "gold": 50, "contribution": 40, "sectPrestige": 3 },
+        "repeatCooldownMonths": 4
+      }
+    ],
+    "facilities": [
+      {
+        "id": "market_hall",
+        "name": "盟市堂",
+        "description": "聚拢散修交易，提升府库收入。",
+        "maxLevel": 3,
+        "upgradeCost": { "treasury": 170, "ore": 8, "prestige": 4 },
+        "effects": { "treasuryYield": 12, "recruitBonus": 1 }
+      },
+      {
+        "id": "guest_cave",
+        "name": "客卿洞府",
+        "description": "供客卿闭关，提升修行与招募。",
+        "maxLevel": 3,
+        "upgradeCost": { "treasury": 180, "herbs": 8, "prestige": 5 },
+        "effects": { "cultivationBonus": 0.02, "recruitBonus": 3 }
+      }
+    ]
+  }
+]

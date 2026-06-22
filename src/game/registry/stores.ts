@@ -14,7 +14,7 @@ import type {
   TechniqueTraitDef, TechniqueInstance,
   AscensionDef,
   RankingDimensionDef, DestinyDef, TalentDef, TalentTreeNodeDef,
-  BountyTemplateDef, SecretRealmDef, EnlightenmentInsightDef,
+  BountyTemplateDef, SecretRealmDef, EnlightenmentInsightDef, SectDef,
 } from '../types';
 import type { AchievementDef } from '../achievement/types';
 
@@ -61,6 +61,7 @@ export const talentTreeNodeRegistry = new Map<string, TalentTreeNodeDef>();
 export const bountyTemplateRegistry = new Map<string, BountyTemplateDef>();
 export const secretRealmRegistry = new Map<string, SecretRealmDef>();
 export const enlightenmentInsightRegistry = new Map<string, EnlightenmentInsightDef>();
+export const sectRegistry = new Map<string, SectDef>();
 
 /** 清空所有注册表（切换 DLC 前调用） */
 export function clearAllRegistries(): void {
@@ -110,4 +111,5 @@ export function clearAllRegistries(): void {
   bountyTemplateRegistry.clear();
   secretRealmRegistry.clear();
   enlightenmentInsightRegistry.clear();
+  sectRegistry.clear();
 }

@@ -77,6 +77,36 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
         const enlightenment = (prev.systems.enlightenment ?? {}) as Record<string, unknown>;
         return { ...prev, systems: { ...prev.systems, enlightenment: { ...enlightenment, activeBuffs: [] } } };
       }
+      if (key === '__sectAddContribution') {
+        const sect = (prev.systems.sect ?? {}) as Record<string, unknown>;
+        const current = (sect.contribution as number | undefined) ?? 0;
+        const total = (sect.totalContribution as number | undefined) ?? 0;
+        return { ...prev, systems: { ...prev.systems, sect: { ...sect, contribution: current + value, totalContribution: total + value } } };
+      }
+      if (key === '__sectAddResources') {
+        const sect = (prev.systems.sect ?? {}) as Record<string, unknown>;
+        const management = (sect.management ?? {}) as Record<string, unknown>;
+        const resources = (management.resources ?? {}) as Record<string, number>;
+        return {
+          ...prev,
+          systems: {
+            ...prev.systems,
+            sect: {
+              ...sect,
+              management: {
+                ...management,
+                resources: {
+                  treasury: (resources.treasury ?? 0) + value,
+                  herbs: (resources.herbs ?? 0) + value,
+                  ore: (resources.ore ?? 0) + value,
+                  morale: Math.min(100, (resources.morale ?? 50) + 10),
+                  prestige: (resources.prestige ?? 0) + Math.floor(value / 20),
+                },
+              },
+            },
+          },
+        };
+      }
       const p = { ...prev };
       (p as unknown as Record<string, number>)[key] = value;
       if (RECALC_KEYS.has(key)) {

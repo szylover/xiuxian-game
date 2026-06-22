@@ -27,3 +27,4 @@ export { BOUNTY_TEXTS } from './bounty';
 export { SECRET_REALM_TEXTS } from './secret-realm';
 export { KARMA_TEXTS, ALIGNMENT_CN } from './karma';
 export { ENLIGHTENMENT_TEXTS } from './enlightenment';
+export { SECT_TEXTS } from './sect';

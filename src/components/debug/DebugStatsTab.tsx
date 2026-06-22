@@ -13,7 +13,8 @@ import { getBountyState } from '../../game/bounty';
 import { getSecretRealmState } from '../../game/secret-realm';
 import { getAlignment, getKarmaTitle, getKarmaState } from '../../game/karma';
 import { getEnlightenmentState } from '../../game/enlightenment';
-import { DESTINY_TEXTS, UI_LABELS, KARMA_TEXTS, ALIGNMENT_CN, ENLIGHTENMENT_TEXTS } from '../../data/texts';
+import { getSectState } from '../../game/sect';
+import { DESTINY_TEXTS, UI_LABELS, KARMA_TEXTS, ALIGNMENT_CN, ENLIGHTENMENT_TEXTS, SECT_TEXTS } from '../../data/texts';
 import './DebugStatsTab.css';
 
 // 可编辑数值行
@@ -166,6 +167,25 @@ export default function DebugStatsTab({ player, onSetStat, onFullRestore, onDebu
         <div className="debug-btns debug-btns-wrap">
           <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__enlightenmentAddInsight', 1)}>{ENLIGHTENMENT_TEXTS.debug.addInsight}</button>
           <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__enlightenmentClearBuffs', 1)}>{ENLIGHTENMENT_TEXTS.debug.clearBuffs}</button>
+        </div>
+      </div>
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{SECT_TEXTS.panel.managementTitle}</span>
+        <div className="debug-tracker-grid">
+          {(() => {
+            const state = getSectState(player);
+            return (
+              <div className="debug-tracker-dim">
+                {SECT_TEXTS.panel.contribution(state.contribution, state.totalContribution)}
+                {state.management?.active ? ` | ${SECT_TEXTS.panel.resourceLine(state.management.resources.treasury, state.management.resources.herbs, state.management.resources.ore, state.management.resources.morale, state.management.resources.prestige)}` : ''}
+              </div>
+            );
+          })()}
+        </div>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__sectAddContribution', 200)}>{SECT_TEXTS.reward.contribution(200)}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__sectAddResources', 200)}>{SECT_TEXTS.panel.resourcesTitle}</button>
         </div>
       </div>
 

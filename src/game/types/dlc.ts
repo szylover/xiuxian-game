@@ -19,6 +19,7 @@ import type { DestinyDef, TalentDef, TalentTreeNodeDef } from './destiny';
 import type { BountyTemplateDef } from './bounty';
 import type { SecretRealmDef } from './secret-realm';
 import type { EnlightenmentInsightDef } from './enlightenment';
+import type { SectDef } from './sect';
 import type {
   EventTemplate,
   VariablePool,
@@ -77,4 +78,5 @@ export interface DLCPack {
   bountyTemplates?: BountyTemplateDef[];          // #117 悬赏模板
   secretRealms?: SecretRealmDef[];                // #95 秘境定义
   enlightenmentInsights?: EnlightenmentInsightDef[]; // #112 悟道顿悟内容
+  sects?: SectDef[];                          // #99/#116 门派与宗门管理内容
 }

@@ -25,13 +25,14 @@ import ChroniclePanel from '../panels/ChroniclePanel';
 import RankingPanel from '../panels/RankingPanel';
 import TalentPanel from '../panels/TalentPanel';
 import EnlightenmentPanel from '../panels/EnlightenmentPanel';
+import SectPanel from '../panels/SectPanel';
 import { UI_LABELS } from '../../data/texts/ui-labels';
 
 // 'status' panel is rendered by LeftPanel, so excluded from this config
 const PANEL_WIDTHS: Partial<Record<PanelKey, number>> = {
   inventory: 380, shop: 380, technique: 400, divine: 420,
   crafting: 380, equipment: 380, achievement: 420, map: 420, npc: 380,
-  quest: 400, bounty: 420, secretRealm: 440, chronicle: 420, ranking: 520, talent: 560, enlightenment: 500,
+  quest: 400, bounty: 420, secretRealm: 440, chronicle: 420, ranking: 520, talent: 560, enlightenment: 500, sect: 520,
 };
 
 interface RightPanelProps {
@@ -54,6 +55,16 @@ interface RightPanelProps {
   onUnlockTalentNode: (nodeId: string) => void;
   onContemplateEnlightenment: () => void;
   onTriggerEnlightenment: () => void;
+  onJoinSect: (sectId: string) => void;
+  onClaimSectStipend: () => void;
+  onAdvanceSectRank: () => void;
+  onCompleteSectMission: (missionId: string) => void;
+  onBuySectStoreItem: (itemId: string) => void;
+  onFoundSectManagement: () => void;
+  onRecruitSectMember: () => void;
+  onCollectSectYield: () => void;
+  onUpgradeSectFacility: (facilityId: string) => void;
+  onAssignSectMemberTask: (memberId: string, task: import('../../game/types').SectMemberState['task']) => void;
   onTravel: (regionId: string) => void;
   onMeetNpc: (npcId: string) => void;
   onGiveGift: (npcId: string, itemId: string) => void;
@@ -84,6 +95,8 @@ export default function RightPanel({
   onLearnTechnique, onPracticeTechnique, onActivateTechnique,
   onLearnDivineArt, onActivateDivineArt, onDeactivateDivineArt, onUnlockTalentNode,
   onContemplateEnlightenment, onTriggerEnlightenment,
+  onJoinSect, onClaimSectStipend, onAdvanceSectRank, onCompleteSectMission, onBuySectStoreItem,
+  onFoundSectManagement, onRecruitSectMember, onCollectSectYield, onUpgradeSectFacility, onAssignSectMemberTask,
   onTravel,
   onMeetNpc, onGiveGift,
   onAcceptQuest, onAbandonQuest, onDeliverQuestItem, onTrackQuest,
@@ -124,6 +137,7 @@ export default function RightPanel({
           {activePanel === 'ranking' && <RankingPanel player={player} />}
           {activePanel === 'talent' && <TalentPanel player={player} onUnlockNode={onUnlockTalentNode} />}
           {activePanel === 'enlightenment' && <EnlightenmentPanel player={player} onContemplate={onContemplateEnlightenment} onTrigger={onTriggerEnlightenment} />}
+          {activePanel === 'sect' && <SectPanel player={player} onJoinSect={onJoinSect} onClaimStipend={onClaimSectStipend} onAdvanceRank={onAdvanceSectRank} onCompleteMission={onCompleteSectMission} onBuyStoreItem={onBuySectStoreItem} onFoundManagement={onFoundSectManagement} onRecruitMember={onRecruitSectMember} onCollectYield={onCollectSectYield} onUpgradeFacility={onUpgradeSectFacility} onAssignMemberTask={onAssignSectMemberTask} />}
         </FloatingPanel>
       )}
     </>
