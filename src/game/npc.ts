@@ -9,6 +9,7 @@ import type { Combatant } from './combat/types';
 import { getAllNpcDefs, getNpcDef, getItemDef } from './registry';
 import { getCurrentRegion, getMaxCultivationLevel } from './map';
 import { hasItem, removeItem } from './inventory';
+import { calcAffinityKarmaModifier } from './karma';
 
 // ── 默认状态 ──
 
@@ -80,7 +81,8 @@ export function changeAffinity(
   const rel = state.relations[npcId] ?? getRelation(player, npcId);
   const maxAffinity = npcDef.maxAffinity ?? 100;
   const oldLevel = rel.relationLevel;
-  const newAffinity = Math.max(-100, Math.min(maxAffinity, rel.affinity + delta));
+  const effectiveDelta = calcAffinityKarmaModifier(player, npcDef, delta);
+  const newAffinity = Math.max(-100, Math.min(maxAffinity, rel.affinity + effectiveDelta));
   const newLevel = calcRelationLevel(newAffinity);
 
   const updatedRel: NpcRelation = {
@@ -96,8 +98,8 @@ export function changeAffinity(
     relations: { ...state.relations, [npcId]: updatedRel },
   };
 
-  const sign = delta >= 0 ? '+' : '';
-  let msg = `${npcDef.emoji} ${npcDef.name} 好感度 ${sign}${delta}（${newAffinity}）`;
+  const sign = effectiveDelta >= 0 ? '+' : '';
+  let msg = `${npcDef.emoji} ${npcDef.name} 好感度 ${sign}${effectiveDelta}（${newAffinity}）`;
   if (oldLevel !== newLevel) {
     msg += ` → 关系变为【${RELATION_CN[newLevel]}】`;
   }

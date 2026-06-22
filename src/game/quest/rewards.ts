@@ -6,8 +6,9 @@ import type { Player } from '../player';
 import type { QuestReward } from '../types';
 import { addItem } from '../inventory';
 import { getItemDef } from '../registry';
-import { QUEST_TEXTS } from '../../data/texts/quest';
 import { ATTR_NAMES } from '../../data/texts/common';
+import { changeKarma } from '../karma';
+import { QUEST_TEXTS } from '../../data/texts/quest';
 
 export function applyReward(player: Player, reward: QuestReward | undefined): { player: Player; logs: string[] } {
   if (!reward) return { player, logs: [] };
@@ -38,6 +39,11 @@ export function applyReward(player: Player, reward: QuestReward | undefined): { 
         logs.push(QUEST_TEXTS.rewardStat(cnName, value));
       }
     }
+  }
+  if (reward.karmaChange) {
+    const result = changeKarma(p, reward.karmaChange, QUEST_TEXTS.karmaReason);
+    p = result.player;
+    logs.push(...result.logs);
   }
 
   return { player: p, logs };

@@ -24,13 +24,14 @@ import SecretRealmPanel from '../panels/SecretRealmPanel';
 import ChroniclePanel from '../panels/ChroniclePanel';
 import RankingPanel from '../panels/RankingPanel';
 import TalentPanel from '../panels/TalentPanel';
+import EnlightenmentPanel from '../panels/EnlightenmentPanel';
 import { UI_LABELS } from '../../data/texts/ui-labels';
 
 // 'status' panel is rendered by LeftPanel, so excluded from this config
 const PANEL_WIDTHS: Partial<Record<PanelKey, number>> = {
   inventory: 380, shop: 380, technique: 400, divine: 420,
   crafting: 380, equipment: 380, achievement: 420, map: 420, npc: 380,
-  quest: 400, bounty: 420, secretRealm: 440, chronicle: 420, ranking: 520, talent: 560,
+  quest: 400, bounty: 420, secretRealm: 440, chronicle: 420, ranking: 520, talent: 560, enlightenment: 500,
 };
 
 interface RightPanelProps {
@@ -51,6 +52,8 @@ interface RightPanelProps {
   onActivateDivineArt: (artId: string) => void;
   onDeactivateDivineArt: () => void;
   onUnlockTalentNode: (nodeId: string) => void;
+  onContemplateEnlightenment: () => void;
+  onTriggerEnlightenment: () => void;
   onTravel: (regionId: string) => void;
   onMeetNpc: (npcId: string) => void;
   onGiveGift: (npcId: string, itemId: string) => void;
@@ -80,6 +83,7 @@ export default function RightPanel({
   onUseItem, onCraft, onSmith, onEquip, onUnequip, onBuy, onSell,
   onLearnTechnique, onPracticeTechnique, onActivateTechnique,
   onLearnDivineArt, onActivateDivineArt, onDeactivateDivineArt, onUnlockTalentNode,
+  onContemplateEnlightenment, onTriggerEnlightenment,
   onTravel,
   onMeetNpc, onGiveGift,
   onAcceptQuest, onAbandonQuest, onDeliverQuestItem, onTrackQuest,
@@ -119,6 +123,7 @@ export default function RightPanel({
           {activePanel === 'chronicle' && <ChroniclePanel chronicle={chronicle} />}
           {activePanel === 'ranking' && <RankingPanel player={player} />}
           {activePanel === 'talent' && <TalentPanel player={player} onUnlockNode={onUnlockTalentNode} />}
+          {activePanel === 'enlightenment' && <EnlightenmentPanel player={player} onContemplate={onContemplateEnlightenment} onTrigger={onTriggerEnlightenment} />}
         </FloatingPanel>
       )}
     </>

@@ -7,6 +7,7 @@ import { rollSpiritRoots } from '../spirit-root';
 import type { PlayerSpiritRoots } from '../spirit-root';
 import type { Player, Aptitudes } from './types';
 import { rollDestinyId, setDestinyTalentState } from '../destiny';
+import { getDestinyDef } from '../registry';
 
 /** 建角色时预先随机好的核心属性（可用于UI展示+重掷） */
 export interface PreviewRoll {
@@ -145,6 +146,7 @@ export function createPlayer(options: CreatePlayerOptions): Player {
     luck:          options.preview?.luck          ?? rollInnateAttr(),
     comprehension: options.preview?.comprehension ?? rollInnateAttr(),
     charisma:      options.preview?.charisma      ?? rollInnateAttr(),
+    karma: getDestinyDef(destinyId ?? '')?.initialKarma ?? 0,
     aptitudes,
     spiritRoots,
     gold: 0, inventory: [], inventoryCapacity: 20,
@@ -163,4 +165,3 @@ export function createPlayer(options: CreatePlayerOptions): Player {
 
   return setDestinyTalentState(player, { talentPoints: 0, unlockedNodeIds: [], acquiredTalentIds: [] });
 }
-

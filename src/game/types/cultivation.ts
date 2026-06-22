@@ -59,6 +59,8 @@ export interface TechniqueDef {
   requiredSpiritRoot?: import('../spirit-root').SpiritRootType; // 学习门槛（T0056）：必须拥有此灵根才能习得
   bodyExpRate?: number;                     // T0059 体修修为系数（0-1，修炼此功法时按此比例给予体修修为）
   levelBottlenecks?: number[];               // T0064 哪些等级会触发瓶颈
+  requiredAlignment?: import('./karma').Alignment;
+  karmaShift?: number;
 }
 
 // ── 气修境界定义（T0058）──

@@ -69,6 +69,14 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
         const secretRealm = (prev.systems.secretRealm ?? {}) as Record<string, unknown>;
         return { ...prev, systems: { ...prev.systems, secretRealm: { ...secretRealm, cooldowns: {} } } };
       }
+      if (key === '__enlightenmentAddInsight') {
+        const enlightenment = (prev.systems.enlightenment ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, enlightenment: { ...enlightenment, insightPoints: ((enlightenment.insightPoints as number | undefined) ?? 0) + value } } };
+      }
+      if (key === '__enlightenmentClearBuffs') {
+        const enlightenment = (prev.systems.enlightenment ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, enlightenment: { ...enlightenment, activeBuffs: [] } } };
+      }
       const p = { ...prev };
       (p as unknown as Record<string, number>)[key] = value;
       if (RECALC_KEYS.has(key)) {

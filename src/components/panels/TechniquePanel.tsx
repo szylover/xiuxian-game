@@ -13,6 +13,8 @@ import { RARITY_COLORS, SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS } 
 import type { TechniqueRarity } from '../../game/registry';
 import { TECHNIQUE_QUALITY_CONFIG } from '../../game/procedural';
 import { useState } from 'react';
+import { getAlignment } from '../../game/karma';
+import { ALIGNMENT_CN, KARMA_TEXTS } from '../../data/texts';
 
 const TECHNIQUE_TYPE_CN: Record<string, string> = {
   sword: '剑法', blade: '刀法', fist: '拳法',
@@ -53,7 +55,8 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
     ? learnable.filter(def => {
         const hasRequired = !def.requiredSpiritRoot
           || player.spiritRoots?.roots.some(r => r.type === def.requiredSpiritRoot);
-        return hasRequired;
+        const alignmentReady = !def.requiredAlignment || getAlignment(player.karma ?? 0) === def.requiredAlignment;
+        return hasRequired && alignmentReady;
       })
     : learnable;
 
@@ -217,10 +220,12 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                 : undefined;
               const hasRequired = !def.requiredSpiritRoot
                 || player.spiritRoots?.roots.some(r => r.type === def.requiredSpiritRoot);
+              const alignmentReady = !def.requiredAlignment || getAlignment(player.karma ?? 0) === def.requiredAlignment;
+              const canLearn = hasRequired && alignmentReady;
               return (
                 <div
                   key={def.id}
-                  className={`technique-card technique-card-colored technique-learnable ${!hasRequired ? 'technique-locked' : ''}`}
+                  className={`technique-card technique-card-colored technique-learnable ${!canLearn ? 'technique-locked' : ''}`}
                   style={{ '--card-accent-color': RARITY_COLORS[def.rarity as TechniqueRarity] || '#9E9E9E' } as React.CSSProperties}
                 >
                   <div className="technique-header">
@@ -246,6 +251,11 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                       {hasRequired ? '✅' : '🔒'} 需要{SPIRIT_ROOT_ICONS[def.requiredSpiritRoot]}{SPIRIT_ROOT_CN[def.requiredSpiritRoot]}灵根
                     </div>
                   )}
+                  {def.requiredAlignment && (
+                    <div className={`technique-root-req ${alignmentReady ? 'technique-root-met' : 'technique-root-unmet'}`}>
+                      {alignmentReady ? '✅' : '🔒'} {KARMA_TEXTS.logs.techniqueGate(ALIGNMENT_CN[def.requiredAlignment])}
+                    </div>
+                  )}
                   <div className="technique-desc">{def.description}</div>
                   <div className="technique-bonus">
                     每级：{formatBonus(def)} ・ 最大 Lv.{effectiveMax}
@@ -265,10 +275,10 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
                   <button
                     className="btn btn-technique-learn"
                     onClick={() => onLearn(def.id)}
-                    disabled={!hasRequired}
-                    title={!hasRequired ? `需要${SPIRIT_ROOT_CN[def.requiredSpiritRoot!]}灵根才能学习` : undefined}
+                    disabled={!canLearn}
+                    title={!canLearn ? (def.requiredAlignment && !alignmentReady ? KARMA_TEXTS.logs.techniqueGate(ALIGNMENT_CN[def.requiredAlignment]) : `需要${SPIRIT_ROOT_CN[def.requiredSpiritRoot!]}灵根才能学习`) : undefined}
                   >
-                    {hasRequired ? '📖 学习' : `🔒 需要${SPIRIT_ROOT_CN[def.requiredSpiritRoot!]}灵根`}
+                    {canLearn ? '📖 学习' : '🔒 条件不足'}
                   </button>
                 </div>
               );
@@ -343,4 +353,3 @@ function TraitSection({ instanceId }: { instanceId?: string }) {
     </div>
   );
 }
-

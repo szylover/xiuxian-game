@@ -37,6 +37,8 @@ import { ensureDestinyTalentState } from '../game/destiny';
 import { getDestinyDef } from '../game/registry';
 import { DESTINY_TEXTS } from '../data/texts';
 import { ensureBountyBoard } from '../game/bounty';
+import { normalizeKarmaPlayer, tickKarmaDecay } from '../game/karma';
+import { tickEnlightenmentBuffs } from '../game/enlightenment';
 
 // Re-export types so existing imports still work
 export type { CombatModalState, DeathModalState } from './useCombatModal';
@@ -94,7 +96,7 @@ export function useGameEngine(
     const slotIndex = options.slotIndex ?? 0;
     currentSlotRef.current = slotIndex;
     let p = createPlayer({ ...options, enabledDLCs: dlcIds });
-    p = ensureDestinyTalentState(p);
+    p = ensureDestinyTalentState(normalizeKarmaPlayer(p));
     p = ensureBountyBoard(refreshRankingState(p, true), true);
     const rootDisplay = getSpiritRootDisplay(p.spiritRoots);
     writeSaveSlot(slotIndex, p);
@@ -136,7 +138,7 @@ export function useGameEngine(
       restoreGeneratedEquips(withRegions);
       // T0073: 恢复程序化功法实例到全局查询表
       restoreTechniqueInstances(withRegions);
-      const withDestiny = recalcStats(ensureDestinyTalentState(withRegions));
+      const withDestiny = recalcStats(ensureDestinyTalentState(normalizeKarmaPlayer(withRegions)));
       const withRankings = ensureBountyBoard(refreshRankingState(withDestiny, true));
       setPlayer(withRankings);
       setGameOver(false);
@@ -206,6 +208,7 @@ export function useGameEngine(
       gameYear: newYear,
       gameMonth: newMonth,
     };
+    updated = normalizeKarmaPlayer(updated);
 
     // T0040: 心情低迷追踪
     if (updated.mood <= 10) {
@@ -297,6 +300,11 @@ export function useGameEngine(
       updated = tickAffinityDecay(updated);
     }
 
+    updated = tickEnlightenmentBuffs(updated);
+    const karmaDecay = tickKarmaDecay(updated);
+    updated = karmaDecay.player;
+    for (const log of karmaDecay.logs) addLog(log, 'system');
+
     updated = refreshRankingState(updated);
     updated = ensureBountyBoard(updated);
 
@@ -346,6 +354,7 @@ export function useGameEngine(
     acceptBounty, claimBounty, refreshBounties,
     startRealm, advanceRealm, finishRealm,
     startDialogue, dialogueSelectChoice, dialogueAdvance,
+    contemplateEnlightenment, triggerEnlightenment,
   } = useSystemActions({
     player, addLog, setPlayer, setGameOver, setGameOverReason, setDeathModal,
     chronicleHooks: { recordEvent: chronicle.recordEvent, syncSnapshot: chronicle.syncSnapshot },
@@ -448,6 +457,8 @@ export function useGameEngine(
     startDialogue,
     dialogueSelectChoice,
     dialogueAdvance,
+    contemplateEnlightenment,
+    triggerEnlightenment,
     toast,
     dismissToast,
     combatModal,

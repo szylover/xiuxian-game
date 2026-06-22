@@ -15,7 +15,7 @@ import {
   monsterTemplateRegistry, mutationDefRegistry,
   techniqueTraitRegistry, ascensionRegistry, rankingDimensionRegistry,
   destinyRegistry, talentRegistry, talentTreeNodeRegistry,
-  bountyTemplateRegistry, secretRealmRegistry,
+  bountyTemplateRegistry, secretRealmRegistry, enlightenmentInsightRegistry,
 } from './stores';
 
 export function registerDLC(pack: DLCPack): void {
@@ -61,6 +61,7 @@ export function registerDLC(pack: DLCPack): void {
   if (pack.talentTreeNodes) for (const n of pack.talentTreeNodes) talentTreeNodeRegistry.set(n.id, n);
   if (pack.bountyTemplates) for (const t of pack.bountyTemplates) bountyTemplateRegistry.set(t.id, t);
   if (pack.secretRealms) for (const r of pack.secretRealms) secretRealmRegistry.set(r.id, r);
+  if (pack.enlightenmentInsights) for (const i of pack.enlightenmentInsights) enlightenmentInsightRegistry.set(i.id, i);
 }
 
 export function unregisterDLC(packId: string): void {
@@ -103,6 +104,7 @@ export function unregisterDLC(packId: string): void {
   if (pack.talentTreeNodes) for (const n of pack.talentTreeNodes) talentTreeNodeRegistry.delete(n.id);
   if (pack.bountyTemplates) for (const t of pack.bountyTemplates) bountyTemplateRegistry.delete(t.id);
   if (pack.secretRealms) for (const r of pack.secretRealms) secretRealmRegistry.delete(r.id);
+  if (pack.enlightenmentInsights) for (const i of pack.enlightenmentInsights) enlightenmentInsightRegistry.delete(i.id);
   dlcRegistry.delete(packId);
 }
 

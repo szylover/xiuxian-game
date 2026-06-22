@@ -3,6 +3,7 @@
 // ============================================================
 
 export const DIALOGUE_TEXTS = {
+  karmaReason: '对话抉择',
   // 系统提示
   noDialogueAvailable: '当前没有新的对话内容。',
   dialogueStarted: (npcName: string) => `💬 ${npcName} 与你交谈——`,

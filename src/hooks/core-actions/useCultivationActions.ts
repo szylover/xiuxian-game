@@ -11,7 +11,9 @@ import type { LogCategory } from '../useGameLog';
 import { COMBAT_TEXTS } from '../../data/texts/combat';
 import { CULTIVATION_TEXTS } from '../../data/texts/cultivation';
 import { playSound } from '../../game/audio';
-import { getDestinyTalentEffects, ensureDestinyTalentState } from '../../game/destiny';
+import { ensureDestinyTalentState } from '../../game/destiny';
+import { gainComprehension, getEnlightenmentEffects, tryTriggerEnlightenment } from '../../game/enlightenment';
+import { changeKarma } from '../../game/karma';
 
 export function useCultivationActions(
   deps: Pick<CoreActionDeps, 'addLog' | 'setPlayer' | 'advanceTime' | 'canAct'>,
@@ -47,11 +49,17 @@ export function useCultivationActions(
       const compBonus = 1 + p.comprehension / 50;
       const cultivationMult = p.spiritRoots?.cultivationMultiplier ?? getSpiritRootGrade(p.aptitudes).multiplier;
       const moodBonus = 0.5 + (p.mood / 100);
-      const expGain = Math.floor(BASE_CULTIVATE_EXP * compBonus * cultivationMult * moodBonus);
+      const enlightenmentBonus = getEnlightenmentEffects(p).cultivationSpeedBonus ?? 0;
+      const expGain = Math.floor(BASE_CULTIVATE_EXP * compBonus * cultivationMult * moodBonus * (1 + enlightenmentBonus));
       p.exp += expGain;
 
       // T0062 根据激活功法类型决定锄体/修炼模式
       const activeDef = p.activeTechniqueId ? getTechniqueDef(p.activeTechniqueId) : null;
+      if (activeDef?.karmaShift) {
+        const karmaResult = changeKarma(p, activeDef.karmaShift, activeDef.name);
+        p = karmaResult.player;
+        queueLogs(karmaResult.logs, 'system');
+      }
       const bodyRate = activeDef?.bodyExpRate ?? 0;
       let bodyMsg = '';
 
@@ -97,9 +105,17 @@ export function useCultivationActions(
       p = questResult.player;
       queueLogs(questResult.logs, 'system');
 
+      const enlightenmentGain = gainComprehension(p, Math.max(4, Math.floor(expGain / 10)));
+      p = enlightenmentGain.player;
+
+      const enlightenmentTrigger = tryTriggerEnlightenment(p, expGain);
+      p = enlightenmentTrigger.player;
+
       p = advanceTime(p, 'cultivate');
 
       pendingRef.current = { msgs: [], categories: [] };
+      queueLogs(enlightenmentGain.logs, 'system');
+      queueLogs(enlightenmentTrigger.logs, 'adventure');
       if (isBodyMode) {
         queueLog(CULTIVATION_TEXTS.cultivateBody(expGain) + bodyMsg, 'system');
       } else {

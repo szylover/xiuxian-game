@@ -23,6 +23,7 @@ import { useDialogueActions } from './useDialogueActions';
 import { useTalentTreeActions } from './useTalentTreeActions';
 import { useBountyActions } from './useBountyActions';
 import { useSecretRealmActions } from './useSecretRealmActions';
+import { useEnlightenmentActions } from './useEnlightenmentActions';
 
 export type { SystemActionDeps, ChronicleHooks } from './types';
 
@@ -62,6 +63,7 @@ export function useSystemActions(deps: SystemActionDeps) {
   const talentTreeActions = useTalentTreeActions(ctx);
   const bountyActions = useBountyActions(ctx);
   const secretRealmActions = useSecretRealmActions(ctx);
+  const enlightenmentActions = useEnlightenmentActions(ctx);
 
   return {
     ...inventoryActions,
@@ -80,5 +82,6 @@ export function useSystemActions(deps: SystemActionDeps) {
     ...talentTreeActions,
     ...bountyActions,
     ...secretRealmActions,
+    ...enlightenmentActions,
   };
 }

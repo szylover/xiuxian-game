@@ -35,6 +35,7 @@ export type {
   DestinyRarity, DestinyTalentStatKey, DestinyTalentEffect, DestinyDef, TalentDef, TalentTreeNodeDef, DestinyTalentState, UnlockTalentNodeResult,
   BountyObjectiveType, BountyObjectiveDef, BountyTemplateDef, GeneratedBounty, ActiveBounty, BountySystemState,
   SecretRealmStageType, SecretRealmStageDef, SecretRealmDef, SecretRealmRun, SecretRealmSystemState,
+  Alignment, KarmaSystemState, EnlightenmentInsightDef, EnlightenmentState, EnlightenmentBuff,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
@@ -79,6 +80,7 @@ export {
   getDestinyDef, getAllDestinyDefs, getTalentDef, getAllTalentDefs, getTalentTreeNodeDef, getAllTalentTreeNodeDefs,
   getBountyTemplateDef, getAllBountyTemplateDefs,
   getSecretRealmDef, getAllSecretRealmDefs,
+  getEnlightenmentInsightDef, getAllEnlightenmentInsightDefs,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

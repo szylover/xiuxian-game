@@ -1,0 +1,118 @@
+.enlightenment-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  color: var(--color-text-primary);
+}
+
+.enlightenment-intro,
+.enlightenment-empty,
+.enlightenment-card-desc,
+.enlightenment-card-meta {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+.enlightenment-section {
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-medium);
+  padding: var(--spacing-lg);
+}
+
+.enlightenment-section-title,
+.enlightenment-card-title {
+  color: var(--color-gold);
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+}
+
+.enlightenment-route {
+  color: var(--color-text-info);
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.enlightenment-progress {
+  height: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-bg-darkest);
+  border: 1px solid var(--color-border);
+  margin: var(--spacing-sm) 0;
+}
+
+.enlightenment-progress-fill {
+  width: var(--enlightenment-progress);
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-text-info), var(--color-gold));
+  transition: width var(--transition-base);
+}
+
+.enlightenment-points {
+  color: var(--color-text-success-light);
+  font-size: var(--font-size-sm);
+}
+
+.enlightenment-actions,
+.enlightenment-effects,
+.enlightenment-card-list {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.enlightenment-actions {
+  margin-top: var(--spacing-md);
+}
+
+.enlightenment-button {
+  border: 1px solid var(--color-border-gold);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-warm-medium);
+  color: var(--color-gold);
+  padding: var(--spacing-md) var(--spacing-lg);
+  cursor: pointer;
+}
+
+.enlightenment-button--secondary {
+  color: var(--color-text-info);
+  border-color: var(--color-border-light);
+  background: var(--color-bg-dark);
+}
+
+.enlightenment-card {
+  flex: 1 1 180px;
+  min-width: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-dark);
+  padding: var(--spacing-md);
+}
+
+.enlightenment-card--unlocked {
+  border-color: var(--color-border-gold);
+  box-shadow: var(--shadow-gold);
+}
+
+.enlightenment-card--locked {
+  opacity: 0.75;
+}
+
+.enlightenment-badge,
+.enlightenment-effect-tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  margin-left: var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  background: var(--color-bg-light);
+  color: var(--color-text-parchment);
+}
+
+.enlightenment-effect-tag {
+  margin-left: 0;
+  margin-top: var(--spacing-sm);
+}

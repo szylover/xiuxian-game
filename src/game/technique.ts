@@ -11,7 +11,9 @@ import { gainBodyRealmExp } from './body-cultivation';
 import { checkBottleneck, activateBottleneck, ensureBottleneckState, getActiveBottlenecks, tickPersistenceCultivation } from './bottleneck';
 import { TECHNIQUE_TEXTS } from '../data/texts/technique';
 import { SPIRIT_ROOT_CN } from '../data/texts/common';
+import { ALIGNMENT_CN, KARMA_TEXTS } from '../data/texts';
 import { generateTechniqueInstance, getTraitBonus } from './procedural';
+import { changeKarma, getAlignment } from './karma';
 
 // ── 功法类型 → 资质字段映射 ──
 const TYPE_APTITUDE_MAP: Record<string, keyof Player['aptitudes']> = {
@@ -63,6 +65,10 @@ export function learnTechnique(player: Player, techniqueId: string): { player: P
 
   if (player.realmIndex < def.minRealm) {
     return { player, message: TECHNIQUE_TEXTS.realmInsufficient(def.name) };
+  }
+
+  if (def.requiredAlignment && getAlignment(player.karma ?? 0) !== def.requiredAlignment) {
+    return { player, message: KARMA_TEXTS.logs.techniqueGate(ALIGNMENT_CN[def.requiredAlignment]) };
   }
 
   // T0056：检查灵根门槛
@@ -179,6 +185,7 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
 
   // T0059 体修修为（每条功法数据定义自己的 bodyExpRate，0 表示不给体修修为）
   let bodyExpMsg = '';
+  let karmaMsg = '';
   if (def.bodyExpRate && def.bodyExpRate > 0) {
     const baseBodyExp = Math.floor(gain * def.bodyExpRate);
     const { player: p2, message: btMsg, actualGain } = gainBodyRealmExp(p, baseBodyExp);
@@ -187,6 +194,11 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
       bodyExpMsg = TECHNIQUE_TEXTS.bodyExpGain(actualGain);
     }
     if (btMsg) bodyExpMsg += ` ${btMsg}`;
+  }
+  if (def.karmaShift) {
+    const karmaResult = changeKarma(p, def.karmaShift, def.name);
+    p = karmaResult.player;
+    karmaMsg = karmaResult.logs.length ? ` ${karmaResult.logs.join(' ')}` : '';
   }
 
   // T0064: 功法修炼也推进坚韧修炼进度
@@ -204,7 +216,7 @@ export function practiceTechnique(player: Player, techniqueId: string): { player
 
   return {
     player: p,
-    message: TECHNIQUE_TEXTS.practiced(def.name, gain, staminaCost, mpCost) + levelUpMsg + passiveUnlockMsg + bodyExpMsg + bottleneckMsg + persistenceMsg,
+    message: TECHNIQUE_TEXTS.practiced(def.name, gain, staminaCost, mpCost) + levelUpMsg + passiveUnlockMsg + bodyExpMsg + bottleneckMsg + persistenceMsg + karmaMsg,
   };
 }
 
@@ -330,4 +342,3 @@ export function calcAptitudeBonus(player: Player, def: TechniqueDef): number {
 
   return bonus;
 }
-

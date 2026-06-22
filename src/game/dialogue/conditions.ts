@@ -9,6 +9,7 @@ import { getCurrentRegion } from '../map';
 import { hasItem } from '../inventory';
 import { getQuestState } from '../quest';
 import { getDialogueState } from './state';
+import { getAlignment } from '../karma';
 
 export function checkDialogueCondition(player: Player, def: DialogueChainDef): boolean {
   const cond = def.condition;
@@ -20,6 +21,9 @@ export function checkDialogueCondition(player: Player, def: DialogueChainDef): b
   if (cond.minAffinity !== undefined && rel.affinity < cond.minAffinity) return false;
   if (cond.maxAffinity !== undefined && rel.affinity > cond.maxAffinity) return false;
   if (cond.minRealm !== undefined && player.realmIndex < cond.minRealm) return false;
+  if (cond.requiredAlignment && getAlignment(player.karma ?? 0) !== cond.requiredAlignment) return false;
+  if (cond.minKarma !== undefined && (player.karma ?? 0) < cond.minKarma) return false;
+  if (cond.maxKarma !== undefined && (player.karma ?? 0) > cond.maxKarma) return false;
   if (cond.maxRealm !== undefined && player.realmIndex > cond.maxRealm) return false;
 
   if (cond.relationLevel?.length) {
@@ -108,6 +112,10 @@ export function checkChoiceCondition(player: Player, npcId: string, cond?: Dialo
     const questState = getQuestState(player);
     if (!questState.activeQuests[cond.hasActiveQuest]) return false;
   }
+
+  if (cond.requiredAlignment && getAlignment(player.karma ?? 0) !== cond.requiredAlignment) return false;
+  if (cond.minKarma !== undefined && (player.karma ?? 0) < cond.minKarma) return false;
+  if (cond.maxKarma !== undefined && (player.karma ?? 0) > cond.maxKarma) return false;
 
   return true;
 }

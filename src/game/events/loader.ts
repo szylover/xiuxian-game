@@ -28,6 +28,7 @@ import { recalcStats } from '../player';
 import { CORE_ACHIEVEMENTS } from '../achievement/data';
 import { CORE_RANKING_DIMENSIONS } from '../ranking';
 import { CORE_DESTINIES, CORE_TALENTS, CORE_TALENT_TREE_NODES } from '../destiny';
+import { CORE_ENLIGHTENMENT_INSIGHTS } from '../../data/dlc/core/enlightenment';
 
 // ── 核心死亡触发条件 ──
 
@@ -343,6 +344,7 @@ export async function registerCoreEvents(): Promise<void> {
     talentTreeNodes: CORE_TALENT_TREE_NODES,
     bountyTemplates: coreBountiesJson as BountyTemplateDef[],
     secretRealms: coreSecretRealmsJson as SecretRealmDef[],
+    enlightenmentInsights: CORE_ENLIGHTENMENT_INSIGHTS,
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }

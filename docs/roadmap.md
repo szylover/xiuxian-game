@@ -33,7 +33,7 @@
 | [T0047](https://github.com/szylover/xiuxian-game/issues/110) | 命格天赋系统 | T0001 | [spec](specs/110-destiny-talent.md) | ✅ |
 | [#215](https://github.com/szylover/xiuxian-game/issues/215) | 天赋树 | T0047 | — | ✅ |
 | [T0056](https://github.com/szylover/xiuxian-game/issues/87) | 初始随机属性系统 | T0001 | — | ✅ |
-| [T0077](https://github.com/szylover/xiuxian-game/issues/198) | 正邪系统（善恶阵营 karma） | T0001 | [spec](specs/198-karma-alignment.md) | 📐 |
+| [T0077](https://github.com/szylover/xiuxian-game/issues/198) | 正邪系统（善恶阵营 karma） | T0001 | [spec](specs/198-karma-alignment.md) | ✅ |
 | [T0072](https://github.com/szylover/xiuxian-game/issues/183) | 程序化妖兽变体系统（境界缩放+属性变异） | T0003 | [spec](specs/T0072-procedural-monsters.md) | ✅ |
 
 ### 🏷️ 事件系统
@@ -68,7 +68,7 @@
 | [T0018](https://github.com/szylover/xiuxian-game/issues/74) | 技能战斗 | T0003, T0017 | [Spec](specs/T0018-skill-combat.md) | ✅ |
 | [T0019](https://github.com/szylover/xiuxian-game/issues/75) | 被动效果 | T0017 | [spec](specs/T0019-passive-effects.md) | ✅ |
 | [T0020](https://github.com/szylover/xiuxian-game/issues/76) | 神通（元素体系） | T0017, T0018 | [Spec](specs/T0020-divine-arts.md) | ✅ |
-| [T0049](https://github.com/szylover/xiuxian-game/issues/112) | 悟道顿悟系统 | T0002, T0017 | [spec](specs/112-enlightenment.md) | 📐 |
+| [T0049](https://github.com/szylover/xiuxian-game/issues/112) | 悟道顿悟系统 | T0002, T0017 | [spec](specs/112-enlightenment.md) | ✅ |
 | [T0075](https://github.com/szylover/xiuxian-game/issues/196) | 学习系统（功法/技能习得流程） | T0017 | [spec](specs/T0075-learning-system.md) | 📐 |
 | [T0073](https://github.com/szylover/xiuxian-game/issues/184) | 程序化功法词条系统（基础功法+随机被动词条） | T0017, T0019 | [spec](specs/T0073-procedural-techniques.md) | ✅ |
 | [T0059](https://github.com/szylover/xiuxian-game/issues/89) | 体修系统核心（体魄 · 体修境界 · 减伤） | T0001, T0003, T0017, T0019 | [spec](specs/T0059-body-cultivation.md) | ✅ |

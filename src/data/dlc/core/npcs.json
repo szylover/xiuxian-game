@@ -15,17 +15,34 @@
     "critResist": 15,
     "critDmgMultiplier": 1.5,
     "disposition": "friendly",
-    "roles": ["elder"],
+    "roles": [
+      "elder"
+    ],
     "personality": "gentle",
     "charisma": 80,
-    "regionTags": ["town"],
+    "regionTags": [
+      "town"
+    ],
     "minRealm": 0,
     "maxAffinity": 100,
     "affinityDecayRate": 2,
     "giftPreferences": {
-      "loved": ["core:enlightenment_pill", "core:spirit_jade"],
-      "liked": ["core:hp_pill", "core:mp_pill"],
-      "disliked": ["core:beast_blood"]
+      "loved": [
+        "core:enlightenment_pill",
+        "core:spirit_jade"
+      ],
+      "liked": [
+        "core:hp_pill",
+        "core:mp_pill"
+      ],
+      "disliked": [
+        "core:beast_blood"
+      ]
+    },
+    "alignment": "righteous",
+    "karmaAffinityModifier": {
+      "sameFaction": 1.3,
+      "oppositeFaction": 0.5
     }
   },
   {
@@ -44,17 +61,35 @@
     "critResist": 8,
     "critDmgMultiplier": 1.3,
     "disposition": "friendly",
-    "roles": ["alchemist"],
+    "roles": [
+      "alchemist"
+    ],
     "personality": "mysterious",
     "charisma": 65,
-    "regionTags": ["valley", "herb"],
+    "regionTags": [
+      "valley",
+      "herb"
+    ],
     "minRealm": 0,
     "maxAffinity": 100,
     "affinityDecayRate": 1,
     "giftPreferences": {
-      "loved": ["core:spirit_herb", "core:thousand_year_ginseng"],
-      "liked": ["core:spirit_stone_shard", "core:jade_slip"],
-      "disliked": ["core:iron_ore"]
+      "loved": [
+        "core:spirit_herb",
+        "core:thousand_year_ginseng"
+      ],
+      "liked": [
+        "core:spirit_stone_shard",
+        "core:jade_slip"
+      ],
+      "disliked": [
+        "core:iron_ore"
+      ]
+    },
+    "alignment": "righteous",
+    "karmaAffinityModifier": {
+      "sameFaction": 1.3,
+      "oppositeFaction": 0.5
     }
   },
   {
@@ -73,17 +108,35 @@
     "critResist": 5,
     "critDmgMultiplier": 1.6,
     "disposition": "neutral",
-    "roles": ["wanderer"],
+    "roles": [
+      "wanderer"
+    ],
     "personality": "hot_tempered",
     "charisma": 40,
-    "regionTags": ["mountain", "wilderness"],
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ],
     "minRealm": 0,
     "maxAffinity": 100,
     "affinityDecayRate": 3,
     "giftPreferences": {
-      "loved": ["core:beast_blood", "core:beast_core"],
-      "liked": ["core:hp_pill", "core:stamina_pill"],
-      "disliked": ["core:jade_slip"]
+      "loved": [
+        "core:beast_blood",
+        "core:beast_core"
+      ],
+      "liked": [
+        "core:hp_pill",
+        "core:stamina_pill"
+      ],
+      "disliked": [
+        "core:jade_slip"
+      ]
+    },
+    "alignment": "evil",
+    "karmaAffinityModifier": {
+      "sameFaction": 1.2,
+      "oppositeFaction": 0.6
     }
   },
   {
@@ -102,18 +155,30 @@
     "critResist": 2,
     "critDmgMultiplier": 1.2,
     "disposition": "friendly",
-    "roles": ["merchant"],
+    "roles": [
+      "merchant"
+    ],
     "personality": "cunning",
     "charisma": 75,
-    "regionTags": ["town"],
+    "regionTags": [
+      "town"
+    ],
     "minRealm": 0,
     "maxAffinity": 100,
     "affinityDecayRate": 1,
     "giftPreferences": {
-      "loved": ["core:spirit_jade", "core:gold_thread"],
-      "liked": ["core:spirit_stone_shard"],
-      "disliked": ["core:beast_blood"]
-    }
+      "loved": [
+        "core:spirit_jade",
+        "core:gold_thread"
+      ],
+      "liked": [
+        "core:spirit_stone_shard"
+      ],
+      "disliked": [
+        "core:beast_blood"
+      ]
+    },
+    "alignment": "neutral"
   },
   {
     "id": "core:npc_gate_guard",
@@ -131,17 +196,32 @@
     "critResist": 3,
     "critDmgMultiplier": 1.3,
     "disposition": "neutral",
-    "roles": ["guard"],
+    "roles": [
+      "guard"
+    ],
     "personality": "righteous",
     "charisma": 30,
-    "regionTags": ["town"],
+    "regionTags": [
+      "town"
+    ],
     "minRealm": 0,
     "maxAffinity": 100,
     "affinityDecayRate": 0,
     "giftPreferences": {
-      "loved": ["core:stamina_pill"],
-      "liked": ["core:hp_pill"],
-      "disliked": ["core:poison_herb"]
+      "loved": [
+        "core:stamina_pill"
+      ],
+      "liked": [
+        "core:hp_pill"
+      ],
+      "disliked": [
+        "core:poison_herb"
+      ]
+    },
+    "alignment": "righteous",
+    "karmaAffinityModifier": {
+      "sameFaction": 1.3,
+      "oppositeFaction": 0.5
     }
   },
   {
@@ -160,7 +240,9 @@
     "critResist": 7,
     "critDmgMultiplier": 1.5,
     "disposition": "neutral",
-    "roles": ["wanderer"],
+    "roles": [
+      "wanderer"
+    ],
     "personality": "cold",
     "charisma": 25,
     "regionTags": [],
@@ -168,10 +250,18 @@
     "maxAffinity": 100,
     "affinityDecayRate": 5,
     "giftPreferences": {
-      "loved": ["core:map_fragment", "core:jade_slip"],
-      "liked": ["core:spirit_stone_shard"],
-      "disliked": ["core:iron_ore"]
-    }
+      "loved": [
+        "core:map_fragment",
+        "core:jade_slip"
+      ],
+      "liked": [
+        "core:spirit_stone_shard"
+      ],
+      "disliked": [
+        "core:iron_ore"
+      ]
+    },
+    "alignment": "neutral"
   },
   {
     "id": "core:npc_mystic_sage",
@@ -189,16 +279,24 @@
     "critResist": 18,
     "critDmgMultiplier": 1.8,
     "disposition": "neutral",
-    "roles": ["elder"],
+    "roles": [
+      "elder"
+    ],
     "personality": "mysterious",
     "charisma": 90,
-    "regionTags": ["mystic"],
+    "regionTags": [
+      "mystic"
+    ],
     "minRealm": 3,
     "maxAffinity": 100,
     "affinityDecayRate": 0,
     "giftPreferences": {
-      "loved": ["core:enlightenment_pill"],
-      "liked": ["core:spirit_jade"],
+      "loved": [
+        "core:enlightenment_pill"
+      ],
+      "liked": [
+        "core:spirit_jade"
+      ],
       "disliked": []
     }
   },
@@ -218,17 +316,28 @@
     "critResist": 6,
     "critDmgMultiplier": 1.4,
     "disposition": "friendly",
-    "roles": ["smith"],
+    "roles": [
+      "smith"
+    ],
     "personality": "hot_tempered",
     "charisma": 35,
-    "regionTags": ["town"],
+    "regionTags": [
+      "town"
+    ],
     "minRealm": 0,
     "maxAffinity": 100,
     "affinityDecayRate": 2,
     "giftPreferences": {
-      "loved": ["core:iron_ore", "core:mithril_ore"],
-      "liked": ["core:spirit_stone_shard"],
-      "disliked": ["core:poison_herb"]
+      "loved": [
+        "core:iron_ore",
+        "core:mithril_ore"
+      ],
+      "liked": [
+        "core:spirit_stone_shard"
+      ],
+      "disliked": [
+        "core:poison_herb"
+      ]
     }
   },
   {
@@ -247,17 +356,29 @@
     "critResist": 4,
     "critDmgMultiplier": 1.7,
     "disposition": "hostile",
-    "roles": ["rival"],
+    "roles": [
+      "rival"
+    ],
     "personality": "cunning",
     "charisma": 15,
-    "regionTags": ["wasteland", "wilderness"],
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ],
     "minRealm": 0,
     "maxAffinity": 100,
     "affinityDecayRate": 0,
     "giftPreferences": {
-      "loved": ["core:spirit_jade", "core:gold_thread"],
-      "liked": ["core:spirit_stone_shard"],
-      "disliked": ["core:jade_slip"]
+      "loved": [
+        "core:spirit_jade",
+        "core:gold_thread"
+      ],
+      "liked": [
+        "core:spirit_stone_shard"
+      ],
+      "disliked": [
+        "core:jade_slip"
+      ]
     }
   },
   {
@@ -276,17 +397,30 @@
     "critResist": 12,
     "critDmgMultiplier": 1.5,
     "disposition": "neutral",
-    "roles": ["companion"],
+    "roles": [
+      "companion"
+    ],
     "personality": "gentle",
     "charisma": 95,
-    "regionTags": ["mystic"],
+    "regionTags": [
+      "mystic"
+    ],
     "minRealm": 3,
     "maxAffinity": 100,
     "affinityDecayRate": 1,
     "giftPreferences": {
-      "loved": ["core:spirit_jade", "core:enlightenment_pill"],
-      "liked": ["core:mp_pill", "core:spirit_herb"],
-      "disliked": ["core:beast_blood", "core:iron_ore"]
+      "loved": [
+        "core:spirit_jade",
+        "core:enlightenment_pill"
+      ],
+      "liked": [
+        "core:mp_pill",
+        "core:spirit_herb"
+      ],
+      "disliked": [
+        "core:beast_blood",
+        "core:iron_ore"
+      ]
     }
   }
 ]

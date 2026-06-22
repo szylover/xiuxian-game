@@ -12,6 +12,8 @@ import { REALMS } from './data';
 import { DIVINE_ARTS_TEXTS } from '../data/texts/divine-arts';
 import { COMBAT_TEXTS } from '../data/texts/combat';
 import { ELEMENT_CN } from '../data/texts/common';
+import { ALIGNMENT_CN, KARMA_TEXTS } from '../data/texts';
+import { getAlignment } from './karma';
 
 // ── 元素显示常量 ──
 
@@ -68,6 +70,10 @@ export function learnDivineArt(player: Player, artId: string): { player: Player;
   if (player.realmIndex < artDef.minRealm) {
     const realmName = REALMS[artDef.minRealm]?.name ?? `境界${artDef.minRealm}`;
     return { player, message: DIVINE_ARTS_TEXTS.realmInsufficient(realmName, artDef.name) };
+  }
+
+  if (artDef.requiredAlignment && getAlignment(player.karma ?? 0) !== artDef.requiredAlignment) {
+    return { player, message: KARMA_TEXTS.logs.divineGate(ALIGNMENT_CN[artDef.requiredAlignment]) };
   }
 
   const aptitude = (player.aptitudes as unknown as Record<string, number>)[artDef.element] ?? 0;
@@ -129,6 +135,7 @@ export function getLearnableDivineArts(player: Player): DivineArtDef[] {
   return getAllDivineArtDefs().filter(def => {
     if (learnedIds.has(def.id)) return false;
     if (player.realmIndex < def.minRealm) return false;
+    if (def.requiredAlignment && getAlignment(player.karma ?? 0) !== def.requiredAlignment) return false;
     const aptitude = (player.aptitudes as unknown as Record<string, number>)[def.element] ?? 0;
     if (aptitude < def.minAptitude) return false;
     return true;

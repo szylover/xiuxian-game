@@ -4,7 +4,7 @@
     "name": "基础剑法",
     "type": "sword",
     "rarity": "common",
-    "description": "入门剑法，剑走轻灵，适合初学者。",
+    "description": "青云正脉入门剑法，剑走轻灵，适合守正修心者。",
     "minRealm": 0,
     "maxLevel": 10,
     "expPerLevel": 50,
@@ -37,14 +37,16 @@
       "cooldown": 0,
       "triggerRate": 0.35
     },
-    "bodyExpRate": 0.2
+    "bodyExpRate": 0.2,
+    "requiredAlignment": "righteous",
+    "karmaShift": 1
   },
   {
     "id": "core:basic_blade",
     "name": "基础刀法",
     "type": "blade",
     "rarity": "common",
-    "description": "以力破巧，大开大合的入门刀法。",
+    "description": "杀伐入门刀法，以力破巧，大开大合，易染煞气。",
     "minRealm": 0,
     "maxLevel": 10,
     "expPerLevel": 50,
@@ -76,7 +78,9 @@
       "cooldown": 1,
       "triggerRate": 0.3
     },
-    "bodyExpRate": 0.4
+    "bodyExpRate": 0.4,
+    "requiredAlignment": "evil",
+    "karmaShift": -1
   },
   {
     "id": "core:basic_fist",
@@ -112,12 +116,12 @@
       "description": "拳拳相连，伤害可观。",
       "mpCost": 8,
       "staminaCost": 3,
-      "dmgMultiplier": 1.0,
+      "dmgMultiplier": 1,
       "hitCount": 3,
       "cooldown": 1,
       "triggerRate": 0.3
     },
-    "bodyExpRate": 1.0
+    "bodyExpRate": 1
   },
   {
     "id": "core:basic_palm",
@@ -163,7 +167,8 @@
         "duration": 1
       }
     },
-    "bodyExpRate": 0.6
+    "bodyExpRate": 0.6,
+    "karmaShift": 1
   },
   {
     "id": "core:basic_finger",
@@ -351,7 +356,7 @@
         "duration": 2
       }
     },
-    "bodyExpRate": 1.0
+    "bodyExpRate": 1
   },
   {
     "id": "core:thunder_blade",
@@ -394,7 +399,7 @@
       "description": "引天雷入刀，雷火灼烧。",
       "mpCost": 25,
       "staminaCost": 8,
-      "dmgMultiplier": 2.0,
+      "dmgMultiplier": 2,
       "hitCount": 1,
       "cooldown": 3,
       "triggerRate": 0.25,
@@ -447,7 +452,7 @@
       "description": "掌影重重，虚实难辨，连击五次。",
       "mpCost": 20,
       "staminaCost": 6,
-      "dmgMultiplier": 1.0,
+      "dmgMultiplier": 1,
       "hitCount": 5,
       "cooldown": 3,
       "triggerRate": 0.25
@@ -613,7 +618,7 @@
         "duration": 3
       }
     },
-    "bodyExpRate": 1.0
+    "bodyExpRate": 1
   },
   {
     "id": "core:water_sword",
@@ -711,7 +716,7 @@
       "description": "如泰山压顶，一掌压制敌人。",
       "mpCost": 20,
       "staminaCost": 7,
-      "dmgMultiplier": 2.0,
+      "dmgMultiplier": 2,
       "hitCount": 1,
       "cooldown": 3,
       "triggerRate": 0.28,
@@ -875,7 +880,7 @@
       "cooldown": 1,
       "triggerRate": 0.3
     },
-    "bodyExpRate": 1.0
+    "bodyExpRate": 1
   },
   {
     "id": "core:iron_shirt",
@@ -917,12 +922,12 @@
       "description": "全身内劲外放，减少本次受到的伤害并反击。",
       "mpCost": 8,
       "staminaCost": 4,
-      "dmgMultiplier": 1.0,
+      "dmgMultiplier": 1,
       "hitCount": 1,
       "cooldown": 1,
       "triggerRate": 0.3
     },
-    "bodyExpRate": 1.0
+    "bodyExpRate": 1
   },
   {
     "id": "core:tiger_roar_fist",
@@ -970,7 +975,7 @@
       "cooldown": 2,
       "triggerRate": 0.35
     },
-    "bodyExpRate": 1.0
+    "bodyExpRate": 1
   },
   {
     "id": "core:mountain_crush_fist",
@@ -1012,12 +1017,12 @@
       "description": "千钧一击，力贯山河，重创敌人。",
       "mpCost": 18,
       "staminaCost": 12,
-      "dmgMultiplier": 2.0,
+      "dmgMultiplier": 2,
       "hitCount": 1,
       "cooldown": 3,
       "triggerRate": 0.25
     },
-    "bodyExpRate": 1.0
+    "bodyExpRate": 1
   },
   {
     "id": "core:stone_body",
@@ -1069,7 +1074,7 @@
         "duration": 2
       }
     },
-    "bodyExpRate": 1.0
+    "bodyExpRate": 1
   },
   {
     "id": "core:eight_drunken_fists",
@@ -1117,7 +1122,7 @@
       "cooldown": 2,
       "triggerRate": 0.35
     },
-    "bodyExpRate": 1.0
+    "bodyExpRate": 1
   },
   {
     "id": "core:diamond_body_fist",
@@ -1170,7 +1175,7 @@
         "duration": 3
       }
     },
-    "bodyExpRate": 1.0
+    "bodyExpRate": 1
   },
   {
     "id": "core:dragon_elephant_fist",
@@ -1222,7 +1227,7 @@
         "duration": 3
       }
     },
-    "bodyExpRate": 1.0
+    "bodyExpRate": 1
   },
   {
     "id": "core:immortal_body_fist",
@@ -1265,7 +1270,7 @@
       "description": "以不灭之躯承受一击，蓄势反击，爆发双倍伤害。",
       "mpCost": 25,
       "staminaCost": 20,
-      "dmgMultiplier": 2.0,
+      "dmgMultiplier": 2,
       "hitCount": 1,
       "cooldown": 5,
       "triggerRate": 0.15
@@ -1312,7 +1317,7 @@
       "description": "归一拳意，攻敌同时以混元之气恢复己身体力。",
       "mpCost": 8,
       "staminaCost": 5,
-      "dmgMultiplier": 1.0,
+      "dmgMultiplier": 1,
       "hitCount": 1,
       "cooldown": 4,
       "triggerRate": 0.2,
@@ -1802,7 +1807,7 @@
         "duration": 5
       }
     },
-    "bodyExpRate": 1.0
+    "bodyExpRate": 1
   },
   {
     "id": "core:heaven_piercing_finger",
@@ -1844,11 +1849,11 @@
       "description": "聚天地灵气于一指，以三倍之力穿透敌人防御。",
       "mpCost": 30,
       "staminaCost": 18,
-      "dmgMultiplier": 3.0,
+      "dmgMultiplier": 3,
       "hitCount": 1,
       "cooldown": 5,
       "triggerRate": 0.18
     },
-    "bodyExpRate": 1.0
+    "bodyExpRate": 1
   }
 ]

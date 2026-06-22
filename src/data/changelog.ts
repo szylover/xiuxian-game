@@ -12,6 +12,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.20.0',
+    date: '2026-06-22',
+    title: '悟道顿悟与正邪阵营',
+    items: [
+      '新增正邪值与阵营判定，影响 NPC 好感、商店价格/限制、功法神通门槛与属性倾向',
+      '新增悟道顿悟系统，修炼积累道悟、随机触发渐悟/顿悟，并可在悟道面板参悟道痕',
+      '新增核心正邪事件、阵营化 NPC/功法/商品/神通数据与 Debug 辅助测试入口',
+    ],
+  },
+  {
     version: '1.19.0',
     date: '2026-06-22',
     title: '历练悬赏与秘境探索',

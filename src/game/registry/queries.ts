@@ -2,7 +2,7 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, AffixPosition, EquipSlot, GeneratedEquipInstance, MonsterTemplate, MutationDef, MutationType, TechniqueTraitDef, TechniqueTraitTier, TechniqueInstance, AscensionDef, RankingDimensionDef, RankingBoardKind, DestinyDef, TalentDef, TalentTreeNodeDef, BountyTemplateDef, SecretRealmDef } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, AffixPosition, EquipSlot, GeneratedEquipInstance, MonsterTemplate, MutationDef, MutationType, TechniqueTraitDef, TechniqueTraitTier, TechniqueInstance, AscensionDef, RankingDimensionDef, RankingBoardKind, DestinyDef, TalentDef, TalentTreeNodeDef, BountyTemplateDef, SecretRealmDef, EnlightenmentInsightDef } from '../types';
 import type { SpiritRootType } from '../spirit-root';
 import type { AchievementDef } from '../achievement/types';
 import {
@@ -18,7 +18,7 @@ import {
   techniqueTraitRegistry, techniqueInstanceRegistry,
   ascensionRegistry, rankingDimensionRegistry,
   destinyRegistry, talentRegistry, talentTreeNodeRegistry,
-  bountyTemplateRegistry, secretRealmRegistry,
+  bountyTemplateRegistry, secretRealmRegistry, enlightenmentInsightRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -221,6 +221,13 @@ export function getAllBountyTemplateDefs(): BountyTemplateDef[] { return Array.f
 
 export function getSecretRealmDef(id: string): SecretRealmDef | undefined { return secretRealmRegistry.get(id); }
 export function getAllSecretRealmDefs(): SecretRealmDef[] { return Array.from(secretRealmRegistry.values()); }
+
+// ── 悟道顿悟（#112）──
+
+export function getEnlightenmentInsightDef(id: string): EnlightenmentInsightDef | undefined { return enlightenmentInsightRegistry.get(id); }
+export function getAllEnlightenmentInsightDefs(): EnlightenmentInsightDef[] {
+  return Array.from(enlightenmentInsightRegistry.values()).sort((a, b) => a.requiredInsight - b.requiredInsight);
+}
 
 // ── 任务链（T0057）──
 

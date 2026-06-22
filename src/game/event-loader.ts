@@ -12,6 +12,9 @@
 
 import type { Player } from './player';
 import type { GameEvent, EventCategory, EventTone, DLCPack } from './registry';
+import type { Alignment } from './types';
+import { changeKarma, getAlignment } from './karma';
+import { KARMA_TEXTS } from '../data/texts';
 
 // ── JSON 事件数据格式 ──
 
@@ -27,6 +30,9 @@ export interface JsonEventCondition {
   minMood?: number;
   minHealth?: number;
   maxHealth?: number;
+  requiredAlignment?: Alignment;
+  minKarma?: number;
+  maxKarma?: number;
 }
 
 export type EffectValue = number | string | [number, number];
@@ -62,6 +68,9 @@ function buildCondition(cond?: JsonEventCondition | null): ((p: Player) => boole
     if (cond.minMood !== undefined && p.mood < cond.minMood) return false;
     if (cond.minHealth !== undefined && p.health < cond.minHealth) return false;
     if (cond.maxHealth !== undefined && p.health > cond.maxHealth) return false;
+    if (cond.requiredAlignment && getAlignment(p.karma ?? 0) !== cond.requiredAlignment) return false;
+    if (cond.minKarma !== undefined && (p.karma ?? 0) < cond.minKarma) return false;
+    if (cond.maxKarma !== undefined && (p.karma ?? 0) > cond.maxKarma) return false;
     return true;
   };
 }
@@ -111,6 +120,10 @@ function buildEffect(effects: Record<string, EffectValue>): (p: Player) => Playe
   return (p: Player): Player => {
     const result = { ...p };
     for (const [field, spec] of Object.entries(effects)) {
+      if (field === 'karmaChange') {
+        Object.assign(result, changeKarma(result, resolveValue(0, undefined, spec), KARMA_TEXTS.reasons.eventChoice).player);
+        continue;
+      }
       const key = field as PlayerNumericKey;
       const current = result[key] as number;
       const maxField = CLAMP_MAX_FIELDS[key];

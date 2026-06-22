@@ -34,6 +34,7 @@ export interface QuestReward {
   items?: { itemId: string; count: number }[];
   statBonus?: Partial<Record<'atk' | 'def' | 'hp' | 'mp' | 'luck' | 'comprehension', number>>;
   affinityChange?: { npcId: string; delta: number }[];
+  karmaChange?: number;
 }
 
 /** 任务步骤定义 */
@@ -59,6 +60,9 @@ export interface QuestChainCondition {
   requiredQuests?: string[];
   requiredItems?: { itemId: string; count: number }[];
   npcAffinity?: { npcId: string; min: number }[];
+  requiredAlignment?: import('./karma').Alignment;
+  minKarma?: number;
+  maxKarma?: number;
   custom?: (p: Player) => boolean;
 }
 

@@ -145,6 +145,9 @@
   --color-progress-complete: #59b300;
   --color-progress-active: #4a9eff;
   --color-progress-active-light: #80c0ff;
+  --color-righteous: #5599ff;
+  --color-evil: #cc3333;
+  --color-karma-neutral: #888;
 }
 
 * {

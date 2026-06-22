@@ -133,6 +133,8 @@ export default function App() {
             onActivateDivineArt={engine.activateDivineArt}
             onDeactivateDivineArt={engine.deactivateDivineArt}
             onUnlockTalentNode={engine.unlockTalentNode}
+            onContemplateEnlightenment={engine.contemplateEnlightenment}
+            onTriggerEnlightenment={engine.triggerEnlightenment}
             onTravel={engine.travel}
             onMeetNpc={engine.meetNpc}
             onGiveGift={engine.giveGift}

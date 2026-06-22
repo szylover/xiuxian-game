@@ -24,6 +24,7 @@ interface JsonDialogueEffect {
   setDialogueFlag?: { key: string; value: unknown };
   unlockDialogueId?: string;
   statBonus?: Partial<Record<string, number>>;
+  karmaChange?: number;
 }
 
 interface JsonDialogueChoiceCondition {
@@ -34,6 +35,9 @@ interface JsonDialogueChoiceCondition {
   hasDialogueFlag?: { key: string; value: unknown };
   completedQuest?: string;
   hasActiveQuest?: string;
+  requiredAlignment?: import('./types').Alignment;
+  minKarma?: number;
+  maxKarma?: number;
 }
 
 interface JsonDialogueChoice {
@@ -111,6 +115,7 @@ function parseEffect(eff?: JsonDialogueEffect): DialogueEffect | undefined {
     setDialogueFlag: eff.setDialogueFlag,
     unlockDialogueId: eff.unlockDialogueId,
     statBonus: eff.statBonus as DialogueEffect['statBonus'],
+    karmaChange: eff.karmaChange,
   };
 }
 
@@ -124,6 +129,9 @@ function parseChoiceCondition(cond?: JsonDialogueChoiceCondition | null): Dialog
     hasDialogueFlag: cond.hasDialogueFlag,
     completedQuest: cond.completedQuest,
     hasActiveQuest: cond.hasActiveQuest,
+    requiredAlignment: cond.requiredAlignment,
+    minKarma: cond.minKarma,
+    maxKarma: cond.maxKarma,
   };
 }
 

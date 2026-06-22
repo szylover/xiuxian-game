@@ -12,6 +12,8 @@ import type { Player, Aptitudes, SpiritRootGrade, PlayerSpiritRoots } from './ty
 import type { SpiritRootCombo } from '../spirit-root';
 import { getDestinyTalentEffects, ensureDestinyTalentState } from '../destiny';
 import type { DestinyTalentStatKey } from '../types';
+import { getAlignment } from '../karma';
+import { getEnlightenmentEffects } from '../enlightenment';
 
 // ── 灵根品级评定 ──
 
@@ -117,6 +119,8 @@ export function recalcStats(player: Player): Player {
   p.physiqueDmgReduce = Math.min(50, bodyBonus.physiqueDmgReduce + (passiveBonus.physiqueDmgReduce ?? 0));
 
   applyDestinyTalentStatEffects(p);
+  applyEnlightenmentStatEffects(p);
+  applyKarmaStatEffects(p);
 
   p.hp = Math.min(p.hp, p.maxHp);
   p.mp = Math.min(p.mp, p.maxMp);
@@ -136,6 +140,27 @@ function applyDestinyTalentStatEffects(p: Player): void {
   for (const [key, value] of Object.entries(effect.statMultipliers ?? {}) as [DestinyTalentStatKey, number][]) {
     const current = (p as unknown as Record<string, number>)[key] ?? 0;
     applyStatDelta(p, key, Math.round(current * value));
+  }
+}
+
+function applyEnlightenmentStatEffects(p: Player): void {
+  const effect = getEnlightenmentEffects(p);
+  for (const [key, value] of Object.entries(effect.statBonuses ?? {}) as [DestinyTalentStatKey, number][]) {
+    applyStatDelta(p, key, value);
+  }
+  for (const [key, value] of Object.entries(effect.statMultipliers ?? {}) as [DestinyTalentStatKey, number][]) {
+    const current = (p as unknown as Record<string, number>)[key] ?? 0;
+    applyStatDelta(p, key, Math.round(current * value));
+  }
+}
+
+function applyKarmaStatEffects(p: Player): void {
+  const alignment = getAlignment(p.karma ?? 0);
+  if (alignment === 'righteous') {
+    p.def += Math.max(1, Math.floor(p.def * 0.03));
+  } else if (alignment === 'evil') {
+    p.atk += Math.max(1, Math.floor(p.atk * 0.03));
+    p.critDmgMultiplier = +(p.critDmgMultiplier + 0.1).toFixed(2);
   }
 }
 

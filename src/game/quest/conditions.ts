@@ -8,6 +8,7 @@ import { getCurrentRegion } from '../map';
 import { hasItem } from '../inventory';
 import { getRelation } from '../npc';
 import { getQuestState } from './state';
+import { getAlignment } from '../karma';
 
 export function checkQuestCondition(player: Player, def: QuestChainDef): boolean {
   const cond = def.condition;
@@ -46,6 +47,10 @@ export function checkQuestCondition(player: Player, def: QuestChainDef): boolean
       if (rel.affinity < min) return false;
     }
   }
+
+  if (cond.requiredAlignment && getAlignment(player.karma ?? 0) !== cond.requiredAlignment) return false;
+  if (cond.minKarma !== undefined && (player.karma ?? 0) < cond.minKarma) return false;
+  if (cond.maxKarma !== undefined && (player.karma ?? 0) > cond.maxKarma) return false;
 
   if (cond.custom && !cond.custom(player)) return false;
 

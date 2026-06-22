@@ -9,6 +9,7 @@ import { changeAffinity, getNpcState } from '../npc';
 import { addItem, removeItem } from '../inventory';
 import { DIALOGUE_TEXTS } from '../../data/texts/dialogue';
 import { getDialogueState, setDialogueState } from './state';
+import { changeKarma } from '../karma';
 
 export function applyDialogueEffect(
   player: Player, npcId: string, effect: DialogueEffect,
@@ -58,6 +59,12 @@ export function applyDialogueEffect(
   if (effect.expChange) {
     p = { ...p, exp: Math.max(0, p.exp + effect.expChange) };
     logs.push(effect.expChange > 0 ? `修为 +${effect.expChange}` : `修为 ${effect.expChange}`);
+  }
+
+  if (effect.karmaChange) {
+    const result = changeKarma(p, effect.karmaChange, DIALOGUE_TEXTS.karmaReason);
+    p = result.player;
+    logs.push(...result.logs);
   }
 
   // 属性加成

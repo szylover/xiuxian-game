@@ -11,7 +11,9 @@ import { getAscensionState } from '../../game/ascension';
 import { getDestinyTalentState } from '../../game/destiny';
 import { getBountyState } from '../../game/bounty';
 import { getSecretRealmState } from '../../game/secret-realm';
-import { DESTINY_TEXTS, UI_LABELS } from '../../data/texts';
+import { getAlignment, getKarmaTitle, getKarmaState } from '../../game/karma';
+import { getEnlightenmentState } from '../../game/enlightenment';
+import { DESTINY_TEXTS, UI_LABELS, KARMA_TEXTS, ALIGNMENT_CN, ENLIGHTENMENT_TEXTS } from '../../data/texts';
 import './DebugStatsTab.css';
 
 // 可编辑数值行
@@ -132,6 +134,38 @@ export default function DebugStatsTab({ player, onSetStat, onFullRestore, onDebu
         <div className="debug-btns debug-btns-wrap">
           <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__bountyReputation', getBountyState(player).reputation + 20)}>{UI_LABELS.debugBountyRealm.addBountyReputation}</button>
           <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__secretRealmClearCooldown', 1)}>{UI_LABELS.debugBountyRealm.clearRealmCooldown}</button>
+        </div>
+      </div>
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{KARMA_TEXTS.debug.title}</span>
+        <div className="debug-tracker-grid">
+          <div className="debug-tracker-dim">
+            {KARMA_TEXTS.panel.alignment(getKarmaTitle(player.karma ?? 0), ALIGNMENT_CN[getAlignment(player.karma ?? 0)])}
+            {' '}| {KARMA_TEXTS.panel.value(player.karma ?? 0)}
+          </div>
+          <div className="debug-tracker-dim">
+            {KARMA_TEXTS.panel.history(getKarmaState(player).totalGained, getKarmaState(player).totalLost)}
+          </div>
+        </div>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('karma', 50)}>{KARMA_TEXTS.debug.setRighteous}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('karma', 0)}>{KARMA_TEXTS.debug.setNeutral}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('karma', -50)}>{KARMA_TEXTS.debug.setEvil}</button>
+        </div>
+      </div>
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{ENLIGHTENMENT_TEXTS.debug.title}</span>
+        <div className="debug-tracker-grid">
+          {(() => {
+            const state = getEnlightenmentState(player);
+            return <div className="debug-tracker-dim">{ENLIGHTENMENT_TEXTS.panel.insightPoints(state.insightPoints)} | {ENLIGHTENMENT_TEXTS.panel.comprehensionExp(state.comprehensionExp, 100)}</div>;
+          })()}
+        </div>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__enlightenmentAddInsight', 1)}>{ENLIGHTENMENT_TEXTS.debug.addInsight}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__enlightenmentClearBuffs', 1)}>{ENLIGHTENMENT_TEXTS.debug.clearBuffs}</button>
         </div>
       </div>
 

@@ -6,7 +6,7 @@
 import { useState } from 'react';
 import type { Player } from '../../game/player';
 import { getItemDef } from '../../game/registry';
-import { getShopGoodsForRegion, calcBuyPrice } from '../../game/shop';
+import { getShopGoodsForRegion, calcKarmaBuyPrice } from '../../game/shop';
 import { getInventoryEntries } from '../../game/inventory';
 import { TabBar } from '../shared';
 import ShopBuyItem from './shop/ShopBuyItem';
@@ -53,7 +53,7 @@ export default function ShopPanel({ player, onBuy, onSell }: ShopPanelProps) {
               goods.map(good => {
                 const def = getItemDef(good.itemId);
                 if (!def) return null;
-                const price = calcBuyPrice(good.buyPrice, player.charisma);
+                const price = calcKarmaBuyPrice(good.buyPrice, player.charisma, player.karma ?? 0);
                 return (
                   <ShopBuyItem
                     key={good.itemId}

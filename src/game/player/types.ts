@@ -78,6 +78,7 @@ export interface Player {
   luck: number;
   comprehension: number;
   charisma: number;
+  karma: number;
   aptitudes: Aptitudes;
   gold: number;
   inventory: InventorySlot[];

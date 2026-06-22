@@ -1,4 +1,5 @@
 import type { Player } from '../player';
+import type { Alignment } from './karma';
 
 // ── NPC 系统类型定义（T0025）──
 
@@ -55,6 +56,11 @@ export interface NpcDef {
   aiTags?: string[];
   maxAffinity?: number;
   affinityDecayRate?: number;
+  alignment?: Alignment;
+  karmaAffinityModifier?: {
+    sameFaction: number;
+    oppositeFaction: number;
+  };
   giftPreferences?: {
     loved: string[];
     liked: string[];

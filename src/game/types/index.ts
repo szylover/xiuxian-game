@@ -21,3 +21,5 @@ export * from './ranking';
 export * from './destiny';
 export * from './bounty';
 export * from './secret-realm';
+export * from './karma';
+export * from './enlightenment';

@@ -9,6 +9,7 @@ import type { Realm } from '../data';
 import { getBreakthroughReq, getItemDef, getAscensionForRealm } from '../registry';
 import type { BreakthroughReqDef, AscensionDef } from '../registry';
 import { getDestinyTalentEffects, ensureDestinyTalentState } from '../destiny';
+import { getEnlightenmentEffects } from '../enlightenment';
 
 export interface ItemCheckResult { itemId: string; name: string; required: number; have: number; ready: boolean; }
 export interface CondCheckResult { id: string; description: string; ready: boolean; }
@@ -76,7 +77,8 @@ export function getBreakthroughStatus(player: Player): BreakthroughStatus {
   const baseRate = req?.baseSuccessRate ?? BREAKTHROUGH_BASE_RATE;
   const failBonus = Math.min(0.25, failCount * 0.05);
   const destinyBonus = getDestinyTalentEffects(p).breakthroughRateBonus ?? 0;
-  const successRate = requiresTribulation ? 0 : Math.min(0.95, baseRate + p.comprehension * BREAKTHROUGH_COMP_BONUS + p.luck * BREAKTHROUGH_LUCK_BONUS + failBonus + destinyBonus);
+  const enlightenmentBonus = getEnlightenmentEffects(p).breakthroughRateBonus ?? 0;
+  const successRate = requiresTribulation ? 0 : Math.min(0.95, baseRate + p.comprehension * BREAKTHROUGH_COMP_BONUS + p.luck * BREAKTHROUGH_LUCK_BONUS + failBonus + destinyBonus + enlightenmentBonus);
 
   const canAttempt = expReady && itemsReady.every(i => i.ready) && conditionsReady.every(c => c.ready);
   return { canAttempt, nextRealm, req: req ?? null, expReady, itemsReady, conditionsReady, requiresTribulation, successRate, requiresAscension: false, ascensionDef: null };
