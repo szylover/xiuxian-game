@@ -126,6 +126,8 @@ function scoreNpc(npc: NpcDef, key: RankingDimensionDef['scoreKey']): number {
 }
 
 function calcPlayerPower(player: Player): number {
+  const pvp = player.systems.pvp as { rating?: number } | undefined;
+  const pvpBonus = Math.max(0, (pvp?.rating ?? 1000) - 1000) * 0.6;
   return Math.round(
     player.maxHp * 1.2
     + player.maxMp * 0.7
@@ -135,7 +137,8 @@ function calcPlayerPower(player: Player): number {
     + player.critRate * 10
     + player.critResist * 8
     + player.realmIndex * 1000
-    + player.bodyRealmIndex * 650,
+    + player.bodyRealmIndex * 650
+    + pvpBonus,
   );
 }
 

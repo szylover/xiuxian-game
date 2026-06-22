@@ -94,7 +94,7 @@
 | [T0025](https://github.com/szylover/xiuxian-game/issues/97) | NPC 系统 | T0001 | — | ✅ |
 | [T0026](https://github.com/szylover/xiuxian-game/issues/98) | 对话系统 | T0025 | [spec](specs/T0026-dialogue-system.md) | ✅ |
 | [T0027](https://github.com/szylover/xiuxian-game/issues/99) | 门派系统 | T0025, T0017 | [spec](specs/99-sect-system.md) | ✅ |
-| [T0028](https://github.com/szylover/xiuxian-game/issues/100) | PvP 切磋 | T0025, T0003 | — | ⬜ |
+| [T0028](https://github.com/szylover/xiuxian-game/issues/100) | PvP 切磋 | T0025, T0003 | — | ✅ |
 | [T0048](https://github.com/szylover/xiuxian-game/issues/111) | 道侣双修系统 | T0025, T0026 | [spec](specs/111-dual-cultivation.md) | ✅ |
 | [T0051](https://github.com/szylover/xiuxian-game/issues/114) | NPC AI 生态（世界模拟） | T0025, T0021 | [spec](specs/114-npc-ai-world.md) | ✅ |
 | [T0053](https://github.com/szylover/xiuxian-game/issues/116) | 宗门管理（自建宗门） | T0027, T0025, T0021 | [spec](specs/116-sect-management.md) | ✅ |
@@ -112,7 +112,7 @@
 | [T0058](https://github.com/szylover/xiuxian-game/issues/88) | 境界表 DLC 化 | — | [spec](specs/T0058-realm-dlc.md) | ✅ |
 | [T0034](https://github.com/szylover/xiuxian-game/issues/104) | 洪荒终局 | T0033 | [spec](specs/104-primordial-endgame.md) | ✅ |
 | [T0042](https://github.com/szylover/xiuxian-game/issues/82) | 年月历法系统 | T0001, T0005 | [spec](specs/T0042-calendar-system.md) | ✅ |
-| [T0050](https://github.com/szylover/xiuxian-game/issues/113) | 心魔系统 | T0029 | [spec](specs/113-heart-demon.md) | 📐 |
+| [T0050](https://github.com/szylover/xiuxian-game/issues/113) | 心魔系统 | T0029 | [spec](specs/113-heart-demon.md) | ✅ |
 | [T0064](https://github.com/szylover/xiuxian-game/issues/93) | 瓶颈系统（境界/功法卡点 + 多元解锁） | T0002, T0029, T0007, T0017, T0058 | [spec](specs/T0064-bottleneck-system.md) | ✅ |
 | [T0055](https://github.com/szylover/xiuxian-game/issues/118) | 天机榜（天骄排行） | T0025, T0003, T0051 | [spec](specs/118-celestial-rankings.md) | ✅ |
 | [T0068](https://github.com/szylover/xiuxian-game/issues/172) | 修仙履历系统（Cultivation Chronicle） | T0029, T0040, T0031, T0042, T0038 | [spec](specs/T0068-cultivation-chronicle.md) | ✅ |
@@ -259,4 +259,3 @@ interface DLCPack {
 6. **核心数据即 DLC**：`data/core-*.json` + `game/data.ts` 的内容最终整合进 `core` DLC 包，启动时自动注册
 7. **JSON 优先**：纯数值型内容（物品/丹药/妖兽/配方）优先用 JSON 定义 + Loader 转换，便于生成和 diff
 8. **Loader 模式**：每种内容类型可配套一个 `*-loader.ts`（类似 `event-loader.ts`），将 JSON 纯数据转为带函数的运行时对象
-

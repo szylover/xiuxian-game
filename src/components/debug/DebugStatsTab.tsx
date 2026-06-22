@@ -15,8 +15,10 @@ import { getBountyState } from '../../game/bounty';
 import { getSecretRealmState } from '../../game/secret-realm';
 import { getAlignment, getKarmaTitle, getKarmaState } from '../../game/karma';
 import { getEnlightenmentState } from '../../game/enlightenment';
+import { getHeartDemonState } from '../../game/heart-demon';
+import { getPvpState } from '../../game/pvp';
 import { getSectState } from '../../game/sect';
-import { DESTINY_TEXTS, UI_LABELS, KARMA_TEXTS, ALIGNMENT_CN, ENLIGHTENMENT_TEXTS, SECT_TEXTS, PRIMORDIAL_ENDGAME_TEXTS } from '../../data/texts';
+import { DESTINY_TEXTS, UI_LABELS, KARMA_TEXTS, ALIGNMENT_CN, ENLIGHTENMENT_TEXTS, HEART_DEMON_TEXTS, PVP_TEXTS, SECT_TEXTS, PRIMORDIAL_ENDGAME_TEXTS } from '../../data/texts';
 import './DebugStatsTab.css';
 
 // 可编辑数值行
@@ -169,6 +171,28 @@ export default function DebugStatsTab({ player, onSetStat, onFullRestore, onDebu
         <div className="debug-btns debug-btns-wrap">
           <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__enlightenmentAddInsight', 1)}>{ENLIGHTENMENT_TEXTS.debug.addInsight}</button>
           <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__enlightenmentClearBuffs', 1)}>{ENLIGHTENMENT_TEXTS.debug.clearBuffs}</button>
+        </div>
+      </div>
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{UI_LABELS.panels.heartDemon.title}</span>
+        <div className="debug-tracker-grid">
+          <div className="debug-tracker-dim">{HEART_DEMON_TEXTS.panel.valueLine(getHeartDemonState(player).value, getHeartDemonState(player).maxValue)}</div>
+        </div>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__heartDemonValue', 0)}>{HEART_DEMON_TEXTS.panel.stateCalm}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__heartDemonValue', 85)}>{HEART_DEMON_TEXTS.panel.stateDanger}</button>
+        </div>
+      </div>
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{UI_LABELS.panels.pvp.title}</span>
+        <div className="debug-tracker-grid">
+          <div className="debug-tracker-dim">{PVP_TEXTS.panel.rating(getPvpState(player).rating)} | {PVP_TEXTS.panel.record(getPvpState(player).wins, getPvpState(player).losses)}</div>
+        </div>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__pvpClearCooldown', 1)}>{PVP_TEXTS.panel.ready}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__pvpRating', getPvpState(player).rating + 100)}>{PVP_TEXTS.panel.rating(getPvpState(player).rating + 100)}</button>
         </div>
       </div>
 

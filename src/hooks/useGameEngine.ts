@@ -43,6 +43,7 @@ import { performReincarnation } from '../game/reincarnation';
 import type { ReincarnationContext } from '../game/types';
 import { attemptPrimordialEndgame } from '../game/primordial-endgame';
 import { REINCARNATION_TEXTS, PRIMORDIAL_ENDGAME_TEXTS } from '../data/texts';
+import { tickHeartDemon } from '../game/heart-demon';
 
 // Re-export types so existing imports still work
 export type { CombatModalState, DeathModalState } from './useCombatModal';
@@ -311,6 +312,9 @@ export function useGameEngine(
     for (const log of npcWorld.logs) addLog(log, 'system');
 
     updated = tickEnlightenmentBuffs(updated);
+    const heartDemonTick = tickHeartDemon(updated);
+    updated = heartDemonTick.player;
+    for (const log of heartDemonTick.logs) addLog(log, 'system');
     const karmaDecay = tickKarmaDecay(updated);
     updated = karmaDecay.player;
     for (const log of karmaDecay.logs) addLog(log, 'system');
@@ -367,6 +371,8 @@ export function useGameEngine(
     contemplateEnlightenment, triggerEnlightenment,
     joinSect, claimSectStipend, advanceSectRank, completeSectMission, buySectStoreItem,
     foundSectManagement, recruitSectMember, collectSectYield, upgradeSectFacility, assignSectMemberTask,
+    suppressHeartDemon, confrontHeartDemon,
+    challengePvp,
   } = useSystemActions({
     player, addLog, setPlayer, setGameOver, setGameOverReason, setDeathModal,
     chronicleHooks: { recordEvent: chronicle.recordEvent, syncSnapshot: chronicle.syncSnapshot },
@@ -523,6 +529,9 @@ export function useGameEngine(
     dialogueAdvance,
     contemplateEnlightenment,
     triggerEnlightenment,
+    suppressHeartDemon,
+    confrontHeartDemon,
+    challengePvp,
     joinSect,
     claimSectStipend,
     advanceSectRank,
@@ -556,6 +565,3 @@ export function useGameEngine(
     debugSetPlayer: setPlayer,
   };
 }
-
-
-

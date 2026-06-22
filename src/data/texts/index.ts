@@ -32,4 +32,5 @@ export { NPC_WORLD_TEXTS } from './npc-world';
 export { DUAL_CULTIVATION_TEXTS } from './dual-cultivation';
 export { REINCARNATION_TEXTS } from './reincarnation';
 export { PRIMORDIAL_ENDGAME_TEXTS } from './primordial-endgame';
-
+export { HEART_DEMON_TEXTS } from './heart-demon';
+export { PVP_TEXTS } from './pvp';

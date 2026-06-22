@@ -26,4 +26,5 @@ export * from './enlightenment';
 export * from './sect';
 export * from './reincarnation';
 export * from './primordial-endgame';
-
+export * from './heart-demon';
+export * from './pvp';

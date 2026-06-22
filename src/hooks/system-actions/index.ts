@@ -25,6 +25,8 @@ import { useBountyActions } from './useBountyActions';
 import { useSecretRealmActions } from './useSecretRealmActions';
 import { useEnlightenmentActions } from './useEnlightenmentActions';
 import { useSectActions } from './useSectActions';
+import { useHeartDemonActions } from './useHeartDemonActions';
+import { usePvpActions } from './usePvpActions';
 
 export type { SystemActionDeps, ChronicleHooks } from './types';
 
@@ -66,6 +68,8 @@ export function useSystemActions(deps: SystemActionDeps) {
   const secretRealmActions = useSecretRealmActions(ctx);
   const enlightenmentActions = useEnlightenmentActions(ctx);
   const sectActions = useSectActions(ctx);
+  const heartDemonActions = useHeartDemonActions(ctx);
+  const pvpActions = usePvpActions(ctx);
 
   return {
     ...inventoryActions,
@@ -86,5 +90,7 @@ export function useSystemActions(deps: SystemActionDeps) {
     ...secretRealmActions,
     ...enlightenmentActions,
     ...sectActions,
+    ...heartDemonActions,
+    ...pvpActions,
   };
 }

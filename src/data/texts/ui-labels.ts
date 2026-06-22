@@ -27,6 +27,8 @@ export const UI_LABELS = {
     divine:      { title: '神通', icon: '✨' },
     talent:     { title: '命格天赋', icon: '🌌' },
     enlightenment: { title: '悟道顿悟', icon: '🧠' },
+    heartDemon: { title: '心魔', icon: '🖤' },
+    pvp: { title: '问道台', icon: '🥋' },
     sect:        { title: '门派宗门', icon: '🏯' },
     crafting:    { title: '炼制', icon: '🔥' },
     equipment:   { title: '装备', icon: '⚔️' },
@@ -96,4 +98,3 @@ export const UI_LABELS = {
     clearRealmCooldown: '清空秘境冷却',
   },
 } as const;
-

@@ -27,13 +27,15 @@ import TalentPanel from '../panels/TalentPanel';
 import EnlightenmentPanel from '../panels/EnlightenmentPanel';
 import SectPanel from '../panels/SectPanel';
 import CompanionPanel from '../panels/CompanionPanel';
+import HeartDemonPanel from '../panels/HeartDemonPanel';
+import PvpPanel from '../panels/PvpPanel';
 import { UI_LABELS } from '../../data/texts/ui-labels';
 
 // 'status' panel is rendered by LeftPanel, so excluded from this config
 const PANEL_WIDTHS: Partial<Record<PanelKey, number>> = {
   inventory: 380, shop: 380, technique: 400, divine: 420,
   crafting: 380, equipment: 380, achievement: 420, map: 420, npc: 380,
-  quest: 400, companion: 420, bounty: 420, secretRealm: 440, chronicle: 420, ranking: 520, talent: 560, enlightenment: 500, sect: 520,
+  quest: 400, companion: 420, bounty: 420, secretRealm: 440, chronicle: 420, ranking: 520, pvp: 520, talent: 560, enlightenment: 500, heartDemon: 500, sect: 520,
 };
 
 interface RightPanelProps {
@@ -56,6 +58,9 @@ interface RightPanelProps {
   onUnlockTalentNode: (nodeId: string) => void;
   onContemplateEnlightenment: () => void;
   onTriggerEnlightenment: () => void;
+  onSuppressHeartDemon: () => void;
+  onConfrontHeartDemon: () => void;
+  onChallengePvp: (opponentId: string) => void;
   onJoinSect: (sectId: string) => void;
   onClaimSectStipend: () => void;
   onAdvanceSectRank: () => void;
@@ -99,6 +104,7 @@ export default function RightPanel({
   onLearnTechnique, onPracticeTechnique, onActivateTechnique,
   onLearnDivineArt, onActivateDivineArt, onDeactivateDivineArt, onUnlockTalentNode,
   onContemplateEnlightenment, onTriggerEnlightenment,
+  onSuppressHeartDemon, onConfrontHeartDemon, onChallengePvp,
   onJoinSect, onClaimSectStipend, onAdvanceSectRank, onCompleteSectMission, onBuySectStoreItem,
   onFoundSectManagement, onRecruitSectMember, onCollectSectYield, onUpgradeSectFacility, onAssignSectMemberTask,
   onTravel,
@@ -140,8 +146,10 @@ export default function RightPanel({
           {activePanel === 'secretRealm' && <SecretRealmPanel player={player} onStartRealm={onStartRealm} onAdvanceRealm={onAdvanceRealm} onFinishRealm={onFinishRealm} />}
           {activePanel === 'chronicle' && <ChroniclePanel chronicle={chronicle} />}
           {activePanel === 'ranking' && <RankingPanel player={player} />}
+          {activePanel === 'pvp' && <PvpPanel player={player} onChallenge={onChallengePvp} />}
           {activePanel === 'talent' && <TalentPanel player={player} onUnlockNode={onUnlockTalentNode} />}
           {activePanel === 'enlightenment' && <EnlightenmentPanel player={player} onContemplate={onContemplateEnlightenment} onTrigger={onTriggerEnlightenment} />}
+          {activePanel === 'heartDemon' && <HeartDemonPanel player={player} onSuppress={onSuppressHeartDemon} onConfront={onConfrontHeartDemon} />}
           {activePanel === 'sect' && <SectPanel player={player} onJoinSect={onJoinSect} onClaimStipend={onClaimSectStipend} onAdvanceRank={onAdvanceSectRank} onCompleteMission={onCompleteSectMission} onBuyStoreItem={onBuySectStoreItem} onFoundManagement={onFoundSectManagement} onRecruitMember={onRecruitSectMember} onCollectYield={onCollectSectYield} onUpgradeFacility={onUpgradeSectFacility} onAssignMemberTask={onAssignSectMemberTask} />}
         </FloatingPanel>
       )}

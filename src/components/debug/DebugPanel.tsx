@@ -92,6 +92,18 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
         const enlightenment = (prev.systems.enlightenment ?? {}) as Record<string, unknown>;
         return { ...prev, systems: { ...prev.systems, enlightenment: { ...enlightenment, activeBuffs: [] } } };
       }
+      if (key === '__heartDemonValue') {
+        const heartDemon = (prev.systems.heartDemon ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, heartDemon: { ...heartDemon, value, maxValue: 100 } } };
+      }
+      if (key === '__pvpClearCooldown') {
+        const pvp = (prev.systems.pvp ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, pvp: { ...pvp, cooldownUntilAge: prev.age } } };
+      }
+      if (key === '__pvpRating') {
+        const pvp = (prev.systems.pvp ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, pvp: { ...pvp, rating: value } } };
+      }
       if (key === '__sectAddContribution') {
         const sect = (prev.systems.sect ?? {}) as Record<string, unknown>;
         const current = (sect.contribution as number | undefined) ?? 0;

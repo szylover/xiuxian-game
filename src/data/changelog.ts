@@ -12,6 +12,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.24.0',
+    date: '2026-06-22',
+    title: '心魔劫与问道台切磋',
+    items: [
+      '新增心魔系统，杀伐、久修、业力偏斜与突破失败会累积心魔值，并影响修炼与突破',
+      '新增心魔面板，可查看心魔状态、静心压制或主动直面心魔劫，结果接入悟道与存档',
+      '新增问道台 PvP，可挑战榜上 NPC 修士，复用战斗系统结算胜负、奖励、冷却与战报',
+    ],
+  },
+  {
     version: '1.23.0',
     date: '2026-06-22',
     title: '转世重修与洪荒终局',
@@ -494,4 +504,3 @@ export const CHANGELOG: ChangelogEntry[] = [
 
 /** 当前最新版本号 */
 export const CURRENT_VERSION = CHANGELOG[0].version;
-

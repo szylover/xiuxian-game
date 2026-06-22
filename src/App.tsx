@@ -142,6 +142,9 @@ export default function App() {
             onUnlockTalentNode={engine.unlockTalentNode}
             onContemplateEnlightenment={engine.contemplateEnlightenment}
             onTriggerEnlightenment={engine.triggerEnlightenment}
+            onSuppressHeartDemon={engine.suppressHeartDemon}
+            onConfrontHeartDemon={engine.confrontHeartDemon}
+            onChallengePvp={engine.challengePvp}
             onJoinSect={engine.joinSect}
             onClaimSectStipend={engine.claimSectStipend}
             onAdvanceSectRank={engine.advanceSectRank}
@@ -239,5 +242,4 @@ export default function App() {
     </>
   );
 }
-
 

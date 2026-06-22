@@ -17,6 +17,7 @@ import { changeKarma } from '../../game/karma';
 import { getSectCultivationBonus } from '../../game/sect';
 import { getReincarnationState } from '../../game/reincarnation';
 import { getDualCultivationBonus } from '../../game/npc';
+import { addHeartDemon, getHeartDemonEffects, tryHeartDemonTribulation } from '../../game/heart-demon';
 
 export function useCultivationActions(
   deps: Pick<CoreActionDeps, 'addLog' | 'setPlayer' | 'advanceTime' | 'canAct'>,
@@ -56,7 +57,8 @@ export function useCultivationActions(
       const sectBonus = getSectCultivationBonus(p);
       const dualBonus = getDualCultivationBonus(p);
       const reincarnationLegacy = getReincarnationState(p).legacy;
-      const expGain = Math.floor(BASE_CULTIVATE_EXP * compBonus * cultivationMult * moodBonus * (1 + enlightenmentBonus + sectBonus + dualBonus + reincarnationLegacy.cultivationSpeedBonus));
+      const heartDemonEffects = getHeartDemonEffects(p);
+      const expGain = Math.floor(BASE_CULTIVATE_EXP * compBonus * cultivationMult * moodBonus * heartDemonEffects.cultivationSpeedMultiplier * (1 + enlightenmentBonus + sectBonus + dualBonus + reincarnationLegacy.cultivationSpeedBonus));
       p.exp += expGain;
 
       // T0062 根据激活功法类型决定锄体/修炼模式
@@ -65,6 +67,11 @@ export function useCultivationActions(
         const karmaResult = changeKarma(p, activeDef.karmaShift, activeDef.name);
         p = karmaResult.player;
         queueLogs(karmaResult.logs, 'system');
+        if (activeDef.karmaShift < 0) {
+          const demon = addHeartDemon(p, Math.abs(activeDef.karmaShift), 'karma');
+          p = demon.player;
+          queueLogs(demon.logs, 'system');
+        }
       }
       const bodyRate = activeDef?.bodyExpRate ?? 0;
       let bodyMsg = '';
@@ -117,6 +124,15 @@ export function useCultivationActions(
       const enlightenmentTrigger = tryTriggerEnlightenment(p, expGain);
       p = enlightenmentTrigger.player;
 
+      const demonGain = addHeartDemon(p, p.tracking.consecutiveCultivates >= 6 ? 3 : 1, 'cultivation');
+      p = demonGain.player;
+      queueLogs(demonGain.logs, 'system');
+      const demonTribulation = tryHeartDemonTribulation(p);
+      if (demonTribulation.triggered) {
+        p = demonTribulation.player;
+        queueLogs(demonTribulation.logs, demonTribulation.success ? 'adventure' : 'system');
+      }
+
       p = advanceTime(p, 'cultivate');
 
       pendingRef.current = { msgs: [], categories: [] };
@@ -135,4 +151,3 @@ export function useCultivationActions(
 
   return { cultivate };
 }
-

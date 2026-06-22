@@ -17,6 +17,7 @@ import type { LogCategory } from '../useGameLog';
 import { COMBAT_TEXTS } from '../../data/texts/combat';
 import { EXPLORE_TEXTS } from '../../data/texts/explore';
 import { playSound } from '../../game/audio';
+import { addHeartDemon } from '../../game/heart-demon';
 
 export function useCombatActions(
   deps: CoreActionDeps,
@@ -117,6 +118,9 @@ export function useCombatActions(
         if (monster.realmIndex > p.realmIndex) {
           p.tracking = { ...p.tracking, defeatedHigherRealm: true };
         }
+        const demon = addHeartDemon(p, monster.realmIndex >= p.realmIndex ? 3 : 2, 'combat');
+        p = demon.player;
+        queueLogs(demon.logs, 'system');
 
         // T0064: 战斗胜利后检查瓶颈解锁
         p = ensureBottleneckState(p);

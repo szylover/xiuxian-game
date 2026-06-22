@@ -1,0 +1,90 @@
+.heart-demon-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  color: var(--color-text-primary);
+}
+
+.heart-demon-intro,
+.heart-demon-empty,
+.heart-demon-hint {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+.heart-demon-section {
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-medium);
+  padding: var(--spacing-lg);
+}
+
+.heart-demon-section-title {
+  color: var(--color-gold);
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+}
+
+.heart-demon-state {
+  color: var(--color-text-danger);
+  font-weight: 700;
+}
+
+.heart-demon-value {
+  margin-top: var(--spacing-sm);
+  color: var(--color-text-parchment);
+}
+
+.heart-demon-bar {
+  height: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-bg-darkest);
+  border: 1px solid var(--color-border);
+  margin: var(--spacing-sm) 0;
+}
+
+.heart-demon-bar-fill {
+  width: var(--heart-demon-progress);
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-text-info), var(--color-text-danger));
+  transition: width var(--transition-base);
+}
+
+.heart-demon-actions,
+.heart-demon-tags,
+.heart-demon-list {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.heart-demon-actions {
+  margin: var(--spacing-md) 0;
+}
+
+.heart-demon-button {
+  border: 1px solid var(--color-border-gold);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-warm-medium);
+  color: var(--color-gold);
+  padding: var(--spacing-md) var(--spacing-lg);
+  cursor: pointer;
+}
+
+.heart-demon-button--danger {
+  border-color: var(--color-text-danger);
+  color: var(--color-text-danger);
+  background: var(--color-bg-dark);
+}
+
+.heart-demon-tag,
+.heart-demon-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-dark);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-sm);
+}
+
