@@ -19,6 +19,8 @@ import AchievementPanel from '../panels/AchievementPanel';
 import MapPanel from '../panels/MapPanel';
 import NpcPanel from '../panels/NpcPanel';
 import QuestPanel from '../panels/QuestPanel';
+import BountyPanel from '../panels/BountyPanel';
+import SecretRealmPanel from '../panels/SecretRealmPanel';
 import ChroniclePanel from '../panels/ChroniclePanel';
 import RankingPanel from '../panels/RankingPanel';
 import TalentPanel from '../panels/TalentPanel';
@@ -28,7 +30,7 @@ import { UI_LABELS } from '../../data/texts/ui-labels';
 const PANEL_WIDTHS: Partial<Record<PanelKey, number>> = {
   inventory: 380, shop: 380, technique: 400, divine: 420,
   crafting: 380, equipment: 380, achievement: 420, map: 420, npc: 380,
-  quest: 400, chronicle: 420, ranking: 520, talent: 560,
+  quest: 400, bounty: 420, secretRealm: 440, chronicle: 420, ranking: 520, talent: 560,
 };
 
 interface RightPanelProps {
@@ -56,6 +58,12 @@ interface RightPanelProps {
   onAbandonQuest: (questId: string) => void;
   onDeliverQuestItem: (questId: string, objectiveIndex: number) => void;
   onTrackQuest: (questId: string | null) => void;
+  onAcceptBounty: (bountyId: string) => void;
+  onClaimBounty: (bountyId: string) => void;
+  onRefreshBounties: () => void;
+  onStartRealm: (realmId: string) => void;
+  onAdvanceRealm: () => void;
+  onFinishRealm: () => void;
   onStartDialogue: (dialogueId: string) => { node: import('../../game/types').DialogueNode | null };
   onDialogueSelectChoice: (dialogueId: string, nodeId: string, choiceId: string) => {
     nextNode: import('../../game/types').DialogueNode | null; logs: string[]; combatTrigger?: string; questTrigger?: string;
@@ -75,6 +83,8 @@ export default function RightPanel({
   onTravel,
   onMeetNpc, onGiveGift,
   onAcceptQuest, onAbandonQuest, onDeliverQuestItem, onTrackQuest,
+  onAcceptBounty, onClaimBounty, onRefreshBounties,
+  onStartRealm, onAdvanceRealm, onFinishRealm,
   onTurnInQuest,
   onStartDialogue, onDialogueSelectChoice, onDialogueAdvance,
   chronicle,
@@ -104,6 +114,8 @@ export default function RightPanel({
           {activePanel === 'map' && <MapPanel player={player} onTravel={onTravel} />}
           {activePanel === 'npc' && <NpcPanel player={player} onMeetNpc={onMeetNpc} onGiveGift={onGiveGift} onAcceptQuest={onAcceptQuest} onTurnInQuest={onTurnInQuest} onStartDialogue={onStartDialogue} onDialogueSelectChoice={onDialogueSelectChoice} onDialogueAdvance={onDialogueAdvance} />}
           {activePanel === 'quest' && <QuestPanel player={player} onAcceptQuest={onAcceptQuest} onAbandonQuest={onAbandonQuest} onDeliverQuestItem={onDeliverQuestItem} onTrackQuest={onTrackQuest} />}
+          {activePanel === 'bounty' && <BountyPanel player={player} onAcceptBounty={onAcceptBounty} onClaimBounty={onClaimBounty} onRefreshBounties={onRefreshBounties} />}
+          {activePanel === 'secretRealm' && <SecretRealmPanel player={player} onStartRealm={onStartRealm} onAdvanceRealm={onAdvanceRealm} onFinishRealm={onFinishRealm} />}
           {activePanel === 'chronicle' && <ChroniclePanel chronicle={chronicle} />}
           {activePanel === 'ranking' && <RankingPanel player={player} />}
           {activePanel === 'talent' && <TalentPanel player={player} onUnlockNode={onUnlockTalentNode} />}

@@ -12,6 +12,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.19.0',
+    date: '2026-06-22',
+    title: '历练悬赏与秘境探索',
+    items: [
+      '新增历练悬赏系统，悬赏栏会按区域生成限时讨伐、采集与探路委托',
+      '新增秘境探索系统，秘境按阶段触发陷阱、宝箱、战斗与结算奖励，并记录冷却',
+      '新增悬赏与秘境面板入口、核心包数据、Debug 辅助与测试用例',
+    ],
+  },
+  {
     version: '1.18.0',
     date: '2026-06-22',
     title: '命格天赋与天赋树',

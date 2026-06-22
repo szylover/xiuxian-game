@@ -140,6 +140,12 @@ export default function App() {
             onAbandonQuest={engine.abandonQuest}
             onDeliverQuestItem={engine.deliverQuestItem}
             onTrackQuest={engine.setTrackedQuest}
+            onAcceptBounty={engine.acceptBounty}
+            onClaimBounty={engine.claimBounty}
+            onRefreshBounties={engine.refreshBounties}
+            onStartRealm={engine.startRealm}
+            onAdvanceRealm={engine.advanceRealm}
+            onFinishRealm={engine.finishRealm}
             onTurnInQuest={engine.turnInQuest}
             onStartDialogue={engine.startDialogue}
             onDialogueSelectChoice={engine.dialogueSelectChoice}

@@ -83,9 +83,9 @@
 |----|------|------|------|------|
 | [T0021](https://github.com/szylover/xiuxian-game/issues/77) | 地图系统（多区域） | T0001 | [spec](specs/T0021-map-system.md) | ✅ |
 | [T0022](https://github.com/szylover/xiuxian-game/issues/94) | 区域事件 | T0007, T0021 | — | ✅ |
-| [T0023](https://github.com/szylover/xiuxian-game/issues/95) | 秘境探索（限时副本） | T0021, T0003 | [spec](specs/95-secret-realm.md) | 📐 |
+| [T0023](https://github.com/szylover/xiuxian-game/issues/95) | 秘境探索（限时副本） | T0021, T0003 | [spec](specs/95-secret-realm.md) | ✅ |
 | [T0024](https://github.com/szylover/xiuxian-game/issues/96) | 风水采矿 | T0021, T0012 | — | ⬜ |
-| [T0054](https://github.com/szylover/xiuxian-game/issues/117) | 历练悬赏任务 | T0021, T0025 | [spec](specs/117-bounty-quests.md) | 📐 |
+| [T0054](https://github.com/szylover/xiuxian-game/issues/117) | 历练悬赏任务 | T0021, T0025 | [spec](specs/117-bounty-quests.md) | ✅ |
 
 ### 🏷️ 社交与NPC
 

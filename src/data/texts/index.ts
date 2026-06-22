@@ -23,3 +23,5 @@ export { AUDIO_TEXTS } from './audio';
 export { ONBOARDING_TEXTS } from './onboarding';
 export { RANKING_TEXTS } from './ranking';
 export { DESTINY_TEXTS } from './destiny';
+export { BOUNTY_TEXTS } from './bounty';
+export { SECRET_REALM_TEXTS } from './secret-realm';

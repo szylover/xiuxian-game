@@ -9,7 +9,9 @@ import { getAllBodyRealmDefs, getAllRegions, getMaxRealmIndex, getAscensionForRe
 import { getMapState } from '../../game/map';
 import { getAscensionState } from '../../game/ascension';
 import { getDestinyTalentState } from '../../game/destiny';
-import { DESTINY_TEXTS } from '../../data/texts';
+import { getBountyState } from '../../game/bounty';
+import { getSecretRealmState } from '../../game/secret-realm';
+import { DESTINY_TEXTS, UI_LABELS } from '../../data/texts';
 import './DebugStatsTab.css';
 
 // 可编辑数值行
@@ -119,6 +121,18 @@ export default function DebugStatsTab({ player, onSetStat, onFullRestore, onDebu
 
       <div className="debug-row">
         <button className="btn debug-btn debug-full" onClick={onFullRestore}>🌟 全满</button>
+      </div>
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{UI_LABELS.debugBountyRealm.title}</span>
+        <div className="debug-tracker-grid">
+          <div className="debug-tracker-dim">{UI_LABELS.debugBountyRealm.bountyReputation(getBountyState(player).reputation)}</div>
+          <div className="debug-tracker-dim">{UI_LABELS.debugBountyRealm.realmCooldowns(Object.keys(getSecretRealmState(player).cooldowns).length)}</div>
+        </div>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__bountyReputation', getBountyState(player).reputation + 20)}>{UI_LABELS.debugBountyRealm.addBountyReputation}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__secretRealmClearCooldown', 1)}>{UI_LABELS.debugBountyRealm.clearRealmCooldown}</button>
+        </div>
       </div>
 
       {/* ── T0033: 飞升调试 ── */}

@@ -8,6 +8,7 @@ import { getCurrentRegion } from '../../game/map';
 import { ensureBottleneckState, tryEpiphanyUnlock } from '../../game/bottleneck';
 import { getNpcsInRegion, meetNpc as meetNpcFn } from '../../game/npc';
 import { tickQuestObjectives, checkQuestDiscovery } from '../../game/quest';
+import { tickBountyObjectives } from '../../game/bounty';
 import type { RegionDef } from '../../game/types';
 import type { CoreActionDeps, LogQueue } from './types';
 import type { LogCategory } from '../useGameLog';
@@ -117,6 +118,8 @@ export function useExplorationActions(
       const questItemChange = tickQuestObjectives(p, { type: 'item_change' });
       p = questItemChange.player;
       queueLogs(questItemChange.logs, 'system');
+      const bountyItemChange = tickBountyObjectives(p, { type: 'item_change' });
+      p = bountyItemChange.player;
 
       // T0067: 探索时检查可发现的任务
       const questDiscover = checkQuestDiscovery(p, { type: 'explore' });

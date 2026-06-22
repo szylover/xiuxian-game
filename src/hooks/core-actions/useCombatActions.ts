@@ -11,6 +11,7 @@ import { checkDeathTriggers, applyDeath } from '../../game/death';
 import { gainBodyRealmExp } from '../../game/body-cultivation';
 import { ensureBottleneckState, tryBattleUnlock } from '../../game/bottleneck';
 import { tickQuestObjectives, checkQuestDiscovery } from '../../game/quest';
+import { tickBountyObjectives } from '../../game/bounty';
 import type { CoreActionDeps, LootEntry, CombatDeathInfo, LogQueue } from './types';
 import type { LogCategory } from '../useGameLog';
 import { COMBAT_TEXTS } from '../../data/texts/combat';
@@ -170,9 +171,13 @@ export function useCombatActions(
         const questKill = tickQuestObjectives(p, { type: 'kill_monster', monsterId: monster.id });
         p = questKill.player;
         queueLogs(questKill.logs, 'system');
+        const bountyKill = tickBountyObjectives(p, { type: 'kill_monster', monsterId: monster.id });
+        p = bountyKill.player;
         const questCombat = tickQuestObjectives(p, { type: 'combat' });
         p = questCombat.player;
         queueLogs(questCombat.logs, 'system');
+        const bountyCombat = tickBountyObjectives(p, { type: 'combat' });
+        p = bountyCombat.player;
 
         // T0067: 战斗胜利后检查可发现的任务
         const questDiscoverCombat = checkQuestDiscovery(p, { type: 'kill_monster', monsterId: monster.id });

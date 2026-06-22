@@ -61,6 +61,14 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
         const death = (prev.systems.death ?? {}) as Record<string, unknown>;
         return { ...prev, systems: { ...prev.systems, death: { ...death, isLooseImmortal: value === 1 } } };
       }
+      if (key === '__bountyReputation') {
+        const bounty = (prev.systems.bounty ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, bounty: { ...bounty, reputation: value } } };
+      }
+      if (key === '__secretRealmClearCooldown') {
+        const secretRealm = (prev.systems.secretRealm ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, secretRealm: { ...secretRealm, cooldowns: {} } } };
+      }
       const p = { ...prev };
       (p as unknown as Record<string, number>)[key] = value;
       if (RECALC_KEYS.has(key)) {
@@ -552,4 +560,3 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
     </CollapsiblePanel>
   );
 }
-

@@ -2,7 +2,7 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, AffixPosition, EquipSlot, GeneratedEquipInstance, MonsterTemplate, MutationDef, MutationType, TechniqueTraitDef, TechniqueTraitTier, TechniqueInstance, AscensionDef, RankingDimensionDef, RankingBoardKind, DestinyDef, TalentDef, TalentTreeNodeDef } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, AffixPosition, EquipSlot, GeneratedEquipInstance, MonsterTemplate, MutationDef, MutationType, TechniqueTraitDef, TechniqueTraitTier, TechniqueInstance, AscensionDef, RankingDimensionDef, RankingBoardKind, DestinyDef, TalentDef, TalentTreeNodeDef, BountyTemplateDef, SecretRealmDef } from '../types';
 import type { SpiritRootType } from '../spirit-root';
 import type { AchievementDef } from '../achievement/types';
 import {
@@ -18,6 +18,7 @@ import {
   techniqueTraitRegistry, techniqueInstanceRegistry,
   ascensionRegistry, rankingDimensionRegistry,
   destinyRegistry, talentRegistry, talentTreeNodeRegistry,
+  bountyTemplateRegistry, secretRealmRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -210,6 +211,16 @@ export function getTalentDef(id: string): TalentDef | undefined { return talentR
 export function getAllTalentDefs(): TalentDef[] { return Array.from(talentRegistry.values()); }
 export function getTalentTreeNodeDef(id: string): TalentTreeNodeDef | undefined { return talentTreeNodeRegistry.get(id); }
 export function getAllTalentTreeNodeDefs(): TalentTreeNodeDef[] { return Array.from(talentTreeNodeRegistry.values()); }
+
+// ── 历练悬赏（#117）──
+
+export function getBountyTemplateDef(id: string): BountyTemplateDef | undefined { return bountyTemplateRegistry.get(id); }
+export function getAllBountyTemplateDefs(): BountyTemplateDef[] { return Array.from(bountyTemplateRegistry.values()); }
+
+// ── 秘境（#95）──
+
+export function getSecretRealmDef(id: string): SecretRealmDef | undefined { return secretRealmRegistry.get(id); }
+export function getAllSecretRealmDefs(): SecretRealmDef[] { return Array.from(secretRealmRegistry.values()); }
 
 // ── 任务链（T0057）──
 

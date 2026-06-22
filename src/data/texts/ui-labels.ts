@@ -30,6 +30,8 @@ export const UI_LABELS = {
     map:         { title: '世界地图', icon: '🗺️' },
     npc:         { title: 'NPC', icon: '👥' },
     quest:       { title: '任务', icon: '📜' },
+    bounty:      { title: '历练悬赏', icon: '🏷️' },
+    secretRealm: { title: '秘境', icon: '🌙' },
     chronicle:   { title: '修仙履历', icon: '📋' },
     ranking:     { title: '榜单', icon: '🏅' },
     status:      { title: '详细属性', icon: '📋' },
@@ -80,4 +82,11 @@ export const UI_LABELS = {
   exitConfirmBody: '当前进度已自动存档，确定要返回主菜单吗？',
   exitConfirmOk: '确认返回',
   exitConfirmCancel: '继续修炼',
+  debugBountyRealm: {
+    title: '🏷️ 悬赏 / 秘境',
+    bountyReputation: (value: number) => `悬赏声望: ${value}`,
+    realmCooldowns: (value: number) => `秘境冷却: ${value}`,
+    addBountyReputation: '悬赏声望 +20',
+    clearRealmCooldown: '清空秘境冷却',
+  },
 } as const;

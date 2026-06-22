@@ -36,6 +36,7 @@ import { refreshRankingState } from '../game/ranking';
 import { ensureDestinyTalentState } from '../game/destiny';
 import { getDestinyDef } from '../game/registry';
 import { DESTINY_TEXTS } from '../data/texts';
+import { ensureBountyBoard } from '../game/bounty';
 
 // Re-export types so existing imports still work
 export type { CombatModalState, DeathModalState } from './useCombatModal';
@@ -94,7 +95,7 @@ export function useGameEngine(
     currentSlotRef.current = slotIndex;
     let p = createPlayer({ ...options, enabledDLCs: dlcIds });
     p = ensureDestinyTalentState(p);
-    p = refreshRankingState(p, true);
+    p = ensureBountyBoard(refreshRankingState(p, true), true);
     const rootDisplay = getSpiritRootDisplay(p.spiritRoots);
     writeSaveSlot(slotIndex, p);
     setPlayer(p);
@@ -136,7 +137,7 @@ export function useGameEngine(
       // T0073: 恢复程序化功法实例到全局查询表
       restoreTechniqueInstances(withRegions);
       const withDestiny = recalcStats(ensureDestinyTalentState(withRegions));
-      const withRankings = refreshRankingState(withDestiny, true);
+      const withRankings = ensureBountyBoard(refreshRankingState(withDestiny, true));
       setPlayer(withRankings);
       setGameOver(false);
       setGameOverReason('');
@@ -297,6 +298,7 @@ export function useGameEngine(
     }
 
     updated = refreshRankingState(updated);
+    updated = ensureBountyBoard(updated);
 
     // T0057: 任务超时检查
     const questTimeoutResult = checkQuestTimeouts(updated);
@@ -341,6 +343,8 @@ export function useGameEngine(
     travel, bodyBreakthrough, ascend,
     meetNpc, giveGift,
     acceptQuest, abandonQuest, deliverQuestItem, turnInQuest,
+    acceptBounty, claimBounty, refreshBounties,
+    startRealm, advanceRealm, finishRealm,
     startDialogue, dialogueSelectChoice, dialogueAdvance,
   } = useSystemActions({
     player, addLog, setPlayer, setGameOver, setGameOverReason, setDeathModal,
@@ -435,6 +439,12 @@ export function useGameEngine(
     deliverQuestItem,
     turnInQuest,
     setTrackedQuest,
+    acceptBounty,
+    claimBounty,
+    refreshBounties,
+    startRealm,
+    advanceRealm,
+    finishRealm,
     startDialogue,
     dialogueSelectChoice,
     dialogueAdvance,
@@ -455,4 +465,3 @@ export function useGameEngine(
     debugSetPlayer: setPlayer,
   };
 }
-

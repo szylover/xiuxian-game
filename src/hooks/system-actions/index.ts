@@ -21,6 +21,8 @@ import { useNpcActions } from './useNpcActions';
 import { useQuestActions } from './useQuestActions';
 import { useDialogueActions } from './useDialogueActions';
 import { useTalentTreeActions } from './useTalentTreeActions';
+import { useBountyActions } from './useBountyActions';
+import { useSecretRealmActions } from './useSecretRealmActions';
 
 export type { SystemActionDeps, ChronicleHooks } from './types';
 
@@ -58,6 +60,8 @@ export function useSystemActions(deps: SystemActionDeps) {
   const questActions = useQuestActions(ctx);
   const dialogueActions = useDialogueActions(ctx);
   const talentTreeActions = useTalentTreeActions(ctx);
+  const bountyActions = useBountyActions(ctx);
+  const secretRealmActions = useSecretRealmActions(ctx);
 
   return {
     ...inventoryActions,
@@ -74,5 +78,7 @@ export function useSystemActions(deps: SystemActionDeps) {
     ...questActions,
     ...dialogueActions,
     ...talentTreeActions,
+    ...bountyActions,
+    ...secretRealmActions,
   };
 }

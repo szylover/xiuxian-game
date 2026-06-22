@@ -19,3 +19,5 @@ export * from './procedural';
 export * from './dlc';
 export * from './ranking';
 export * from './destiny';
+export * from './bounty';
+export * from './secret-realm';

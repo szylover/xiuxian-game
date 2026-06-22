@@ -33,6 +33,8 @@ export type {
   RealmTier, AscensionDef, AscensionItemCost, AscensionCondition, AscensionState,
   RankingBoardKind, RankingScoreKey, RankingDimensionDef, RankingEntry, RankingSnapshot, RankingSystemState,
   DestinyRarity, DestinyTalentStatKey, DestinyTalentEffect, DestinyDef, TalentDef, TalentTreeNodeDef, DestinyTalentState, UnlockTalentNodeResult,
+  BountyObjectiveType, BountyObjectiveDef, BountyTemplateDef, GeneratedBounty, ActiveBounty, BountySystemState,
+  SecretRealmStageType, SecretRealmStageDef, SecretRealmDef, SecretRealmRun, SecretRealmSystemState,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
@@ -75,6 +77,8 @@ export {
   getAscensionDef, getAllAscensionDefs, getAscensionForRealm,
   getRankingDimensionDef, getAllRankingDimensionDefs, getRankingDimensionsByBoard,
   getDestinyDef, getAllDestinyDefs, getTalentDef, getAllTalentDefs, getTalentTreeNodeDef, getAllTalentTreeNodeDefs,
+  getBountyTemplateDef, getAllBountyTemplateDefs,
+  getSecretRealmDef, getAllSecretRealmDefs,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

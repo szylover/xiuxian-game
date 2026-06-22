@@ -16,6 +16,8 @@ import type { DialogueChainDef, IdleChatPool } from './dialogue';
 import type { AscensionDef } from './ascension';
 import type { RankingDimensionDef } from './ranking';
 import type { DestinyDef, TalentDef, TalentTreeNodeDef } from './destiny';
+import type { BountyTemplateDef } from './bounty';
+import type { SecretRealmDef } from './secret-realm';
 import type {
   EventTemplate,
   VariablePool,
@@ -71,4 +73,6 @@ export interface DLCPack {
   destinies?: DestinyDef[];                      // #110 命格定义
   talents?: TalentDef[];                          // #110 天赋定义
   talentTreeNodes?: TalentTreeNodeDef[];          // #215 天赋树节点定义
+  bountyTemplates?: BountyTemplateDef[];          // #117 悬赏模板
+  secretRealms?: SecretRealmDef[];                // #95 秘境定义
 }
