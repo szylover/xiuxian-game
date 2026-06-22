@@ -1,0 +1,76 @@
+[
+  {
+    "id": "core:qingyun_backhill_vein",
+    "name": "青云后山浅脉",
+    "icon": "⛰️",
+    "description": "镇外山脚的浅层矿脉，灵气温和，适合初学者练手。",
+    "regionId": "core:qingyun_town",
+    "regionTags": ["town", "safe"],
+    "minRealm": 0,
+    "fengShui": 2,
+    "staminaCost": 12,
+    "months": 1,
+    "baseYields": 2,
+    "yields": [
+      { "itemId": "core:iron_ore", "min": 1, "max": 3, "weight": 16 },
+      { "itemId": "core:spirit_stone_shard", "min": 1, "max": 2, "weight": 8 },
+      { "itemId": "core:jade_slip", "min": 1, "max": 1, "weight": 1, "rare": true }
+    ]
+  },
+  {
+    "id": "core:beast_mountain_metal_vein",
+    "name": "妖兽山金煞矿脉",
+    "icon": "⛏️",
+    "description": "山势如兽脊，金煞伏于岩层，产矿丰厚但妖气扰人。",
+    "regionId": "core:beast_mountain",
+    "regionTags": ["mountain", "wilderness"],
+    "minRealm": 1,
+    "fengShui": 4,
+    "staminaCost": 22,
+    "months": 1,
+    "baseYields": 3,
+    "yields": [
+      { "itemId": "core:iron_ore", "min": 2, "max": 5, "weight": 18 },
+      { "itemId": "core:monster_fang", "min": 1, "max": 2, "weight": 6 },
+      { "itemId": "core:monster_core", "min": 1, "max": 1, "weight": 2, "rare": true }
+    ]
+  },
+  {
+    "id": "core:desolate_waste_crystal_field",
+    "name": "荒原砂晶地眼",
+    "icon": "🏜️",
+    "description": "风蚀砂海中偶露晶眼，地气散乱却能凝出砂晶。",
+    "regionId": "core:desolate_waste",
+    "regionTags": ["wasteland", "wilderness"],
+    "minRealm": 2,
+    "fengShui": 3,
+    "staminaCost": 28,
+    "months": 1,
+    "baseYields": 3,
+    "yields": [
+      { "itemId": "core:sand_crystal", "min": 1, "max": 4, "weight": 16 },
+      { "itemId": "core:iron_ore", "min": 1, "max": 3, "weight": 8 },
+      { "itemId": "core:spirit_stone_shard", "min": 2, "max": 5, "weight": 7 },
+      { "itemId": "core:mystery_fragment", "min": 1, "max": 1, "weight": 1, "rare": true }
+    ]
+  },
+  {
+    "id": "core:mystic_realm_dragon_node",
+    "name": "秘境伏龙灵眼",
+    "icon": "🐉",
+    "description": "秘境深处山环水抱，疑有伏龙脉经过，稀有灵材随脉息浮沉。",
+    "regionId": "core:mystic_realm",
+    "regionTags": ["mystic", "dangerous"],
+    "minRealm": 3,
+    "fengShui": 5,
+    "staminaCost": 36,
+    "months": 2,
+    "baseYields": 4,
+    "yields": [
+      { "itemId": "core:mystery_fragment", "min": 1, "max": 3, "weight": 12 },
+      { "itemId": "core:monster_core", "min": 1, "max": 2, "weight": 8 },
+      { "itemId": "core:celestial_jade", "min": 1, "max": 1, "weight": 2, "rare": true },
+      { "itemId": "core:jade_slip", "min": 1, "max": 2, "weight": 5 }
+    ]
+  }
+]

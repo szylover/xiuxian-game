@@ -170,6 +170,11 @@ export default function App() {
             onAcceptBounty={engine.acceptBounty}
             onClaimBounty={engine.claimBounty}
             onRefreshBounties={engine.refreshBounties}
+            onBidAuctionLot={engine.bidAuctionLot}
+            onConsignAuction={engine.consignAuction}
+            onRefreshAuction={engine.refreshAuction}
+            onSettleAuction={engine.settleAuction}
+            onMineAtSite={engine.mineAtSite}
             onStartRealm={engine.startRealm}
             onAdvanceRealm={engine.advanceRealm}
             onFinishRealm={engine.finishRealm}

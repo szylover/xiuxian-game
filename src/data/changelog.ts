@@ -12,6 +12,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.26.0',
+    date: '2026-06-22',
+    title: '拍卖行与风水采矿',
+    items: [
+      '新增拍卖行系统，支持周期拍品、AI 追价、玩家竞拍结算与背包/灵石持久化',
+      '新增寄售玩法，可上架背包物品并在拍卖周期结算成交或流拍退回',
+      '新增风水采矿系统，按区域矿脉、风水品级与采矿/风水资质产出矿材和稀有资源',
+    ],
+  },
+  {
     version: '1.25.0',
     date: '2026-06-22',
     title: '研读学习与场景商铺',
@@ -514,3 +524,5 @@ export const CHANGELOG: ChangelogEntry[] = [
 
 /** 当前最新版本号 */
 export const CURRENT_VERSION = CHANGELOG[0].version;
+
+

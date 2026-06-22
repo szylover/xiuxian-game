@@ -57,7 +57,7 @@
 | [T0014](https://github.com/szylover/xiuxian-game/issues/70) | 装备系统 | T0012 | — | ✅ |
 | [T0015](https://github.com/szylover/xiuxian-game/issues/71) | 商店系统 | T0012 | — | ✅ |
 | [T0016](https://github.com/szylover/xiuxian-game/issues/72) | 炼器系统 | T0012, T0014 | — | ✅ |
-| [T0052](https://github.com/szylover/xiuxian-game/issues/115) | 拍卖行 | T0025, T0015 | [spec](specs/115-auction-house.md) | 📐 |
+| [T0052](https://github.com/szylover/xiuxian-game/issues/115) | 拍卖行 | T0025, T0015 | [spec](specs/115-auction-house.md) | ✅ |
 | [T0071](https://github.com/szylover/xiuxian-game/issues/182) | 程序化物品词缀系统（随机装备+品质变体） | T0012, T0014 | [spec](specs/T0071-procedural-items.md) | ✅ |
 
 ### 🏷️ 功法与技能
@@ -84,7 +84,7 @@
 | [T0021](https://github.com/szylover/xiuxian-game/issues/77) | 地图系统（多区域） | T0001 | [spec](specs/T0021-map-system.md) | ✅ |
 | [T0022](https://github.com/szylover/xiuxian-game/issues/94) | 区域事件 | T0007, T0021 | — | ✅ |
 | [T0023](https://github.com/szylover/xiuxian-game/issues/95) | 秘境探索（限时副本） | T0021, T0003 | [spec](specs/95-secret-realm.md) | ✅ |
-| [T0024](https://github.com/szylover/xiuxian-game/issues/96) | 风水采矿 | T0021, T0012 | — | ⬜ |
+| [T0024](https://github.com/szylover/xiuxian-game/issues/96) | 风水采矿 | T0021, T0012 | — | ✅ |
 | [T0054](https://github.com/szylover/xiuxian-game/issues/117) | 历练悬赏任务 | T0021, T0025 | [spec](specs/117-bounty-quests.md) | ✅ |
 
 ### 🏷️ 社交与NPC
@@ -259,3 +259,4 @@ interface DLCPack {
 6. **核心数据即 DLC**：`data/core-*.json` + `game/data.ts` 的内容最终整合进 `core` DLC 包，启动时自动注册
 7. **JSON 优先**：纯数值型内容（物品/丹药/妖兽/配方）优先用 JSON 定义 + Loader 转换，便于生成和 diff
 8. **Loader 模式**：每种内容类型可配套一个 `*-loader.ts`（类似 `event-loader.ts`），将 JSON 纯数据转为带函数的运行时对象
+

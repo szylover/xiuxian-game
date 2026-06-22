@@ -29,6 +29,10 @@ import { CORE_ACHIEVEMENTS } from '../achievement/data';
 import { CORE_RANKING_DIMENSIONS } from '../ranking';
 import { CORE_DESTINIES, CORE_TALENTS, CORE_TALENT_TREE_NODES } from '../destiny';
 import { CORE_ENLIGHTENMENT_INSIGHTS } from '../../data/dlc/core/enlightenment';
+import { registerAuctionLots } from '../auction';
+import type { AuctionLotDef } from '../auction';
+import { registerMiningSites } from '../feng-shui-mining';
+import type { MiningSiteDef } from '../feng-shui-mining';
 
 // ── 核心死亡触发条件 ──
 
@@ -265,6 +269,8 @@ export async function registerCoreEvents(): Promise<void> {
     { default: coreBountiesJson },
     { default: coreSecretRealmsJson },
     { default: coreSectsJson },
+    { default: coreAuctionLotsJson },
+    { default: coreMiningSitesJson },
   ] = await Promise.all([
     import('../../data/dlc/core/events.json'),
     import('../../data/dlc/core/items.json'),
@@ -286,6 +292,8 @@ export async function registerCoreEvents(): Promise<void> {
     import('../../data/dlc/core/bounties.json'),
     import('../../data/dlc/core/secret-realms.json'),
     import('../../data/dlc/core/sects.json'),
+    import('../../data/dlc/core/auction-lots.json'),
+    import('../../data/dlc/core/mining-sites.json'),
   ]);
 
   // 对话文件按 NPC 拆分，批量加载 dialogues/*.json（排除 idle-chat.json）
@@ -350,4 +358,6 @@ export async function registerCoreEvents(): Promise<void> {
     sects: coreSectsJson as SectDef[],
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
+  registerAuctionLots(coreAuctionLotsJson as AuctionLotDef[]);
+  registerMiningSites(coreMiningSitesJson as MiningSiteDef[]);
 }

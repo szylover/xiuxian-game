@@ -36,3 +36,5 @@ export { HEART_DEMON_TEXTS } from './heart-demon';
 export { PVP_TEXTS } from './pvp';
 export { LEARNING_TEXTS } from './learning';
 export { SCENE_SHOP_TEXTS } from './scene-shop';
+export { AUCTION_TEXTS } from './auction';
+export { MINING_TEXTS } from './mining';

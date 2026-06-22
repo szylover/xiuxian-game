@@ -23,6 +23,8 @@ export const UI_LABELS = {
   panels: {
     inventory:   { title: '背包', icon: '🎒' },
     shop:        { title: '商店', icon: '🏪' },
+    auction:     { title: '拍卖行', icon: '🔨' },
+    mining:      { title: '风水采矿', icon: '⛏️' },
     technique:   { title: '功法', icon: '📖' },
     learning:    { title: '研读', icon: '📜' },
     divine:      { title: '神通', icon: '✨' },

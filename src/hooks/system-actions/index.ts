@@ -28,6 +28,8 @@ import { useSectActions } from './useSectActions';
 import { useHeartDemonActions } from './useHeartDemonActions';
 import { usePvpActions } from './usePvpActions';
 import { useLearningActions } from './useLearningActions';
+import { useAuctionActions } from './useAuctionActions';
+import { useMiningActions } from './useMiningActions';
 
 export type { SystemActionDeps, ChronicleHooks } from './types';
 
@@ -72,6 +74,8 @@ export function useSystemActions(deps: SystemActionDeps) {
   const heartDemonActions = useHeartDemonActions(ctx);
   const pvpActions = usePvpActions(ctx);
   const learningActions = useLearningActions(ctx);
+  const auctionActions = useAuctionActions(ctx);
+  const miningActions = useMiningActions(ctx);
 
   return {
     ...inventoryActions,
@@ -95,5 +99,7 @@ export function useSystemActions(deps: SystemActionDeps) {
     ...heartDemonActions,
     ...pvpActions,
     ...learningActions,
+    ...auctionActions,
+    ...miningActions,
   };
 }

@@ -13,12 +13,14 @@ import { getPrimordialEndgameState } from '../../game/primordial-endgame';
 import { getDestinyTalentState } from '../../game/destiny';
 import { getBountyState } from '../../game/bounty';
 import { getSecretRealmState } from '../../game/secret-realm';
+import { getAuctionState } from '../../game/auction';
+import { getMiningState } from '../../game/feng-shui-mining';
 import { getAlignment, getKarmaTitle, getKarmaState } from '../../game/karma';
 import { getEnlightenmentState } from '../../game/enlightenment';
 import { getHeartDemonState } from '../../game/heart-demon';
 import { getPvpState } from '../../game/pvp';
 import { getSectState } from '../../game/sect';
-import { DESTINY_TEXTS, UI_LABELS, KARMA_TEXTS, ALIGNMENT_CN, ENLIGHTENMENT_TEXTS, HEART_DEMON_TEXTS, PVP_TEXTS, SECT_TEXTS, PRIMORDIAL_ENDGAME_TEXTS, LEARNING_TEXTS } from '../../data/texts';
+import { DESTINY_TEXTS, UI_LABELS, KARMA_TEXTS, ALIGNMENT_CN, ENLIGHTENMENT_TEXTS, HEART_DEMON_TEXTS, PVP_TEXTS, SECT_TEXTS, PRIMORDIAL_ENDGAME_TEXTS, LEARNING_TEXTS, AUCTION_TEXTS } from '../../data/texts';
 import './DebugStatsTab.css';
 
 // 可编辑数值行
@@ -147,6 +149,20 @@ export default function DebugStatsTab({ player, onSetStat, onFullRestore, onDebu
         <div className="debug-btns debug-btns-wrap">
           <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__bountyReputation', getBountyState(player).reputation + 20)}>{UI_LABELS.debugBountyRealm.addBountyReputation}</button>
           <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__secretRealmClearCooldown', 1)}>{UI_LABELS.debugBountyRealm.clearRealmCooldown}</button>
+        </div>
+      </div>
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{AUCTION_TEXTS.debug.title}</span>
+        <div className="debug-tracker-grid">
+          <div className="debug-tracker-dim">{AUCTION_TEXTS.debug.auctionLots(getAuctionState(player).lots.length)}</div>
+          <div className="debug-tracker-dim">{AUCTION_TEXTS.debug.consignments(getAuctionState(player).consignments.length)}</div>
+          <div className="debug-tracker-dim">{AUCTION_TEXTS.debug.miningCount(getMiningState(player).minedCount)}</div>
+        </div>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__auctionRefresh', 1)}>{AUCTION_TEXTS.debug.refreshAuction}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__auctionClear', 1)}>{AUCTION_TEXTS.debug.clearAuction}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__miningBoost', 5)}>{AUCTION_TEXTS.debug.boostMining}</button>
         </div>
       </div>
 

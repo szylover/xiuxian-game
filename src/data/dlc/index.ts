@@ -76,8 +76,12 @@ export function getDefaultEnabledDLCs(): string[] {
 export async function loadDLCs(dlcIds: string[]): Promise<void> {
   const { clearAllRegistries } = await import('../../game/registry/stores');
   const { clearShopGoods } = await import('../../game/shop');
+  const { clearAuctionLots } = await import('../../game/auction');
+  const { clearMiningSites } = await import('../../game/feng-shui-mining');
   clearAllRegistries();
   clearShopGoods();
+  clearAuctionLots();
+  clearMiningSites();
   for (const id of dlcIds) {
     const meta = ALL_DLCS.find(d => d.id === id);
     if (meta?.loader) await meta.loader();

@@ -21,6 +21,8 @@ import NpcPanel from '../panels/NpcPanel';
 import QuestPanel from '../panels/QuestPanel';
 import BountyPanel from '../panels/BountyPanel';
 import SecretRealmPanel from '../panels/SecretRealmPanel';
+import AuctionPanel from '../panels/AuctionPanel';
+import MiningPanel from '../panels/MiningPanel';
 import ChroniclePanel from '../panels/ChroniclePanel';
 import RankingPanel from '../panels/RankingPanel';
 import TalentPanel from '../panels/TalentPanel';
@@ -35,7 +37,7 @@ import { UI_LABELS } from '../../data/texts/ui-labels';
 const PANEL_WIDTHS: Partial<Record<PanelKey, number>> = {
   inventory: 380, technique: 400, learning: 420, divine: 420,
   crafting: 380, equipment: 380, achievement: 420, map: 420, npc: 380,
-  quest: 400, companion: 420, bounty: 420, secretRealm: 440, chronicle: 420, ranking: 520, pvp: 520, talent: 560, enlightenment: 500, heartDemon: 500, sect: 520,
+  quest: 400, companion: 420, bounty: 420, secretRealm: 440, auction: 460, mining: 440, chronicle: 420, ranking: 520, pvp: 520, talent: 560, enlightenment: 500, heartDemon: 500, sect: 520,
 };
 
 interface RightPanelProps {
@@ -84,6 +86,11 @@ interface RightPanelProps {
   onAcceptBounty: (bountyId: string) => void;
   onClaimBounty: (bountyId: string) => void;
   onRefreshBounties: () => void;
+  onBidAuctionLot: (lotId: string) => void;
+  onConsignAuction: (itemId: string, count: number, askPrice: number) => void;
+  onRefreshAuction: () => void;
+  onSettleAuction: () => void;
+  onMineAtSite: (siteId: string) => void;
   onStartRealm: (realmId: string) => void;
   onAdvanceRealm: () => void;
   onFinishRealm: () => void;
@@ -111,6 +118,7 @@ export default function RightPanel({
   onMeetNpc, onGiveGift, onFormDaoCompanion, onPerformDualCultivation, onDissolveDaoCompanion,
   onAcceptQuest, onAbandonQuest, onDeliverQuestItem, onTrackQuest,
   onAcceptBounty, onClaimBounty, onRefreshBounties,
+  onBidAuctionLot, onConsignAuction, onRefreshAuction, onSettleAuction, onMineAtSite,
   onStartRealm, onAdvanceRealm, onFinishRealm,
   onTurnInQuest,
   onStartDialogue, onDialogueSelectChoice, onDialogueAdvance,
@@ -143,6 +151,8 @@ export default function RightPanel({
           {activePanel === 'companion' && <CompanionPanel player={player} onFormDaoCompanion={onFormDaoCompanion} onPerformDualCultivation={onPerformDualCultivation} onDissolveDaoCompanion={onDissolveDaoCompanion} />}
           {activePanel === 'quest' && <QuestPanel player={player} onAcceptQuest={onAcceptQuest} onAbandonQuest={onAbandonQuest} onDeliverQuestItem={onDeliverQuestItem} onTrackQuest={onTrackQuest} />}
           {activePanel === 'bounty' && <BountyPanel player={player} onAcceptBounty={onAcceptBounty} onClaimBounty={onClaimBounty} onRefreshBounties={onRefreshBounties} />}
+          {activePanel === 'auction' && <AuctionPanel player={player} onBid={onBidAuctionLot} onConsign={onConsignAuction} onRefresh={onRefreshAuction} onSettle={onSettleAuction} />}
+          {activePanel === 'mining' && <MiningPanel player={player} onMine={onMineAtSite} />}
           {activePanel === 'secretRealm' && <SecretRealmPanel player={player} onStartRealm={onStartRealm} onAdvanceRealm={onAdvanceRealm} onFinishRealm={onFinishRealm} />}
           {activePanel === 'chronicle' && <ChroniclePanel chronicle={chronicle} />}
           {activePanel === 'ranking' && <RankingPanel player={player} />}

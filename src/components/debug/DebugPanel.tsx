@@ -18,6 +18,8 @@ import { getDestinyTalentState, setDestinyTalentState, getSortedTalentTreeNodes 
 import type { BottleneckState } from '../../game/types';
 import { completeStudy, getLearningState, setLearningState } from '../../game/learning';
 import { getAllRecipes, getAllSmithingRecipes } from '../../game/registry';
+import { refreshAuctionHouse, setAuctionState } from '../../game/auction';
+import { getMiningState, setMiningState } from '../../game/feng-shui-mining';
 
 import { CollapsiblePanel, TabBar } from '../shared';
 import DebugStatsTab from './DebugStatsTab';
@@ -85,6 +87,16 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
       if (key === '__secretRealmClearCooldown') {
         const secretRealm = (prev.systems.secretRealm ?? {}) as Record<string, unknown>;
         return { ...prev, systems: { ...prev.systems, secretRealm: { ...secretRealm, cooldowns: {} } } };
+      }
+      if (key === '__auctionRefresh') {
+        return refreshAuctionHouse(prev).player;
+      }
+      if (key === '__auctionClear') {
+        return setAuctionState(prev, { lots: [], consignments: [], lastRefreshAge: -1, cycleIndex: 0, history: [] });
+      }
+      if (key === '__miningBoost') {
+        const state = getMiningState(prev);
+        return setMiningState(prev, { ...state, minedCount: state.minedCount + value, totalFengShui: state.totalFengShui + value * 3 });
       }
       if (key === '__enlightenmentAddInsight') {
         const enlightenment = (prev.systems.enlightenment ?? {}) as Record<string, unknown>;

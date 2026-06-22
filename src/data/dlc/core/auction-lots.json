@@ -1,0 +1,11 @@
+[
+  { "id": "core:auction_hp_pill", "itemId": "core:hp_pill", "count": 5, "basePrice": 90, "minRealm": 0, "weight": 18, "regionTags": ["town", "city", "safe"] },
+  { "id": "core:auction_exp_pill", "itemId": "core:exp_pill", "count": 2, "basePrice": 160, "minRealm": 0, "weight": 14, "regionTags": ["town", "city", "safe"] },
+  { "id": "core:auction_iron_ore", "itemId": "core:iron_ore", "count": 20, "basePrice": 90, "minRealm": 0, "weight": 16, "regionTags": ["town", "mountain", "wilderness"] },
+  { "id": "core:auction_spirit_water", "itemId": "core:spirit_water", "count": 6, "basePrice": 180, "minRealm": 1, "weight": 10, "regionTags": ["valley", "town", "city"] },
+  { "id": "core:auction_snow_lotus", "itemId": "core:herb_snow_lotus", "count": 3, "basePrice": 220, "minRealm": 1, "weight": 8, "regionTags": ["valley", "mystic", "city"] },
+  { "id": "core:auction_monster_core", "itemId": "core:monster_core", "count": 4, "basePrice": 260, "minRealm": 2, "weight": 8, "regionTags": ["wilderness", "wasteland", "mystic"] },
+  { "id": "core:auction_sand_crystal", "itemId": "core:sand_crystal", "count": 8, "basePrice": 240, "minRealm": 2, "weight": 9, "regionTags": ["wasteland", "city"] },
+  { "id": "core:auction_celestial_jade", "itemId": "core:celestial_jade", "count": 2, "basePrice": 520, "minRealm": 4, "weight": 5, "regionTags": ["celestial", "city", "mystic"] },
+  { "id": "core:auction_full_restore", "itemId": "core:full_restore_pill", "count": 1, "basePrice": 900, "minRealm": 3, "weight": 4, "regionTags": ["city", "celestial", "mystic"] }
+]
