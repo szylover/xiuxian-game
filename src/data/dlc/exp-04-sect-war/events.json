@@ -1,0 +1,314 @@
+[
+  {
+    "id": "exp-04:border_patrol",
+    "category": "daily",
+    "tone": "good",
+    "name": "边境巡防",
+    "weight": 18,
+    "effects": {
+      "exp": 70,
+      "gold": 40,
+      "stamina": -8
+    },
+    "message": "🚩 你随宗门巡防边境，修为 +70，灵石 +40，精力 -8。",
+    "regionTags": [
+      "sect",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "exp-04:war_drums",
+    "category": "daily",
+    "tone": "neutral",
+    "name": "战鼓晨训",
+    "weight": 16,
+    "effects": {
+      "stamina": -10,
+      "exp": 90
+    },
+    "message": "🥁 宗门战鼓催动晨训，你挥汗演阵，精力 -10，修为 +90。"
+  },
+  {
+    "id": "exp-04:supply_convoy",
+    "category": "explore",
+    "tone": "good",
+    "name": "护送辎重",
+    "weight": 12,
+    "effects": {
+      "gold": 120,
+      "mood": 8
+    },
+    "message": "📦 你护送宗门辎重平安抵达，灵石 +120，心情 +8。",
+    "regionTags": [
+      "sect",
+      "trade"
+    ]
+  },
+  {
+    "id": "exp-04:enemy_scout",
+    "category": "explore",
+    "tone": "bad",
+    "name": "敌宗斥候",
+    "weight": 10,
+    "effects": {
+      "hp": -45,
+      "exp": 80
+    },
+    "message": "🕵️ 你遭遇敌宗斥候，短战后逼退对方，HP -45，修为 +80。",
+    "regionTags": [
+      "dangerous",
+      "sect"
+    ]
+  },
+  {
+    "id": "exp-04:territory_banner",
+    "category": "explore",
+    "tone": "good",
+    "name": "插旗占点",
+    "weight": 8,
+    "effects": {
+      "mood": 12,
+      "gold": 80
+    },
+    "message": "🚩 你在灵脉节点插下宗门战旗，心情 +12，灵石 +80。",
+    "condition": {
+      "minRealm": 1
+    }
+  },
+  {
+    "id": "exp-04:spy_report",
+    "category": "adventure",
+    "tone": "neutral",
+    "name": "密探情报",
+    "weight": 8,
+    "effects": {
+      "mentalPower": 35,
+      "gold": -30
+    },
+    "message": "📜 你购得敌宗布防情报，念力 +35，灵石 -30。",
+    "condition": {
+      "minGold": 30,
+      "minRealm": 1
+    }
+  },
+  {
+    "id": "exp-04:duel_challenge",
+    "category": "adventure",
+    "tone": "good",
+    "name": "阵前斗法",
+    "weight": 7,
+    "effects": {
+      "exp": 220,
+      "mood": 10
+    },
+    "message": "⚔️ 你在阵前斗法中胜出，修为 +220，心情 +10。",
+    "condition": {
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "exp-04:formation_backlash",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "战阵反噬",
+    "weight": 6,
+    "effects": {
+      "hp": -90,
+      "mp": -70
+    },
+    "message": "🛡️ 护宗战阵一时反噬，你强行稳阵，HP -90，灵力 -70。",
+    "condition": {
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "exp-04:alliance_feast",
+    "category": "daily",
+    "tone": "good",
+    "name": "盟宗宴饮",
+    "weight": 8,
+    "effects": {
+      "mood": 20,
+      "health": 8
+    },
+    "message": "🍶 盟宗设宴鼓舞士气，心情 +20，健康 +8。"
+  },
+  {
+    "id": "exp-04:lost_outpost",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "前哨失守",
+    "weight": 5,
+    "effects": {
+      "mood": -12,
+      "stamina": -18
+    },
+    "message": "🔥 前哨被敌宗夜袭，你赶到时已成焦土，心情 -12，精力 -18。",
+    "condition": {
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "exp-04:counter_raid",
+    "category": "adventure",
+    "tone": "good",
+    "name": "反袭灵矿",
+    "weight": 5,
+    "effects": {
+      "gold": [
+        220,
+        420
+      ],
+      "exp": 260
+    },
+    "message": "⛏️ 你参与反袭敌宗灵矿，缴获大量灵石并增长战斗经验。",
+    "condition": {
+      "minRealm": 3
+    }
+  },
+  {
+    "id": "exp-04:sect_reputation",
+    "category": "daily",
+    "tone": "good",
+    "name": "宗名远播",
+    "weight": 7,
+    "effects": {
+      "mood": 14,
+      "exp": 120
+    },
+    "message": "🏯 宗门威名传遍附近坊市，你也受人敬重，心情 +14，修为 +120。",
+    "condition": {
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "exp-04:wounded_disciple",
+    "category": "explore",
+    "tone": "good",
+    "name": "救回同门",
+    "weight": 9,
+    "effects": {
+      "karmaChange": 3,
+      "mood": 8,
+      "stamina": -8
+    },
+    "message": "🩹 你从战场救回受伤同门，正邪值上升，心情 +8，精力 -8。",
+    "regionTags": [
+      "dangerous",
+      "sect"
+    ]
+  },
+  {
+    "id": "exp-04:plunder_temptation",
+    "category": "explore",
+    "tone": "bad",
+    "name": "战利诱惑",
+    "weight": 6,
+    "effects": {
+      "karmaChange": -4,
+      "gold": 180,
+      "mood": -6
+    },
+    "message": "💰 你私取一袋战利品，正邪值下降，灵石 +180，心情 -6。",
+    "condition": {
+      "minRealm": 1
+    }
+  },
+  {
+    "id": "exp-04:war_council",
+    "category": "daily",
+    "tone": "neutral",
+    "name": "战议旁听",
+    "weight": 12,
+    "effects": {
+      "mentalPower": 25,
+      "exp": 50
+    },
+    "message": "🧭 你旁听宗门战议，记下攻守取舍，念力 +25，修为 +50。"
+  },
+  {
+    "id": "exp-04:banner_blessing",
+    "category": "adventure",
+    "tone": "good",
+    "name": "战旗赐福",
+    "weight": 4,
+    "effects": {
+      "hp": "max",
+      "mp": "max",
+      "mood": 15
+    },
+    "message": "🏳️ 宗门战旗垂下灵光，HP 与灵力尽复，心情 +15。",
+    "condition": {
+      "minRealm": 2,
+      "minLuck": 35
+    }
+  },
+  {
+    "id": "exp-04:rival_elder_pressure",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "敌宗长老威压",
+    "weight": 4,
+    "effects": {
+      "hp": -160,
+      "mentalPower": -40
+    },
+    "message": "🧓 敌宗长老隔空施压，你咬牙抵住，HP -160，念力 -40。",
+    "condition": {
+      "minRealm": 3
+    }
+  },
+  {
+    "id": "exp-04:territory_tax",
+    "category": "daily",
+    "tone": "good",
+    "name": "领地分润",
+    "weight": 8,
+    "effects": {
+      "gold": 160
+    },
+    "message": "🧾 宗门领地分润发放，灵石 +160。",
+    "condition": {
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "exp-04:secret_march",
+    "category": "explore",
+    "tone": "neutral",
+    "name": "夜行军",
+    "weight": 10,
+    "effects": {
+      "stamina": -22,
+      "exp": 120
+    },
+    "message": "🌙 你随队夜行突进，精力 -22，修为 +120。",
+    "regionTags": [
+      "wilderness",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "exp-04:great_victory",
+    "category": "adventure",
+    "tone": "good",
+    "name": "宗战大捷",
+    "weight": 3,
+    "effects": {
+      "exp": [
+        800,
+        1500
+      ],
+      "gold": [
+        500,
+        900
+      ],
+      "mood": 25
+    },
+    "message": "🏆 宗门大会战大捷，你分得丰厚战功奖励。",
+    "condition": {
+      "minRealm": 4,
+      "minLuck": 40
+    }
+  }
+]

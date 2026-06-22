@@ -1,0 +1,262 @@
+[
+  {
+    "id": "exp-01:quest_first_week",
+    "name": "七日不断",
+    "description": "灵历童子邀请你完成一轮七日签到试炼。",
+    "icon": "📅",
+    "category": "main",
+    "condition": {
+      "minRealm": 0
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "前往签到殿",
+        "description": "前往签到殿，领取第一枚签到玉简。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "exp-01:checkin_hall",
+            "description": "前往签到殿"
+          }
+        ],
+        "dialogueSnippet": "灵历童子认真叮嘱：「修行贵在坚持，签到也是如此。」"
+      },
+      {
+        "id": "step_2",
+        "name": "收集签到凭证",
+        "description": "准备签到玉简与登录香，完成首周仪式。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "exp-01:daily_jade_slip",
+            "count": 3,
+            "description": "收集签到玉简 (0/3)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "exp-01:login_incense",
+            "count": 2,
+            "description": "收集登录香 (0/2)"
+          }
+        ],
+        "rewards": {
+          "exp": 80,
+          "items": [
+            {
+              "itemId": "exp-01:streak_pill",
+              "count": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "step_3",
+        "name": "每日例行",
+        "description": "完成 5 次日常行动，养成稳定签到节奏。",
+        "objectives": [
+          {
+            "type": "cultivate_count",
+            "count": 3,
+            "description": "完成修炼 (0/3)"
+          },
+          {
+            "type": "explore_count",
+            "count": 2,
+            "description": "完成探索 (0/2)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 260,
+      "gold": 120,
+      "items": [
+        {
+          "itemId": "exp-01:seven_day_box",
+          "count": 1
+        },
+        {
+          "itemId": "exp-01:makeup_token",
+          "count": 2
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "auto"
+    },
+    "turnInNpcId": "exp-01:npc_calendar_spirit",
+    "repeatable": false
+  },
+  {
+    "id": "exp-01:quest_reward_market",
+    "name": "奖励坊市",
+    "description": "宝匣掌柜需要你证明自己懂得领取、整理与兑换奖励。",
+    "icon": "🎁",
+    "category": "side",
+    "condition": {
+      "minRealm": 1,
+      "requiredQuests": [
+        "exp-01:quest_first_week"
+      ]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "抵达奖励坊市",
+        "description": "前往奖励坊市，见识各式签到宝匣。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "exp-01:reward_market",
+            "description": "前往奖励坊市"
+          }
+        ]
+      },
+      {
+        "id": "step_2",
+        "name": "准备兑换材料",
+        "description": "收集补签令、尊享灵钻与灵历残页。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "exp-01:makeup_token",
+            "count": 2,
+            "description": "收集补签令 (0/2)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "exp-01:premium_gem",
+            "count": 1,
+            "description": "收集尊享灵钻 (0/1)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "exp-01:calendar_page",
+            "count": 3,
+            "description": "收集灵历残页 (0/3)"
+          }
+        ],
+        "rewards": {
+          "gold": 120
+        }
+      },
+      {
+        "id": "step_3",
+        "name": "清理宝匣拟怪",
+        "description": "击败奖励坊市里伪装成宝匣的妖物。",
+        "objectives": [
+          {
+            "type": "kill_monster",
+            "targetId": "exp-01:reward_box_mimic",
+            "count": 1,
+            "description": "击败宝匣拟怪 (0/1)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 800,
+      "gold": 300,
+      "items": [
+        {
+          "itemId": "exp-01:monthly_card",
+          "count": 1
+        },
+        {
+          "itemId": "exp-01:golden_checkin_seal",
+          "count": 1
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "npc",
+      "npcId": "exp-01:npc_reward_broker"
+    },
+    "turnInNpcId": "exp-01:npc_reward_broker",
+    "repeatable": false
+  },
+  {
+    "id": "exp-01:quest_idle_cave",
+    "name": "挂机洞府",
+    "description": "挂机阵师正在调试自动吐纳阵，需要你协助收集稳定阵材。",
+    "icon": "🤖",
+    "category": "side",
+    "condition": {
+      "minRealm": 2,
+      "requiredQuests": [
+        "exp-01:quest_reward_market"
+      ]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "寻找挂机洞府",
+        "description": "前往挂机洞府拜访阵师。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "exp-01:idle_cave",
+            "description": "前往挂机洞府"
+          }
+        ]
+      },
+      {
+        "id": "step_2",
+        "name": "校准自动阵",
+        "description": "收集挂机符牌与金签印，校准自动吐纳阵。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "exp-01:auto_cultivation_tag",
+            "count": 2,
+            "description": "收集挂机符牌 (0/2)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "exp-01:golden_checkin_seal",
+            "count": 1,
+            "description": "收集金签印 (0/1)"
+          }
+        ]
+      },
+      {
+        "id": "step_3",
+        "name": "测试阵盘稳定",
+        "description": "在洞府内完成战斗与修炼，验证挂机收益不会失控。",
+        "objectives": [
+          {
+            "type": "combat_count",
+            "count": 2,
+            "description": "完成战斗 (0/2)"
+          },
+          {
+            "type": "cultivate_count",
+            "count": 3,
+            "description": "完成修炼 (0/3)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 1800,
+      "gold": 600,
+      "items": [
+        {
+          "itemId": "exp-01:returnee_bundle",
+          "count": 1
+        },
+        {
+          "itemId": "exp-01:seven_day_box",
+          "count": 2
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "npc",
+      "npcId": "exp-01:npc_idle_array_master"
+    },
+    "turnInNpcId": "exp-01:npc_idle_array_master",
+    "repeatable": false
+  }
+]

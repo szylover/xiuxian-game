@@ -1,0 +1,358 @@
+[
+  {
+    "id": "exp-04:red_banner_war_sect",
+    "name": "赤旗战宗",
+    "description": "以战旗立宗，重边境攻防与阵前斗法，弟子多习枪刀。",
+    "alignment": "righteous",
+    "minRealm": 1,
+    "minKarma": -10,
+    "entryGold": 120,
+    "founderNpcIds": [
+      "exp-04:npc_banner_general"
+    ],
+    "ranks": [
+      {
+        "id": "warrior",
+        "name": "战堂弟子",
+        "minContribution": 0,
+        "stipendGold": 35,
+        "stipendContribution": 14,
+        "cultivationBonus": 0.04,
+        "statBonuses": {
+          "atk": 8,
+          "hp": 30
+        },
+        "techniqueIds": [
+          "exp-04:battle_banner_spear"
+        ]
+      },
+      {
+        "id": "captain",
+        "name": "旗队执事",
+        "minContribution": 160,
+        "stipendGold": 85,
+        "stipendContribution": 24,
+        "cultivationBonus": 0.09,
+        "statBonuses": {
+          "atk": 18,
+          "def": 8,
+          "hp": 80
+        },
+        "techniqueIds": [
+          "exp-04:battle_banner_spear",
+          "exp-04:fortress_body_art"
+        ]
+      },
+      {
+        "id": "commander",
+        "name": "战堡统领",
+        "minContribution": 460,
+        "stipendGold": 180,
+        "stipendContribution": 38,
+        "cultivationBonus": 0.16,
+        "statBonuses": {
+          "atk": 36,
+          "def": 18,
+          "hp": 180
+        },
+        "techniqueIds": [
+          "exp-04:battle_banner_spear",
+          "exp-04:fortress_body_art",
+          "exp-04:thousand_army_blade"
+        ]
+      }
+    ],
+    "store": [
+      {
+        "itemId": "exp-04:war_supply_crate",
+        "contributionCost": 60,
+        "minRankId": "warrior",
+        "stockPerYear": 3
+      },
+      {
+        "itemId": "exp-04:sect_banner",
+        "contributionCost": 180,
+        "minRankId": "captain",
+        "stockPerYear": 1
+      },
+      {
+        "itemId": "exp-04:formation_core",
+        "contributionCost": 360,
+        "minRankId": "commander",
+        "stockPerYear": 1
+      }
+    ],
+    "missions": [
+      {
+        "id": "red_banner_patrol",
+        "title": "边堡巡防",
+        "description": "巡查边堡外三十里，清理敌宗斥候。",
+        "type": "patrol",
+        "minRankId": "warrior",
+        "staminaCost": 18,
+        "reward": {
+          "exp": 80,
+          "gold": 45,
+          "contribution": 30,
+          "sectPrestige": 2
+        },
+        "repeatCooldownMonths": 2
+      },
+      {
+        "id": "red_banner_donate_stone",
+        "title": "加固旗阵",
+        "description": "上交固阵石，加固边堡旗阵。",
+        "type": "donate_item",
+        "minRankId": "warrior",
+        "itemCost": {
+          "itemId": "exp-04:fortification_stone",
+          "count": 2
+        },
+        "reward": {
+          "contribution": 55,
+          "sectPrestige": 3
+        },
+        "repeatCooldownMonths": 3
+      },
+      {
+        "id": "red_banner_command",
+        "title": "主持旗队操练",
+        "description": "组织旗队演练冲阵与退守。",
+        "type": "manage",
+        "minRankId": "captain",
+        "staminaCost": 24,
+        "reward": {
+          "exp": 160,
+          "gold": 90,
+          "contribution": 70,
+          "sectPrestige": 5
+        },
+        "repeatCooldownMonths": 4
+      }
+    ],
+    "facilities": [
+      {
+        "id": "banner_array",
+        "name": "战旗大阵",
+        "description": "以战旗凝聚士气与防线。",
+        "maxLevel": 4,
+        "upgradeCost": {
+          "treasury": 260,
+          "ore": 20,
+          "prestige": 8
+        },
+        "effects": {
+          "cultivationBonus": 0.03,
+          "oreYield": 2,
+          "treasuryYield": 8
+        }
+      },
+      {
+        "id": "war_drill_ground",
+        "name": "演武校场",
+        "description": "训练弟子协同作战。",
+        "maxLevel": 4,
+        "upgradeCost": {
+          "treasury": 220,
+          "herbs": 8,
+          "prestige": 6
+        },
+        "effects": {
+          "cultivationBonus": 0.04,
+          "recruitBonus": 2
+        }
+      },
+      {
+        "id": "front_supply_depot",
+        "name": "前线仓",
+        "description": "存放战备辎重，提升府库产出。",
+        "maxLevel": 3,
+        "upgradeCost": {
+          "treasury": 240,
+          "ore": 12
+        },
+        "effects": {
+          "treasuryYield": 14,
+          "herbYield": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "exp-04:war_merit_alliance",
+    "name": "战功盟",
+    "description": "多宗战后成立的中立盟会，专司战功裁定、调停与赏罚。",
+    "alignment": "neutral",
+    "minRealm": 1,
+    "entryGold": 100,
+    "founderNpcIds": [
+      "exp-04:npc_war_elder",
+      "exp-04:npc_shadow_strategist"
+    ],
+    "ranks": [
+      {
+        "id": "registrar",
+        "name": "记功客卿",
+        "minContribution": 0,
+        "stipendGold": 30,
+        "stipendContribution": 12,
+        "cultivationBonus": 0.03,
+        "statBonuses": {
+          "mp": 20
+        },
+        "techniqueIds": [
+          "exp-04:battle_banner_spear"
+        ]
+      },
+      {
+        "id": "arbiter",
+        "name": "裁功执事",
+        "minContribution": 140,
+        "stipendGold": 75,
+        "stipendContribution": 22,
+        "cultivationBonus": 0.08,
+        "statBonuses": {
+          "mp": 55,
+          "def": 10
+        },
+        "techniqueIds": [
+          "exp-04:fortress_body_art",
+          "exp-04:thousand_army_blade"
+        ]
+      },
+      {
+        "id": "strategist",
+        "name": "盟战谋主",
+        "minContribution": 420,
+        "stipendGold": 160,
+        "stipendContribution": 36,
+        "cultivationBonus": 0.14,
+        "statBonuses": {
+          "mp": 120,
+          "atk": 24,
+          "speed": 4
+        },
+        "techniqueIds": [
+          "exp-04:thousand_army_blade",
+          "exp-04:dominion_sword_record"
+        ]
+      }
+    ],
+    "store": [
+      {
+        "itemId": "exp-04:scout_talisman",
+        "contributionCost": 45,
+        "minRankId": "registrar",
+        "stockPerYear": 4
+      },
+      {
+        "itemId": "exp-04:territory_map",
+        "contributionCost": 160,
+        "minRankId": "arbiter",
+        "stockPerYear": 1
+      },
+      {
+        "itemId": "exp-04:spirit_mine_deed",
+        "contributionCost": 420,
+        "minRankId": "strategist",
+        "stockPerYear": 1
+      }
+    ],
+    "missions": [
+      {
+        "id": "alliance_record_merit",
+        "title": "核验战功",
+        "description": "核验各宗提交的战功令，防止冒领。",
+        "type": "manage",
+        "minRankId": "registrar",
+        "staminaCost": 14,
+        "reward": {
+          "exp": 60,
+          "gold": 60,
+          "contribution": 28,
+          "sectPrestige": 2
+        },
+        "repeatCooldownMonths": 2
+      },
+      {
+        "id": "alliance_collect_seals",
+        "title": "回收敌宗印信",
+        "description": "上交敌宗印信作为战场凭证。",
+        "type": "donate_item",
+        "minRankId": "registrar",
+        "itemCost": {
+          "itemId": "exp-04:rival_seal",
+          "count": 2
+        },
+        "reward": {
+          "gold": 80,
+          "contribution": 60,
+          "sectPrestige": 3
+        },
+        "repeatCooldownMonths": 3
+      },
+      {
+        "id": "alliance_plan_front",
+        "title": "推演前线",
+        "description": "根据疆域图推演下一轮领地争夺。",
+        "type": "manage",
+        "minRankId": "arbiter",
+        "staminaCost": 22,
+        "reward": {
+          "exp": 180,
+          "gold": 120,
+          "contribution": 75,
+          "sectPrestige": 5
+        },
+        "repeatCooldownMonths": 4
+      }
+    ],
+    "facilities": [
+      {
+        "id": "merit_archive",
+        "name": "战功档案阁",
+        "description": "保存战功记录与疆域变更。",
+        "maxLevel": 4,
+        "upgradeCost": {
+          "treasury": 230,
+          "herbs": 8,
+          "prestige": 8
+        },
+        "effects": {
+          "cultivationBonus": 0.02,
+          "treasuryYield": 10
+        }
+      },
+      {
+        "id": "strategy_table",
+        "name": "沙盘议事厅",
+        "description": "用于推演宗战局势的沙盘。",
+        "maxLevel": 4,
+        "upgradeCost": {
+          "treasury": 260,
+          "ore": 16,
+          "prestige": 10
+        },
+        "effects": {
+          "recruitBonus": 3,
+          "cultivationBonus": 0.03
+        }
+      },
+      {
+        "id": "neutral_market",
+        "name": "中立军市",
+        "description": "各宗默认休战交易的军市。",
+        "maxLevel": 3,
+        "upgradeCost": {
+          "treasury": 240,
+          "ore": 10
+        },
+        "effects": {
+          "treasuryYield": 18,
+          "herbYield": 1,
+          "oreYield": 1
+        }
+      }
+    ]
+  }
+]

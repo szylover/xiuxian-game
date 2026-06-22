@@ -12,6 +12,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.27.0',
+    date: '2026-06-22',
+    title: '四大扩展包',
+    items: [
+      '新增签到模拟器、无限秘境、量劫天道、宗门争霸四个可选扩展包',
+      '每个扩展包提供主题事件、物品、妖兽、功法、区域、NPC 与任务链等数据内容',
+      '无限秘境新增多座秘境定义，宗门争霸新增宗门定义，可在开始界面 DLC 列表勾选加载',
+    ],
+  },
+  {
     version: '1.26.0',
     date: '2026-06-22',
     title: '拍卖行与风水采矿',
@@ -524,5 +534,4 @@ export const CHANGELOG: ChangelogEntry[] = [
 
 /** 当前最新版本号 */
 export const CURRENT_VERSION = CHANGELOG[0].version;
-
 

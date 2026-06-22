@@ -1,0 +1,127 @@
+[
+  {
+    "id": "exp-03:npc_heavenly_clerk",
+    "name": "司命书吏",
+    "title": "天账执笔",
+    "emoji": "📒",
+    "gender": "male",
+    "description": "替天道记录因果的小吏，语气平静得令人不安。",
+    "realmIndex": 5,
+    "hp": 7200,
+    "atk": 360,
+    "def": 300,
+    "speed": 24,
+    "critRate": 10,
+    "critResist": 20,
+    "critDmgMultiplier": 1.5,
+    "disposition": "neutral",
+    "roles": [
+      "elder"
+    ],
+    "personality": "cold",
+    "charisma": 60,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ],
+    "homeRegionId": "exp-03:heavenly_ledger_cliff",
+    "minRealm": 3,
+    "alignment": "neutral",
+    "giftPreferences": {
+      "loved": [
+        "exp-03:fate_thread",
+        "exp-03:heavenly_decree"
+      ],
+      "liked": [
+        "exp-03:merit_jade"
+      ],
+      "disliked": [
+        "exp-03:chaos_slag"
+      ]
+    }
+  },
+  {
+    "id": "exp-03:npc_merit_fairy",
+    "name": "功德仙子",
+    "title": "金光巡使",
+    "emoji": "✨",
+    "gender": "female",
+    "description": "随功德金光而来的巡使，专查量劫中的护生之举。",
+    "realmIndex": 4,
+    "hp": 4200,
+    "atk": 240,
+    "def": 210,
+    "speed": 30,
+    "critRate": 9,
+    "critResist": 16,
+    "critDmgMultiplier": 1.5,
+    "disposition": "friendly",
+    "roles": [
+      "wanderer"
+    ],
+    "personality": "righteous",
+    "charisma": 78,
+    "regionTags": [
+      "celestial",
+      "safe"
+    ],
+    "homeRegionId": "exp-03:calamity_wasteland",
+    "minRealm": 2,
+    "alignment": "righteous",
+    "giftPreferences": {
+      "loved": [
+        "exp-03:merit_jade",
+        "exp-03:calamity_lotus_seed"
+      ],
+      "liked": [
+        "exp-03:karma_wash_water"
+      ],
+      "disliked": [
+        "exp-03:calamity_ash"
+      ]
+    }
+  },
+  {
+    "id": "exp-03:npc_calamity_prophet",
+    "name": "量劫道人",
+    "title": "劫数预言者",
+    "emoji": "⌛",
+    "gender": "male",
+    "description": "总能提前半步看见大劫，却从不说完整。",
+    "realmIndex": 6,
+    "hp": 14000,
+    "atk": 680,
+    "def": 480,
+    "speed": 28,
+    "critRate": 13,
+    "critResist": 24,
+    "critDmgMultiplier": 1.7,
+    "disposition": "neutral",
+    "roles": [
+      "elder",
+      "wanderer"
+    ],
+    "personality": "mysterious",
+    "charisma": 66,
+    "regionTags": [
+      "mystic",
+      "dangerous"
+    ],
+    "homeRegionId": "exp-03:chaos_fate_river",
+    "minRealm": 4,
+    "alignment": "neutral",
+    "giftPreferences": {
+      "loved": [
+        "exp-03:saint_bone_script",
+        "exp-03:sky_eye_shard"
+      ],
+      "liked": [
+        "exp-03:tribulation_pearl",
+        "exp-03:heavenly_decree"
+      ],
+      "disliked": [
+        "exp-03:dao_seal_charm"
+      ]
+    }
+  }
+]

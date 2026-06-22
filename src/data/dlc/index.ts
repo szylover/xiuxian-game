@@ -65,6 +65,38 @@ export const ALL_DLCS: DLCMeta[] = [
       await registerCP05();
     },
   },
+  {
+    id: 'exp-01', name: '签到模拟器', description: '系统流扩展 — 新增签到、连签、补签与日常奖励主题内容',
+    version: '1.0.0', type: 'expansion', required: false,
+    loader: async () => {
+      const { registerEXP01 } = await import('./exp-01-qiandao/loader');
+      await registerEXP01();
+    },
+  },
+  {
+    id: 'exp-02', name: '无限秘境', description: '无限流扩展 — 新增层叠秘境、秘境妖兽、轮回宝材与探索任务',
+    version: '1.0.0', type: 'expansion', required: false,
+    loader: async () => {
+      const { registerEXP02 } = await import('./exp-02-infinite-secret-realm/loader');
+      await registerEXP02();
+    },
+  },
+  {
+    id: 'exp-03', name: '量劫天道', description: '洪荒终局扩展 — 新增量劫、天道感应、劫灰宝材与道劫试炼内容',
+    version: '1.0.0', type: 'expansion', required: false,
+    loader: async () => {
+      const { registerEXP03 } = await import('./exp-03-liangjie-tiandao/loader');
+      await registerEXP03();
+    },
+  },
+  {
+    id: 'exp-04', name: '宗门争霸', description: '宗门流扩展 — 新增宗门战争、领地争夺、战功资源与宗门任务内容',
+    version: '1.0.0', type: 'expansion', required: false,
+    loader: async () => {
+      const { registerEXP04 } = await import('./exp-04-sect-war/loader');
+      await registerEXP04();
+    },
+  },
 ];
 
 /** 获取默认启用的 DLC ID 列表（默认勾选 core） */

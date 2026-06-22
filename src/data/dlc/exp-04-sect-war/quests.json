@@ -1,0 +1,264 @@
+[
+  {
+    "id": "exp-04:quest_border_oath",
+    "name": "边堡立旗",
+    "description": "赤旗战将邀请你参与边境立旗，熟悉宗门战场规矩。",
+    "icon": "🚩",
+    "category": "main",
+    "condition": {
+      "minRealm": 1
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "前往边境战堡",
+        "description": "抵达边境战堡，拜见赤旗战将。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "exp-04:border_fort",
+            "description": "前往边境战堡"
+          }
+        ],
+        "dialogueSnippet": "赤旗战将按住枪杆：「入宗战场，先记住旗在哪里。」"
+      },
+      {
+        "id": "step_2",
+        "name": "准备立旗物资",
+        "description": "收集宗门战旗、固阵石与战备箱。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "exp-04:sect_banner",
+            "count": 1,
+            "description": "收集宗门战旗 (0/1)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "exp-04:fortification_stone",
+            "count": 3,
+            "description": "收集固阵石 (0/3)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "exp-04:war_supply_crate",
+            "count": 1,
+            "description": "准备战备箱 (0/1)"
+          }
+        ],
+        "rewards": {
+          "exp": 300
+        }
+      },
+      {
+        "id": "step_3",
+        "name": "驱逐敌宗斥候",
+        "description": "清理潜伏在边堡附近的斥候。",
+        "objectives": [
+          {
+            "type": "kill_monster",
+            "targetId": "exp-04:rival_scout",
+            "count": 3,
+            "description": "击败敌宗斥候 (0/3)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 1400,
+      "gold": 600,
+      "items": [
+        {
+          "itemId": "exp-04:battle_merit_token",
+          "count": 4
+        },
+        {
+          "itemId": "exp-04:scout_talisman",
+          "count": 2
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "auto"
+    },
+    "turnInNpcId": "exp-04:npc_banner_general",
+    "repeatable": false
+  },
+  {
+    "id": "exp-04:quest_spirit_mine_front",
+    "name": "灵矿争夺",
+    "description": "战功堂发布灵矿前线委托，要求夺回一批矿脉凭证。",
+    "icon": "⛏️",
+    "category": "main",
+    "condition": {
+      "minRealm": 2,
+      "requiredQuests": [
+        "exp-04:quest_border_oath"
+      ]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "奔赴灵矿前线",
+        "description": "前往灵矿前线。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "exp-04:spirit_mine_front",
+            "description": "前往灵矿前线"
+          }
+        ]
+      },
+      {
+        "id": "step_2",
+        "name": "收集战场凭证",
+        "description": "收集敌宗印信、缴获辎重与灵矿契。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "exp-04:rival_seal",
+            "count": 3,
+            "description": "收集敌宗印信 (0/3)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "exp-04:captured_supply",
+            "count": 5,
+            "description": "收集缴获辎重 (0/5)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "exp-04:spirit_mine_deed",
+            "count": 1,
+            "description": "取得灵矿契 (0/1)"
+          }
+        ],
+        "rewards": {
+          "gold": 300
+        }
+      },
+      {
+        "id": "step_3",
+        "name": "击退敌宗精锐",
+        "description": "击败前线敌宗精锐。",
+        "objectives": [
+          {
+            "type": "kill_monster",
+            "targetId": "exp-04:rival_elite",
+            "count": 2,
+            "description": "击败敌宗精锐 (0/2)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 4200,
+      "gold": 1600,
+      "items": [
+        {
+          "itemId": "exp-04:territory_map",
+          "count": 1
+        },
+        {
+          "itemId": "exp-04:formation_core",
+          "count": 1
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "npc",
+      "npcId": "exp-04:npc_war_elder"
+    },
+    "turnInNpcId": "exp-04:npc_war_elder",
+    "repeatable": false
+  },
+  {
+    "id": "exp-04:quest_alliance_battle",
+    "name": "盟战古原",
+    "description": "玄策先生正在组织盟战推演，目标是关闭古原失控战阵。",
+    "icon": "⚔️",
+    "category": "main",
+    "condition": {
+      "minRealm": 3,
+      "requiredQuests": [
+        "exp-04:quest_spirit_mine_front"
+      ]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "进入盟战古原",
+        "description": "前往盟战古原调查残阵。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "exp-04:alliance_battlefield",
+            "description": "前往盟战古原"
+          }
+        ]
+      },
+      {
+        "id": "step_2",
+        "name": "修复战阵枢纽",
+        "description": "准备战阵枢核、战鼓皮与疆域图。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "exp-04:formation_core",
+            "count": 2,
+            "description": "收集战阵枢核 (0/2)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "exp-04:war_drum_hide",
+            "count": 2,
+            "description": "收集战鼓皮 (0/2)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "exp-04:territory_map",
+            "count": 1,
+            "description": "准备疆域图 (0/1)"
+          }
+        ]
+      },
+      {
+        "id": "step_3",
+        "name": "击破万军阵灵",
+        "description": "击败失控的万军阵灵。",
+        "objectives": [
+          {
+            "type": "kill_monster",
+            "targetId": "exp-04:war_array_avatar",
+            "count": 1,
+            "description": "击败万军阵灵 (0/1)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 14000,
+      "gold": 5200,
+      "items": [
+        {
+          "itemId": "exp-04:spirit_mine_deed",
+          "count": 1
+        },
+        {
+          "itemId": "exp-04:sect_banner",
+          "count": 1
+        },
+        {
+          "itemId": "exp-04:battle_merit_token",
+          "count": 8
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "npc",
+      "npcId": "exp-04:npc_shadow_strategist"
+    },
+    "turnInNpcId": "exp-04:npc_shadow_strategist",
+    "repeatable": false
+  }
+]

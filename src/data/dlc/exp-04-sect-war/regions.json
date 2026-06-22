@@ -1,0 +1,126 @@
+[
+  {
+    "id": "exp-04:border_fort",
+    "name": "边境战堡",
+    "emoji": "🏯",
+    "description": "宗门势力交界处的战堡，旗阵与烽火昼夜不息。",
+    "minRealm": 1,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "sect",
+      "dangerous",
+      "trade"
+    ],
+    "travelCostBase": 24,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.18,
+    "explorationBonus": 0.12,
+    "lootTable": [
+      {
+        "itemId": "exp-04:battle_merit_token",
+        "chance": 0.18
+      },
+      {
+        "itemId": "exp-04:captured_supply",
+        "chance": 0.22
+      },
+      {
+        "itemId": "exp-04:scout_talisman",
+        "chance": 0.08
+      }
+    ]
+  },
+  {
+    "id": "exp-04:war_merit_hall",
+    "name": "战功堂",
+    "emoji": "🎖️",
+    "description": "统计战功、发放军令与兑换物资的宗门堂口。",
+    "minRealm": 1,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "sect",
+      "safe",
+      "trade"
+    ],
+    "travelCostBase": 14,
+    "travelTimeMonths": 1,
+    "safeZone": true,
+    "shopDiscount": 0.03,
+    "lootTable": [
+      {
+        "itemId": "exp-04:battle_merit_token",
+        "chance": 0.2
+      },
+      {
+        "itemId": "exp-04:war_supply_crate",
+        "chance": 0.06
+      },
+      {
+        "itemId": "exp-04:territory_map",
+        "chance": 0.04
+      }
+    ]
+  },
+  {
+    "id": "exp-04:spirit_mine_front",
+    "name": "灵矿前线",
+    "emoji": "⛏️",
+    "description": "多宗争夺的灵矿群，矿道内外皆有埋伏。",
+    "minRealm": 2,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "sect",
+      "dangerous",
+      "mountain"
+    ],
+    "travelCostBase": 34,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.32,
+    "explorationBonus": 0.16,
+    "lootTable": [
+      {
+        "itemId": "exp-04:spirit_mine_deed",
+        "chance": 0.03
+      },
+      {
+        "itemId": "exp-04:fortification_stone",
+        "chance": 0.2
+      },
+      {
+        "itemId": "exp-04:rival_seal",
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "id": "exp-04:alliance_battlefield",
+    "name": "盟战古原",
+    "emoji": "⚔️",
+    "description": "曾有万修会战的古原，残阵至今仍会自行运转。",
+    "minRealm": 3,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "sect",
+      "dangerous",
+      "mystic"
+    ],
+    "travelCostBase": 44,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.45,
+    "explorationBonus": 0.25,
+    "lootTable": [
+      {
+        "itemId": "exp-04:formation_core",
+        "chance": 0.08
+      },
+      {
+        "itemId": "exp-04:war_drum_hide",
+        "chance": 0.12
+      },
+      {
+        "itemId": "exp-04:sect_banner",
+        "chance": 0.04
+      }
+    ]
+  }
+]

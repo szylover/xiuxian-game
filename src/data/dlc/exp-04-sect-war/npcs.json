@@ -1,0 +1,133 @@
+[
+  {
+    "id": "exp-04:npc_war_elder",
+    "name": "铁律长老",
+    "title": "战功堂主",
+    "emoji": "🧓",
+    "gender": "male",
+    "description": "执掌战功堂的严厉长老，赏罚从不拖延。",
+    "realmIndex": 4,
+    "hp": 4500,
+    "atk": 260,
+    "def": 210,
+    "speed": 22,
+    "critRate": 9,
+    "critResist": 18,
+    "critDmgMultiplier": 1.5,
+    "disposition": "neutral",
+    "roles": [
+      "elder",
+      "guard"
+    ],
+    "personality": "cold",
+    "charisma": 58,
+    "regionTags": [
+      "sect",
+      "safe"
+    ],
+    "homeRegionId": "exp-04:war_merit_hall",
+    "minRealm": 1,
+    "sectId": "exp-04:war_merit_alliance",
+    "alignment": "neutral",
+    "giftPreferences": {
+      "loved": [
+        "exp-04:battle_merit_token",
+        "exp-04:territory_map"
+      ],
+      "liked": [
+        "exp-04:war_supply_crate"
+      ],
+      "disliked": [
+        "exp-04:alliance_wine"
+      ]
+    }
+  },
+  {
+    "id": "exp-04:npc_banner_general",
+    "name": "赤旗战将",
+    "title": "边堡统领",
+    "emoji": "🚩",
+    "gender": "female",
+    "description": "镇守边境战堡的战将，枪不离手，战旗不倒。",
+    "realmIndex": 5,
+    "hp": 9200,
+    "atk": 560,
+    "def": 380,
+    "speed": 30,
+    "critRate": 13,
+    "critResist": 22,
+    "critDmgMultiplier": 1.7,
+    "disposition": "friendly",
+    "roles": [
+      "guard",
+      "sect_leader"
+    ],
+    "personality": "hot_tempered",
+    "charisma": 70,
+    "regionTags": [
+      "sect",
+      "dangerous"
+    ],
+    "homeRegionId": "exp-04:border_fort",
+    "minRealm": 2,
+    "sectId": "exp-04:red_banner_war_sect",
+    "alignment": "righteous",
+    "giftPreferences": {
+      "loved": [
+        "exp-04:sect_banner",
+        "exp-04:war_drum_hide"
+      ],
+      "liked": [
+        "exp-04:scout_talisman",
+        "exp-04:fortification_stone"
+      ],
+      "disliked": [
+        "exp-04:rival_seal"
+      ]
+    }
+  },
+  {
+    "id": "exp-04:npc_shadow_strategist",
+    "name": "玄策先生",
+    "title": "盟战谋士",
+    "emoji": "🧭",
+    "gender": "male",
+    "description": "擅长以少胜多的宗战谋士，总在地图前沉思。",
+    "realmIndex": 4,
+    "hp": 3600,
+    "atk": 220,
+    "def": 170,
+    "speed": 26,
+    "critRate": 10,
+    "critResist": 16,
+    "critDmgMultiplier": 1.6,
+    "disposition": "neutral",
+    "roles": [
+      "wanderer",
+      "elder"
+    ],
+    "personality": "cunning",
+    "charisma": 74,
+    "regionTags": [
+      "sect",
+      "mystic"
+    ],
+    "homeRegionId": "exp-04:alliance_battlefield",
+    "minRealm": 2,
+    "sectId": "exp-04:war_merit_alliance",
+    "alignment": "neutral",
+    "giftPreferences": {
+      "loved": [
+        "exp-04:territory_map",
+        "exp-04:formation_core"
+      ],
+      "liked": [
+        "exp-04:scout_talisman",
+        "exp-04:rival_seal"
+      ],
+      "disliked": [
+        "exp-04:alliance_wine"
+      ]
+    }
+  }
+]

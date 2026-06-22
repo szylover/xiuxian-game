@@ -1,0 +1,123 @@
+[
+  {
+    "id": "exp-04:rival_scout",
+    "name": "敌宗斥候",
+    "emoji": "🕵️",
+    "realmIndex": 1,
+    "hp": 240,
+    "atk": 24,
+    "def": 12,
+    "speed": 26,
+    "moveSpeed": 20,
+    "critRate": 10,
+    "critResist": 4,
+    "critDmgMultiplier": 1.5,
+    "expReward": 60,
+    "goldReward": 22,
+    "regionTags": [
+      "sect",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "exp-04:war_wolf",
+    "name": "战獒妖狼",
+    "emoji": "🐺",
+    "realmIndex": 2,
+    "hp": 680,
+    "atk": 70,
+    "def": 32,
+    "speed": 28,
+    "moveSpeed": 24,
+    "critRate": 10,
+    "critResist": 8,
+    "critDmgMultiplier": 1.5,
+    "expReward": 190,
+    "goldReward": 75,
+    "regionTags": [
+      "wilderness",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "exp-04:banner_golem",
+    "name": "旗阵傀儡",
+    "emoji": "🤖",
+    "realmIndex": 3,
+    "hp": 1600,
+    "atk": 130,
+    "def": 90,
+    "speed": 12,
+    "moveSpeed": 8,
+    "critRate": 5,
+    "critResist": 16,
+    "critDmgMultiplier": 1.4,
+    "expReward": 460,
+    "goldReward": 180,
+    "regionTags": [
+      "sect",
+      "mystic"
+    ]
+  },
+  {
+    "id": "exp-04:rival_elite",
+    "name": "敌宗精锐",
+    "emoji": "⚔️",
+    "realmIndex": 4,
+    "hp": 4300,
+    "atk": 310,
+    "def": 170,
+    "speed": 30,
+    "moveSpeed": 22,
+    "critRate": 14,
+    "critResist": 16,
+    "critDmgMultiplier": 1.7,
+    "expReward": 1350,
+    "goldReward": 520,
+    "regionTags": [
+      "sect",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "exp-04:guardian_beast",
+    "name": "护山战兽",
+    "emoji": "🦁",
+    "realmIndex": 5,
+    "hp": 9800,
+    "atk": 560,
+    "def": 360,
+    "speed": 24,
+    "moveSpeed": 18,
+    "critRate": 12,
+    "critResist": 22,
+    "critDmgMultiplier": 1.7,
+    "expReward": 4200,
+    "goldReward": 1500,
+    "regionTags": [
+      "sect",
+      "celestial"
+    ]
+  },
+  {
+    "id": "exp-04:war_array_avatar",
+    "name": "万军阵灵",
+    "emoji": "🛡️",
+    "realmIndex": 6,
+    "hp": 21000,
+    "atk": 920,
+    "def": 680,
+    "speed": 20,
+    "moveSpeed": 12,
+    "critRate": 14,
+    "critResist": 28,
+    "critDmgMultiplier": 1.8,
+    "expReward": 9800,
+    "goldReward": 3600,
+    "regionTags": [
+      "sect",
+      "celestial",
+      "mystic"
+    ]
+  }
+]

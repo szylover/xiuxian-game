@@ -1,0 +1,302 @@
+[
+  {
+    "id": "exp-02:realm_gate_refresh",
+    "category": "explore",
+    "tone": "good",
+    "name": "秘境刷新",
+    "weight": 18,
+    "effects": {
+      "exp": 60,
+      "mp": 20
+    },
+    "message": "🌀 秘境入口重新折叠展开，你捕捉到一缕空间道韵，修为 +60，灵力 +20。",
+    "regionTags": [
+      "mystic"
+    ]
+  },
+  {
+    "id": "exp-02:floor_one_cache",
+    "category": "explore",
+    "tone": "good",
+    "name": "首层暗格",
+    "weight": 16,
+    "effects": {
+      "gold": 70
+    },
+    "message": "📦 你在秘境首层墙缝中摸到暗格，获得 70 灵石。",
+    "regionTags": [
+      "mystic"
+    ]
+  },
+  {
+    "id": "exp-02:loop_marker",
+    "category": "explore",
+    "tone": "neutral",
+    "name": "轮回刻痕",
+    "weight": 14,
+    "effects": {
+      "mentalPower": 20
+    },
+    "message": "♾️ 石壁上重复的刻痕提醒你：这一层曾被无数人踏过，念力 +20。",
+    "regionTags": [
+      "mystic"
+    ]
+  },
+  {
+    "id": "exp-02:mist_wrong_turn",
+    "category": "explore",
+    "tone": "bad",
+    "name": "迷雾岔路",
+    "weight": 11,
+    "effects": {
+      "stamina": -18,
+      "mood": -5
+    },
+    "message": "🌫️ 你在重复回廊中绕了三圈，精力 -18，心情 -5。",
+    "regionTags": [
+      "mystic",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "exp-02:layered_herb_pool",
+    "category": "explore",
+    "tone": "good",
+    "name": "层叠药池",
+    "weight": 12,
+    "effects": {
+      "health": 12,
+      "mp": 60
+    },
+    "message": "🪷 秘境药池跨层涌动，洗去暗伤，健康 +12，灵力 +60。",
+    "condition": {
+      "minRealm": 1
+    },
+    "regionTags": [
+      "herb",
+      "mystic"
+    ]
+  },
+  {
+    "id": "exp-02:echoing_chest",
+    "category": "adventure",
+    "tone": "good",
+    "name": "回声宝箱",
+    "weight": 7,
+    "effects": {
+      "gold": [
+        100,
+        260
+      ],
+      "mood": 10
+    },
+    "message": "🎁 宝箱开合声在多层空间回响，灵石增加，心情 +10。",
+    "condition": {
+      "minRealm": 1
+    }
+  },
+  {
+    "id": "exp-02:space_pressure",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "空间重压",
+    "weight": 8,
+    "effects": {
+      "hp": -55,
+      "mp": -45
+    },
+    "message": "🪨 空间层压忽然落下，你强行穿行，HP -55，灵力 -45。",
+    "condition": {
+      "minRealm": 1
+    }
+  },
+  {
+    "id": "exp-02:infinite_stair",
+    "category": "adventure",
+    "tone": "neutral",
+    "name": "无尽阶梯",
+    "weight": 10,
+    "effects": {
+      "stamina": -10,
+      "exp": 100
+    },
+    "message": "🪜 你踏上似无尽头的阶梯，在疲惫中参透步法，精力 -10，修为 +100。"
+  },
+  {
+    "id": "exp-02:mirror_self",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "镜中敌影",
+    "weight": 6,
+    "effects": {
+      "hp": -80,
+      "mentalPower": -20
+    },
+    "message": "🪞 镜中倒影突然出手，你斩散幻身后仍受震荡，HP -80，念力 -20。",
+    "condition": {
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "exp-02:realm_cartographer",
+    "category": "adventure",
+    "tone": "good",
+    "name": "秘境绘图者",
+    "weight": 5,
+    "effects": {
+      "exp": 220,
+      "mood": 12
+    },
+    "message": "🗺️ 一位绘图者赠你半张层图，修为 +220，心情 +12。",
+    "condition": {
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "exp-02:layer_boss_trace",
+    "category": "adventure",
+    "tone": "neutral",
+    "name": "层主痕迹",
+    "weight": 7,
+    "effects": {
+      "exp": 160
+    },
+    "message": "🐉 你发现层主留下的爪痕，从中推演出战斗节奏，修为 +160。",
+    "condition": {
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "exp-02:void_tide",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "虚潮倒灌",
+    "weight": 5,
+    "effects": {
+      "hp": -120,
+      "stamina": -25
+    },
+    "message": "🌊 虚潮从裂隙倒灌，你撑起护体灵光突围，HP -120，精力 -25。",
+    "condition": {
+      "minRealm": 3
+    }
+  },
+  {
+    "id": "exp-02:treasure_room_reset",
+    "category": "daily",
+    "tone": "good",
+    "name": "宝室重置",
+    "weight": 12,
+    "effects": {
+      "gold": 90,
+      "exp": 45
+    },
+    "message": "🔄 秘境宝室按日重置，你顺手取走新凝宝光，灵石 +90，修为 +45。"
+  },
+  {
+    "id": "exp-02:daily_floor_count",
+    "category": "daily",
+    "tone": "neutral",
+    "name": "层数记录",
+    "weight": 15,
+    "effects": {
+      "mood": 5
+    },
+    "message": "📊 你记录今日推进层数，虽未突破极限，却心中有数，心情 +5。"
+  },
+  {
+    "id": "exp-02:rest_floor",
+    "category": "daily",
+    "tone": "good",
+    "name": "休整层",
+    "weight": 10,
+    "effects": {
+      "hp": 120,
+      "stamina": 20
+    },
+    "message": "🛏️ 你抵达安全休整层，HP +120，精力 +20。",
+    "condition": {
+      "minRealm": 1
+    }
+  },
+  {
+    "id": "exp-02:greedy_extra_floor",
+    "category": "daily",
+    "tone": "bad",
+    "name": "贪闯一层",
+    "weight": 8,
+    "effects": {
+      "hp": -45,
+      "mood": -8
+    },
+    "message": "⚠️ 你贪心多闯一层，被陷阱擦伤，HP -45，心情 -8。"
+  },
+  {
+    "id": "exp-02:deep_layer_luck",
+    "category": "adventure",
+    "tone": "good",
+    "name": "深层福缘",
+    "weight": 4,
+    "effects": {
+      "exp": [
+        450,
+        900
+      ],
+      "gold": [
+        300,
+        600
+      ]
+    },
+    "message": "💫 深层秘境短暂开出福缘之眼，修为与灵石大增。",
+    "condition": {
+      "minRealm": 4,
+      "minLuck": 45
+    }
+  },
+  {
+    "id": "exp-02:collapsed_portal",
+    "category": "explore",
+    "tone": "bad",
+    "name": "坍塌传送门",
+    "weight": 7,
+    "effects": {
+      "stamina": -30,
+      "mp": -30
+    },
+    "message": "🚪 传送门忽然坍塌，你绕路寻找出口，精力 -30，灵力 -30。",
+    "regionTags": [
+      "mystic"
+    ]
+  },
+  {
+    "id": "exp-02:loop_breakthrough",
+    "category": "adventure",
+    "tone": "good",
+    "name": "破环一念",
+    "weight": 4,
+    "effects": {
+      "mentalPower": 80,
+      "exp": 300
+    },
+    "message": "🔓 你看破一段空间循环，念力 +80，修为 +300。",
+    "condition": {
+      "minComprehension": 45,
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "exp-02:realm_tax",
+    "category": "daily",
+    "tone": "neutral",
+    "name": "秘境过路费",
+    "weight": 8,
+    "effects": {
+      "gold": -20,
+      "stamina": 15
+    },
+    "message": "🪙 你向守门阵灵缴纳过路灵石，换来省力捷径，灵石 -20，精力 +15。",
+    "condition": {
+      "minGold": 20
+    }
+  }
+]

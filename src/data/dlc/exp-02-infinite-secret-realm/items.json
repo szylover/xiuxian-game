@@ -1,0 +1,157 @@
+[
+  {
+    "id": "exp-02:loop_fragment",
+    "name": "轮回碎片",
+    "category": "material",
+    "rarity": "uncommon",
+    "description": "从重复秘境回廊中剥落的空间碎片。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 38
+  },
+  {
+    "id": "exp-02:floor_key",
+    "name": "层门钥",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "开启更深层秘境层门的晶钥。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": false,
+    "sellPrice": 160
+  },
+  {
+    "id": "exp-02:realm_compass",
+    "name": "秘境罗盘",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "可在混乱层道中辨识出口。",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": true,
+    "effects": {
+      "stamina": 40,
+      "mood": 8
+    },
+    "effectMessage": "🧭 秘境罗盘定住方向，精力 +40，心情 +8。",
+    "sellPrice": 260
+  },
+  {
+    "id": "exp-02:void_pearl",
+    "name": "虚空珠",
+    "category": "material",
+    "rarity": "epic",
+    "description": "深层裂隙凝成的暗色珠子。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": false,
+    "sellPrice": 520
+  },
+  {
+    "id": "exp-02:reset_talisman",
+    "name": "重置符",
+    "category": "consumable",
+    "rarity": "uncommon",
+    "description": "重置一段疲惫状态的小符。",
+    "stackable": true,
+    "maxStack": 30,
+    "usable": true,
+    "effects": {
+      "stamina": "max"
+    },
+    "effectMessage": "🔄 重置符展开，精力恢复至满。",
+    "sellPrice": 120
+  },
+  {
+    "id": "exp-02:layer_map",
+    "name": "千层图",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "绘有诸多秘境层道的残图。",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": true,
+    "effects": {
+      "exp": [
+        180,
+        360
+      ],
+      "mentalPower": 30
+    },
+    "effectMessage": "🗺️ 参照千层图推演路线，修为与念力增长。",
+    "sellPrice": 300
+  },
+  {
+    "id": "exp-02:deep_moss",
+    "name": "深层苔",
+    "category": "material",
+    "rarity": "common",
+    "description": "只在低光秘境层生长的药苔。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 12
+  },
+  {
+    "id": "exp-02:echo_crystal",
+    "name": "回声晶",
+    "category": "material",
+    "rarity": "uncommon",
+    "description": "储存战斗回声的晶体。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 45
+  },
+  {
+    "id": "exp-02:floor_lord_scale",
+    "name": "层主鳞",
+    "category": "material",
+    "rarity": "epic",
+    "description": "秘境层主身上剥落的坚鳞。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": false,
+    "sellPrice": 680
+  },
+  {
+    "id": "exp-02:infinite_core",
+    "name": "无尽核",
+    "category": "material",
+    "rarity": "legendary",
+    "description": "无限秘境循环中罕见凝成的核心。",
+    "stackable": true,
+    "maxStack": 5,
+    "usable": false,
+    "sellPrice": 1800
+  },
+  {
+    "id": "exp-02:safe_floor_charm",
+    "name": "安层符",
+    "category": "consumable",
+    "rarity": "rare",
+    "description": "临时展开安全休整层。",
+    "stackable": true,
+    "maxStack": 10,
+    "usable": true,
+    "effects": {
+      "hp": "max",
+      "mp": "max",
+      "mood": 15
+    },
+    "effectMessage": "🛏️ 安层符化作安全小室，HP 与灵力尽复，心情 +15。",
+    "sellPrice": 420
+  },
+  {
+    "id": "exp-02:treasure_dust",
+    "name": "宝箱尘",
+    "category": "material",
+    "rarity": "common",
+    "description": "秘境宝箱开启后散落的金色粉尘。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 10
+  }
+]

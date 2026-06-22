@@ -1,0 +1,95 @@
+[
+  {
+    "id": "exp-01:checkin_hall",
+    "name": "签到殿",
+    "emoji": "📅",
+    "description": "专为每日签到而建的玉殿，四壁挂满奖励日历。",
+    "minRealm": 0,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "safe",
+      "sect",
+      "trade"
+    ],
+    "travelCostBase": 6,
+    "travelTimeMonths": 1,
+    "safeZone": true,
+    "explorationBonus": 0.2,
+    "lootTable": [
+      {
+        "itemId": "exp-01:daily_jade_slip",
+        "chance": 0.25
+      },
+      {
+        "itemId": "exp-01:login_incense",
+        "chance": 0.18
+      },
+      {
+        "itemId": "exp-01:calendar_page",
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "id": "exp-01:reward_market",
+    "name": "奖励坊市",
+    "emoji": "🎁",
+    "description": "各路阵灵在此兑换签到奖励，摊位上常有红点闪烁。",
+    "minRealm": 1,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "town",
+      "trade",
+      "safe"
+    ],
+    "travelCostBase": 12,
+    "travelTimeMonths": 1,
+    "safeZone": true,
+    "shopDiscount": 0.04,
+    "lootTable": [
+      {
+        "itemId": "exp-01:makeup_token",
+        "chance": 0.12
+      },
+      {
+        "itemId": "exp-01:streak_pill",
+        "chance": 0.1
+      },
+      {
+        "itemId": "exp-01:premium_gem",
+        "chance": 0.06
+      }
+    ]
+  },
+  {
+    "id": "exp-01:idle_cave",
+    "name": "挂机洞府",
+    "emoji": "🤖",
+    "description": "自动聚灵阵缓缓运转，即使主人打盹也会吐纳。",
+    "minRealm": 2,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "mystic",
+      "safe",
+      "mountain"
+    ],
+    "travelCostBase": 20,
+    "travelTimeMonths": 1,
+    "safeZone": true,
+    "explorationBonus": 0.15,
+    "lootTable": [
+      {
+        "itemId": "exp-01:auto_cultivation_tag",
+        "chance": 0.12
+      },
+      {
+        "itemId": "exp-01:seven_day_box",
+        "chance": 0.05
+      },
+      {
+        "itemId": "exp-01:golden_checkin_seal",
+        "chance": 0.04
+      }
+    ]
+  }
+]

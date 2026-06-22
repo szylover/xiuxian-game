@@ -1,0 +1,125 @@
+[
+  {
+    "id": "exp-01:npc_calendar_spirit",
+    "name": "灵历童子",
+    "title": "签到引导",
+    "emoji": "📅",
+    "gender": "male",
+    "description": "负责提醒修士每日签到的阵灵童子，最怕别人漏签。",
+    "realmIndex": 1,
+    "hp": 260,
+    "atk": 20,
+    "def": 18,
+    "speed": 20,
+    "critRate": 5,
+    "critResist": 4,
+    "critDmgMultiplier": 1.4,
+    "disposition": "friendly",
+    "roles": [
+      "elder"
+    ],
+    "personality": "gentle",
+    "charisma": 58,
+    "regionTags": [
+      "safe",
+      "sect"
+    ],
+    "homeRegionId": "exp-01:checkin_hall",
+    "minRealm": 0,
+    "giftPreferences": {
+      "loved": [
+        "exp-01:daily_jade_slip",
+        "exp-01:calendar_page"
+      ],
+      "liked": [
+        "exp-01:login_incense"
+      ],
+      "disliked": [
+        "exp-01:red_dot_dust"
+      ]
+    }
+  },
+  {
+    "id": "exp-01:npc_reward_broker",
+    "name": "宝匣掌柜",
+    "title": "奖励坊掌柜",
+    "emoji": "🎁",
+    "gender": "female",
+    "description": "掌管奖励坊市的精明掌柜，能把普通奖励包装成惊喜。",
+    "realmIndex": 2,
+    "hp": 700,
+    "atk": 55,
+    "def": 40,
+    "speed": 24,
+    "critRate": 8,
+    "critResist": 8,
+    "critDmgMultiplier": 1.5,
+    "disposition": "neutral",
+    "roles": [
+      "merchant"
+    ],
+    "personality": "cunning",
+    "charisma": 72,
+    "regionTags": [
+      "trade",
+      "town"
+    ],
+    "homeRegionId": "exp-01:reward_market",
+    "minRealm": 1,
+    "giftPreferences": {
+      "loved": [
+        "exp-01:seven_day_box",
+        "exp-01:premium_gem"
+      ],
+      "liked": [
+        "exp-01:makeup_token",
+        "exp-01:monthly_card"
+      ],
+      "disliked": [
+        "exp-01:red_dot_dust"
+      ]
+    }
+  },
+  {
+    "id": "exp-01:npc_idle_array_master",
+    "name": "挂机阵师",
+    "title": "洞府阵师",
+    "emoji": "🤖",
+    "gender": "male",
+    "description": "专研自动吐纳阵法的阵师，坚信懒也是一种修行。",
+    "realmIndex": 3,
+    "hp": 1300,
+    "atk": 90,
+    "def": 70,
+    "speed": 16,
+    "critRate": 6,
+    "critResist": 12,
+    "critDmgMultiplier": 1.4,
+    "disposition": "friendly",
+    "roles": [
+      "smith",
+      "elder"
+    ],
+    "personality": "mysterious",
+    "charisma": 61,
+    "regionTags": [
+      "mystic",
+      "mountain"
+    ],
+    "homeRegionId": "exp-01:idle_cave",
+    "minRealm": 2,
+    "giftPreferences": {
+      "loved": [
+        "exp-01:auto_cultivation_tag",
+        "exp-01:golden_checkin_seal"
+      ],
+      "liked": [
+        "exp-01:monthly_card",
+        "exp-01:returnee_bundle"
+      ],
+      "disliked": [
+        "exp-01:login_incense"
+      ]
+    }
+  }
+]

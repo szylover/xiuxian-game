@@ -1,0 +1,165 @@
+[
+  {
+    "id": "exp-01:daily_login_breath",
+    "name": "每日登录吐纳法",
+    "type": "palm",
+    "rarity": "common",
+    "description": "固定时辰吐纳，重在日日不断。",
+    "minRealm": 0,
+    "maxLevel": 10,
+    "expPerLevel": 42,
+    "statBonusPerLevel": {
+      "mp": 4,
+      "hp": 5
+    },
+    "aptitudeKey": "palm",
+    "spiritRootElement": "wood",
+    "passiveEffects": [
+      {
+        "minLevel": 3,
+        "stat": "mp",
+        "value": 30,
+        "description": "每日一息：灵力 +30"
+      },
+      {
+        "minLevel": 7,
+        "stat": "hp",
+        "value": 40,
+        "description": "稳定作息：体力 +40"
+      }
+    ]
+  },
+  {
+    "id": "exp-01:streak_flame_fist",
+    "name": "连签炎拳",
+    "type": "fist",
+    "rarity": "uncommon",
+    "description": "连签越久，拳势越盛。",
+    "minRealm": 1,
+    "maxLevel": 15,
+    "expPerLevel": 76,
+    "statBonusPerLevel": {
+      "atk": 3,
+      "hp": 8
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "fire",
+    "activeSkill": {
+      "name": "七日炎印",
+      "description": "以连签火印轰击敌身。",
+      "mpCost": 14,
+      "staminaCost": 5,
+      "dmgMultiplier": 1.35,
+      "hitCount": 1,
+      "cooldown": 1,
+      "triggerRate": 0.3,
+      "effect": {
+        "type": "dot",
+        "value": 6,
+        "duration": 2
+      }
+    },
+    "passiveEffects": [
+      {
+        "minLevel": 4,
+        "stat": "atk",
+        "value": 12,
+        "description": "连签蓄势：攻击 +12"
+      },
+      {
+        "minLevel": 10,
+        "stat": "critRate",
+        "value": 3,
+        "description": "火印跳动：暴击率 +3%"
+      }
+    ],
+    "bodyExpRate": 0.8
+  },
+  {
+    "id": "exp-01:calendar_sword_formula",
+    "name": "灵历剑诀",
+    "type": "sword",
+    "rarity": "rare",
+    "description": "按灵历节气递剑，节节相扣。",
+    "minRealm": 2,
+    "maxLevel": 20,
+    "expPerLevel": 105,
+    "statBonusPerLevel": {
+      "atk": 4,
+      "speed": 2,
+      "mp": 5
+    },
+    "aptitudeKey": "sword",
+    "spiritRootElement": "metal",
+    "activeSkill": {
+      "name": "月签十二剑",
+      "description": "十二道剑影按月序斩落。",
+      "mpCost": 24,
+      "staminaCost": 8,
+      "dmgMultiplier": 1.2,
+      "hitCount": 3,
+      "cooldown": 2,
+      "triggerRate": 0.26
+    },
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "speed",
+        "value": 10,
+        "description": "按历出剑：速度 +10"
+      },
+      {
+        "minLevel": 12,
+        "stat": "atk",
+        "value": 26,
+        "description": "月序剑势：攻击 +26"
+      }
+    ]
+  },
+  {
+    "id": "exp-01:golden_reward_scripture",
+    "name": "金签宝箓",
+    "type": "finger",
+    "rarity": "epic",
+    "description": "以奖励灵光凝成指箓，点破瓶颈与惰性。",
+    "minRealm": 3,
+    "maxLevel": 25,
+    "expPerLevel": 145,
+    "statBonusPerLevel": {
+      "atk": 5,
+      "mp": 10,
+      "critRate": 1
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "metal",
+    "activeSkill": {
+      "name": "金签点名",
+      "description": "金光点名，必中其一处破绽。",
+      "mpCost": 36,
+      "staminaCost": 10,
+      "dmgMultiplier": 1.85,
+      "hitCount": 1,
+      "cooldown": 3,
+      "triggerRate": 0.24,
+      "effect": {
+        "type": "debuff_def",
+        "value": 10,
+        "duration": 2
+      }
+    },
+    "passiveEffects": [
+      {
+        "minLevel": 6,
+        "stat": "mp",
+        "value": 80,
+        "description": "宝箓储灵：灵力 +80"
+      },
+      {
+        "minLevel": 15,
+        "stat": "critDmgMultiplier",
+        "value": 0.25,
+        "description": "金签暴赏：暴击伤害 +25%"
+      }
+    ]
+  }
+]
