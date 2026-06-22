@@ -33,6 +33,14 @@ export const ALL_DLCS: DLCMeta[] = [
       await registerCP01();
     },
   },
+  {
+    id: 'cp-02', name: '苟道求真', description: '苟道流 — 新增谨慎生存主题事件·物品·妖兽·功法·任务链',
+    version: '1.0.0', type: 'content-pack', required: false,
+    loader: async () => {
+      const { registerCP02 } = await import('./cp-02-goudao/loader');
+      await registerCP02();
+    },
+  },
 ];
 
 /** 获取默认启用的 DLC ID 列表（默认勾选 core） */

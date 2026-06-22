@@ -137,10 +137,10 @@
 |----|------|------|------|------|
 | [T0035](https://github.com/szylover/xiuxian-game/issues/105) | Azure SWA CI/CD | — | — | ✅ |
 | [T0036](https://github.com/szylover/xiuxian-game/issues/106) | PWA 支持 | T0035 | — | ❌ 取消 |
-| [T0037](https://github.com/szylover/xiuxian-game/issues/107) | 音效系统 | — | — | ⬜ |
+| [T0037](https://github.com/szylover/xiuxian-game/issues/107) | 音效系统 | — | — | ✅ |
 | [T0038](https://github.com/szylover/xiuxian-game/issues/108) | 多存档 | — | — | ✅ |
 | [T0066](https://github.com/szylover/xiuxian-game/issues/139) | 数据文件 TS→JSON 迁移 | — | — | ✅ |
-| [T0039](https://github.com/szylover/xiuxian-game/issues/109) | 新手引导 | T0001 | — | ⬜ |
+| [T0039](https://github.com/szylover/xiuxian-game/issues/109) | 新手引导 | T0001 | — | ✅ |
 | [T0059b](https://github.com/szylover/xiuxian-game/issues/90) | 数据懒加载 & Bundle 分割 | — | [spec](specs/T0059-data-lazy-loading.md) | ✅ |
 | [T0068](https://github.com/szylover/xiuxian-game/issues/161) | CSS 外置与全局变量体系（TSX 禁止内联样式） | — | — | ✅ |
 | [T0074](https://github.com/szylover/xiuxian-game/issues/195) | DLC 选择界面（开始界面 DLC 勾选 + CP-01） | — | [spec](specs/T0074-dlc-selection-cp01.md) | ✅ |
@@ -161,7 +161,7 @@
 | ID | 名称 | 主题 | 挂载内容 | 前置 | 状态 |
 |----|------|------|----------|------|------|
 | CP-01 | 凡人修仙 | 凡人流 | 事件·物品·妖兽·功法·任务链 | T0057 | ✅ |
-| CP-02 | 苟道求真 | 苟道流 | 事件·物品·妖兽·功法·任务链 | T0057 | ⬜ |
+| CP-02 | 苟道求真 | 苟道流 | 事件·物品·妖兽·功法·任务链 | T0057 | ✅ |
 | CP-03 | 仙道飞升 | 仙界 | 境界·事件·物品·妖兽·功法·任务链 | T0058, T0033 | ⬜ |
 | CP-04 | 洪荒天地 | 洪荒流 | 境界·事件·物品·妖兽·任务链 | CP-03 | ⬜ |
 | CP-05 | 魔道逆天 | 魔道流 | 事件·物品·妖兽·功法·任务链 | T0050 | ⬜ |

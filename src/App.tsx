@@ -2,7 +2,7 @@
 // App.tsx — 根组件
 // ============================================================
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useGameEngine } from './hooks/useGameEngine';
 import { useGameLog } from './hooks/useGameLog';
 import type { CreatePlayerOptions } from './game/player';
@@ -17,7 +17,11 @@ import LeftPanel from './components/layout/LeftPanel';
 import RightPanel from './components/layout/RightPanel';
 import CombatModal from './components/shared/CombatModal';
 import DeathModal from './components/shared/DeathModal';
+import OnboardingOverlay from './components/hud/OnboardingOverlay';
+import SoundControls from './components/hud/SoundControls';
 import type { PanelKey } from './components/layout/PanelButtons';
+import { playSound } from './game/audio';
+import { ONBOARDING_TEXTS, UI_LABELS } from './data/texts';
 import './App.css';
 
 export default function App() {
@@ -26,17 +30,27 @@ export default function App() {
   const [activePanel, setActivePanel] = useState<PanelKey | null>(null);
   const [showExitConfirm, setShowExitConfirm] = useState(false);
   const [logDrawerOpen, setLogDrawerOpen] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+
+  useEffect(() => {
+    if (engine.player && localStorage.getItem(ONBOARDING_TEXTS.storageKey) !== 'true') {
+      setShowOnboarding(true);
+    }
+  }, [engine.player]);
 
   // 切换面板：点击已选中的按钮则收起
   const handleSelectPanel = (key: PanelKey) => {
+    playSound('buttonClick');
     setActivePanel(prev => prev === key ? null : key);
   };
 
   const handleExitGame = () => {
+    playSound('buttonClick');
     setShowExitConfirm(true);
   };
 
   const handleExitConfirm = () => {
+    playSound('buttonClick');
     setShowExitConfirm(false);
     clearLogs();
     engine.exitGame();
@@ -160,17 +174,20 @@ export default function App() {
         currentMonth={engine.player.gameMonth}
       />
 
+      <SoundControls onOpenOnboarding={() => setShowOnboarding(true)} />
+      <OnboardingOverlay open={showOnboarding} onClose={() => setShowOnboarding(false)} />
+
       {/* T0038: 退出确认弹窗 */}
       {showExitConfirm && (
         <div className="exit-confirm-overlay" onClick={() => setShowExitConfirm(false)}>
           <div className="exit-confirm-modal" onClick={e => e.stopPropagation()}>
-            <div className="exit-confirm-title">🏠 返回主菜单</div>
+            <div className="exit-confirm-title">{UI_LABELS.exitConfirmTitle}</div>
             <div className="exit-confirm-body">
-              当前进度已自动存档，确定要返回主菜单吗？
+              {UI_LABELS.exitConfirmBody}
             </div>
             <div className="exit-confirm-actions">
-              <button className="btn btn-primary" onClick={handleExitConfirm}>确认返回</button>
-              <button className="btn btn-secondary" onClick={() => setShowExitConfirm(false)}>继续修炼</button>
+              <button className="btn btn-primary" onClick={handleExitConfirm}>{UI_LABELS.exitConfirmOk}</button>
+              <button className="btn btn-secondary" onClick={() => setShowExitConfirm(false)}>{UI_LABELS.exitConfirmCancel}</button>
             </div>
           </div>
         </div>

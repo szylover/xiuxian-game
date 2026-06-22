@@ -19,3 +19,5 @@ export { QUEST_TEXTS } from './quest';
 export { DIALOGUE_TEXTS } from './dialogue';
 export { PROCEDURAL_TEXTS } from './procedural';
 export { ASCENSION_TEXTS } from './ascension';
+export { AUDIO_TEXTS } from './audio';
+export { ONBOARDING_TEXTS } from './onboarding';

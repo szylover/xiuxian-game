@@ -1,0 +1,159 @@
+[
+  {
+    "id": "cp-02:quest_three_caves_rule",
+    "name": "狡兔三窟",
+    "description": "龟隐老人认为苟道第一课不是斗法，而是准备三条退路。",
+    "icon": "🐇",
+    "category": "main",
+    "condition": { "minRealm": 0 },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "拜访隐雾谷",
+        "description": "前往隐雾谷，寻找传闻中的龟隐老人。",
+        "objectives": [
+          { "type": "reach_region", "targetId": "cp-02:hidden_valley", "description": "前往隐雾谷" }
+        ],
+        "dialogueSnippet": "薄雾深处传来苍老声音：「先别急着求机缘，先想好怎么活。」"
+      },
+      {
+        "id": "step_2",
+        "name": "准备退路",
+        "description": "收集隐洞舆图与退路木牌，建立最基础的后手。",
+        "objectives": [
+          { "type": "collect_item", "targetId": "cp-02:cave_map", "count": 1, "description": "收集隐洞舆图 (0/1)" },
+          { "type": "collect_item", "targetId": "cp-02:retreat_token", "count": 2, "description": "收集退路木牌 (0/2)" }
+        ],
+        "rewards": {
+          "exp": 40,
+          "items": [{ "itemId": "cp-02:breath_pill", "count": 2 }]
+        },
+        "dialogueSnippet": "龟隐老人点头：「地图在手，心里才不慌。」"
+      },
+      {
+        "id": "step_3",
+        "name": "熟悉三窟岭",
+        "description": "前往三窟岭探索 3 次，记住至少三处藏身洞。",
+        "objectives": [
+          { "type": "reach_region", "targetId": "cp-02:three_caves", "description": "前往三窟岭" },
+          { "type": "explore_count", "count": 3, "description": "探索三窟岭 (0/3)" }
+        ],
+        "dialogueSnippet": "你在洞窟间留下暗记，确认每条退路都能独自走通。"
+      }
+    ],
+    "rewards": {
+      "exp": 120,
+      "gold": 60,
+      "items": [
+        { "itemId": "cp-02:smoke_escape_talisman", "count": 2 },
+        { "itemId": "cp-02:risk_notes", "count": 1 }
+      ]
+    },
+    "discoverSource": { "type": "auto" },
+    "turnInNpcId": "cp-02:npc_old_tortoise",
+    "repeatable": false
+  },
+  {
+    "id": "cp-02:quest_low_profile_market",
+    "name": "无名小市",
+    "description": "真正的保命资源往往不在明面柜台，而在无人留名的小市。",
+    "icon": "🎭",
+    "category": "main",
+    "condition": {
+      "minRealm": 1,
+      "requiredQuests": ["cp-02:quest_three_caves_rule"]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "进入无名小市",
+        "description": "前往无名小市，切记不要报真名。",
+        "objectives": [
+          { "type": "reach_region", "targetId": "cp-02:nameless_market", "description": "前往无名小市" }
+        ]
+      },
+      {
+        "id": "step_2",
+        "name": "购置伪装",
+        "description": "准备无名面具和备用灵石袋。",
+        "objectives": [
+          { "type": "collect_item", "targetId": "cp-02:plain_mask", "count": 1, "description": "收集无名面具 (0/1)" },
+          { "type": "collect_item", "targetId": "cp-02:spirit_stone_cache", "count": 1, "description": "收集备用灵石袋 (0/1)" }
+        ],
+        "rewards": { "gold": 30 }
+      },
+      {
+        "id": "step_3",
+        "name": "拜访无面掮客",
+        "description": "向无面掮客打听安全屋的消息。",
+        "objectives": [
+          { "type": "talk_npc", "targetId": "cp-02:npc_masked_broker", "description": "与无面掮客交谈" }
+        ],
+        "dialogueSnippet": "无面掮客压低声音：「安全屋不卖给勇士，只卖给惜命的人。」"
+      }
+    ],
+    "rewards": {
+      "exp": 220,
+      "gold": 120,
+      "items": [
+        { "itemId": "cp-02:safehouse_key", "count": 1 },
+        { "itemId": "cp-02:substitute_talisman", "count": 1 }
+      ]
+    },
+    "discoverSource": { "type": "npc", "npcId": "cp-02:npc_old_tortoise" },
+    "turnInNpcId": "cp-02:npc_masked_broker",
+    "repeatable": false
+  },
+  {
+    "id": "cp-02:quest_shadow_marsh_supplies",
+    "name": "影沼备药",
+    "description": "影沼药师愿意传授避毒之法，但你得先证明自己会准备补给。",
+    "icon": "🧪",
+    "category": "side",
+    "condition": {
+      "minRealm": 2,
+      "requiredQuests": ["cp-02:quest_low_profile_market"]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "深入影沼泽",
+        "description": "前往影沼泽采集隐匿灵材。",
+        "objectives": [
+          { "type": "reach_region", "targetId": "cp-02:shadow_marsh", "description": "前往影沼泽" }
+        ]
+      },
+      {
+        "id": "step_2",
+        "name": "采集避险灵材",
+        "description": "收集月隐苔、影蛛丝与避毒散。",
+        "objectives": [
+          { "type": "collect_item", "targetId": "cp-02:moon_moss", "count": 2, "description": "收集月隐苔 (0/2)" },
+          { "type": "collect_item", "targetId": "cp-02:shadow_thread", "count": 1, "description": "收集影蛛丝 (0/1)" },
+          { "type": "collect_item", "targetId": "cp-02:detox_powder", "count": 1, "description": "准备避毒散 (0/1)" }
+        ],
+        "rewards": { "exp": 120 }
+      },
+      {
+        "id": "step_3",
+        "name": "避开影丝蛛",
+        "description": "斩杀或驱离影丝蛛，确保退路安全。",
+        "objectives": [
+          { "type": "kill_monster", "targetId": "cp-02:shadow_spider", "count": 2, "description": "处理影丝蛛 (0/2)" }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 450,
+      "gold": 180,
+      "items": [
+        { "itemId": "cp-02:hidden_heal_pill", "count": 3 },
+        { "itemId": "cp-02:long_breath_pill", "count": 2 }
+      ]
+    },
+    "discoverSource": { "type": "npc", "npcId": "cp-02:npc_shadow_alchemist" },
+    "turnInNpcId": "cp-02:npc_shadow_alchemist",
+    "repeatable": false
+  }
+]
+

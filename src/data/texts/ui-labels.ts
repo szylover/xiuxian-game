@@ -72,4 +72,10 @@ export const UI_LABELS = {
   age: '岁',
   yearPrefix: '第',
   yearSuffix: '年',
+  mainMenuTitle: '返回主菜单',
+  mainMenuButton: '🏠 主菜单',
+  exitConfirmTitle: '🏠 返回主菜单',
+  exitConfirmBody: '当前进度已自动存档，确定要返回主菜单吗？',
+  exitConfirmOk: '确认返回',
+  exitConfirmCancel: '继续修炼',
 } as const;

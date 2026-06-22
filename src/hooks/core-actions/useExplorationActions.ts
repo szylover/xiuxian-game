@@ -13,6 +13,7 @@ import type { CoreActionDeps, LogQueue } from './types';
 import type { LogCategory } from '../useGameLog';
 import { COMBAT_TEXTS } from '../../data/texts/combat';
 import { EXPLORE_TEXTS } from '../../data/texts/explore';
+import { playSound } from '../../game/audio';
 
 // ── T0022: 区域掉落表辅助函数 ──
 const DEFAULT_EXPLORE_LOOT: [string, number][] = [
@@ -58,6 +59,7 @@ export function useExplorationActions(
       return;
     }
     pendingRef.current = { msgs: [], categories: [] };
+    let gainedItem = false;
     setPlayer(prev => {
       if (!prev) return prev;
       let p: Player = { ...prev };
@@ -88,6 +90,7 @@ export function useExplorationActions(
           const { player: p2, added } = addItem(p, itemId, 1);
           if (added > 0) {
             p = p2;
+            gainedItem = true;
             const def = getItemDef(itemId);
             exploreMsg += EXPLORE_TEXTS.lootGained(def?.name ?? itemId);
           }
@@ -125,6 +128,9 @@ export function useExplorationActions(
       p = advanceTime(p, 'explore');
       return p;
     });
+    if (gainedItem) {
+      playSound('itemGain');
+    }
     setTimeout(flushLogs, 0);
   }, [canAct, advanceTime, addLog, setPlayer]);
 

@@ -1,0 +1,201 @@
+[
+  {
+    "id": "cp-02:hidden_cave_meditation",
+    "category": "explore",
+    "tone": "good",
+    "name": "隐洞静修",
+    "weight": 24,
+    "effects": { "exp": 28, "mood": 6 },
+    "message": "🕳️ 你没有贸然深入险地，而是在隐蔽石洞中静修半日，修为 +28，心情 +6。",
+    "regionTags": ["wilderness", "mountain"]
+  },
+  {
+    "id": "cp-02:avoid_danger_sign",
+    "category": "explore",
+    "tone": "good",
+    "name": "识破凶兆",
+    "weight": 20,
+    "effects": { "mood": 8, "stamina": 8 },
+    "message": "👣 你从兽爪痕与断枝中看出凶兆，提前绕路避开危险，心情 +8，精力 +8。",
+    "regionTags": ["dangerous", "wilderness", "mountain"]
+  },
+  {
+    "id": "cp-02:buried_cache",
+    "category": "explore",
+    "tone": "good",
+    "name": "前人暗藏",
+    "weight": 14,
+    "effects": { "gold": 35 },
+    "message": "📦 你在不起眼的枯树根下发现前人暗藏的小布袋，获得 35 灵石。",
+    "regionTags": ["wilderness", "safe"]
+  },
+  {
+    "id": "cp-02:dew_collection",
+    "category": "explore",
+    "tone": "good",
+    "name": "晨露养身",
+    "weight": 18,
+    "effects": { "health": 8, "mp": 25 },
+    "message": "💧 清晨收集无垢灵露服下，身体轻健，健康 +8，灵力 +25。",
+    "regionTags": ["herb", "valley"]
+  },
+  {
+    "id": "cp-02:safe_route_map",
+    "category": "explore",
+    "tone": "good",
+    "name": "安全路线",
+    "weight": 15,
+    "effects": { "stamina": 15, "mood": 6 },
+    "message": "🗺️ 你重新校对路线，避开妖兽巡游之处，精力 +15，心情 +6。"
+  },
+  {
+    "id": "cp-02:watch_from_afar",
+    "category": "explore",
+    "tone": "neutral",
+    "name": "远观争斗",
+    "weight": 16,
+    "effects": { "exp": 12 },
+    "message": "👁️ 你远远观察两名修士斗法，记下几处法力运转细节，修为 +12。",
+    "regionTags": ["dangerous", "sect", "city"]
+  },
+  {
+    "id": "cp-02:no_gain_no_loss",
+    "category": "explore",
+    "tone": "neutral",
+    "name": "无事便好",
+    "weight": 24,
+    "effects": {},
+    "message": "🍃 今日谨慎巡查四周，虽无所得，却也没有招惹麻烦。"
+  },
+  {
+    "id": "cp-02:missed_treasure",
+    "category": "explore",
+    "tone": "bad",
+    "name": "错失宝光",
+    "weight": 9,
+    "effects": { "mood": -8 },
+    "message": "✨ 远处似有宝光冲天，但你判断风险过高选择撤离，事后略有遗憾，心情 -8。",
+    "regionTags": ["mystic", "dangerous"]
+  },
+  {
+    "id": "cp-02:false_alarm",
+    "category": "explore",
+    "tone": "bad",
+    "name": "疑神疑鬼",
+    "weight": 12,
+    "effects": { "stamina": -10, "mood": -6 },
+    "message": "🐾 你把山狸脚印误认作妖兽踪迹，白白绕远路，精力 -10，心情 -6。"
+  },
+  {
+    "id": "cp-02:ambush_graze",
+    "category": "explore",
+    "tone": "bad",
+    "name": "擦身伏击",
+    "weight": 10,
+    "effects": { "hp": -18, "health": -3 },
+    "message": "🏹 一支冷箭擦肩而过，你及时伏地逃开，仍受轻伤，HP -18，健康 -3。",
+    "regionTags": ["dangerous", "wilderness"]
+  },
+  {
+    "id": "cp-02:spirit_beast_passes",
+    "category": "explore",
+    "tone": "bad",
+    "name": "屏息避兽",
+    "weight": 9,
+    "effects": { "stamina": -18, "mood": -5 },
+    "message": "🐅 高阶妖兽从藏身处外走过，你屏息良久不敢动弹，精力 -18，心情 -5。",
+    "condition": { "minRealm": 1 },
+    "regionTags": ["dangerous", "mountain", "wilderness"]
+  },
+  {
+    "id": "cp-02:hidden_master_hint",
+    "category": "adventure",
+    "tone": "good",
+    "name": "苟道前辈",
+    "weight": 5,
+    "effects": { "exp": 90, "mood": 15 },
+    "message": "🧙 一位擅长避劫的老修士指点你三句保命口诀，修为 +90，心情 +15。",
+    "condition": { "minRealm": 1 }
+  },
+  {
+    "id": "cp-02:retreat_from_secret_realm",
+    "category": "adventure",
+    "tone": "good",
+    "name": "及时撤出",
+    "weight": 5,
+    "effects": { "health": 12, "stamina": 20 },
+    "message": "🚪 秘境震动前，你没有贪图最后一件宝物，提前撤出，健康 +12，精力 +20。",
+    "condition": { "minRealm": 2 },
+    "regionTags": ["mystic", "dangerous"]
+  },
+  {
+    "id": "cp-02:small_fortune_no_fight",
+    "category": "adventure",
+    "tone": "good",
+    "name": "不战得利",
+    "weight": 4,
+    "effects": { "gold": 90, "exp": 45 },
+    "message": "🪙 两伙修士争斗后离去，你等到确认安全才拾取遗落储物袋，灵石 +90，修为 +45。",
+    "condition": { "minRealm": 1 },
+    "regionTags": ["dangerous", "wilderness"]
+  },
+  {
+    "id": "cp-02:dangerous_inheritance_refused",
+    "category": "adventure",
+    "tone": "neutral",
+    "name": "拒绝传承",
+    "weight": 4,
+    "effects": { "mood": 5 },
+    "message": "🚫 一座古洞传出诱人呼唤，你察觉誓约陷阱，转身离去。心情 +5。",
+    "condition": { "minRealm": 2 },
+    "regionTags": ["mystic", "dangerous"]
+  },
+  {
+    "id": "cp-02:greedy_chase_loss",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "差点贪心",
+    "weight": 4,
+    "effects": { "hp": -35, "mood": -12 },
+    "message": "💥 你多看了一眼禁制后的宝匣，险些被余波卷入，HP -35，心情 -12。",
+    "condition": { "minRealm": 1 },
+    "regionTags": ["mystic", "dangerous"]
+  },
+  {
+    "id": "cp-02:daily_check_formations",
+    "category": "daily",
+    "tone": "good",
+    "name": "检查阵盘",
+    "weight": 18,
+    "effects": { "mood": 6 },
+    "message": "🧭 你照例检查洞府阵盘与退路，确认无虞，心情 +6。"
+  },
+  {
+    "id": "cp-02:daily_breath_control",
+    "category": "daily",
+    "tone": "good",
+    "name": "龟息吐纳",
+    "weight": 16,
+    "effects": { "exp": 18, "health": 4 },
+    "message": "🐢 今日修行龟息吐纳，气息绵长，修为 +18，健康 +4。"
+  },
+  {
+    "id": "cp-02:daily_inventory_sort",
+    "category": "daily",
+    "tone": "good",
+    "name": "整理后手",
+    "weight": 14,
+    "effects": { "mood": 8, "stamina": 6 },
+    "message": "🎒 你把丹药符箓按逃命顺序排好，心情 +8，精力 +6。"
+  },
+  {
+    "id": "cp-02:daily_over_cautious",
+    "category": "daily",
+    "tone": "bad",
+    "name": "过度谨慎",
+    "weight": 10,
+    "effects": { "mood": -6, "exp": -5 },
+    "message": "😟 你反复推演最坏结果，错过了修炼时辰，心情 -6，修为 -5。"
+  }
+]
+

@@ -10,6 +10,7 @@ import type { CoreActionDeps, LogQueue } from './types';
 import type { LogCategory } from '../useGameLog';
 import { COMBAT_TEXTS } from '../../data/texts/combat';
 import { CULTIVATION_TEXTS } from '../../data/texts/cultivation';
+import { playSound } from '../../game/audio';
 
 export function useCultivationActions(
   deps: Pick<CoreActionDeps, 'addLog' | 'setPlayer' | 'advanceTime' | 'canAct'>,
@@ -105,6 +106,7 @@ export function useCultivationActions(
       }
       return p;
     });
+    playSound('cultivateTick');
     setTimeout(flushLogs, 0);
   }, [canAct, advanceTime, addLog, setPlayer]);
 

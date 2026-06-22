@@ -15,6 +15,7 @@ import type { CoreActionDeps, LootEntry, CombatDeathInfo, LogQueue } from './typ
 import type { LogCategory } from '../useGameLog';
 import { COMBAT_TEXTS } from '../../data/texts/combat';
 import { EXPLORE_TEXTS } from '../../data/texts/explore';
+import { playSound } from '../../game/audio';
 
 export function useCombatActions(
   deps: CoreActionDeps,
@@ -236,6 +237,13 @@ export function useCombatActions(
       if (combatResultRef.current) {
         const { monsterName, monsterEmoji, result, loot, deathInfo, hpBefore, mpBefore } = combatResultRef.current;
         onCombatResult(monsterName, monsterEmoji, result, loot, deathInfo, hpBefore, mpBefore);
+        if (deathInfo?.triggered && !deathInfo.blocked) {
+          playSound('death');
+        } else if (loot.length > 0) {
+          playSound('itemGain');
+        } else {
+          playSound('combatHit');
+        }
         combatResultRef.current = null;
       } else {
         flushLogs();

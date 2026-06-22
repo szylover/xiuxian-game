@@ -1,0 +1,227 @@
+[
+  {
+    "id": "cp-02:turtle_breath_art",
+    "name": "龟息诀",
+    "type": "palm",
+    "rarity": "common",
+    "description": "收敛气息、调匀内息的入门苟道功法。",
+    "minRealm": 0,
+    "maxLevel": 10,
+    "expPerLevel": 45,
+    "statBonusPerLevel": { "hp": 10, "def": 1 },
+    "aptitudeKey": "palm",
+    "spiritRootElement": "water",
+    "passiveEffects": [
+      { "minLevel": 3, "stat": "hp", "value": 40, "description": "绵长气息：体力 +40" },
+      { "minLevel": 7, "stat": "def", "value": 6, "description": "缩息护体：防御 +6" }
+    ],
+    "bodyExpRate": 0.5
+  },
+  {
+    "id": "cp-02:grey_shadow_step",
+    "name": "灰影步",
+    "type": "fist",
+    "rarity": "common",
+    "description": "不求最快，只求脚步无声、退路清楚。",
+    "minRealm": 0,
+    "maxLevel": 10,
+    "expPerLevel": 50,
+    "statBonusPerLevel": { "speed": 2, "hp": 6 },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "earth",
+    "passiveEffects": [
+      { "minLevel": 3, "stat": "speed", "value": 6, "description": "无声移步：速度 +6" },
+      { "minLevel": 7, "stat": "hp", "value": 35, "description": "留力撤退：体力 +35" }
+    ],
+    "activeSkill": {
+      "name": "退影连步",
+      "description": "避开锋芒后顺势反击。",
+      "mpCost": 8,
+      "staminaCost": 4,
+      "dmgMultiplier": 0.9,
+      "hitCount": 2,
+      "cooldown": 1,
+      "triggerRate": 0.28
+    },
+    "bodyExpRate": 0.8
+  },
+  {
+    "id": "cp-02:stone_shell_method",
+    "name": "石壳功",
+    "type": "fist",
+    "rarity": "uncommon",
+    "description": "以土灵气覆体，宁可慢半拍，也要扛得住。",
+    "minRealm": 1,
+    "maxLevel": 15,
+    "expPerLevel": 75,
+    "statBonusPerLevel": { "def": 4, "hp": 12 },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "earth",
+    "passiveEffects": [
+      { "minLevel": 4, "stat": "def", "value": 14, "description": "石壳护身：防御 +14" },
+      { "minLevel": 9, "stat": "physiqueDmgReduce", "value": 3, "description": "厚土卸力：物理减伤 +3%" },
+      { "minLevel": 12, "stat": "hp", "value": 90, "description": "厚积薄发：体力 +90" }
+    ],
+    "activeSkill": {
+      "name": "缩壳守势",
+      "description": "短暂收势，以下盘稳固反震来敌。",
+      "mpCost": 14,
+      "staminaCost": 6,
+      "dmgMultiplier": 1.1,
+      "hitCount": 1,
+      "cooldown": 2,
+      "triggerRate": 0.25,
+      "effect": { "type": "debuff_atk", "value": 5, "duration": 2 }
+    },
+    "bodyExpRate": 1.0
+  },
+  {
+    "id": "cp-02:hidden_blade_manual",
+    "name": "藏锋刀谱",
+    "type": "blade",
+    "rarity": "uncommon",
+    "description": "刀不轻出，出则只求脱身。",
+    "minRealm": 1,
+    "maxLevel": 14,
+    "expPerLevel": 80,
+    "statBonusPerLevel": { "atk": 3, "speed": 1, "def": 1 },
+    "aptitudeKey": "blade",
+    "passiveEffects": [
+      { "minLevel": 4, "stat": "atk", "value": 10, "description": "藏锋蓄势：攻击 +10" },
+      { "minLevel": 8, "stat": "speed", "value": 8, "description": "抽身刀步：速度 +8" }
+    ],
+    "activeSkill": {
+      "name": "断追一刀",
+      "description": "斩向追击者脚步，逼其停顿。",
+      "mpCost": 12,
+      "staminaCost": 5,
+      "dmgMultiplier": 1.35,
+      "hitCount": 1,
+      "cooldown": 1,
+      "triggerRate": 0.3,
+      "effect": { "type": "debuff_atk", "value": 4, "duration": 1 }
+    },
+    "bodyExpRate": 0.4
+  },
+  {
+    "id": "cp-02:mudra_of_forbearance",
+    "name": "忍辱掌",
+    "type": "palm",
+    "rarity": "uncommon",
+    "description": "不争一时胜负，以柔掌化去杀机。",
+    "minRealm": 1,
+    "maxLevel": 15,
+    "expPerLevel": 78,
+    "statBonusPerLevel": { "def": 3, "mp": 5 },
+    "aptitudeKey": "palm",
+    "spiritRootElement": "wood",
+    "passiveEffects": [
+      { "minLevel": 4, "stat": "def", "value": 12, "description": "忍辱卸劲：防御 +12" },
+      { "minLevel": 9, "stat": "mp", "value": 45, "description": "心湖不波：灵力 +45" }
+    ],
+    "activeSkill": {
+      "name": "息争掌",
+      "description": "掌势绵软，削弱敌意与攻势。",
+      "mpCost": 16,
+      "staminaCost": 5,
+      "dmgMultiplier": 1.0,
+      "hitCount": 1,
+      "cooldown": 2,
+      "triggerRate": 0.32,
+      "effect": { "type": "debuff_atk", "value": 7, "duration": 2 }
+    },
+    "bodyExpRate": 0.6
+  },
+  {
+    "id": "cp-02:mist_veil_finger",
+    "name": "雾隐指",
+    "type": "finger",
+    "rarity": "rare",
+    "description": "指劲如雾，重在扰乱感知而非正面破敌。",
+    "minRealm": 2,
+    "maxLevel": 18,
+    "expPerLevel": 100,
+    "statBonusPerLevel": { "atk": 3, "speed": 2, "mp": 6 },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "water",
+    "passiveEffects": [
+      { "minLevel": 5, "stat": "speed", "value": 10, "description": "雾中无迹：速度 +10" },
+      { "minLevel": 10, "stat": "mp", "value": 70, "description": "雾藏灵机：灵力 +70" },
+      { "minLevel": 15, "stat": "critRate", "value": 4, "description": "雾隙点穴：暴击率 +4%" }
+    ],
+    "activeSkill": {
+      "name": "雾锁一指",
+      "description": "一指封住敌人视线中的破绽。",
+      "mpCost": 20,
+      "staminaCost": 6,
+      "dmgMultiplier": 1.45,
+      "hitCount": 1,
+      "cooldown": 2,
+      "triggerRate": 0.28,
+      "effect": { "type": "debuff_def", "value": 6, "duration": 2 }
+    },
+    "bodyExpRate": 0.5
+  },
+  {
+    "id": "cp-02:ten_retreats_classic",
+    "name": "十退经",
+    "type": "palm",
+    "rarity": "epic",
+    "description": "十种退路、百般后手，苟道修士奉为圭臬。",
+    "minRealm": 3,
+    "maxLevel": 25,
+    "expPerLevel": 135,
+    "statBonusPerLevel": { "hp": 18, "def": 5, "speed": 1 },
+    "aptitudeKey": "palm",
+    "spiritRootElement": "earth",
+    "passiveEffects": [
+      { "minLevel": 5, "stat": "hp", "value": 150, "description": "退路充足：体力 +150" },
+      { "minLevel": 10, "stat": "def", "value": 28, "description": "三重后手：防御 +28" },
+      { "minLevel": 16, "stat": "physiqueDmgReduce", "value": 5, "description": "避劫卸力：物理减伤 +5%" },
+      { "minLevel": 22, "stat": "speed", "value": 18, "description": "第十退路：速度 +18" }
+    ],
+    "activeSkill": {
+      "name": "三步一退",
+      "description": "连退三步化去杀机，再以掌劲回击。",
+      "mpCost": 30,
+      "staminaCost": 10,
+      "dmgMultiplier": 1.35,
+      "hitCount": 2,
+      "cooldown": 3,
+      "triggerRate": 0.25,
+      "effect": { "type": "heal_self", "value": 70, "duration": 1 }
+    },
+    "bodyExpRate": 0.7
+  },
+  {
+    "id": "cp-02:calamity_avoidance_sword",
+    "name": "避劫剑经",
+    "type": "sword",
+    "rarity": "legendary",
+    "description": "不与天争锋，只在劫隙中求一线真道。",
+    "minRealm": 4,
+    "maxLevel": 30,
+    "expPerLevel": 180,
+    "statBonusPerLevel": { "atk": 6, "def": 4, "speed": 2, "critRate": 1 },
+    "aptitudeKey": "sword",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      { "minLevel": 6, "stat": "def", "value": 35, "description": "避劫剑围：防御 +35" },
+      { "minLevel": 12, "stat": "speed", "value": 22, "description": "劫前先退：速度 +22" },
+      { "minLevel": 18, "stat": "atk", "value": 45, "description": "劫隙一剑：攻击 +45" },
+      { "minLevel": 24, "stat": "critDmgMultiplier", "value": 0.3, "description": "真机一线：暴击伤害 +30%" }
+    ],
+    "activeSkill": {
+      "name": "劫隙归真",
+      "description": "在杀机空隙中递出求真一剑。",
+      "mpCost": 45,
+      "staminaCost": 14,
+      "dmgMultiplier": 2.1,
+      "hitCount": 2,
+      "cooldown": 4,
+      "triggerRate": 0.22
+    },
+    "bodyExpRate": 0.2
+  }
+]
+
