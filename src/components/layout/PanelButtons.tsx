@@ -5,7 +5,7 @@
 import type { Player } from '../../game/player';
 import { UI_LABELS } from '../../data/texts/ui-labels';
 
-export type PanelKey = 'inventory' | 'shop' | 'crafting' | 'equipment' | 'technique' | 'divine' | 'enlightenment' | 'heartDemon' | 'achievement' | 'map' | 'npc' | 'companion' | 'quest' | 'bounty' | 'secretRealm' | 'chronicle' | 'ranking' | 'pvp' | 'talent' | 'sect' | 'status';
+export type PanelKey = 'inventory' | 'shop' | 'crafting' | 'equipment' | 'technique' | 'learning' | 'divine' | 'enlightenment' | 'heartDemon' | 'achievement' | 'map' | 'npc' | 'companion' | 'quest' | 'bounty' | 'secretRealm' | 'chronicle' | 'ranking' | 'pvp' | 'talent' | 'sect' | 'status';
 
 interface PanelDef {
   key: PanelKey;
@@ -26,13 +26,13 @@ const PANEL_GROUPS: PanelGroup[] = [
     label: g.economy,
     panels: [
       { key: 'inventory', icon: p.inventory.icon, label: p.inventory.title },
-      { key: 'shop', icon: p.shop.icon, label: p.shop.title },
     ],
   },
   {
     label: g.cultivation,
     panels: [
       { key: 'technique', icon: p.technique.icon, label: p.technique.title },
+      { key: 'learning', icon: p.learning.icon, label: p.learning.title },
       { key: 'divine', icon: p.divine.icon, label: p.divine.title },
       { key: 'talent', icon: p.talent.icon, label: p.talent.title },
       { key: 'enlightenment', icon: p.enlightenment.icon, label: p.enlightenment.title },

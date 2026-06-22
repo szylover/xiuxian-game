@@ -12,6 +12,8 @@ import { SHOP_TEXTS } from '../data/texts/shop';
 import type { Alignment } from './types';
 import { getAlignment } from './karma';
 import { ALIGNMENT_CN, KARMA_TEXTS } from '../data/texts';
+import { getNpcsInRegion } from './npc';
+import type { NpcDef } from './types';
 
 // ── 商品定义（注册到全局表）──
 
@@ -21,6 +23,7 @@ export interface ShopGoodsDef {
   stock: number;          // 库存（-1 = 无限）
   regionTags?: string[];  // T0021 区域标签（空/未设置 = 所有区域可购买）
   requiredAlignment?: Alignment;
+  npcId?: string;
 }
 
 // ── 商品注册表 ──
@@ -30,7 +33,7 @@ const shopGoodsRegistry: ShopGoodsDef[] = [];
 export function registerShopGoods(goods: ShopGoodsDef[]): void {
   for (const g of goods) {
     // 避免重复
-    if (!shopGoodsRegistry.find(x => x.itemId === g.itemId)) {
+    if (!shopGoodsRegistry.find(x => x.itemId === g.itemId && x.npcId === g.npcId)) {
       shopGoodsRegistry.push(g);
     }
   }
@@ -54,6 +57,23 @@ export function getShopGoodsForRegion(player: Player): ShopGoodsDef[] {
     (!g.regionTags?.length || g.regionTags.some(t => tags.includes(t)))
     && (!g.requiredAlignment || getAlignment(player.karma ?? 0) === g.requiredAlignment)
   );
+}
+
+export function getMerchantsInRegion(player: Player): NpcDef[] {
+  return getNpcsInRegion(player).filter(npc => npc.roles.includes('merchant') && getGoodsForMerchant(npc.id, player).length > 0);
+}
+
+export function getGoodsForMerchant(npcId: string, player: Player): ShopGoodsDef[] {
+  const regionGoods = getShopGoodsForRegion(player);
+  return regionGoods.filter(g => g.npcId === npcId || (!g.npcId && getLegacyMerchantMatch(npcId)));
+}
+
+export function hasShopInRegion(player: Player): boolean {
+  return getMerchantsInRegion(player).length > 0;
+}
+
+function getLegacyMerchantMatch(npcId: string): boolean {
+  return npcId === 'core:npc_market_chen';
 }
 
 // ── 价格计算 ──

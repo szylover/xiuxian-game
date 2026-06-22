@@ -38,3 +38,12 @@
 .technique-progress-fill {
   width: var(--progress-pct, 0%);
 }
+
+.technique-learning-hint {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  color: var(--color-text-secondary);
+  background: var(--color-bg-medium);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+}

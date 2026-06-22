@@ -422,5 +422,299 @@
         "core:iron_ore"
       ]
     }
+  },
+  {
+    "id": "core:merchant_zhang",
+    "name": "张药师",
+    "title": "丹药阁掌柜",
+    "emoji": "🧪",
+    "gender": "male",
+    "description": "青云镇丹药阁掌柜，专售丹药与基础丹方。",
+    "regionTags": [
+      "town",
+      "safe"
+    ],
+    "homeRegionId": "core:qingyun_town",
+    "realmIndex": 1,
+    "hp": 220,
+    "atk": 16,
+    "def": 14,
+    "speed": 10,
+    "critRate": 3,
+    "critResist": 2,
+    "critDmgMultiplier": 1.2,
+    "disposition": "friendly",
+    "roles": [
+      "merchant"
+    ],
+    "personality": "cunning",
+    "charisma": 70,
+    "minRealm": 0,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "core:spirit_stone_shard"
+      ],
+      "liked": [
+        "core:jade_slip"
+      ],
+      "disliked": [
+        "core:beast_blood"
+      ]
+    },
+    "alignment": "neutral"
+  },
+  {
+    "id": "core:merchant_li",
+    "name": "李铁匠",
+    "title": "百炼铺掌柜",
+    "emoji": "⚒️",
+    "gender": "male",
+    "description": "青云镇百炼铺铁匠，经营兵甲与炼器图纸。",
+    "regionTags": [
+      "town",
+      "safe"
+    ],
+    "homeRegionId": "core:qingyun_town",
+    "realmIndex": 1,
+    "hp": 220,
+    "atk": 16,
+    "def": 14,
+    "speed": 10,
+    "critRate": 3,
+    "critResist": 2,
+    "critDmgMultiplier": 1.2,
+    "disposition": "friendly",
+    "roles": [
+      "merchant"
+    ],
+    "personality": "cunning",
+    "charisma": 70,
+    "minRealm": 0,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "core:spirit_stone_shard"
+      ],
+      "liked": [
+        "core:jade_slip"
+      ],
+      "disliked": [
+        "core:beast_blood"
+      ]
+    },
+    "alignment": "neutral"
+  },
+  {
+    "id": "core:merchant_wang",
+    "name": "王材官",
+    "title": "材料坊掌柜",
+    "emoji": "🪨",
+    "gender": "male",
+    "description": "青云镇材料坊掌柜，收售灵材矿石。",
+    "regionTags": [
+      "town",
+      "safe"
+    ],
+    "homeRegionId": "core:qingyun_town",
+    "realmIndex": 1,
+    "hp": 220,
+    "atk": 16,
+    "def": 14,
+    "speed": 10,
+    "critRate": 3,
+    "critResist": 2,
+    "critDmgMultiplier": 1.2,
+    "disposition": "friendly",
+    "roles": [
+      "merchant"
+    ],
+    "personality": "cunning",
+    "charisma": 70,
+    "minRealm": 0,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "core:spirit_stone_shard"
+      ],
+      "liked": [
+        "core:jade_slip"
+      ],
+      "disliked": [
+        "core:beast_blood"
+      ]
+    },
+    "alignment": "neutral"
+  },
+  {
+    "id": "core:merchant_scroll_yu",
+    "name": "余书吏",
+    "title": "听雨书斋掌柜",
+    "emoji": "📜",
+    "gender": "male",
+    "description": "听雨书斋掌柜，珍藏功法秘籍与神通玉简。",
+    "regionTags": [
+      "town",
+      "safe"
+    ],
+    "homeRegionId": "core:qingyun_town",
+    "realmIndex": 1,
+    "hp": 220,
+    "atk": 16,
+    "def": 14,
+    "speed": 10,
+    "critRate": 3,
+    "critResist": 2,
+    "critDmgMultiplier": 1.2,
+    "disposition": "friendly",
+    "roles": [
+      "merchant"
+    ],
+    "personality": "cunning",
+    "charisma": 70,
+    "minRealm": 0,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "core:spirit_stone_shard"
+      ],
+      "liked": [
+        "core:jade_slip"
+      ],
+      "disliked": [
+        "core:beast_blood"
+      ]
+    },
+    "alignment": "neutral"
+  },
+  {
+    "id": "core:merchant_herb_farmer",
+    "name": "灵药谷药农",
+    "title": "药材商",
+    "emoji": "🌿",
+    "gender": "female",
+    "description": "长年在灵药谷采药的药农，出售药材与丹方。",
+    "regionTags": [
+      "valley",
+      "herb"
+    ],
+    "homeRegionId": "core:herb_valley",
+    "realmIndex": 1,
+    "hp": 220,
+    "atk": 16,
+    "def": 14,
+    "speed": 10,
+    "critRate": 3,
+    "critResist": 2,
+    "critDmgMultiplier": 1.2,
+    "disposition": "friendly",
+    "roles": [
+      "merchant"
+    ],
+    "personality": "cunning",
+    "charisma": 70,
+    "minRealm": 0,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "core:spirit_stone_shard"
+      ],
+      "liked": [
+        "core:jade_slip"
+      ],
+      "disliked": [
+        "core:beast_blood"
+      ]
+    },
+    "alignment": "neutral"
+  },
+  {
+    "id": "core:merchant_miner_old",
+    "name": "矿山老汉",
+    "title": "矿石商",
+    "emoji": "⛏️",
+    "gender": "male",
+    "description": "往来荒山矿脉的老矿工，出售矿材与粗浅图纸。",
+    "regionTags": [
+      "mountain",
+      "wilderness",
+      "wasteland"
+    ],
+    "realmIndex": 1,
+    "hp": 220,
+    "atk": 16,
+    "def": 14,
+    "speed": 10,
+    "critRate": 3,
+    "critResist": 2,
+    "critDmgMultiplier": 1.2,
+    "disposition": "friendly",
+    "roles": [
+      "merchant"
+    ],
+    "personality": "cunning",
+    "charisma": 70,
+    "minRealm": 0,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "core:spirit_stone_shard"
+      ],
+      "liked": [
+        "core:jade_slip"
+      ],
+      "disliked": [
+        "core:beast_blood"
+      ]
+    },
+    "alignment": "neutral"
+  },
+  {
+    "id": "core:merchant_xiandu_master",
+    "name": "仙都仙师",
+    "title": "仙器铺掌柜",
+    "emoji": "🏛️",
+    "gender": "male",
+    "description": "仙都仙器铺掌柜，经营高阶装备与稀有秘籍。",
+    "regionTags": [
+      "city",
+      "celestial"
+    ],
+    "homeRegionId": "core:celestial_city",
+    "realmIndex": 1,
+    "hp": 220,
+    "atk": 16,
+    "def": 14,
+    "speed": 10,
+    "critRate": 3,
+    "critResist": 2,
+    "critDmgMultiplier": 1.2,
+    "disposition": "friendly",
+    "roles": [
+      "merchant"
+    ],
+    "personality": "cunning",
+    "charisma": 70,
+    "minRealm": 0,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "core:spirit_stone_shard"
+      ],
+      "liked": [
+        "core:jade_slip"
+      ],
+      "disliked": [
+        "core:beast_blood"
+      ]
+    },
+    "alignment": "neutral"
   }
 ]

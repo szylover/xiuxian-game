@@ -10,7 +10,7 @@ import { FloatingPanel } from '../shared';
 import PanelButtons from './PanelButtons';
 import type { PanelKey } from './PanelButtons';
 import InventoryPanel from '../panels/InventoryPanel';
-import ShopPanel from '../panels/ShopPanel';
+import LearningPanel from '../panels/LearningPanel';
 import CraftingPanel from '../panels/CraftingPanel';
 import EquipmentPanel from '../panels/EquipmentPanel';
 import TechniquePanel from '../panels/TechniquePanel';
@@ -33,7 +33,7 @@ import { UI_LABELS } from '../../data/texts/ui-labels';
 
 // 'status' panel is rendered by LeftPanel, so excluded from this config
 const PANEL_WIDTHS: Partial<Record<PanelKey, number>> = {
-  inventory: 380, shop: 380, technique: 400, divine: 420,
+  inventory: 380, technique: 400, learning: 420, divine: 420,
   crafting: 380, equipment: 380, achievement: 420, map: 420, npc: 380,
   quest: 400, companion: 420, bounty: 420, secretRealm: 440, chronicle: 420, ranking: 520, pvp: 520, talent: 560, enlightenment: 500, heartDemon: 500, sect: 520,
 };
@@ -49,12 +49,12 @@ interface RightPanelProps {
   onUnequip: (slot: EquipSlot) => void;
   onBuy: (itemId: string) => void;
   onSell: (itemId: string) => void;
-  onLearnTechnique: (techniqueId: string) => void;
   onPracticeTechnique: (techniqueId: string) => void;
   onActivateTechnique: (techniqueId: string) => void;
-  onLearnDivineArt: (artId: string) => void;
   onActivateDivineArt: (artId: string) => void;
   onDeactivateDivineArt: () => void;
+  onStartStudy: (scrollItemId: string) => void;
+  onCancelStudy: () => void;
   onUnlockTalentNode: (nodeId: string) => void;
   onContemplateEnlightenment: () => void;
   onTriggerEnlightenment: () => void;
@@ -101,8 +101,8 @@ interface RightPanelProps {
 export default function RightPanel({
   player, activePanel, onSelectPanel,
   onUseItem, onCraft, onSmith, onEquip, onUnequip, onBuy, onSell,
-  onLearnTechnique, onPracticeTechnique, onActivateTechnique,
-  onLearnDivineArt, onActivateDivineArt, onDeactivateDivineArt, onUnlockTalentNode,
+  onPracticeTechnique, onActivateTechnique,
+  onActivateDivineArt, onDeactivateDivineArt, onStartStudy, onCancelStudy, onUnlockTalentNode,
   onContemplateEnlightenment, onTriggerEnlightenment,
   onSuppressHeartDemon, onConfrontHeartDemon, onChallengePvp,
   onJoinSect, onClaimSectStipend, onAdvanceSectRank, onCompleteSectMission, onBuySectStoreItem,
@@ -132,9 +132,9 @@ export default function RightPanel({
           onClose={closePanel}
         >
           {activePanel === 'inventory' && <InventoryPanel player={player} onUseItem={onUseItem} />}
-          {activePanel === 'shop' && <ShopPanel player={player} onBuy={onBuy} onSell={onSell} />}
-          {activePanel === 'technique' && <TechniquePanel player={player} onLearn={onLearnTechnique} onPractice={onPracticeTechnique} onActivate={onActivateTechnique} />}
-          {activePanel === 'divine' && <DivineArtsPanel player={player} onLearn={onLearnDivineArt} onActivate={onActivateDivineArt} onDeactivate={onDeactivateDivineArt} />}
+          {activePanel === 'technique' && <TechniquePanel player={player} onPractice={onPracticeTechnique} onActivate={onActivateTechnique} />}
+          {activePanel === 'learning' && <LearningPanel player={player} onStartStudy={onStartStudy} onCancelStudy={onCancelStudy} />}
+          {activePanel === 'divine' && <DivineArtsPanel player={player} onActivate={onActivateDivineArt} onDeactivate={onDeactivateDivineArt} />}
           {activePanel === 'crafting' && <CraftingPanel player={player} onCraft={onCraft} onSmith={onSmith} />}
           {activePanel === 'equipment' && <EquipmentPanel player={player} onEquip={onEquip} onUnequip={onUnequip} />}
           {activePanel === 'achievement' && <AchievementPanel player={player} />}

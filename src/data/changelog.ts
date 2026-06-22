@@ -12,6 +12,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.25.0',
+    date: '2026-06-22',
+    title: '研读学习与场景商铺',
+    items: [
+      '新增秘籍研读系统，功法、神通、炼丹配方与炼器图纸需先获得卷轴并随时间参悟解锁',
+      '新增研读面板与 Debug 辅助，研读进度随月数推进并受悟性、境界、灵根与阵营门槛影响',
+      '商店整合进场景视图，按当前区域 NPC 商人分店展示本地库存，并保留统一出售功能',
+    ],
+  },
+  {
     version: '1.24.0',
     date: '2026-06-22',
     title: '心魔劫与问道台切磋',

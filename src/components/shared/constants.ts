@@ -52,6 +52,7 @@ export const CATEGORY_TABS: { key: 'all' | ItemCategory; label: string; icon: st
   { key: 'consumable', label: '丹药', icon: '💊' },
   { key: 'material',   label: '材料', icon: '🪨' },
   { key: 'technique',  label: '功法', icon: '📖' },
+  { key: 'scroll',     label: '秘籍', icon: '📜' },
   { key: 'misc',       label: '杂物', icon: '📜' },
 ];
 

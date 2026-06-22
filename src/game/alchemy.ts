@@ -10,6 +10,7 @@ import { getRecipe, getAllRecipes, getItemDef } from './registry';
 import { hasItem, addItem, removeItem } from './inventory';
 import { ALCHEMY_TEXTS } from '../data/texts/alchemy';
 import { QUALITY_NAMES } from '../data/texts/common';
+import { hasLearnedRecipe } from './learning';
 
 // ── 炼丹结果 ──
 
@@ -29,6 +30,7 @@ export function getAvailableRecipes(player: Player): RecipeDef[] {
 export function canCraft(player: Player, recipeId: string): boolean {
   const recipe = getRecipe(recipeId);
   if (!recipe) return false;
+  if (!hasLearnedRecipe(player, recipeId)) return false;
   if (player.realmIndex < recipe.minRealm) return false;
   if (player.mentalPower < recipe.mentalCost) return false;
   for (const input of recipe.inputs) {
@@ -66,6 +68,9 @@ function rollQuality(player: Player): RecipeQuality {
 export function performAlchemy(player: Player, recipeId: string): AlchemyResult {
   const recipe = getRecipe(recipeId);
   if (!recipe) {
+    return { player, success: false, message: ALCHEMY_TEXTS.recipeNotFound };
+  }
+  if (!hasLearnedRecipe(player, recipeId)) {
     return { player, success: false, message: ALCHEMY_TEXTS.recipeNotFound };
   }
 

@@ -34,3 +34,5 @@ export { REINCARNATION_TEXTS } from './reincarnation';
 export { PRIMORDIAL_ENDGAME_TEXTS } from './primordial-endgame';
 export { HEART_DEMON_TEXTS } from './heart-demon';
 export { PVP_TEXTS } from './pvp';
+export { LEARNING_TEXTS } from './learning';
+export { SCENE_SHOP_TEXTS } from './scene-shop';

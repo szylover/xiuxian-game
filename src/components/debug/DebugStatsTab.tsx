@@ -18,7 +18,7 @@ import { getEnlightenmentState } from '../../game/enlightenment';
 import { getHeartDemonState } from '../../game/heart-demon';
 import { getPvpState } from '../../game/pvp';
 import { getSectState } from '../../game/sect';
-import { DESTINY_TEXTS, UI_LABELS, KARMA_TEXTS, ALIGNMENT_CN, ENLIGHTENMENT_TEXTS, HEART_DEMON_TEXTS, PVP_TEXTS, SECT_TEXTS, PRIMORDIAL_ENDGAME_TEXTS } from '../../data/texts';
+import { DESTINY_TEXTS, UI_LABELS, KARMA_TEXTS, ALIGNMENT_CN, ENLIGHTENMENT_TEXTS, HEART_DEMON_TEXTS, PVP_TEXTS, SECT_TEXTS, PRIMORDIAL_ENDGAME_TEXTS, LEARNING_TEXTS } from '../../data/texts';
 import './DebugStatsTab.css';
 
 // 可编辑数值行
@@ -128,6 +128,14 @@ export default function DebugStatsTab({ player, onSetStat, onFullRestore, onDebu
 
       <div className="debug-row">
         <button className="btn debug-btn debug-full" onClick={onFullRestore}>🌟 全满</button>
+      </div>
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{LEARNING_TEXTS.debug.title}</span>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__learnAllRecipes', 1)}>{LEARNING_TEXTS.debug.learnAllRecipes}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__completeStudy', 1)}>{LEARNING_TEXTS.debug.completeStudy}</button>
+        </div>
       </div>
 
       <div className="debug-tracker-box">

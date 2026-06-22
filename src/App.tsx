@@ -118,6 +118,8 @@ export default function App() {
             onStartDialogue={engine.startDialogue}
             onDialogueSelectChoice={engine.dialogueSelectChoice}
             onDialogueAdvance={engine.dialogueAdvance}
+            onBuy={engine.buy}
+            onSell={engine.sell}
             gameOver={engine.gameOver}
           />
         }
@@ -133,12 +135,12 @@ export default function App() {
             onUnequip={engine.unequip}
             onBuy={engine.buy}
             onSell={engine.sell}
-            onLearnTechnique={engine.learnTechnique}
             onPracticeTechnique={engine.practiceTechnique}
             onActivateTechnique={engine.activateTechnique}
-            onLearnDivineArt={engine.learnDivineArt}
             onActivateDivineArt={engine.activateDivineArt}
             onDeactivateDivineArt={engine.deactivateDivineArt}
+            onStartStudy={engine.startStudy}
+            onCancelStudy={engine.cancelStudy}
             onUnlockTalentNode={engine.unlockTalentNode}
             onContemplateEnlightenment={engine.contemplateEnlightenment}
             onTriggerEnlightenment={engine.triggerEnlightenment}
@@ -242,4 +244,3 @@ export default function App() {
     </>
   );
 }
-

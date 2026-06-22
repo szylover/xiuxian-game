@@ -8,13 +8,11 @@ import type { Player } from '../../game/player';
 import { getTechniqueDef } from '../../game/registry';
 import type { TechniqueDef, PassiveEffect } from '../../game/registry';
 import { getTechniqueInstance, getTechniqueTraitDef } from '../../game/registry';
-import { getLearnableTechniques, calcTechniqueExpGain, getEffectiveMaxLevel, calcAptitudeBonus } from '../../game/technique';
+import { calcTechniqueExpGain, getEffectiveMaxLevel, calcAptitudeBonus } from '../../game/technique';
 import { RARITY_COLORS, SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS } from '../shared';
 import type { TechniqueRarity } from '../../game/registry';
 import { TECHNIQUE_QUALITY_CONFIG } from '../../game/procedural';
-import { useState } from 'react';
-import { getAlignment } from '../../game/karma';
-import { ALIGNMENT_CN, KARMA_TEXTS } from '../../data/texts';
+import { LEARNING_TEXTS } from '../../data/texts';
 
 const TECHNIQUE_TYPE_CN: Record<string, string> = {
   sword: '剑法', blade: '刀法', fist: '拳法',
@@ -23,7 +21,6 @@ const TECHNIQUE_TYPE_CN: Record<string, string> = {
 
 interface TechniquePanelProps {
   player: Player;
-  onLearn: (techniqueId: string) => void;
   onPractice: (techniqueId: string) => void;
   onActivate: (techniqueId: string) => void;
 }
@@ -45,33 +42,9 @@ function SpiritRootTag({ rootType, affinity }: { rootType: string; affinity?: nu
   );
 }
 
-export default function TechniquePanel({ player, onLearn, onPractice, onActivate }: TechniquePanelProps) {
-  const [filterAvailable, setFilterAvailable] = useState(false);
-  const learnable = getLearnableTechniques(player);
-  const learnableIds = new Set(learnable.map(d => d.id));
-
-  // 过滤可学功法：开启时只显示满足条件的
-  const displayLearnable = filterAvailable
-    ? learnable.filter(def => {
-        const hasRequired = !def.requiredSpiritRoot
-          || player.spiritRoots?.roots.some(r => r.type === def.requiredSpiritRoot);
-        const alignmentReady = !def.requiredAlignment || getAlignment(player.karma ?? 0) === def.requiredAlignment;
-        return hasRequired && alignmentReady;
-      })
-    : learnable;
-
+export default function TechniquePanel({ player, onPractice, onActivate }: TechniquePanelProps) {
   return (
     <div className="technique-panel">
-      {/* 过滤开关 */}
-      <div className="technique-filter-bar">
-        <button
-          className={`btn btn-technique-filter ${filterAvailable ? 'btn-technique-activate' : 'btn-technique'}`}
-          onClick={() => setFilterAvailable(!filterAvailable)}
-        >
-          {filterAvailable ? '✅ 只看可学' : '👁️ 全部'}
-        </button>
-      </div>
-
       {/* 已学功法 */}
       <div className="technique-section-title">📖 已学功法</div>
       {player.techniques.length === 0 ? (
@@ -208,84 +181,7 @@ export default function TechniquePanel({ player, onLearn, onPractice, onActivate
         </div>
       )}
 
-      {/* 可学功法 */}
-      {displayLearnable.length > 0 && (
-        <>
-          <div className="technique-section-title technique-section-title-spaced">📚 可学功法{filterAvailable ? '（已筛选）' : ''}</div>
-          <div className="technique-list">
-            {displayLearnable.map(def => {
-              const effectiveMax = getEffectiveMaxLevel(player, def);
-              const matchRoot = def.spiritRootElement
-                ? player.spiritRoots?.roots.find(r => r.type === def.spiritRootElement)
-                : undefined;
-              const hasRequired = !def.requiredSpiritRoot
-                || player.spiritRoots?.roots.some(r => r.type === def.requiredSpiritRoot);
-              const alignmentReady = !def.requiredAlignment || getAlignment(player.karma ?? 0) === def.requiredAlignment;
-              const canLearn = hasRequired && alignmentReady;
-              return (
-                <div
-                  key={def.id}
-                  className={`technique-card technique-card-colored technique-learnable ${!canLearn ? 'technique-locked' : ''}`}
-                  style={{ '--card-accent-color': RARITY_COLORS[def.rarity as TechniqueRarity] || '#9E9E9E' } as React.CSSProperties}
-                >
-                  <div className="technique-header">
-                    <span className="technique-name">
-                      {def.name}
-                    </span>
-                    <span className="technique-type">{TECHNIQUE_TYPE_CN[def.type] ?? def.type}</span>
-                    {def.spiritRootElement && (
-                      <SpiritRootTag
-                        rootType={def.spiritRootElement}
-                        affinity={matchRoot?.affinity}
-                      />
-                    )}
-                    {(def.passiveEffects?.length ?? 0) > 0 && (
-                      <span className="technique-passive-badge" title="含被动效果">
-                        ✨{def.passiveEffects?.length}
-                      </span>
-                    )}
-                  </div>
-                  {/* 灵根门槛提示 */}
-                  {def.requiredSpiritRoot && (
-                    <div className={`technique-root-req ${hasRequired ? 'technique-root-met' : 'technique-root-unmet'}`}>
-                      {hasRequired ? '✅' : '🔒'} 需要{SPIRIT_ROOT_ICONS[def.requiredSpiritRoot]}{SPIRIT_ROOT_CN[def.requiredSpiritRoot]}灵根
-                    </div>
-                  )}
-                  {def.requiredAlignment && (
-                    <div className={`technique-root-req ${alignmentReady ? 'technique-root-met' : 'technique-root-unmet'}`}>
-                      {alignmentReady ? '✅' : '🔒'} {KARMA_TEXTS.logs.techniqueGate(ALIGNMENT_CN[def.requiredAlignment])}
-                    </div>
-                  )}
-                  <div className="technique-desc">{def.description}</div>
-                  <div className="technique-bonus">
-                    每级：{formatBonus(def)} ・ 最大 Lv.{effectiveMax}
-                    {effectiveMax !== def.maxLevel && (
-                      <span className="technique-max-bonus" title={`灵根亲和度可进一步提升上限，基础 ${def.maxLevel}`}> (基础{def.maxLevel})</span>
-                    )}
-                  </div>
-                  {/* 可学功法也显示被动预览 */}
-                  {def.passiveEffects && def.passiveEffects.length > 0 && (
-                    <div className="technique-passive-section">
-                      <div className="technique-passive-title">✨ 熟练被动（预览）</div>
-                      {def.passiveEffects.map((pe, i) => (
-                        <PassiveEffectRow key={i} pe={pe} currentLevel={0} />
-                      ))}
-                    </div>
-                  )}
-                  <button
-                    className="btn btn-technique-learn"
-                    onClick={() => onLearn(def.id)}
-                    disabled={!canLearn}
-                    title={!canLearn ? (def.requiredAlignment && !alignmentReady ? KARMA_TEXTS.logs.techniqueGate(ALIGNMENT_CN[def.requiredAlignment]) : `需要${SPIRIT_ROOT_CN[def.requiredSpiritRoot!]}灵根才能学习`) : undefined}
-                  >
-                    {canLearn ? '📖 学习' : '🔒 条件不足'}
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        </>
-      )}
+      <div className="technique-learning-hint">{LEARNING_TEXTS.panel.noLearnedTechniqueHint}</div>
     </div>
   );
 }

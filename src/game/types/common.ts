@@ -17,7 +17,7 @@ export const ELEMENT_COUNTER_MULTIPLIER = 1.3;
 
 // ── 物品/品质枚举 ──
 
-export type ItemCategory = 'weapon' | 'armor' | 'accessory' | 'consumable' | 'material' | 'technique' | 'misc';
+export type ItemCategory = 'weapon' | 'armor' | 'accessory' | 'consumable' | 'material' | 'technique' | 'misc' | 'scroll';
 export type ItemRarity = 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
 
 // ── 炼丹品质 ──

@@ -24,6 +24,7 @@ export const UI_LABELS = {
     inventory:   { title: '背包', icon: '🎒' },
     shop:        { title: '商店', icon: '🏪' },
     technique:   { title: '功法', icon: '📖' },
+    learning:    { title: '研读', icon: '📜' },
     divine:      { title: '神通', icon: '✨' },
     talent:     { title: '命格天赋', icon: '🌌' },
     enlightenment: { title: '悟道顿悟', icon: '🧠' },

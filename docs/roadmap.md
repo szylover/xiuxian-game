@@ -69,7 +69,7 @@
 | [T0019](https://github.com/szylover/xiuxian-game/issues/75) | 被动效果 | T0017 | [spec](specs/T0019-passive-effects.md) | ✅ |
 | [T0020](https://github.com/szylover/xiuxian-game/issues/76) | 神通（元素体系） | T0017, T0018 | [Spec](specs/T0020-divine-arts.md) | ✅ |
 | [T0049](https://github.com/szylover/xiuxian-game/issues/112) | 悟道顿悟系统 | T0002, T0017 | [spec](specs/112-enlightenment.md) | ✅ |
-| [T0075](https://github.com/szylover/xiuxian-game/issues/196) | 学习系统（功法/技能习得流程） | T0017 | [spec](specs/T0075-learning-system.md) | 📐 |
+| [T0075](https://github.com/szylover/xiuxian-game/issues/196) | 学习系统（功法/技能习得流程） | T0017 | [spec](specs/T0075-learning-system.md) | ✅ |
 | [T0073](https://github.com/szylover/xiuxian-game/issues/184) | 程序化功法词条系统（基础功法+随机被动词条） | T0017, T0019 | [spec](specs/T0073-procedural-techniques.md) | ✅ |
 | [T0059](https://github.com/szylover/xiuxian-game/issues/89) | 体修系统核心（体魄 · 体修境界 · 减伤） | T0001, T0003, T0017, T0019 | [spec](specs/T0059-body-cultivation.md) | ✅ |
 | [T0060](https://github.com/szylover/xiuxian-game/issues/120) | 体修武器内容（拳套 · 指环 · 手甲） | T0059, T0014, T0015 | [spec](specs/T0059-body-cultivation.md) | ✅ |
@@ -130,7 +130,7 @@
 | [T0065](https://github.com/szylover/xiuxian-game/issues/138) | 文案集中管理（中文文本从代码中抽取到统一文件） | — | [spec](specs/T0065-text-centralization.md) | ✅ |
 | [T0067](https://github.com/szylover/xiuxian-game/issues/157) | 任务面板 UI（QuestPanel + 追踪器 + 调试面板） | T0057, T0041, T0046 | — | ✅ |
 | [T0069](https://github.com/szylover/xiuxian-game/issues/165) | 中央区域布局重构（仪表盘 + 日志抽屉化） | T0041, T0043, T0057, T0064 | [spec](specs/T0069-center-panel-revamp.md) | ✅ |
-| [T0076](https://github.com/szylover/xiuxian-game/issues/197) | 商店集成到场景视图（NPC 商人分店模式） | T0069, T0015, T0025 | [spec](specs/197-shop-in-scene.md) | 📐 |
+| [T0076](https://github.com/szylover/xiuxian-game/issues/197) | 商店集成到场景视图（NPC 商人分店模式） | T0069, T0015, T0025 | [spec](specs/197-shop-in-scene.md) | ✅ |
 
 ### 🏷️ 部署与体验
 

@@ -44,6 +44,7 @@ import type { ReincarnationContext } from '../game/types';
 import { attemptPrimordialEndgame } from '../game/primordial-endgame';
 import { REINCARNATION_TEXTS, PRIMORDIAL_ENDGAME_TEXTS } from '../data/texts';
 import { tickHeartDemon } from '../game/heart-demon';
+import { tickStudy } from '../game/learning';
 
 // Re-export types so existing imports still work
 export type { CombatModalState, DeathModalState } from './useCombatModal';
@@ -217,6 +218,10 @@ export function useGameEngine(
     };
     updated = normalizeKarmaPlayer(updated);
 
+    const learningTick = tickStudy(updated, cost.time);
+    updated = learningTick.player;
+    for (const log of learningTick.messages) addLog(log, learningTick.completed ? 'adventure' : 'system');
+
     // T0040: 心情低迷追踪
     if (updated.mood <= 10) {
       updated.tracking = { ...updated.tracking, lowMoodStreak: (updated.tracking.lowMoodStreak ?? 0) + 1 };
@@ -373,6 +378,7 @@ export function useGameEngine(
     foundSectManagement, recruitSectMember, collectSectYield, upgradeSectFacility, assignSectMemberTask,
     suppressHeartDemon, confrontHeartDemon,
     challengePvp,
+    startStudy, cancelStudy,
   } = useSystemActions({
     player, addLog, setPlayer, setGameOver, setGameOverReason, setDeathModal,
     chronicleHooks: { recordEvent: chronicle.recordEvent, syncSnapshot: chronicle.syncSnapshot },
@@ -532,6 +538,8 @@ export function useGameEngine(
     suppressHeartDemon,
     confrontHeartDemon,
     challengePvp,
+    startStudy,
+    cancelStudy,
     joinSect,
     claimSectStipend,
     advanceSectRank,

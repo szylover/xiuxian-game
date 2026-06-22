@@ -16,6 +16,8 @@ import { getAchievementState, checkAchievements, ONCE_BONUS_KEYS } from '../../g
 import { activateBottleneck, unlockBottleneck, ensureBottleneckState } from '../../game/bottleneck';
 import { getDestinyTalentState, setDestinyTalentState, getSortedTalentTreeNodes } from '../../game/destiny';
 import type { BottleneckState } from '../../game/types';
+import { completeStudy, getLearningState, setLearningState } from '../../game/learning';
+import { getAllRecipes, getAllSmithingRecipes } from '../../game/registry';
 
 import { CollapsiblePanel, TabBar } from '../shared';
 import DebugStatsTab from './DebugStatsTab';
@@ -103,6 +105,22 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
       if (key === '__pvpRating') {
         const pvp = (prev.systems.pvp ?? {}) as Record<string, unknown>;
         return { ...prev, systems: { ...prev.systems, pvp: { ...pvp, rating: value } } };
+      }
+      if (key === '__learnAllRecipes') {
+        const state = getLearningState(prev);
+        return setLearningState(prev, {
+          ...state,
+          learnedRecipes: getAllRecipes().map(r => r.id),
+          learnedSmithingRecipes: getAllSmithingRecipes().map(r => r.id),
+        });
+      }
+      if (key === '__completeStudy') {
+        const state = getLearningState(prev);
+        if (!state.activeStudy) return prev;
+        return completeStudy(setLearningState(prev, {
+          ...state,
+          activeStudy: { ...state.activeStudy, progressMonths: state.activeStudy.totalMonths },
+        })).player;
       }
       if (key === '__sectAddContribution') {
         const sect = (prev.systems.sect ?? {}) as Record<string, unknown>;

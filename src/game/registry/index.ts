@@ -37,6 +37,7 @@ export type {
   SecretRealmStageType, SecretRealmStageDef, SecretRealmDef, SecretRealmRun, SecretRealmSystemState,
   Alignment, KarmaSystemState, EnlightenmentInsightDef, EnlightenmentState, EnlightenmentBuff,
   SectDef, SectRankDef, SectMissionDef, SectStoreItemDef, SectFacilityDef, SectSystemState, SectManagementState, SectMemberState,
+  ScrollStudyType, ActiveStudy, LearningSystemState,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
@@ -89,4 +90,3 @@ export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,
 } from './event-engine';
 export type { EventResult, EventRuntimeState } from './event-engine';
-

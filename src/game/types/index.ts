@@ -28,3 +28,4 @@ export * from './reincarnation';
 export * from './primordial-endgame';
 export * from './heart-demon';
 export * from './pvp';
+export * from './learning';

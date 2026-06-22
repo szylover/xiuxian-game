@@ -27,6 +27,7 @@ import { useEnlightenmentActions } from './useEnlightenmentActions';
 import { useSectActions } from './useSectActions';
 import { useHeartDemonActions } from './useHeartDemonActions';
 import { usePvpActions } from './usePvpActions';
+import { useLearningActions } from './useLearningActions';
 
 export type { SystemActionDeps, ChronicleHooks } from './types';
 
@@ -70,6 +71,7 @@ export function useSystemActions(deps: SystemActionDeps) {
   const sectActions = useSectActions(ctx);
   const heartDemonActions = useHeartDemonActions(ctx);
   const pvpActions = usePvpActions(ctx);
+  const learningActions = useLearningActions(ctx);
 
   return {
     ...inventoryActions,
@@ -92,5 +94,6 @@ export function useSystemActions(deps: SystemActionDeps) {
     ...sectActions,
     ...heartDemonActions,
     ...pvpActions,
+    ...learningActions,
   };
 }

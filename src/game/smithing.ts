@@ -8,6 +8,7 @@ import type { SmithingRecipeDef } from './registry';
 import { getSmithingRecipe, getAllSmithingRecipes, getItemDef, getEquipDef } from './registry';
 import { hasItem, addItem, removeItem } from './inventory';
 import { SMITHING_TEXTS } from '../data/texts/smithing';
+import { hasLearnedSmithingRecipe } from './learning';
 
 // ── 炼器结果 ──
 
@@ -26,6 +27,7 @@ export function getAvailableSmithingRecipes(player: Player): SmithingRecipeDef[]
 export function canSmith(player: Player, recipeId: string): boolean {
   const recipe = getSmithingRecipe(recipeId);
   if (!recipe) return false;
+  if (!hasLearnedSmithingRecipe(player, recipeId)) return false;
   if (player.realmIndex < recipe.minRealm) return false;
   if (player.mentalPower < recipe.mentalCost) return false;
   if (player.gold < recipe.goldCost) return false;
@@ -48,6 +50,9 @@ export function calcSmithingSuccessRate(player: Player, recipe: SmithingRecipeDe
 export function performSmithing(player: Player, recipeId: string): SmithingResult {
   const recipe = getSmithingRecipe(recipeId);
   if (!recipe) {
+    return { player, success: false, message: SMITHING_TEXTS.recipeNotFound };
+  }
+  if (!hasLearnedSmithingRecipe(player, recipeId)) {
     return { player, success: false, message: SMITHING_TEXTS.recipeNotFound };
   }
 

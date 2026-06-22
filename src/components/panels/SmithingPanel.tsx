@@ -10,6 +10,8 @@ import { getAllSmithingRecipes, getItemDef, getEquipDef } from '../../game/regis
 import { canSmith, calcSmithingSuccessRate } from '../../game/smithing';
 import { getItemCount } from '../../game/inventory';
 import { CapacityBar } from '../shared';
+import { hasLearnedSmithingRecipe } from '../../game/learning';
+import { LEARNING_TEXTS } from '../../data/texts';
 
 interface SmithingPanelProps {
   player: Player;
@@ -61,7 +63,7 @@ function SmithingCard({ recipe, player, onSmith }: { recipe: SmithingRecipeDef; 
 export default function SmithingPanel({ player, onSmith }: SmithingPanelProps) {
   if (!player) return null;
 
-  const recipes = getAllSmithingRecipes().filter(r => player.realmIndex >= r.minRealm);
+  const recipes = getAllSmithingRecipes().filter(r => hasLearnedSmithingRecipe(player, r.id) && player.realmIndex >= r.minRealm);
 
   return (
     <div className="alchemy-content">
@@ -82,6 +84,7 @@ export default function SmithingPanel({ player, onSmith }: SmithingPanelProps) {
           ))
         )}
       </div>
+      <div className="technique-learning-hint">{LEARNING_TEXTS.panel.noLearnedSmithingHint}</div>
     </div>
   );
 }

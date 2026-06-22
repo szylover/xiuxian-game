@@ -8,7 +8,8 @@
     "regionTags": [],
     "travelCostBase": 0,
     "travelTimeMonths": 0,
-    "isContainer": true
+    "isContainer": true,
+    "lootTable": []
   },
   {
     "id": "core:qingyun_town",
@@ -17,16 +18,39 @@
     "description": "修仙者聚居的小镇，平和安宁，适合初入修仙之道的散修",
     "minRealm": 0,
     "parentId": "core:mortal_world",
-    "regionTags": ["town", "safe"],
+    "regionTags": [
+      "town",
+      "safe"
+    ],
     "travelCostBase": 0,
     "travelTimeMonths": 1,
     "safeZone": true,
     "shopDiscount": 0,
     "lootTable": [
-      { "itemId": "core:spirit_stone_shard", "chance": 0.30 },
-      { "itemId": "core:jade_slip",          "chance": 0.12 },
-      { "itemId": "core:hp_pill",            "chance": 0.10 },
-      { "itemId": "core:map_fragment",       "chance": 0.05 }
+      {
+        "itemId": "core:spirit_stone_shard",
+        "chance": 0.3
+      },
+      {
+        "itemId": "core:jade_slip",
+        "chance": 0.12
+      },
+      {
+        "itemId": "core:hp_pill",
+        "chance": 0.1
+      },
+      {
+        "itemId": "core:map_fragment",
+        "chance": 0.05
+      },
+      {
+        "itemId": "core:scroll_technique_basic_sword",
+        "chance": 0.05
+      },
+      {
+        "itemId": "core:scroll_recipe_hp_pill",
+        "chance": 0.04
+      }
     ]
   },
   {
@@ -36,16 +60,42 @@
     "description": "妖兽出没之地，适合以战养战的修行者",
     "minRealm": 1,
     "parentId": "core:mortal_world",
-    "regionTags": ["mountain", "wilderness"],
+    "regionTags": [
+      "mountain",
+      "wilderness"
+    ],
     "travelCostBase": 15,
     "travelTimeMonths": 1,
     "combatBonus": 0.2,
     "lootTable": [
-      { "itemId": "core:iron_ore",       "chance": 0.25 },
-      { "itemId": "core:monster_fang",   "chance": 0.20 },
-      { "itemId": "core:mountain_herb",  "chance": 0.15 },
-      { "itemId": "core:monster_core",   "chance": 0.05 },
-      { "itemId": "core:jade_slip",      "chance": 0.04 }
+      {
+        "itemId": "core:iron_ore",
+        "chance": 0.25
+      },
+      {
+        "itemId": "core:monster_fang",
+        "chance": 0.2
+      },
+      {
+        "itemId": "core:mountain_herb",
+        "chance": 0.15
+      },
+      {
+        "itemId": "core:monster_core",
+        "chance": 0.05
+      },
+      {
+        "itemId": "core:jade_slip",
+        "chance": 0.04
+      },
+      {
+        "itemId": "core:scroll_technique_basic_fist",
+        "chance": 0.05
+      },
+      {
+        "itemId": "core:scroll_smithing_iron_sword",
+        "chance": 0.04
+      }
     ]
   },
   {
@@ -55,16 +105,42 @@
     "description": "灵药遍地，适合炼丹师采集和修炼",
     "minRealm": 1,
     "parentId": "core:mortal_world",
-    "regionTags": ["valley", "herb"],
+    "regionTags": [
+      "valley",
+      "herb"
+    ],
     "travelCostBase": 15,
     "travelTimeMonths": 1,
     "explorationBonus": 0.3,
     "lootTable": [
-      { "itemId": "core:herb_lingzhi",       "chance": 0.30 },
-      { "itemId": "core:herb_snow_lotus",    "chance": 0.12 },
-      { "itemId": "core:spirit_water",       "chance": 0.18 },
-      { "itemId": "core:spirit_stone_shard", "chance": 0.10 },
-      { "itemId": "core:hp_pill",            "chance": 0.06 }
+      {
+        "itemId": "core:herb_lingzhi",
+        "chance": 0.3
+      },
+      {
+        "itemId": "core:herb_snow_lotus",
+        "chance": 0.12
+      },
+      {
+        "itemId": "core:spirit_water",
+        "chance": 0.18
+      },
+      {
+        "itemId": "core:spirit_stone_shard",
+        "chance": 0.1
+      },
+      {
+        "itemId": "core:hp_pill",
+        "chance": 0.06
+      },
+      {
+        "itemId": "core:scroll_recipe_mp_pill",
+        "chance": 0.06
+      },
+      {
+        "itemId": "core:scroll_recipe_stamina_pill",
+        "chance": 0.06
+      }
     ]
   },
   {
@@ -74,16 +150,42 @@
     "description": "荒芜之地，凶险异常，但蕴藏稀有资源",
     "minRealm": 2,
     "parentId": "core:mortal_world",
-    "regionTags": ["wasteland", "wilderness"],
+    "regionTags": [
+      "wasteland",
+      "wilderness"
+    ],
     "travelCostBase": 25,
     "travelTimeMonths": 1,
     "combatBonus": 0.3,
     "lootTable": [
-      { "itemId": "core:sand_crystal",       "chance": 0.22 },
-      { "itemId": "core:iron_ore",           "chance": 0.18 },
-      { "itemId": "core:monster_core",       "chance": 0.10 },
-      { "itemId": "core:spirit_stone_shard", "chance": 0.12 },
-      { "itemId": "core:map_fragment",       "chance": 0.05 }
+      {
+        "itemId": "core:sand_crystal",
+        "chance": 0.22
+      },
+      {
+        "itemId": "core:iron_ore",
+        "chance": 0.18
+      },
+      {
+        "itemId": "core:monster_core",
+        "chance": 0.1
+      },
+      {
+        "itemId": "core:spirit_stone_shard",
+        "chance": 0.12
+      },
+      {
+        "itemId": "core:map_fragment",
+        "chance": 0.05
+      },
+      {
+        "itemId": "core:scroll_divine_earth_shield",
+        "chance": 0.03
+      },
+      {
+        "itemId": "core:scroll_smithing_spirit_sword",
+        "chance": 0.03
+      }
     ]
   },
   {
@@ -93,16 +195,38 @@
     "description": "神秘之地，机遇与危险并存",
     "minRealm": 3,
     "parentId": "core:mortal_world",
-    "regionTags": ["mystic", "dangerous"],
+    "regionTags": [
+      "mystic",
+      "dangerous"
+    ],
     "travelCostBase": 35,
     "travelTimeMonths": 1,
     "explorationBonus": 0.5,
     "lootTable": [
-      { "itemId": "core:mystery_fragment",   "chance": 0.20 },
-      { "itemId": "core:jade_slip",          "chance": 0.15 },
-      { "itemId": "core:monster_core",       "chance": 0.12 },
-      { "itemId": "core:herb_snow_lotus",    "chance": 0.08 },
-      { "itemId": "core:spirit_stone_shard", "chance": 0.15 }
+      {
+        "itemId": "core:mystery_fragment",
+        "chance": 0.2
+      },
+      {
+        "itemId": "core:jade_slip",
+        "chance": 0.15
+      },
+      {
+        "itemId": "core:monster_core",
+        "chance": 0.12
+      },
+      {
+        "itemId": "core:herb_snow_lotus",
+        "chance": 0.08
+      },
+      {
+        "itemId": "core:spirit_stone_shard",
+        "chance": 0.15
+      },
+      {
+        "itemId": "core:scroll_divine_thunder_strike",
+        "chance": 0.03
+      }
     ]
   },
   {
@@ -112,16 +236,42 @@
     "description": "仙人聚居之地，高阶修行者的圣地",
     "minRealm": 4,
     "parentId": "core:mortal_world",
-    "regionTags": ["city", "celestial"],
+    "regionTags": [
+      "city",
+      "celestial"
+    ],
     "travelCostBase": 40,
     "travelTimeMonths": 1,
     "shopDiscount": 0.1,
     "lootTable": [
-      { "itemId": "core:celestial_jade",     "chance": 0.18 },
-      { "itemId": "core:jade_slip",          "chance": 0.12 },
-      { "itemId": "core:spirit_stone_shard", "chance": 0.20 },
-      { "itemId": "core:mystery_fragment",   "chance": 0.08 },
-      { "itemId": "core:hp_pill",            "chance": 0.05 }
+      {
+        "itemId": "core:celestial_jade",
+        "chance": 0.18
+      },
+      {
+        "itemId": "core:jade_slip",
+        "chance": 0.12
+      },
+      {
+        "itemId": "core:spirit_stone_shard",
+        "chance": 0.2
+      },
+      {
+        "itemId": "core:mystery_fragment",
+        "chance": 0.08
+      },
+      {
+        "itemId": "core:hp_pill",
+        "chance": 0.05
+      },
+      {
+        "itemId": "core:scroll_divine_metal_blade",
+        "chance": 0.04
+      },
+      {
+        "itemId": "core:scroll_recipe_full_restore",
+        "chance": 0.03
+      }
     ]
   }
 ]

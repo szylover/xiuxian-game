@@ -8,6 +8,7 @@ import type { Player } from '../../../game/player';
 import type { PanelKey } from '../../layout/PanelButtons';
 import SceneHeader from './SceneHeader';
 import SceneNpcs from './SceneNpcs';
+import SceneShop from './SceneShop';
 import ActionPanel from '../ActionPanel';
 
 interface SceneViewProps {
@@ -36,6 +37,8 @@ interface SceneViewProps {
   onDialogueAdvance: (dialogueId: string, currentNodeId: string) => {
     nextNode: import('../../../game/types').DialogueNode | null; logs: string[]; combatTrigger?: string; questTrigger?: string;
   };
+  onBuy: (itemId: string) => void;
+  onSell: (itemId: string) => void;
   gameOver: boolean;
 }
 
@@ -61,6 +64,8 @@ export default function SceneView({
   onStartDialogue,
   onDialogueSelectChoice,
   onDialogueAdvance,
+  onBuy,
+  onSell,
   gameOver,
 }: SceneViewProps) {
   return (
@@ -81,6 +86,8 @@ export default function SceneView({
         onOpenContacts={onSelectPanel}
       />
 
+      <SceneShop player={player} onBuy={onBuy} onSell={onSell} />
+
       {/* 操作按钮区 */}
       <ActionPanel
         player={player}
@@ -100,5 +107,4 @@ export default function SceneView({
     </div>
   );
 }
-
 
