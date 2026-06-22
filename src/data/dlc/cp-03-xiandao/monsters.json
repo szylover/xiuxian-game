@@ -1,0 +1,222 @@
+[
+  {
+    "id": "cp-03:cloud_fox",
+    "name": "云尾灵狐",
+    "emoji": "🦊",
+    "realmIndex": 8,
+    "hp": 82000,
+    "atk": 4300,
+    "def": 2100,
+    "speed": 170,
+    "moveSpeed": 150,
+    "critRate": 12,
+    "critResist": 10,
+    "critDmgMultiplier": 1.6,
+    "expReward": 9000,
+    "goldReward": 2600,
+    "element": "wood",
+    "regionTags": [
+      "immortal",
+      "cloud",
+      "safe"
+    ]
+  },
+  {
+    "id": "cp-03:white_crane_guard",
+    "name": "白鹤仙卫",
+    "emoji": "🪽",
+    "realmIndex": 8,
+    "hp": 90000,
+    "atk": 4600,
+    "def": 2600,
+    "speed": 190,
+    "moveSpeed": 160,
+    "critRate": 10,
+    "critResist": 14,
+    "critDmgMultiplier": 1.5,
+    "expReward": 9800,
+    "goldReward": 2800,
+    "element": "metal",
+    "regionTags": [
+      "immortal",
+      "city",
+      "safe"
+    ]
+  },
+  {
+    "id": "cp-03:jade_pool_carp",
+    "name": "玉池锦鲤",
+    "emoji": "🐟",
+    "realmIndex": 8,
+    "hp": 76000,
+    "atk": 3900,
+    "def": 2300,
+    "speed": 150,
+    "moveSpeed": 120,
+    "critRate": 8,
+    "critResist": 16,
+    "critDmgMultiplier": 1.4,
+    "expReward": 8600,
+    "goldReward": 2300,
+    "element": "water",
+    "regionTags": [
+      "immortal",
+      "lake",
+      "herb"
+    ]
+  },
+  {
+    "id": "cp-03:star_marten",
+    "name": "星斑貂",
+    "emoji": "🦡",
+    "realmIndex": 9,
+    "hp": 150000,
+    "atk": 8200,
+    "def": 4200,
+    "speed": 240,
+    "moveSpeed": 210,
+    "critRate": 18,
+    "critResist": 12,
+    "critDmgMultiplier": 1.7,
+    "expReward": 21000,
+    "goldReward": 6200,
+    "element": "metal",
+    "regionTags": [
+      "immortal",
+      "star",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-03:thunder_gate_lion",
+    "name": "雷门狮",
+    "emoji": "🦁",
+    "realmIndex": 9,
+    "hp": 190000,
+    "atk": 9000,
+    "def": 6200,
+    "speed": 180,
+    "moveSpeed": 140,
+    "critRate": 12,
+    "critResist": 20,
+    "critDmgMultiplier": 1.5,
+    "expReward": 24000,
+    "goldReward": 7000,
+    "element": "fire",
+    "regionTags": [
+      "immortal",
+      "thunder",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-03:moon_shadow_deer",
+    "name": "月影鹿",
+    "emoji": "🦌",
+    "realmIndex": 9,
+    "hp": 130000,
+    "atk": 7600,
+    "def": 3900,
+    "speed": 260,
+    "moveSpeed": 230,
+    "critRate": 16,
+    "critResist": 14,
+    "critDmgMultiplier": 1.6,
+    "expReward": 19500,
+    "goldReward": 5600,
+    "element": "water",
+    "regionTags": [
+      "immortal",
+      "forest",
+      "mystic"
+    ]
+  },
+  {
+    "id": "cp-03:golden_wing_peng",
+    "name": "金翼鹏",
+    "emoji": "🦅",
+    "realmIndex": 10,
+    "hp": 330000,
+    "atk": 17500,
+    "def": 9000,
+    "speed": 330,
+    "moveSpeed": 300,
+    "critRate": 22,
+    "critResist": 18,
+    "critDmgMultiplier": 1.8,
+    "expReward": 56000,
+    "goldReward": 16000,
+    "element": "metal",
+    "regionTags": [
+      "immortal",
+      "sky",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-03:aurora_serpent",
+    "name": "极光天蛇",
+    "emoji": "🐍",
+    "realmIndex": 10,
+    "hp": 300000,
+    "atk": 16000,
+    "def": 8200,
+    "speed": 300,
+    "moveSpeed": 260,
+    "critRate": 18,
+    "critResist": 16,
+    "critDmgMultiplier": 1.7,
+    "expReward": 52000,
+    "goldReward": 15000,
+    "element": "water",
+    "regionTags": [
+      "immortal",
+      "star",
+      "mystic"
+    ]
+  },
+  {
+    "id": "cp-03:sunfire_kylin",
+    "name": "日火麒麟",
+    "emoji": "🦄",
+    "realmIndex": 11,
+    "hp": 720000,
+    "atk": 36000,
+    "def": 21000,
+    "speed": 360,
+    "moveSpeed": 280,
+    "critRate": 20,
+    "critResist": 25,
+    "critDmgMultiplier": 1.8,
+    "expReward": 150000,
+    "goldReward": 42000,
+    "element": "fire",
+    "regionTags": [
+      "immortal",
+      "sun",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-03:ancient_jade_dragon",
+    "name": "古玉天龙",
+    "emoji": "🐉",
+    "realmIndex": 11,
+    "hp": 860000,
+    "atk": 34000,
+    "def": 26000,
+    "speed": 320,
+    "moveSpeed": 250,
+    "critRate": 18,
+    "critResist": 28,
+    "critDmgMultiplier": 1.7,
+    "expReward": 170000,
+    "goldReward": 48000,
+    "element": "earth",
+    "regionTags": [
+      "immortal",
+      "dragon",
+      "mystic"
+    ]
+  }
+]

@@ -1,0 +1,174 @@
+[
+  {
+    "id": "cp-04:npc_tribe_shaman",
+    "name": "玄岳巫祝",
+    "title": "部族巫祝",
+    "emoji": "🧙",
+    "gender": "male",
+    "description": "太初原部族的巫祝，以图腾与鼓声沟通祖灵。",
+    "realmIndex": 12,
+    "hp": 1500000,
+    "atk": 62000,
+    "def": 52000,
+    "speed": 420,
+    "critRate": 10,
+    "critResist": 26,
+    "critDmgMultiplier": 1.5,
+    "disposition": "friendly",
+    "roles": [
+      "elder"
+    ],
+    "personality": "mysterious",
+    "charisma": 72,
+    "regionTags": [
+      "tribe",
+      "safe"
+    ],
+    "homeRegionId": "cp-04:taichu_plain",
+    "minRealm": 12,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "cp-04:tribe_totem",
+        "cp-04:witch_blood_stone"
+      ],
+      "liked": [
+        "cp-04:primordial_coin",
+        "cp-04:ancestral_bone"
+      ],
+      "disliked": [
+        "cp-04:demon_banner_thread"
+      ]
+    }
+  },
+  {
+    "id": "cp-04:npc_mountain_keeper",
+    "name": "不周守山人",
+    "title": "古山守者",
+    "emoji": "🗿",
+    "gender": "male",
+    "description": "沉默守在不周山麓的巨人，见过数次天地倾斜。",
+    "realmIndex": 13,
+    "hp": 3100000,
+    "atk": 120000,
+    "def": 120000,
+    "speed": 430,
+    "critRate": 8,
+    "critResist": 36,
+    "critDmgMultiplier": 1.4,
+    "disposition": "neutral",
+    "roles": [
+      "guard"
+    ],
+    "personality": "cold",
+    "charisma": 58,
+    "regionTags": [
+      "mountain",
+      "dangerous"
+    ],
+    "homeRegionId": "cp-04:buzhou_mountain",
+    "minRealm": 12,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "cp-04:earth_vein_marrow",
+        "cp-04:ancestral_bone"
+      ],
+      "liked": [
+        "cp-04:mountain_sea_map",
+        "cp-04:primordial_jade"
+      ],
+      "disliked": [
+        "cp-04:sun_crow_feather"
+      ]
+    }
+  },
+  {
+    "id": "cp-04:npc_jianmu_spirit",
+    "name": "建木青灵",
+    "title": "先天灵根化身",
+    "emoji": "🌿",
+    "gender": "female",
+    "description": "建木根域中诞生的青灵，言语间带着草木法则。",
+    "realmIndex": 13,
+    "hp": 2400000,
+    "atk": 105000,
+    "def": 85000,
+    "speed": 760,
+    "critRate": 12,
+    "critResist": 28,
+    "critDmgMultiplier": 1.6,
+    "disposition": "friendly",
+    "roles": [
+      "wanderer"
+    ],
+    "personality": "gentle",
+    "charisma": 90,
+    "regionTags": [
+      "world_tree",
+      "mystic"
+    ],
+    "homeRegionId": "cp-04:world_tree_root",
+    "minRealm": 13,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "cp-04:world_tree_leaf",
+        "cp-04:law_fragment"
+      ],
+      "liked": [
+        "cp-04:sky_river_drop",
+        "cp-04:ginseng_fruit_slice"
+      ],
+      "disliked": [
+        "cp-04:witch_blood_stone"
+      ]
+    }
+  },
+  {
+    "id": "cp-04:npc_beiming_ferryman",
+    "name": "北冥风师",
+    "title": "天海摆渡者",
+    "emoji": "🌀",
+    "gender": "female",
+    "description": "驾驭北冥天风的摆渡者，熟悉鲲鹏出没的潮汐。",
+    "realmIndex": 14,
+    "hp": 5200000,
+    "atk": 230000,
+    "def": 150000,
+    "speed": 940,
+    "critRate": 20,
+    "critResist": 30,
+    "critDmgMultiplier": 1.8,
+    "disposition": "neutral",
+    "roles": [
+      "wanderer"
+    ],
+    "personality": "righteous",
+    "charisma": 76,
+    "regionTags": [
+      "sea",
+      "sky"
+    ],
+    "homeRegionId": "cp-04:north_sea",
+    "minRealm": 13,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "cp-04:kunpeng_scale",
+        "cp-04:sky_river_drop"
+      ],
+      "liked": [
+        "cp-04:phoenix_ember",
+        "cp-04:primordial_elixir"
+      ],
+      "disliked": [
+        "cp-04:chaos_shell"
+      ]
+    }
+  }
+]

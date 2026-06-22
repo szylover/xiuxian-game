@@ -1,0 +1,266 @@
+[
+  {
+    "id": "cp-05:quest_shadow_market_entry",
+    "name": "魔市入门",
+    "description": "枯骨老魔说，魔道第一课不是杀人，而是知道哪里能买到活命东西。",
+    "icon": "🏮",
+    "category": "main",
+    "condition": {
+      "minRealm": 0
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "前往地下魔市",
+        "description": "找到隐藏在废城地下的魔市。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "cp-05:underground_demon_market",
+            "description": "前往地下魔市"
+          }
+        ],
+        "dialogueSnippet": "枯骨老魔咧嘴：「别在明面坊市问这些东西。」"
+      },
+      {
+        "id": "step_2",
+        "name": "准备交易筹码",
+        "description": "收集魔市钱与血纹玉。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "cp-05:demon_market_coin",
+            "count": 2,
+            "description": "收集魔市钱 (0/2)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "cp-05:blood_jade",
+            "count": 2,
+            "description": "收集血纹玉 (0/2)"
+          }
+        ],
+        "rewards": {
+          "exp": 40
+        }
+      },
+      {
+        "id": "step_3",
+        "name": "拜访赤纱掮客",
+        "description": "向赤纱掮客打听魔渊暗路。",
+        "objectives": [
+          {
+            "type": "talk_npc",
+            "targetId": "cp-05:npc_demon_market_broker",
+            "description": "与赤纱掮客交谈"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 160,
+      "gold": 80,
+      "items": [
+        {
+          "itemId": "cp-05:demon_map",
+          "count": 1
+        },
+        {
+          "itemId": "cp-05:black_breath_pill",
+          "count": 2
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "auto"
+    },
+    "turnInNpcId": "cp-05:npc_demon_market_broker",
+    "repeatable": false
+  },
+  {
+    "id": "cp-05:quest_blood_lotus_medicine",
+    "name": "血莲药引",
+    "description": "血莲医女愿意为你配药，但你得先从沼泽中取回药引。",
+    "icon": "🪷",
+    "category": "side",
+    "condition": {
+      "minRealm": 1,
+      "requiredQuests": [
+        "cp-05:quest_shadow_market_entry"
+      ]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "前往血莲沼",
+        "description": "深入血莲沼寻找药材。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "cp-05:blood_lotus_marsh",
+            "description": "前往血莲沼"
+          }
+        ]
+      },
+      {
+        "id": "step_2",
+        "name": "采集药引",
+        "description": "收集血莲子、鬼面苔与红线。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "cp-05:blood_lotus_seed",
+            "count": 2,
+            "description": "收集血莲子 (0/2)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "cp-05:ghost_moss",
+            "count": 3,
+            "description": "收集鬼面苔 (0/3)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "cp-05:red_thread",
+            "count": 1,
+            "description": "收集血命线 (0/1)"
+          }
+        ],
+        "rewards": {
+          "exp": 120
+        }
+      },
+      {
+        "id": "step_3",
+        "name": "驱离血莲蛇",
+        "description": "击败盘踞在药田旁的血莲蛇。",
+        "objectives": [
+          {
+            "type": "kill_monster",
+            "targetId": "cp-05:blood_lotus_serpent",
+            "count": 2,
+            "description": "击败血莲蛇 (0/2)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 520,
+      "gold": 180,
+      "items": [
+        {
+          "itemId": "cp-05:bone_heal_powder",
+          "count": 3
+        },
+        {
+          "itemId": "cp-05:demon_heart_tea",
+          "count": 2
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "npc",
+      "npcId": "cp-05:npc_blood_lotus_healer"
+    },
+    "turnInNpcId": "cp-05:npc_blood_lotus_healer",
+    "repeatable": false
+  },
+  {
+    "id": "cp-05:quest_black_flame_oath",
+    "name": "黑焰逆命",
+    "description": "黑焰祭坛中藏着逆命符的线索，但冥河渡叟提醒你别把命赔进去。",
+    "icon": "🔥",
+    "category": "main",
+    "condition": {
+      "minRealm": 3,
+      "requiredQuests": [
+        "cp-05:quest_blood_lotus_medicine"
+      ]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "渡过冥河",
+        "description": "前往冥河渡，取得渡叟指引。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "cp-05:nether_river_ford",
+            "description": "前往冥河渡"
+          },
+          {
+            "type": "talk_npc",
+            "targetId": "cp-05:npc_nether_ferryman",
+            "description": "与冥河渡叟交谈"
+          }
+        ]
+      },
+      {
+        "id": "step_2",
+        "name": "备齐祭坛材料",
+        "description": "准备幽冥铁、万魂灰与黑坛钥。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "cp-05:nether_iron",
+            "count": 1,
+            "description": "收集幽冥铁 (0/1)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "cp-05:ten_thousand_soul_ash",
+            "count": 1,
+            "description": "收集万魂灰 (0/1)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "cp-05:black_altar_key",
+            "count": 1,
+            "description": "收集黑坛钥 (0/1)"
+          }
+        ],
+        "rewards": {
+          "exp": 380
+        }
+      },
+      {
+        "id": "step_3",
+        "name": "挑战黑焰祭坛",
+        "description": "前往黑焰祭坛并击败裂魂魔猿。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "cp-05:black_flame_altar",
+            "description": "前往黑焰祭坛"
+          },
+          {
+            "type": "kill_monster",
+            "targetId": "cp-05:demon_ape",
+            "count": 1,
+            "description": "击败裂魂魔猿 (0/1)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 1600,
+      "gold": 500,
+      "items": [
+        {
+          "itemId": "cp-05:reverse_fate_talisman",
+          "count": 1
+        },
+        {
+          "itemId": "cp-05:black_flame_seed",
+          "count": 1
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "npc",
+      "npcId": "cp-05:npc_old_demon"
+    },
+    "turnInNpcId": "cp-05:npc_old_demon",
+    "repeatable": false
+  }
+]

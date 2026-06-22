@@ -1,0 +1,242 @@
+[
+  {
+    "id": "cp-04:quest_taichu_foothold",
+    "name": "太初立足",
+    "description": "玄岳巫祝认为，入洪荒者先要学会敬畏脚下大地。",
+    "icon": "🌄",
+    "category": "main",
+    "condition": {
+      "minRealm": 12
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "抵达太初原",
+        "description": "前往太初原，适应洪荒天地压力。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "cp-04:taichu_plain",
+            "description": "前往太初原"
+          }
+        ],
+        "dialogueSnippet": "玄岳巫祝敲响兽皮鼓：「先听大地的心跳。」"
+      },
+      {
+        "id": "step_2",
+        "name": "献上入荒礼",
+        "description": "收集混沌息与洪荒贝币，作为部族见面礼。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "cp-04:chaos_breath",
+            "count": 2,
+            "description": "收集混沌息 (0/2)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "cp-04:primordial_coin",
+            "count": 2,
+            "description": "收集洪荒贝币 (0/2)"
+          }
+        ],
+        "rewards": {
+          "exp": 2500
+        }
+      },
+      {
+        "id": "step_3",
+        "name": "请巫祝刻图腾",
+        "description": "请玄岳巫祝为你刻下临时守护图腾。",
+        "objectives": [
+          {
+            "type": "talk_npc",
+            "targetId": "cp-04:npc_tribe_shaman",
+            "description": "与玄岳巫祝交谈"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 12000,
+      "gold": 3000,
+      "items": [
+        {
+          "itemId": "cp-04:tribe_totem",
+          "count": 1
+        },
+        {
+          "itemId": "cp-04:primordial_jade",
+          "count": 2
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "auto"
+    },
+    "turnInNpcId": "cp-04:npc_tribe_shaman",
+    "repeatable": false
+  },
+  {
+    "id": "cp-04:quest_buzhou_bone_mark",
+    "name": "不周骨纹",
+    "description": "不周守山人愿意指引古山残路，但要你证明能承受祖灵骨纹。",
+    "icon": "⛰️",
+    "category": "main",
+    "condition": {
+      "minRealm": 12,
+      "requiredQuests": [
+        "cp-04:quest_taichu_foothold"
+      ]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "前往不周山麓",
+        "description": "攀上不周山麓。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "cp-04:buzhou_mountain",
+            "description": "前往不周山麓"
+          }
+        ]
+      },
+      {
+        "id": "step_2",
+        "name": "收集骨纹材料",
+        "description": "收集祖灵骨与地脉髓。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "cp-04:ancestral_bone",
+            "count": 2,
+            "description": "收集祖灵骨 (0/2)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "cp-04:earth_vein_marrow",
+            "count": 1,
+            "description": "收集地脉髓 (0/1)"
+          }
+        ]
+      },
+      {
+        "id": "step_3",
+        "name": "击退太初灵猿",
+        "description": "击败盘踞在山路的太初灵猿。",
+        "objectives": [
+          {
+            "type": "kill_monster",
+            "targetId": "cp-04:taichu_ape",
+            "count": 2,
+            "description": "击败太初灵猿 (0/2)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 36000,
+      "gold": 8000,
+      "items": [
+        {
+          "itemId": "cp-04:mountain_sea_map",
+          "count": 1
+        },
+        {
+          "itemId": "cp-04:ancestral_bone",
+          "count": 1
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "npc",
+      "npcId": "cp-04:npc_mountain_keeper"
+    },
+    "turnInNpcId": "cp-04:npc_mountain_keeper",
+    "repeatable": false
+  },
+  {
+    "id": "cp-04:quest_jianmu_law_leaf",
+    "name": "建木法叶",
+    "description": "建木青灵请你护送一片法叶越过北冥风潮。",
+    "icon": "🌳",
+    "category": "side",
+    "condition": {
+      "minRealm": 13,
+      "requiredQuests": [
+        "cp-04:quest_buzhou_bone_mark"
+      ]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "拜访建木根域",
+        "description": "前往建木根域求取法叶。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "cp-04:world_tree_root",
+            "description": "前往建木根域"
+          }
+        ]
+      },
+      {
+        "id": "step_2",
+        "name": "采集法叶与水珠",
+        "description": "准备建木叶与天河水珠。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "cp-04:world_tree_leaf",
+            "count": 1,
+            "description": "收集建木叶 (0/1)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "cp-04:sky_river_drop",
+            "count": 3,
+            "description": "收集天河水珠 (0/3)"
+          }
+        ]
+      },
+      {
+        "id": "step_3",
+        "name": "穿过北冥天海",
+        "description": "前往北冥天海并与北冥风师交谈。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "cp-04:north_sea",
+            "description": "前往北冥天海"
+          },
+          {
+            "type": "talk_npc",
+            "targetId": "cp-04:npc_beiming_ferryman",
+            "description": "与北冥风师交谈"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 98000,
+      "gold": 18000,
+      "items": [
+        {
+          "itemId": "cp-04:law_fragment",
+          "count": 2
+        },
+        {
+          "itemId": "cp-04:ginseng_fruit_slice",
+          "count": 1
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "npc",
+      "npcId": "cp-04:npc_jianmu_spirit"
+    },
+    "turnInNpcId": "cp-04:npc_jianmu_spirit",
+    "repeatable": false
+  }
+]

@@ -1,0 +1,174 @@
+[
+  {
+    "id": "cp-03:immortal_world",
+    "name": "仙界",
+    "emoji": "☁️",
+    "description": "飞升后抵达的浩大仙界，云海、星河与天律交织。",
+    "minRealm": 8,
+    "regionTags": [
+      "immortal"
+    ],
+    "travelCostBase": 0,
+    "travelTimeMonths": 0,
+    "isContainer": true
+  },
+  {
+    "id": "cp-03:ascension_cloud_gate",
+    "name": "接引云门",
+    "emoji": "🌈",
+    "description": "凡界飞升者最先抵达的云门，仙光温和却暗藏天律压力。",
+    "minRealm": 8,
+    "parentId": "cp-03:immortal_world",
+    "regionTags": [
+      "immortal",
+      "cloud",
+      "safe"
+    ],
+    "travelCostBase": 20,
+    "travelTimeMonths": 1,
+    "safeZone": true,
+    "explorationBonus": 0.15,
+    "lootTable": [
+      {
+        "itemId": "cp-03:immortal_dew",
+        "chance": 0.12
+      },
+      {
+        "itemId": "cp-03:crane_feather",
+        "chance": 0.16
+      },
+      {
+        "itemId": "cp-03:jade_bridge_map",
+        "chance": 0.05
+      }
+    ]
+  },
+  {
+    "id": "cp-03:cloud_market",
+    "name": "流云仙市",
+    "emoji": "🏮",
+    "description": "悬在云海中的仙市，接引使、散仙与仙兽商队来往不绝。",
+    "minRealm": 8,
+    "parentId": "cp-03:immortal_world",
+    "regionTags": [
+      "immortal",
+      "trade",
+      "city",
+      "safe"
+    ],
+    "travelCostBase": 24,
+    "travelTimeMonths": 1,
+    "safeZone": true,
+    "shopDiscount": 0.08,
+    "lootTable": [
+      {
+        "itemId": "cp-03:cloud_market_note",
+        "chance": 0.2
+      },
+      {
+        "itemId": "cp-03:immortal_incense",
+        "chance": 0.1
+      },
+      {
+        "itemId": "cp-03:immortal_seal_blank",
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "id": "cp-03:jade_pool_garden",
+    "name": "玉池仙苑",
+    "emoji": "🪷",
+    "description": "仙莲盛开的玉池园林，适合温养仙躯与采集仙材。",
+    "minRealm": 8,
+    "parentId": "cp-03:immortal_world",
+    "regionTags": [
+      "immortal",
+      "lake",
+      "herb",
+      "safe"
+    ],
+    "travelCostBase": 26,
+    "travelTimeMonths": 1,
+    "safeZone": true,
+    "explorationBonus": 0.25,
+    "lootTable": [
+      {
+        "itemId": "cp-03:celestial_lotus_seed",
+        "chance": 0.22
+      },
+      {
+        "itemId": "cp-03:star_river_water",
+        "chance": 0.08
+      },
+      {
+        "itemId": "cp-03:jade_body_pill",
+        "chance": 0.05
+      }
+    ]
+  },
+  {
+    "id": "cp-03:star_river_ferry",
+    "name": "星河渡口",
+    "emoji": "🌌",
+    "description": "横跨仙界夜幕的星河渡口，星光可炼魂，也会诱来星兽。",
+    "minRealm": 9,
+    "parentId": "cp-03:immortal_world",
+    "regionTags": [
+      "immortal",
+      "star",
+      "mystic",
+      "dangerous"
+    ],
+    "travelCostBase": 42,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.25,
+    "explorationBonus": 0.25,
+    "lootTable": [
+      {
+        "itemId": "cp-03:starlight_sand",
+        "chance": 0.2
+      },
+      {
+        "itemId": "cp-03:dao_echo_shell",
+        "chance": 0.08
+      },
+      {
+        "itemId": "cp-03:cloud_pattern_core",
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "id": "cp-03:sunfire_peak",
+    "name": "日火仙峰",
+    "emoji": "☀️",
+    "description": "大日金辉直照的仙峰，金仙前后常来此淬炼不朽金性。",
+    "minRealm": 10,
+    "parentId": "cp-03:immortal_world",
+    "regionTags": [
+      "immortal",
+      "sun",
+      "mountain",
+      "dangerous"
+    ],
+    "travelCostBase": 58,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.4,
+    "explorationBonus": 0.2,
+    "lootTable": [
+      {
+        "itemId": "cp-03:sun_fragment",
+        "chance": 0.1
+      },
+      {
+        "itemId": "cp-03:fallen_star_core",
+        "chance": 0.03
+      },
+      {
+        "itemId": "cp-03:golden_cloud_pill",
+        "chance": 0.04
+      }
+    ]
+  }
+]

@@ -1,0 +1,174 @@
+[
+  {
+    "id": "cp-05:npc_old_demon",
+    "name": "枯骨老魔",
+    "title": "魔谷散修",
+    "emoji": "🧙",
+    "gender": "male",
+    "description": "瘦得只剩一把骨头的老魔，讲起保命心得比谁都认真。",
+    "realmIndex": 3,
+    "hp": 1200,
+    "atk": 95,
+    "def": 60,
+    "speed": 20,
+    "critRate": 10,
+    "critResist": 12,
+    "critDmgMultiplier": 1.5,
+    "disposition": "neutral",
+    "roles": [
+      "elder"
+    ],
+    "personality": "mysterious",
+    "charisma": 50,
+    "regionTags": [
+      "demonic",
+      "wilderness"
+    ],
+    "homeRegionId": "cp-05:demon_valley",
+    "minRealm": 0,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "cp-05:soul_lamp_oil",
+        "cp-05:black_altar_key"
+      ],
+      "liked": [
+        "cp-05:black_breath_pill",
+        "cp-05:forbidden_manual_page"
+      ],
+      "disliked": [
+        "cp-05:tribe_totem"
+      ]
+    }
+  },
+  {
+    "id": "cp-05:npc_demon_market_broker",
+    "name": "赤纱掮客",
+    "title": "魔市中人",
+    "emoji": "🎭",
+    "gender": "female",
+    "description": "地下魔市的红纱女子，擅长把危险交易说得像寻常买卖。",
+    "realmIndex": 2,
+    "hp": 700,
+    "atk": 55,
+    "def": 35,
+    "speed": 26,
+    "critRate": 12,
+    "critResist": 8,
+    "critDmgMultiplier": 1.5,
+    "disposition": "neutral",
+    "roles": [
+      "merchant"
+    ],
+    "personality": "cunning",
+    "charisma": 78,
+    "regionTags": [
+      "trade",
+      "safe"
+    ],
+    "homeRegionId": "cp-05:underground_demon_market",
+    "minRealm": 0,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "cp-05:masked_contract",
+        "cp-05:demon_market_coin"
+      ],
+      "liked": [
+        "cp-05:blood_jade",
+        "cp-05:demon_map"
+      ],
+      "disliked": [
+        "cp-05:grave_soil"
+      ]
+    }
+  },
+  {
+    "id": "cp-05:npc_blood_lotus_healer",
+    "name": "血莲医女",
+    "title": "魔道药师",
+    "emoji": "🪷",
+    "gender": "female",
+    "description": "在血莲沼炼药的医女，药方温柔，药性霸道。",
+    "realmIndex": 3,
+    "hp": 1100,
+    "atk": 72,
+    "def": 55,
+    "speed": 24,
+    "critRate": 8,
+    "critResist": 12,
+    "critDmgMultiplier": 1.4,
+    "disposition": "friendly",
+    "roles": [
+      "alchemist"
+    ],
+    "personality": "cold",
+    "charisma": 66,
+    "regionTags": [
+      "herb",
+      "demonic"
+    ],
+    "homeRegionId": "cp-05:blood_lotus_marsh",
+    "minRealm": 1,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "cp-05:blood_lotus_seed",
+        "cp-05:red_thread"
+      ],
+      "liked": [
+        "cp-05:bone_heal_powder",
+        "cp-05:demon_heart_tea"
+      ],
+      "disliked": [
+        "cp-05:black_sand"
+      ]
+    }
+  },
+  {
+    "id": "cp-05:npc_nether_ferryman",
+    "name": "冥河渡叟",
+    "title": "摆渡人",
+    "emoji": "🛶",
+    "gender": "male",
+    "description": "守着冥河渡的老叟，竹篙一撑便能避开水下蛟影。",
+    "realmIndex": 4,
+    "hp": 3600,
+    "atk": 210,
+    "def": 130,
+    "speed": 36,
+    "critRate": 14,
+    "critResist": 18,
+    "critDmgMultiplier": 1.7,
+    "disposition": "neutral",
+    "roles": [
+      "wanderer"
+    ],
+    "personality": "mysterious",
+    "charisma": 58,
+    "regionTags": [
+      "mystic",
+      "demonic"
+    ],
+    "homeRegionId": "cp-05:nether_river_ford",
+    "minRealm": 3,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "cp-05:nether_iron",
+        "cp-05:resentment_crystal"
+      ],
+      "liked": [
+        "cp-05:soul_lamp_oil",
+        "cp-05:silent_skull"
+      ],
+      "disliked": [
+        "cp-05:blood_spark_pill"
+      ]
+    }
+  }
+]

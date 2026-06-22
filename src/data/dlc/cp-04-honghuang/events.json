@@ -1,0 +1,353 @@
+[
+  {
+    "id": "cp-04:chaos_wind",
+    "category": "explore",
+    "tone": "bad",
+    "name": "混沌罡风",
+    "weight": 10,
+    "effects": {
+      "hp": -1800,
+      "stamina": -80
+    },
+    "message": "🌪️ 混沌罡风扫过山海，你护体道光剧震，HP -1800，精力 -80。",
+    "condition": {
+      "minRealm": 12
+    },
+    "regionTags": [
+      "chaos",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-04:primordial_sunrise",
+    "category": "explore",
+    "tone": "good",
+    "name": "洪荒日出",
+    "weight": 16,
+    "effects": {
+      "exp": 1400,
+      "mood": 12
+    },
+    "message": "🌅 洪荒大日升起，万物法则尽显，修为 +1400，心情 +12。",
+    "condition": {
+      "minRealm": 12
+    },
+    "regionTags": [
+      "sun"
+    ]
+  },
+  {
+    "id": "cp-04:tribe_fire",
+    "category": "explore",
+    "tone": "good",
+    "name": "部族篝火",
+    "weight": 14,
+    "effects": {
+      "mood": 16,
+      "health": 8
+    },
+    "message": "🔥 洪荒部族邀你围坐篝火，心情 +16，健康 +8。",
+    "condition": {
+      "minRealm": 12
+    },
+    "regionTags": [
+      "tribe",
+      "safe"
+    ]
+  },
+  {
+    "id": "cp-04:mountain_sea_mark",
+    "category": "explore",
+    "tone": "good",
+    "name": "山海刻痕",
+    "weight": 12,
+    "effects": {
+      "mentalPower": 260
+    },
+    "message": "⛰️ 你在古崖上读懂山海刻痕，念力 +260。",
+    "condition": {
+      "minRealm": 12
+    },
+    "regionTags": [
+      "mountain",
+      "mystic"
+    ]
+  },
+  {
+    "id": "cp-04:world_tree_shadow",
+    "category": "explore",
+    "tone": "good",
+    "name": "建木投影",
+    "weight": 10,
+    "effects": {
+      "exp": 2200,
+      "mp": 300
+    },
+    "message": "🌳 建木投影落在识海，修为 +2200，灵力 +300。",
+    "condition": {
+      "minRealm": 13
+    },
+    "regionTags": [
+      "world_tree"
+    ]
+  },
+  {
+    "id": "cp-04:ancient_beast_roar",
+    "category": "explore",
+    "tone": "bad",
+    "name": "远古兽吼",
+    "weight": 12,
+    "effects": {
+      "mood": -12,
+      "hp": -900
+    },
+    "message": "🐲 远古兽吼震碎云层，你气血翻涌，心情 -12，HP -900。",
+    "condition": {
+      "minRealm": 12
+    },
+    "regionTags": [
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-04:river_of_time",
+    "category": "explore",
+    "tone": "neutral",
+    "name": "岁月支流",
+    "weight": 9,
+    "effects": {
+      "exp": 900,
+      "lifespan": -12
+    },
+    "message": "⏳ 你触碰岁月支流，悟得片刻大道，却折去一年寿元，修为 +900。",
+    "condition": {
+      "minRealm": 12
+    },
+    "regionTags": [
+      "river",
+      "mystic"
+    ]
+  },
+  {
+    "id": "cp-04:witch_drum",
+    "category": "explore",
+    "tone": "neutral",
+    "name": "巫鼓回响",
+    "weight": 11,
+    "effects": {
+      "stamina": -40,
+      "mentalPower": 180
+    },
+    "message": "🥁 巫鼓回响逼你稳住神魂，精力 -40，念力 +180。",
+    "condition": {
+      "minRealm": 12
+    },
+    "regionTags": [
+      "tribe"
+    ]
+  },
+  {
+    "id": "cp-04:phoenix_ember_event",
+    "category": "adventure",
+    "tone": "good",
+    "name": "凤火涅槃",
+    "weight": 4,
+    "effects": {
+      "health": 30,
+      "exp": 4500
+    },
+    "message": "🔥 凤火余烬为你洗炼旧伤，健康 +30，修为 +4500。",
+    "condition": {
+      "minRealm": 13
+    },
+    "regionTags": [
+      "volcano"
+    ]
+  },
+  {
+    "id": "cp-04:kunpeng_wake",
+    "category": "adventure",
+    "tone": "good",
+    "name": "鲲鹏掠海",
+    "weight": 4,
+    "effects": {
+      "stamina": "max",
+      "mood": 18
+    },
+    "message": "🐋 鲲鹏掠过北冥，长风托起你的身形，精力尽复，心情 +18。",
+    "condition": {
+      "minRealm": 13
+    },
+    "regionTags": [
+      "sea",
+      "sky"
+    ]
+  },
+  {
+    "id": "cp-04:zixiao_echo",
+    "category": "adventure",
+    "tone": "good",
+    "name": "紫霄余音",
+    "weight": 3,
+    "effects": {
+      "exp": 9000,
+      "mentalPower": 900
+    },
+    "message": "🟣 紫霄宫旧音隔世传来，修为 +9000，念力 +900。",
+    "condition": {
+      "minRealm": 14
+    },
+    "regionTags": [
+      "mystic"
+    ]
+  },
+  {
+    "id": "cp-04:taotie_gaze",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "饕餮凝视",
+    "weight": 3,
+    "effects": {
+      "hp": -5000,
+      "mood": -25
+    },
+    "message": "👁️ 混沌饕餮隔空望来，你如坠深渊，HP -5000，心情 -25。",
+    "condition": {
+      "minRealm": 14
+    },
+    "regionTags": [
+      "chaos",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-04:open_sky_trace",
+    "category": "adventure",
+    "tone": "neutral",
+    "name": "开天痕迹",
+    "weight": 3,
+    "effects": {
+      "exp": 7000,
+      "hp": -2200
+    },
+    "message": "🪓 开天斧痕尚有余威，你强行参悟，修为 +7000，HP -2200。",
+    "condition": {
+      "minRealm": 14
+    },
+    "regionTags": [
+      "chaos"
+    ]
+  },
+  {
+    "id": "cp-04:daily_totem_pray",
+    "category": "daily",
+    "tone": "good",
+    "name": "祭拜图腾",
+    "weight": 18,
+    "effects": {
+      "mood": 14,
+      "mentalPower": 120
+    },
+    "message": "🪵 今日祭拜部族图腾，心情 +14，念力 +120。",
+    "condition": {
+      "minRealm": 12
+    }
+  },
+  {
+    "id": "cp-04:daily_breathe_chaos",
+    "category": "daily",
+    "tone": "good",
+    "name": "吐纳混沌",
+    "weight": 16,
+    "effects": {
+      "exp": 1100,
+      "mp": 220
+    },
+    "message": "⚫⚪ 你吞吐一缕混沌清气，修为 +1100，灵力 +220。",
+    "condition": {
+      "minRealm": 12
+    }
+  },
+  {
+    "id": "cp-04:daily_hunt_tracks",
+    "category": "daily",
+    "tone": "neutral",
+    "name": "辨认兽迹",
+    "weight": 12,
+    "effects": {
+      "stamina": -20,
+      "exp": 500
+    },
+    "message": "🐾 你辨认洪荒凶兽足迹，精力 -20，修为 +500。",
+    "condition": {
+      "minRealm": 12
+    }
+  },
+  {
+    "id": "cp-04:daily_heavy_law",
+    "category": "daily",
+    "tone": "bad",
+    "name": "法则沉重",
+    "weight": 8,
+    "effects": {
+      "mp": -260,
+      "mood": -8
+    },
+    "message": "⚖️ 洪荒法则厚重如山，灵力 -260，心情 -8。",
+    "condition": {
+      "minRealm": 12
+    }
+  },
+  {
+    "id": "cp-04:daily_tribe_trade",
+    "category": "daily",
+    "tone": "good",
+    "name": "贝币交易",
+    "weight": 10,
+    "effects": {
+      "gold": 420
+    },
+    "message": "🐚 你用多余灵材换得洪荒贝币，灵石 +420。",
+    "condition": {
+      "minRealm": 12
+    },
+    "regionTags": [
+      "trade",
+      "safe"
+    ]
+  },
+  {
+    "id": "cp-04:daily_old_grudge",
+    "category": "daily",
+    "tone": "bad",
+    "name": "古怨缠身",
+    "weight": 7,
+    "effects": {
+      "health": -6,
+      "mentalPower": -80
+    },
+    "message": "🩸 古战场怨气缠身，健康 -6，念力 -80。",
+    "condition": {
+      "minRealm": 13
+    },
+    "regionTags": [
+      "wasteland",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-04:daily_clear_turbid",
+    "category": "daily",
+    "tone": "neutral",
+    "name": "清浊分判",
+    "weight": 11,
+    "effects": {
+      "exp": 700,
+      "mood": -4
+    },
+    "message": "⚫⚪ 你推演清浊分判之理，修为 +700，心情 -4。",
+    "condition": {
+      "minRealm": 12
+    }
+  }
+]

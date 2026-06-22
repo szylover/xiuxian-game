@@ -1,0 +1,171 @@
+{
+  "breakthroughReqs": [
+    {
+      "id": "cp-04:bt_12_13",
+      "fromRealmIndex": 12,
+      "toRealmIndex": 13,
+      "itemCosts": [
+        {
+          "itemId": "cp-04:primordial_jade",
+          "count": 5
+        },
+        {
+          "itemId": "cp-04:ancestral_bone",
+          "count": 3
+        }
+      ],
+      "conditions": [],
+      "requiresTribulation": false,
+      "baseSuccessRate": 0.32,
+      "description": "太乙修士炼化祖灵骨纹，证入大罗逍遥。"
+    },
+    {
+      "id": "cp-04:bt_13_14",
+      "fromRealmIndex": 13,
+      "toRealmIndex": 14,
+      "itemCosts": [
+        {
+          "itemId": "cp-04:law_fragment",
+          "count": 4
+        },
+        {
+          "itemId": "cp-04:world_tree_leaf",
+          "count": 2
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cp-04:cond_defeat_higher",
+          "description": "曾击败过高境界敌人",
+          "field": "tracking.defeatedHigherRealm",
+          "op": "==",
+          "value": true
+        }
+      ],
+      "requiresTribulation": false,
+      "baseSuccessRate": 0.26,
+      "description": "大罗参悟洪荒法则碎片，向准圣之位迈进。"
+    },
+    {
+      "id": "cp-04:bt_14_15",
+      "fromRealmIndex": 14,
+      "toRealmIndex": 15,
+      "itemCosts": [
+        {
+          "itemId": "cp-04:hunyuan_seed",
+          "count": 1
+        },
+        {
+          "itemId": "cp-04:chaos_stone_heart",
+          "count": 2
+        }
+      ],
+      "conditions": [],
+      "requiresTribulation": true,
+      "baseSuccessRate": 0.2,
+      "description": "准圣合炼混元道种，须承受开天余劫。"
+    }
+  ],
+  "tribulations": [
+    {
+      "id": "cp-04:tribulation_primordial_gate",
+      "name": "太初门劫",
+      "description": "洪荒天地不容弱者，太初门前混沌风雷齐落。",
+      "forRealmIndex": 11,
+      "waves": [
+        {
+          "name": "混沌罡风",
+          "hp": 700000,
+          "atk": 36000,
+          "def": 18000,
+          "speed": 360
+        },
+        {
+          "name": "太初紫雷",
+          "hp": 860000,
+          "atk": 43000,
+          "def": 21000,
+          "speed": 390,
+          "specialEffect": {
+            "type": "dot",
+            "value": 600,
+            "description": "太初紫雷，每回合 600 伤害"
+          }
+        },
+        {
+          "name": "洪荒门影",
+          "hp": 1100000,
+          "atk": 52000,
+          "def": 26000,
+          "speed": 420,
+          "specialEffect": {
+            "type": "debuff_def",
+            "value": 30,
+            "description": "门影镇身，防御降低 30%"
+          }
+        }
+      ],
+      "rewards": {
+        "bonusExp": 180000,
+        "items": [
+          {
+            "itemId": "cp-04:primordial_jade",
+            "count": 3
+          }
+        ]
+      },
+      "failureType": "realm_drop",
+      "failureDescription": "太初门闭合，混沌风雷将你震回金仙边缘。"
+    },
+    {
+      "id": "cp-04:tribulation_hunyuan",
+      "name": "开天余劫",
+      "description": "盘古开天余威在道种中回响，准圣必须承受混元叩问。",
+      "forRealmIndex": 14,
+      "waves": [
+        {
+          "name": "清浊分判",
+          "hp": 4000000,
+          "atk": 190000,
+          "def": 120000,
+          "speed": 820
+        },
+        {
+          "name": "地火水风",
+          "hp": 5200000,
+          "atk": 240000,
+          "def": 150000,
+          "speed": 880,
+          "specialEffect": {
+            "type": "heal_block",
+            "value": 0,
+            "description": "地火水风翻涌，无法恢复"
+          }
+        },
+        {
+          "name": "开天斧影",
+          "hp": 6800000,
+          "atk": 320000,
+          "def": 180000,
+          "speed": 960,
+          "specialEffect": {
+            "type": "debuff_atk",
+            "value": 35,
+            "description": "斧影压道，攻击降低 35%"
+          }
+        }
+      ],
+      "rewards": {
+        "bonusExp": 2000000,
+        "items": [
+          {
+            "itemId": "cp-04:hunyuan_seed",
+            "count": 1
+          }
+        ]
+      },
+      "failureType": "death",
+      "failureDescription": "开天斧影落下，道种破碎，生死只在一线。"
+    }
+  ]
+}

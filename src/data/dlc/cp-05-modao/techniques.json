@@ -1,0 +1,335 @@
+[
+  {
+    "id": "cp-05:blood_shadow_sword",
+    "name": "血影剑诀",
+    "type": "sword",
+    "rarity": "common",
+    "description": "以血气催动剑影，快而狠。",
+    "minRealm": 0,
+    "maxLevel": 10,
+    "expPerLevel": 55,
+    "statBonusPerLevel": {
+      "atk": 3,
+      "speed": 1
+    },
+    "aptitudeKey": "sword",
+    "spiritRootElement": "fire",
+    "passiveEffects": [
+      {
+        "minLevel": 4,
+        "stat": "atk",
+        "value": 9,
+        "description": "血影剑诀小成：攻势更狠"
+      },
+      {
+        "minLevel": 9,
+        "stat": "mp",
+        "value": 30,
+        "description": "血影剑诀精熟：魔气护身"
+      }
+    ],
+    "activeSkill": {
+      "name": "血影连斩",
+      "description": "引动魔气施展狠辣一击。",
+      "mpCost": 12,
+      "staminaCost": 5,
+      "dmgMultiplier": 1.15,
+      "hitCount": 2,
+      "cooldown": 2,
+      "triggerRate": 0.28
+    },
+    "bodyExpRate": 0.2
+  },
+  {
+    "id": "cp-05:black_sand_palm",
+    "name": "黑砂掌",
+    "type": "palm",
+    "rarity": "common",
+    "description": "掌风裹挟黑煞砂，重在扰敌。",
+    "minRealm": 0,
+    "maxLevel": 10,
+    "expPerLevel": 52,
+    "statBonusPerLevel": {
+      "atk": 2,
+      "def": 1
+    },
+    "aptitudeKey": "palm",
+    "spiritRootElement": "earth",
+    "passiveEffects": [
+      {
+        "minLevel": 4,
+        "stat": "atk",
+        "value": 9,
+        "description": "黑砂掌小成：攻势更狠"
+      },
+      {
+        "minLevel": 9,
+        "stat": "mp",
+        "value": 30,
+        "description": "黑砂掌精熟：魔气护身"
+      }
+    ],
+    "activeSkill": {
+      "name": "黑砂扑面",
+      "description": "引动魔气施展狠辣一击。",
+      "mpCost": 12,
+      "staminaCost": 5,
+      "dmgMultiplier": 1.05,
+      "hitCount": 1,
+      "cooldown": 2,
+      "triggerRate": 0.28
+    },
+    "bodyExpRate": 0.5
+  },
+  {
+    "id": "cp-05:bone_break_fist",
+    "name": "碎骨拳",
+    "type": "fist",
+    "rarity": "uncommon",
+    "description": "霸道近身拳法，伤敌也伤己。",
+    "minRealm": 1,
+    "maxLevel": 15,
+    "expPerLevel": 82,
+    "statBonusPerLevel": {
+      "atk": 4,
+      "hp": 8
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "earth",
+    "passiveEffects": [
+      {
+        "minLevel": 4,
+        "stat": "atk",
+        "value": 14,
+        "description": "碎骨拳小成：攻势更狠"
+      },
+      {
+        "minLevel": 9,
+        "stat": "hp",
+        "value": 36,
+        "description": "碎骨拳精熟：魔气护身"
+      }
+    ],
+    "activeSkill": {
+      "name": "裂骨震",
+      "description": "引动魔气施展狠辣一击。",
+      "mpCost": 20,
+      "staminaCost": 8,
+      "dmgMultiplier": 1.35,
+      "hitCount": 1,
+      "cooldown": 2,
+      "triggerRate": 0.28
+    },
+    "bodyExpRate": 1
+  },
+  {
+    "id": "cp-05:ghost_step",
+    "name": "鬼影步",
+    "type": "fist",
+    "rarity": "uncommon",
+    "description": "脚步飘忽如鬼影，适合突袭脱身。",
+    "minRealm": 1,
+    "maxLevel": 15,
+    "expPerLevel": 78,
+    "statBonusPerLevel": {
+      "speed": 3,
+      "hp": 5
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "water",
+    "passiveEffects": [
+      {
+        "minLevel": 4,
+        "stat": "speed",
+        "value": 14,
+        "description": "鬼影步小成：攻势更狠"
+      },
+      {
+        "minLevel": 9,
+        "stat": "hp",
+        "value": 35,
+        "description": "鬼影步精熟：魔气护身"
+      }
+    ],
+    "activeSkill": {
+      "name": "鬼影三折",
+      "description": "引动魔气施展狠辣一击。",
+      "mpCost": 20,
+      "staminaCost": 8,
+      "dmgMultiplier": 0.95,
+      "hitCount": 3,
+      "cooldown": 2,
+      "triggerRate": 0.28
+    },
+    "bodyExpRate": 0.85
+  },
+  {
+    "id": "cp-05:soul_pierce_finger",
+    "name": "穿魂指",
+    "type": "finger",
+    "rarity": "rare",
+    "description": "凝阴气于指尖，专攻破绽。",
+    "minRealm": 2,
+    "maxLevel": 18,
+    "expPerLevel": 110,
+    "statBonusPerLevel": {
+      "atk": 5,
+      "critRate": 1,
+      "mp": 6
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "water",
+    "passiveEffects": [
+      {
+        "minLevel": 4,
+        "stat": "atk",
+        "value": 19,
+        "description": "穿魂指小成：攻势更狠"
+      },
+      {
+        "minLevel": 9,
+        "stat": "mp",
+        "value": 49,
+        "description": "穿魂指精熟：魔气护身"
+      }
+    ],
+    "activeSkill": {
+      "name": "穿魂一点",
+      "description": "引动魔气施展狠辣一击。",
+      "mpCost": 28,
+      "staminaCost": 11,
+      "dmgMultiplier": 1.65,
+      "hitCount": 1,
+      "cooldown": 2,
+      "triggerRate": 0.28
+    },
+    "bodyExpRate": 0.45
+  },
+  {
+    "id": "cp-05:nether_blade_record",
+    "name": "冥河刀录",
+    "type": "blade",
+    "rarity": "rare",
+    "description": "刀势如冥河暗潮，连绵不绝。",
+    "minRealm": 2,
+    "maxLevel": 18,
+    "expPerLevel": 115,
+    "statBonusPerLevel": {
+      "atk": 5,
+      "def": 2,
+      "mp": 5
+    },
+    "aptitudeKey": "blade",
+    "spiritRootElement": "water",
+    "passiveEffects": [
+      {
+        "minLevel": 4,
+        "stat": "atk",
+        "value": 20,
+        "description": "冥河刀录小成：攻势更狠"
+      },
+      {
+        "minLevel": 9,
+        "stat": "mp",
+        "value": 51,
+        "description": "冥河刀录精熟：魔气护身"
+      }
+    ],
+    "activeSkill": {
+      "name": "冥潮斩",
+      "description": "引动魔气施展狠辣一击。",
+      "mpCost": 28,
+      "staminaCost": 11,
+      "dmgMultiplier": 1.45,
+      "hitCount": 2,
+      "cooldown": 2,
+      "triggerRate": 0.28
+    },
+    "bodyExpRate": 0.35
+  },
+  {
+    "id": "cp-05:black_flame_spear",
+    "name": "黑焰枪诀",
+    "type": "spear",
+    "rarity": "epic",
+    "description": "枪芒燃黑焰，以攻代守。",
+    "minRealm": 3,
+    "maxLevel": 24,
+    "expPerLevel": 155,
+    "statBonusPerLevel": {
+      "atk": 8,
+      "speed": 2,
+      "critRate": 1
+    },
+    "aptitudeKey": "spear",
+    "spiritRootElement": "fire",
+    "passiveEffects": [
+      {
+        "minLevel": 4,
+        "stat": "atk",
+        "value": 27,
+        "description": "黑焰枪诀小成：攻势更狠"
+      },
+      {
+        "minLevel": 9,
+        "stat": "mp",
+        "value": 69,
+        "description": "黑焰枪诀精熟：魔气护身"
+      }
+    ],
+    "activeSkill": {
+      "name": "黑焰贯心",
+      "description": "引动魔气施展狠辣一击。",
+      "mpCost": 36,
+      "staminaCost": 14,
+      "dmgMultiplier": 2.1,
+      "hitCount": 1,
+      "cooldown": 2,
+      "triggerRate": 0.28
+    },
+    "bodyExpRate": 0.3
+  },
+  {
+    "id": "cp-05:reverse_fate_demon_art",
+    "name": "逆命魔经",
+    "type": "palm",
+    "rarity": "legendary",
+    "description": "不求天命垂青，只以魔念逆改败局。",
+    "minRealm": 4,
+    "maxLevel": 30,
+    "expPerLevel": 220,
+    "statBonusPerLevel": {
+      "atk": 8,
+      "hp": 25,
+      "mp": 14,
+      "critDmgMultiplier": 0.02
+    },
+    "aptitudeKey": "palm",
+    "spiritRootElement": "fire",
+    "passiveEffects": [
+      {
+        "minLevel": 4,
+        "stat": "atk",
+        "value": 39,
+        "description": "逆命魔经小成：攻势更狠"
+      },
+      {
+        "minLevel": 9,
+        "stat": "hp",
+        "value": 99,
+        "description": "逆命魔经精熟：魔气护身"
+      }
+    ],
+    "activeSkill": {
+      "name": "逆命一掌",
+      "description": "引动魔气施展狠辣一击。",
+      "mpCost": 44,
+      "staminaCost": 17,
+      "dmgMultiplier": 2.35,
+      "hitCount": 2,
+      "cooldown": 2,
+      "triggerRate": 0.28
+    },
+    "bodyExpRate": 0.5
+  }
+]

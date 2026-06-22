@@ -12,6 +12,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.16.0',
+    date: '2026-06-22',
+    title: '内容包 CP-03/CP-04/CP-05',
+    items: [
+      '新增仙道飞升、洪荒天地、魔道逆天三个纯数据内容包，可在开始界面 DLC 列表中勾选加载',
+      '新增仙界与洪荒境界、飞升定义、突破需求、天劫、区域、妖兽、物品与任务链',
+      '新增魔道主题事件、物品、妖兽、功法、区域与任务链，不依赖未实现的心魔系统',
+    ],
+  },
+  {
     version: '1.15.0',
     date: '2026-06-22',
     title: '音效系统与新手引导（T0037/T0039）',

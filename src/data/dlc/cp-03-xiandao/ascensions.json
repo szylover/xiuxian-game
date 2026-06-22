@@ -1,0 +1,47 @@
+[
+  {
+    "id": "cp-03:ascend_to_immortal_world",
+    "name": "飞升仙界",
+    "description": "大乘圆满后引动接引仙光，穿过九霄雷门，进入仙界真仙之境。",
+    "fromTier": "mortal",
+    "toTier": "immortal",
+    "fromRealmIndex": 7,
+    "toRealmIndex": 8,
+    "minExp": 500000,
+    "itemCosts": [
+      {
+        "itemId": "cp-03:ascension_token",
+        "count": 1
+      },
+      {
+        "itemId": "cp-03:immortal_dew",
+        "count": 2
+      }
+    ],
+    "conditions": [
+      {
+        "id": "cp-03:cond_defeat_higher",
+        "description": "曾击败过高境界敌人",
+        "field": "tracking.defeatedHigherRealm",
+        "op": "==",
+        "value": true
+      }
+    ],
+    "tribulationId": "cp-03:tribulation_ascend_immortal",
+    "rewards": {
+      "bonusExp": 80000,
+      "lifespanBonus": 120000,
+      "items": [
+        {
+          "itemId": "cp-03:immortal_jade",
+          "count": 3
+        }
+      ]
+    },
+    "statReset": {
+      "hpMultiplier": 1,
+      "mpMultiplier": 1,
+      "expReset": true
+    }
+  }
+]

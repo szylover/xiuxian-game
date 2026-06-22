@@ -1,0 +1,219 @@
+[
+  {
+    "id": "cp-04:taichu_ape",
+    "name": "太初灵猿",
+    "emoji": "🦍",
+    "realmIndex": 12,
+    "hp": 1350000,
+    "atk": 65000,
+    "def": 42000,
+    "speed": 500,
+    "moveSpeed": 400,
+    "critRate": 14,
+    "critResist": 22,
+    "critDmgMultiplier": 1.6,
+    "expReward": 260000,
+    "goldReward": 72000,
+    "element": "earth",
+    "regionTags": [
+      "primordial",
+      "forest"
+    ]
+  },
+  {
+    "id": "cp-04:nine_head_bird",
+    "name": "九首凶鸟",
+    "emoji": "🦅",
+    "realmIndex": 12,
+    "hp": 1200000,
+    "atk": 72000,
+    "def": 36000,
+    "speed": 610,
+    "moveSpeed": 560,
+    "critRate": 20,
+    "critResist": 18,
+    "critDmgMultiplier": 1.8,
+    "expReward": 280000,
+    "goldReward": 76000,
+    "element": "fire",
+    "regionTags": [
+      "primordial",
+      "sky",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-04:sky_river_turtle",
+    "name": "天河玄龟",
+    "emoji": "🐢",
+    "realmIndex": 12,
+    "hp": 1800000,
+    "atk": 52000,
+    "def": 65000,
+    "speed": 360,
+    "moveSpeed": 220,
+    "critRate": 8,
+    "critResist": 30,
+    "critDmgMultiplier": 1.4,
+    "expReward": 250000,
+    "goldReward": 70000,
+    "element": "water",
+    "regionTags": [
+      "primordial",
+      "river"
+    ]
+  },
+  {
+    "id": "cp-04:sun_crow",
+    "name": "三足金乌",
+    "emoji": "🐦",
+    "realmIndex": 13,
+    "hp": 2600000,
+    "atk": 138000,
+    "def": 78000,
+    "speed": 760,
+    "moveSpeed": 690,
+    "critRate": 24,
+    "critResist": 24,
+    "critDmgMultiplier": 1.9,
+    "expReward": 620000,
+    "goldReward": 160000,
+    "element": "fire",
+    "regionTags": [
+      "primordial",
+      "sun",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-04:moon_jade_rabbit",
+    "name": "太阴玉兔",
+    "emoji": "🐇",
+    "realmIndex": 13,
+    "hp": 2100000,
+    "atk": 112000,
+    "def": 72000,
+    "speed": 820,
+    "moveSpeed": 760,
+    "critRate": 18,
+    "critResist": 28,
+    "critDmgMultiplier": 1.7,
+    "expReward": 540000,
+    "goldReward": 140000,
+    "element": "water",
+    "regionTags": [
+      "primordial",
+      "moon",
+      "herb"
+    ]
+  },
+  {
+    "id": "cp-04:bone_witch_beast",
+    "name": "白骨巫兽",
+    "emoji": "💀",
+    "realmIndex": 13,
+    "hp": 3000000,
+    "atk": 125000,
+    "def": 110000,
+    "speed": 540,
+    "moveSpeed": 420,
+    "critRate": 14,
+    "critResist": 34,
+    "critDmgMultiplier": 1.6,
+    "expReward": 680000,
+    "goldReward": 180000,
+    "element": "earth",
+    "regionTags": [
+      "primordial",
+      "wasteland",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-04:kunpeng_shadow",
+    "name": "鲲鹏影",
+    "emoji": "🐋",
+    "realmIndex": 14,
+    "hp": 5600000,
+    "atk": 270000,
+    "def": 170000,
+    "speed": 980,
+    "moveSpeed": 900,
+    "critRate": 26,
+    "critResist": 30,
+    "critDmgMultiplier": 2,
+    "expReward": 1600000,
+    "goldReward": 380000,
+    "element": "water",
+    "regionTags": [
+      "primordial",
+      "sky",
+      "sea"
+    ]
+  },
+  {
+    "id": "cp-04:phoenix_ancestor",
+    "name": "元凤遗裔",
+    "emoji": "🦚",
+    "realmIndex": 14,
+    "hp": 5000000,
+    "atk": 250000,
+    "def": 155000,
+    "speed": 900,
+    "moveSpeed": 820,
+    "critRate": 22,
+    "critResist": 32,
+    "critDmgMultiplier": 1.9,
+    "expReward": 1500000,
+    "goldReward": 360000,
+    "element": "fire",
+    "regionTags": [
+      "primordial",
+      "volcano"
+    ]
+  },
+  {
+    "id": "cp-04:chaos_taotie",
+    "name": "混沌饕餮",
+    "emoji": "🐲",
+    "realmIndex": 15,
+    "hp": 11000000,
+    "atk": 560000,
+    "def": 350000,
+    "speed": 1000,
+    "moveSpeed": 760,
+    "critRate": 20,
+    "critResist": 40,
+    "critDmgMultiplier": 2,
+    "expReward": 4200000,
+    "goldReward": 900000,
+    "element": "earth",
+    "regionTags": [
+      "primordial",
+      "chaos",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-04:world_serpent",
+    "name": "衔界巨蛇",
+    "emoji": "🐍",
+    "realmIndex": 15,
+    "hp": 9800000,
+    "atk": 600000,
+    "def": 310000,
+    "speed": 1120,
+    "moveSpeed": 980,
+    "critRate": 24,
+    "critResist": 36,
+    "critDmgMultiplier": 2.1,
+    "expReward": 4500000,
+    "goldReward": 950000,
+    "element": "wood",
+    "regionTags": [
+      "primordial",
+      "world_tree",
+      "dangerous"
+    ]
+  }
+]

@@ -1,0 +1,178 @@
+[
+  {
+    "id": "cp-03:npc_cloud_envoy",
+    "name": "接引仙使",
+    "title": "云门使者",
+    "emoji": "🧑‍🦳",
+    "gender": "male",
+    "description": "负责引导新晋飞升者登记仙籍的温和仙使。",
+    "realmIndex": 9,
+    "hp": 180000,
+    "atk": 7600,
+    "def": 5200,
+    "speed": 210,
+    "critRate": 8,
+    "critResist": 18,
+    "critDmgMultiplier": 1.5,
+    "disposition": "friendly",
+    "roles": [
+      "elder"
+    ],
+    "personality": "righteous",
+    "charisma": 78,
+    "regionTags": [
+      "immortal",
+      "cloud",
+      "safe"
+    ],
+    "homeRegionId": "cp-03:ascension_cloud_gate",
+    "minRealm": 8,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "cp-03:ascension_token",
+        "cp-03:heaven_scroll"
+      ],
+      "liked": [
+        "cp-03:immortal_dew",
+        "cp-03:cloud_market_note"
+      ],
+      "disliked": [
+        "cp-03:thunder_gate_shard"
+      ]
+    }
+  },
+  {
+    "id": "cp-03:npc_jade_pool_fairy",
+    "name": "玉池仙子",
+    "title": "仙苑掌事",
+    "emoji": "🧚",
+    "gender": "female",
+    "description": "看守玉池仙苑的女仙，熟悉仙莲与玉骨丹法。",
+    "realmIndex": 9,
+    "hp": 160000,
+    "atk": 7000,
+    "def": 4800,
+    "speed": 230,
+    "critRate": 10,
+    "critResist": 16,
+    "critDmgMultiplier": 1.5,
+    "disposition": "friendly",
+    "roles": [
+      "alchemist"
+    ],
+    "personality": "gentle",
+    "charisma": 86,
+    "regionTags": [
+      "immortal",
+      "herb",
+      "lake"
+    ],
+    "homeRegionId": "cp-03:jade_pool_garden",
+    "minRealm": 8,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "cp-03:celestial_lotus_seed",
+        "cp-03:star_river_water"
+      ],
+      "liked": [
+        "cp-03:jade_body_pill",
+        "cp-03:moon_palace_thread"
+      ],
+      "disliked": [
+        "cp-03:sun_fragment"
+      ]
+    }
+  },
+  {
+    "id": "cp-03:npc_cloud_merchant",
+    "name": "流云掌柜",
+    "title": "仙市商人",
+    "emoji": "🧾",
+    "gender": "female",
+    "description": "流云仙市中消息灵通的掌柜，账本比云路还复杂。",
+    "realmIndex": 8,
+    "hp": 98000,
+    "atk": 4200,
+    "def": 3000,
+    "speed": 180,
+    "critRate": 8,
+    "critResist": 12,
+    "critDmgMultiplier": 1.4,
+    "disposition": "neutral",
+    "roles": [
+      "merchant"
+    ],
+    "personality": "cunning",
+    "charisma": 82,
+    "regionTags": [
+      "trade",
+      "city",
+      "safe"
+    ],
+    "homeRegionId": "cp-03:cloud_market",
+    "minRealm": 8,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "cp-03:cloud_market_note",
+        "cp-03:fallen_star_core"
+      ],
+      "liked": [
+        "cp-03:immortal_jade",
+        "cp-03:cloud_silk_rope"
+      ],
+      "disliked": [
+        "cp-03:crane_feather"
+      ]
+    }
+  },
+  {
+    "id": "cp-03:npc_star_ferryman",
+    "name": "星河渡者",
+    "title": "摆渡人",
+    "emoji": "🛶",
+    "gender": "male",
+    "description": "沉默的星河摆渡人，据说曾从金仙手下逃生。",
+    "realmIndex": 10,
+    "hp": 340000,
+    "atk": 15500,
+    "def": 9000,
+    "speed": 280,
+    "critRate": 16,
+    "critResist": 20,
+    "critDmgMultiplier": 1.7,
+    "disposition": "neutral",
+    "roles": [
+      "wanderer"
+    ],
+    "personality": "mysterious",
+    "charisma": 64,
+    "regionTags": [
+      "star",
+      "mystic",
+      "dangerous"
+    ],
+    "homeRegionId": "cp-03:star_river_ferry",
+    "minRealm": 9,
+    "maxAffinity": 100,
+    "affinityDecayRate": 1,
+    "giftPreferences": {
+      "loved": [
+        "cp-03:dao_echo_shell",
+        "cp-03:starlight_sand"
+      ],
+      "liked": [
+        "cp-03:star_river_water",
+        "cp-03:heaven_scroll"
+      ],
+      "disliked": [
+        "cp-03:immortal_incense"
+      ]
+    }
+  }
+]

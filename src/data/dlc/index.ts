@@ -41,6 +41,30 @@ export const ALL_DLCS: DLCMeta[] = [
       await registerCP02();
     },
   },
+  {
+    id: 'cp-03', name: '仙道飞升', description: '仙界/飞升主题 — 新增仙道境界·事件·物品·妖兽·功法·任务链',
+    version: '1.0.0', type: 'content-pack', required: false,
+    loader: async () => {
+      const { registerCP03 } = await import('./cp-03-xiandao/loader');
+      await registerCP03();
+    },
+  },
+  {
+    id: 'cp-04', name: '洪荒天地', description: '洪荒流主题 — 新增洪荒境界·事件·物品·妖兽·任务链',
+    version: '1.0.0', type: 'content-pack', required: false,
+    loader: async () => {
+      const { registerCP04 } = await import('./cp-04-honghuang/loader');
+      await registerCP04();
+    },
+  },
+  {
+    id: 'cp-05', name: '魔道逆天', description: '魔道流主题 — 新增魔道事件·物品·妖兽·功法·任务链',
+    version: '1.0.0', type: 'content-pack', required: false,
+    loader: async () => {
+      const { registerCP05 } = await import('./cp-05-modao/loader');
+      await registerCP05();
+    },
+  },
 ];
 
 /** 获取默认启用的 DLC ID 列表（默认勾选 core） */

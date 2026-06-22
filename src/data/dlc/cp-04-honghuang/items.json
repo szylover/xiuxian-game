@@ -1,0 +1,298 @@
+[
+  {
+    "id": "cp-04:chaos_breath",
+    "name": "混沌息",
+    "category": "material",
+    "rarity": "rare",
+    "description": "洪荒边界流动的混沌气息。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": false,
+    "sellPrice": 520
+  },
+  {
+    "id": "cp-04:taichu_beacon",
+    "name": "太初道标",
+    "category": "misc",
+    "rarity": "legendary",
+    "description": "指向洪荒天地入口的古老道标。",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 2600
+  },
+  {
+    "id": "cp-04:primordial_jade",
+    "name": "洪荒灵玉",
+    "category": "material",
+    "rarity": "rare",
+    "description": "沾染洪荒地脉的厚重灵玉。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 430
+  },
+  {
+    "id": "cp-04:ancestral_bone",
+    "name": "祖灵骨",
+    "category": "material",
+    "rarity": "rare",
+    "description": "古老生灵遗落的骨片，仍有图腾纹路。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": false,
+    "sellPrice": 560
+  },
+  {
+    "id": "cp-04:law_fragment",
+    "name": "法则碎片",
+    "category": "material",
+    "rarity": "epic",
+    "description": "洪荒天地法则崩落的细碎晶片。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": false,
+    "sellPrice": 1300
+  },
+  {
+    "id": "cp-04:world_tree_leaf",
+    "name": "建木叶",
+    "category": "material",
+    "rarity": "epic",
+    "description": "通天建木落下的青金叶片。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": false,
+    "sellPrice": 1200
+  },
+  {
+    "id": "cp-04:hunyuan_seed",
+    "name": "混元道种",
+    "category": "misc",
+    "rarity": "legendary",
+    "description": "准圣冲击混元所需的道种雏形。",
+    "stackable": true,
+    "maxStack": 5,
+    "usable": false,
+    "sellPrice": 3600
+  },
+  {
+    "id": "cp-04:chaos_stone_heart",
+    "name": "混沌石心",
+    "category": "material",
+    "rarity": "epic",
+    "description": "混沌石胎深处的核心。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": false,
+    "sellPrice": 1500
+  },
+  {
+    "id": "cp-04:sun_crow_feather",
+    "name": "金乌羽",
+    "category": "material",
+    "rarity": "rare",
+    "description": "三足金乌遗落的炽热羽毛。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": false,
+    "sellPrice": 680
+  },
+  {
+    "id": "cp-04:moon_rabbit_jade",
+    "name": "月兔玉屑",
+    "category": "material",
+    "rarity": "uncommon",
+    "description": "太阴月兔捣药时飞溅的玉屑。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 180
+  },
+  {
+    "id": "cp-04:kunpeng_scale",
+    "name": "鲲鹏鳞",
+    "category": "material",
+    "rarity": "epic",
+    "description": "一念北冥一念天风的巨鳞。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": false,
+    "sellPrice": 1400
+  },
+  {
+    "id": "cp-04:phoenix_ember",
+    "name": "凤火余烬",
+    "category": "material",
+    "rarity": "rare",
+    "description": "凤凰涅槃后留下的温热余烬。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": false,
+    "sellPrice": 760
+  },
+  {
+    "id": "cp-04:ginseng_fruit_slice",
+    "name": "人参果片",
+    "category": "consumable",
+    "rarity": "epic",
+    "description": "延长寿命 80 年，恢复全部精力。",
+    "stackable": true,
+    "maxStack": 5,
+    "usable": true,
+    "effects": {
+      "lifespan": 960,
+      "stamina": "max"
+    },
+    "effectMessage": "🍐 人参果片入口即化，寿限延长 80 年，精力尽复。",
+    "sellPrice": 2100
+  },
+  {
+    "id": "cp-04:primordial_elixir",
+    "name": "洪荒灵浆",
+    "category": "consumable",
+    "rarity": "rare",
+    "description": "恢复 1600 HP 与 300 灵力。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": true,
+    "effects": {
+      "hp": 1600,
+      "mp": 300
+    },
+    "effectMessage": "🏺 洪荒灵浆厚重甘冽，HP +1600，灵力 +300。",
+    "sellPrice": 820
+  },
+  {
+    "id": "cp-04:chaos_clear_pill",
+    "name": "清浊丹",
+    "category": "consumable",
+    "rarity": "epic",
+    "description": "恢复全部 HP 并提升健康。",
+    "stackable": true,
+    "maxStack": 10,
+    "usable": true,
+    "effects": {
+      "hp": "max",
+      "health": 25
+    },
+    "effectMessage": "⚫⚪ 清浊丹分判阴阳，HP 尽复，健康 +25。",
+    "sellPrice": 1600
+  },
+  {
+    "id": "cp-04:tribe_totem",
+    "name": "部族图腾",
+    "category": "misc",
+    "rarity": "uncommon",
+    "description": "洪荒部族刻下的守护图腾。",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": true,
+    "effects": {
+      "mood": 18,
+      "def": 0
+    },
+    "effectMessage": "🪵 你观想部族图腾，心情 +18。",
+    "sellPrice": 220
+  },
+  {
+    "id": "cp-04:mountain_sea_map",
+    "name": "山海残图",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "记载洪荒山海方位的残缺地图。",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 500
+  },
+  {
+    "id": "cp-04:witch_blood_stone",
+    "name": "巫血石",
+    "category": "material",
+    "rarity": "rare",
+    "description": "沾染古巫血气的赤黑石块。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": false,
+    "sellPrice": 620
+  },
+  {
+    "id": "cp-04:demon_banner_thread",
+    "name": "妖幡丝",
+    "category": "material",
+    "rarity": "uncommon",
+    "description": "从古妖幡边缘拆下的坚韧丝线。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 210
+  },
+  {
+    "id": "cp-04:earth_vein_marrow",
+    "name": "地脉髓",
+    "category": "material",
+    "rarity": "rare",
+    "description": "洪荒地脉中凝出的灵髓。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": false,
+    "sellPrice": 700
+  },
+  {
+    "id": "cp-04:sky_river_drop",
+    "name": "天河水珠",
+    "category": "material",
+    "rarity": "uncommon",
+    "description": "天河溅落的银色水珠。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 190
+  },
+  {
+    "id": "cp-04:purple_cloud_token",
+    "name": "紫霄令片",
+    "category": "misc",
+    "rarity": "legendary",
+    "description": "紫霄宫旧令碎片，蕴含讲道余音。",
+    "stackable": true,
+    "maxStack": 5,
+    "usable": true,
+    "effects": {
+      "exp": [
+        5000,
+        12000
+      ],
+      "mentalPower": 600
+    },
+    "effectMessage": "🟣 紫霄余音震动识海，修为与念力大涨。",
+    "sellPrice": 3200
+  },
+  {
+    "id": "cp-04:chaos_shell",
+    "name": "混沌甲壳",
+    "category": "material",
+    "rarity": "epic",
+    "description": "混沌凶兽脱落的甲片。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": false,
+    "sellPrice": 1350
+  },
+  {
+    "id": "cp-04:primordial_coin",
+    "name": "洪荒贝币",
+    "category": "misc",
+    "rarity": "common",
+    "description": "洪荒部族交易用贝币。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": true,
+    "effects": {
+      "gold": 360
+    },
+    "effectMessage": "🐚 兑开洪荒贝币，获得 360 灵石。",
+    "sellPrice": 320
+  }
+]
