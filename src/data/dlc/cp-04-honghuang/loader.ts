@@ -16,6 +16,7 @@ import { CP04_DLC_META } from './manifest';
 import { CP04_REALMS } from './realms';
 import { CP04_BREAKTHROUGH_REQS, CP04_TRIBULATIONS } from './breakthrough';
 import { CP04_ASCENSIONS } from './ascensions';
+import { CP04_PRIMORDIAL_ENDGAMES } from './endgame';
 
 export async function registerCP04(): Promise<void> {
   const [
@@ -47,5 +48,7 @@ export async function registerCP04(): Promise<void> {
     breakthroughReqs: CP04_BREAKTHROUGH_REQS,
     tribulations: CP04_TRIBULATIONS,
     ascensions: CP04_ASCENSIONS,
+    primordialEndgames: CP04_PRIMORDIAL_ENDGAMES,
   });
 }
+

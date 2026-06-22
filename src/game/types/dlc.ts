@@ -14,6 +14,8 @@ import type { NpcDef } from './npc';
 import type { QuestChainDef } from './quest';
 import type { DialogueChainDef, IdleChatPool } from './dialogue';
 import type { AscensionDef } from './ascension';
+import type { ReincarnationEffectDef } from './reincarnation';
+import type { PrimordialEndgameDef } from './primordial-endgame';
 import type { RankingDimensionDef } from './ranking';
 import type { DestinyDef, TalentDef, TalentTreeNodeDef } from './destiny';
 import type { BountyTemplateDef } from './bounty';
@@ -79,4 +81,7 @@ export interface DLCPack {
   secretRealms?: SecretRealmDef[];                // #95 秘境定义
   enlightenmentInsights?: EnlightenmentInsightDef[]; // #112 悟道顿悟内容
   sects?: SectDef[];                          // #99/#116 门派与宗门管理内容
+  reincarnationEffects?: ReincarnationEffectDef[]; // #101 转世扩展效果
+  primordialEndgames?: PrimordialEndgameDef[]; // #104 洪荒终局定义
 }
+

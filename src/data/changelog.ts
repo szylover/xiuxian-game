@@ -12,6 +12,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.23.0',
+    date: '2026-06-22',
+    title: '转世重修与洪荒终局',
+    items: [
+      '新增转世重修系统，死亡、飞升与轮回珠主动转世会累积前世遗产并重置新一世进度',
+      '新增洪荒终局挑战，CP-04 按正道、邪道、中立路线触发最终天道战与结局记录',
+      '新增转世与终局弹窗、状态面板遗产展示、ActionPanel 入口以及 Debug 辅助验证功能',
+    ],
+  },
+  {
     version: '1.22.0',
     date: '2026-06-22',
     title: 'NPC 世界模拟与道侣双修',
@@ -484,3 +494,4 @@ export const CHANGELOG: ChangelogEntry[] = [
 
 /** 当前最新版本号 */
 export const CURRENT_VERSION = CHANGELOG[0].version;
+

@@ -8,6 +8,7 @@ import type { Player } from '../../game/player';
 import { recalcStats } from '../../game/player';
 import { getAllItemDefs, getAllEquipDefs, getAllTechniqueDefs, getAllDivineArtDefs, getAllAchievementDefs, getAllBottleneckDefs } from '../../game/registry';
 import { addItem } from '../../game/inventory';
+import { createEmptyLegacy, REINCARNATION_ORB_ID } from '../../game/reincarnation';
 import { getAllTechniquePassiveBonus } from '../../game/technique';
 import { getDivineArtsState, ELEMENT_EMOJI, ELEMENT_CN } from '../../game/divine-arts';
 import type { DivineArtsSystemState } from '../../game/divine-arts';
@@ -60,6 +61,20 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
       if (key === '__toggleLooseImmortal') {
         const death = (prev.systems.death ?? {}) as Record<string, unknown>;
         return { ...prev, systems: { ...prev.systems, death: { ...death, isLooseImmortal: value === 1 } } };
+      }
+      if (key === '__giveReincarnationOrb') {
+        return addItem(prev, REINCARNATION_ORB_ID, value).player;
+      }
+      if (key === '__resetReincarnationLegacy') {
+        const reincarnation = (prev.systems.reincarnation ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, reincarnation: { ...reincarnation, legacy: createEmptyLegacy() } } };
+      }
+      if (key === '__reincarnationCount') {
+        const reincarnation = (prev.systems.reincarnation ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, reincarnation: { ...reincarnation, count: value } } };
+      }
+      if (key === '__primordialEndgameReady') {
+        return { ...prev, realmIndex: 15, exp: 520000000, karma: value };
       }
       if (key === '__bountyReputation') {
         const bounty = (prev.systems.bounty ?? {}) as Record<string, unknown>;

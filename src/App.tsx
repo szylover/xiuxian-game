@@ -17,6 +17,8 @@ import LeftPanel from './components/layout/LeftPanel';
 import RightPanel from './components/layout/RightPanel';
 import CombatModal from './components/shared/CombatModal';
 import DeathModal from './components/shared/DeathModal';
+import ReincarnationModal from './components/shared/ReincarnationModal';
+import PrimordialEndgameModal from './components/shared/PrimordialEndgameModal';
 import OnboardingOverlay from './components/hud/OnboardingOverlay';
 import SoundControls from './components/hud/SoundControls';
 import type { PanelKey } from './components/layout/PanelButtons';
@@ -75,6 +77,8 @@ export default function App() {
         reason={engine.gameOverReason}
         logs={logs}
         onRestart={() => { clearLogs(); engine.deleteSave(); }}
+        player={engine.player}
+        onReincarnate={() => engine.openReincarnation('death')}
       />
     );
   }
@@ -101,6 +105,9 @@ export default function App() {
             onBreakthrough={engine.breakthrough}
             onBodyBreakthrough={engine.bodyBreakthrough}
             onAscend={engine.ascend}
+            onReincarnate={() => engine.openReincarnation('voluntary')}
+            onAscensionReincarnate={() => engine.openReincarnation('ascension')}
+            onPrimordialEndgame={engine.openPrimordialEndgame}
             onOpenLog={() => setLogDrawerOpen(true)}
             onTravel={engine.travel}
             onSelectPanel={handleSelectPanel}
@@ -177,6 +184,21 @@ export default function App() {
               onClose={engine.handleCombatClose}
             />
           )}
+          {engine.reincarnationModalContext && (
+            <ReincarnationModal
+              player={engine.player}
+              context={engine.reincarnationModalContext}
+              onConfirm={engine.confirmReincarnation}
+              onClose={engine.closeReincarnationModal}
+            />
+          )}
+          {engine.primordialEndgameOpen && (
+            <PrimordialEndgameModal
+              player={engine.player}
+              onChallenge={engine.challengePrimordialEndgame}
+              onClose={engine.closePrimordialEndgame}
+            />
+          )}
           {engine.deathModal && (
             <DeathModal
               state={engine.deathModal}
@@ -217,3 +239,5 @@ export default function App() {
     </>
   );
 }
+
+

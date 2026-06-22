@@ -160,3 +160,15 @@
   border-radius: 6px;
   opacity: 0.8;
 }
+
+.btn-reincarnation {
+  border-color: var(--color-text-info);
+  color: var(--color-text-info);
+  background: var(--color-bg-dark);
+}
+
+.btn-primordial-endgame {
+  border-color: var(--color-text-accent);
+  color: var(--color-text-accent);
+  background: var(--color-bg-warm-dim);
+}

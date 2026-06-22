@@ -15,6 +15,7 @@ import { ensureDestinyTalentState } from '../../game/destiny';
 import { gainComprehension, getEnlightenmentEffects, tryTriggerEnlightenment } from '../../game/enlightenment';
 import { changeKarma } from '../../game/karma';
 import { getSectCultivationBonus } from '../../game/sect';
+import { getReincarnationState } from '../../game/reincarnation';
 import { getDualCultivationBonus } from '../../game/npc';
 
 export function useCultivationActions(
@@ -54,7 +55,8 @@ export function useCultivationActions(
       const enlightenmentBonus = getEnlightenmentEffects(p).cultivationSpeedBonus ?? 0;
       const sectBonus = getSectCultivationBonus(p);
       const dualBonus = getDualCultivationBonus(p);
-      const expGain = Math.floor(BASE_CULTIVATE_EXP * compBonus * cultivationMult * moodBonus * (1 + enlightenmentBonus + sectBonus + dualBonus));
+      const reincarnationLegacy = getReincarnationState(p).legacy;
+      const expGain = Math.floor(BASE_CULTIVATE_EXP * compBonus * cultivationMult * moodBonus * (1 + enlightenmentBonus + sectBonus + dualBonus + reincarnationLegacy.cultivationSpeedBonus));
       p.exp += expGain;
 
       // T0062 根据激活功法类型决定锄体/修炼模式
@@ -74,7 +76,7 @@ export function useCultivationActions(
       }
 
       if (bodyRate > 0) {
-        const baseBodyExp = Math.floor(expGain * bodyRate * 0.5);
+        const baseBodyExp = Math.floor(expGain * bodyRate * 0.5 * (1 + reincarnationLegacy.bodyExpBonus));
         const { player: p2, message: btMsg, actualGain } = gainBodyRealmExp(p, baseBodyExp);
         p = p2;
         if (actualGain > 0) bodyMsg = ` ${CULTIVATION_TEXTS.bodyExpGain(actualGain)}`;
@@ -133,3 +135,4 @@ export function useCultivationActions(
 
   return { cultivate };
 }
+

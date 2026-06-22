@@ -24,3 +24,6 @@ export * from './secret-realm';
 export * from './karma';
 export * from './enlightenment';
 export * from './sect';
+export * from './reincarnation';
+export * from './primordial-endgame';
+

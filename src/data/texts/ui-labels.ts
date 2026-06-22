@@ -8,6 +8,8 @@ export const UI_LABELS = {
   lifespanDeath: (age: number) => `💀 寿元耗尽！享年 ${age} 岁。修仙之路到此为止…`,
   lifespanDeathReason: (age: number, realm: string) => `寿元耗尽，享年 ${age} 岁，${realm}期。`,
   gameOverFallback: '修仙之路到此为止…',
+  gameOverTitle: '游戏结束',
+  restartButton: '重新开始',
   deleteSave: '🗑️ 存档已删除。',
   achievementUnlock: (name: string, bonus: string) => `🏆 解锁成就：${name}${bonus}`,
   // useSystemActions.ts
@@ -94,3 +96,4 @@ export const UI_LABELS = {
     clearRealmCooldown: '清空秘境冷却',
   },
 } as const;
+

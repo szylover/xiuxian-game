@@ -9,12 +9,14 @@ import type { Player } from '../../game/player';
 import { ACTION_COSTS } from '../../game/data';
 import { getBreakthroughStatus } from '../../game/breakthrough';
 import { getBodyBreakthroughStatus } from '../../game/body-cultivation';
-import { getAscensionStatus } from '../../game/ascension';
+import { getAscensionStatus, getAscensionState } from '../../game/ascension';
+import { checkReincarnation } from '../../game/reincarnation';
+import { getPrimordialEndgameStatus } from '../../game/primordial-endgame';
 import { getCurrentRegion } from '../../game/map';
 import { getActiveBottlenecks } from '../../game/bottleneck';
 import type { BottleneckDef, BottleneckState } from '../../game/types';
 import { getBottleneckDef, getRealmDef } from '../../game/registry';
-import { ASCENSION_TEXTS } from '../../data/texts/ascension';
+import { ASCENSION_TEXTS, REINCARNATION_TEXTS, PRIMORDIAL_ENDGAME_TEXTS } from '../../data/texts';
 import { useState } from 'react';
 
 interface ActionPanelProps {
@@ -26,11 +28,14 @@ interface ActionPanelProps {
   onBreakthrough: () => void;
   onBodyBreakthrough: () => void;
   onAscend: () => void;
+  onReincarnate: () => void;
+  onAscensionReincarnate: () => void;
+  onPrimordialEndgame: () => void;
   onOpenMap?: () => void;
   gameOver: boolean;
 }
 
-export default function ActionPanel({ player, onCultivate, onFight, onExplore, onRest, onBreakthrough, onBodyBreakthrough, onAscend, onOpenMap, gameOver }: ActionPanelProps) {
+export default function ActionPanel({ player, onCultivate, onFight, onExplore, onRest, onBreakthrough, onBodyBreakthrough, onAscend, onReincarnate, onAscensionReincarnate, onPrimordialEndgame, onOpenMap, gameOver }: ActionPanelProps) {
   if (!player || gameOver) return null;
 
   const [showBottleneckModal, setShowBottleneckModal] = useState<string | null>(null);
@@ -83,6 +88,13 @@ export default function ActionPanel({ player, onCultivate, onFight, onExplore, o
 
   // T0033: 已达巅峰提示（无下一境界且无飞升定义）
   const showPeakReached = !nextRealm && !ascStatus.ascDef;
+
+  const reincarnationCheck = checkReincarnation(player, 'voluntary');
+  const ascensionReincarnationCheck = checkReincarnation(player, 'ascension');
+  const showAscensionReincarnation = getAscensionState(player).hasAscended;
+  const showReincarnation = player.realmIndex >= 7;
+  const endgameStatus = getPrimordialEndgameStatus(player);
+  const showPrimordialEndgame = endgameStatus.selectedDef !== null || endgameStatus.completed;
 
   // ── 体修突破状态 ──
   const bodyBt = getBodyBreakthroughStatus(player);
@@ -173,6 +185,36 @@ export default function ActionPanel({ player, onCultivate, onFight, onExplore, o
         </div>
       )}
 
+      
+      {showReincarnation && (
+        <button
+          className="btn btn-action btn-reincarnation"
+          onClick={onReincarnate}
+          disabled={!reincarnationCheck.canReincarnate}
+          title={reincarnationCheck.canReincarnate ? REINCARNATION_TEXTS.voluntaryTitle : reincarnationCheck.reason}
+        >
+          ♻️ {REINCARNATION_TEXTS.voluntaryButton}
+        </button>
+      )}
+      {showAscensionReincarnation && (
+        <button
+          className="btn btn-action btn-reincarnation"
+          onClick={onAscensionReincarnate}
+          disabled={!ascensionReincarnationCheck.canReincarnate}
+          title={REINCARNATION_TEXTS.ascensionButton}
+        >
+          ♻️ {REINCARNATION_TEXTS.ascensionButton}
+        </button>
+      )}
+      {showPrimordialEndgame && (
+        <button
+          className="btn btn-action btn-primordial-endgame"
+          onClick={onPrimordialEndgame}
+          title={PRIMORDIAL_ENDGAME_TEXTS.buttonTitle}
+        >
+          🌌 {PRIMORDIAL_ENDGAME_TEXTS.button}
+        </button>
+      )}
       {/* 体修突破 */}
       {showBodyBreak && (
         <button
@@ -278,3 +320,5 @@ export default function ActionPanel({ player, onCultivate, onFight, onExplore, o
     </div>
   );
 }
+
+

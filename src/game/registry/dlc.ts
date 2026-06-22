@@ -16,6 +16,7 @@ import {
   techniqueTraitRegistry, ascensionRegistry, rankingDimensionRegistry,
   destinyRegistry, talentRegistry, talentTreeNodeRegistry,
   bountyTemplateRegistry, secretRealmRegistry, enlightenmentInsightRegistry, sectRegistry,
+  reincarnationEffectRegistry, primordialEndgameRegistry,
 } from './stores';
 
 export function registerDLC(pack: DLCPack): void {
@@ -63,6 +64,8 @@ export function registerDLC(pack: DLCPack): void {
   if (pack.secretRealms) for (const r of pack.secretRealms) secretRealmRegistry.set(r.id, r);
   if (pack.enlightenmentInsights) for (const i of pack.enlightenmentInsights) enlightenmentInsightRegistry.set(i.id, i);
   if (pack.sects) for (const s of pack.sects) sectRegistry.set(s.id, s);
+  if (pack.reincarnationEffects) for (const e of pack.reincarnationEffects) reincarnationEffectRegistry.set(e.id, e);
+  if (pack.primordialEndgames) for (const e of pack.primordialEndgames) primordialEndgameRegistry.set(e.id, e);
 }
 
 export function unregisterDLC(packId: string): void {
@@ -107,6 +110,8 @@ export function unregisterDLC(packId: string): void {
   if (pack.secretRealms) for (const r of pack.secretRealms) secretRealmRegistry.delete(r.id);
   if (pack.enlightenmentInsights) for (const i of pack.enlightenmentInsights) enlightenmentInsightRegistry.delete(i.id);
   if (pack.sects) for (const s of pack.sects) sectRegistry.delete(s.id);
+  if (pack.reincarnationEffects) for (const e of pack.reincarnationEffects) reincarnationEffectRegistry.delete(e.id);
+  if (pack.primordialEndgames) for (const e of pack.primordialEndgames) primordialEndgameRegistry.delete(e.id);
   dlcRegistry.delete(packId);
 }
 
@@ -117,3 +122,4 @@ export function getDLC(packId: string): DLCPack | undefined {
 export function getAllDLCs(): DLCPack[] {
   return Array.from(dlcRegistry.values());
 }
+

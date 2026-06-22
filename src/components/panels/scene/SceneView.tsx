@@ -19,6 +19,9 @@ interface SceneViewProps {
   onBreakthrough: () => void;
   onBodyBreakthrough: () => void;
   onAscend: () => void;
+  onReincarnate: () => void;
+  onAscensionReincarnate: () => void;
+  onPrimordialEndgame: () => void;
   onOpenLog: () => void;
   onTravel: (regionId: string) => void;
   onSelectPanel: (key: PanelKey) => void;
@@ -45,6 +48,9 @@ export default function SceneView({
   onBreakthrough,
   onBodyBreakthrough,
   onAscend,
+  onReincarnate,
+  onAscensionReincarnate,
+  onPrimordialEndgame,
   onOpenLog,
   onTravel,
   onSelectPanel,
@@ -85,9 +91,14 @@ export default function SceneView({
         onBreakthrough={onBreakthrough}
         onBodyBreakthrough={onBodyBreakthrough}
         onAscend={onAscend}
+        onReincarnate={onReincarnate}
+        onAscensionReincarnate={onAscensionReincarnate}
+        onPrimordialEndgame={onPrimordialEndgame}
         onOpenMap={() => onSelectPanel('map')}
         gameOver={gameOver}
       />
     </div>
   );
 }
+
+

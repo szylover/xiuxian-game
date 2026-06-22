@@ -2,7 +2,7 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, AffixPosition, EquipSlot, GeneratedEquipInstance, MonsterTemplate, MutationDef, MutationType, TechniqueTraitDef, TechniqueTraitTier, TechniqueInstance, AscensionDef, RankingDimensionDef, RankingBoardKind, DestinyDef, TalentDef, TalentTreeNodeDef, BountyTemplateDef, SecretRealmDef, EnlightenmentInsightDef, SectDef } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, AffixPosition, EquipSlot, GeneratedEquipInstance, MonsterTemplate, MutationDef, MutationType, TechniqueTraitDef, TechniqueTraitTier, TechniqueInstance, AscensionDef, ReincarnationEffectDef, PrimordialEndgameDef, RankingDimensionDef, RankingBoardKind, DestinyDef, TalentDef, TalentTreeNodeDef, BountyTemplateDef, SecretRealmDef, EnlightenmentInsightDef, SectDef } from '../types';
 import type { SpiritRootType } from '../spirit-root';
 import type { AchievementDef } from '../achievement/types';
 import {
@@ -19,6 +19,7 @@ import {
   ascensionRegistry, rankingDimensionRegistry,
   destinyRegistry, talentRegistry, talentTreeNodeRegistry,
   bountyTemplateRegistry, secretRealmRegistry, enlightenmentInsightRegistry, sectRegistry,
+  reincarnationEffectRegistry, primordialEndgameRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -234,6 +235,15 @@ export function getAllEnlightenmentInsightDefs(): EnlightenmentInsightDef[] {
 export function getSectDef(id: string): SectDef | undefined { return sectRegistry.get(id); }
 export function getAllSectDefs(): SectDef[] { return Array.from(sectRegistry.values()); }
 
+
+// ── 转世 / 洪荒终局（#101/#104）──
+
+export function getAllReincarnationEffects(): ReincarnationEffectDef[] {
+  return Array.from(reincarnationEffectRegistry.values()).sort((a, b) => a.priority - b.priority);
+}
+export function getPrimordialEndgameDef(id: string): PrimordialEndgameDef | undefined { return primordialEndgameRegistry.get(id); }
+export function getAllPrimordialEndgameDefs(): PrimordialEndgameDef[] { return Array.from(primordialEndgameRegistry.values()); }
+
 // ── 任务链（T0057）──
 
 export function getQuestChainDef(id: string): QuestChainDef | undefined { return questChainRegistry.get(id); }
@@ -377,3 +387,4 @@ export function getAscensionForRealm(fromRealmIndex: number): AscensionDef | und
   }
   return undefined;
 }
+

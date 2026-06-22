@@ -104,6 +104,18 @@
   --transition-base: 0.3s ease;
   --transition-slow: 0.5s ease;
 
+  /* === 通用尺寸补充 === */
+  --border-width: 1px;
+  --border-width-thick: 2px;
+  --modal-width-lg: 680px;
+  --size-card-sm: 150px;
+  --size-label-md: 72px;
+  --color-bg-elevated: var(--color-bg-medium);
+  --color-overlay-dark: var(--color-bg-overlay);
+  --color-warning: var(--color-text-warning);
+  --color-success: var(--color-text-success);
+  --shadow-modal: var(--shadow-lg);
+
   /* === 文字颜色补充 === */
   --color-text-warm: #ffcc80;
   --color-text-parchment: #e6d9a8;
@@ -3739,3 +3751,4 @@ body {
 .btn-danger:active {
   transform: scale(0.97);
 }
+

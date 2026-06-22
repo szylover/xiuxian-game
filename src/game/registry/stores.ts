@@ -12,7 +12,7 @@ import type {
   EquipBaseTemplate, AffixDef, GeneratedEquipInstance,
   MonsterTemplate, MutationDef,
   TechniqueTraitDef, TechniqueInstance,
-  AscensionDef,
+  AscensionDef, ReincarnationEffectDef, PrimordialEndgameDef,
   RankingDimensionDef, DestinyDef, TalentDef, TalentTreeNodeDef,
   BountyTemplateDef, SecretRealmDef, EnlightenmentInsightDef, SectDef,
 } from '../types';
@@ -62,6 +62,8 @@ export const bountyTemplateRegistry = new Map<string, BountyTemplateDef>();
 export const secretRealmRegistry = new Map<string, SecretRealmDef>();
 export const enlightenmentInsightRegistry = new Map<string, EnlightenmentInsightDef>();
 export const sectRegistry = new Map<string, SectDef>();
+export const reincarnationEffectRegistry = new Map<string, ReincarnationEffectDef>();
+export const primordialEndgameRegistry = new Map<string, PrimordialEndgameDef>();
 
 /** 清空所有注册表（切换 DLC 前调用） */
 export function clearAllRegistries(): void {
@@ -112,4 +114,7 @@ export function clearAllRegistries(): void {
   secretRealmRegistry.clear();
   enlightenmentInsightRegistry.clear();
   sectRegistry.clear();
+  reincarnationEffectRegistry.clear();
+  primordialEndgameRegistry.clear();
 }
+

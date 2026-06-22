@@ -125,6 +125,7 @@ export function recalcStats(player: Player): Player {
   applyKarmaStatEffects(p);
   applySectStatEffects(p);
   applyDualCultivationStatEffects(p);
+  applyReincarnationLegacyEffects(p);
 
   p.hp = Math.min(p.hp, p.maxHp);
   p.mp = Math.min(p.mp, p.maxMp);
@@ -151,6 +152,17 @@ function applyDualCultivationStatEffects(p: Player): void {
   if (bonuses.mp) p.maxMp += bonuses.mp;
 }
 
+function applyReincarnationLegacyEffects(p: Player): void {
+  const state = p.systems.reincarnation as { legacy?: Partial<Record<string, number>> } | undefined;
+  const legacy = state?.legacy;
+  if (!legacy) return;
+  p.atk += legacy.atkBonus ?? 0;
+  p.def += legacy.defBonus ?? 0;
+  p.speed += legacy.speedBonus ?? 0;
+  p.maxHp += legacy.hpBonus ?? 0;
+  p.maxMp += legacy.mpBonus ?? 0;
+  p.inventoryCapacity += legacy.inventoryCapacityBonus ?? 0;
+}
 // ── 境界查询 ──
 
 function applyDestinyTalentStatEffects(p: Player): void {
@@ -197,3 +209,4 @@ export function getNextRealm(player: Player) {
   if (next?.ascensionRequired) return null;
   return next;
 }
+

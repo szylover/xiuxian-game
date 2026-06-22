@@ -104,13 +104,13 @@
 | ID | 任务 | 前置 | Spec | 状态 |
 |----|------|------|------|------|
 | [T0029](https://github.com/szylover/xiuxian-game/issues/78) | 突破系统重构 + 渡劫 | T0004, T0012 | [spec](specs/T0029-breakthrough-tribulation.md) | ✅ |
-| [T0030](https://github.com/szylover/xiuxian-game/issues/101) | 转世重修 | T0029, T0040, T0056 | [spec](specs/101-reincarnation.md) | 📐 |
+| [T0030](https://github.com/szylover/xiuxian-game/issues/101) | 转世重修 | T0029, T0040, T0056 | [spec](specs/101-reincarnation.md) | ✅ |
 | [T0040](https://github.com/szylover/xiuxian-game/issues/80) | 死亡与复活系统 | T0001, T0003, T0012, T0018, T0044 | [spec](specs/T0040-death-system.md) | ✅ |
 | [T0031](https://github.com/szylover/xiuxian-game/issues/79) | 成就系统 | T0001 | [spec](specs/T0031-achievement.md) | ✅ |
 | [T0032](https://github.com/szylover/xiuxian-game/issues/102) | 排行榜 | T0031 | — | ✅ |
 | [T0033](https://github.com/szylover/xiuxian-game/issues/103) | 仙道境界（飞升） | T0029, T0058 | [spec](specs/T0033-immortal-ascension.md) | ✅ |
 | [T0058](https://github.com/szylover/xiuxian-game/issues/88) | 境界表 DLC 化 | — | [spec](specs/T0058-realm-dlc.md) | ✅ |
-| [T0034](https://github.com/szylover/xiuxian-game/issues/104) | 洪荒终局 | T0033 | [spec](specs/104-primordial-endgame.md) | 📐 |
+| [T0034](https://github.com/szylover/xiuxian-game/issues/104) | 洪荒终局 | T0033 | [spec](specs/104-primordial-endgame.md) | ✅ |
 | [T0042](https://github.com/szylover/xiuxian-game/issues/82) | 年月历法系统 | T0001, T0005 | [spec](specs/T0042-calendar-system.md) | ✅ |
 | [T0050](https://github.com/szylover/xiuxian-game/issues/113) | 心魔系统 | T0029 | [spec](specs/113-heart-demon.md) | 📐 |
 | [T0064](https://github.com/szylover/xiuxian-game/issues/93) | 瓶颈系统（境界/功法卡点 + 多元解锁） | T0002, T0029, T0007, T0017, T0058 | [spec](specs/T0064-bottleneck-system.md) | ✅ |
@@ -259,3 +259,4 @@ interface DLCPack {
 6. **核心数据即 DLC**：`data/core-*.json` + `game/data.ts` 的内容最终整合进 `core` DLC 包，启动时自动注册
 7. **JSON 优先**：纯数值型内容（物品/丹药/妖兽/配方）优先用 JSON 定义 + Loader 转换，便于生成和 diff
 8. **Loader 模式**：每种内容类型可配套一个 `*-loader.ts`（类似 `event-loader.ts`），将 JSON 纯数据转为带函数的运行时对象
+

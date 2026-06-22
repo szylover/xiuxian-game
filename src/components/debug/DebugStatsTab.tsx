@@ -8,13 +8,15 @@ import { REALMS } from '../../game/data';
 import { getAllBodyRealmDefs, getAllRegions, getMaxRealmIndex, getAscensionForRealm } from '../../game/registry';
 import { getMapState } from '../../game/map';
 import { getAscensionState } from '../../game/ascension';
+import { getReincarnationState } from '../../game/reincarnation';
+import { getPrimordialEndgameState } from '../../game/primordial-endgame';
 import { getDestinyTalentState } from '../../game/destiny';
 import { getBountyState } from '../../game/bounty';
 import { getSecretRealmState } from '../../game/secret-realm';
 import { getAlignment, getKarmaTitle, getKarmaState } from '../../game/karma';
 import { getEnlightenmentState } from '../../game/enlightenment';
 import { getSectState } from '../../game/sect';
-import { DESTINY_TEXTS, UI_LABELS, KARMA_TEXTS, ALIGNMENT_CN, ENLIGHTENMENT_TEXTS, SECT_TEXTS } from '../../data/texts';
+import { DESTINY_TEXTS, UI_LABELS, KARMA_TEXTS, ALIGNMENT_CN, ENLIGHTENMENT_TEXTS, SECT_TEXTS, PRIMORDIAL_ENDGAME_TEXTS } from '../../data/texts';
 import './DebugStatsTab.css';
 
 // 可编辑数值行

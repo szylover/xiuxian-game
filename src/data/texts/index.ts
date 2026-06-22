@@ -30,3 +30,6 @@ export { ENLIGHTENMENT_TEXTS } from './enlightenment';
 export { SECT_TEXTS } from './sect';
 export { NPC_WORLD_TEXTS } from './npc-world';
 export { DUAL_CULTIVATION_TEXTS } from './dual-cultivation';
+export { REINCARNATION_TEXTS } from './reincarnation';
+export { PRIMORDIAL_ENDGAME_TEXTS } from './primordial-endgame';
+

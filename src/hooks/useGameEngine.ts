@@ -39,6 +39,10 @@ import { DESTINY_TEXTS } from '../data/texts';
 import { ensureBountyBoard } from '../game/bounty';
 import { normalizeKarmaPlayer, tickKarmaDecay } from '../game/karma';
 import { tickEnlightenmentBuffs } from '../game/enlightenment';
+import { performReincarnation } from '../game/reincarnation';
+import type { ReincarnationContext } from '../game/types';
+import { attemptPrimordialEndgame } from '../game/primordial-endgame';
+import { REINCARNATION_TEXTS, PRIMORDIAL_ENDGAME_TEXTS } from '../data/texts';
 
 // Re-export types so existing imports still work
 export type { CombatModalState, DeathModalState } from './useCombatModal';
@@ -53,6 +57,8 @@ export function useGameEngine(
   const [deathModal, setDeathModal] = useState<DeathModalState | null>(null);
   const [dataReady, setDataReady] = useState(false);
   const [dataError, setDataError] = useState(false);
+  const [reincarnationModalContext, setReincarnationModalContext] = useState<ReincarnationContext | null>(null);
+  const [primordialEndgameOpen, setPrimordialEndgameOpen] = useState(false);
   const playerRef = useRef<Player | null>(null);
   const currentSlotRef = useRef(0);
   const { toast, showToast, dismiss: dismissToast } = useToast();
@@ -366,6 +372,55 @@ export function useGameEngine(
     chronicleHooks: { recordEvent: chronicle.recordEvent, syncSnapshot: chronicle.syncSnapshot },
   });
 
+
+  const openReincarnation = useCallback((context: ReincarnationContext) => {
+    setReincarnationModalContext(context);
+  }, []);
+
+  const confirmReincarnation = useCallback((options: { name: string; gender: 'male' | 'female'; appearance: number }) => {
+    const context = reincarnationModalContext;
+    if (!context) return;
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = performReincarnation(prev, context, options);
+      for (const log of result.logs) addLog(log, 'system');
+      if (result.newPlayer !== prev) {
+        chronicle.finalizeCurrentIncarnation(prev, context === 'death' ? 'died' : 'ascended');
+        chronicle.startNewIncarnation(result.newPlayer);
+        chronicle.recordEvent('reincarnation', result.newPlayer, REINCARNATION_TEXTS.reincarnationChronicle(result.legacySnapshot.incarnationNo));
+      }
+      return result.newPlayer;
+    });
+    setReincarnationModalContext(null);
+    setGameOver(false);
+    setGameOverReason('');
+    setDeathModal(null);
+  }, [reincarnationModalContext, addLog, chronicle]);
+
+  const closeReincarnationModal = useCallback(() => {
+    setReincarnationModalContext(null);
+  }, []);
+
+  const openPrimordialEndgame = useCallback(() => {
+    setPrimordialEndgameOpen(true);
+  }, []);
+
+  const closePrimordialEndgame = useCallback(() => {
+    setPrimordialEndgameOpen(false);
+  }, []);
+
+  const challengePrimordialEndgame = useCallback(() => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = attemptPrimordialEndgame(prev);
+      for (const log of result.logs) addLog(log, result.success ? 'system' : 'combat');
+      if (result.success) {
+        chronicle.recordEvent('ascension_success', result.player, result.def?.endingTitle ?? PRIMORDIAL_ENDGAME_TEXTS.modalTitle);
+        chronicle.syncSnapshot(result.player);
+      }
+      return result.player;
+    });
+  }, [addLog, chronicle]);
   // ── T0040: 复活回调 ──
   const handleRevival = useCallback((method: RevivalMethodDef) => {
     setPlayer(prev => {
@@ -446,7 +501,7 @@ export function useGameEngine(
     unlockTalentNode,
     travel,
     bodyBreakthrough,
-    ascend,
+    ascend, openReincarnation, openPrimordialEndgame,
     meetNpc,
     giveGift,
     formDaoCompanion,
@@ -484,6 +539,12 @@ export function useGameEngine(
     handleCombatNext,
     handleCombatClose,
     deathModal,
+    reincarnationModalContext,
+    confirmReincarnation,
+    closeReincarnationModal,
+    primordialEndgameOpen,
+    closePrimordialEndgame,
+    challengePrimordialEndgame,
     handleRevival,
     handleDeathModalClose,
     exitGame,
@@ -495,3 +556,6 @@ export function useGameEngine(
     debugSetPlayer: setPlayer,
   };
 }
+
+
+

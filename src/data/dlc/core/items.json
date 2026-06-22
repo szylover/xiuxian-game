@@ -616,5 +616,16 @@
     "maxStack": 30,
     "usable": false,
     "sellPrice": 120
+  },
+  {
+    "id": "core:reincarnation_orb",
+    "name": "轮回珠",
+    "category": "misc",
+    "rarity": "legendary",
+    "description": "蕴含轮回之力的神珠，可在大乘期主动转世重修，保留今世修行遗产。",
+    "stackable": true,
+    "maxStack": 3,
+    "usable": false,
+    "sellPrice": 0
   }
 ]

@@ -16,6 +16,7 @@ const EVENT_ICONS: Record<ChronicleEventType, string> = {
   ascension_fail: '💫',
   death: '💀',
   revival: '✨',
+  reincarnation: '♻️',
   first_boss_kill: '🗡️',
   rare_item_obtained: '💎',
   technique_acquired: '📖',
@@ -81,3 +82,4 @@ export default function ChroniclePanel({ chronicle }: ChroniclePanelProps) {
     </div>
   );
 }
+

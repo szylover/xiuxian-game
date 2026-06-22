@@ -30,7 +30,7 @@ export type {
   MutationType, MonsterTemplate, MutationDef, ProceduralMonsterState,
   TechniqueTraitDef, TechniqueTraitTier, TechniqueTraitSlot, TechniqueInstance,
   TechniqueQualityConfig, ProceduralTechniqueState,
-  RealmTier, AscensionDef, AscensionItemCost, AscensionCondition, AscensionState,
+  RealmTier, AscensionDef, AscensionItemCost, AscensionCondition, AscensionState, ReincarnationContext, ReincarnationLegacy, ReincarnationState, LegacySnapshot, ReincarnationEffectDef, PrimordialEndgameDef, PrimordialEndgameState,
   RankingBoardKind, RankingScoreKey, RankingDimensionDef, RankingEntry, RankingSnapshot, RankingSystemState,
   DestinyRarity, DestinyTalentStatKey, DestinyTalentEffect, DestinyDef, TalentDef, TalentTreeNodeDef, DestinyTalentState, UnlockTalentNodeResult,
   BountyObjectiveType, BountyObjectiveDef, BountyTemplateDef, GeneratedBounty, ActiveBounty, BountySystemState,
@@ -83,8 +83,10 @@ export {
   getSecretRealmDef, getAllSecretRealmDefs,
   getEnlightenmentInsightDef, getAllEnlightenmentInsightDefs,
   getSectDef, getAllSectDefs,
+  getAllReincarnationEffects, getPrimordialEndgameDef, getAllPrimordialEndgameDefs,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,
 } from './event-engine';
 export type { EventResult, EventRuntimeState } from './event-engine';
+

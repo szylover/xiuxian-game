@@ -13,6 +13,8 @@ import { getCurrentRegion, getMapState } from '../../game/map';
 import { StatRow, AptitudeBar, STAT_COLORS } from '../shared';
 import { SPIRIT_ROOT_CN, SPIRIT_ROOT_COLORS, SPIRIT_ROOT_ICONS } from '../shared/constants';
 import { REALMS } from '../../game/data';
+import { getReincarnationState } from '../../game/reincarnation';
+import { REINCARNATION_TEXTS } from '../../data/texts';
 
 interface StatusPanelProps {
   player: Player;
@@ -85,6 +87,7 @@ export default function StatusPanel({ player }: StatusPanelProps) {
   const region = getCurrentRegion(player);
   const mapState = getMapState(player);
   const apt = player.aptitudes as unknown as Record<string, number>;
+  const reincarnationState = getReincarnationState(player);
 
   return (
     <div className="status-panel-content">
@@ -167,6 +170,18 @@ export default function StatusPanel({ player }: StatusPanelProps) {
             <AptitudeBar key={f.key} label={f.label} value={apt[f.key] ?? 0} />
           ))}
         </Section>
+
+
+        {reincarnationState.count > 0 && (
+          <Section title={REINCARNATION_TEXTS.statusTitle}>
+            <StatRow icon="♻️" label={REINCARNATION_TEXTS.statusCountLabel} value={reincarnationState.count} />
+            <StatRow icon="🧘" label={REINCARNATION_TEXTS.statusCultivationLabel} value={REINCARNATION_TEXTS.legacyCultivationSpeed(reincarnationState.legacy.cultivationSpeedBonus)} />
+            <StatRow icon="🗡️" label={REINCARNATION_TEXTS.statusAtkLabel} value={reincarnationState.legacy.atkBonus} />
+            <StatRow icon="🛡️" label={REINCARNATION_TEXTS.statusDefLabel} value={reincarnationState.legacy.defBonus} />
+            <StatRow icon="❤️" label={REINCARNATION_TEXTS.statusHpLabel} value={reincarnationState.legacy.hpBonus} />
+            <StatRow icon="📜" label={REINCARNATION_TEXTS.statusSnapshotsLabel} value={reincarnationState.snapshots.length} />
+          </Section>
+        )}
 
         <Section title="📊 追踪数据">
           <StatRow icon="💀" label="击杀数" value={player.tracking.killCount} />
