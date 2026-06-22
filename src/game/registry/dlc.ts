@@ -13,7 +13,7 @@ import {
   eventTemplateRegistry, variablePoolRegistry,
   equipTemplateRegistry, affixDefRegistry,
   monsterTemplateRegistry, mutationDefRegistry,
-  techniqueTraitRegistry, ascensionRegistry,
+  techniqueTraitRegistry, ascensionRegistry, rankingDimensionRegistry,
 } from './stores';
 
 export function registerDLC(pack: DLCPack): void {
@@ -53,6 +53,7 @@ export function registerDLC(pack: DLCPack): void {
   if (pack.mutations) for (const md of pack.mutations) mutationDefRegistry.set(md.id, md);
   if (pack.techniqueTraits) for (const tt of pack.techniqueTraits) techniqueTraitRegistry.set(tt.id, tt);
   if (pack.ascensions) for (const asc of pack.ascensions) ascensionRegistry.set(asc.id, asc);
+  if (pack.rankingDimensions) for (const rd of pack.rankingDimensions) rankingDimensionRegistry.set(rd.id, rd);
 }
 
 export function unregisterDLC(packId: string): void {
@@ -89,6 +90,7 @@ export function unregisterDLC(packId: string): void {
   if (pack.mutations) for (const md of pack.mutations) mutationDefRegistry.delete(md.id);
   if (pack.techniqueTraits) for (const tt of pack.techniqueTraits) techniqueTraitRegistry.delete(tt.id);
   if (pack.ascensions) for (const asc of pack.ascensions) ascensionRegistry.delete(asc.id);
+  if (pack.rankingDimensions) for (const rd of pack.rankingDimensions) rankingDimensionRegistry.delete(rd.id);
   dlcRegistry.delete(packId);
 }
 

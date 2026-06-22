@@ -14,6 +14,7 @@ import type { NpcDef } from './npc';
 import type { QuestChainDef } from './quest';
 import type { DialogueChainDef, IdleChatPool } from './dialogue';
 import type { AscensionDef } from './ascension';
+import type { RankingDimensionDef } from './ranking';
 import type {
   EventTemplate,
   VariablePool,
@@ -65,4 +66,5 @@ export interface DLCPack {
   mutations?: MutationDef[];                 // T0072 变异定义
   techniqueTraits?: TechniqueTraitDef[];     // T0073 功法词条定义
   ascensions?: AscensionDef[];               // T0033 飞升定义
+  rankingDimensions?: RankingDimensionDef[]; // #102/#118 排名维度定义
 }

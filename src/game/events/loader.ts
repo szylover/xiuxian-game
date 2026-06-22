@@ -26,6 +26,7 @@ import type { ShopGoodsDef } from '../shop';
 import { getDeathSystemState } from '../death';
 import { recalcStats } from '../player';
 import { CORE_ACHIEVEMENTS } from '../achievement/data';
+import { CORE_RANKING_DIMENSIONS } from '../ranking';
 
 // ── 核心死亡触发条件 ──
 
@@ -331,6 +332,7 @@ export async function registerCoreEvents(): Promise<void> {
     monsterTemplates: loadMonsterTemplatesFromJson(coreMonsterTemplatesJson as unknown as MonsterTemplate[]),
     mutations: loadMutationDefsFromJson(coreMutationsJson as unknown as MutationDef[]),
     techniqueTraits: coreTechniqueTraitsJson as unknown as TechniqueTraitDef[],
+    rankingDimensions: CORE_RANKING_DIMENSIONS,
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }

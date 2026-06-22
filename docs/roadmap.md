@@ -106,14 +106,14 @@
 | [T0030](https://github.com/szylover/xiuxian-game/issues/101) | 转世重修 | T0029, T0040, T0056 | [spec](specs/101-reincarnation.md) | 📐 |
 | [T0040](https://github.com/szylover/xiuxian-game/issues/80) | 死亡与复活系统 | T0001, T0003, T0012, T0018, T0044 | [spec](specs/T0040-death-system.md) | ✅ |
 | [T0031](https://github.com/szylover/xiuxian-game/issues/79) | 成就系统 | T0001 | [spec](specs/T0031-achievement.md) | ✅ |
-| [T0032](https://github.com/szylover/xiuxian-game/issues/102) | 排行榜 | T0031 | — | ⬜ |
+| [T0032](https://github.com/szylover/xiuxian-game/issues/102) | 排行榜 | T0031 | — | ✅ |
 | [T0033](https://github.com/szylover/xiuxian-game/issues/103) | 仙道境界（飞升） | T0029, T0058 | [spec](specs/T0033-immortal-ascension.md) | ✅ |
 | [T0058](https://github.com/szylover/xiuxian-game/issues/88) | 境界表 DLC 化 | — | [spec](specs/T0058-realm-dlc.md) | ✅ |
 | [T0034](https://github.com/szylover/xiuxian-game/issues/104) | 洪荒终局 | T0033 | [spec](specs/104-primordial-endgame.md) | 📐 |
 | [T0042](https://github.com/szylover/xiuxian-game/issues/82) | 年月历法系统 | T0001, T0005 | [spec](specs/T0042-calendar-system.md) | ✅ |
 | [T0050](https://github.com/szylover/xiuxian-game/issues/113) | 心魔系统 | T0029 | [spec](specs/113-heart-demon.md) | 📐 |
 | [T0064](https://github.com/szylover/xiuxian-game/issues/93) | 瓶颈系统（境界/功法卡点 + 多元解锁） | T0002, T0029, T0007, T0017, T0058 | [spec](specs/T0064-bottleneck-system.md) | ✅ |
-| [T0055](https://github.com/szylover/xiuxian-game/issues/118) | 天机榜（天骄排行） | T0025, T0003, T0051 | [spec](specs/118-celestial-rankings.md) | 📐 |
+| [T0055](https://github.com/szylover/xiuxian-game/issues/118) | 天机榜（天骄排行） | T0025, T0003, T0051 | [spec](specs/118-celestial-rankings.md) | ✅ |
 | [T0068](https://github.com/szylover/xiuxian-game/issues/172) | 修仙履历系统（Cultivation Chronicle） | T0029, T0040, T0031, T0042, T0038 | [spec](specs/T0068-cultivation-chronicle.md) | ✅ |
 
 ### 🏷️ 界面与体验

@@ -12,6 +12,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.17.0',
+    date: '2026-06-22',
+    title: '排行榜与天机榜',
+    items: [
+      '新增排行榜系统，按境界、战力、财富、声望与功法造诣为玩家和 NPC 排名',
+      '新增天机榜系统，展示天骄榜与潜龙榜等命数推演排行',
+      '新增榜单面板入口，当前玩家名次会在榜单中高亮显示',
+    ],
+  },
+  {
     version: '1.16.0',
     date: '2026-06-22',
     title: '内容包 CP-03/CP-04/CP-05',

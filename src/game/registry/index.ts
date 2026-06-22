@@ -31,6 +31,7 @@ export type {
   TechniqueTraitDef, TechniqueTraitTier, TechniqueTraitSlot, TechniqueInstance,
   TechniqueQualityConfig, ProceduralTechniqueState,
   RealmTier, AscensionDef, AscensionItemCost, AscensionCondition, AscensionState,
+  RankingBoardKind, RankingScoreKey, RankingDimensionDef, RankingEntry, RankingSnapshot, RankingSystemState,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
@@ -71,6 +72,7 @@ export {
   getTechniqueTraitDef, getAllTechniqueTraitDefs, getTechniqueTraitsByTier,
   getTechniqueInstance, registerTechniqueInstance, removeTechniqueInstance, getAllTechniqueInstances, clearAllTechniqueInstances,
   getAscensionDef, getAllAscensionDefs, getAscensionForRealm,
+  getRankingDimensionDef, getAllRankingDimensionDefs, getRankingDimensionsByBoard,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

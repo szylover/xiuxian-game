@@ -20,13 +20,14 @@ import MapPanel from '../panels/MapPanel';
 import NpcPanel from '../panels/NpcPanel';
 import QuestPanel from '../panels/QuestPanel';
 import ChroniclePanel from '../panels/ChroniclePanel';
+import RankingPanel from '../panels/RankingPanel';
 import { UI_LABELS } from '../../data/texts/ui-labels';
 
 // 'status' panel is rendered by LeftPanel, so excluded from this config
 const PANEL_WIDTHS: Partial<Record<PanelKey, number>> = {
   inventory: 380, shop: 380, technique: 400, divine: 420,
   crafting: 380, equipment: 380, achievement: 420, map: 420, npc: 380,
-  quest: 400, chronicle: 420,
+  quest: 400, chronicle: 420, ranking: 520,
 };
 
 interface RightPanelProps {
@@ -102,6 +103,7 @@ export default function RightPanel({
           {activePanel === 'npc' && <NpcPanel player={player} onMeetNpc={onMeetNpc} onGiveGift={onGiveGift} onAcceptQuest={onAcceptQuest} onTurnInQuest={onTurnInQuest} onStartDialogue={onStartDialogue} onDialogueSelectChoice={onDialogueSelectChoice} onDialogueAdvance={onDialogueAdvance} />}
           {activePanel === 'quest' && <QuestPanel player={player} onAcceptQuest={onAcceptQuest} onAbandonQuest={onAbandonQuest} onDeliverQuestItem={onDeliverQuestItem} onTrackQuest={onTrackQuest} />}
           {activePanel === 'chronicle' && <ChroniclePanel chronicle={chronicle} />}
+          {activePanel === 'ranking' && <RankingPanel player={player} />}
         </FloatingPanel>
       )}
     </>

@@ -21,3 +21,4 @@ export { PROCEDURAL_TEXTS } from './procedural';
 export { ASCENSION_TEXTS } from './ascension';
 export { AUDIO_TEXTS } from './audio';
 export { ONBOARDING_TEXTS } from './onboarding';
+export { RANKING_TEXTS } from './ranking';

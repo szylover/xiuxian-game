@@ -32,6 +32,7 @@ import { tickAffinityDecay } from '../game/npc';
 import { restoreGeneratedEquips } from '../game/procedural';
 import { restoreTechniqueInstances } from '../game/procedural';
 import { useChronicle } from './useChronicle';
+import { refreshRankingState } from '../game/ranking';
 
 // Re-export types so existing imports still work
 export type { CombatModalState, DeathModalState } from './useCombatModal';
@@ -89,6 +90,7 @@ export function useGameEngine(
     const slotIndex = options.slotIndex ?? 0;
     currentSlotRef.current = slotIndex;
     let p = createPlayer({ ...options, enabledDLCs: dlcIds });
+    p = refreshRankingState(p, true);
     const rootDisplay = getSpiritRootDisplay(p.spiritRoots);
     writeSaveSlot(slotIndex, p);
     setPlayer(p);
@@ -127,13 +129,14 @@ export function useGameEngine(
       restoreGeneratedEquips(withRegions);
       // T0073: 恢复程序化功法实例到全局查询表
       restoreTechniqueInstances(withRegions);
-      setPlayer(withRegions);
+      const withRankings = refreshRankingState(withRegions, true);
+      setPlayer(withRankings);
       setGameOver(false);
       setGameOverReason('');
       addLog(UI_LABELS.loadSuccess(saved.name, REALMS[saved.realmIndex].name), 'system');
       // T0068: 加载存档时确保有当前轮回
       if (!chronicle.chronicle.current) {
-        chronicle.startNewIncarnation(withRegions);
+        chronicle.startNewIncarnation(withRankings);
       }
       return true;
     }
@@ -285,6 +288,8 @@ export function useGameEngine(
     if (crossedYear) {
       updated = tickAffinityDecay(updated);
     }
+
+    updated = refreshRankingState(updated);
 
     // T0057: 任务超时检查
     const questTimeoutResult = checkQuestTimeouts(updated);

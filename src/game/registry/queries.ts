@@ -2,7 +2,7 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, AffixPosition, EquipSlot, GeneratedEquipInstance, MonsterTemplate, MutationDef, MutationType, TechniqueTraitDef, TechniqueTraitTier, TechniqueInstance, AscensionDef } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, AffixPosition, EquipSlot, GeneratedEquipInstance, MonsterTemplate, MutationDef, MutationType, TechniqueTraitDef, TechniqueTraitTier, TechniqueInstance, AscensionDef, RankingDimensionDef, RankingBoardKind } from '../types';
 import type { SpiritRootType } from '../spirit-root';
 import type { AchievementDef } from '../achievement/types';
 import {
@@ -16,7 +16,7 @@ import {
   equipTemplateRegistry, affixDefRegistry, generatedEquipRegistry,
   monsterTemplateRegistry, mutationDefRegistry,
   techniqueTraitRegistry, techniqueInstanceRegistry,
-  ascensionRegistry,
+  ascensionRegistry, rankingDimensionRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -187,6 +187,18 @@ export function getNpcsByRole(role: NpcRole): NpcDef[] {
 }
 export function getNpcsByDisposition(disposition: NpcDisposition): NpcDef[] {
   return Array.from(npcRegistry.values()).filter(npc => npc.disposition === disposition);
+}
+
+// ── 排名维度（#102 / #118）──
+
+export function getRankingDimensionDef(id: string): RankingDimensionDef | undefined {
+  return rankingDimensionRegistry.get(id);
+}
+export function getAllRankingDimensionDefs(): RankingDimensionDef[] {
+  return Array.from(rankingDimensionRegistry.values()).sort((a, b) => a.order - b.order);
+}
+export function getRankingDimensionsByBoard(board: RankingBoardKind): RankingDimensionDef[] {
+  return getAllRankingDimensionDefs().filter(def => def.board === board);
 }
 
 // ── 任务链（T0057）──

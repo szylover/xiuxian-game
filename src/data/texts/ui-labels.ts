@@ -30,6 +30,7 @@ export const UI_LABELS = {
     npc:         { title: 'NPC', icon: '👥' },
     quest:       { title: '任务', icon: '📜' },
     chronicle:   { title: '修仙履历', icon: '📋' },
+    ranking:     { title: '榜单', icon: '🏅' },
     status:      { title: '详细属性', icon: '📋' },
   } as Record<string, { title: string; icon: string }>,
 
