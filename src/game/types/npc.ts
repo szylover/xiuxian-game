@@ -80,6 +80,49 @@ export interface NpcRelation {
   flags: Record<string, unknown>;
 }
 
+export type NpcWorldEventType =
+  | 'cultivation'
+  | 'breakthrough'
+  | 'travel'
+  | 'relationship'
+  | 'status'
+  | 'death';
+
+export type NpcWorldGoal = 'cultivate' | 'travel' | 'trade' | 'guard' | 'seek_fortune' | 'rivalry';
+export type NpcWorldStatus = 'normal' | 'secluded' | 'injured' | 'wandering' | 'fallen';
+
+export interface NpcDynamicState {
+  npcId: string;
+  realmIndex: number;
+  cultivation: number;
+  regionId: string | null;
+  alive: boolean;
+  status: NpcWorldStatus;
+  goal: NpcWorldGoal;
+  ageMonths: number;
+  lastUpdatedAge: number;
+  deathAge?: number;
+}
+
+export interface NpcWorldEvent {
+  id: string;
+  npcId: string;
+  type: NpcWorldEventType;
+  age: number;
+  gameYear: number;
+  gameMonth: number;
+  message: string;
+}
+
+export interface DualCultivationState {
+  companionNpcId: string | null;
+  bondedAtAge: number | null;
+  lastDualCultivationAge: number | null;
+  bondLevel: number;
+  totalSessions: number;
+  activeBuffUntilAge: number | null;
+}
+
 /** 关系等级 */
 export type NpcRelationLevel =
   | 'hostile'
@@ -96,4 +139,10 @@ export interface NpcSystemState {
   discoveredNpcs: string[];
   /** 每个 NPC 最后一次赠礼时的 player.age，用于 CD 计算 */
   lastGiftAge: Record<string, number>;
+  world: {
+    lastTickAge: number;
+    dynamic: Record<string, NpcDynamicState>;
+    events: NpcWorldEvent[];
+  };
+  dualCultivation: DualCultivationState;
 }

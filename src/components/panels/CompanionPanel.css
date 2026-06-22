@@ -1,0 +1,114 @@
+.companion-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  color: var(--color-text-primary);
+}
+
+.companion-intro,
+.companion-hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.companion-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.companion-section-title {
+  color: var(--color-text-gold);
+  font-weight: 700;
+  border-bottom: 1px solid var(--color-border-gold);
+  padding-bottom: var(--spacing-sm);
+}
+
+.companion-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.companion-card {
+  padding: var(--spacing-lg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-medium);
+}
+
+.companion-card-active {
+  border-color: var(--color-border-gold);
+  box-shadow: var(--shadow-gold);
+}
+
+.companion-summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.companion-name {
+  color: var(--color-text-warm);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+.companion-meta {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.companion-buff {
+  margin-top: var(--spacing-sm);
+  color: var(--color-text-success-light);
+  font-size: var(--font-size-sm);
+}
+
+.companion-effect {
+  margin-top: var(--spacing-md);
+  color: var(--color-text-info);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+.companion-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.companion-action {
+  border: 1px solid var(--color-border-gold);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-warm-medium);
+  color: var(--color-text-gold);
+  padding: var(--spacing-md) var(--spacing-lg);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.companion-action:hover:not(:disabled) {
+  background: var(--color-bg-warm-highlight);
+}
+
+.companion-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.companion-action-secondary {
+  border-color: var(--color-border-light);
+  background: var(--color-bg-light);
+  color: var(--color-text-secondary);
+}
+
+.companion-empty {
+  padding: var(--spacing-lg);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  text-align: center;
+}

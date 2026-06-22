@@ -15,6 +15,7 @@ import { ensureDestinyTalentState } from '../../game/destiny';
 import { gainComprehension, getEnlightenmentEffects, tryTriggerEnlightenment } from '../../game/enlightenment';
 import { changeKarma } from '../../game/karma';
 import { getSectCultivationBonus } from '../../game/sect';
+import { getDualCultivationBonus } from '../../game/npc';
 
 export function useCultivationActions(
   deps: Pick<CoreActionDeps, 'addLog' | 'setPlayer' | 'advanceTime' | 'canAct'>,
@@ -52,7 +53,8 @@ export function useCultivationActions(
       const moodBonus = 0.5 + (p.mood / 100);
       const enlightenmentBonus = getEnlightenmentEffects(p).cultivationSpeedBonus ?? 0;
       const sectBonus = getSectCultivationBonus(p);
-      const expGain = Math.floor(BASE_CULTIVATE_EXP * compBonus * cultivationMult * moodBonus * (1 + enlightenmentBonus + sectBonus));
+      const dualBonus = getDualCultivationBonus(p);
+      const expGain = Math.floor(BASE_CULTIVATE_EXP * compBonus * cultivationMult * moodBonus * (1 + enlightenmentBonus + sectBonus + dualBonus));
       p.exp += expGain;
 
       // T0062 根据激活功法类型决定锄体/修炼模式

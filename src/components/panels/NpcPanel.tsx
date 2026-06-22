@@ -6,18 +6,20 @@
 import { useState } from 'react';
 import type { Player } from '../../game/player';
 import { TabBar } from '../shared';
-import { getNpcsInRegion, getRelation, getNpcState } from '../../game/npc';
+import { getNpcsInRegion, getRelation, getNpcState, getNpcWorldEvents, getNpcDynamicState } from '../../game/npc';
 import { getCurrentRegion } from '../../game/map';
 import { getAllNpcDefs } from '../../game/registry';
 import { getQuestsForNpc } from '../../game/quest';
 import type { NpcDef, DialogueNode } from '../../game/types';
 import NpcCard from './npc/NpcCard';
 import NpcDetailModal from './npc/NpcDetailModal';
+import { NPC_WORLD_TEXTS } from '../../data/texts';
 import './NpcPanel.css';
 
 const TABS = [
-  { key: 'region' as const, label: '当前区域', icon: '📍' },
-  { key: 'contacts' as const, label: '人脉总览', icon: '📋' },
+  { key: 'region' as const, label: NPC_WORLD_TEXTS.panel.regionTab, icon: '📍' },
+  { key: 'contacts' as const, label: NPC_WORLD_TEXTS.panel.contactsTab, icon: '📋' },
+  { key: 'world' as const, label: NPC_WORLD_TEXTS.panel.worldTab, icon: '📰' },
 ];
 
 interface NpcPanelProps {
@@ -36,12 +38,13 @@ interface NpcPanelProps {
 }
 
 export default function NpcPanel({ player, onMeetNpc, onGiveGift, onAcceptQuest, onTurnInQuest, onStartDialogue, onDialogueSelectChoice, onDialogueAdvance }: NpcPanelProps) {
-  const [tab, setTab] = useState<'region' | 'contacts'>('region');
+  const [tab, setTab] = useState<'region' | 'contacts' | 'world'>('region');
   const [selectedNpc, setSelectedNpc] = useState<NpcDef | null>(null);
 
   const region = getCurrentRegion(player);
   const regionNpcs = getNpcsInRegion(player);
   const npcState = getNpcState(player);
+  const worldEvents = getNpcWorldEvents(player);
 
   // 人脉列表：所有已邂逅的 NPC
   const contactNpcs = npcState.discoveredNpcs
@@ -71,6 +74,7 @@ export default function NpcPanel({ player, onMeetNpc, onGiveGift, onAcceptQuest,
       <div className="npc-list-container">
         {npcs.map(npc => {
           const rel = getRelation(player, npc.id);
+          const dynamic = getNpcDynamicState(player, npc.id);
           const flags = npcQuestFlags.get(npc.id);
           return (
             <NpcCard
@@ -79,6 +83,7 @@ export default function NpcPanel({ player, onMeetNpc, onGiveGift, onAcceptQuest,
               relationLevel={rel.relationLevel}
               affinity={rel.affinity}
               met={rel.met}
+              dynamicState={dynamic}
               hasQuest={flags?.hasQuest}
               hasTurnIn={flags?.hasTurnIn}
               onClick={() => setSelectedNpc(npc)}
@@ -114,6 +119,22 @@ export default function NpcPanel({ player, onMeetNpc, onGiveGift, onAcceptQuest,
             已邂逅 {contactNpcs.length} 位修士
           </div>
           {renderNpcList(contactNpcs, '尚未邂逅任何人')}
+        </div>
+      )}
+
+      {tab === 'world' && (
+        <div className="npc-tab-section">
+          <div className="npc-tab-hint">{NPC_WORLD_TEXTS.panel.latestEvents}</div>
+          <div className="npc-world-event-list">
+            {worldEvents.length === 0 ? (
+              <div className="npc-list-empty">{NPC_WORLD_TEXTS.panel.noEvents}</div>
+            ) : worldEvents.map(event => (
+              <div key={event.id} className="npc-world-event">
+                <span className="npc-world-event-time">{NPC_WORLD_TEXTS.panel.eventTime(event.gameYear, event.gameMonth)}</span>
+                <span>{event.message}</span>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

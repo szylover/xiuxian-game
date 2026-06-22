@@ -31,6 +31,7 @@ export const UI_LABELS = {
     achievement: { title: '成就', icon: '🏆' },
     map:         { title: '世界地图', icon: '🗺️' },
     npc:         { title: 'NPC', icon: '👥' },
+    companion:   { title: '道侣双修', icon: '☯️' },
     quest:       { title: '任务', icon: '📜' },
     bounty:      { title: '历练悬赏', icon: '🏷️' },
     secretRealm: { title: '秘境', icon: '🌙' },

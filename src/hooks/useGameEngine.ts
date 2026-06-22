@@ -28,7 +28,7 @@ import { refreshUnlockedRegions } from '../game/map';
 import { checkQuestTimeouts, checkQuestDiscovery, tickQuestObjectives, setTrackedQuest as setTrackedQuestFn } from '../game/quest';
 import { UI_LABELS } from '../data/texts/ui-labels';
 import { SPIRIT_ROOT_CN, SEPARATOR, NONE_TEXT } from '../data/texts/common';
-import { tickAffinityDecay } from '../game/npc';
+import { tickAffinityDecay, tickNpcWorld } from '../game/npc';
 import { restoreGeneratedEquips } from '../game/procedural';
 import { restoreTechniqueInstances } from '../game/procedural';
 import { useChronicle } from './useChronicle';
@@ -300,6 +300,10 @@ export function useGameEngine(
       updated = tickAffinityDecay(updated);
     }
 
+    const npcWorld = tickNpcWorld(updated);
+    updated = npcWorld.player;
+    for (const log of npcWorld.logs) addLog(log, 'system');
+
     updated = tickEnlightenmentBuffs(updated);
     const karmaDecay = tickKarmaDecay(updated);
     updated = karmaDecay.player;
@@ -349,7 +353,7 @@ export function useGameEngine(
     learnDivineArt, activateDivineArt, deactivateDivineArt,
     unlockTalentNode,
     travel, bodyBreakthrough, ascend,
-    meetNpc, giveGift,
+    meetNpc, giveGift, formDaoCompanion, performDualCultivation, dissolveDaoCompanion,
     acceptQuest, abandonQuest, deliverQuestItem, turnInQuest,
     acceptBounty, claimBounty, refreshBounties,
     startRealm, advanceRealm, finishRealm,
@@ -445,6 +449,9 @@ export function useGameEngine(
     ascend,
     meetNpc,
     giveGift,
+    formDaoCompanion,
+    performDualCultivation,
+    dissolveDaoCompanion,
     acceptQuest,
     abandonQuest,
     deliverQuestItem,

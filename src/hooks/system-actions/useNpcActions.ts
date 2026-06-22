@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
-import { meetNpc as meetNpcFn, giveGift as giveGiftFn } from '../../game/npc';
+import { meetNpc as meetNpcFn, giveGift as giveGiftFn, formDaoCompanion as formDaoCompanionFn, performDualCultivation as performDualCultivationFn, dissolveDaoCompanion as dissolveDaoCompanionFn } from '../../game/npc';
 import { tickQuestObjectives, checkQuestDiscovery } from '../../game/quest';
 import type { SystemActionContext } from './types';
+import { recalcStats } from '../../game/player';
 
 export function useNpcActions({ addLog, setPlayer, execAction }: Pick<SystemActionContext, 'addLog' | 'setPlayer' | 'execAction'>) {
   const meetNpc = useCallback((npcId: string) => {
@@ -31,5 +32,23 @@ export function useNpcActions({ addLog, setPlayer, execAction }: Pick<SystemActi
     });
   }, [execAction]);
 
-  return { meetNpc, giveGift };
+  const formDaoCompanion = useCallback((npcId: string) => {
+    execAction(p => formDaoCompanionFn(p, npcId));
+  }, [execAction]);
+
+  const performDualCultivation = useCallback(() => {
+    execAction(p => {
+      const result = performDualCultivationFn(p);
+      return { ...result, player: recalcStats(result.player) };
+    });
+  }, [execAction]);
+
+  const dissolveDaoCompanion = useCallback(() => {
+    execAction(p => {
+      const result = dissolveDaoCompanionFn(p);
+      return { ...result, player: recalcStats(result.player) };
+    });
+  }, [execAction]);
+
+  return { meetNpc, giveGift, formDaoCompanion, performDualCultivation, dissolveDaoCompanion };
 }

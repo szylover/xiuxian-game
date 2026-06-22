@@ -4,21 +4,23 @@
 
 import './NpcCard.css';
 import { REALMS } from '../../../game/data';
-import type { NpcDef, NpcRelationLevel } from '../../../game/types';
+import type { NpcDef, NpcDynamicState, NpcRelationLevel } from '../../../game/types';
 import { NPC_RELATION_CN, NPC_RELATION_COLORS, NPC_RELATION_EMOJI } from '../../shared/constants';
+import { NPC_WORLD_TEXTS } from '../../../data/texts';
 
 interface NpcCardProps {
   npc: NpcDef;
   relationLevel: NpcRelationLevel;
   affinity: number;
   met: boolean;
+  dynamicState?: NpcDynamicState;
   hasQuest?: boolean;
   hasTurnIn?: boolean;
   onClick: () => void;
 }
 
-export default function NpcCard({ npc, relationLevel, affinity, met, hasQuest, hasTurnIn, onClick }: NpcCardProps) {
-  const realmName = REALMS[npc.realmIndex]?.name ?? '???';
+export default function NpcCard({ npc, relationLevel, affinity, met, dynamicState, hasQuest, hasTurnIn, onClick }: NpcCardProps) {
+  const realmName = REALMS[dynamicState?.realmIndex ?? npc.realmIndex]?.name ?? '???';
   const relColor = NPC_RELATION_COLORS[relationLevel];
   const relEmoji = NPC_RELATION_EMOJI[relationLevel];
   const relLabel = NPC_RELATION_CN[relationLevel];
@@ -34,7 +36,7 @@ export default function NpcCard({ npc, relationLevel, affinity, met, hasQuest, h
         <div className="npc-card-name">
           {npc.name}{hasTurnIn && <span className="npc-quest-marker">❓</span>}{hasQuest && <span className="npc-quest-marker">📜</span>}
         </div>
-        <div className="npc-card-realm">{realmName}期</div>
+        <div className="npc-card-realm">{NPC_WORLD_TEXTS.panel.cardRealmStatus(realmName, dynamicState?.alive === false ? NPC_WORLD_TEXTS.panel.fallen : NPC_WORLD_TEXTS.status[dynamicState?.status ?? 'normal'])}</div>
       </div>
       <div className="npc-card-relation">
         {met ? (
@@ -49,4 +51,3 @@ export default function NpcCard({ npc, relationLevel, affinity, met, hasQuest, h
     </div>
   );
 }
-

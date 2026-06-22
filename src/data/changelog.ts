@@ -12,6 +12,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.22.0',
+    date: '2026-06-22',
+    title: 'NPC 世界模拟与道侣双修',
+    items: [
+      '新增 NPC 世界模拟，修士会随时间修炼突破、迁徙、变更状态、结缘或陨落，并在 NPC 面板展示传闻',
+      '新增道侣双修系统，可与知己 NPC 结为道侣，执行双修获得修为、羁绊与限时加成',
+      'NPC 动态状态、世界事件与道侣进度均随存档持久化，并接入修炼效率、属性加成与 Debug 辅助',
+    ],
+  },
+  {
     version: '1.21.0',
     date: '2026-06-22',
     title: '门派与宗门管理',

@@ -26,13 +26,14 @@ import RankingPanel from '../panels/RankingPanel';
 import TalentPanel from '../panels/TalentPanel';
 import EnlightenmentPanel from '../panels/EnlightenmentPanel';
 import SectPanel from '../panels/SectPanel';
+import CompanionPanel from '../panels/CompanionPanel';
 import { UI_LABELS } from '../../data/texts/ui-labels';
 
 // 'status' panel is rendered by LeftPanel, so excluded from this config
 const PANEL_WIDTHS: Partial<Record<PanelKey, number>> = {
   inventory: 380, shop: 380, technique: 400, divine: 420,
   crafting: 380, equipment: 380, achievement: 420, map: 420, npc: 380,
-  quest: 400, bounty: 420, secretRealm: 440, chronicle: 420, ranking: 520, talent: 560, enlightenment: 500, sect: 520,
+  quest: 400, companion: 420, bounty: 420, secretRealm: 440, chronicle: 420, ranking: 520, talent: 560, enlightenment: 500, sect: 520,
 };
 
 interface RightPanelProps {
@@ -68,6 +69,9 @@ interface RightPanelProps {
   onTravel: (regionId: string) => void;
   onMeetNpc: (npcId: string) => void;
   onGiveGift: (npcId: string, itemId: string) => void;
+  onFormDaoCompanion: (npcId: string) => void;
+  onPerformDualCultivation: () => void;
+  onDissolveDaoCompanion: () => void;
   onAcceptQuest: (questId: string) => void;
   onAbandonQuest: (questId: string) => void;
   onDeliverQuestItem: (questId: string, objectiveIndex: number) => void;
@@ -98,7 +102,7 @@ export default function RightPanel({
   onJoinSect, onClaimSectStipend, onAdvanceSectRank, onCompleteSectMission, onBuySectStoreItem,
   onFoundSectManagement, onRecruitSectMember, onCollectSectYield, onUpgradeSectFacility, onAssignSectMemberTask,
   onTravel,
-  onMeetNpc, onGiveGift,
+  onMeetNpc, onGiveGift, onFormDaoCompanion, onPerformDualCultivation, onDissolveDaoCompanion,
   onAcceptQuest, onAbandonQuest, onDeliverQuestItem, onTrackQuest,
   onAcceptBounty, onClaimBounty, onRefreshBounties,
   onStartRealm, onAdvanceRealm, onFinishRealm,
@@ -130,6 +134,7 @@ export default function RightPanel({
           {activePanel === 'achievement' && <AchievementPanel player={player} />}
           {activePanel === 'map' && <MapPanel player={player} onTravel={onTravel} />}
           {activePanel === 'npc' && <NpcPanel player={player} onMeetNpc={onMeetNpc} onGiveGift={onGiveGift} onAcceptQuest={onAcceptQuest} onTurnInQuest={onTurnInQuest} onStartDialogue={onStartDialogue} onDialogueSelectChoice={onDialogueSelectChoice} onDialogueAdvance={onDialogueAdvance} />}
+          {activePanel === 'companion' && <CompanionPanel player={player} onFormDaoCompanion={onFormDaoCompanion} onPerformDualCultivation={onPerformDualCultivation} onDissolveDaoCompanion={onDissolveDaoCompanion} />}
           {activePanel === 'quest' && <QuestPanel player={player} onAcceptQuest={onAcceptQuest} onAbandonQuest={onAbandonQuest} onDeliverQuestItem={onDeliverQuestItem} onTrackQuest={onTrackQuest} />}
           {activePanel === 'bounty' && <BountyPanel player={player} onAcceptBounty={onAcceptBounty} onClaimBounty={onClaimBounty} onRefreshBounties={onRefreshBounties} />}
           {activePanel === 'secretRealm' && <SecretRealmPanel player={player} onStartRealm={onStartRealm} onAdvanceRealm={onAdvanceRealm} onFinishRealm={onFinishRealm} />}

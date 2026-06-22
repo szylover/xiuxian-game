@@ -148,6 +148,9 @@ export default function App() {
             onTravel={engine.travel}
             onMeetNpc={engine.meetNpc}
             onGiveGift={engine.giveGift}
+            onFormDaoCompanion={engine.formDaoCompanion}
+            onPerformDualCultivation={engine.performDualCultivation}
+            onDissolveDaoCompanion={engine.dissolveDaoCompanion}
             onAcceptQuest={engine.acceptQuest}
             onAbandonQuest={engine.abandonQuest}
             onDeliverQuestItem={engine.deliverQuestItem}

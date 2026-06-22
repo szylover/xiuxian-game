@@ -1,7 +1,7 @@
 import type { Player } from '../../game/player';
 import { recalcStats } from '../../game/player';
 import { getAllNpcDefs } from '../../game/registry';
-import { getNpcState, calcRelationLevel } from '../../game/npc';
+import { getNpcState, calcRelationLevel, tickNpcWorld } from '../../game/npc';
 import { getDialogueState, resetDialogueState } from '../../game/dialogue';
 import type { NpcSystemState, NpcRelation } from '../../game/types';
 import { NPC_RELATION_CN } from '../shared/constants';
@@ -63,7 +63,13 @@ export default function DebugNpcTab({ player, onUpdate }: Props) {
   const resetAll = () => {
     onUpdate(prev => {
       if (!prev) return prev;
-      const newState: NpcSystemState = { relations: {}, discoveredNpcs: [], lastGiftAge: {} };
+      const newState: NpcSystemState = {
+        relations: {},
+        discoveredNpcs: [],
+        lastGiftAge: {},
+        world: { lastTickAge: 0, dynamic: {}, events: [] },
+        dualCultivation: { companionNpcId: null, bondedAtAge: null, lastDualCultivationAge: null, bondLevel: 0, totalSessions: 0, activeBuffUntilAge: null },
+      };
       return { ...prev, systems: { ...prev.systems, npc: newState } };
     });
   };
@@ -97,6 +103,15 @@ export default function DebugNpcTab({ player, onUpdate }: Props) {
         <button className="btn debug-btn" onClick={() => setAllAffinity(90)}>❤️ 全部设为知己</button>
         <button className="btn debug-btn" onClick={() => setAllAffinity(0)}>🤍 全部设为陌生</button>
         <button className="btn debug-btn" onClick={() => setAllAffinity(-60)}>💢 全部设为敌对</button>
+        <button className="btn debug-btn" onClick={() => {
+          onUpdate(prev => prev ? tickNpcWorld({ ...prev, age: prev.age + 12 }).player : prev);
+        }}>📰 推演一年</button>
+      </div>
+
+      <div className="debug-npc-card">
+        <span>世界事件：{npcState.world.events.length} 条</span>
+        <span>当前道侣：{npcState.dualCultivation.companionNpcId ?? '无'}</span>
+        <span>羁绊：{npcState.dualCultivation.bondLevel}</span>
       </div>
 
       <div className="debug-npc-list">
