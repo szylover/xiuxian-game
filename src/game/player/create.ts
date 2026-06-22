@@ -6,6 +6,7 @@ import { REALMS } from '../data';
 import { rollSpiritRoots } from '../spirit-root';
 import type { PlayerSpiritRoots } from '../spirit-root';
 import type { Player, Aptitudes } from './types';
+import { rollDestinyId, setDestinyTalentState } from '../destiny';
 
 /** 建角色时预先随机好的核心属性（可用于UI展示+重掷） */
 export interface PreviewRoll {
@@ -117,6 +118,7 @@ export function rollAptitudesWithSpiritRoots(spiritRoots: PlayerSpiritRoots): Ap
 export function createPlayer(options: CreatePlayerOptions): Player {
   const { name, gender, appearance } = options;
   const realm = REALMS[0];
+  const destinyId = rollDestinyId();
 
   // 决定灵根（优先使用预览中的值，兼容旧 spiritRoots 字段）
   const spiritRoots = options.preview?.spiritRoots ?? options.spiritRoots ?? rollSpiritRoots();
@@ -124,7 +126,7 @@ export function createPlayer(options: CreatePlayerOptions): Player {
   // 资质优先使用预览值，否则重新生成（含灵根加成）
   const aptitudes = options.preview?.aptitudes ?? rollAptitudesWithSpiritRoots(spiritRoots);
 
-  return {
+  const player: Player = {
     name: name || '无名散修',
     avatar: `${gender}-${appearance}`,
     gender,
@@ -148,6 +150,7 @@ export function createPlayer(options: CreatePlayerOptions): Player {
     gold: 0, inventory: [], inventoryCapacity: 20,
     equipped: { weapon: null, helmet: null, armor: null, boots: null, accessory1: null, accessory2: null },
     techniques: [], activeTechniqueId: null,
+    destinyId, talentIds: [],
     items: {}, passives: {}, systems: {},
     tracking: { killCount: 0, bossKillCount: 0, consecutiveRests: 0, consecutiveCultivates: 0, hasBeenBelow10Hp: false, defeatedHigherRealm: false, lowMoodStreak: 0, consecutiveBreakthroughFails: 0 },
     gameYear: 1, gameMonth: 1,
@@ -157,5 +160,7 @@ export function createPlayer(options: CreatePlayerOptions): Player {
     // T0074 DLC 列表
     enabledDLCs: options.enabledDLCs ?? ['core'],
   };
+
+  return setDestinyTalentState(player, { talentPoints: 0, unlockedNodeIds: [], acquiredTalentIds: [] });
 }
 

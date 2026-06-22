@@ -30,7 +30,8 @@
 | [T0004](https://github.com/szylover/xiuxian-game/issues/60) | 境界突破 v1 | T0002 | — | ✅ |
 | [T0005](https://github.com/szylover/xiuxian-game/issues/61) | 寿命系统 | T0001 | — | ✅ |
 | [T0006](https://github.com/szylover/xiuxian-game/issues/62) | 状态面板 v2 | T0001 | — | ✅ |
-| [T0047](https://github.com/szylover/xiuxian-game/issues/110) | 命格天赋系统 | T0001 | [spec](specs/110-destiny-talent.md) | 📐 |
+| [T0047](https://github.com/szylover/xiuxian-game/issues/110) | 命格天赋系统 | T0001 | [spec](specs/110-destiny-talent.md) | ✅ |
+| [#215](https://github.com/szylover/xiuxian-game/issues/215) | 天赋树 | T0047 | — | ✅ |
 | [T0056](https://github.com/szylover/xiuxian-game/issues/87) | 初始随机属性系统 | T0001 | — | ✅ |
 | [T0077](https://github.com/szylover/xiuxian-game/issues/198) | 正邪系统（善恶阵营 karma） | T0001 | [spec](specs/198-karma-alignment.md) | 📐 |
 | [T0072](https://github.com/szylover/xiuxian-game/issues/183) | 程序化妖兽变体系统（境界缩放+属性变异） | T0003 | [spec](specs/T0072-procedural-monsters.md) | ✅ |

@@ -27,6 +27,7 @@ import { getDeathSystemState } from '../death';
 import { recalcStats } from '../player';
 import { CORE_ACHIEVEMENTS } from '../achievement/data';
 import { CORE_RANKING_DIMENSIONS } from '../ranking';
+import { CORE_DESTINIES, CORE_TALENTS, CORE_TALENT_TREE_NODES } from '../destiny';
 
 // ── 核心死亡触发条件 ──
 
@@ -333,6 +334,9 @@ export async function registerCoreEvents(): Promise<void> {
     mutations: loadMutationDefsFromJson(coreMutationsJson as unknown as MutationDef[]),
     techniqueTraits: coreTechniqueTraitsJson as unknown as TechniqueTraitDef[],
     rankingDimensions: CORE_RANKING_DIMENSIONS,
+    destinies: CORE_DESTINIES,
+    talents: CORE_TALENTS,
+    talentTreeNodes: CORE_TALENT_TREE_NODES,
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
 }

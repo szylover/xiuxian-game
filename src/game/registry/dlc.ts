@@ -14,6 +14,7 @@ import {
   equipTemplateRegistry, affixDefRegistry,
   monsterTemplateRegistry, mutationDefRegistry,
   techniqueTraitRegistry, ascensionRegistry, rankingDimensionRegistry,
+  destinyRegistry, talentRegistry, talentTreeNodeRegistry,
 } from './stores';
 
 export function registerDLC(pack: DLCPack): void {
@@ -54,6 +55,9 @@ export function registerDLC(pack: DLCPack): void {
   if (pack.techniqueTraits) for (const tt of pack.techniqueTraits) techniqueTraitRegistry.set(tt.id, tt);
   if (pack.ascensions) for (const asc of pack.ascensions) ascensionRegistry.set(asc.id, asc);
   if (pack.rankingDimensions) for (const rd of pack.rankingDimensions) rankingDimensionRegistry.set(rd.id, rd);
+  if (pack.destinies) for (const d of pack.destinies) destinyRegistry.set(d.id, d);
+  if (pack.talents) for (const t of pack.talents) talentRegistry.set(t.id, t);
+  if (pack.talentTreeNodes) for (const n of pack.talentTreeNodes) talentTreeNodeRegistry.set(n.id, n);
 }
 
 export function unregisterDLC(packId: string): void {
@@ -91,6 +95,9 @@ export function unregisterDLC(packId: string): void {
   if (pack.techniqueTraits) for (const tt of pack.techniqueTraits) techniqueTraitRegistry.delete(tt.id);
   if (pack.ascensions) for (const asc of pack.ascensions) ascensionRegistry.delete(asc.id);
   if (pack.rankingDimensions) for (const rd of pack.rankingDimensions) rankingDimensionRegistry.delete(rd.id);
+  if (pack.destinies) for (const d of pack.destinies) destinyRegistry.delete(d.id);
+  if (pack.talents) for (const t of pack.talents) talentRegistry.delete(t.id);
+  if (pack.talentTreeNodes) for (const n of pack.talentTreeNodes) talentTreeNodeRegistry.delete(n.id);
   dlcRegistry.delete(packId);
 }
 

@@ -20,6 +20,7 @@ import { useBodyCultivationActions } from './useBodyCultivationActions';
 import { useNpcActions } from './useNpcActions';
 import { useQuestActions } from './useQuestActions';
 import { useDialogueActions } from './useDialogueActions';
+import { useTalentTreeActions } from './useTalentTreeActions';
 
 export type { SystemActionDeps, ChronicleHooks } from './types';
 
@@ -56,6 +57,7 @@ export function useSystemActions(deps: SystemActionDeps) {
   const npcActions = useNpcActions(ctx);
   const questActions = useQuestActions(ctx);
   const dialogueActions = useDialogueActions(ctx);
+  const talentTreeActions = useTalentTreeActions(ctx);
 
   return {
     ...inventoryActions,
@@ -71,5 +73,6 @@ export function useSystemActions(deps: SystemActionDeps) {
     ...npcActions,
     ...questActions,
     ...dialogueActions,
+    ...talentTreeActions,
   };
 }

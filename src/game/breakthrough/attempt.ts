@@ -10,6 +10,8 @@ import { removeItem } from '../inventory';
 import { getBreakthroughStatus, getBreakthroughState, setBreakthroughState } from './status';
 import { checkBottleneck, activateBottleneck, ensureBottleneckState } from '../bottleneck';
 import { BREAKTHROUGH_TEXTS } from '../../data/texts/breakthrough';
+import { grantTalentPoints, getBreakthroughTalentPointGain } from '../destiny';
+import { DESTINY_TEXTS } from '../../data/texts';
 
 export interface BreakthroughResult {
   success: boolean;
@@ -67,6 +69,7 @@ export function attemptBreakthrough(player: Player): BreakthroughResult {
     p.realmIndex += 1;
     const newRealm = REALMS[p.realmIndex];
     p.lifespan += newRealm.lifespanBonus;
+    p = grantTalentPoints(p, getBreakthroughTalentPointGain(p.realmIndex));
     p = recalcStats(p);
     p.hp = p.maxHp; p.mp = p.maxMp; p.stamina = p.maxStamina;
     p.mood = Math.min(100, p.mood + 20);
@@ -80,6 +83,7 @@ export function attemptBreakthrough(player: Player): BreakthroughResult {
 
     logs.push(BREAKTHROUGH_TEXTS.success(newRealm.name));
     logs.push(BREAKTHROUGH_TEXTS.successBonus(newRealm.lifespanBonus));
+    logs.push(DESTINY_TEXTS.logs.talentPointGained(getBreakthroughTalentPointGain(p.realmIndex)));
     return { success: true, player: p, logs, triggerTribulation: false };
   }
 

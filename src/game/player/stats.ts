@@ -10,6 +10,8 @@ import { getBodyRealmBonus } from '../body-cultivation';
 import type { EquipStatBonus } from '../registry';
 import type { Player, Aptitudes, SpiritRootGrade, PlayerSpiritRoots } from './types';
 import type { SpiritRootCombo } from '../spirit-root';
+import { getDestinyTalentEffects, ensureDestinyTalentState } from '../destiny';
+import type { DestinyTalentStatKey } from '../types';
 
 // ── 灵根品级评定 ──
 
@@ -114,6 +116,8 @@ export function recalcStats(player: Player): Player {
   p.maxPhysique = bodyBonus.maxPhysique + (passiveBonus.physique ?? 0);
   p.physiqueDmgReduce = Math.min(50, bodyBonus.physiqueDmgReduce + (passiveBonus.physiqueDmgReduce ?? 0));
 
+  applyDestinyTalentStatEffects(p);
+
   p.hp = Math.min(p.hp, p.maxHp);
   p.mp = Math.min(p.mp, p.maxMp);
   p.stamina = Math.min(p.stamina, p.maxStamina);
@@ -123,6 +127,22 @@ export function recalcStats(player: Player): Player {
 }
 
 // ── 境界查询 ──
+
+function applyDestinyTalentStatEffects(p: Player): void {
+  const effect = getDestinyTalentEffects(p);
+  for (const [key, value] of Object.entries(effect.statBonuses ?? {}) as [DestinyTalentStatKey, number][]) {
+    applyStatDelta(p, key, value);
+  }
+  for (const [key, value] of Object.entries(effect.statMultipliers ?? {}) as [DestinyTalentStatKey, number][]) {
+    const current = (p as unknown as Record<string, number>)[key] ?? 0;
+    applyStatDelta(p, key, Math.round(current * value));
+  }
+}
+
+function applyStatDelta(p: Player, key: DestinyTalentStatKey, value: number): void {
+  const record = p as unknown as Record<string, number>;
+  record[key] = (record[key] ?? 0) + value;
+}
 
 export function getRealmInfo(player: Player) { return REALMS[player.realmIndex] || REALMS[0]; }
 export function getNextRealm(player: Player) {

@@ -23,6 +23,7 @@ export const UI_LABELS = {
     shop:        { title: '商店', icon: '🏪' },
     technique:   { title: '功法', icon: '📖' },
     divine:      { title: '神通', icon: '✨' },
+    talent:     { title: '命格天赋', icon: '🌌' },
     crafting:    { title: '炼制', icon: '🔥' },
     equipment:   { title: '装备', icon: '⚔️' },
     achievement: { title: '成就', icon: '🏆' },

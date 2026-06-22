@@ -12,6 +12,16 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '1.18.0',
+    date: '2026-06-22',
+    title: '命格天赋与天赋树',
+    items: [
+      '新增命格天赋系统，新角色会觉醒先天命格并获得属性、修炼与突破加成',
+      '新增天赋树面板，突破获得天赋点后可按前置与消耗点亮天赋节点',
+      '新增 Debug 辅助，可快速增加天赋点、点亮全部天赋或重置天赋树',
+    ],
+  },
+  {
     version: '1.17.0',
     date: '2026-06-22',
     title: '排行榜与天机榜',

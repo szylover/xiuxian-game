@@ -8,7 +8,7 @@
 // ============================================================
 
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { createPlayer, getSpiritRootDisplay } from '../game/player';
+import { createPlayer, getSpiritRootDisplay, recalcStats } from '../game/player';
 import type { Player } from '../game/player';
 import type { CreatePlayerOptions } from '../game/player';
 import { REALMS, ACTION_COSTS } from '../game/data';
@@ -33,6 +33,9 @@ import { restoreGeneratedEquips } from '../game/procedural';
 import { restoreTechniqueInstances } from '../game/procedural';
 import { useChronicle } from './useChronicle';
 import { refreshRankingState } from '../game/ranking';
+import { ensureDestinyTalentState } from '../game/destiny';
+import { getDestinyDef } from '../game/registry';
+import { DESTINY_TEXTS } from '../data/texts';
 
 // Re-export types so existing imports still work
 export type { CombatModalState, DeathModalState } from './useCombatModal';
@@ -90,6 +93,7 @@ export function useGameEngine(
     const slotIndex = options.slotIndex ?? 0;
     currentSlotRef.current = slotIndex;
     let p = createPlayer({ ...options, enabledDLCs: dlcIds });
+    p = ensureDestinyTalentState(p);
     p = refreshRankingState(p, true);
     const rootDisplay = getSpiritRootDisplay(p.spiritRoots);
     writeSaveSlot(slotIndex, p);
@@ -103,6 +107,8 @@ export function useGameEngine(
     }).join(SEPARATOR) || NONE_TEXT;
     addLog(UI_LABELS.spiritRootDetails(rootList), 'system');
     addLog(UI_LABELS.playerStats(p.luck, p.comprehension, p.charisma), 'system');
+    const destiny = p.destinyId ? getDestinyDef(p.destinyId) : undefined;
+    if (destiny) addLog(DESTINY_TEXTS.logs.destinyAssigned(destiny.name, DESTINY_TEXTS.rarity[destiny.rarity]), 'system');
     // T0068: 开始新轮回
     chronicle.startNewIncarnation(p);
   }, [addLog, chronicle]);
@@ -129,7 +135,8 @@ export function useGameEngine(
       restoreGeneratedEquips(withRegions);
       // T0073: 恢复程序化功法实例到全局查询表
       restoreTechniqueInstances(withRegions);
-      const withRankings = refreshRankingState(withRegions, true);
+      const withDestiny = recalcStats(ensureDestinyTalentState(withRegions));
+      const withRankings = refreshRankingState(withDestiny, true);
       setPlayer(withRankings);
       setGameOver(false);
       setGameOverReason('');
@@ -330,6 +337,7 @@ export function useGameEngine(
     useItem, craft, equip, unequip, buy, sell, smith, breakthrough,
     learnTechnique, practiceTechnique, activateTechnique,
     learnDivineArt, activateDivineArt, deactivateDivineArt,
+    unlockTalentNode,
     travel, bodyBreakthrough, ascend,
     meetNpc, giveGift,
     acceptQuest, abandonQuest, deliverQuestItem, turnInQuest,
@@ -416,6 +424,7 @@ export function useGameEngine(
     learnDivineArt,
     activateDivineArt,
     deactivateDivineArt,
+    unlockTalentNode,
     travel,
     bodyBreakthrough,
     ascend,
@@ -446,3 +455,4 @@ export function useGameEngine(
     debugSetPlayer: setPlayer,
   };
 }
+

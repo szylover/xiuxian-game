@@ -2,7 +2,7 @@
 // registry/queries.ts — 注册表查询 API
 // ============================================================
 
-import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, AffixPosition, EquipSlot, GeneratedEquipInstance, MonsterTemplate, MutationDef, MutationType, TechniqueTraitDef, TechniqueTraitTier, TechniqueInstance, AscensionDef, RankingDimensionDef, RankingBoardKind } from '../types';
+import type { ItemCategory, GameEvent, EventCategory, MonsterDef, ElementType, DivineArtDef, BodyRealmDef, SpiritRootBodyBonus, RealmDef, RegionDef, BottleneckDef, NpcDef, NpcRole, NpcDisposition, QuestChainDef, QuestChainCategory, DialogueChainDef, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, AffixPosition, EquipSlot, GeneratedEquipInstance, MonsterTemplate, MutationDef, MutationType, TechniqueTraitDef, TechniqueTraitTier, TechniqueInstance, AscensionDef, RankingDimensionDef, RankingBoardKind, DestinyDef, TalentDef, TalentTreeNodeDef } from '../types';
 import type { SpiritRootType } from '../spirit-root';
 import type { AchievementDef } from '../achievement/types';
 import {
@@ -17,6 +17,7 @@ import {
   monsterTemplateRegistry, mutationDefRegistry,
   techniqueTraitRegistry, techniqueInstanceRegistry,
   ascensionRegistry, rankingDimensionRegistry,
+  destinyRegistry, talentRegistry, talentTreeNodeRegistry,
 } from './stores';
 
 // ── 事件 ──
@@ -200,6 +201,15 @@ export function getAllRankingDimensionDefs(): RankingDimensionDef[] {
 export function getRankingDimensionsByBoard(board: RankingBoardKind): RankingDimensionDef[] {
   return getAllRankingDimensionDefs().filter(def => def.board === board);
 }
+
+// ── 命格天赋（#110 / #215）──
+
+export function getDestinyDef(id: string): DestinyDef | undefined { return destinyRegistry.get(id); }
+export function getAllDestinyDefs(): DestinyDef[] { return Array.from(destinyRegistry.values()); }
+export function getTalentDef(id: string): TalentDef | undefined { return talentRegistry.get(id); }
+export function getAllTalentDefs(): TalentDef[] { return Array.from(talentRegistry.values()); }
+export function getTalentTreeNodeDef(id: string): TalentTreeNodeDef | undefined { return talentTreeNodeRegistry.get(id); }
+export function getAllTalentTreeNodeDefs(): TalentTreeNodeDef[] { return Array.from(talentTreeNodeRegistry.values()); }
 
 // ── 任务链（T0057）──
 

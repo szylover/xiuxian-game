@@ -32,6 +32,7 @@ export type {
   TechniqueQualityConfig, ProceduralTechniqueState,
   RealmTier, AscensionDef, AscensionItemCost, AscensionCondition, AscensionState,
   RankingBoardKind, RankingScoreKey, RankingDimensionDef, RankingEntry, RankingSnapshot, RankingSystemState,
+  DestinyRarity, DestinyTalentStatKey, DestinyTalentEffect, DestinyDef, TalentDef, TalentTreeNodeDef, DestinyTalentState, UnlockTalentNodeResult,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
@@ -73,6 +74,7 @@ export {
   getTechniqueInstance, registerTechniqueInstance, removeTechniqueInstance, getAllTechniqueInstances, clearAllTechniqueInstances,
   getAscensionDef, getAllAscensionDefs, getAscensionForRealm,
   getRankingDimensionDef, getAllRankingDimensionDefs, getRankingDimensionsByBoard,
+  getDestinyDef, getAllDestinyDefs, getTalentDef, getAllTalentDefs, getTalentTreeNodeDef, getAllTalentTreeNodeDefs,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

@@ -18,3 +18,4 @@ export * from './dialogue';
 export * from './procedural';
 export * from './dlc';
 export * from './ranking';
+export * from './destiny';

@@ -8,6 +8,8 @@ import { REALMS } from '../../game/data';
 import { getAllBodyRealmDefs, getAllRegions, getMaxRealmIndex, getAscensionForRealm } from '../../game/registry';
 import { getMapState } from '../../game/map';
 import { getAscensionState } from '../../game/ascension';
+import { getDestinyTalentState } from '../../game/destiny';
+import { DESTINY_TEXTS } from '../../data/texts';
 import './DebugStatsTab.css';
 
 // 可编辑数值行
@@ -146,6 +148,21 @@ export default function DebugStatsTab({ player, onSetStat, onFullRestore, onDebu
           </div>
         );
       })()}
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{DESTINY_TEXTS.debug.title}</span>
+        <div className="debug-tracker-grid">
+          {(() => {
+            const state = getDestinyTalentState(player);
+            return <div className="debug-tracker-dim">{DESTINY_TEXTS.debug.summary(state.talentPoints, state.unlockedNodeIds.length)}</div>;
+          })()}
+        </div>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__destinyAddPoint', 1)}>{DESTINY_TEXTS.debug.addPoint}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__destinyUnlockAll', 1)}>{DESTINY_TEXTS.debug.unlockAll}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__destinyReset', 1)}>{DESTINY_TEXTS.debug.reset}</button>
+        </div>
+      </div>
 
       {/* ── 战斗追踪 ── */}
       <div className="debug-tracker-box">

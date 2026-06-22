@@ -15,6 +15,7 @@ import type { QuestChainDef } from './quest';
 import type { DialogueChainDef, IdleChatPool } from './dialogue';
 import type { AscensionDef } from './ascension';
 import type { RankingDimensionDef } from './ranking';
+import type { DestinyDef, TalentDef, TalentTreeNodeDef } from './destiny';
 import type {
   EventTemplate,
   VariablePool,
@@ -67,4 +68,7 @@ export interface DLCPack {
   techniqueTraits?: TechniqueTraitDef[];     // T0073 功法词条定义
   ascensions?: AscensionDef[];               // T0033 飞升定义
   rankingDimensions?: RankingDimensionDef[]; // #102/#118 排名维度定义
+  destinies?: DestinyDef[];                      // #110 命格定义
+  talents?: TalentDef[];                          // #110 天赋定义
+  talentTreeNodes?: TalentTreeNodeDef[];          // #215 天赋树节点定义
 }

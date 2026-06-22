@@ -21,13 +21,14 @@ import NpcPanel from '../panels/NpcPanel';
 import QuestPanel from '../panels/QuestPanel';
 import ChroniclePanel from '../panels/ChroniclePanel';
 import RankingPanel from '../panels/RankingPanel';
+import TalentPanel from '../panels/TalentPanel';
 import { UI_LABELS } from '../../data/texts/ui-labels';
 
 // 'status' panel is rendered by LeftPanel, so excluded from this config
 const PANEL_WIDTHS: Partial<Record<PanelKey, number>> = {
   inventory: 380, shop: 380, technique: 400, divine: 420,
   crafting: 380, equipment: 380, achievement: 420, map: 420, npc: 380,
-  quest: 400, chronicle: 420, ranking: 520,
+  quest: 400, chronicle: 420, ranking: 520, talent: 560,
 };
 
 interface RightPanelProps {
@@ -47,6 +48,7 @@ interface RightPanelProps {
   onLearnDivineArt: (artId: string) => void;
   onActivateDivineArt: (artId: string) => void;
   onDeactivateDivineArt: () => void;
+  onUnlockTalentNode: (nodeId: string) => void;
   onTravel: (regionId: string) => void;
   onMeetNpc: (npcId: string) => void;
   onGiveGift: (npcId: string, itemId: string) => void;
@@ -69,7 +71,7 @@ export default function RightPanel({
   player, activePanel, onSelectPanel,
   onUseItem, onCraft, onSmith, onEquip, onUnequip, onBuy, onSell,
   onLearnTechnique, onPracticeTechnique, onActivateTechnique,
-  onLearnDivineArt, onActivateDivineArt, onDeactivateDivineArt,
+  onLearnDivineArt, onActivateDivineArt, onDeactivateDivineArt, onUnlockTalentNode,
   onTravel,
   onMeetNpc, onGiveGift,
   onAcceptQuest, onAbandonQuest, onDeliverQuestItem, onTrackQuest,
@@ -104,6 +106,7 @@ export default function RightPanel({
           {activePanel === 'quest' && <QuestPanel player={player} onAcceptQuest={onAcceptQuest} onAbandonQuest={onAbandonQuest} onDeliverQuestItem={onDeliverQuestItem} onTrackQuest={onTrackQuest} />}
           {activePanel === 'chronicle' && <ChroniclePanel chronicle={chronicle} />}
           {activePanel === 'ranking' && <RankingPanel player={player} />}
+          {activePanel === 'talent' && <TalentPanel player={player} onUnlockNode={onUnlockTalentNode} />}
         </FloatingPanel>
       )}
     </>

@@ -85,6 +85,8 @@ export interface Player {
   equipped: EquippedSlots;
   techniques: TechniqueSlot[];             // 已学功法列表
   activeTechniqueId: string | null;        // 当前激活功法 ID
+  destinyId: string | null;                    // #110 命格 ID
+  talentIds: string[];                         // #110 已获得天赋 ID
   items: Record<string, unknown>;
   passives: Record<string, unknown>;
   systems: Record<string, unknown>;

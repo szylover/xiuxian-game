@@ -132,6 +132,7 @@ export default function App() {
             onLearnDivineArt={engine.learnDivineArt}
             onActivateDivineArt={engine.activateDivineArt}
             onDeactivateDivineArt={engine.deactivateDivineArt}
+            onUnlockTalentNode={engine.unlockTalentNode}
             onTravel={engine.travel}
             onMeetNpc={engine.meetNpc}
             onGiveGift={engine.giveGift}

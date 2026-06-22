@@ -13,6 +13,7 @@ import { getDivineArtsState, ELEMENT_EMOJI, ELEMENT_CN } from '../../game/divine
 import type { DivineArtsSystemState } from '../../game/divine-arts';
 import { getAchievementState, checkAchievements, ONCE_BONUS_KEYS } from '../../game/achievement/engine';
 import { activateBottleneck, unlockBottleneck, ensureBottleneckState } from '../../game/bottleneck';
+import { getDestinyTalentState, setDestinyTalentState, getSortedTalentTreeNodes } from '../../game/destiny';
 import type { BottleneckState } from '../../game/types';
 
 import { CollapsiblePanel, TabBar } from '../shared';

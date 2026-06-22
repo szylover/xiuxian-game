@@ -13,7 +13,7 @@ import type {
   MonsterTemplate, MutationDef,
   TechniqueTraitDef, TechniqueInstance,
   AscensionDef,
-  RankingDimensionDef,
+  RankingDimensionDef, DestinyDef, TalentDef, TalentTreeNodeDef,
 } from '../types';
 import type { AchievementDef } from '../achievement/types';
 
@@ -54,6 +54,9 @@ export const techniqueTraitRegistry = new Map<string, TechniqueTraitDef>();
 export const techniqueInstanceRegistry = new Map<string, TechniqueInstance>();
 export const ascensionRegistry = new Map<string, AscensionDef>();
 export const rankingDimensionRegistry = new Map<string, RankingDimensionDef>();
+export const destinyRegistry = new Map<string, DestinyDef>();
+export const talentRegistry = new Map<string, TalentDef>();
+export const talentTreeNodeRegistry = new Map<string, TalentTreeNodeDef>();
 
 /** 清空所有注册表（切换 DLC 前调用） */
 export function clearAllRegistries(): void {
@@ -97,4 +100,9 @@ export function clearAllRegistries(): void {
   techniqueInstanceRegistry.clear();
   ascensionRegistry.clear();
   rankingDimensionRegistry.clear();
+  destinyRegistry.clear();
+  talentRegistry.clear();
+  talentTreeNodeRegistry.clear();
 }
+
+

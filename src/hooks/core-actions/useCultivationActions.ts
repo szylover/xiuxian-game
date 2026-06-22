@@ -11,6 +11,7 @@ import type { LogCategory } from '../useGameLog';
 import { COMBAT_TEXTS } from '../../data/texts/combat';
 import { CULTIVATION_TEXTS } from '../../data/texts/cultivation';
 import { playSound } from '../../game/audio';
+import { getDestinyTalentEffects, ensureDestinyTalentState } from '../../game/destiny';
 
 export function useCultivationActions(
   deps: Pick<CoreActionDeps, 'addLog' | 'setPlayer' | 'advanceTime' | 'canAct'>,
@@ -39,7 +40,7 @@ export function useCultivationActions(
     pendingRef.current = { msgs: [], categories: [] };
     setPlayer(prev => {
       if (!prev) return prev;
-      let p: Player = { ...prev };
+      let p: Player = ensureDestinyTalentState({ ...prev });
       const cost = ACTION_COSTS.cultivate;
       p.stamina -= cost.stamina;
 
