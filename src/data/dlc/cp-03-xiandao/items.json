@@ -1,0 +1,321 @@
+[
+  {
+    "id": "cp-03:immortal_dew",
+    "name": "接引仙露",
+    "category": "consumable",
+    "rarity": "rare",
+    "description": "恢复 180 灵力与 30 健康。",
+    "stackable": true,
+    "maxStack": 30,
+    "usable": true,
+    "effects": {
+      "mp": 180,
+      "health": 30
+    },
+    "effectMessage": "🍶 接引仙露化作清光，灵力 +180，健康 +30。",
+    "sellPrice": 260
+  },
+  {
+    "id": "cp-03:golden_cloud_pill",
+    "name": "金霞丹",
+    "category": "consumable",
+    "rarity": "epic",
+    "description": "恢复全部灵力并振奋心神。",
+    "stackable": true,
+    "maxStack": 10,
+    "usable": true,
+    "effects": {
+      "mp": "max",
+      "mood": 20
+    },
+    "effectMessage": "☁️ 金霞丹在丹田散开，灵力尽复，心情 +20。",
+    "sellPrice": 720
+  },
+  {
+    "id": "cp-03:jade_body_pill",
+    "name": "玉骨仙丹",
+    "category": "consumable",
+    "rarity": "rare",
+    "description": "恢复 800 HP 与 20 健康。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": true,
+    "effects": {
+      "hp": 800,
+      "health": 20
+    },
+    "effectMessage": "💊 玉骨仙丹温养仙躯，HP +800，健康 +20。",
+    "sellPrice": 420
+  },
+  {
+    "id": "cp-03:cloud_walk_elixir",
+    "name": "踏云散",
+    "category": "consumable",
+    "rarity": "uncommon",
+    "description": "恢复 80 精力并获得少量修为。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": true,
+    "effects": {
+      "stamina": 80,
+      "exp": 80
+    },
+    "effectMessage": "🌥️ 踏云散令脚下生风，精力 +80，修为 +80。",
+    "sellPrice": 120
+  },
+  {
+    "id": "cp-03:immortal_peach_slice",
+    "name": "蟠桃薄片",
+    "category": "consumable",
+    "rarity": "epic",
+    "description": "延长寿命 50 年，心情 +25。",
+    "stackable": true,
+    "maxStack": 5,
+    "usable": true,
+    "effects": {
+      "lifespan": 600,
+      "mood": 25
+    },
+    "effectMessage": "🍑 蟠桃清香入骨，寿限延长 50 年，心情 +25。",
+    "sellPrice": 1200
+  },
+  {
+    "id": "cp-03:ascension_token",
+    "name": "接引令",
+    "category": "misc",
+    "rarity": "legendary",
+    "description": "刻有接引仙光印记的令牌，是飞升仙界的重要凭证。",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 1600
+  },
+  {
+    "id": "cp-03:immortal_jade",
+    "name": "仙界玉髓",
+    "category": "material",
+    "rarity": "rare",
+    "description": "仙界地脉凝成的温润玉髓。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 180
+  },
+  {
+    "id": "cp-03:cloud_pattern_core",
+    "name": "云纹仙核",
+    "category": "material",
+    "rarity": "rare",
+    "description": "仙兽体内凝成的云纹内核。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": false,
+    "sellPrice": 240
+  },
+  {
+    "id": "cp-03:starlight_sand",
+    "name": "星辉砂",
+    "category": "material",
+    "rarity": "rare",
+    "description": "夜空星辉落入仙河后沉积成砂。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 210
+  },
+  {
+    "id": "cp-03:heaven_scroll",
+    "name": "天律残卷",
+    "category": "misc",
+    "rarity": "epic",
+    "description": "记载仙界天律片段的残卷，可辅助玄仙突破。",
+    "stackable": true,
+    "maxStack": 10,
+    "usable": true,
+    "effects": {
+      "exp": [
+        1200,
+        2600
+      ],
+      "mood": 8
+    },
+    "effectMessage": "📜 参悟天律残卷，修为有所精进。",
+    "sellPrice": 680
+  },
+  {
+    "id": "cp-03:sun_fragment",
+    "name": "日精碎片",
+    "category": "material",
+    "rarity": "epic",
+    "description": "大日金辉凝成的炽热碎晶。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": false,
+    "sellPrice": 800
+  },
+  {
+    "id": "cp-03:moon_palace_thread",
+    "name": "月宫银丝",
+    "category": "material",
+    "rarity": "uncommon",
+    "description": "轻若无物的银丝，常用于仙衣与阵旗。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 90
+  },
+  {
+    "id": "cp-03:celestial_lotus_seed",
+    "name": "仙莲子",
+    "category": "material",
+    "rarity": "uncommon",
+    "description": "仙池莲花结出的莲子，灵气清正。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 85
+  },
+  {
+    "id": "cp-03:crane_feather",
+    "name": "白鹤仙羽",
+    "category": "material",
+    "rarity": "uncommon",
+    "description": "仙鹤落下的羽毛，蕴含轻灵之气。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 78
+  },
+  {
+    "id": "cp-03:thunder_gate_shard",
+    "name": "雷门碎玉",
+    "category": "material",
+    "rarity": "epic",
+    "description": "飞升雷门崩落的玉片，仍有雷意游走。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": false,
+    "sellPrice": 950
+  },
+  {
+    "id": "cp-03:clear_mind_bell",
+    "name": "清心铃",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "轻摇可定住杂念。",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": true,
+    "effects": {
+      "mood": 30,
+      "mentalPower": 80
+    },
+    "effectMessage": "🔔 清心铃声悠远，心情 +30，念力 +80。",
+    "sellPrice": 360
+  },
+  {
+    "id": "cp-03:cloud_market_note",
+    "name": "云市票据",
+    "category": "misc",
+    "rarity": "common",
+    "description": "仙界云市流通的小额票据。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": true,
+    "effects": {
+      "gold": 180
+    },
+    "effectMessage": "🧾 兑开云市票据，获得 180 灵石。",
+    "sellPrice": 160
+  },
+  {
+    "id": "cp-03:immortal_incense",
+    "name": "仙檀香",
+    "category": "consumable",
+    "rarity": "uncommon",
+    "description": "心情 +35，灵力 +60。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": true,
+    "effects": {
+      "mood": 35,
+      "mp": 60
+    },
+    "effectMessage": "🕯️ 仙檀香烟气袅袅，心情 +35，灵力 +60。",
+    "sellPrice": 130
+  },
+  {
+    "id": "cp-03:jade_bridge_map",
+    "name": "玉桥图",
+    "category": "misc",
+    "rarity": "uncommon",
+    "description": "标注仙界玉桥与云路的地图。",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 150
+  },
+  {
+    "id": "cp-03:star_river_water",
+    "name": "星河水",
+    "category": "material",
+    "rarity": "rare",
+    "description": "从星河渡口取来的银蓝河水。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": false,
+    "sellPrice": 260
+  },
+  {
+    "id": "cp-03:immortal_seal_blank",
+    "name": "空白仙箓",
+    "category": "material",
+    "rarity": "uncommon",
+    "description": "尚未落印的仙箓底纸。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 75
+  },
+  {
+    "id": "cp-03:dao_echo_shell",
+    "name": "道音贝",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "贴近耳边可听见细微道音。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": true,
+    "effects": {
+      "exp": [
+        500,
+        1200
+      ],
+      "mentalPower": 60
+    },
+    "effectMessage": "🐚 道音入耳，修为与念力皆有增长。",
+    "sellPrice": 300
+  },
+  {
+    "id": "cp-03:cloud_silk_rope",
+    "name": "缚云索",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "可暂时缚住云兽的仙索。",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 380
+  },
+  {
+    "id": "cp-03:fallen_star_core",
+    "name": "陨星核",
+    "category": "material",
+    "rarity": "legendary",
+    "description": "仙界陨星深处的核心，适合高阶突破。",
+    "stackable": true,
+    "maxStack": 5,
+    "usable": false,
+    "sellPrice": 1800
+  }
+]

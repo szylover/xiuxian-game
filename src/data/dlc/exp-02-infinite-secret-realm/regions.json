@@ -1,0 +1,124 @@
+[
+  {
+    "id": "exp-02:infinite_gate",
+    "name": "无尽秘境门",
+    "emoji": "🌀",
+    "description": "不断折叠重组的秘境入口，门内层数似乎永无止境。",
+    "minRealm": 1,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "mystic",
+      "dangerous"
+    ],
+    "travelCostBase": 22,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.15,
+    "explorationBonus": 0.25,
+    "lootTable": [
+      {
+        "itemId": "exp-02:loop_fragment",
+        "chance": 0.25
+      },
+      {
+        "itemId": "exp-02:floor_key",
+        "chance": 0.08
+      },
+      {
+        "itemId": "exp-02:realm_compass",
+        "chance": 0.04
+      }
+    ]
+  },
+  {
+    "id": "exp-02:mirror_loop_gallery",
+    "name": "镜环长廊",
+    "emoji": "🪞",
+    "description": "镜面互相照映，来路与去路都被折成圆环。",
+    "minRealm": 2,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "mystic",
+      "dangerous"
+    ],
+    "travelCostBase": 30,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.25,
+    "explorationBonus": 0.15,
+    "lootTable": [
+      {
+        "itemId": "exp-02:echo_crystal",
+        "chance": 0.18
+      },
+      {
+        "itemId": "exp-02:layer_map",
+        "chance": 0.06
+      },
+      {
+        "itemId": "exp-02:reset_talisman",
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "id": "exp-02:void_stairwell",
+    "name": "虚空阶井",
+    "emoji": "🪜",
+    "description": "阶梯悬在虚空中，向上向下都通往未知层。",
+    "minRealm": 3,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "mystic",
+      "celestial",
+      "dangerous"
+    ],
+    "travelCostBase": 38,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.35,
+    "explorationBonus": 0.2,
+    "lootTable": [
+      {
+        "itemId": "exp-02:void_pearl",
+        "chance": 0.08
+      },
+      {
+        "itemId": "exp-02:safe_floor_charm",
+        "chance": 0.05
+      },
+      {
+        "itemId": "exp-02:deep_moss",
+        "chance": 0.22
+      }
+    ]
+  },
+  {
+    "id": "exp-02:deep_reset_core",
+    "name": "深层重置核",
+    "emoji": "♾️",
+    "description": "据说所有秘境循环都在此处重置，空间潮汐极不稳定。",
+    "minRealm": 4,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "mystic",
+      "celestial",
+      "dangerous"
+    ],
+    "travelCostBase": 48,
+    "travelTimeMonths": 2,
+    "combatBonus": 0.45,
+    "explorationBonus": 0.3,
+    "lootTable": [
+      {
+        "itemId": "exp-02:infinite_core",
+        "chance": 0.03
+      },
+      {
+        "itemId": "exp-02:floor_lord_scale",
+        "chance": 0.08
+      },
+      {
+        "itemId": "exp-02:void_pearl",
+        "chance": 0.12
+      }
+    ]
+  }
+]

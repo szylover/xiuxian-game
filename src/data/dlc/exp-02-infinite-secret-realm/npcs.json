@@ -1,0 +1,122 @@
+[
+  {
+    "id": "exp-02:npc_realm_cartographer",
+    "name": "层图散人",
+    "title": "秘境绘图者",
+    "emoji": "🗺️",
+    "gender": "male",
+    "description": "终年绘制秘境层图的散人，衣袖里塞满失败版本。",
+    "realmIndex": 3,
+    "hp": 1150,
+    "atk": 82,
+    "def": 62,
+    "speed": 24,
+    "critRate": 8,
+    "critResist": 10,
+    "critDmgMultiplier": 1.4,
+    "disposition": "friendly",
+    "roles": [
+      "wanderer"
+    ],
+    "personality": "mysterious",
+    "charisma": 64,
+    "regionTags": [
+      "mystic"
+    ],
+    "homeRegionId": "exp-02:infinite_gate",
+    "minRealm": 1,
+    "giftPreferences": {
+      "loved": [
+        "exp-02:layer_map",
+        "exp-02:realm_compass"
+      ],
+      "liked": [
+        "exp-02:loop_fragment",
+        "exp-02:echo_crystal"
+      ],
+      "disliked": [
+        "exp-02:treasure_dust"
+      ]
+    }
+  },
+  {
+    "id": "exp-02:npc_floor_guardian",
+    "name": "层门守者",
+    "title": "深层守门人",
+    "emoji": "🚪",
+    "gender": "female",
+    "description": "守在层门前的冷面修士，只承认能带回层门钥的人。",
+    "realmIndex": 4,
+    "hp": 3000,
+    "atk": 190,
+    "def": 150,
+    "speed": 22,
+    "critRate": 10,
+    "critResist": 16,
+    "critDmgMultiplier": 1.6,
+    "disposition": "neutral",
+    "roles": [
+      "guard"
+    ],
+    "personality": "cold",
+    "charisma": 55,
+    "regionTags": [
+      "mystic",
+      "dangerous"
+    ],
+    "homeRegionId": "exp-02:mirror_loop_gallery",
+    "minRealm": 2,
+    "giftPreferences": {
+      "loved": [
+        "exp-02:floor_key",
+        "exp-02:floor_lord_scale"
+      ],
+      "liked": [
+        "exp-02:void_pearl"
+      ],
+      "disliked": [
+        "exp-02:deep_moss"
+      ]
+    }
+  },
+  {
+    "id": "exp-02:npc_loop_merchant",
+    "name": "循环商贾",
+    "title": "重置行商",
+    "emoji": "🧳",
+    "gender": "male",
+    "description": "每次相遇都声称是第一次见面的秘境行商。",
+    "realmIndex": 2,
+    "hp": 680,
+    "atk": 46,
+    "def": 38,
+    "speed": 28,
+    "critRate": 7,
+    "critResist": 7,
+    "critDmgMultiplier": 1.5,
+    "disposition": "neutral",
+    "roles": [
+      "merchant"
+    ],
+    "personality": "cunning",
+    "charisma": 70,
+    "regionTags": [
+      "trade",
+      "mystic"
+    ],
+    "homeRegionId": "exp-02:void_stairwell",
+    "minRealm": 2,
+    "giftPreferences": {
+      "loved": [
+        "exp-02:reset_talisman",
+        "exp-02:safe_floor_charm"
+      ],
+      "liked": [
+        "exp-02:treasure_dust"
+      ],
+      "disliked": [
+        "exp-02:loop_fragment"
+      ]
+    }
+  }
+]

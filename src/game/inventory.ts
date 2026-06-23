@@ -7,6 +7,7 @@ import type { Player, InventorySlot } from './player';
 import { getItemDef } from './registry';
 import type { ItemDef } from './registry';
 import { INVENTORY_TEXTS } from '../data/texts/inventory';
+import { startStudy } from './learning';
 
 // ── 查询 ──
 
@@ -103,6 +104,10 @@ export function useItem(player: Player, itemId: string): UseItemResult {
   const def = getItemDef(itemId);
   if (!def) {
     return { player, success: false, message: INVENTORY_TEXTS.itemNotFound };
+  }
+  if (def.category === 'scroll') {
+    const result = startStudy(player, itemId);
+    return { player: result.player, success: result.player !== player, message: result.message };
   }
   if (!def.usable || !def.effect) {
     return { player, success: false, message: INVENTORY_TEXTS.notUsable(def.name) };

@@ -8,6 +8,7 @@ import type { Player } from '../../../game/player';
 import type { PanelKey } from '../../layout/PanelButtons';
 import SceneHeader from './SceneHeader';
 import SceneNpcs from './SceneNpcs';
+import SceneShop from './SceneShop';
 import ActionPanel from '../ActionPanel';
 
 interface SceneViewProps {
@@ -19,6 +20,9 @@ interface SceneViewProps {
   onBreakthrough: () => void;
   onBodyBreakthrough: () => void;
   onAscend: () => void;
+  onReincarnate: () => void;
+  onAscensionReincarnate: () => void;
+  onPrimordialEndgame: () => void;
   onOpenLog: () => void;
   onTravel: (regionId: string) => void;
   onSelectPanel: (key: PanelKey) => void;
@@ -33,6 +37,8 @@ interface SceneViewProps {
   onDialogueAdvance: (dialogueId: string, currentNodeId: string) => {
     nextNode: import('../../../game/types').DialogueNode | null; logs: string[]; combatTrigger?: string; questTrigger?: string;
   };
+  onBuy: (itemId: string) => void;
+  onSell: (itemId: string) => void;
   gameOver: boolean;
 }
 
@@ -45,6 +51,9 @@ export default function SceneView({
   onBreakthrough,
   onBodyBreakthrough,
   onAscend,
+  onReincarnate,
+  onAscensionReincarnate,
+  onPrimordialEndgame,
   onOpenLog,
   onTravel,
   onSelectPanel,
@@ -55,6 +64,8 @@ export default function SceneView({
   onStartDialogue,
   onDialogueSelectChoice,
   onDialogueAdvance,
+  onBuy,
+  onSell,
   gameOver,
 }: SceneViewProps) {
   return (
@@ -75,6 +86,8 @@ export default function SceneView({
         onOpenContacts={onSelectPanel}
       />
 
+      <SceneShop player={player} onBuy={onBuy} onSell={onSell} />
+
       {/* 操作按钮区 */}
       <ActionPanel
         player={player}
@@ -85,9 +98,13 @@ export default function SceneView({
         onBreakthrough={onBreakthrough}
         onBodyBreakthrough={onBodyBreakthrough}
         onAscend={onAscend}
+        onReincarnate={onReincarnate}
+        onAscensionReincarnate={onAscensionReincarnate}
+        onPrimordialEndgame={onPrimordialEndgame}
         onOpenMap={() => onSelectPanel('map')}
         gameOver={gameOver}
       />
     </div>
   );
 }
+

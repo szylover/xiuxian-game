@@ -22,6 +22,10 @@ export interface JsonItem {
   effects?: Record<string, EffectValue>;
   effectMessage?: string;
   sellPrice: number;
+  scrollType?: 'technique' | 'divineArt' | 'recipe' | 'smithingRecipe';
+  scrollTargetId?: string;
+  scrollStudyMonths?: number;
+  scrollMinRealm?: number;
 }
 
 // ── 效果值解析（与 event-loader 相同逻辑）──
@@ -89,6 +93,10 @@ function jsonToItemDef(json: JsonItem): ItemDef {
     effect: json.effects ? buildEffect(json.effects) : undefined,
     effectMessage: json.effectMessage,
     sellPrice: json.sellPrice,
+    scrollType: json.scrollType,
+    scrollTargetId: json.scrollTargetId,
+    scrollStudyMonths: json.scrollStudyMonths,
+    scrollMinRealm: json.scrollMinRealm,
   };
 }
 

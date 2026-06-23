@@ -15,6 +15,8 @@ import { CapacityBar, FloatingPanel, STAT_COLORS } from '../shared';
 import StatusPanel from '../panels/StatusPanel';
 import type { PanelKey } from './PanelButtons';
 import { UI_LABELS } from '../../data/texts/ui-labels';
+import { getAlignment, getKarmaTitle } from '../../game/karma';
+import { KARMA_TEXTS, ALIGNMENT_CN } from '../../data/texts';
 
 interface LeftPanelProps {
   player: Player;
@@ -39,6 +41,9 @@ export default function LeftPanel({ player, activePanel, onSelectPanel }: LeftPa
   const activeBns = getActiveBottlenecks(pWithBn);
 
   const currentRegion = getCurrentRegion(player);
+  const karma = player.karma ?? 0;
+  const karmaPct = `${((karma + 100) / 200) * 100}%`;
+  const alignment = getAlignment(karma);
 
   return (
     <>
@@ -59,6 +64,19 @@ export default function LeftPanel({ player, activePanel, onSelectPanel }: LeftPa
             📍 {currentRegion.emoji} {currentRegion.name}
           </div>
         )}
+        <div className="left-karma">
+          <div className="left-karma-title">
+            {KARMA_TEXTS.panel.alignment(getKarmaTitle(karma), ALIGNMENT_CN[alignment])}
+          </div>
+          <div className="left-karma-bar" title={KARMA_TEXTS.panel.value(karma)}>
+            <div className="left-karma-marker" style={{ '--karma-pos': karmaPct } as React.CSSProperties} />
+          </div>
+          <div className="left-karma-scale">
+            <span>{ALIGNMENT_CN.evil}</span>
+            <span>{KARMA_TEXTS.panel.value(karma)}</span>
+            <span>{ALIGNMENT_CN.righteous}</span>
+          </div>
+        </div>
       </div>
 
       {/* 核心属性 */}

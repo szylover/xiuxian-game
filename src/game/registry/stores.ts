@@ -12,7 +12,9 @@ import type {
   EquipBaseTemplate, AffixDef, GeneratedEquipInstance,
   MonsterTemplate, MutationDef,
   TechniqueTraitDef, TechniqueInstance,
-  AscensionDef,
+  AscensionDef, ReincarnationEffectDef, PrimordialEndgameDef,
+  RankingDimensionDef, DestinyDef, TalentDef, TalentTreeNodeDef,
+  BountyTemplateDef, SecretRealmDef, EnlightenmentInsightDef, SectDef,
 } from '../types';
 import type { AchievementDef } from '../achievement/types';
 
@@ -52,6 +54,16 @@ export const mutationDefRegistry = new Map<string, MutationDef>();
 export const techniqueTraitRegistry = new Map<string, TechniqueTraitDef>();
 export const techniqueInstanceRegistry = new Map<string, TechniqueInstance>();
 export const ascensionRegistry = new Map<string, AscensionDef>();
+export const rankingDimensionRegistry = new Map<string, RankingDimensionDef>();
+export const destinyRegistry = new Map<string, DestinyDef>();
+export const talentRegistry = new Map<string, TalentDef>();
+export const talentTreeNodeRegistry = new Map<string, TalentTreeNodeDef>();
+export const bountyTemplateRegistry = new Map<string, BountyTemplateDef>();
+export const secretRealmRegistry = new Map<string, SecretRealmDef>();
+export const enlightenmentInsightRegistry = new Map<string, EnlightenmentInsightDef>();
+export const sectRegistry = new Map<string, SectDef>();
+export const reincarnationEffectRegistry = new Map<string, ReincarnationEffectDef>();
+export const primordialEndgameRegistry = new Map<string, PrimordialEndgameDef>();
 
 /** 清空所有注册表（切换 DLC 前调用） */
 export function clearAllRegistries(): void {
@@ -94,4 +106,15 @@ export function clearAllRegistries(): void {
   techniqueTraitRegistry.clear();
   techniqueInstanceRegistry.clear();
   ascensionRegistry.clear();
+  rankingDimensionRegistry.clear();
+  destinyRegistry.clear();
+  talentRegistry.clear();
+  talentTreeNodeRegistry.clear();
+  bountyTemplateRegistry.clear();
+  secretRealmRegistry.clear();
+  enlightenmentInsightRegistry.clear();
+  sectRegistry.clear();
+  reincarnationEffectRegistry.clear();
+  primordialEndgameRegistry.clear();
 }
+

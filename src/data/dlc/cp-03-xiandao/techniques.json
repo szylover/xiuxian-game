@@ -1,0 +1,338 @@
+[
+  {
+    "id": "cp-03:cloud_light_sword",
+    "name": "云光剑诀",
+    "type": "sword",
+    "rarity": "rare",
+    "description": "飞升后常见的仙界剑诀，剑光如云开日出。",
+    "minRealm": 8,
+    "maxLevel": 22,
+    "expPerLevel": 220,
+    "statBonusPerLevel": {
+      "atk": 18,
+      "speed": 4,
+      "mp": 12
+    },
+    "aptitudeKey": "sword",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "atk",
+        "value": 110,
+        "description": "云光剑诀小成：核心属性提升"
+      },
+      {
+        "minLevel": 12,
+        "stat": "speed",
+        "value": 77,
+        "description": "云光剑诀精熟：身法或防御提升"
+      }
+    ],
+    "activeSkill": {
+      "name": "云开一剑",
+      "description": "引动仙界清光施展本门绝技。",
+      "mpCost": 96,
+      "staminaCost": 16,
+      "dmgMultiplier": 1.8,
+      "hitCount": 2,
+      "cooldown": 3,
+      "triggerRate": 0.24
+    },
+    "bodyExpRate": 0.2
+  },
+  {
+    "id": "cp-03:jade_pool_palm",
+    "name": "玉池掌经",
+    "type": "palm",
+    "rarity": "rare",
+    "description": "以玉池仙液温养掌势，攻守兼备。",
+    "minRealm": 8,
+    "maxLevel": 22,
+    "expPerLevel": 210,
+    "statBonusPerLevel": {
+      "def": 14,
+      "hp": 70,
+      "mp": 8
+    },
+    "aptitudeKey": "palm",
+    "spiritRootElement": "water",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "hp",
+        "value": 105,
+        "description": "玉池掌经小成：核心属性提升"
+      },
+      {
+        "minLevel": 12,
+        "stat": "def",
+        "value": 73,
+        "description": "玉池掌经精熟：身法或防御提升"
+      }
+    ],
+    "activeSkill": {
+      "name": "玉浪回环",
+      "description": "引动仙界清光施展本门绝技。",
+      "mpCost": 96,
+      "staminaCost": 16,
+      "dmgMultiplier": 1.45,
+      "hitCount": 2,
+      "cooldown": 3,
+      "triggerRate": 0.24
+    },
+    "bodyExpRate": 0.5
+  },
+  {
+    "id": "cp-03:crane_shadow_step",
+    "name": "鹤影步",
+    "type": "fist",
+    "rarity": "uncommon",
+    "description": "观仙鹤翔云而悟出的轻身步法。",
+    "minRealm": 8,
+    "maxLevel": 18,
+    "expPerLevel": 170,
+    "statBonusPerLevel": {
+      "speed": 8,
+      "hp": 35
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "wood",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "hp",
+        "value": 85,
+        "description": "鹤影步小成：核心属性提升"
+      },
+      {
+        "minLevel": 12,
+        "stat": "speed",
+        "value": 59,
+        "description": "鹤影步精熟：身法或防御提升"
+      }
+    ],
+    "activeSkill": {
+      "name": "鹤唳穿云",
+      "description": "引动仙界清光施展本门绝技。",
+      "mpCost": 96,
+      "staminaCost": 16,
+      "dmgMultiplier": 1.25,
+      "hitCount": 3,
+      "cooldown": 3,
+      "triggerRate": 0.24
+    },
+    "bodyExpRate": 0.8
+  },
+  {
+    "id": "cp-03:star_river_finger",
+    "name": "星河指",
+    "type": "finger",
+    "rarity": "epic",
+    "description": "引星河微光凝于指尖，专破仙躯护光。",
+    "minRealm": 9,
+    "maxLevel": 26,
+    "expPerLevel": 300,
+    "statBonusPerLevel": {
+      "atk": 22,
+      "critRate": 1,
+      "mp": 18
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "water",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "atk",
+        "value": 150,
+        "description": "星河指小成：核心属性提升"
+      },
+      {
+        "minLevel": 12,
+        "stat": "def",
+        "value": 105,
+        "description": "星河指精熟：身法或防御提升"
+      }
+    ],
+    "activeSkill": {
+      "name": "一指落星",
+      "description": "引动仙界清光施展本门绝技。",
+      "mpCost": 108,
+      "staminaCost": 18,
+      "dmgMultiplier": 2,
+      "hitCount": 1,
+      "cooldown": 3,
+      "triggerRate": 0.24
+    },
+    "bodyExpRate": 0.4
+  },
+  {
+    "id": "cp-03:thunder_gate_blade",
+    "name": "雷门刀录",
+    "type": "blade",
+    "rarity": "epic",
+    "description": "模仿飞升雷门开阖的刚猛刀法。",
+    "minRealm": 9,
+    "maxLevel": 26,
+    "expPerLevel": 320,
+    "statBonusPerLevel": {
+      "atk": 26,
+      "def": 10,
+      "hp": 60
+    },
+    "aptitudeKey": "blade",
+    "spiritRootElement": "fire",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "atk",
+        "value": 160,
+        "description": "雷门刀录小成：核心属性提升"
+      },
+      {
+        "minLevel": 12,
+        "stat": "def",
+        "value": 112,
+        "description": "雷门刀录精熟：身法或防御提升"
+      }
+    ],
+    "activeSkill": {
+      "name": "开天雷斩",
+      "description": "引动仙界清光施展本门绝技。",
+      "mpCost": 108,
+      "staminaCost": 18,
+      "dmgMultiplier": 2.25,
+      "hitCount": 1,
+      "cooldown": 3,
+      "triggerRate": 0.24
+    },
+    "bodyExpRate": 0.35
+  },
+  {
+    "id": "cp-03:sun_gold_spear",
+    "name": "日金枪诀",
+    "type": "spear",
+    "rarity": "legendary",
+    "description": "借大日金辉凝成枪芒，适合金仙前后参悟。",
+    "minRealm": 10,
+    "maxLevel": 30,
+    "expPerLevel": 420,
+    "statBonusPerLevel": {
+      "atk": 34,
+      "speed": 6,
+      "critRate": 1
+    },
+    "aptitudeKey": "spear",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "atk",
+        "value": 210,
+        "description": "日金枪诀小成：核心属性提升"
+      },
+      {
+        "minLevel": 12,
+        "stat": "speed",
+        "value": 147,
+        "description": "日金枪诀精熟：身法或防御提升"
+      }
+    ],
+    "activeSkill": {
+      "name": "日轮贯天",
+      "description": "引动仙界清光施展本门绝技。",
+      "mpCost": 120,
+      "staminaCost": 20,
+      "dmgMultiplier": 2.6,
+      "hitCount": 2,
+      "cooldown": 3,
+      "triggerRate": 0.24
+    },
+    "bodyExpRate": 0.25
+  },
+  {
+    "id": "cp-03:clear_law_palm",
+    "name": "清律仙掌",
+    "type": "palm",
+    "rarity": "legendary",
+    "description": "以天律为掌印，清浊分明，克制邪祟。",
+    "minRealm": 10,
+    "maxLevel": 30,
+    "expPerLevel": 400,
+    "statBonusPerLevel": {
+      "def": 22,
+      "mp": 28,
+      "hp": 90
+    },
+    "aptitudeKey": "palm",
+    "spiritRootElement": "wood",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "hp",
+        "value": 200,
+        "description": "清律仙掌小成：核心属性提升"
+      },
+      {
+        "minLevel": 12,
+        "stat": "def",
+        "value": 140,
+        "description": "清律仙掌精熟：身法或防御提升"
+      }
+    ],
+    "activeSkill": {
+      "name": "清律镇邪",
+      "description": "引动仙界清光施展本门绝技。",
+      "mpCost": 120,
+      "staminaCost": 20,
+      "dmgMultiplier": 2,
+      "hitCount": 2,
+      "cooldown": 3,
+      "triggerRate": 0.24
+    },
+    "bodyExpRate": 0.55
+  },
+  {
+    "id": "cp-03:golden_immortal_sword",
+    "name": "金仙不朽剑",
+    "type": "sword",
+    "rarity": "legendary",
+    "description": "凝练不朽金性后方能承载的高阶仙剑法。",
+    "minRealm": 11,
+    "maxLevel": 35,
+    "expPerLevel": 560,
+    "statBonusPerLevel": {
+      "atk": 48,
+      "def": 18,
+      "speed": 8,
+      "critRate": 1
+    },
+    "aptitudeKey": "sword",
+    "spiritRootElement": "metal",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "atk",
+        "value": 280,
+        "description": "金仙不朽剑小成：核心属性提升"
+      },
+      {
+        "minLevel": 12,
+        "stat": "speed",
+        "value": 196,
+        "description": "金仙不朽剑精熟：身法或防御提升"
+      }
+    ],
+    "activeSkill": {
+      "name": "不朽金虹",
+      "description": "引动仙界清光施展本门绝技。",
+      "mpCost": 132,
+      "staminaCost": 22,
+      "dmgMultiplier": 3,
+      "hitCount": 2,
+      "cooldown": 3,
+      "triggerRate": 0.24
+    },
+    "bodyExpRate": 0.2
+  }
+]

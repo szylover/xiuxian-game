@@ -8,7 +8,7 @@
 // ============================================================
 
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { createPlayer, getSpiritRootDisplay } from '../game/player';
+import { createPlayer, getSpiritRootDisplay, recalcStats } from '../game/player';
 import type { Player } from '../game/player';
 import type { CreatePlayerOptions } from '../game/player';
 import { REALMS, ACTION_COSTS } from '../game/data';
@@ -28,10 +28,23 @@ import { refreshUnlockedRegions } from '../game/map';
 import { checkQuestTimeouts, checkQuestDiscovery, tickQuestObjectives, setTrackedQuest as setTrackedQuestFn } from '../game/quest';
 import { UI_LABELS } from '../data/texts/ui-labels';
 import { SPIRIT_ROOT_CN, SEPARATOR, NONE_TEXT } from '../data/texts/common';
-import { tickAffinityDecay } from '../game/npc';
+import { tickAffinityDecay, tickNpcWorld } from '../game/npc';
 import { restoreGeneratedEquips } from '../game/procedural';
 import { restoreTechniqueInstances } from '../game/procedural';
 import { useChronicle } from './useChronicle';
+import { refreshRankingState } from '../game/ranking';
+import { ensureDestinyTalentState } from '../game/destiny';
+import { getDestinyDef } from '../game/registry';
+import { DESTINY_TEXTS } from '../data/texts';
+import { ensureBountyBoard } from '../game/bounty';
+import { normalizeKarmaPlayer, tickKarmaDecay } from '../game/karma';
+import { tickEnlightenmentBuffs } from '../game/enlightenment';
+import { performReincarnation } from '../game/reincarnation';
+import type { ReincarnationContext } from '../game/types';
+import { attemptPrimordialEndgame } from '../game/primordial-endgame';
+import { REINCARNATION_TEXTS, PRIMORDIAL_ENDGAME_TEXTS } from '../data/texts';
+import { tickHeartDemon } from '../game/heart-demon';
+import { tickStudy } from '../game/learning';
 
 // Re-export types so existing imports still work
 export type { CombatModalState, DeathModalState } from './useCombatModal';
@@ -46,6 +59,8 @@ export function useGameEngine(
   const [deathModal, setDeathModal] = useState<DeathModalState | null>(null);
   const [dataReady, setDataReady] = useState(false);
   const [dataError, setDataError] = useState(false);
+  const [reincarnationModalContext, setReincarnationModalContext] = useState<ReincarnationContext | null>(null);
+  const [primordialEndgameOpen, setPrimordialEndgameOpen] = useState(false);
   const playerRef = useRef<Player | null>(null);
   const currentSlotRef = useRef(0);
   const { toast, showToast, dismiss: dismissToast } = useToast();
@@ -89,6 +104,8 @@ export function useGameEngine(
     const slotIndex = options.slotIndex ?? 0;
     currentSlotRef.current = slotIndex;
     let p = createPlayer({ ...options, enabledDLCs: dlcIds });
+    p = ensureDestinyTalentState(normalizeKarmaPlayer(p));
+    p = ensureBountyBoard(refreshRankingState(p, true), true);
     const rootDisplay = getSpiritRootDisplay(p.spiritRoots);
     writeSaveSlot(slotIndex, p);
     setPlayer(p);
@@ -101,6 +118,8 @@ export function useGameEngine(
     }).join(SEPARATOR) || NONE_TEXT;
     addLog(UI_LABELS.spiritRootDetails(rootList), 'system');
     addLog(UI_LABELS.playerStats(p.luck, p.comprehension, p.charisma), 'system');
+    const destiny = p.destinyId ? getDestinyDef(p.destinyId) : undefined;
+    if (destiny) addLog(DESTINY_TEXTS.logs.destinyAssigned(destiny.name, DESTINY_TEXTS.rarity[destiny.rarity]), 'system');
     // T0068: 开始新轮回
     chronicle.startNewIncarnation(p);
   }, [addLog, chronicle]);
@@ -127,13 +146,15 @@ export function useGameEngine(
       restoreGeneratedEquips(withRegions);
       // T0073: 恢复程序化功法实例到全局查询表
       restoreTechniqueInstances(withRegions);
-      setPlayer(withRegions);
+      const withDestiny = recalcStats(ensureDestinyTalentState(normalizeKarmaPlayer(withRegions)));
+      const withRankings = ensureBountyBoard(refreshRankingState(withDestiny, true));
+      setPlayer(withRankings);
       setGameOver(false);
       setGameOverReason('');
       addLog(UI_LABELS.loadSuccess(saved.name, REALMS[saved.realmIndex].name), 'system');
       // T0068: 加载存档时确保有当前轮回
       if (!chronicle.chronicle.current) {
-        chronicle.startNewIncarnation(withRegions);
+        chronicle.startNewIncarnation(withRankings);
       }
       return true;
     }
@@ -195,6 +216,11 @@ export function useGameEngine(
       gameYear: newYear,
       gameMonth: newMonth,
     };
+    updated = normalizeKarmaPlayer(updated);
+
+    const learningTick = tickStudy(updated, cost.time);
+    updated = learningTick.player;
+    for (const log of learningTick.messages) addLog(log, learningTick.completed ? 'adventure' : 'system');
 
     // T0040: 心情低迷追踪
     if (updated.mood <= 10) {
@@ -286,6 +312,21 @@ export function useGameEngine(
       updated = tickAffinityDecay(updated);
     }
 
+    const npcWorld = tickNpcWorld(updated);
+    updated = npcWorld.player;
+    for (const log of npcWorld.logs) addLog(log, 'system');
+
+    updated = tickEnlightenmentBuffs(updated);
+    const heartDemonTick = tickHeartDemon(updated);
+    updated = heartDemonTick.player;
+    for (const log of heartDemonTick.logs) addLog(log, 'system');
+    const karmaDecay = tickKarmaDecay(updated);
+    updated = karmaDecay.player;
+    for (const log of karmaDecay.logs) addLog(log, 'system');
+
+    updated = refreshRankingState(updated);
+    updated = ensureBountyBoard(updated);
+
     // T0057: 任务超时检查
     const questTimeoutResult = checkQuestTimeouts(updated);
     updated = questTimeoutResult.player;
@@ -325,15 +366,74 @@ export function useGameEngine(
     useItem, craft, equip, unequip, buy, sell, smith, breakthrough,
     learnTechnique, practiceTechnique, activateTechnique,
     learnDivineArt, activateDivineArt, deactivateDivineArt,
+    unlockTalentNode,
     travel, bodyBreakthrough, ascend,
-    meetNpc, giveGift,
+    meetNpc, giveGift, formDaoCompanion, performDualCultivation, dissolveDaoCompanion,
     acceptQuest, abandonQuest, deliverQuestItem, turnInQuest,
+    acceptBounty, claimBounty, refreshBounties,
+    bidAuctionLot, consignAuction, refreshAuction, settleAuction, mineAtSite,
+    startRealm, advanceRealm, finishRealm,
     startDialogue, dialogueSelectChoice, dialogueAdvance,
+    contemplateEnlightenment, triggerEnlightenment,
+    joinSect, claimSectStipend, advanceSectRank, completeSectMission, buySectStoreItem,
+    foundSectManagement, recruitSectMember, collectSectYield, upgradeSectFacility, assignSectMemberTask,
+    suppressHeartDemon, confrontHeartDemon,
+    challengePvp,
+    startStudy, cancelStudy,
   } = useSystemActions({
     player, addLog, setPlayer, setGameOver, setGameOverReason, setDeathModal,
     chronicleHooks: { recordEvent: chronicle.recordEvent, syncSnapshot: chronicle.syncSnapshot },
   });
 
+
+  const openReincarnation = useCallback((context: ReincarnationContext) => {
+    setReincarnationModalContext(context);
+  }, []);
+
+  const confirmReincarnation = useCallback((options: { name: string; gender: 'male' | 'female'; appearance: number }) => {
+    const context = reincarnationModalContext;
+    if (!context) return;
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = performReincarnation(prev, context, options);
+      for (const log of result.logs) addLog(log, 'system');
+      if (result.newPlayer !== prev) {
+        chronicle.finalizeCurrentIncarnation(prev, context === 'death' ? 'died' : 'ascended');
+        chronicle.startNewIncarnation(result.newPlayer);
+        chronicle.recordEvent('reincarnation', result.newPlayer, REINCARNATION_TEXTS.reincarnationChronicle(result.legacySnapshot.incarnationNo));
+      }
+      return result.newPlayer;
+    });
+    setReincarnationModalContext(null);
+    setGameOver(false);
+    setGameOverReason('');
+    setDeathModal(null);
+  }, [reincarnationModalContext, addLog, chronicle]);
+
+  const closeReincarnationModal = useCallback(() => {
+    setReincarnationModalContext(null);
+  }, []);
+
+  const openPrimordialEndgame = useCallback(() => {
+    setPrimordialEndgameOpen(true);
+  }, []);
+
+  const closePrimordialEndgame = useCallback(() => {
+    setPrimordialEndgameOpen(false);
+  }, []);
+
+  const challengePrimordialEndgame = useCallback(() => {
+    setPlayer(prev => {
+      if (!prev) return prev;
+      const result = attemptPrimordialEndgame(prev);
+      for (const log of result.logs) addLog(log, result.success ? 'system' : 'combat');
+      if (result.success) {
+        chronicle.recordEvent('ascension_success', result.player, result.def?.endingTitle ?? PRIMORDIAL_ENDGAME_TEXTS.modalTitle);
+        chronicle.syncSnapshot(result.player);
+      }
+      return result.player;
+    });
+  }, [addLog, chronicle]);
   // ── T0040: 复活回调 ──
   const handleRevival = useCallback((method: RevivalMethodDef) => {
     setPlayer(prev => {
@@ -411,25 +511,63 @@ export function useGameEngine(
     learnDivineArt,
     activateDivineArt,
     deactivateDivineArt,
+    unlockTalentNode,
     travel,
     bodyBreakthrough,
-    ascend,
+    ascend, openReincarnation, openPrimordialEndgame,
     meetNpc,
     giveGift,
+    formDaoCompanion,
+    performDualCultivation,
+    dissolveDaoCompanion,
     acceptQuest,
     abandonQuest,
     deliverQuestItem,
     turnInQuest,
     setTrackedQuest,
+    acceptBounty,
+    claimBounty,
+    refreshBounties,
+    bidAuctionLot,
+    consignAuction,
+    refreshAuction,
+    settleAuction,
+    mineAtSite,
+    startRealm,
+    advanceRealm,
+    finishRealm,
     startDialogue,
     dialogueSelectChoice,
     dialogueAdvance,
+    contemplateEnlightenment,
+    triggerEnlightenment,
+    suppressHeartDemon,
+    confrontHeartDemon,
+    challengePvp,
+    startStudy,
+    cancelStudy,
+    joinSect,
+    claimSectStipend,
+    advanceSectRank,
+    completeSectMission,
+    buySectStoreItem,
+    foundSectManagement,
+    recruitSectMember,
+    collectSectYield,
+    upgradeSectFacility,
+    assignSectMemberTask,
     toast,
     dismissToast,
     combatModal,
     handleCombatNext,
     handleCombatClose,
     deathModal,
+    reincarnationModalContext,
+    confirmReincarnation,
+    closeReincarnationModal,
+    primordialEndgameOpen,
+    closePrimordialEndgame,
+    challengePrimordialEndgame,
     handleRevival,
     handleDeathModalClose,
     exitGame,

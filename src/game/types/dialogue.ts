@@ -20,6 +20,7 @@ export interface DialogueEffect {
   setDialogueFlag?: { key: string; value: unknown };
   unlockDialogueId?: string;
   statBonus?: Partial<Record<'atk' | 'def' | 'hp' | 'mp' | 'luck' | 'comprehension', number>>;
+  karmaChange?: number;
 }
 
 /** 对话选项条件（决定该选项是否显示） */
@@ -31,6 +32,9 @@ export interface DialogueChoiceCondition {
   hasDialogueFlag?: { key: string; value: unknown };
   completedQuest?: string;
   hasActiveQuest?: string;
+  requiredAlignment?: import('./karma').Alignment;
+  minKarma?: number;
+  maxKarma?: number;
 }
 
 /** 单个对话选项 */
@@ -70,6 +74,9 @@ export interface DialogueCondition {
   hasNpcFlag?: { key: string; value: unknown };
   hasDialogueFlag?: { key: string; value: unknown };
   requiredDialogues?: string[];           // 前置对话链 ID（必须已触发才解锁）
+  requiredAlignment?: import('./karma').Alignment;
+  minKarma?: number;
+  maxKarma?: number;
   custom?: (p: Player) => boolean;
 }
 

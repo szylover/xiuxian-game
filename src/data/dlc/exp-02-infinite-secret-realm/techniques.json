@@ -1,0 +1,176 @@
+[
+  {
+    "id": "exp-02:loop_step",
+    "name": "环廊步",
+    "type": "fist",
+    "rarity": "uncommon",
+    "description": "在重复回廊中练成的折返步法。",
+    "minRealm": 1,
+    "maxLevel": 15,
+    "expPerLevel": 72,
+    "statBonusPerLevel": {
+      "speed": 2,
+      "hp": 8
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "earth",
+    "activeSkill": {
+      "name": "折环闪",
+      "description": "绕身半圈后突袭敌侧。",
+      "mpCost": 12,
+      "staminaCost": 5,
+      "dmgMultiplier": 1.25,
+      "hitCount": 1,
+      "cooldown": 1,
+      "triggerRate": 0.3
+    },
+    "passiveEffects": [
+      {
+        "minLevel": 4,
+        "stat": "speed",
+        "value": 9,
+        "description": "回廊熟路：速度 +9"
+      },
+      {
+        "minLevel": 10,
+        "stat": "hp",
+        "value": 70,
+        "description": "层间耐行：体力 +70"
+      }
+    ],
+    "bodyExpRate": 0.9
+  },
+  {
+    "id": "exp-02:void_gate_sword",
+    "name": "虚门剑诀",
+    "type": "sword",
+    "rarity": "rare",
+    "description": "剑出虚门，忽前忽后。",
+    "minRealm": 2,
+    "maxLevel": 20,
+    "expPerLevel": 110,
+    "statBonusPerLevel": {
+      "atk": 4,
+      "speed": 2,
+      "mp": 4
+    },
+    "aptitudeKey": "sword",
+    "spiritRootElement": "metal",
+    "activeSkill": {
+      "name": "虚门三现",
+      "description": "剑影三次从不同虚门现身。",
+      "mpCost": 26,
+      "staminaCost": 8,
+      "dmgMultiplier": 1.1,
+      "hitCount": 3,
+      "cooldown": 2,
+      "triggerRate": 0.27
+    },
+    "passiveEffects": [
+      {
+        "minLevel": 6,
+        "stat": "atk",
+        "value": 22,
+        "description": "虚门藏锋：攻击 +22"
+      },
+      {
+        "minLevel": 14,
+        "stat": "critRate",
+        "value": 4,
+        "description": "裂隙突刺：暴击率 +4%"
+      }
+    ]
+  },
+  {
+    "id": "exp-02:thousand_layer_palm",
+    "name": "千层掌",
+    "type": "palm",
+    "rarity": "epic",
+    "description": "掌力层层叠加，如秘境无尽。",
+    "minRealm": 3,
+    "maxLevel": 25,
+    "expPerLevel": 150,
+    "statBonusPerLevel": {
+      "atk": 5,
+      "def": 3,
+      "mp": 8
+    },
+    "aptitudeKey": "palm",
+    "spiritRootElement": "earth",
+    "activeSkill": {
+      "name": "叠界掌",
+      "description": "连叠空间震荡压向敌人。",
+      "mpCost": 38,
+      "staminaCost": 11,
+      "dmgMultiplier": 1.7,
+      "hitCount": 2,
+      "cooldown": 3,
+      "triggerRate": 0.24,
+      "effect": {
+        "type": "debuff_def",
+        "value": 12,
+        "duration": 2
+      }
+    },
+    "passiveEffects": [
+      {
+        "minLevel": 8,
+        "stat": "def",
+        "value": 24,
+        "description": "层界护身：防御 +24"
+      },
+      {
+        "minLevel": 18,
+        "stat": "atk",
+        "value": 44,
+        "description": "千层叠劲：攻击 +44"
+      }
+    ]
+  },
+  {
+    "id": "exp-02:infinite_spear_formula",
+    "name": "无尽枪诀",
+    "type": "spear",
+    "rarity": "legendary",
+    "description": "每一枪都像通向更深一层。",
+    "minRealm": 4,
+    "maxLevel": 30,
+    "expPerLevel": 190,
+    "statBonusPerLevel": {
+      "atk": 7,
+      "speed": 2,
+      "critRate": 1
+    },
+    "aptitudeKey": "spear",
+    "spiritRootElement": "metal",
+    "activeSkill": {
+      "name": "贯层一线",
+      "description": "一枪贯穿多重层壁。",
+      "mpCost": 52,
+      "staminaCost": 16,
+      "dmgMultiplier": 2.3,
+      "hitCount": 1,
+      "cooldown": 4,
+      "triggerRate": 0.22,
+      "effect": {
+        "type": "debuff_def",
+        "value": 18,
+        "duration": 2
+      }
+    },
+    "passiveEffects": [
+      {
+        "minLevel": 8,
+        "stat": "atk",
+        "value": 50,
+        "description": "无尽锋芒：攻击 +50"
+      },
+      {
+        "minLevel": 20,
+        "stat": "critDmgMultiplier",
+        "value": 0.35,
+        "description": "贯层爆裂：暴击伤害 +35%"
+      }
+    ]
+  }
+]

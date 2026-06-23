@@ -29,4 +29,5 @@ export interface DivineArtDef {
   defPenetration?: number;          // 防御穿透系数 0~1（仅雷系；无视怪物防御的比例）
   effects?: DivineArtSkillEffect[]; // 附加效果列表（支持多效果并发）
   aptitudeScaling: number;          // 资质加成系数
+  requiredAlignment?: import('./karma').Alignment;
 }

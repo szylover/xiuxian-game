@@ -1,0 +1,355 @@
+[
+  {
+    "id": "cp-03:cloud_gate_open",
+    "category": "explore",
+    "tone": "good",
+    "name": "云门初开",
+    "weight": 18,
+    "effects": {
+      "exp": 260,
+      "mood": 10
+    },
+    "message": "☁️ 仙界云门为你敞开一线，清灵仙气灌入经脉，修为 +260，心情 +10。",
+    "condition": {
+      "minRealm": 8
+    },
+    "regionTags": [
+      "immortal",
+      "cloud"
+    ]
+  },
+  {
+    "id": "cp-03:jade_pool_reflection",
+    "category": "explore",
+    "tone": "good",
+    "name": "玉池照心",
+    "weight": 16,
+    "effects": {
+      "health": 12,
+      "mp": 160
+    },
+    "message": "💧 你在玉池边照见本心，仙液洗去尘垢，健康 +12，灵力 +160。",
+    "condition": {
+      "minRealm": 8
+    },
+    "regionTags": [
+      "lake",
+      "herb"
+    ]
+  },
+  {
+    "id": "cp-03:cloud_market_trade",
+    "category": "explore",
+    "tone": "good",
+    "name": "云市交易",
+    "weight": 14,
+    "effects": {
+      "gold": 220
+    },
+    "message": "🏮 你在云市以凡界旧物换得仙界票据，灵石 +220。",
+    "condition": {
+      "minRealm": 8
+    },
+    "regionTags": [
+      "trade",
+      "safe"
+    ]
+  },
+  {
+    "id": "cp-03:crane_guidance",
+    "category": "explore",
+    "tone": "good",
+    "name": "仙鹤引路",
+    "weight": 13,
+    "effects": {
+      "stamina": 40,
+      "mood": 8
+    },
+    "message": "🪽 一只白鹤在云路前引你避开乱流，精力 +40，心情 +8。",
+    "condition": {
+      "minRealm": 8
+    },
+    "regionTags": [
+      "immortal",
+      "safe"
+    ]
+  },
+  {
+    "id": "cp-03:star_river_spark",
+    "category": "explore",
+    "tone": "good",
+    "name": "星河火花",
+    "weight": 12,
+    "effects": {
+      "exp": 420,
+      "mentalPower": 80
+    },
+    "message": "✨ 星河溅起一缕火花落入识海，修为 +420，念力 +80。",
+    "condition": {
+      "minRealm": 9
+    },
+    "regionTags": [
+      "star",
+      "mystic"
+    ]
+  },
+  {
+    "id": "cp-03:thin_immortal_air",
+    "category": "explore",
+    "tone": "neutral",
+    "name": "仙气稀薄",
+    "weight": 16,
+    "effects": {
+      "mp": -60,
+      "exp": 120
+    },
+    "message": "🌬️ 此处仙气稀薄，你耗费灵力才稳住周天，但仍有所体悟，灵力 -60，修为 +120。",
+    "condition": {
+      "minRealm": 8
+    }
+  },
+  {
+    "id": "cp-03:heaven_law_inscription",
+    "category": "explore",
+    "tone": "neutral",
+    "name": "天律碑文",
+    "weight": 11,
+    "effects": {
+      "mentalPower": 60
+    },
+    "message": "📜 你抄录一段天律碑文，念力 +60。",
+    "condition": {
+      "minRealm": 8
+    },
+    "regionTags": [
+      "city",
+      "mystic"
+    ]
+  },
+  {
+    "id": "cp-03:cloud_path_lost",
+    "category": "explore",
+    "tone": "bad",
+    "name": "迷失云路",
+    "weight": 10,
+    "effects": {
+      "stamina": -45,
+      "mood": -8
+    },
+    "message": "🌫️ 云路忽然倒转，你绕行许久才寻回方向，精力 -45，心情 -8。",
+    "condition": {
+      "minRealm": 8
+    },
+    "regionTags": [
+      "cloud"
+    ]
+  },
+  {
+    "id": "cp-03:immortal_beast_shadow",
+    "category": "explore",
+    "tone": "bad",
+    "name": "仙兽掠影",
+    "weight": 9,
+    "effects": {
+      "hp": -220,
+      "health": -4
+    },
+    "message": "🦅 金光掠过天际，劲风割伤护体仙光，HP -220，健康 -4。",
+    "condition": {
+      "minRealm": 8
+    },
+    "regionTags": [
+      "dangerous",
+      "sky"
+    ]
+  },
+  {
+    "id": "cp-03:law_pressure",
+    "category": "explore",
+    "tone": "bad",
+    "name": "天律压身",
+    "weight": 8,
+    "effects": {
+      "mp": -120,
+      "mood": -6
+    },
+    "message": "⚖️ 仙界天律忽然压身，你强行运功抵御，灵力 -120，心情 -6。",
+    "condition": {
+      "minRealm": 9
+    }
+  },
+  {
+    "id": "cp-03:meet_cloud_envoy",
+    "category": "adventure",
+    "tone": "good",
+    "name": "遇见接引使",
+    "weight": 5,
+    "effects": {
+      "exp": 1800,
+      "mood": 18
+    },
+    "message": "🧑‍🦳 接引使为你讲解仙籍规矩，修为 +1800，心情 +18。",
+    "condition": {
+      "minRealm": 8
+    },
+    "regionTags": [
+      "city",
+      "safe"
+    ]
+  },
+  {
+    "id": "cp-03:ancient_immortal_cave",
+    "category": "adventure",
+    "tone": "good",
+    "name": "古仙洞府",
+    "weight": 4,
+    "effects": {
+      "gold": 1200,
+      "exp": 900
+    },
+    "message": "🏔️ 你开启一处古仙洞府外阁，获得灵石 +1200，修为 +900。",
+    "condition": {
+      "minRealm": 9
+    },
+    "regionTags": [
+      "mystic",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-03:star_teacher_dream",
+    "category": "adventure",
+    "tone": "good",
+    "name": "星师入梦",
+    "weight": 4,
+    "effects": {
+      "mentalPower": 240,
+      "exp": 1200
+    },
+    "message": "🌌 梦中星师点出仙魂破绽，念力 +240，修为 +1200。",
+    "condition": {
+      "minRealm": 9
+    }
+  },
+  {
+    "id": "cp-03:forbidden_heaven_scroll",
+    "category": "adventure",
+    "tone": "neutral",
+    "name": "禁阅天卷",
+    "weight": 4,
+    "effects": {
+      "exp": 1500,
+      "mood": -10
+    },
+    "message": "📚 你短暂翻阅禁阁天卷，收获颇丰却心生敬畏，修为 +1500，心情 -10。",
+    "condition": {
+      "minRealm": 10
+    },
+    "regionTags": [
+      "city",
+      "mystic"
+    ]
+  },
+  {
+    "id": "cp-03:sunfire_trial",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "日火试炼",
+    "weight": 3,
+    "effects": {
+      "hp": -900,
+      "health": -8,
+      "exp": 1000
+    },
+    "message": "☀️ 日火试炼灼伤仙躯，却也淬出一分金性，HP -900，健康 -8，修为 +1000。",
+    "condition": {
+      "minRealm": 10
+    },
+    "regionTags": [
+      "sun",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-03:daily_cloud_breath",
+    "category": "daily",
+    "tone": "good",
+    "name": "餐霞吐纳",
+    "weight": 18,
+    "effects": {
+      "exp": 220,
+      "mp": 80
+    },
+    "message": "🌅 今日餐霞吐纳，修为 +220，灵力 +80。",
+    "condition": {
+      "minRealm": 8
+    }
+  },
+  {
+    "id": "cp-03:daily_copy_heaven_law",
+    "category": "daily",
+    "tone": "good",
+    "name": "抄录天律",
+    "weight": 14,
+    "effects": {
+      "mentalPower": 50,
+      "mood": 5
+    },
+    "message": "✒️ 你静心抄录天律一页，念力 +50，心情 +5。",
+    "condition": {
+      "minRealm": 8
+    }
+  },
+  {
+    "id": "cp-03:daily_feed_crane",
+    "category": "daily",
+    "tone": "good",
+    "name": "饲喂仙鹤",
+    "weight": 12,
+    "effects": {
+      "mood": 12
+    },
+    "message": "🪽 仙鹤啄食仙谷后绕你飞舞，心情 +12。",
+    "condition": {
+      "minRealm": 8
+    },
+    "regionTags": [
+      "safe"
+    ]
+  },
+  {
+    "id": "cp-03:daily_cloud_tax",
+    "category": "daily",
+    "tone": "bad",
+    "name": "云税催缴",
+    "weight": 7,
+    "effects": {
+      "gold": -120,
+      "mood": -6
+    },
+    "message": "🧾 云市管事催缴临时云税，灵石 -120，心情 -6。",
+    "condition": {
+      "minRealm": 8,
+      "minGold": 120
+    },
+    "regionTags": [
+      "trade",
+      "city"
+    ]
+  },
+  {
+    "id": "cp-03:daily_homesick_mortal",
+    "category": "daily",
+    "tone": "neutral",
+    "name": "遥望凡尘",
+    "weight": 10,
+    "effects": {
+      "mood": -4,
+      "exp": 150
+    },
+    "message": "🌍 你遥望凡尘旧路，心绪微乱，却更坚定仙途，心情 -4，修为 +150。",
+    "condition": {
+      "minRealm": 8
+    }
+  }
+]

@@ -4,6 +4,7 @@
 // ============================================================
 
 import type { ReactNode } from 'react';
+import { UI_LABELS } from '../../data/texts';
 
 interface GameLayoutProps {
   left: ReactNode;
@@ -24,8 +25,8 @@ export default function GameLayout({ left, center, right, topBar, debug, onExit 
         <aside className="right-panel">{right}</aside>
       </div>
       {onExit && (
-        <button className="exit-toggle" onClick={onExit} title="返回主菜单">
-          🏠 主菜单
+        <button className="exit-toggle" onClick={onExit} title={UI_LABELS.mainMenuTitle}>
+          {UI_LABELS.mainMenuButton}
         </button>
       )}
       {debug}

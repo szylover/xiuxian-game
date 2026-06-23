@@ -1,0 +1,165 @@
+[
+  {
+    "id": "exp-03:calamity_ash",
+    "name": "量劫灰",
+    "category": "material",
+    "rarity": "rare",
+    "description": "量劫过境后残留的灰烬，含有毁灭与新生之意。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 180
+  },
+  {
+    "id": "exp-03:merit_jade",
+    "name": "功德玉",
+    "category": "material",
+    "rarity": "epic",
+    "description": "凝结微弱功德金光的玉石。",
+    "stackable": true,
+    "maxStack": 30,
+    "usable": false,
+    "sellPrice": 720
+  },
+  {
+    "id": "exp-03:heavenly_decree",
+    "name": "天道敕令",
+    "category": "misc",
+    "rarity": "legendary",
+    "description": "可暂借天道秩序的敕令。",
+    "stackable": true,
+    "maxStack": 5,
+    "usable": true,
+    "effects": {
+      "mentalPower": 180,
+      "exp": [
+        800,
+        1600
+      ]
+    },
+    "effectMessage": "⚖️ 天道敕令化作秩序金纹，念力与修为大幅增长。",
+    "sellPrice": 1800
+  },
+  {
+    "id": "exp-03:fate_thread",
+    "name": "命运丝",
+    "category": "material",
+    "rarity": "rare",
+    "description": "从命线边缘剥离的细丝。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": false,
+    "sellPrice": 260
+  },
+  {
+    "id": "exp-03:tribulation_pearl",
+    "name": "劫雷珠",
+    "category": "material",
+    "rarity": "epic",
+    "description": "劫雷收束后凝成的雷珠。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": false,
+    "sellPrice": 650
+  },
+  {
+    "id": "exp-03:dao_balance_pill",
+    "name": "衡道丹",
+    "category": "consumable",
+    "rarity": "rare",
+    "description": "平复劫气，恢复健康与念力。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": true,
+    "effects": {
+      "health": 35,
+      "mentalPower": 80
+    },
+    "effectMessage": "☯️ 衡道丹安抚劫气，健康 +35，念力 +80。",
+    "sellPrice": 320
+  },
+  {
+    "id": "exp-03:karma_wash_water",
+    "name": "洗业水",
+    "category": "consumable",
+    "rarity": "rare",
+    "description": "洗去心头业火，恢复心情。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": true,
+    "effects": {
+      "mood": 35,
+      "health": 10
+    },
+    "effectMessage": "💧 洗业水清凉入心，心情 +35，健康 +10。",
+    "sellPrice": 300
+  },
+  {
+    "id": "exp-03:saint_bone_script",
+    "name": "圣骨残文",
+    "category": "misc",
+    "rarity": "legendary",
+    "description": "疑似圣人骨片上的残缺道文。",
+    "stackable": true,
+    "maxStack": 5,
+    "usable": true,
+    "effects": {
+      "exp": [
+        1500,
+        3000
+      ],
+      "mentalPower": 120
+    },
+    "effectMessage": "🦴 圣骨残文震动识海，修为与念力大幅增长。",
+    "sellPrice": 2200
+  },
+  {
+    "id": "exp-03:sky_eye_shard",
+    "name": "天眼碎片",
+    "category": "material",
+    "rarity": "epic",
+    "description": "天眼虚影破碎后落下的晶片。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": false,
+    "sellPrice": 820
+  },
+  {
+    "id": "exp-03:calamity_lotus_seed",
+    "name": "劫莲子",
+    "category": "material",
+    "rarity": "rare",
+    "description": "劫灰白莲结出的莲子。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": false,
+    "sellPrice": 240
+  },
+  {
+    "id": "exp-03:dao_seal_charm",
+    "name": "道印符",
+    "category": "consumable",
+    "rarity": "uncommon",
+    "description": "刻有简化道印的护身符。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": true,
+    "effects": {
+      "mp": 120,
+      "mood": 8
+    },
+    "effectMessage": "🔖 道印符护住丹田，灵力 +120，心情 +8。",
+    "sellPrice": 140
+  },
+  {
+    "id": "exp-03:chaos_slag",
+    "name": "混沌渣",
+    "category": "material",
+    "rarity": "uncommon",
+    "description": "混沌裂隙边缘冷却后的残渣。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 70
+  }
+]

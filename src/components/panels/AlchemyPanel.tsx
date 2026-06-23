@@ -9,6 +9,8 @@ import type { RecipeDef } from '../../game/registry';
 import { canCraft, calcSuccessRate } from '../../game/alchemy';
 import { getItemCount } from '../../game/inventory';
 import { CapacityBar } from '../shared';
+import { hasLearnedRecipe } from '../../game/learning';
+import { LEARNING_TEXTS } from '../../data/texts';
 
 interface AlchemyPanelProps {
   player: Player;
@@ -57,7 +59,7 @@ function RecipeCard({ recipe, player, onCraft }: { recipe: RecipeDef; player: Pl
 export default function AlchemyPanel({ player, onCraft }: AlchemyPanelProps) {
   if (!player) return null;
 
-  const recipes = getAllRecipes().filter(r => player.realmIndex >= r.minRealm);
+  const recipes = getAllRecipes().filter(r => hasLearnedRecipe(player, r.id) && player.realmIndex >= r.minRealm);
 
   return (
     <div className="alchemy-content">
@@ -78,6 +80,7 @@ export default function AlchemyPanel({ player, onCraft }: AlchemyPanelProps) {
           ))
         )}
       </div>
+      <div className="technique-learning-hint">{LEARNING_TEXTS.panel.noLearnedRecipeHint}</div>
     </div>
   );
 }

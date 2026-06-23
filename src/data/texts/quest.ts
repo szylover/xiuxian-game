@@ -1,4 +1,5 @@
 export const QUEST_TEXTS = {
+  karmaReason: '任务抉择',
   // ── 系统提示 ──
   accepted: (name: string) => `📜 接取任务：${name}`,
   abandoned: (name: string) => `📜 放弃任务：${name}`,

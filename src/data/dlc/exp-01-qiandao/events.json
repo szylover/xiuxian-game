@@ -1,0 +1,313 @@
+[
+  {
+    "id": "exp-01:daily_first_sign",
+    "category": "daily",
+    "tone": "good",
+    "name": "今日签到",
+    "weight": 26,
+    "effects": {
+      "gold": 18,
+      "mood": 4
+    },
+    "message": "📅 你在签到玉册上按下灵印，领取今日灵石，灵石 +18，心情 +4。"
+  },
+  {
+    "id": "exp-01:morning_login_aura",
+    "category": "daily",
+    "tone": "good",
+    "name": "晨间登录",
+    "weight": 22,
+    "effects": {
+      "exp": 22,
+      "mp": 20
+    },
+    "message": "🌅 清晨登录洞府阵盘，灵气自动汇聚，修为 +22，灵力 +20。"
+  },
+  {
+    "id": "exp-01:streak_three_days",
+    "category": "daily",
+    "tone": "good",
+    "name": "三日连签",
+    "weight": 12,
+    "effects": {
+      "exp": 60,
+      "gold": 45
+    },
+    "message": "🔥 签到玉册亮起三重纹路，连签奖励到账，修为 +60，灵石 +45。"
+  },
+  {
+    "id": "exp-01:streak_seven_days",
+    "category": "daily",
+    "tone": "good",
+    "name": "七日连签",
+    "weight": 8,
+    "effects": {
+      "exp": 120,
+      "mood": 12,
+      "stamina": 20
+    },
+    "message": "🎁 七日连签宝匣开启，修为 +120，心情 +12，精力 +20。",
+    "condition": {
+      "minRealm": 1
+    }
+  },
+  {
+    "id": "exp-01:monthly_card_glow",
+    "category": "daily",
+    "tone": "good",
+    "name": "月卡灵光",
+    "weight": 8,
+    "effects": {
+      "gold": 120,
+      "mp": 45
+    },
+    "message": "💳 月卡灵光从玉简中溢出，本月供奉提前到账，灵石 +120，灵力 +45。",
+    "condition": {
+      "minRealm": 1
+    }
+  },
+  {
+    "id": "exp-01:makeup_sign_token",
+    "category": "daily",
+    "tone": "neutral",
+    "name": "补签机会",
+    "weight": 14,
+    "effects": {
+      "mood": 6
+    },
+    "message": "🧾 你整理旧日签到记录，发现一枚可用的补签凭证，心情 +6。"
+  },
+  {
+    "id": "exp-01:ad_watch_reward",
+    "category": "daily",
+    "tone": "neutral",
+    "name": "观影奖励",
+    "weight": 16,
+    "effects": {
+      "gold": 35
+    },
+    "message": "📺 你看完投影玉璧中的丹坊广告，领取少量赞助，灵石 +35。"
+  },
+  {
+    "id": "exp-01:double_reward_hour",
+    "category": "daily",
+    "tone": "good",
+    "name": "双倍时辰",
+    "weight": 10,
+    "effects": {
+      "exp": 80,
+      "gold": 80
+    },
+    "message": "⏰ 签到阵盘进入双倍时辰，今日奖励翻倍，修为 +80，灵石 +80。",
+    "condition": {
+      "minLuck": 35
+    }
+  },
+  {
+    "id": "exp-01:forgot_checkin",
+    "category": "daily",
+    "tone": "bad",
+    "name": "险些漏签",
+    "weight": 12,
+    "effects": {
+      "mood": -8
+    },
+    "message": "😰 你差点忘记今日签到，虽然赶在子时前补上，仍心情 -8。"
+  },
+  {
+    "id": "exp-01:server_maintenance",
+    "category": "daily",
+    "tone": "bad",
+    "name": "阵盘维护",
+    "weight": 8,
+    "effects": {
+      "mood": -5,
+      "stamina": -6
+    },
+    "message": "🛠️ 签到阵盘临时维护，你反复尝试半天，心情 -5，精力 -6。"
+  },
+  {
+    "id": "exp-01:lucky_spin_small",
+    "category": "adventure",
+    "tone": "good",
+    "name": "幸运转盘",
+    "weight": 8,
+    "effects": {
+      "gold": [
+        60,
+        160
+      ],
+      "mood": 8
+    },
+    "message": "🎡 你转动洞府幸运盘，指针停在灵石格，灵石增加，心情 +8。",
+    "condition": {
+      "minLuck": 25
+    }
+  },
+  {
+    "id": "exp-01:lucky_spin_big",
+    "category": "adventure",
+    "tone": "good",
+    "name": "金色传说",
+    "weight": 3,
+    "effects": {
+      "exp": [
+        300,
+        600
+      ],
+      "gold": [
+        200,
+        500
+      ]
+    },
+    "message": "🌟 签到玉册爆出金色传说，修为与灵石同时暴涨。",
+    "condition": {
+      "minLuck": 55,
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "exp-01:calendar_mystery_box",
+    "category": "adventure",
+    "tone": "good",
+    "name": "日历盲盒",
+    "weight": 7,
+    "effects": {
+      "exp": 150,
+      "mentalPower": 30
+    },
+    "message": "🎲 你开启日历盲盒，里面竟是悟道小札，修为 +150，念力 +30。",
+    "condition": {
+      "minRealm": 1
+    }
+  },
+  {
+    "id": "exp-01:login_compensation",
+    "category": "adventure",
+    "tone": "good",
+    "name": "维护补偿",
+    "weight": 6,
+    "effects": {
+      "gold": 180,
+      "mood": 18
+    },
+    "message": "📮 阵灵发放维护补偿礼包，灵石 +180，心情 +18。",
+    "condition": {
+      "minRealm": 1
+    }
+  },
+  {
+    "id": "exp-01:ranking_checkin",
+    "category": "adventure",
+    "tone": "neutral",
+    "name": "签到榜单",
+    "weight": 7,
+    "effects": {
+      "mood": 5,
+      "exp": 55
+    },
+    "message": "🏆 你查看签到榜单，受到榜首激励，修为 +55，心情 +5。"
+  },
+  {
+    "id": "exp-01:auto_hangup_cultivate",
+    "category": "adventure",
+    "tone": "good",
+    "name": "挂机修炼",
+    "weight": 8,
+    "effects": {
+      "exp": 220,
+      "stamina": -10
+    },
+    "message": "🧘 洞府挂机阵代你吐纳半日，修为 +220，精力 -10。",
+    "condition": {
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "exp-01:red_dot_cleanup",
+    "category": "explore",
+    "tone": "neutral",
+    "name": "清理红点",
+    "weight": 18,
+    "effects": {
+      "mood": 7
+    },
+    "message": "🔴 你逐一清理洞府玉简上的红点，心情莫名舒畅，心情 +7。"
+  },
+  {
+    "id": "exp-01:checkin_stall",
+    "category": "explore",
+    "tone": "good",
+    "name": "签到摊位",
+    "weight": 12,
+    "effects": {
+      "gold": 50,
+      "stamina": 8
+    },
+    "message": "🏮 坊市新开签到摊位，路过即可领奖，灵石 +50，精力 +8。",
+    "regionTags": [
+      "town",
+      "trade",
+      "safe"
+    ]
+  },
+  {
+    "id": "exp-01:calendar_beast_raid",
+    "category": "explore",
+    "tone": "bad",
+    "name": "日历兽捣乱",
+    "weight": 7,
+    "effects": {
+      "hp": -24,
+      "mood": -6
+    },
+    "message": "🐾 一只日历兽咬坏签到竹简，你护册时受伤，HP -24，心情 -6。",
+    "regionTags": [
+      "wilderness",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "exp-01:premium_hint",
+    "category": "explore",
+    "tone": "neutral",
+    "name": "尊享提示",
+    "weight": 9,
+    "effects": {
+      "mood": -3,
+      "gold": 20
+    },
+    "message": "💎 阵灵不停推荐尊享礼包，你拒绝后只领了普通奖励，灵石 +20，心情 -3。"
+  },
+  {
+    "id": "exp-01:anniversary_mail",
+    "category": "adventure",
+    "tone": "good",
+    "name": "周年灵邮",
+    "weight": 4,
+    "effects": {
+      "lifespan": 120,
+      "gold": 260,
+      "mood": 20
+    },
+    "message": "🎊 周年灵邮送来长青福袋，寿限延长 10 年，灵石 +260，心情 +20。",
+    "condition": {
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "exp-01:offline_return",
+    "category": "daily",
+    "tone": "good",
+    "name": "离线回归",
+    "weight": 9,
+    "effects": {
+      "exp": 180,
+      "stamina": "max"
+    },
+    "message": "📦 你领取离线回归收益，修为 +180，精力恢复至满。",
+    "condition": {
+      "minRealm": 1
+    }
+  }
+]

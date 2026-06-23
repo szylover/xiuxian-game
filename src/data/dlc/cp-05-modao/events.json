@@ -1,0 +1,339 @@
+[
+  {
+    "id": "cp-05:blood_moon_refine",
+    "category": "explore",
+    "tone": "good",
+    "name": "血月炼气",
+    "weight": 16,
+    "effects": {
+      "exp": 45,
+      "mood": -3
+    },
+    "message": "🌕 血月照入经脉，修为 +45，心情 -3。",
+    "condition": {
+      "minRealm": 0
+    },
+    "regionTags": [
+      "demonic"
+    ]
+  },
+  {
+    "id": "cp-05:demon_market_bargain",
+    "category": "explore",
+    "tone": "good",
+    "name": "魔市砍价",
+    "weight": 14,
+    "effects": {
+      "gold": 65
+    },
+    "message": "🏮 你在地下魔市低价转手杂物，灵石 +65。",
+    "condition": {
+      "minRealm": 0
+    },
+    "regionTags": [
+      "trade",
+      "safe"
+    ]
+  },
+  {
+    "id": "cp-05:bone_cave_find",
+    "category": "explore",
+    "tone": "good",
+    "name": "骨洞拾遗",
+    "weight": 12,
+    "effects": {
+      "exp": 25,
+      "gold": 30
+    },
+    "message": "💀 你在骨洞暗格中拾得旧物，修为 +25，灵石 +30。",
+    "condition": {
+      "minRealm": 0
+    },
+    "regionTags": [
+      "cave"
+    ]
+  },
+  {
+    "id": "cp-05:black_flame_spark",
+    "category": "explore",
+    "tone": "good",
+    "name": "黑焰火星",
+    "weight": 10,
+    "effects": {
+      "exp": 80,
+      "mp": 25
+    },
+    "message": "🔥 黑焰火星落入掌心，修为 +80，灵力 +25。",
+    "condition": {
+      "minRealm": 1
+    },
+    "regionTags": [
+      "demonic",
+      "fire"
+    ]
+  },
+  {
+    "id": "cp-05:ghost_moss_patch",
+    "category": "explore",
+    "tone": "good",
+    "name": "鬼苔药斑",
+    "weight": 14,
+    "effects": {
+      "health": 8
+    },
+    "message": "🍄 鬼面苔药性阴寒，调和后健康 +8。",
+    "condition": {
+      "minRealm": 0
+    },
+    "regionTags": [
+      "herb"
+    ]
+  },
+  {
+    "id": "cp-05:whispering_skulls",
+    "category": "explore",
+    "tone": "neutral",
+    "name": "骷髅低语",
+    "weight": 16,
+    "effects": {
+      "mentalPower": 20,
+      "mood": -4
+    },
+    "message": "💬 骷髅低语扰人心神，念力 +20，心情 -4。",
+    "condition": {
+      "minRealm": 0
+    }
+  },
+  {
+    "id": "cp-05:failed_blood_ritual",
+    "category": "explore",
+    "tone": "bad",
+    "name": "血祭反噬",
+    "weight": 8,
+    "effects": {
+      "hp": -35,
+      "health": -3
+    },
+    "message": "🩸 残破血阵忽然反噬，HP -35，健康 -3。",
+    "condition": {
+      "minRealm": 0
+    },
+    "regionTags": [
+      "demonic",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-05:black_sand_storm",
+    "category": "explore",
+    "tone": "bad",
+    "name": "黑砂迷眼",
+    "weight": 10,
+    "effects": {
+      "stamina": -18,
+      "mood": -5
+    },
+    "message": "🌫️ 黑煞砂扑面而来，精力 -18，心情 -5。",
+    "condition": {
+      "minRealm": 0
+    },
+    "regionTags": [
+      "wasteland"
+    ]
+  },
+  {
+    "id": "cp-05:rival_ambush",
+    "category": "explore",
+    "tone": "bad",
+    "name": "魔修截道",
+    "weight": 8,
+    "effects": {
+      "hp": -70,
+      "gold": -20
+    },
+    "message": "🗡️ 一名魔修截道夺财，你负伤脱身，HP -70，灵石 -20。",
+    "condition": {
+      "minRealm": 1
+    },
+    "regionTags": [
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-05:hidden_altar",
+    "category": "adventure",
+    "tone": "good",
+    "name": "隐秘黑坛",
+    "weight": 5,
+    "effects": {
+      "exp": 180,
+      "gold": 120
+    },
+    "message": "⚫ 你开启隐秘黑坛外层禁制，修为 +180，灵石 +120。",
+    "condition": {
+      "minRealm": 1
+    },
+    "regionTags": [
+      "mystic"
+    ]
+  },
+  {
+    "id": "cp-05:old_demon_hint",
+    "category": "adventure",
+    "tone": "good",
+    "name": "老魔指路",
+    "weight": 4,
+    "effects": {
+      "exp": 260,
+      "mood": 8
+    },
+    "message": "🧙 老魔随口点破你运功破绽，修为 +260，心情 +8。",
+    "condition": {
+      "minRealm": 1
+    }
+  },
+  {
+    "id": "cp-05:blood_lotus_bloom",
+    "category": "adventure",
+    "tone": "good",
+    "name": "血莲盛放",
+    "weight": 4,
+    "effects": {
+      "health": 18,
+      "mp": 90
+    },
+    "message": "🪷 血莲盛放，阴寒药香护住经脉，健康 +18，灵力 +90。",
+    "condition": {
+      "minRealm": 2
+    },
+    "regionTags": [
+      "herb"
+    ]
+  },
+  {
+    "id": "cp-05:forbidden_page_cost",
+    "category": "adventure",
+    "tone": "neutral",
+    "name": "禁页代价",
+    "weight": 4,
+    "effects": {
+      "exp": 320,
+      "mood": -12
+    },
+    "message": "📖 禁法残页让你大有所得，也令心绪阴沉，修为 +320，心情 -12。",
+    "condition": {
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "cp-05:nether_river_wave",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "冥河逆浪",
+    "weight": 3,
+    "effects": {
+      "hp": -220,
+      "mp": -80
+    },
+    "message": "🌊 冥河逆浪拍碎护体灵光，HP -220，灵力 -80。",
+    "condition": {
+      "minRealm": 3
+    },
+    "regionTags": [
+      "mystic",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-05:black_flame_trial",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "黑焰试身",
+    "weight": 3,
+    "effects": {
+      "hp": -180,
+      "exp": 260
+    },
+    "message": "🔥 黑焰灼身痛入骨髓，却炼出一分狠劲，HP -180，修为 +260。",
+    "condition": {
+      "minRealm": 3
+    },
+    "regionTags": [
+      "fire"
+    ]
+  },
+  {
+    "id": "cp-05:daily_suppress_aura",
+    "category": "daily",
+    "tone": "good",
+    "name": "收敛魔气",
+    "weight": 18,
+    "effects": {
+      "mood": 6,
+      "mp": 20
+    },
+    "message": "⚫ 今日收敛魔气，心情 +6，灵力 +20。",
+    "condition": {
+      "minRealm": 0
+    }
+  },
+  {
+    "id": "cp-05:daily_copy_forbidden",
+    "category": "daily",
+    "tone": "good",
+    "name": "抄录禁法",
+    "weight": 14,
+    "effects": {
+      "exp": 35,
+      "mentalPower": 12
+    },
+    "message": "✒️ 你抄录禁法残句，修为 +35，念力 +12。",
+    "condition": {
+      "minRealm": 0
+    }
+  },
+  {
+    "id": "cp-05:daily_feed_soul_lamp",
+    "category": "daily",
+    "tone": "neutral",
+    "name": "添油魂灯",
+    "weight": 12,
+    "effects": {
+      "gold": -15,
+      "mentalPower": 25
+    },
+    "message": "🕯️ 你为魂灯添油，灵石 -15，念力 +25。",
+    "condition": {
+      "minRealm": 0
+    }
+  },
+  {
+    "id": "cp-05:daily_dark_mood",
+    "category": "daily",
+    "tone": "bad",
+    "name": "阴气压心",
+    "weight": 10,
+    "effects": {
+      "mood": -8
+    },
+    "message": "🌑 洞府阴气太重，心情 -8。",
+    "condition": {
+      "minRealm": 0
+    }
+  },
+  {
+    "id": "cp-05:daily_blood_training",
+    "category": "daily",
+    "tone": "good",
+    "name": "血劲打磨",
+    "weight": 12,
+    "effects": {
+      "hp": -15,
+      "exp": 55
+    },
+    "message": "🥊 你以血劲打磨筋骨，HP -15，修为 +55。",
+    "condition": {
+      "minRealm": 0
+    }
+  }
+]

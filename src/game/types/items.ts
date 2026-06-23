@@ -13,4 +13,8 @@ export interface ItemDef {
   effect?: (p: Player) => Player;          // 使用效果
   effectMessage?: string;                  // 使用后日志消息
   sellPrice: number;                       // 售卖价格（灵石）
+  scrollType?: 'technique' | 'divineArt' | 'recipe' | 'smithingRecipe';
+  scrollTargetId?: string;
+  scrollStudyMonths?: number;
+  scrollMinRealm?: number;
 }

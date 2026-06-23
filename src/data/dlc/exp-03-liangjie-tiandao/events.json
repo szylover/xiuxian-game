@@ -1,0 +1,320 @@
+[
+  {
+    "id": "exp-03:heavenly_warning",
+    "category": "daily",
+    "tone": "neutral",
+    "name": "天道示警",
+    "weight": 15,
+    "effects": {
+      "mentalPower": 25,
+      "mood": -4
+    },
+    "message": "⚖️ 天穹浮现一行劫纹，你心神震动，念力 +25，心情 -4。",
+    "condition": {
+      "minRealm": 3
+    }
+  },
+  {
+    "id": "exp-03:calamity_ash_rain",
+    "category": "explore",
+    "tone": "bad",
+    "name": "劫灰雨",
+    "weight": 12,
+    "effects": {
+      "health": -6,
+      "mp": -30
+    },
+    "message": "🌧️ 劫灰如雨落下，护体灵光被污，健康 -6，灵力 -30。",
+    "condition": {
+      "minRealm": 2
+    },
+    "regionTags": [
+      "wasteland",
+      "dangerous",
+      "celestial"
+    ]
+  },
+  {
+    "id": "exp-03:dao_merit_glow",
+    "category": "adventure",
+    "tone": "good",
+    "name": "功德金光",
+    "weight": 6,
+    "effects": {
+      "karmaChange": 6,
+      "mood": 15,
+      "exp": 180
+    },
+    "message": "✨ 你护住一方生灵，天道降下微弱功德，正邪值上升，心情 +15，修为 +180。",
+    "condition": {
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "exp-03:karmic_debt_echo",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "业债回响",
+    "weight": 7,
+    "effects": {
+      "karmaChange": -5,
+      "hp": -80
+    },
+    "message": "⛓️ 旧日业债随量劫翻涌，正邪值下降，HP -80。",
+    "condition": {
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "exp-03:tribulation_cloud",
+    "category": "explore",
+    "tone": "bad",
+    "name": "劫云压顶",
+    "weight": 9,
+    "effects": {
+      "hp": -60,
+      "mentalPower": 20
+    },
+    "message": "⛈️ 劫云压下，你硬撑雷意洗心，HP -60，念力 +20。",
+    "condition": {
+      "minRealm": 3
+    },
+    "regionTags": [
+      "celestial",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "exp-03:saint_whisper",
+    "category": "adventure",
+    "tone": "good",
+    "name": "圣人余音",
+    "weight": 4,
+    "effects": {
+      "exp": [
+        500,
+        1000
+      ],
+      "mentalPower": 80
+    },
+    "message": "📜 你在天痕边听见圣人余音，修为与念力大幅增长。",
+    "condition": {
+      "minRealm": 5,
+      "minComprehension": 45
+    }
+  },
+  {
+    "id": "exp-03:dao_balance",
+    "category": "daily",
+    "tone": "neutral",
+    "name": "天道平衡",
+    "weight": 12,
+    "effects": {
+      "mood": 6,
+      "health": 4
+    },
+    "message": "☯️ 你静观阴阳消长，心境稍稳，心情 +6，健康 +4。"
+  },
+  {
+    "id": "exp-03:calamity_beast_trace",
+    "category": "explore",
+    "tone": "neutral",
+    "name": "劫兽足迹",
+    "weight": 10,
+    "effects": {
+      "exp": 95
+    },
+    "message": "🐾 劫兽足迹烙在焦土上，你推演其杀伐轨迹，修为 +95。",
+    "regionTags": [
+      "dangerous",
+      "wasteland"
+    ]
+  },
+  {
+    "id": "exp-03:fate_thread_cut",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "命线微断",
+    "weight": 5,
+    "effects": {
+      "lifespan": -60,
+      "mood": -10
+    },
+    "message": "🧵 命线被劫风割开一丝，寿限减少 5 年，心情 -10。",
+    "condition": {
+      "minRealm": 4
+    }
+  },
+  {
+    "id": "exp-03:fate_thread_mend",
+    "category": "adventure",
+    "tone": "good",
+    "name": "补命一线",
+    "weight": 4,
+    "effects": {
+      "lifespan": 120,
+      "mood": 12
+    },
+    "message": "🪡 你以功德补上一缕命线，寿限延长 10 年，心情 +12。",
+    "condition": {
+      "minKarma": 30,
+      "minRealm": 3
+    }
+  },
+  {
+    "id": "exp-03:heaven_eye_opens",
+    "category": "adventure",
+    "tone": "neutral",
+    "name": "天眼睁开",
+    "weight": 6,
+    "effects": {
+      "mentalPower": 60,
+      "stamina": -15
+    },
+    "message": "👁️ 天眼虚影扫过山河，你强记道纹，念力 +60，精力 -15。",
+    "condition": {
+      "minRealm": 3
+    }
+  },
+  {
+    "id": "exp-03:dao_punishment",
+    "category": "adventure",
+    "tone": "bad",
+    "name": "天罚余波",
+    "weight": 4,
+    "effects": {
+      "hp": -160,
+      "mp": -100
+    },
+    "message": "⚡ 天罚余波擦过护体灵光，HP -160，灵力 -100。",
+    "condition": {
+      "minRealm": 4,
+      "maxKarma": -25
+    }
+  },
+  {
+    "id": "exp-03:merit_market",
+    "category": "explore",
+    "tone": "good",
+    "name": "功德小市",
+    "weight": 8,
+    "effects": {
+      "gold": 160,
+      "mood": 8
+    },
+    "message": "🏮 功德小市短暂开放，你换得灵石 +160，心情 +8。",
+    "condition": {
+      "minKarma": 10
+    },
+    "regionTags": [
+      "trade",
+      "celestial"
+    ]
+  },
+  {
+    "id": "exp-03:calamity_countdown",
+    "category": "daily",
+    "tone": "neutral",
+    "name": "量劫倒计",
+    "weight": 10,
+    "effects": {
+      "exp": 70,
+      "mood": -5
+    },
+    "message": "⌛ 玉璧上浮现量劫倒计，你不敢懈怠，修为 +70，心情 -5。"
+  },
+  {
+    "id": "exp-03:ash_bloom",
+    "category": "explore",
+    "tone": "good",
+    "name": "劫灰生莲",
+    "weight": 7,
+    "effects": {
+      "health": 15,
+      "exp": 130
+    },
+    "message": "🪷 焦土劫灰中生出白莲，健康 +15，修为 +130。",
+    "condition": {
+      "minRealm": 2
+    },
+    "regionTags": [
+      "wasteland",
+      "herb"
+    ]
+  },
+  {
+    "id": "exp-03:heavenly_ledger",
+    "category": "adventure",
+    "tone": "neutral",
+    "name": "天道账簿",
+    "weight": 5,
+    "effects": {
+      "mentalPower": 45,
+      "gold": -50
+    },
+    "message": "📒 天道账簿显化，你缴清一笔小因果，念力 +45，灵石 -50。",
+    "condition": {
+      "minGold": 50,
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "exp-03:chaos_gap",
+    "category": "explore",
+    "tone": "bad",
+    "name": "混沌裂隙",
+    "weight": 8,
+    "effects": {
+      "hp": -90,
+      "stamina": -20
+    },
+    "message": "🕳️ 混沌裂隙突然张开，你强行跃出，HP -90，精力 -20。",
+    "regionTags": [
+      "mystic",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "exp-03:dao_seed",
+    "category": "adventure",
+    "tone": "good",
+    "name": "天道种子",
+    "weight": 4,
+    "effects": {
+      "exp": [
+        800,
+        1400
+      ],
+      "mood": 20
+    },
+    "message": "🌱 一枚天道种子落入识海，修为大增，心情 +20。",
+    "condition": {
+      "minRealm": 5,
+      "minLuck": 45
+    }
+  },
+  {
+    "id": "exp-03:tribulation_rest",
+    "category": "daily",
+    "tone": "good",
+    "name": "劫后清宁",
+    "weight": 9,
+    "effects": {
+      "hp": "max",
+      "mood": 10
+    },
+    "message": "🌤️ 劫云散去，你在清宁灵光中恢复伤势，HP 尽复，心情 +10。",
+    "condition": {
+      "minRealm": 2
+    }
+  },
+  {
+    "id": "exp-03:heavenly_silence",
+    "category": "daily",
+    "tone": "neutral",
+    "name": "天道沉默",
+    "weight": 18,
+    "effects": {},
+    "message": "🌌 今日天道沉默无声，你只觉山河格外辽阔。"
+  }
+]

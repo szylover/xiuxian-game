@@ -1,0 +1,174 @@
+[
+  {
+    "id": "exp-03:calamity_ash_body",
+    "name": "劫灰炼身法",
+    "type": "fist",
+    "rarity": "rare",
+    "description": "以劫灰淬炼肉身，毁中求生。",
+    "minRealm": 2,
+    "maxLevel": 18,
+    "expPerLevel": 105,
+    "statBonusPerLevel": {
+      "hp": 18,
+      "def": 4
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "earth",
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "hp",
+        "value": 140,
+        "description": "劫灰淬体：体力 +140"
+      },
+      {
+        "minLevel": 12,
+        "stat": "physiqueDmgReduce",
+        "value": 4,
+        "description": "劫灰卸力：物理减伤 +4%"
+      }
+    ],
+    "bodyExpRate": 1.2
+  },
+  {
+    "id": "exp-03:heaven_punishment_sword",
+    "name": "天罚剑经",
+    "type": "sword",
+    "rarity": "epic",
+    "description": "引天罚雷意入剑，斩邪也斩己。",
+    "minRealm": 3,
+    "maxLevel": 25,
+    "expPerLevel": 150,
+    "statBonusPerLevel": {
+      "atk": 6,
+      "mp": 6,
+      "critRate": 1
+    },
+    "aptitudeKey": "sword",
+    "spiritRootElement": "metal",
+    "activeSkill": {
+      "name": "天罚一剑",
+      "description": "剑光如雷诏落下。",
+      "mpCost": 42,
+      "staminaCost": 12,
+      "dmgMultiplier": 2,
+      "hitCount": 1,
+      "cooldown": 3,
+      "triggerRate": 0.24,
+      "effect": {
+        "type": "dot",
+        "value": 18,
+        "duration": 2
+      }
+    },
+    "passiveEffects": [
+      {
+        "minLevel": 8,
+        "stat": "atk",
+        "value": 40,
+        "description": "雷诏剑意：攻击 +40"
+      },
+      {
+        "minLevel": 18,
+        "stat": "critDmgMultiplier",
+        "value": 0.3,
+        "description": "天罚爆雷：暴击伤害 +30%"
+      }
+    ]
+  },
+  {
+    "id": "exp-03:merit_palm",
+    "name": "功德金掌",
+    "type": "palm",
+    "rarity": "epic",
+    "description": "以功德护心，掌出温和却不可违逆。",
+    "minRealm": 3,
+    "maxLevel": 24,
+    "expPerLevel": 145,
+    "statBonusPerLevel": {
+      "def": 4,
+      "mp": 9,
+      "hp": 10
+    },
+    "aptitudeKey": "palm",
+    "spiritRootElement": "wood",
+    "requiredAlignment": "righteous",
+    "activeSkill": {
+      "name": "金光护世",
+      "description": "金掌压下，削弱杀意并回护己身。",
+      "mpCost": 36,
+      "staminaCost": 10,
+      "dmgMultiplier": 1.45,
+      "hitCount": 1,
+      "cooldown": 3,
+      "triggerRate": 0.25,
+      "effect": {
+        "type": "heal_self",
+        "value": 120,
+        "duration": 1
+      }
+    },
+    "passiveEffects": [
+      {
+        "minLevel": 7,
+        "stat": "def",
+        "value": 30,
+        "description": "功德护体：防御 +30"
+      },
+      {
+        "minLevel": 16,
+        "stat": "hp",
+        "value": 220,
+        "description": "金身微光：体力 +220"
+      }
+    ],
+    "karmaShift": 4
+  },
+  {
+    "id": "exp-03:chaos_fate_finger",
+    "name": "混沌命指",
+    "type": "finger",
+    "rarity": "legendary",
+    "description": "一指拨动命线，逆量劫而行。",
+    "minRealm": 5,
+    "maxLevel": 30,
+    "expPerLevel": 210,
+    "statBonusPerLevel": {
+      "atk": 8,
+      "speed": 2,
+      "mp": 12,
+      "critRate": 1
+    },
+    "aptitudeKey": "finger",
+    "spiritRootElement": "water",
+    "activeSkill": {
+      "name": "断命一指",
+      "description": "指尖掠过命线，使敌机运断裂。",
+      "mpCost": 58,
+      "staminaCost": 16,
+      "dmgMultiplier": 2.4,
+      "hitCount": 1,
+      "cooldown": 4,
+      "triggerRate": 0.22,
+      "effect": {
+        "type": "debuff_atk",
+        "value": 26,
+        "duration": 2
+      }
+    },
+    "passiveEffects": [
+      {
+        "minLevel": 10,
+        "stat": "atk",
+        "value": 68,
+        "description": "命线拨杀：攻击 +68"
+      },
+      {
+        "minLevel": 22,
+        "stat": "critRate",
+        "value": 7,
+        "description": "逆命破绽：暴击率 +7%"
+      }
+    ]
+  }
+]

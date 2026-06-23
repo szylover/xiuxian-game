@@ -1,0 +1,63 @@
+[
+  {
+    "id": "cp-03:realm_true_immortal",
+    "name": "真仙",
+    "index": 8,
+    "expReq": 1200000,
+    "lifespanBonus": 120000,
+    "hpBase": 90000,
+    "mpBase": 36000,
+    "atkBase": 4800,
+    "defBase": 2600,
+    "speedBase": 150,
+    "mentalBase": 6000,
+    "tier": "immortal",
+    "ascensionRequired": true,
+    "tierTransition": "ascension"
+  },
+  {
+    "id": "cp-03:realm_heaven_immortal",
+    "name": "天仙",
+    "index": 9,
+    "expReq": 3200000,
+    "lifespanBonus": 240000,
+    "hpBase": 180000,
+    "mpBase": 76000,
+    "atkBase": 9000,
+    "defBase": 5200,
+    "speedBase": 210,
+    "mentalBase": 12000,
+    "tier": "immortal",
+    "ascensionRequired": true
+  },
+  {
+    "id": "cp-03:realm_mystic_immortal",
+    "name": "玄仙",
+    "index": 10,
+    "expReq": 8200000,
+    "lifespanBonus": 480000,
+    "hpBase": 360000,
+    "mpBase": 160000,
+    "atkBase": 18000,
+    "defBase": 11000,
+    "speedBase": 290,
+    "mentalBase": 25000,
+    "tier": "immortal",
+    "ascensionRequired": true
+  },
+  {
+    "id": "cp-03:realm_golden_immortal",
+    "name": "金仙",
+    "index": 11,
+    "expReq": 18000000,
+    "lifespanBonus": 960000,
+    "hpBase": 720000,
+    "mpBase": 320000,
+    "atkBase": 36000,
+    "defBase": 23000,
+    "speedBase": 390,
+    "mentalBase": 52000,
+    "tier": "immortal",
+    "ascensionRequired": true
+  }
+]

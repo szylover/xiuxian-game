@@ -1,0 +1,115 @@
+[
+  {
+    "id": "cp-02:hidden_valley",
+    "name": "隐雾谷",
+    "emoji": "🌫️",
+    "description": "常年被薄雾笼罩的山谷，适合低调修行与采集药草。",
+    "minRealm": 0,
+    "parentId": "core:mortal_world",
+    "regionTags": ["valley", "herb", "safe"],
+    "travelCostBase": 8,
+    "travelTimeMonths": 1,
+    "safeZone": true,
+    "explorationBonus": 0.2,
+    "lootTable": [
+      { "itemId": "cp-02:dried_spirit_herb", "chance": 0.28 },
+      { "itemId": "cp-02:bitter_root", "chance": 0.18 },
+      { "itemId": "cp-02:breath_pill", "chance": 0.08 },
+      { "itemId": "cp-02:risk_notes", "chance": 0.06 }
+    ]
+  },
+  {
+    "id": "cp-02:three_caves",
+    "name": "三窟岭",
+    "emoji": "🕳️",
+    "description": "狡兔三窟之地，洞穴相连，进可采矿，退可藏身。",
+    "minRealm": 1,
+    "parentId": "core:mortal_world",
+    "regionTags": ["mountain", "wilderness"],
+    "travelCostBase": 18,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.1,
+    "lootTable": [
+      { "itemId": "cp-02:turtle_shell_piece", "chance": 0.18 },
+      { "itemId": "cp-02:silent_jade", "chance": 0.12 },
+      { "itemId": "cp-02:cave_map", "chance": 0.05 },
+      { "itemId": "cp-02:retreat_token", "chance": 0.12 }
+    ]
+  },
+  {
+    "id": "cp-02:nameless_market",
+    "name": "无名小市",
+    "emoji": "🏮",
+    "description": "无人追问来历的小市，修士们只认灵石不认姓名。",
+    "minRealm": 1,
+    "parentId": "core:mortal_world",
+    "regionTags": ["town", "trade", "safe"],
+    "travelCostBase": 12,
+    "travelTimeMonths": 1,
+    "safeZone": true,
+    "shopDiscount": 0.05,
+    "lootTable": [
+      { "itemId": "cp-02:plain_mask", "chance": 0.08 },
+      { "itemId": "cp-02:spirit_stone_cache", "chance": 0.12 },
+      { "itemId": "cp-02:smoke_escape_talisman", "chance": 0.06 },
+      { "itemId": "cp-02:substitute_talisman", "chance": 0.03 }
+    ]
+  },
+  {
+    "id": "cp-02:shadow_marsh",
+    "name": "影沼泽",
+    "emoji": "🕸️",
+    "description": "泥沼与阴影交错，盛产隐匿灵材，也潜伏着无声妖兽。",
+    "minRealm": 2,
+    "parentId": "core:mortal_world",
+    "regionTags": ["wilderness", "dangerous", "herb"],
+    "travelCostBase": 26,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.25,
+    "lootTable": [
+      { "itemId": "cp-02:moon_moss", "chance": 0.20 },
+      { "itemId": "cp-02:shadow_thread", "chance": 0.10 },
+      { "itemId": "cp-02:detox_powder", "chance": 0.08 },
+      { "itemId": "cp-02:hidden_heal_pill", "chance": 0.05 }
+    ]
+  },
+  {
+    "id": "cp-02:forgotten_safehouse",
+    "name": "旧日安全屋",
+    "emoji": "🏚️",
+    "description": "前辈散修留下的隐蔽落脚点，墙中暗格仍有余温。",
+    "minRealm": 2,
+    "parentId": "core:mortal_world",
+    "regionTags": ["mystic", "safe"],
+    "travelCostBase": 24,
+    "travelTimeMonths": 1,
+    "safeZone": true,
+    "explorationBonus": 0.15,
+    "lootTable": [
+      { "itemId": "cp-02:old_formation_plate", "chance": 0.12 },
+      { "itemId": "cp-02:safehouse_key", "chance": 0.05 },
+      { "itemId": "cp-02:long_breath_pill", "chance": 0.06 },
+      { "itemId": "cp-02:fake_death_pill", "chance": 0.03 }
+    ]
+  },
+  {
+    "id": "cp-02:calamity_avoidance_cliff",
+    "name": "避劫崖",
+    "emoji": "⛰️",
+    "description": "雷痕密布却有奇异静意的高崖，传闻能遮掩一线天机。",
+    "minRealm": 3,
+    "parentId": "core:mortal_world",
+    "regionTags": ["mystic", "dangerous", "mountain"],
+    "travelCostBase": 34,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.35,
+    "explorationBonus": 0.25,
+    "lootTable": [
+      { "itemId": "cp-02:calamity_ash", "chance": 0.08 },
+      { "itemId": "cp-02:earth_escape_clay", "chance": 0.12 },
+      { "itemId": "cp-02:full_retreat_pill", "chance": 0.03 },
+      { "itemId": "cp-02:life_extension_tea", "chance": 0.04 }
+    ]
+  }
+]
+

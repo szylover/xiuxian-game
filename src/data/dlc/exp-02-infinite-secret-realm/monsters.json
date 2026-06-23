@@ -1,0 +1,120 @@
+[
+  {
+    "id": "exp-02:loop_rat",
+    "name": "循环灵鼠",
+    "emoji": "🐀",
+    "realmIndex": 1,
+    "hp": 220,
+    "atk": 20,
+    "def": 10,
+    "speed": 18,
+    "moveSpeed": 14,
+    "critRate": 6,
+    "critResist": 3,
+    "critDmgMultiplier": 1.4,
+    "expReward": 55,
+    "goldReward": 20,
+    "regionTags": [
+      "mystic"
+    ]
+  },
+  {
+    "id": "exp-02:mirror_guard",
+    "name": "镜层守卫",
+    "emoji": "🪞",
+    "realmIndex": 2,
+    "hp": 650,
+    "atk": 62,
+    "def": 36,
+    "speed": 18,
+    "moveSpeed": 12,
+    "critRate": 8,
+    "critResist": 8,
+    "critDmgMultiplier": 1.5,
+    "expReward": 180,
+    "goldReward": 70,
+    "regionTags": [
+      "mystic",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "exp-02:void_mantis",
+    "name": "虚隙螳螂",
+    "emoji": "🦗",
+    "realmIndex": 3,
+    "hp": 1350,
+    "atk": 135,
+    "def": 45,
+    "speed": 36,
+    "moveSpeed": 28,
+    "critRate": 18,
+    "critResist": 8,
+    "critDmgMultiplier": 1.7,
+    "expReward": 430,
+    "goldReward": 170,
+    "regionTags": [
+      "mystic",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "exp-02:floor_ogre",
+    "name": "层门巨魁",
+    "emoji": "👹",
+    "realmIndex": 4,
+    "hp": 4200,
+    "atk": 260,
+    "def": 170,
+    "speed": 12,
+    "moveSpeed": 8,
+    "critRate": 7,
+    "critResist": 18,
+    "critDmgMultiplier": 1.5,
+    "expReward": 1320,
+    "goldReward": 520,
+    "regionTags": [
+      "mystic"
+    ]
+  },
+  {
+    "id": "exp-02:void_serpent",
+    "name": "虚空游蛇",
+    "emoji": "🐍",
+    "realmIndex": 5,
+    "hp": 8800,
+    "atk": 480,
+    "def": 260,
+    "speed": 32,
+    "moveSpeed": 25,
+    "critRate": 14,
+    "critResist": 18,
+    "critDmgMultiplier": 1.7,
+    "expReward": 3800,
+    "goldReward": 1300,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
+  },
+  {
+    "id": "exp-02:infinite_floor_lord",
+    "name": "无尽层主",
+    "emoji": "🐲",
+    "realmIndex": 6,
+    "hp": 18000,
+    "atk": 820,
+    "def": 520,
+    "speed": 26,
+    "moveSpeed": 18,
+    "critRate": 16,
+    "critResist": 24,
+    "critDmgMultiplier": 1.8,
+    "expReward": 9000,
+    "goldReward": 3200,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
+  }
+]

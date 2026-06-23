@@ -1,0 +1,41 @@
+export const RANKING_TEXTS = {
+  boardTabs: {
+    leaderboard: { key: 'leaderboard', label: '排行榜' },
+    celestial: { key: 'celestial', label: '天机榜' },
+  },
+  boardIntro: {
+    leaderboard: '衡量修仙界各路修士的境界、战力、财富、声望与功法造诣。',
+    celestial: '天机阁推演命数与天资，只收录最具变数的天骄与异数。',
+  },
+  dimensionLabels: {
+    'core:realm_progress': '境界榜',
+    'core:combat_power': '战力榜',
+    'core:wealth': '财富榜',
+    'core:reputation': '声望榜',
+    'core:technique_mastery': '功法榜',
+    'core:heaven_chosen': '天骄榜',
+    'core:prodigy': '潜龙榜',
+  } as Record<string, string>,
+  dimensionHints: {
+    'core:realm_progress': '按境界与当前修为排序，境界越高越靠前。',
+    'core:combat_power': '综合气血、灵力、攻防、速度、暴击与体修境界计算。',
+    'core:wealth': '按灵石、随身资源与修为底蕴估算。',
+    'core:reputation': '按战绩、成就、境界与魅力估算。',
+    'core:technique_mastery': '按已学功法等级、熟练度与 NPC 传承底蕴估算。',
+    'core:heaven_chosen': '天机阁以战力、气运、魅力与声望推演当世天骄。',
+    'core:prodigy': '以悟性、气运、魅力与传承潜力推演未来潜龙。',
+  } as Record<string, string>,
+  sourceLabels: {
+    player: '你',
+    npc: '修士',
+  },
+  playerBadge: '本尊',
+  unknownDimension: '未知榜单',
+  empty: '天机未显，暂无上榜者。',
+  score: (value: number) => `评分 ${value}`,
+  refreshedAt: (year: number, month: number) => `第 ${year} 年 ${month} 月刷新`,
+  playerRank: (rank: number) => `当前名次：第 ${rank} 名`,
+  playerOffList: '当前未入榜',
+  rankPrefix: (rank: number) => `第 ${rank} 名`,
+  realmUnknown: '未知境界',
+} as const;

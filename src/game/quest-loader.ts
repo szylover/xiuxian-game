@@ -20,6 +20,9 @@ interface JsonQuestCondition {
   requiredQuests?: string[];
   requiredItems?: { itemId: string; count: number }[];
   npcAffinity?: { npcId: string; min: number }[];
+  requiredAlignment?: import('./types').Alignment;
+  minKarma?: number;
+  maxKarma?: number;
 }
 
 interface JsonQuestObjective {
@@ -36,6 +39,7 @@ interface JsonQuestReward {
   items?: { itemId: string; count: number }[];
   statBonus?: Partial<Record<string, number>>;
   affinityChange?: { npcId: string; delta: number }[];
+  karmaChange?: number;
 }
 
 interface JsonQuestStep {
@@ -93,6 +97,9 @@ function parseCondition(cond?: JsonQuestCondition | null): QuestChainCondition |
     requiredQuests: cond.requiredQuests,
     requiredItems: cond.requiredItems,
     npcAffinity: cond.npcAffinity,
+    requiredAlignment: cond.requiredAlignment,
+    minKarma: cond.minKarma,
+    maxKarma: cond.maxKarma,
   };
 }
 
@@ -118,6 +125,7 @@ function parseReward(reward?: JsonQuestReward): QuestReward {
     items: reward.items,
     statBonus: reward.statBonus as QuestReward['statBonus'],
     affinityChange: reward.affinityChange,
+    karmaChange: reward.karmaChange,
   };
 }
 

@@ -10,6 +10,14 @@ import type { CoreActionDeps, LogQueue } from './types';
 import type { LogCategory } from '../useGameLog';
 import { COMBAT_TEXTS } from '../../data/texts/combat';
 import { CULTIVATION_TEXTS } from '../../data/texts/cultivation';
+import { playSound } from '../../game/audio';
+import { ensureDestinyTalentState } from '../../game/destiny';
+import { gainComprehension, getEnlightenmentEffects, tryTriggerEnlightenment } from '../../game/enlightenment';
+import { changeKarma } from '../../game/karma';
+import { getSectCultivationBonus } from '../../game/sect';
+import { getReincarnationState } from '../../game/reincarnation';
+import { getDualCultivationBonus } from '../../game/npc';
+import { addHeartDemon, getHeartDemonEffects, tryHeartDemonTribulation } from '../../game/heart-demon';
 
 export function useCultivationActions(
   deps: Pick<CoreActionDeps, 'addLog' | 'setPlayer' | 'advanceTime' | 'canAct'>,
@@ -38,18 +46,33 @@ export function useCultivationActions(
     pendingRef.current = { msgs: [], categories: [] };
     setPlayer(prev => {
       if (!prev) return prev;
-      let p: Player = { ...prev };
+      let p: Player = ensureDestinyTalentState({ ...prev });
       const cost = ACTION_COSTS.cultivate;
       p.stamina -= cost.stamina;
 
       const compBonus = 1 + p.comprehension / 50;
       const cultivationMult = p.spiritRoots?.cultivationMultiplier ?? getSpiritRootGrade(p.aptitudes).multiplier;
       const moodBonus = 0.5 + (p.mood / 100);
-      const expGain = Math.floor(BASE_CULTIVATE_EXP * compBonus * cultivationMult * moodBonus);
+      const enlightenmentBonus = getEnlightenmentEffects(p).cultivationSpeedBonus ?? 0;
+      const sectBonus = getSectCultivationBonus(p);
+      const dualBonus = getDualCultivationBonus(p);
+      const reincarnationLegacy = getReincarnationState(p).legacy;
+      const heartDemonEffects = getHeartDemonEffects(p);
+      const expGain = Math.floor(BASE_CULTIVATE_EXP * compBonus * cultivationMult * moodBonus * heartDemonEffects.cultivationSpeedMultiplier * (1 + enlightenmentBonus + sectBonus + dualBonus + reincarnationLegacy.cultivationSpeedBonus));
       p.exp += expGain;
 
       // T0062 根据激活功法类型决定锄体/修炼模式
       const activeDef = p.activeTechniqueId ? getTechniqueDef(p.activeTechniqueId) : null;
+      if (activeDef?.karmaShift) {
+        const karmaResult = changeKarma(p, activeDef.karmaShift, activeDef.name);
+        p = karmaResult.player;
+        queueLogs(karmaResult.logs, 'system');
+        if (activeDef.karmaShift < 0) {
+          const demon = addHeartDemon(p, Math.abs(activeDef.karmaShift), 'karma');
+          p = demon.player;
+          queueLogs(demon.logs, 'system');
+        }
+      }
       const bodyRate = activeDef?.bodyExpRate ?? 0;
       let bodyMsg = '';
 
@@ -60,7 +83,7 @@ export function useCultivationActions(
       }
 
       if (bodyRate > 0) {
-        const baseBodyExp = Math.floor(expGain * bodyRate * 0.5);
+        const baseBodyExp = Math.floor(expGain * bodyRate * 0.5 * (1 + reincarnationLegacy.bodyExpBonus));
         const { player: p2, message: btMsg, actualGain } = gainBodyRealmExp(p, baseBodyExp);
         p = p2;
         if (actualGain > 0) bodyMsg = ` ${CULTIVATION_TEXTS.bodyExpGain(actualGain)}`;
@@ -95,9 +118,26 @@ export function useCultivationActions(
       p = questResult.player;
       queueLogs(questResult.logs, 'system');
 
+      const enlightenmentGain = gainComprehension(p, Math.max(4, Math.floor(expGain / 10)));
+      p = enlightenmentGain.player;
+
+      const enlightenmentTrigger = tryTriggerEnlightenment(p, expGain);
+      p = enlightenmentTrigger.player;
+
+      const demonGain = addHeartDemon(p, p.tracking.consecutiveCultivates >= 6 ? 3 : 1, 'cultivation');
+      p = demonGain.player;
+      queueLogs(demonGain.logs, 'system');
+      const demonTribulation = tryHeartDemonTribulation(p);
+      if (demonTribulation.triggered) {
+        p = demonTribulation.player;
+        queueLogs(demonTribulation.logs, demonTribulation.success ? 'adventure' : 'system');
+      }
+
       p = advanceTime(p, 'cultivate');
 
       pendingRef.current = { msgs: [], categories: [] };
+      queueLogs(enlightenmentGain.logs, 'system');
+      queueLogs(enlightenmentTrigger.logs, 'adventure');
       if (isBodyMode) {
         queueLog(CULTIVATION_TEXTS.cultivateBody(expGain) + bodyMsg, 'system');
       } else {
@@ -105,6 +145,7 @@ export function useCultivationActions(
       }
       return p;
     });
+    playSound('cultivateTick');
     setTimeout(flushLogs, 0);
   }, [canAct, advanceTime, addLog, setPlayer]);
 

@@ -1,0 +1,212 @@
+[
+  {
+    "id": "cp-05:blood_bat",
+    "name": "血翅蝠",
+    "emoji": "🦇",
+    "realmIndex": 0,
+    "hp": 70,
+    "atk": 9,
+    "def": 2,
+    "speed": 14,
+    "moveSpeed": 14,
+    "critRate": 8,
+    "critResist": 0,
+    "critDmgMultiplier": 1.5,
+    "expReward": 16,
+    "goldReward": 8,
+    "element": "fire",
+    "regionTags": [
+      "demonic",
+      "cave"
+    ]
+  },
+  {
+    "id": "cp-05:grave_worm",
+    "name": "阴坟虫",
+    "emoji": "🪱",
+    "realmIndex": 0,
+    "hp": 95,
+    "atk": 6,
+    "def": 5,
+    "speed": 8,
+    "moveSpeed": 6,
+    "critRate": 3,
+    "critResist": 3,
+    "critDmgMultiplier": 1.4,
+    "expReward": 15,
+    "goldReward": 6,
+    "element": "earth",
+    "regionTags": [
+      "demonic",
+      "wilderness"
+    ]
+  },
+  {
+    "id": "cp-05:bone_hound",
+    "name": "白骨犬",
+    "emoji": "🐕",
+    "realmIndex": 1,
+    "hp": 240,
+    "atk": 20,
+    "def": 10,
+    "speed": 16,
+    "moveSpeed": 12,
+    "critRate": 6,
+    "critResist": 4,
+    "critDmgMultiplier": 1.5,
+    "expReward": 46,
+    "goldReward": 18,
+    "element": "earth",
+    "regionTags": [
+      "demonic",
+      "wasteland"
+    ]
+  },
+  {
+    "id": "cp-05:black_mist_spider",
+    "name": "黑雾蛛",
+    "emoji": "🕷️",
+    "realmIndex": 1,
+    "hp": 210,
+    "atk": 24,
+    "def": 8,
+    "speed": 18,
+    "moveSpeed": 15,
+    "critRate": 10,
+    "critResist": 3,
+    "critDmgMultiplier": 1.6,
+    "expReward": 55,
+    "goldReward": 22,
+    "element": "water",
+    "regionTags": [
+      "demonic",
+      "mystic"
+    ]
+  },
+  {
+    "id": "cp-05:resentment_wraith",
+    "name": "怨魂影",
+    "emoji": "👻",
+    "realmIndex": 2,
+    "hp": 520,
+    "atk": 58,
+    "def": 18,
+    "speed": 24,
+    "moveSpeed": 22,
+    "critRate": 14,
+    "critResist": 8,
+    "critDmgMultiplier": 1.7,
+    "expReward": 145,
+    "goldReward": 62,
+    "element": "water",
+    "regionTags": [
+      "demonic",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-05:blood_lotus_serpent",
+    "name": "血莲蛇",
+    "emoji": "🐍",
+    "realmIndex": 2,
+    "hp": 680,
+    "atk": 50,
+    "def": 30,
+    "speed": 18,
+    "moveSpeed": 14,
+    "critRate": 9,
+    "critResist": 10,
+    "critDmgMultiplier": 1.5,
+    "expReward": 150,
+    "goldReward": 70,
+    "element": "wood",
+    "regionTags": [
+      "demonic",
+      "herb"
+    ]
+  },
+  {
+    "id": "cp-05:nether_armor_ox",
+    "name": "幽甲牛",
+    "emoji": "🐂",
+    "realmIndex": 3,
+    "hp": 1800,
+    "atk": 105,
+    "def": 80,
+    "speed": 18,
+    "moveSpeed": 10,
+    "critRate": 7,
+    "critResist": 18,
+    "critDmgMultiplier": 1.5,
+    "expReward": 420,
+    "goldReward": 160,
+    "element": "earth",
+    "regionTags": [
+      "demonic",
+      "mountain"
+    ]
+  },
+  {
+    "id": "cp-05:black_flame_raven",
+    "name": "黑焰鸦",
+    "emoji": "🐦‍⬛",
+    "realmIndex": 3,
+    "hp": 1450,
+    "atk": 135,
+    "def": 48,
+    "speed": 34,
+    "moveSpeed": 28,
+    "critRate": 18,
+    "critResist": 10,
+    "critDmgMultiplier": 1.8,
+    "expReward": 480,
+    "goldReward": 190,
+    "element": "fire",
+    "regionTags": [
+      "demonic",
+      "sky"
+    ]
+  },
+  {
+    "id": "cp-05:demon_ape",
+    "name": "裂魂魔猿",
+    "emoji": "🦍",
+    "realmIndex": 4,
+    "hp": 4200,
+    "atk": 270,
+    "def": 130,
+    "speed": 38,
+    "moveSpeed": 28,
+    "critRate": 16,
+    "critResist": 14,
+    "critDmgMultiplier": 1.7,
+    "expReward": 1300,
+    "goldReward": 520,
+    "element": "fire",
+    "regionTags": [
+      "demonic",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "cp-05:nether_dragon",
+    "name": "冥河蛟",
+    "emoji": "🐉",
+    "realmIndex": 5,
+    "hp": 9800,
+    "atk": 560,
+    "def": 300,
+    "speed": 52,
+    "moveSpeed": 38,
+    "critRate": 18,
+    "critResist": 18,
+    "critDmgMultiplier": 1.8,
+    "expReward": 4200,
+    "goldReward": 1600,
+    "element": "water",
+    "regionTags": [
+      "demonic",
+      "mystic"
+    ]
+  }
+]

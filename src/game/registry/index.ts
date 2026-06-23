@@ -30,7 +30,14 @@ export type {
   MutationType, MonsterTemplate, MutationDef, ProceduralMonsterState,
   TechniqueTraitDef, TechniqueTraitTier, TechniqueTraitSlot, TechniqueInstance,
   TechniqueQualityConfig, ProceduralTechniqueState,
-  RealmTier, AscensionDef, AscensionItemCost, AscensionCondition, AscensionState,
+  RealmTier, AscensionDef, AscensionItemCost, AscensionCondition, AscensionState, ReincarnationContext, ReincarnationLegacy, ReincarnationState, LegacySnapshot, ReincarnationEffectDef, PrimordialEndgameDef, PrimordialEndgameState,
+  RankingBoardKind, RankingScoreKey, RankingDimensionDef, RankingEntry, RankingSnapshot, RankingSystemState,
+  DestinyRarity, DestinyTalentStatKey, DestinyTalentEffect, DestinyDef, TalentDef, TalentTreeNodeDef, DestinyTalentState, UnlockTalentNodeResult,
+  BountyObjectiveType, BountyObjectiveDef, BountyTemplateDef, GeneratedBounty, ActiveBounty, BountySystemState,
+  SecretRealmStageType, SecretRealmStageDef, SecretRealmDef, SecretRealmRun, SecretRealmSystemState,
+  Alignment, KarmaSystemState, EnlightenmentInsightDef, EnlightenmentState, EnlightenmentBuff,
+  SectDef, SectRankDef, SectMissionDef, SectStoreItemDef, SectFacilityDef, SectSystemState, SectManagementState, SectMemberState,
+  ScrollStudyType, ActiveStudy, LearningSystemState,
 } from '../types';
 export type {
   AchievementCategory, AchievementDef, AchievementBonusStats,
@@ -71,6 +78,13 @@ export {
   getTechniqueTraitDef, getAllTechniqueTraitDefs, getTechniqueTraitsByTier,
   getTechniqueInstance, registerTechniqueInstance, removeTechniqueInstance, getAllTechniqueInstances, clearAllTechniqueInstances,
   getAscensionDef, getAllAscensionDefs, getAscensionForRealm,
+  getRankingDimensionDef, getAllRankingDimensionDefs, getRankingDimensionsByBoard,
+  getDestinyDef, getAllDestinyDefs, getTalentDef, getAllTalentDefs, getTalentTreeNodeDef, getAllTalentTreeNodeDefs,
+  getBountyTemplateDef, getAllBountyTemplateDefs,
+  getSecretRealmDef, getAllSecretRealmDefs,
+  getEnlightenmentInsightDef, getAllEnlightenmentInsightDefs,
+  getSectDef, getAllSectDefs,
+  getAllReincarnationEffects, getPrimordialEndgameDef, getAllPrimordialEndgameDefs,
 } from './queries';
 export {
   triggerEvent, resetRuntimeState, saveEventState, loadEventState,

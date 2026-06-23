@@ -19,6 +19,7 @@ export type ChronicleEventType =
   | 'ascension_fail'
   | 'death'
   | 'revival'
+  | 'reincarnation'
   | 'first_boss_kill'
   | 'rare_item_obtained'
   | 'technique_acquired'
@@ -76,7 +77,7 @@ const CURRENT_SCHEMA = 1;
 /** 事件是否为"关键"（超限丢弃时保留） */
 const CRITICAL_TYPES: Set<ChronicleEventType> = new Set([
   'death', 'game_over', 'realm_breakthrough', 'tribulation_pass', 'tribulation_fail',
-  'ascension_success', 'ascension_fail',
+  'ascension_success', 'ascension_fail', 'reincarnation',
 ]);
 
 // ── 空状态 ──
@@ -292,3 +293,4 @@ function addEventToList(events: ChronicleEvent[], event: ChronicleEvent): Chroni
 export function getBodyRealmName(index: number): string {
   return getBodyRealmDef(index)?.name ?? '凡躯';
 }
+

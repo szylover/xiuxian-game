@@ -5,7 +5,7 @@
 import type { Player } from '../../game/player';
 import { UI_LABELS } from '../../data/texts/ui-labels';
 
-export type PanelKey = 'inventory' | 'shop' | 'crafting' | 'equipment' | 'technique' | 'divine' | 'achievement' | 'map' | 'npc' | 'quest' | 'chronicle' | 'status';
+export type PanelKey = 'inventory' | 'shop' | 'auction' | 'mining' | 'crafting' | 'equipment' | 'technique' | 'learning' | 'divine' | 'enlightenment' | 'heartDemon' | 'achievement' | 'map' | 'npc' | 'companion' | 'quest' | 'bounty' | 'secretRealm' | 'chronicle' | 'ranking' | 'pvp' | 'talent' | 'sect' | 'status';
 
 interface PanelDef {
   key: PanelKey;
@@ -26,14 +26,19 @@ const PANEL_GROUPS: PanelGroup[] = [
     label: g.economy,
     panels: [
       { key: 'inventory', icon: p.inventory.icon, label: p.inventory.title },
-      { key: 'shop', icon: p.shop.icon, label: p.shop.title },
+      { key: 'auction', icon: p.auction.icon, label: p.auction.title },
+      { key: 'mining', icon: p.mining.icon, label: p.mining.title },
     ],
   },
   {
     label: g.cultivation,
     panels: [
       { key: 'technique', icon: p.technique.icon, label: p.technique.title },
+      { key: 'learning', icon: p.learning.icon, label: p.learning.title },
       { key: 'divine', icon: p.divine.icon, label: p.divine.title },
+      { key: 'talent', icon: p.talent.icon, label: p.talent.title },
+      { key: 'enlightenment', icon: p.enlightenment.icon, label: p.enlightenment.title },
+      { key: 'heartDemon', icon: p.heartDemon.icon, label: p.heartDemon.title },
       { key: 'crafting', icon: p.crafting.icon, label: p.crafting.title },
       { key: 'equipment', icon: p.equipment.icon, label: p.equipment.title },
     ],
@@ -43,12 +48,23 @@ const PANEL_GROUPS: PanelGroup[] = [
     panels: [
       { key: 'achievement', icon: p.achievement.icon, label: p.achievement.title },
       { key: 'chronicle', icon: p.chronicle.icon, label: p.chronicle.title },
+      { key: 'ranking', icon: p.ranking.icon, label: p.ranking.title },
+      { key: 'pvp', icon: p.pvp.icon, label: p.pvp.title },
+    ],
+  },
+  {
+    label: g.sect,
+    panels: [
+      { key: 'sect', icon: p.sect.icon, label: p.sect.title },
     ],
   },
   {
     label: g.world,
     panels: [
       { key: 'quest', icon: p.quest.icon, label: p.quest.title },
+      { key: 'companion', icon: p.companion.icon, label: p.companion.title },
+      { key: 'bounty', icon: p.bounty.icon, label: p.bounty.title },
+      { key: 'secretRealm', icon: p.secretRealm.icon, label: p.secretRealm.title },
     ],
   },
 ];

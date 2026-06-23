@@ -1,0 +1,256 @@
+[
+  {
+    "id": "exp-03:quest_ash_lotus",
+    "name": "劫灰生莲",
+    "description": "功德仙子请你在量劫焦土中寻找劫后新生的证据。",
+    "icon": "🪷",
+    "category": "main",
+    "condition": {
+      "minRealm": 2
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "前往量劫焦土",
+        "description": "抵达量劫焦土，观察劫灰变化。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "exp-03:calamity_wasteland",
+            "description": "前往量劫焦土"
+          }
+        ],
+        "dialogueSnippet": "功德仙子轻声道：「大劫不是终点，护住新生才有功德。」"
+      },
+      {
+        "id": "step_2",
+        "name": "收集劫后灵材",
+        "description": "收集量劫灰与劫莲子。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "exp-03:calamity_ash",
+            "count": 3,
+            "description": "收集量劫灰 (0/3)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "exp-03:calamity_lotus_seed",
+            "count": 2,
+            "description": "收集劫莲子 (0/2)"
+          }
+        ],
+        "rewards": {
+          "exp": 300,
+          "karmaChange": 2
+        }
+      },
+      {
+        "id": "step_3",
+        "name": "驱散劫灰怨灵",
+        "description": "击败盘踞焦土的劫灰怨灵。",
+        "objectives": [
+          {
+            "type": "kill_monster",
+            "targetId": "exp-03:ash_wraith",
+            "count": 3,
+            "description": "击败劫灰怨灵 (0/3)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 1800,
+      "gold": 700,
+      "karmaChange": 5,
+      "items": [
+        {
+          "itemId": "exp-03:merit_jade",
+          "count": 1
+        },
+        {
+          "itemId": "exp-03:dao_balance_pill",
+          "count": 2
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "auto"
+    },
+    "turnInNpcId": "exp-03:npc_merit_fairy",
+    "repeatable": false
+  },
+  {
+    "id": "exp-03:quest_heavenly_ledger",
+    "name": "天账审因果",
+    "description": "司命书吏要求你补齐一段被劫风吹散的天账。",
+    "icon": "📒",
+    "category": "main",
+    "condition": {
+      "minRealm": 3,
+      "requiredQuests": [
+        "exp-03:quest_ash_lotus"
+      ]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "登上天账崖",
+        "description": "前往天账崖接受因果审视。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "exp-03:heavenly_ledger_cliff",
+            "description": "前往天账崖"
+          }
+        ]
+      },
+      {
+        "id": "step_2",
+        "name": "准备账簿材料",
+        "description": "收集命运丝、功德玉与洗业水。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "exp-03:fate_thread",
+            "count": 2,
+            "description": "收集命运丝 (0/2)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "exp-03:merit_jade",
+            "count": 1,
+            "description": "收集功德玉 (0/1)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "exp-03:karma_wash_water",
+            "count": 1,
+            "description": "准备洗业水 (0/1)"
+          }
+        ],
+        "rewards": {
+          "exp": 600
+        }
+      },
+      {
+        "id": "step_3",
+        "name": "平定业火猎犬",
+        "description": "击败追逐业债的猎犬。",
+        "objectives": [
+          {
+            "type": "kill_monster",
+            "targetId": "exp-03:karma_hound",
+            "count": 2,
+            "description": "击败业火猎犬 (0/2)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 3600,
+      "gold": 1200,
+      "items": [
+        {
+          "itemId": "exp-03:heavenly_decree",
+          "count": 1
+        },
+        {
+          "itemId": "exp-03:fate_thread",
+          "count": 3
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "npc",
+      "npcId": "exp-03:npc_heavenly_clerk"
+    },
+    "turnInNpcId": "exp-03:npc_heavenly_clerk",
+    "repeatable": false
+  },
+  {
+    "id": "exp-03:quest_chaos_fate",
+    "name": "逆命渡劫",
+    "description": "量劫道人预言命河将现天罚执使，需先收束混沌因果。",
+    "icon": "🌌",
+    "category": "main",
+    "condition": {
+      "minRealm": 5,
+      "requiredQuests": [
+        "exp-03:quest_heavenly_ledger"
+      ]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "抵达混沌命河",
+        "description": "前往混沌命河。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "exp-03:chaos_fate_river",
+            "description": "前往混沌命河"
+          }
+        ]
+      },
+      {
+        "id": "step_2",
+        "name": "收束天道残片",
+        "description": "收集圣骨残文、天眼碎片与劫雷珠。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "exp-03:saint_bone_script",
+            "count": 1,
+            "description": "收集圣骨残文 (0/1)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "exp-03:sky_eye_shard",
+            "count": 2,
+            "description": "收集天眼碎片 (0/2)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "exp-03:tribulation_pearl",
+            "count": 2,
+            "description": "收集劫雷珠 (0/2)"
+          }
+        ]
+      },
+      {
+        "id": "step_3",
+        "name": "直面天罚执使",
+        "description": "击败天罚执使，证明你可在量劫中自持。",
+        "objectives": [
+          {
+            "type": "kill_monster",
+            "targetId": "exp-03:dao_punisher",
+            "count": 1,
+            "description": "击败天罚执使 (0/1)"
+          }
+        ]
+      }
+    ],
+    "rewards": {
+      "exp": 24000,
+      "gold": 8000,
+      "items": [
+        {
+          "itemId": "exp-03:heavenly_decree",
+          "count": 2
+        },
+        {
+          "itemId": "exp-03:saint_bone_script",
+          "count": 1
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "npc",
+      "npcId": "exp-03:npc_calamity_prophet"
+    },
+    "turnInNpcId": "exp-03:npc_calamity_prophet",
+    "repeatable": false
+  }
+]

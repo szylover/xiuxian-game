@@ -8,6 +8,9 @@ import { BREAKTHROUGH_BASE_RATE, BREAKTHROUGH_COMP_BONUS, BREAKTHROUGH_LUCK_BONU
 import type { Realm } from '../data';
 import { getBreakthroughReq, getItemDef, getAscensionForRealm } from '../registry';
 import type { BreakthroughReqDef, AscensionDef } from '../registry';
+import { getDestinyTalentEffects, ensureDestinyTalentState } from '../destiny';
+import { getEnlightenmentEffects } from '../enlightenment';
+import { getHeartDemonEffects } from '../heart-demon';
 
 export interface ItemCheckResult { itemId: string; name: string; required: number; have: number; ready: boolean; }
 export interface CondCheckResult { id: string; description: string; ready: boolean; }
@@ -41,10 +44,11 @@ export function setBreakthroughState(player: Player, state: ReturnType<typeof ge
 }
 
 export function getBreakthroughStatus(player: Player): BreakthroughStatus {
-  const nextRealm = getNextRealm(player);
+  const p = ensureDestinyTalentState(player);
+  const nextRealm = getNextRealm(p);
 
   // T0033: 如果没有下一境界但有飞升定义，说明需要飞升
-  const ascDef = getAscensionForRealm(player.realmIndex);
+  const ascDef = getAscensionForRealm(p.realmIndex);
   if (!nextRealm && ascDef) {
     return { canAttempt: false, nextRealm: null, req: null, expReady: false, itemsReady: [], conditionsReady: [], requiresTribulation: false, successRate: 0, requiresAscension: true, ascensionDef: ascDef };
   }
@@ -55,25 +59,28 @@ export function getBreakthroughStatus(player: Player): BreakthroughStatus {
     return { canAttempt: false, nextRealm, req: null, expReady: false, itemsReady: [], conditionsReady: [], requiresTribulation: false, successRate: 0, requiresAscension: true, ascensionDef: ascDef ?? null };
   }
 
-  const req = getBreakthroughReq(player.realmIndex);
-  const expReady = player.exp >= nextRealm.expReq;
+  const req = getBreakthroughReq(p.realmIndex);
+  const expReady = p.exp >= nextRealm.expReq;
 
   const itemsReady: ItemCheckResult[] = (req?.itemCosts ?? []).map(cost => {
     const def = getItemDef(cost.itemId);
-    const have = player.inventory.find(s => s.itemId === cost.itemId)?.count ?? 0;
+    const have = p.inventory.find(s => s.itemId === cost.itemId)?.count ?? 0;
     return { itemId: cost.itemId, name: def?.name ?? cost.itemId, required: cost.count, have, ready: have >= cost.count };
   });
 
   const conditionsReady: CondCheckResult[] = (req?.conditions ?? []).map(cond => ({
-    id: cond.id, description: cond.description, ready: cond.check(player),
+    id: cond.id, description: cond.description, ready: cond.check(p),
   }));
 
   const requiresTribulation = req?.requiresTribulation ?? false;
-  const btState = getBreakthroughState(player);
-  const failCount = btState.failedAttempts[player.realmIndex] ?? 0;
+  const btState = getBreakthroughState(p);
+  const failCount = btState.failedAttempts[p.realmIndex] ?? 0;
   const baseRate = req?.baseSuccessRate ?? BREAKTHROUGH_BASE_RATE;
   const failBonus = Math.min(0.25, failCount * 0.05);
-  const successRate = requiresTribulation ? 0 : Math.min(0.95, baseRate + player.comprehension * BREAKTHROUGH_COMP_BONUS + player.luck * BREAKTHROUGH_LUCK_BONUS + failBonus);
+  const destinyBonus = getDestinyTalentEffects(p).breakthroughRateBonus ?? 0;
+  const enlightenmentBonus = getEnlightenmentEffects(p).breakthroughRateBonus ?? 0;
+  const heartDemonPenalty = getHeartDemonEffects(p).breakthroughRatePenalty;
+  const successRate = requiresTribulation ? 0 : Math.min(0.95, Math.max(0.05, baseRate + p.comprehension * BREAKTHROUGH_COMP_BONUS + p.luck * BREAKTHROUGH_LUCK_BONUS + failBonus + destinyBonus + enlightenmentBonus - heartDemonPenalty));
 
   const canAttempt = expReady && itemsReady.every(i => i.ready) && conditionsReady.every(c => c.ready);
   return { canAttempt, nextRealm, req: req ?? null, expReady, itemsReady, conditionsReady, requiresTribulation, successRate, requiresAscension: false, ascensionDef: null };

@@ -1,0 +1,173 @@
+[
+  {
+    "id": "exp-04:battle_merit_token",
+    "name": "战功令",
+    "category": "misc",
+    "rarity": "uncommon",
+    "description": "记录宗门战功的令牌。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": true,
+    "effects": {
+      "mood": 8,
+      "exp": 60
+    },
+    "effectMessage": "🎖️ 你摩挲战功令，回想战场所得，心情 +8，修为 +60。",
+    "sellPrice": 45
+  },
+  {
+    "id": "exp-04:sect_banner",
+    "name": "宗门战旗",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "可凝聚士气的宗门战旗。",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": true,
+    "effects": {
+      "mood": 20,
+      "mp": 120
+    },
+    "effectMessage": "🚩 宗门战旗展开，心情 +20，灵力 +120。",
+    "sellPrice": 320
+  },
+  {
+    "id": "exp-04:war_supply_crate",
+    "name": "战备箱",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "装有丹药、符箓与备用灵石的战备箱。",
+    "stackable": true,
+    "maxStack": 10,
+    "usable": true,
+    "effects": {
+      "hp": 350,
+      "stamina": 60,
+      "gold": 120
+    },
+    "effectMessage": "📦 打开战备箱，HP +350，精力 +60，灵石 +120。",
+    "sellPrice": 280
+  },
+  {
+    "id": "exp-04:fortification_stone",
+    "name": "固阵石",
+    "category": "material",
+    "rarity": "uncommon",
+    "description": "加固护宗大阵的石材。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 55
+  },
+  {
+    "id": "exp-04:spirit_mine_deed",
+    "name": "灵矿契",
+    "category": "misc",
+    "rarity": "epic",
+    "description": "一处小型灵矿的占有凭证。",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": true,
+    "effects": {
+      "gold": 800,
+      "mood": 12
+    },
+    "effectMessage": "⛏️ 灵矿契兑付当季收益，灵石 +800，心情 +12。",
+    "sellPrice": 900
+  },
+  {
+    "id": "exp-04:scout_talisman",
+    "name": "斥候符",
+    "category": "consumable",
+    "rarity": "uncommon",
+    "description": "记录敌情路线的符箓。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": true,
+    "effects": {
+      "mentalPower": 45,
+      "stamina": 20
+    },
+    "effectMessage": "🕵️ 斥候符展开地形幻影，念力 +45，精力 +20。",
+    "sellPrice": 90
+  },
+  {
+    "id": "exp-04:war_drum_hide",
+    "name": "战鼓皮",
+    "category": "material",
+    "rarity": "rare",
+    "description": "妖兽皮制成的战鼓鼓面。",
+    "stackable": true,
+    "maxStack": 30,
+    "usable": false,
+    "sellPrice": 210
+  },
+  {
+    "id": "exp-04:alliance_wine",
+    "name": "盟誓酒",
+    "category": "consumable",
+    "rarity": "rare",
+    "description": "盟宗会师时饮用的灵酒。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": true,
+    "effects": {
+      "mood": 35,
+      "health": 15
+    },
+    "effectMessage": "🍶 盟誓酒入喉，心情 +35，健康 +15。",
+    "sellPrice": 260
+  },
+  {
+    "id": "exp-04:captured_supply",
+    "name": "缴获辎重",
+    "category": "material",
+    "rarity": "common",
+    "description": "从战场上缴获的普通辎重。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 25
+  },
+  {
+    "id": "exp-04:formation_core",
+    "name": "战阵枢核",
+    "category": "material",
+    "rarity": "epic",
+    "description": "大型宗门战阵的核心部件。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": false,
+    "sellPrice": 700
+  },
+  {
+    "id": "exp-04:rival_seal",
+    "name": "敌宗印信",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "敌宗弟子随身携带的印信。",
+    "stackable": true,
+    "maxStack": 30,
+    "usable": false,
+    "sellPrice": 180
+  },
+  {
+    "id": "exp-04:territory_map",
+    "name": "疆域图",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "绘有灵脉、关隘与宗门势力边界的地图。",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": true,
+    "effects": {
+      "exp": [
+        220,
+        500
+      ],
+      "mentalPower": 60
+    },
+    "effectMessage": "🗺️ 参研疆域图，修为与念力增长。",
+    "sellPrice": 360
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "cp-04:ascend_to_primordial_world",
+    "name": "叩入洪荒",
+    "description": "金仙圆满后循太初道标越过仙界边界，踏入洪荒天地。",
+    "fromTier": "immortal",
+    "toTier": "primordial",
+    "fromRealmIndex": 11,
+    "toRealmIndex": 12,
+    "minExp": 18000000,
+    "itemCosts": [
+      {
+        "itemId": "cp-04:taichu_beacon",
+        "count": 1
+      },
+      {
+        "itemId": "cp-04:chaos_breath",
+        "count": 3
+      }
+    ],
+    "conditions": [
+      {
+        "id": "cp-04:cond_kill_200",
+        "description": "击杀妖兽 ≥ 200",
+        "field": "tracking.killCount",
+        "op": ">=",
+        "value": 200
+      }
+    ],
+    "tribulationId": "cp-04:tribulation_primordial_gate",
+    "rewards": {
+      "bonusExp": 180000,
+      "lifespanBonus": 240000,
+      "items": [
+        {
+          "itemId": "cp-04:primordial_jade",
+          "count": 3
+        }
+      ]
+    },
+    "statReset": {
+      "hpMultiplier": 1,
+      "mpMultiplier": 1,
+      "expReset": true
+    }
+  }
+]

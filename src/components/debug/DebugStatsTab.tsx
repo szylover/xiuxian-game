@@ -8,6 +8,19 @@ import { REALMS } from '../../game/data';
 import { getAllBodyRealmDefs, getAllRegions, getMaxRealmIndex, getAscensionForRealm } from '../../game/registry';
 import { getMapState } from '../../game/map';
 import { getAscensionState } from '../../game/ascension';
+import { getReincarnationState } from '../../game/reincarnation';
+import { getPrimordialEndgameState } from '../../game/primordial-endgame';
+import { getDestinyTalentState } from '../../game/destiny';
+import { getBountyState } from '../../game/bounty';
+import { getSecretRealmState } from '../../game/secret-realm';
+import { getAuctionState } from '../../game/auction';
+import { getMiningState } from '../../game/feng-shui-mining';
+import { getAlignment, getKarmaTitle, getKarmaState } from '../../game/karma';
+import { getEnlightenmentState } from '../../game/enlightenment';
+import { getHeartDemonState } from '../../game/heart-demon';
+import { getPvpState } from '../../game/pvp';
+import { getSectState } from '../../game/sect';
+import { DESTINY_TEXTS, UI_LABELS, KARMA_TEXTS, ALIGNMENT_CN, ENLIGHTENMENT_TEXTS, HEART_DEMON_TEXTS, PVP_TEXTS, SECT_TEXTS, PRIMORDIAL_ENDGAME_TEXTS, LEARNING_TEXTS, AUCTION_TEXTS } from '../../data/texts';
 import './DebugStatsTab.css';
 
 // 可编辑数值行
@@ -119,6 +132,113 @@ export default function DebugStatsTab({ player, onSetStat, onFullRestore, onDebu
         <button className="btn debug-btn debug-full" onClick={onFullRestore}>🌟 全满</button>
       </div>
 
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{LEARNING_TEXTS.debug.title}</span>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__learnAllRecipes', 1)}>{LEARNING_TEXTS.debug.learnAllRecipes}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__completeStudy', 1)}>{LEARNING_TEXTS.debug.completeStudy}</button>
+        </div>
+      </div>
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{UI_LABELS.debugBountyRealm.title}</span>
+        <div className="debug-tracker-grid">
+          <div className="debug-tracker-dim">{UI_LABELS.debugBountyRealm.bountyReputation(getBountyState(player).reputation)}</div>
+          <div className="debug-tracker-dim">{UI_LABELS.debugBountyRealm.realmCooldowns(Object.keys(getSecretRealmState(player).cooldowns).length)}</div>
+        </div>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__bountyReputation', getBountyState(player).reputation + 20)}>{UI_LABELS.debugBountyRealm.addBountyReputation}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__secretRealmClearCooldown', 1)}>{UI_LABELS.debugBountyRealm.clearRealmCooldown}</button>
+        </div>
+      </div>
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{AUCTION_TEXTS.debug.title}</span>
+        <div className="debug-tracker-grid">
+          <div className="debug-tracker-dim">{AUCTION_TEXTS.debug.auctionLots(getAuctionState(player).lots.length)}</div>
+          <div className="debug-tracker-dim">{AUCTION_TEXTS.debug.consignments(getAuctionState(player).consignments.length)}</div>
+          <div className="debug-tracker-dim">{AUCTION_TEXTS.debug.miningCount(getMiningState(player).minedCount)}</div>
+        </div>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__auctionRefresh', 1)}>{AUCTION_TEXTS.debug.refreshAuction}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__auctionClear', 1)}>{AUCTION_TEXTS.debug.clearAuction}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__miningBoost', 5)}>{AUCTION_TEXTS.debug.boostMining}</button>
+        </div>
+      </div>
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{KARMA_TEXTS.debug.title}</span>
+        <div className="debug-tracker-grid">
+          <div className="debug-tracker-dim">
+            {KARMA_TEXTS.panel.alignment(getKarmaTitle(player.karma ?? 0), ALIGNMENT_CN[getAlignment(player.karma ?? 0)])}
+            {' '}| {KARMA_TEXTS.panel.value(player.karma ?? 0)}
+          </div>
+          <div className="debug-tracker-dim">
+            {KARMA_TEXTS.panel.history(getKarmaState(player).totalGained, getKarmaState(player).totalLost)}
+          </div>
+        </div>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('karma', 50)}>{KARMA_TEXTS.debug.setRighteous}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('karma', 0)}>{KARMA_TEXTS.debug.setNeutral}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('karma', -50)}>{KARMA_TEXTS.debug.setEvil}</button>
+        </div>
+      </div>
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{ENLIGHTENMENT_TEXTS.debug.title}</span>
+        <div className="debug-tracker-grid">
+          {(() => {
+            const state = getEnlightenmentState(player);
+            return <div className="debug-tracker-dim">{ENLIGHTENMENT_TEXTS.panel.insightPoints(state.insightPoints)} | {ENLIGHTENMENT_TEXTS.panel.comprehensionExp(state.comprehensionExp, 100)}</div>;
+          })()}
+        </div>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__enlightenmentAddInsight', 1)}>{ENLIGHTENMENT_TEXTS.debug.addInsight}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__enlightenmentClearBuffs', 1)}>{ENLIGHTENMENT_TEXTS.debug.clearBuffs}</button>
+        </div>
+      </div>
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{UI_LABELS.panels.heartDemon.title}</span>
+        <div className="debug-tracker-grid">
+          <div className="debug-tracker-dim">{HEART_DEMON_TEXTS.panel.valueLine(getHeartDemonState(player).value, getHeartDemonState(player).maxValue)}</div>
+        </div>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__heartDemonValue', 0)}>{HEART_DEMON_TEXTS.panel.stateCalm}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__heartDemonValue', 85)}>{HEART_DEMON_TEXTS.panel.stateDanger}</button>
+        </div>
+      </div>
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{UI_LABELS.panels.pvp.title}</span>
+        <div className="debug-tracker-grid">
+          <div className="debug-tracker-dim">{PVP_TEXTS.panel.rating(getPvpState(player).rating)} | {PVP_TEXTS.panel.record(getPvpState(player).wins, getPvpState(player).losses)}</div>
+        </div>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__pvpClearCooldown', 1)}>{PVP_TEXTS.panel.ready}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__pvpRating', getPvpState(player).rating + 100)}>{PVP_TEXTS.panel.rating(getPvpState(player).rating + 100)}</button>
+        </div>
+      </div>
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{SECT_TEXTS.panel.managementTitle}</span>
+        <div className="debug-tracker-grid">
+          {(() => {
+            const state = getSectState(player);
+            return (
+              <div className="debug-tracker-dim">
+                {SECT_TEXTS.panel.contribution(state.contribution, state.totalContribution)}
+                {state.management?.active ? ` | ${SECT_TEXTS.panel.resourceLine(state.management.resources.treasury, state.management.resources.herbs, state.management.resources.ore, state.management.resources.morale, state.management.resources.prestige)}` : ''}
+              </div>
+            );
+          })()}
+        </div>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__sectAddContribution', 200)}>{SECT_TEXTS.reward.contribution(200)}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__sectAddResources', 200)}>{SECT_TEXTS.panel.resourcesTitle}</button>
+        </div>
+      </div>
+
       {/* ── T0033: 飞升调试 ── */}
       {(() => {
         const ascState = getAscensionState(player);
@@ -146,6 +266,21 @@ export default function DebugStatsTab({ player, onSetStat, onFullRestore, onDebu
           </div>
         );
       })()}
+
+      <div className="debug-tracker-box">
+        <span className="debug-label debug-tracker-label">{DESTINY_TEXTS.debug.title}</span>
+        <div className="debug-tracker-grid">
+          {(() => {
+            const state = getDestinyTalentState(player);
+            return <div className="debug-tracker-dim">{DESTINY_TEXTS.debug.summary(state.talentPoints, state.unlockedNodeIds.length)}</div>;
+          })()}
+        </div>
+        <div className="debug-btns debug-btns-wrap">
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__destinyAddPoint', 1)}>{DESTINY_TEXTS.debug.addPoint}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__destinyUnlockAll', 1)}>{DESTINY_TEXTS.debug.unlockAll}</button>
+          <button className="btn debug-btn debug-btn-sm" onClick={() => onSetStat('__destinyReset', 1)}>{DESTINY_TEXTS.debug.reset}</button>
+        </div>
+      </div>
 
       {/* ── 战斗追踪 ── */}
       <div className="debug-tracker-box">

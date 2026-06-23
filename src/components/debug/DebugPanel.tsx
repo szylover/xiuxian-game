@@ -8,12 +8,18 @@ import type { Player } from '../../game/player';
 import { recalcStats } from '../../game/player';
 import { getAllItemDefs, getAllEquipDefs, getAllTechniqueDefs, getAllDivineArtDefs, getAllAchievementDefs, getAllBottleneckDefs } from '../../game/registry';
 import { addItem } from '../../game/inventory';
+import { createEmptyLegacy, REINCARNATION_ORB_ID } from '../../game/reincarnation';
 import { getAllTechniquePassiveBonus } from '../../game/technique';
 import { getDivineArtsState, ELEMENT_EMOJI, ELEMENT_CN } from '../../game/divine-arts';
 import type { DivineArtsSystemState } from '../../game/divine-arts';
 import { getAchievementState, checkAchievements, ONCE_BONUS_KEYS } from '../../game/achievement/engine';
 import { activateBottleneck, unlockBottleneck, ensureBottleneckState } from '../../game/bottleneck';
+import { getDestinyTalentState, setDestinyTalentState, getSortedTalentTreeNodes } from '../../game/destiny';
 import type { BottleneckState } from '../../game/types';
+import { completeStudy, getLearningState, setLearningState } from '../../game/learning';
+import { getAllRecipes, getAllSmithingRecipes } from '../../game/registry';
+import { refreshAuctionHouse, setAuctionState } from '../../game/auction';
+import { getMiningState, setMiningState } from '../../game/feng-shui-mining';
 
 import { CollapsiblePanel, TabBar } from '../shared';
 import DebugStatsTab from './DebugStatsTab';
@@ -59,6 +65,104 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
       if (key === '__toggleLooseImmortal') {
         const death = (prev.systems.death ?? {}) as Record<string, unknown>;
         return { ...prev, systems: { ...prev.systems, death: { ...death, isLooseImmortal: value === 1 } } };
+      }
+      if (key === '__giveReincarnationOrb') {
+        return addItem(prev, REINCARNATION_ORB_ID, value).player;
+      }
+      if (key === '__resetReincarnationLegacy') {
+        const reincarnation = (prev.systems.reincarnation ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, reincarnation: { ...reincarnation, legacy: createEmptyLegacy() } } };
+      }
+      if (key === '__reincarnationCount') {
+        const reincarnation = (prev.systems.reincarnation ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, reincarnation: { ...reincarnation, count: value } } };
+      }
+      if (key === '__primordialEndgameReady') {
+        return { ...prev, realmIndex: 15, exp: 520000000, karma: value };
+      }
+      if (key === '__bountyReputation') {
+        const bounty = (prev.systems.bounty ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, bounty: { ...bounty, reputation: value } } };
+      }
+      if (key === '__secretRealmClearCooldown') {
+        const secretRealm = (prev.systems.secretRealm ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, secretRealm: { ...secretRealm, cooldowns: {} } } };
+      }
+      if (key === '__auctionRefresh') {
+        return refreshAuctionHouse(prev).player;
+      }
+      if (key === '__auctionClear') {
+        return setAuctionState(prev, { lots: [], consignments: [], lastRefreshAge: -1, cycleIndex: 0, history: [] });
+      }
+      if (key === '__miningBoost') {
+        const state = getMiningState(prev);
+        return setMiningState(prev, { ...state, minedCount: state.minedCount + value, totalFengShui: state.totalFengShui + value * 3 });
+      }
+      if (key === '__enlightenmentAddInsight') {
+        const enlightenment = (prev.systems.enlightenment ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, enlightenment: { ...enlightenment, insightPoints: ((enlightenment.insightPoints as number | undefined) ?? 0) + value } } };
+      }
+      if (key === '__enlightenmentClearBuffs') {
+        const enlightenment = (prev.systems.enlightenment ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, enlightenment: { ...enlightenment, activeBuffs: [] } } };
+      }
+      if (key === '__heartDemonValue') {
+        const heartDemon = (prev.systems.heartDemon ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, heartDemon: { ...heartDemon, value, maxValue: 100 } } };
+      }
+      if (key === '__pvpClearCooldown') {
+        const pvp = (prev.systems.pvp ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, pvp: { ...pvp, cooldownUntilAge: prev.age } } };
+      }
+      if (key === '__pvpRating') {
+        const pvp = (prev.systems.pvp ?? {}) as Record<string, unknown>;
+        return { ...prev, systems: { ...prev.systems, pvp: { ...pvp, rating: value } } };
+      }
+      if (key === '__learnAllRecipes') {
+        const state = getLearningState(prev);
+        return setLearningState(prev, {
+          ...state,
+          learnedRecipes: getAllRecipes().map(r => r.id),
+          learnedSmithingRecipes: getAllSmithingRecipes().map(r => r.id),
+        });
+      }
+      if (key === '__completeStudy') {
+        const state = getLearningState(prev);
+        if (!state.activeStudy) return prev;
+        return completeStudy(setLearningState(prev, {
+          ...state,
+          activeStudy: { ...state.activeStudy, progressMonths: state.activeStudy.totalMonths },
+        })).player;
+      }
+      if (key === '__sectAddContribution') {
+        const sect = (prev.systems.sect ?? {}) as Record<string, unknown>;
+        const current = (sect.contribution as number | undefined) ?? 0;
+        const total = (sect.totalContribution as number | undefined) ?? 0;
+        return { ...prev, systems: { ...prev.systems, sect: { ...sect, contribution: current + value, totalContribution: total + value } } };
+      }
+      if (key === '__sectAddResources') {
+        const sect = (prev.systems.sect ?? {}) as Record<string, unknown>;
+        const management = (sect.management ?? {}) as Record<string, unknown>;
+        const resources = (management.resources ?? {}) as Record<string, number>;
+        return {
+          ...prev,
+          systems: {
+            ...prev.systems,
+            sect: {
+              ...sect,
+              management: {
+                ...management,
+                resources: {
+                  treasury: (resources.treasury ?? 0) + value,
+                  herbs: (resources.herbs ?? 0) + value,
+                  ore: (resources.ore ?? 0) + value,
+                  morale: Math.min(100, (resources.morale ?? 50) + 10),
+                  prestige: (resources.prestige ?? 0) + Math.floor(value / 20),
+                },
+              },
+            },
+          },
+        };
       }
       const p = { ...prev };
       (p as unknown as Record<string, number>)[key] = value;
@@ -551,4 +655,3 @@ export default function DebugPanel({ player, onUpdate }: DebugPanelProps) {
     </CollapsiblePanel>
   );
 }
-

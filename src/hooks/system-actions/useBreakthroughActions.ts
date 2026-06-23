@@ -8,6 +8,7 @@ import { REALMS } from '../../game/data';
 import { UI_LABELS } from '../../data/texts/ui-labels';
 import { BREAKTHROUGH_TEXTS } from '../../data/texts/breakthrough';
 import { ASCENSION_TEXTS } from '../../data/texts/ascension';
+import { playSound } from '../../game/audio';
 import type { SystemActionContext } from './types';
 
 export function useBreakthroughActions({ player, addLog, setPlayer, setGameOver, setGameOverReason, chronicleHooks }: Pick<SystemActionContext, 'player' | 'addLog' | 'setPlayer' | 'setGameOver' | 'setGameOverReason' | 'chronicleHooks'>) {
@@ -17,9 +18,11 @@ export function useBreakthroughActions({ player, addLog, setPlayer, setGameOver,
     const btResult = attemptBreakthroughFn(player);
     let finalPlayer = btResult.player;
     const allLogs = [...btResult.logs];
+    let tribulationSuccess: boolean | null = null;
 
     if (btResult.triggerTribulation) {
       const tribResult = runTribulationFn(finalPlayer);
+      tribulationSuccess = tribResult.success;
       finalPlayer = tribResult.player;
       allLogs.push(...tribResult.logs);
 
@@ -40,6 +43,7 @@ export function useBreakthroughActions({ player, addLog, setPlayer, setGameOver,
     }
     // T0067: 突破成功后检查可发现的任务
     if (btResult.success) {
+      playSound('breakthroughSuccess');
       // T0068: 记录境界突破事件
       const realmName = REALMS[finalPlayer.realmIndex]?.name ?? '???';
       chronicleHooks?.recordEvent('realm_breakthrough', finalPlayer, `突破至${realmName}期`, {
@@ -53,11 +57,18 @@ export function useBreakthroughActions({ player, addLog, setPlayer, setGameOver,
         return questDiscover.player;
       });
     }
+    if (tribulationSuccess === true) {
+      playSound('breakthroughSuccess');
+    }
     // 突破失败额外提示
     if (!btResult.success && !btResult.triggerTribulation) {
+      playSound('breakthroughFailure');
       if (btResult.blockedByBottleneck) {
         addLog(BREAKTHROUGH_TEXTS.bottleneckHint, 'system');
       }
+    }
+    if (tribulationSuccess === false) {
+      playSound('breakthroughFailure');
     }
   }, [player, addLog, setPlayer, setGameOver, setGameOverReason, chronicleHooks]);
 

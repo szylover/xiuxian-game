@@ -1,0 +1,63 @@
+[
+  {
+    "id": "cp-04:realm_taiyi",
+    "name": "太乙",
+    "index": 12,
+    "expReq": 42000000,
+    "lifespanBonus": 1920000,
+    "hpBase": 1400000,
+    "mpBase": 640000,
+    "atkBase": 70000,
+    "defBase": 46000,
+    "speedBase": 520,
+    "mentalBase": 110000,
+    "tier": "primordial",
+    "ascensionRequired": true,
+    "tierTransition": "primordial_ascension"
+  },
+  {
+    "id": "cp-04:realm_daluo",
+    "name": "大罗",
+    "index": 13,
+    "expReq": 96000000,
+    "lifespanBonus": 3840000,
+    "hpBase": 2800000,
+    "mpBase": 1300000,
+    "atkBase": 140000,
+    "defBase": 92000,
+    "speedBase": 700,
+    "mentalBase": 230000,
+    "tier": "primordial",
+    "ascensionRequired": true
+  },
+  {
+    "id": "cp-04:realm_quasi_sage",
+    "name": "准圣",
+    "index": 14,
+    "expReq": 220000000,
+    "lifespanBonus": 7680000,
+    "hpBase": 5600000,
+    "mpBase": 2600000,
+    "atkBase": 285000,
+    "defBase": 190000,
+    "speedBase": 930,
+    "mentalBase": 480000,
+    "tier": "primordial",
+    "ascensionRequired": true
+  },
+  {
+    "id": "cp-04:realm_hunyuan",
+    "name": "混元",
+    "index": 15,
+    "expReq": 520000000,
+    "lifespanBonus": 15360000,
+    "hpBase": 11200000,
+    "mpBase": 5200000,
+    "atkBase": 580000,
+    "defBase": 390000,
+    "speedBase": 1200,
+    "mentalBase": 1000000,
+    "tier": "primordial",
+    "ascensionRequired": true
+  }
+]

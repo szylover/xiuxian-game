@@ -1,0 +1,58 @@
+.primordial-endgame-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-overlay-dark);
+}
+
+.primordial-endgame-modal {
+  width: min(var(--modal-width-lg), calc(100vw - var(--spacing-xl)));
+  max-height: calc(100vh - var(--spacing-xl));
+  overflow: auto;
+  border: var(--border-width-thick) solid var(--color-border-accent);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-panel);
+  box-shadow: var(--shadow-modal);
+}
+
+.primordial-endgame-header {
+  padding: var(--spacing-md) var(--spacing-lg);
+  color: var(--color-text-accent);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.primordial-endgame-body {
+  display: grid;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+}
+
+.primordial-endgame-section {
+  padding: var(--spacing-md);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+}
+
+.primordial-endgame-section h3 {
+  margin: 0 0 var(--spacing-sm);
+  color: var(--color-text-primary);
+}
+
+.primordial-endgame-section p {
+  margin: var(--spacing-xs) 0;
+  color: var(--color-text-secondary);
+}
+
+.primordial-endgame-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-top: var(--border-width) solid var(--color-border);
+}

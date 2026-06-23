@@ -20,6 +20,16 @@ import { useBodyCultivationActions } from './useBodyCultivationActions';
 import { useNpcActions } from './useNpcActions';
 import { useQuestActions } from './useQuestActions';
 import { useDialogueActions } from './useDialogueActions';
+import { useTalentTreeActions } from './useTalentTreeActions';
+import { useBountyActions } from './useBountyActions';
+import { useSecretRealmActions } from './useSecretRealmActions';
+import { useEnlightenmentActions } from './useEnlightenmentActions';
+import { useSectActions } from './useSectActions';
+import { useHeartDemonActions } from './useHeartDemonActions';
+import { usePvpActions } from './usePvpActions';
+import { useLearningActions } from './useLearningActions';
+import { useAuctionActions } from './useAuctionActions';
+import { useMiningActions } from './useMiningActions';
 
 export type { SystemActionDeps, ChronicleHooks } from './types';
 
@@ -56,6 +66,16 @@ export function useSystemActions(deps: SystemActionDeps) {
   const npcActions = useNpcActions(ctx);
   const questActions = useQuestActions(ctx);
   const dialogueActions = useDialogueActions(ctx);
+  const talentTreeActions = useTalentTreeActions(ctx);
+  const bountyActions = useBountyActions(ctx);
+  const secretRealmActions = useSecretRealmActions(ctx);
+  const enlightenmentActions = useEnlightenmentActions(ctx);
+  const sectActions = useSectActions(ctx);
+  const heartDemonActions = useHeartDemonActions(ctx);
+  const pvpActions = usePvpActions(ctx);
+  const learningActions = useLearningActions(ctx);
+  const auctionActions = useAuctionActions(ctx);
+  const miningActions = useMiningActions(ctx);
 
   return {
     ...inventoryActions,
@@ -71,5 +91,15 @@ export function useSystemActions(deps: SystemActionDeps) {
     ...npcActions,
     ...questActions,
     ...dialogueActions,
+    ...talentTreeActions,
+    ...bountyActions,
+    ...secretRealmActions,
+    ...enlightenmentActions,
+    ...sectActions,
+    ...heartDemonActions,
+    ...pvpActions,
+    ...learningActions,
+    ...auctionActions,
+    ...miningActions,
   };
 }

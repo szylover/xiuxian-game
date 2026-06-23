@@ -42,3 +42,44 @@
   color: var(--rarity-legendary);
   margin-top: 2px;
 }
+.left-karma {
+  width: 100%;
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-medium);
+}
+
+.left-karma-title {
+  color: var(--color-gold);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.left-karma-bar {
+  position: relative;
+  height: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(90deg, var(--color-evil), var(--color-karma-neutral), var(--color-righteous));
+  border: 1px solid var(--color-border);
+}
+
+.left-karma-marker {
+  position: absolute;
+  left: var(--karma-pos);
+  top: calc(-1 * var(--spacing-xs));
+  width: var(--spacing-sm);
+  height: var(--spacing-xl);
+  border-radius: var(--radius-sm);
+  background: var(--color-text-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.left-karma-scale {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  margin-top: var(--spacing-xs);
+}

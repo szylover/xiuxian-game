@@ -5,7 +5,7 @@
 import type { Player } from '../player';
 import { registerDLC } from '../registry';
 import type { RecipeDef, EquipDef, SmithingRecipeDef, TechniqueDef, DeathTriggerDef, LifeSaverDef, RevivalMethodDef, MonsterDef } from '../registry';
-import type { RegionDef, NpcDef, IdleChatPool, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, MonsterTemplate, MutationDef, TechniqueTraitDef } from '../types';
+import type { RegionDef, NpcDef, IdleChatPool, EventTemplate, VariablePool, EquipBaseTemplate, AffixDef, MonsterTemplate, MutationDef, TechniqueTraitDef, BountyTemplateDef, SecretRealmDef, SectDef } from '../types';
 import { loadEventsFromJson } from '../event-loader';
 import { loadItemsFromJson } from '../item-loader';
 import { loadQuestsFromJson } from '../quest-loader';
@@ -26,6 +26,13 @@ import type { ShopGoodsDef } from '../shop';
 import { getDeathSystemState } from '../death';
 import { recalcStats } from '../player';
 import { CORE_ACHIEVEMENTS } from '../achievement/data';
+import { CORE_RANKING_DIMENSIONS } from '../ranking';
+import { CORE_DESTINIES, CORE_TALENTS, CORE_TALENT_TREE_NODES } from '../destiny';
+import { CORE_ENLIGHTENMENT_INSIGHTS } from '../../data/dlc/core/enlightenment';
+import { registerAuctionLots } from '../auction';
+import type { AuctionLotDef } from '../auction';
+import { registerMiningSites } from '../feng-shui-mining';
+import type { MiningSiteDef } from '../feng-shui-mining';
 
 // ── 核心死亡触发条件 ──
 
@@ -259,6 +266,11 @@ export async function registerCoreEvents(): Promise<void> {
     { default: coreMonsterTemplatesJson },
     { default: coreMutationsJson },
     { default: coreTechniqueTraitsJson },
+    { default: coreBountiesJson },
+    { default: coreSecretRealmsJson },
+    { default: coreSectsJson },
+    { default: coreAuctionLotsJson },
+    { default: coreMiningSitesJson },
   ] = await Promise.all([
     import('../../data/dlc/core/events.json'),
     import('../../data/dlc/core/items.json'),
@@ -277,6 +289,11 @@ export async function registerCoreEvents(): Promise<void> {
     import('../../data/dlc/core/monster-templates.json'),
     import('../../data/dlc/core/mutations.json'),
     import('../../data/dlc/core/technique-traits.json'),
+    import('../../data/dlc/core/bounties.json'),
+    import('../../data/dlc/core/secret-realms.json'),
+    import('../../data/dlc/core/sects.json'),
+    import('../../data/dlc/core/auction-lots.json'),
+    import('../../data/dlc/core/mining-sites.json'),
   ]);
 
   // 对话文件按 NPC 拆分，批量加载 dialogues/*.json（排除 idle-chat.json）
@@ -331,6 +348,16 @@ export async function registerCoreEvents(): Promise<void> {
     monsterTemplates: loadMonsterTemplatesFromJson(coreMonsterTemplatesJson as unknown as MonsterTemplate[]),
     mutations: loadMutationDefsFromJson(coreMutationsJson as unknown as MutationDef[]),
     techniqueTraits: coreTechniqueTraitsJson as unknown as TechniqueTraitDef[],
+    rankingDimensions: CORE_RANKING_DIMENSIONS,
+    destinies: CORE_DESTINIES,
+    talents: CORE_TALENTS,
+    talentTreeNodes: CORE_TALENT_TREE_NODES,
+    bountyTemplates: coreBountiesJson as BountyTemplateDef[],
+    secretRealms: coreSecretRealmsJson as SecretRealmDef[],
+    enlightenmentInsights: CORE_ENLIGHTENMENT_INSIGHTS,
+    sects: coreSectsJson as SectDef[],
   });
   registerShopGoods(coreShopJson as ShopGoodsDef[]);
+  registerAuctionLots(coreAuctionLotsJson as AuctionLotDef[]);
+  registerMiningSites(coreMiningSitesJson as MiningSiteDef[]);
 }

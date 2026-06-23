@@ -1,0 +1,168 @@
+[
+  {
+    "id": "cp-04:primordial_world",
+    "name": "洪荒天地",
+    "emoji": "🌋",
+    "description": "仙界之外的古老天地，清浊未远，凶兽与先天灵根并存。",
+    "minRealm": 12,
+    "regionTags": [
+      "primordial"
+    ],
+    "travelCostBase": 0,
+    "travelTimeMonths": 0,
+    "isContainer": true
+  },
+  {
+    "id": "cp-04:taichu_plain",
+    "name": "太初原",
+    "emoji": "🌄",
+    "description": "清浊初分的辽阔原野，适合初入洪荒者适应天地压力。",
+    "minRealm": 12,
+    "parentId": "cp-04:primordial_world",
+    "regionTags": [
+      "primordial",
+      "tribe",
+      "safe"
+    ],
+    "travelCostBase": 60,
+    "travelTimeMonths": 1,
+    "safeZone": true,
+    "explorationBonus": 0.12,
+    "lootTable": [
+      {
+        "itemId": "cp-04:chaos_breath",
+        "chance": 0.16
+      },
+      {
+        "itemId": "cp-04:primordial_coin",
+        "chance": 0.18
+      },
+      {
+        "itemId": "cp-04:tribe_totem",
+        "chance": 0.06
+      }
+    ]
+  },
+  {
+    "id": "cp-04:buzhou_mountain",
+    "name": "不周山麓",
+    "emoji": "⛰️",
+    "description": "撑天古山残脉，重压惊人，亦孕育祖灵骨与地脉髓。",
+    "minRealm": 12,
+    "parentId": "cp-04:primordial_world",
+    "regionTags": [
+      "primordial",
+      "mountain",
+      "dangerous"
+    ],
+    "travelCostBase": 78,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.28,
+    "lootTable": [
+      {
+        "itemId": "cp-04:ancestral_bone",
+        "chance": 0.15
+      },
+      {
+        "itemId": "cp-04:earth_vein_marrow",
+        "chance": 0.12
+      },
+      {
+        "itemId": "cp-04:mountain_sea_map",
+        "chance": 0.05
+      }
+    ]
+  },
+  {
+    "id": "cp-04:world_tree_root",
+    "name": "建木根域",
+    "emoji": "🌳",
+    "description": "建木根系横贯大地，法则碎片常随叶影落下。",
+    "minRealm": 13,
+    "parentId": "cp-04:primordial_world",
+    "regionTags": [
+      "primordial",
+      "world_tree",
+      "mystic"
+    ],
+    "travelCostBase": 90,
+    "travelTimeMonths": 1,
+    "explorationBonus": 0.35,
+    "lootTable": [
+      {
+        "itemId": "cp-04:world_tree_leaf",
+        "chance": 0.1
+      },
+      {
+        "itemId": "cp-04:law_fragment",
+        "chance": 0.08
+      },
+      {
+        "itemId": "cp-04:sky_river_drop",
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "id": "cp-04:north_sea",
+    "name": "北冥天海",
+    "emoji": "🌊",
+    "description": "鲲鹏出没的无垠天海，风浪可直接撕裂护体道光。",
+    "minRealm": 13,
+    "parentId": "cp-04:primordial_world",
+    "regionTags": [
+      "primordial",
+      "sea",
+      "sky",
+      "dangerous"
+    ],
+    "travelCostBase": 110,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.4,
+    "lootTable": [
+      {
+        "itemId": "cp-04:kunpeng_scale",
+        "chance": 0.08
+      },
+      {
+        "itemId": "cp-04:sky_river_drop",
+        "chance": 0.16
+      },
+      {
+        "itemId": "cp-04:chaos_shell",
+        "chance": 0.05
+      }
+    ]
+  },
+  {
+    "id": "cp-04:chaos_edge",
+    "name": "混沌边荒",
+    "emoji": "⚫",
+    "description": "洪荒天地边缘，混沌未退，饕餮与巨蛇的影子徘徊不去。",
+    "minRealm": 14,
+    "parentId": "cp-04:primordial_world",
+    "regionTags": [
+      "primordial",
+      "chaos",
+      "dangerous"
+    ],
+    "travelCostBase": 140,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.55,
+    "explorationBonus": 0.25,
+    "lootTable": [
+      {
+        "itemId": "cp-04:chaos_stone_heart",
+        "chance": 0.08
+      },
+      {
+        "itemId": "cp-04:hunyuan_seed",
+        "chance": 0.02
+      },
+      {
+        "itemId": "cp-04:purple_cloud_token",
+        "chance": 0.03
+      }
+    ]
+  }
+]

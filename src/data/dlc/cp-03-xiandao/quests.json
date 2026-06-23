@@ -1,0 +1,257 @@
+[
+  {
+    "id": "cp-03:quest_register_immortal_name",
+    "name": "仙籍初录",
+    "description": "接引仙使提醒你：飞升只是开始，先在云门登记仙籍。",
+    "icon": "☁️",
+    "category": "main",
+    "condition": {
+      "minRealm": 8
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "抵达接引云门",
+        "description": "前往接引云门，适应仙界天律。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "cp-03:ascension_cloud_gate",
+            "description": "前往接引云门"
+          }
+        ],
+        "dialogueSnippet": "接引仙使微笑道：「入仙界者，先留名于云册。」"
+      },
+      {
+        "id": "step_2",
+        "name": "准备仙籍材料",
+        "description": "收集接引仙露与白鹤仙羽，完成仙籍初录。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "cp-03:immortal_dew",
+            "count": 1,
+            "description": "收集接引仙露 (0/1)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "cp-03:crane_feather",
+            "count": 2,
+            "description": "收集白鹤仙羽 (0/2)"
+          }
+        ],
+        "rewards": {
+          "exp": 600,
+          "items": [
+            {
+              "itemId": "cp-03:cloud_market_note",
+              "count": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "step_3",
+        "name": "拜见接引仙使",
+        "description": "向接引仙使完成仙籍登记。",
+        "objectives": [
+          {
+            "type": "talk_npc",
+            "targetId": "cp-03:npc_cloud_envoy",
+            "description": "与接引仙使交谈"
+          }
+        ],
+        "dialogueSnippet": "仙使在云册写下你的名号，云门为你亮起一缕清光。"
+      }
+    ],
+    "rewards": {
+      "exp": 2400,
+      "gold": 600,
+      "items": [
+        {
+          "itemId": "cp-03:jade_bridge_map",
+          "count": 1
+        },
+        {
+          "itemId": "cp-03:immortal_jade",
+          "count": 2
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "auto"
+    },
+    "turnInNpcId": "cp-03:npc_cloud_envoy",
+    "repeatable": false
+  },
+  {
+    "id": "cp-03:quest_jade_pool_repair",
+    "name": "玉池补莲",
+    "description": "玉池仙子发现仙莲根脉受损，需要你帮忙修补仙苑阵脚。",
+    "icon": "🪷",
+    "category": "side",
+    "condition": {
+      "minRealm": 8,
+      "requiredQuests": [
+        "cp-03:quest_register_immortal_name"
+      ]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "前往玉池仙苑",
+        "description": "前往玉池仙苑查看仙莲情况。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "cp-03:jade_pool_garden",
+            "description": "前往玉池仙苑"
+          }
+        ]
+      },
+      {
+        "id": "step_2",
+        "name": "采集补池灵材",
+        "description": "准备仙莲子、星河水与月宫银丝。",
+        "objectives": [
+          {
+            "type": "collect_item",
+            "targetId": "cp-03:celestial_lotus_seed",
+            "count": 2,
+            "description": "收集仙莲子 (0/2)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "cp-03:star_river_water",
+            "count": 1,
+            "description": "收集星河水 (0/1)"
+          },
+          {
+            "type": "collect_item",
+            "targetId": "cp-03:moon_palace_thread",
+            "count": 2,
+            "description": "收集月宫银丝 (0/2)"
+          }
+        ],
+        "rewards": {
+          "exp": 900
+        }
+      },
+      {
+        "id": "step_3",
+        "name": "请玉池仙子验看",
+        "description": "将灵材交给玉池仙子。",
+        "objectives": [
+          {
+            "type": "talk_npc",
+            "targetId": "cp-03:npc_jade_pool_fairy",
+            "description": "与玉池仙子交谈"
+          }
+        ],
+        "dialogueSnippet": "玉池仙子拈起莲子：「仙根得补，你也沾一分清气。」"
+      }
+    ],
+    "rewards": {
+      "exp": 3600,
+      "gold": 900,
+      "items": [
+        {
+          "itemId": "cp-03:jade_body_pill",
+          "count": 2
+        },
+        {
+          "itemId": "cp-03:clear_mind_bell",
+          "count": 1
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "npc",
+      "npcId": "cp-03:npc_jade_pool_fairy"
+    },
+    "turnInNpcId": "cp-03:npc_jade_pool_fairy",
+    "repeatable": false
+  },
+  {
+    "id": "cp-03:quest_star_river_pass",
+    "name": "星河渡牒",
+    "description": "要深入星河渡口，必须证明你能在星兽环伺下自保。",
+    "icon": "🌌",
+    "category": "main",
+    "condition": {
+      "minRealm": 9,
+      "requiredQuests": [
+        "cp-03:quest_jade_pool_repair"
+      ]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "前往星河渡口",
+        "description": "沿玉桥图指引抵达星河渡口。",
+        "objectives": [
+          {
+            "type": "reach_region",
+            "targetId": "cp-03:star_river_ferry",
+            "description": "前往星河渡口"
+          }
+        ]
+      },
+      {
+        "id": "step_2",
+        "name": "清理星兽",
+        "description": "击败星斑貂与极光天蛇，取得渡者信任。",
+        "objectives": [
+          {
+            "type": "kill_monster",
+            "targetId": "cp-03:star_marten",
+            "count": 2,
+            "description": "击败星斑貂 (0/2)"
+          },
+          {
+            "type": "kill_monster",
+            "targetId": "cp-03:aurora_serpent",
+            "count": 1,
+            "description": "击败极光天蛇 (0/1)"
+          }
+        ],
+        "rewards": {
+          "exp": 2400
+        }
+      },
+      {
+        "id": "step_3",
+        "name": "请渡者盖印",
+        "description": "请星河渡者在渡牒上盖印。",
+        "objectives": [
+          {
+            "type": "talk_npc",
+            "targetId": "cp-03:npc_star_ferryman",
+            "description": "与星河渡者交谈"
+          }
+        ],
+        "dialogueSnippet": "星河渡者终于开口：「能过星河者，不只看修为，也看心胆。」"
+      }
+    ],
+    "rewards": {
+      "exp": 9000,
+      "gold": 1800,
+      "items": [
+        {
+          "itemId": "cp-03:heaven_scroll",
+          "count": 1
+        },
+        {
+          "itemId": "cp-03:starlight_sand",
+          "count": 3
+        }
+      ]
+    },
+    "discoverSource": {
+      "type": "npc",
+      "npcId": "cp-03:npc_cloud_envoy"
+    },
+    "turnInNpcId": "cp-03:npc_star_ferryman",
+    "repeatable": false
+  }
+]

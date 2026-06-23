@@ -11,10 +11,13 @@ import { checkDeathTriggers, applyDeath } from '../../game/death';
 import { gainBodyRealmExp } from '../../game/body-cultivation';
 import { ensureBottleneckState, tryBattleUnlock } from '../../game/bottleneck';
 import { tickQuestObjectives, checkQuestDiscovery } from '../../game/quest';
+import { tickBountyObjectives } from '../../game/bounty';
 import type { CoreActionDeps, LootEntry, CombatDeathInfo, LogQueue } from './types';
 import type { LogCategory } from '../useGameLog';
 import { COMBAT_TEXTS } from '../../data/texts/combat';
 import { EXPLORE_TEXTS } from '../../data/texts/explore';
+import { playSound } from '../../game/audio';
+import { addHeartDemon } from '../../game/heart-demon';
 
 export function useCombatActions(
   deps: CoreActionDeps,
@@ -115,6 +118,9 @@ export function useCombatActions(
         if (monster.realmIndex > p.realmIndex) {
           p.tracking = { ...p.tracking, defeatedHigherRealm: true };
         }
+        const demon = addHeartDemon(p, monster.realmIndex >= p.realmIndex ? 3 : 2, 'combat');
+        p = demon.player;
+        queueLogs(demon.logs, 'system');
 
         // T0064: 战斗胜利后检查瓶颈解锁
         p = ensureBottleneckState(p);
@@ -169,9 +175,13 @@ export function useCombatActions(
         const questKill = tickQuestObjectives(p, { type: 'kill_monster', monsterId: monster.id });
         p = questKill.player;
         queueLogs(questKill.logs, 'system');
+        const bountyKill = tickBountyObjectives(p, { type: 'kill_monster', monsterId: monster.id });
+        p = bountyKill.player;
         const questCombat = tickQuestObjectives(p, { type: 'combat' });
         p = questCombat.player;
         queueLogs(questCombat.logs, 'system');
+        const bountyCombat = tickBountyObjectives(p, { type: 'combat' });
+        p = bountyCombat.player;
 
         // T0067: 战斗胜利后检查可发现的任务
         const questDiscoverCombat = checkQuestDiscovery(p, { type: 'kill_monster', monsterId: monster.id });
@@ -236,6 +246,13 @@ export function useCombatActions(
       if (combatResultRef.current) {
         const { monsterName, monsterEmoji, result, loot, deathInfo, hpBefore, mpBefore } = combatResultRef.current;
         onCombatResult(monsterName, monsterEmoji, result, loot, deathInfo, hpBefore, mpBefore);
+        if (deathInfo?.triggered && !deathInfo.blocked) {
+          playSound('death');
+        } else if (loot.length > 0) {
+          playSound('itemGain');
+        } else {
+          playSound('combatHit');
+        }
         combatResultRef.current = null;
       } else {
         flushLogs();

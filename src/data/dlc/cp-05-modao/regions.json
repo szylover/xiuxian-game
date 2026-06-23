@@ -1,0 +1,184 @@
+[
+  {
+    "id": "cp-05:demon_valley",
+    "name": "黑风魔谷",
+    "emoji": "🌑",
+    "description": "黑风终年不散的山谷，低阶魔修常在此试炼。",
+    "minRealm": 0,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "demonic",
+      "wilderness"
+    ],
+    "travelCostBase": 10,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.12,
+    "lootTable": [
+      {
+        "itemId": "cp-05:blood_jade",
+        "chance": 0.22
+      },
+      {
+        "itemId": "cp-05:ghost_moss",
+        "chance": 0.18
+      },
+      {
+        "itemId": "cp-05:blood_spark_pill",
+        "chance": 0.08
+      }
+    ]
+  },
+  {
+    "id": "cp-05:underground_demon_market",
+    "name": "地下魔市",
+    "emoji": "🏮",
+    "description": "隐于废城地下的魔道小市，不问来路，只问价钱。",
+    "minRealm": 0,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "demonic",
+      "trade",
+      "safe"
+    ],
+    "travelCostBase": 12,
+    "travelTimeMonths": 1,
+    "safeZone": true,
+    "shopDiscount": 0.04,
+    "lootTable": [
+      {
+        "itemId": "cp-05:demon_market_coin",
+        "chance": 0.2
+      },
+      {
+        "itemId": "cp-05:masked_contract",
+        "chance": 0.1
+      },
+      {
+        "itemId": "cp-05:demon_map",
+        "chance": 0.05
+      }
+    ]
+  },
+  {
+    "id": "cp-05:blood_lotus_marsh",
+    "name": "血莲沼",
+    "emoji": "🪷",
+    "description": "血莲盛开的阴湿沼泽，药材与毒兽同生。",
+    "minRealm": 1,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "demonic",
+      "herb",
+      "dangerous"
+    ],
+    "travelCostBase": 24,
+    "travelTimeMonths": 1,
+    "explorationBonus": 0.22,
+    "lootTable": [
+      {
+        "itemId": "cp-05:blood_lotus_seed",
+        "chance": 0.18
+      },
+      {
+        "itemId": "cp-05:red_thread",
+        "chance": 0.12
+      },
+      {
+        "itemId": "cp-05:bone_heal_powder",
+        "chance": 0.06
+      }
+    ]
+  },
+  {
+    "id": "cp-05:boneyard_cave",
+    "name": "万骨窟",
+    "emoji": "💀",
+    "description": "无数白骨堆叠成洞，阴兽在骨缝间穿行。",
+    "minRealm": 1,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "demonic",
+      "cave",
+      "dangerous"
+    ],
+    "travelCostBase": 26,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.25,
+    "lootTable": [
+      {
+        "itemId": "cp-05:bone_fragment",
+        "chance": 0.22
+      },
+      {
+        "itemId": "cp-05:grave_soil",
+        "chance": 0.18
+      },
+      {
+        "itemId": "cp-05:black_altar_key",
+        "chance": 0.04
+      }
+    ]
+  },
+  {
+    "id": "cp-05:nether_river_ford",
+    "name": "冥河渡",
+    "emoji": "🌊",
+    "description": "阴冷黑水横断荒野，冥河蛟偶尔从水下翻身。",
+    "minRealm": 3,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "demonic",
+      "mystic",
+      "dangerous"
+    ],
+    "travelCostBase": 38,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.35,
+    "explorationBonus": 0.2,
+    "lootTable": [
+      {
+        "itemId": "cp-05:nether_iron",
+        "chance": 0.12
+      },
+      {
+        "itemId": "cp-05:soul_lamp_oil",
+        "chance": 0.06
+      },
+      {
+        "itemId": "cp-05:resentment_crystal",
+        "chance": 0.12
+      }
+    ]
+  },
+  {
+    "id": "cp-05:black_flame_altar",
+    "name": "黑焰祭坛",
+    "emoji": "🔥",
+    "description": "古魔留下的破碎祭坛，黑焰种偶尔在灰烬中苏醒。",
+    "minRealm": 3,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "demonic",
+      "fire",
+      "mystic",
+      "dangerous"
+    ],
+    "travelCostBase": 42,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.45,
+    "lootTable": [
+      {
+        "itemId": "cp-05:black_flame_seed",
+        "chance": 0.06
+      },
+      {
+        "itemId": "cp-05:ten_thousand_soul_ash",
+        "chance": 0.08
+      },
+      {
+        "itemId": "cp-05:reverse_fate_talisman",
+        "chance": 0.02
+      }
+    ]
+  }
+]

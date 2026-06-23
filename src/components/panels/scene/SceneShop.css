@@ -1,0 +1,33 @@
+.scene-shop {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.scene-shop-gold {
+  color: var(--color-gold);
+  font-size: var(--font-size-sm);
+  font-weight: bold;
+}
+
+.scene-shop-tabs {
+  flex-wrap: wrap;
+}
+
+.scene-shop-tab {
+  font-size: var(--font-size-sm);
+}
+
+.scene-shop-list {
+  max-height: 240px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+@media (max-width: 720px) {
+  .scene-shop-list {
+    max-height: 180px;
+  }
+}

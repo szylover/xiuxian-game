@@ -1,0 +1,108 @@
+.learning-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.learning-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.learning-section-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+  font-weight: bold;
+}
+
+.learning-empty {
+  padding: var(--spacing-md);
+  color: var(--color-text-secondary);
+  background: var(--color-bg-medium);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+}
+
+.learning-active-card,
+.learning-scroll-card {
+  padding: var(--spacing-md);
+  background: var(--color-bg-medium);
+  border-radius: var(--radius-md);
+  border-left: var(--border-width-thick) solid var(--learning-scroll-color, var(--color-gold));
+}
+
+.learning-active-name {
+  color: var(--color-gold);
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  margin-bottom: var(--spacing-sm);
+}
+
+.learning-progress {
+  height: var(--spacing-sm);
+  overflow: hidden;
+  background: var(--color-bg-light);
+  border-radius: var(--radius-md);
+}
+
+.learning-progress-fill {
+  width: var(--learning-progress);
+  height: 100%;
+  background: var(--color-gold);
+  transition: width var(--transition-base);
+}
+
+.learning-meta-row,
+.learning-scroll-header,
+.learning-scroll-meta,
+.learning-scroll-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.learning-meta-row {
+  margin-top: var(--spacing-xs);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.learning-meta-muted,
+.learning-scroll-meta,
+.learning-scroll-desc,
+.learning-scroll-footer {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.learning-cancel-btn {
+  margin-top: var(--spacing-sm);
+}
+
+.learning-scroll-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.learning-scroll-card {
+  --learning-scroll-color: var(--color-gold);
+}
+
+.learning-scroll-name {
+  color: var(--color-text-primary);
+  font-weight: bold;
+}
+
+.learning-scroll-count,
+.learning-scroll-target {
+  color: var(--color-gold);
+}
+
+.learning-scroll-target,
+.learning-scroll-desc,
+.learning-scroll-footer {
+  margin-top: var(--spacing-xs);
+}

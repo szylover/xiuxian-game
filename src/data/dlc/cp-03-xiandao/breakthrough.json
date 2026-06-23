@@ -1,0 +1,171 @@
+{
+  "breakthroughReqs": [
+    {
+      "id": "cp-03:bt_8_9",
+      "fromRealmIndex": 8,
+      "toRealmIndex": 9,
+      "itemCosts": [
+        {
+          "itemId": "cp-03:cloud_pattern_core",
+          "count": 3
+        },
+        {
+          "itemId": "cp-03:immortal_jade",
+          "count": 5
+        }
+      ],
+      "conditions": [],
+      "requiresTribulation": false,
+      "baseSuccessRate": 0.42,
+      "description": "真仙凝聚仙元云纹，迈入天仙之列。"
+    },
+    {
+      "id": "cp-03:bt_9_10",
+      "fromRealmIndex": 9,
+      "toRealmIndex": 10,
+      "itemCosts": [
+        {
+          "itemId": "cp-03:starlight_sand",
+          "count": 4
+        },
+        {
+          "itemId": "cp-03:heaven_scroll",
+          "count": 1
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cp-03:cond_kill_120",
+          "description": "击杀妖兽 ≥ 120",
+          "field": "tracking.killCount",
+          "op": ">=",
+          "value": 120
+        }
+      ],
+      "requiresTribulation": false,
+      "baseSuccessRate": 0.34,
+      "description": "以星辉洗炼仙魂，天仙玄化为玄仙。"
+    },
+    {
+      "id": "cp-03:bt_10_11",
+      "fromRealmIndex": 10,
+      "toRealmIndex": 11,
+      "itemCosts": [
+        {
+          "itemId": "cp-03:golden_cloud_pill",
+          "count": 1
+        },
+        {
+          "itemId": "cp-03:sun_fragment",
+          "count": 2
+        }
+      ],
+      "conditions": [],
+      "requiresTribulation": true,
+      "baseSuccessRate": 0.28,
+      "description": "玄仙叩问不朽金性，需渡金霞雷劫。"
+    }
+  ],
+  "tribulations": [
+    {
+      "id": "cp-03:tribulation_ascend_immortal",
+      "name": "九霄接引劫",
+      "description": "接引仙光照落，凡躯最后一次承受九霄雷门洗礼。",
+      "forRealmIndex": 7,
+      "waves": [
+        {
+          "name": "接引青雷",
+          "hp": 26000,
+          "atk": 1800,
+          "def": 700,
+          "speed": 85
+        },
+        {
+          "name": "洗尘白雷",
+          "hp": 32000,
+          "atk": 2200,
+          "def": 850,
+          "speed": 90,
+          "specialEffect": {
+            "type": "debuff_def",
+            "value": 35,
+            "description": "白雷洗尘，防御降低 35%"
+          }
+        },
+        {
+          "name": "登仙金雷",
+          "hp": 42000,
+          "atk": 2800,
+          "def": 1000,
+          "speed": 100,
+          "specialEffect": {
+            "type": "dot",
+            "value": 180,
+            "description": "金雷入体，每回合 180 伤害"
+          }
+        }
+      ],
+      "rewards": {
+        "bonusExp": 80000,
+        "items": [
+          {
+            "itemId": "cp-03:immortal_jade",
+            "count": 3
+          }
+        ]
+      },
+      "failureType": "become_loose_immortal",
+      "failureDescription": "接引仙光散去，道基被雷门震裂，沦为散仙。"
+    },
+    {
+      "id": "cp-03:tribulation_gold_cloud",
+      "name": "金霞雷劫",
+      "description": "金霞化雷，照见仙魂每一丝杂质。",
+      "forRealmIndex": 10,
+      "waves": [
+        {
+          "name": "第一缕金霞",
+          "hp": 180000,
+          "atk": 9500,
+          "def": 5200,
+          "speed": 240
+        },
+        {
+          "name": "裂魂金雷",
+          "hp": 220000,
+          "atk": 11500,
+          "def": 6000,
+          "speed": 260,
+          "specialEffect": {
+            "type": "debuff_atk",
+            "value": 25,
+            "description": "金雷裂魂，攻击降低 25%"
+          }
+        },
+        {
+          "name": "不朽叩问",
+          "hp": 280000,
+          "atk": 14000,
+          "def": 7200,
+          "speed": 280,
+          "specialEffect": {
+            "type": "heal_block",
+            "value": 0,
+            "description": "不朽叩问期间无法恢复"
+          }
+        }
+      ],
+      "rewards": {
+        "bonusExp": 400000,
+        "items": [
+          {
+            "itemId": "cp-03:sun_fragment",
+            "count": 1
+          }
+        ]
+      },
+      "failureType": "realm_drop",
+      "failureDescription": "金霞散尽，仙魂受创，境界跌回天仙。"
+    }
+  ]
+}

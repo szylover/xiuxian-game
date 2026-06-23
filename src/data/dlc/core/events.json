@@ -18517,5 +18517,69 @@
     "condition": null,
     "once": false,
     "cooldown": 0
+  },
+  {
+    "id": "core:rescue_wounded_cultivator",
+    "category": "explore",
+    "tone": "good",
+    "name": "救助伤修",
+    "weight": 10,
+    "effects": {
+      "karmaChange": 10,
+      "mood": 5
+    },
+    "message": "⚖️ 你救下一名走火入魔的伤修，正气入心，心境更稳。",
+    "regionTags": [
+      "town",
+      "wilderness",
+      "valley"
+    ]
+  },
+  {
+    "id": "core:seize_lost_pouch",
+    "category": "explore",
+    "tone": "bad",
+    "name": "夺取遗囊",
+    "weight": 8,
+    "effects": {
+      "karmaChange": -12,
+      "gold": 35,
+      "mood": -5
+    },
+    "message": "⚖️ 你夺走无主遗囊，灵石入袋，却隐有煞意缠身。",
+    "regionTags": [
+      "wasteland",
+      "dangerous",
+      "wilderness"
+    ]
+  },
+  {
+    "id": "core:righteous_sermon",
+    "category": "daily",
+    "tone": "good",
+    "name": "正道讲法",
+    "weight": 6,
+    "effects": {
+      "exp": 40
+    },
+    "message": "🌤️ 同道讲法印证本心，获得 40 修为。",
+    "condition": {
+      "requiredAlignment": "righteous"
+    }
+  },
+  {
+    "id": "core:evil_blood_moon",
+    "category": "daily",
+    "tone": "good",
+    "name": "血月炼煞",
+    "weight": 5,
+    "effects": {
+      "exp": 80,
+      "health": -5
+    },
+    "message": "🌘 血月之夜煞气奔涌，修为 +80，健康 -5。",
+    "condition": {
+      "requiredAlignment": "evil"
+    }
   }
 ]

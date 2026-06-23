@@ -1,0 +1,123 @@
+[
+  {
+    "id": "exp-03:calamity_wasteland",
+    "name": "量劫焦土",
+    "emoji": "🔥",
+    "description": "大劫掠过后的焦黑大地，劫灰下仍有新芽。",
+    "minRealm": 2,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "wasteland",
+      "dangerous",
+      "herb"
+    ],
+    "travelCostBase": 32,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.28,
+    "explorationBonus": 0.15,
+    "lootTable": [
+      {
+        "itemId": "exp-03:calamity_ash",
+        "chance": 0.2
+      },
+      {
+        "itemId": "exp-03:calamity_lotus_seed",
+        "chance": 0.08
+      },
+      {
+        "itemId": "exp-03:dao_seal_charm",
+        "chance": 0.08
+      }
+    ]
+  },
+  {
+    "id": "exp-03:heavenly_ledger_cliff",
+    "name": "天账崖",
+    "emoji": "📒",
+    "description": "崖壁如账簿般记录因果得失，风声皆似审判。",
+    "minRealm": 3,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "mystic",
+      "celestial"
+    ],
+    "travelCostBase": 38,
+    "travelTimeMonths": 1,
+    "explorationBonus": 0.25,
+    "lootTable": [
+      {
+        "itemId": "exp-03:fate_thread",
+        "chance": 0.14
+      },
+      {
+        "itemId": "exp-03:merit_jade",
+        "chance": 0.05
+      },
+      {
+        "itemId": "exp-03:karma_wash_water",
+        "chance": 0.08
+      }
+    ]
+  },
+  {
+    "id": "exp-03:tribulation_cloud_sea",
+    "name": "劫云海",
+    "emoji": "⛈️",
+    "description": "雷云如海，行走其上需承受天威。",
+    "minRealm": 4,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "celestial",
+      "dangerous"
+    ],
+    "travelCostBase": 46,
+    "travelTimeMonths": 1,
+    "combatBonus": 0.42,
+    "explorationBonus": 0.2,
+    "lootTable": [
+      {
+        "itemId": "exp-03:tribulation_pearl",
+        "chance": 0.1
+      },
+      {
+        "itemId": "exp-03:sky_eye_shard",
+        "chance": 0.05
+      },
+      {
+        "itemId": "exp-03:dao_balance_pill",
+        "chance": 0.08
+      }
+    ]
+  },
+  {
+    "id": "exp-03:chaos_fate_river",
+    "name": "混沌命河",
+    "emoji": "🌌",
+    "description": "命运丝线在混沌河面交错，稍有不慎便被因果拖入深处。",
+    "minRealm": 5,
+    "parentId": "core:mortal_world",
+    "regionTags": [
+      "mystic",
+      "celestial",
+      "dangerous"
+    ],
+    "travelCostBase": 58,
+    "travelTimeMonths": 2,
+    "combatBonus": 0.5,
+    "explorationBonus": 0.3,
+    "lootTable": [
+      {
+        "itemId": "exp-03:heavenly_decree",
+        "chance": 0.03
+      },
+      {
+        "itemId": "exp-03:saint_bone_script",
+        "chance": 0.025
+      },
+      {
+        "itemId": "exp-03:chaos_slag",
+        "chance": 0.18
+      }
+    ]
+  }
+]

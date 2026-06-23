@@ -1,0 +1,182 @@
+[
+  {
+    "id": "exp-01:daily_jade_slip",
+    "name": "签到玉简",
+    "category": "misc",
+    "rarity": "common",
+    "description": "记录每日签到的小玉简，使用后获得少量心情。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": true,
+    "effects": {
+      "mood": 6
+    },
+    "effectMessage": "📅 你翻看签到玉简，确认今日没有漏签，心情 +6。",
+    "sellPrice": 8
+  },
+  {
+    "id": "exp-01:makeup_token",
+    "name": "补签令",
+    "category": "misc",
+    "rarity": "uncommon",
+    "description": "可用于补记错过的一日签到。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": true,
+    "effects": {
+      "mood": 14,
+      "exp": 40
+    },
+    "effectMessage": "🧾 补签令化作灵光，补回一日机缘，心情 +14，修为 +40。",
+    "sellPrice": 45
+  },
+  {
+    "id": "exp-01:streak_pill",
+    "name": "连签丹",
+    "category": "consumable",
+    "rarity": "uncommon",
+    "description": "服下后精神振奋，适合维持连签节奏。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": true,
+    "effects": {
+      "stamina": 50,
+      "mood": 10
+    },
+    "effectMessage": "🔥 连签丹温热入腹，精力 +50，心情 +10。",
+    "sellPrice": 60
+  },
+  {
+    "id": "exp-01:monthly_card",
+    "name": "月卡玉牌",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "模拟器修士常备的月供玉牌。",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": true,
+    "effects": {
+      "gold": 300,
+      "mp": 80
+    },
+    "effectMessage": "💳 月卡玉牌吐出本月供奉，灵石 +300，灵力 +80。",
+    "sellPrice": 260
+  },
+  {
+    "id": "exp-01:seven_day_box",
+    "name": "七日宝匣",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "连签七日后开启的奖励宝匣。",
+    "stackable": true,
+    "maxStack": 10,
+    "usable": true,
+    "effects": {
+      "exp": [
+        180,
+        360
+      ],
+      "gold": 180,
+      "mood": 12
+    },
+    "effectMessage": "🎁 七日宝匣打开，修为、灵石与心情一并增长。",
+    "sellPrice": 180
+  },
+  {
+    "id": "exp-01:login_incense",
+    "name": "登录香",
+    "category": "consumable",
+    "rarity": "common",
+    "description": "点燃后提醒自己上线领取奖励。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": true,
+    "effects": {
+      "mp": 35,
+      "mood": 8
+    },
+    "effectMessage": "🕯️ 登录香袅袅升起，灵力 +35，心情 +8。",
+    "sellPrice": 12
+  },
+  {
+    "id": "exp-01:auto_cultivation_tag",
+    "name": "挂机符牌",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "刻着自动吐纳阵纹的符牌。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": true,
+    "effects": {
+      "exp": [
+        120,
+        260
+      ],
+      "stamina": -5
+    },
+    "effectMessage": "🤖 挂机符牌运转一周天，修为增长但略耗精力。",
+    "sellPrice": 140
+  },
+  {
+    "id": "exp-01:golden_checkin_seal",
+    "name": "金签印",
+    "category": "material",
+    "rarity": "epic",
+    "description": "签到榜前列才会发放的金色印记。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": false,
+    "sellPrice": 420
+  },
+  {
+    "id": "exp-01:red_dot_dust",
+    "name": "红点尘",
+    "category": "material",
+    "rarity": "common",
+    "description": "清理玉简红点时落下的微光粉尘。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 5
+  },
+  {
+    "id": "exp-01:calendar_page",
+    "name": "灵历残页",
+    "category": "material",
+    "rarity": "uncommon",
+    "description": "记有特殊签到日的灵历残页。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 30
+  },
+  {
+    "id": "exp-01:premium_gem",
+    "name": "尊享灵钻",
+    "category": "material",
+    "rarity": "rare",
+    "description": "阵灵称其可提升奖励档位的明亮晶石。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": false,
+    "sellPrice": 120
+  },
+  {
+    "id": "exp-01:returnee_bundle",
+    "name": "回归福袋",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "久未上线后收到的福袋。",
+    "stackable": true,
+    "maxStack": 10,
+    "usable": true,
+    "effects": {
+      "hp": "max",
+      "mp": "max",
+      "stamina": "max",
+      "mood": 25
+    },
+    "effectMessage": "📦 回归福袋灵光大放，身心状态尽复，心情 +25。",
+    "sellPrice": 220
+  }
+]

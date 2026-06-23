@@ -10,6 +10,9 @@ import { removeItem } from '../inventory';
 import { getBreakthroughStatus, getBreakthroughState, setBreakthroughState } from './status';
 import { checkBottleneck, activateBottleneck, ensureBottleneckState } from '../bottleneck';
 import { BREAKTHROUGH_TEXTS } from '../../data/texts/breakthrough';
+import { grantTalentPoints, getBreakthroughTalentPointGain } from '../destiny';
+import { DESTINY_TEXTS } from '../../data/texts';
+import { addHeartDemon, tryHeartDemonTribulation } from '../heart-demon';
 
 export interface BreakthroughResult {
   success: boolean;
@@ -35,6 +38,14 @@ export function attemptBreakthrough(player: Player): BreakthroughResult {
 
   // T0064: 境界瓶颈检查
   let p = ensureBottleneckState(player);
+  const demon = tryHeartDemonTribulation(p);
+  if (demon.triggered) {
+    p = demon.player;
+    logs.push(...demon.logs);
+    if (!demon.success) {
+      return { success: false, player: p, logs, triggerTribulation: false };
+    }
+  }
   const bnResult = checkBottleneck(p, 'realm', p.realmIndex);
   if (bnResult.blocked && bnResult.bottleneckDef) {
     if (bnResult.isNewlyActivated) {
@@ -67,6 +78,7 @@ export function attemptBreakthrough(player: Player): BreakthroughResult {
     p.realmIndex += 1;
     const newRealm = REALMS[p.realmIndex];
     p.lifespan += newRealm.lifespanBonus;
+    p = grantTalentPoints(p, getBreakthroughTalentPointGain(p.realmIndex));
     p = recalcStats(p);
     p.hp = p.maxHp; p.mp = p.maxMp; p.stamina = p.maxStamina;
     p.mood = Math.min(100, p.mood + 20);
@@ -80,6 +92,7 @@ export function attemptBreakthrough(player: Player): BreakthroughResult {
 
     logs.push(BREAKTHROUGH_TEXTS.success(newRealm.name));
     logs.push(BREAKTHROUGH_TEXTS.successBonus(newRealm.lifespanBonus));
+    logs.push(DESTINY_TEXTS.logs.talentPointGained(getBreakthroughTalentPointGain(p.realmIndex)));
     return { success: true, player: p, logs, triggerTribulation: false };
   }
 
@@ -97,8 +110,11 @@ export function attemptBreakthrough(player: Player): BreakthroughResult {
 
   // 突破失败：递增连续突破失败计数
   p.tracking = { ...p.tracking, consecutiveBreakthroughFails: (p.tracking.consecutiveBreakthroughFails ?? 0) + 1 };
+  const demonFail = addHeartDemon(p, 12 + p.tracking.consecutiveBreakthroughFails * 2, 'breakthrough_fail');
+  p = demonFail.player;
 
   logs.push(BREAKTHROUGH_TEXTS.failed(expLoss, penalty.moodLoss ?? 20, penalty.healthLoss ?? 10));
   logs.push(BREAKTHROUGH_TEXTS.failedStats((status.successRate * 100).toFixed(1), (roll * 100).toFixed(1), failCount));
+  logs.push(...demonFail.logs);
   return { success: false, player: p, logs, triggerTribulation: false };
 }

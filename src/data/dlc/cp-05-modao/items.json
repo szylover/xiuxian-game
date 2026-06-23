@@ -1,0 +1,319 @@
+[
+  {
+    "id": "cp-05:blood_spark_pill",
+    "name": "血火丹",
+    "category": "consumable",
+    "rarity": "common",
+    "description": "恢复 90 HP，但心情略降。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": true,
+    "effects": {
+      "hp": 90,
+      "mood": -3
+    },
+    "effectMessage": "🩸 血火丹化作热流，HP +90，心情 -3。",
+    "sellPrice": 18
+  },
+  {
+    "id": "cp-05:black_breath_pill",
+    "name": "玄煞丹",
+    "category": "consumable",
+    "rarity": "uncommon",
+    "description": "恢复 120 灵力并获得修为。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": true,
+    "effects": {
+      "mp": 120,
+      "exp": 60
+    },
+    "effectMessage": "⚫ 玄煞丹沉入丹田，灵力 +120，修为 +60。",
+    "sellPrice": 60
+  },
+  {
+    "id": "cp-05:bone_heal_powder",
+    "name": "白骨生肌散",
+    "category": "consumable",
+    "rarity": "uncommon",
+    "description": "恢复 180 HP 与 10 健康。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": true,
+    "effects": {
+      "hp": 180,
+      "health": 10
+    },
+    "effectMessage": "💀 白骨生肌散药力霸道，HP +180，健康 +10。",
+    "sellPrice": 70
+  },
+  {
+    "id": "cp-05:soul_lamp_oil",
+    "name": "魂灯油",
+    "category": "consumable",
+    "rarity": "rare",
+    "description": "恢复灵力与念力。",
+    "stackable": true,
+    "maxStack": 30,
+    "usable": true,
+    "effects": {
+      "mp": 260,
+      "mentalPower": 120
+    },
+    "effectMessage": "🕯️ 魂灯油燃起幽焰，灵力 +260，念力 +120。",
+    "sellPrice": 180
+  },
+  {
+    "id": "cp-05:demon_heart_tea",
+    "name": "魔心茶",
+    "category": "consumable",
+    "rarity": "rare",
+    "description": "提振心情与精力的苦茶，不依赖心魔系统。",
+    "stackable": true,
+    "maxStack": 30,
+    "usable": true,
+    "effects": {
+      "mood": 18,
+      "stamina": 70
+    },
+    "effectMessage": "🍵 魔心茶苦尽回甘，心情 +18，精力 +70。",
+    "sellPrice": 160
+  },
+  {
+    "id": "cp-05:reverse_fate_talisman",
+    "name": "逆命符",
+    "category": "consumable",
+    "rarity": "epic",
+    "description": "恢复全部 HP / MP / 精力。",
+    "stackable": true,
+    "maxStack": 5,
+    "usable": true,
+    "effects": {
+      "hp": "max",
+      "mp": "max",
+      "stamina": "max"
+    },
+    "effectMessage": "符火逆卷，身心灵力尽数复原。",
+    "sellPrice": 900
+  },
+  {
+    "id": "cp-05:blood_jade",
+    "name": "血纹玉",
+    "category": "material",
+    "rarity": "common",
+    "description": "带有血色纹路的低阶玉石。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 8
+  },
+  {
+    "id": "cp-05:ghost_moss",
+    "name": "鬼面苔",
+    "category": "material",
+    "rarity": "common",
+    "description": "阴湿洞壁上生长的苔藓。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 7
+  },
+  {
+    "id": "cp-05:black_sand",
+    "name": "黑煞砂",
+    "category": "material",
+    "rarity": "uncommon",
+    "description": "魔渊边缘常见的黑色砂砾。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 28
+  },
+  {
+    "id": "cp-05:bone_fragment",
+    "name": "阴骨片",
+    "category": "material",
+    "rarity": "uncommon",
+    "description": "阴兽遗落的苍白骨片。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 32
+  },
+  {
+    "id": "cp-05:resentment_crystal",
+    "name": "怨晶",
+    "category": "material",
+    "rarity": "rare",
+    "description": "怨气凝成的暗紫晶石。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": false,
+    "sellPrice": 120
+  },
+  {
+    "id": "cp-05:blood_lotus_seed",
+    "name": "血莲子",
+    "category": "material",
+    "rarity": "rare",
+    "description": "血莲池中凝出的莲子。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": false,
+    "sellPrice": 140
+  },
+  {
+    "id": "cp-05:demon_core",
+    "name": "魔兽核",
+    "category": "material",
+    "rarity": "rare",
+    "description": "魔化妖兽体内的核心。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": false,
+    "sellPrice": 160
+  },
+  {
+    "id": "cp-05:nether_iron",
+    "name": "幽冥铁",
+    "category": "material",
+    "rarity": "epic",
+    "description": "冥河附近开采出的寒铁。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": false,
+    "sellPrice": 420
+  },
+  {
+    "id": "cp-05:ten_thousand_soul_ash",
+    "name": "万魂灰",
+    "category": "material",
+    "rarity": "epic",
+    "description": "古战场幽焰焚尽后留下的灰。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": false,
+    "sellPrice": 520
+  },
+  {
+    "id": "cp-05:black_altar_key",
+    "name": "黑坛钥",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "开启黑坛密室的骨质钥匙。",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 260
+  },
+  {
+    "id": "cp-05:demon_market_coin",
+    "name": "魔市钱",
+    "category": "misc",
+    "rarity": "common",
+    "description": "地下魔市流通的黑色钱币。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": true,
+    "effects": {
+      "gold": 80
+    },
+    "effectMessage": "🪙 兑开魔市钱，获得 80 灵石。",
+    "sellPrice": 70
+  },
+  {
+    "id": "cp-05:masked_contract",
+    "name": "无名血契",
+    "category": "misc",
+    "rarity": "uncommon",
+    "description": "不署真名的交易血契。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": true,
+    "effects": {
+      "gold": 120,
+      "mood": -4
+    },
+    "effectMessage": "📜 血契化灰，灵石 +120，心情 -4。",
+    "sellPrice": 95
+  },
+  {
+    "id": "cp-05:silent_skull",
+    "name": "默骨铃",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "摇动无声，却能稳住神魂。",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": true,
+    "effects": {
+      "mentalPower": 160,
+      "mood": 8
+    },
+    "effectMessage": "🔕 默骨铃无声震荡，念力 +160，心情 +8。",
+    "sellPrice": 260
+  },
+  {
+    "id": "cp-05:demon_map",
+    "name": "魔渊残图",
+    "category": "misc",
+    "rarity": "uncommon",
+    "description": "标注魔渊暗路的残图。",
+    "stackable": false,
+    "maxStack": 1,
+    "usable": false,
+    "sellPrice": 90
+  },
+  {
+    "id": "cp-05:red_thread",
+    "name": "血命线",
+    "category": "material",
+    "rarity": "rare",
+    "description": "似能牵引气血的红线。",
+    "stackable": true,
+    "maxStack": 50,
+    "usable": false,
+    "sellPrice": 130
+  },
+  {
+    "id": "cp-05:grave_soil",
+    "name": "阴坟土",
+    "category": "material",
+    "rarity": "common",
+    "description": "阴气浓重的坟土。",
+    "stackable": true,
+    "maxStack": 99,
+    "usable": false,
+    "sellPrice": 6
+  },
+  {
+    "id": "cp-05:black_flame_seed",
+    "name": "黑焰种",
+    "category": "material",
+    "rarity": "epic",
+    "description": "跳动着黑色火苗的种子。",
+    "stackable": true,
+    "maxStack": 10,
+    "usable": false,
+    "sellPrice": 650
+  },
+  {
+    "id": "cp-05:forbidden_manual_page",
+    "name": "禁法残页",
+    "category": "misc",
+    "rarity": "rare",
+    "description": "记载魔道禁法的一页残纸。",
+    "stackable": true,
+    "maxStack": 20,
+    "usable": true,
+    "effects": {
+      "exp": [
+        300,
+        800
+      ],
+      "mood": -6
+    },
+    "effectMessage": "📖 读完禁法残页，修为增长，心情 -6。",
+    "sellPrice": 220
+  }
+]

@@ -1,33 +1,919 @@
 [
-  { "itemId": "core:hp_pill", "buyPrice": 20, "stock": -1 },
-  { "itemId": "core:mp_pill", "buyPrice": 20, "stock": -1 },
-  { "itemId": "core:stamina_pill", "buyPrice": 16, "stock": -1 },
-  { "itemId": "core:mood_pill", "buyPrice": 16, "stock": -1 },
-  { "itemId": "core:health_pill", "buyPrice": 16, "stock": -1 },
-  { "itemId": "core:spirit_water", "buyPrice": 30, "stock": -1, "regionTags": ["valley", "herb"] },
-  { "itemId": "core:herb_lingzhi", "buyPrice": 30, "stock": -1, "regionTags": ["valley", "herb"] },
-  { "itemId": "core:spirit_stone_shard", "buyPrice": 3, "stock": -1 },
-  { "itemId": "core:iron_ore", "buyPrice": 8, "stock": -1, "regionTags": ["wasteland", "mountain"] },
-  { "itemId": "core:iron_sword", "buyPrice": 30, "stock": 3, "regionTags": ["town", "safe"] },
-  { "itemId": "core:cloth_hat", "buyPrice": 16, "stock": 3, "regionTags": ["town", "safe"] },
-  { "itemId": "core:linen_robe", "buyPrice": 20, "stock": 3, "regionTags": ["town", "safe"] },
-  { "itemId": "core:straw_shoes", "buyPrice": 12, "stock": 3, "regionTags": ["town", "safe"] },
-  { "itemId": "core:jade_pendant", "buyPrice": 24, "stock": 2, "regionTags": ["town", "safe"] },
-  { "itemId": "core:spirit_sword", "buyPrice": 100, "stock": 1, "regionTags": ["city", "celestial"] },
-  { "itemId": "core:spirit_crown", "buyPrice": 80, "stock": 1, "regionTags": ["city", "celestial"] },
-  { "itemId": "core:spirit_robe", "buyPrice": 110, "stock": 1, "regionTags": ["city", "celestial"] },
-  { "itemId": "core:wind_boots", "buyPrice": 90, "stock": 1, "regionTags": ["city", "celestial"] },
-  { "itemId": "core:spirit_ring", "buyPrice": 100, "stock": 1, "regionTags": ["city", "celestial"] },
-  { "itemId": "core:iron_fist_gloves", "buyPrice": 20, "stock": 3, "regionTags": ["town", "safe"] },
-  { "itemId": "core:bone_finger_ring", "buyPrice": 18, "stock": 3, "regionTags": ["town", "safe"] },
-  { "itemId": "core:iron_hand_armor", "buyPrice": 22, "stock": 3, "regionTags": ["town", "safe"] },
-  { "itemId": "core:bronze_gauntlets", "buyPrice": 60, "stock": 2, "regionTags": ["city", "celestial"] },
-  { "itemId": "core:spirit_finger_guard", "buyPrice": 55, "stock": 2, "regionTags": ["city", "celestial"] },
-  { "itemId": "core:steel_hand_armor", "buyPrice": 65, "stock": 2, "regionTags": ["city", "celestial"] },
-  { "itemId": "core:jade_fist_gloves", "buyPrice": 180, "stock": 1, "regionTags": ["city", "celestial"] },
-  { "itemId": "core:gold_piercing_ring", "buyPrice": 160, "stock": 1, "regionTags": ["city", "celestial"] },
-  { "itemId": "core:black_iron_gauntlets", "buyPrice": 200, "stock": 1, "regionTags": ["city", "celestial"] },
-  { "itemId": "core:dragon_iron_fists", "buyPrice": 600, "stock": 1, "regionTags": ["celestial"] },
-  { "itemId": "core:void_finger_claws", "buyPrice": 550, "stock": 1, "regionTags": ["celestial"] },
-  { "itemId": "core:ancient_war_gauntlets", "buyPrice": 650, "stock": 1, "regionTags": ["celestial"] }
+  {
+    "itemId": "core:hp_pill",
+    "buyPrice": 20,
+    "stock": -1,
+    "npcId": "core:merchant_zhang"
+  },
+  {
+    "itemId": "core:mp_pill",
+    "buyPrice": 20,
+    "stock": -1,
+    "npcId": "core:merchant_zhang"
+  },
+  {
+    "itemId": "core:stamina_pill",
+    "buyPrice": 16,
+    "stock": -1,
+    "npcId": "core:merchant_zhang"
+  },
+  {
+    "itemId": "core:mood_pill",
+    "buyPrice": 16,
+    "stock": -1,
+    "npcId": "core:merchant_zhang"
+  },
+  {
+    "itemId": "core:health_pill",
+    "buyPrice": 16,
+    "stock": -1,
+    "npcId": "core:merchant_zhang"
+  },
+  {
+    "itemId": "core:spirit_water",
+    "buyPrice": 30,
+    "stock": -1,
+    "regionTags": [
+      "valley",
+      "herb"
+    ],
+    "npcId": "core:merchant_herb_farmer"
+  },
+  {
+    "itemId": "core:herb_lingzhi",
+    "buyPrice": 30,
+    "stock": -1,
+    "regionTags": [
+      "valley",
+      "herb"
+    ],
+    "npcId": "core:merchant_herb_farmer"
+  },
+  {
+    "itemId": "core:spirit_stone_shard",
+    "buyPrice": 3,
+    "stock": -1,
+    "npcId": "core:merchant_wang"
+  },
+  {
+    "itemId": "core:iron_ore",
+    "buyPrice": 8,
+    "stock": -1,
+    "regionTags": [
+      "wasteland",
+      "mountain"
+    ],
+    "npcId": "core:merchant_miner_old"
+  },
+  {
+    "itemId": "core:iron_sword",
+    "buyPrice": 30,
+    "stock": 3,
+    "regionTags": [
+      "town",
+      "safe"
+    ],
+    "npcId": "core:merchant_li"
+  },
+  {
+    "itemId": "core:cloth_hat",
+    "buyPrice": 16,
+    "stock": 3,
+    "regionTags": [
+      "town",
+      "safe"
+    ],
+    "npcId": "core:merchant_li"
+  },
+  {
+    "itemId": "core:linen_robe",
+    "buyPrice": 20,
+    "stock": 3,
+    "regionTags": [
+      "town",
+      "safe"
+    ],
+    "npcId": "core:merchant_li"
+  },
+  {
+    "itemId": "core:straw_shoes",
+    "buyPrice": 12,
+    "stock": 3,
+    "regionTags": [
+      "town",
+      "safe"
+    ],
+    "npcId": "core:merchant_li"
+  },
+  {
+    "itemId": "core:jade_pendant",
+    "buyPrice": 24,
+    "stock": 2,
+    "regionTags": [
+      "town",
+      "safe"
+    ],
+    "npcId": "core:merchant_li"
+  },
+  {
+    "itemId": "core:spirit_sword",
+    "buyPrice": 100,
+    "stock": 1,
+    "regionTags": [
+      "city",
+      "celestial"
+    ],
+    "requiredAlignment": "righteous",
+    "npcId": "core:merchant_xiandu_master"
+  },
+  {
+    "itemId": "core:spirit_crown",
+    "buyPrice": 80,
+    "stock": 1,
+    "regionTags": [
+      "city",
+      "celestial"
+    ],
+    "npcId": "core:merchant_xiandu_master"
+  },
+  {
+    "itemId": "core:spirit_robe",
+    "buyPrice": 110,
+    "stock": 1,
+    "regionTags": [
+      "city",
+      "celestial"
+    ],
+    "npcId": "core:merchant_xiandu_master"
+  },
+  {
+    "itemId": "core:wind_boots",
+    "buyPrice": 90,
+    "stock": 1,
+    "regionTags": [
+      "city",
+      "celestial"
+    ],
+    "npcId": "core:merchant_xiandu_master"
+  },
+  {
+    "itemId": "core:spirit_ring",
+    "buyPrice": 100,
+    "stock": 1,
+    "regionTags": [
+      "city",
+      "celestial"
+    ],
+    "npcId": "core:merchant_xiandu_master"
+  },
+  {
+    "itemId": "core:iron_fist_gloves",
+    "buyPrice": 20,
+    "stock": 3,
+    "regionTags": [
+      "town",
+      "safe"
+    ],
+    "npcId": "core:merchant_li"
+  },
+  {
+    "itemId": "core:bone_finger_ring",
+    "buyPrice": 18,
+    "stock": 3,
+    "regionTags": [
+      "town",
+      "safe"
+    ],
+    "npcId": "core:merchant_li"
+  },
+  {
+    "itemId": "core:iron_hand_armor",
+    "buyPrice": 22,
+    "stock": 3,
+    "regionTags": [
+      "town",
+      "safe"
+    ],
+    "npcId": "core:merchant_li"
+  },
+  {
+    "itemId": "core:bronze_gauntlets",
+    "buyPrice": 60,
+    "stock": 2,
+    "regionTags": [
+      "city",
+      "celestial"
+    ],
+    "npcId": "core:merchant_xiandu_master"
+  },
+  {
+    "itemId": "core:spirit_finger_guard",
+    "buyPrice": 55,
+    "stock": 2,
+    "regionTags": [
+      "city",
+      "celestial"
+    ],
+    "npcId": "core:merchant_xiandu_master"
+  },
+  {
+    "itemId": "core:steel_hand_armor",
+    "buyPrice": 65,
+    "stock": 2,
+    "regionTags": [
+      "city",
+      "celestial"
+    ],
+    "npcId": "core:merchant_xiandu_master"
+  },
+  {
+    "itemId": "core:jade_fist_gloves",
+    "buyPrice": 180,
+    "stock": 1,
+    "regionTags": [
+      "city",
+      "celestial"
+    ],
+    "npcId": "core:merchant_xiandu_master"
+  },
+  {
+    "itemId": "core:gold_piercing_ring",
+    "buyPrice": 160,
+    "stock": 1,
+    "regionTags": [
+      "city",
+      "celestial"
+    ],
+    "npcId": "core:merchant_xiandu_master"
+  },
+  {
+    "itemId": "core:black_iron_gauntlets",
+    "buyPrice": 200,
+    "stock": 1,
+    "regionTags": [
+      "city",
+      "celestial"
+    ],
+    "requiredAlignment": "evil",
+    "npcId": "core:merchant_xiandu_master"
+  },
+  {
+    "itemId": "core:dragon_iron_fists",
+    "buyPrice": 600,
+    "stock": 1,
+    "regionTags": [
+      "celestial"
+    ],
+    "requiredAlignment": "righteous",
+    "npcId": "core:merchant_xiandu_master"
+  },
+  {
+    "itemId": "core:void_finger_claws",
+    "buyPrice": 550,
+    "stock": 1,
+    "regionTags": [
+      "celestial"
+    ],
+    "requiredAlignment": "evil",
+    "npcId": "core:merchant_xiandu_master"
+  },
+  {
+    "itemId": "core:ancient_war_gauntlets",
+    "buyPrice": 650,
+    "stock": 1,
+    "regionTags": [
+      "celestial"
+    ],
+    "npcId": "core:merchant_xiandu_master"
+  },
+  {
+    "itemId": "core:scroll_technique_basic_sword",
+    "buyPrice": 72,
+    "stock": 3,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_basic_blade",
+    "buyPrice": 72,
+    "stock": 3,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_basic_fist",
+    "buyPrice": 72,
+    "stock": 3,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_basic_palm",
+    "buyPrice": 72,
+    "stock": 3,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_basic_finger",
+    "buyPrice": 72,
+    "stock": 3,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_basic_spear",
+    "buyPrice": 72,
+    "stock": 3,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_swift_sword",
+    "buyPrice": 120,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_iron_fist",
+    "buyPrice": 120,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_thunder_blade",
+    "buyPrice": 192,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_phantom_palm",
+    "buyPrice": 192,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_heaven_sword",
+    "buyPrice": 288,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_dragon_spear",
+    "buyPrice": 288,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_flame_fist",
+    "buyPrice": 192,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_water_sword",
+    "buyPrice": 192,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_earth_palm",
+    "buyPrice": 192,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_metal_blade",
+    "buyPrice": 192,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_wood_spear",
+    "buyPrice": 192,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_hard_qigong",
+    "buyPrice": 120,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_iron_shirt",
+    "buyPrice": 120,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_tiger_roar_fist",
+    "buyPrice": 192,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_mountain_crush_fist",
+    "buyPrice": 192,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_stone_body",
+    "buyPrice": 192,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_eight_drunken_fists",
+    "buyPrice": 192,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_diamond_body_fist",
+    "buyPrice": 288,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_dragon_elephant_fist",
+    "buyPrice": 288,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_immortal_body_fist",
+    "buyPrice": 432,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_primal_chaos_fist",
+    "buyPrice": 432,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_bone_press_finger",
+    "buyPrice": 72,
+    "stock": 3,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_iron_finger",
+    "buyPrice": 120,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_steel_finger",
+    "buyPrice": 120,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_nimble_finger",
+    "buyPrice": 120,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_void_pierce_finger",
+    "buyPrice": 192,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_willow_leaf_finger",
+    "buyPrice": 192,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_wind_finger",
+    "buyPrice": 192,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_sunflower_finger",
+    "buyPrice": 288,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_thunder_finger",
+    "buyPrice": 288,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_one_finger_chan",
+    "buyPrice": 432,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_technique_heaven_piercing_finger",
+    "buyPrice": 432,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_divine_fire_blast",
+    "buyPrice": 432,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_divine_water_wave",
+    "buyPrice": 288,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_divine_thunder_strike",
+    "buyPrice": 432,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_divine_wind_slash",
+    "buyPrice": 288,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_divine_earth_shield",
+    "buyPrice": 288,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_divine_wood_bind",
+    "buyPrice": 288,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_divine_metal_blade",
+    "buyPrice": 288,
+    "stock": 1,
+    "npcId": "core:merchant_scroll_yu",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_recipe_hp_pill",
+    "buyPrice": 40,
+    "stock": 3,
+    "npcId": "core:merchant_zhang",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_recipe_mp_pill",
+    "buyPrice": 40,
+    "stock": 3,
+    "npcId": "core:merchant_zhang",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_recipe_stamina_pill",
+    "buyPrice": 40,
+    "stock": 3,
+    "npcId": "core:merchant_zhang",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_recipe_exp_pill",
+    "buyPrice": 100,
+    "stock": 1,
+    "npcId": "core:merchant_herb_farmer",
+    "regionTags": [
+      "valley",
+      "herb"
+    ]
+  },
+  {
+    "itemId": "core:scroll_recipe_mood_pill",
+    "buyPrice": 40,
+    "stock": 3,
+    "npcId": "core:merchant_zhang",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_recipe_health_pill",
+    "buyPrice": 40,
+    "stock": 3,
+    "npcId": "core:merchant_zhang",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_recipe_spirit_water",
+    "buyPrice": 100,
+    "stock": 1,
+    "npcId": "core:merchant_herb_farmer",
+    "regionTags": [
+      "valley",
+      "herb"
+    ]
+  },
+  {
+    "itemId": "core:scroll_recipe_full_restore",
+    "buyPrice": 140,
+    "stock": 1,
+    "npcId": "core:merchant_herb_farmer",
+    "regionTags": [
+      "valley",
+      "herb"
+    ]
+  },
+  {
+    "itemId": "core:scroll_smithing_iron_sword",
+    "buyPrice": 72,
+    "stock": 3,
+    "npcId": "core:merchant_li",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_smithing_cloth_hat",
+    "buyPrice": 72,
+    "stock": 3,
+    "npcId": "core:merchant_li",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_smithing_linen_robe",
+    "buyPrice": 72,
+    "stock": 3,
+    "npcId": "core:merchant_li",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_smithing_straw_shoes",
+    "buyPrice": 72,
+    "stock": 3,
+    "npcId": "core:merchant_li",
+    "regionTags": [
+      "town",
+      "safe"
+    ]
+  },
+  {
+    "itemId": "core:scroll_smithing_spirit_sword",
+    "buyPrice": 144,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_smithing_spirit_crown",
+    "buyPrice": 144,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_smithing_wind_boots",
+    "buyPrice": 144,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_smithing_flame_blade",
+    "buyPrice": 168,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_smithing_golden_armor",
+    "buyPrice": 168,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  },
+  {
+    "itemId": "core:scroll_smithing_thunder_spear",
+    "buyPrice": 192,
+    "stock": 1,
+    "npcId": "core:merchant_xiandu_master",
+    "regionTags": [
+      "city",
+      "celestial"
+    ]
+  }
 ]

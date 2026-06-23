@@ -14,6 +14,14 @@ import type { NpcDef } from './npc';
 import type { QuestChainDef } from './quest';
 import type { DialogueChainDef, IdleChatPool } from './dialogue';
 import type { AscensionDef } from './ascension';
+import type { ReincarnationEffectDef } from './reincarnation';
+import type { PrimordialEndgameDef } from './primordial-endgame';
+import type { RankingDimensionDef } from './ranking';
+import type { DestinyDef, TalentDef, TalentTreeNodeDef } from './destiny';
+import type { BountyTemplateDef } from './bounty';
+import type { SecretRealmDef } from './secret-realm';
+import type { EnlightenmentInsightDef } from './enlightenment';
+import type { SectDef } from './sect';
 import type {
   EventTemplate,
   VariablePool,
@@ -65,4 +73,15 @@ export interface DLCPack {
   mutations?: MutationDef[];                 // T0072 变异定义
   techniqueTraits?: TechniqueTraitDef[];     // T0073 功法词条定义
   ascensions?: AscensionDef[];               // T0033 飞升定义
+  rankingDimensions?: RankingDimensionDef[]; // #102/#118 排名维度定义
+  destinies?: DestinyDef[];                      // #110 命格定义
+  talents?: TalentDef[];                          // #110 天赋定义
+  talentTreeNodes?: TalentTreeNodeDef[];          // #215 天赋树节点定义
+  bountyTemplates?: BountyTemplateDef[];          // #117 悬赏模板
+  secretRealms?: SecretRealmDef[];                // #95 秘境定义
+  enlightenmentInsights?: EnlightenmentInsightDef[]; // #112 悟道顿悟内容
+  sects?: SectDef[];                          // #99/#116 门派与宗门管理内容
+  reincarnationEffects?: ReincarnationEffectDef[]; // #101 转世扩展效果
+  primordialEndgames?: PrimordialEndgameDef[]; // #104 洪荒终局定义
 }
+

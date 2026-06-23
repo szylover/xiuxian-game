@@ -10,6 +10,12 @@ import { getBodyRealmBonus } from '../body-cultivation';
 import type { EquipStatBonus } from '../registry';
 import type { Player, Aptitudes, SpiritRootGrade, PlayerSpiritRoots } from './types';
 import type { SpiritRootCombo } from '../spirit-root';
+import { getDestinyTalentEffects, ensureDestinyTalentState } from '../destiny';
+import type { DestinyTalentStatKey } from '../types';
+import { getAlignment } from '../karma';
+import { getEnlightenmentEffects } from '../enlightenment';
+import { getSectStatBonuses } from '../sect';
+import { getDualCultivationStatBonuses } from '../npc';
 
 // ── 灵根品级评定 ──
 
@@ -114,6 +120,13 @@ export function recalcStats(player: Player): Player {
   p.maxPhysique = bodyBonus.maxPhysique + (passiveBonus.physique ?? 0);
   p.physiqueDmgReduce = Math.min(50, bodyBonus.physiqueDmgReduce + (passiveBonus.physiqueDmgReduce ?? 0));
 
+  applyDestinyTalentStatEffects(p);
+  applyEnlightenmentStatEffects(p);
+  applyKarmaStatEffects(p);
+  applySectStatEffects(p);
+  applyDualCultivationStatEffects(p);
+  applyReincarnationLegacyEffects(p);
+
   p.hp = Math.min(p.hp, p.maxHp);
   p.mp = Math.min(p.mp, p.maxMp);
   p.stamina = Math.min(p.stamina, p.maxStamina);
@@ -122,7 +135,72 @@ export function recalcStats(player: Player): Player {
   return p;
 }
 
+function applySectStatEffects(p: Player): void {
+  const bonuses = getSectStatBonuses(p);
+  if (bonuses.atk) p.atk += bonuses.atk;
+  if (bonuses.def) p.def += bonuses.def;
+  if (bonuses.speed) p.speed += bonuses.speed;
+  if (bonuses.hp) p.maxHp += bonuses.hp;
+  if (bonuses.mp) p.maxMp += bonuses.mp;
+}
+
+function applyDualCultivationStatEffects(p: Player): void {
+  const bonuses = getDualCultivationStatBonuses(p);
+  if (bonuses.atk) p.atk += bonuses.atk;
+  if (bonuses.def) p.def += bonuses.def;
+  if (bonuses.hp) p.maxHp += bonuses.hp;
+  if (bonuses.mp) p.maxMp += bonuses.mp;
+}
+
+function applyReincarnationLegacyEffects(p: Player): void {
+  const state = p.systems.reincarnation as { legacy?: Partial<Record<string, number>> } | undefined;
+  const legacy = state?.legacy;
+  if (!legacy) return;
+  p.atk += legacy.atkBonus ?? 0;
+  p.def += legacy.defBonus ?? 0;
+  p.speed += legacy.speedBonus ?? 0;
+  p.maxHp += legacy.hpBonus ?? 0;
+  p.maxMp += legacy.mpBonus ?? 0;
+  p.inventoryCapacity += legacy.inventoryCapacityBonus ?? 0;
+}
 // ── 境界查询 ──
+
+function applyDestinyTalentStatEffects(p: Player): void {
+  const effect = getDestinyTalentEffects(p);
+  for (const [key, value] of Object.entries(effect.statBonuses ?? {}) as [DestinyTalentStatKey, number][]) {
+    applyStatDelta(p, key, value);
+  }
+  for (const [key, value] of Object.entries(effect.statMultipliers ?? {}) as [DestinyTalentStatKey, number][]) {
+    const current = (p as unknown as Record<string, number>)[key] ?? 0;
+    applyStatDelta(p, key, Math.round(current * value));
+  }
+}
+
+function applyEnlightenmentStatEffects(p: Player): void {
+  const effect = getEnlightenmentEffects(p);
+  for (const [key, value] of Object.entries(effect.statBonuses ?? {}) as [DestinyTalentStatKey, number][]) {
+    applyStatDelta(p, key, value);
+  }
+  for (const [key, value] of Object.entries(effect.statMultipliers ?? {}) as [DestinyTalentStatKey, number][]) {
+    const current = (p as unknown as Record<string, number>)[key] ?? 0;
+    applyStatDelta(p, key, Math.round(current * value));
+  }
+}
+
+function applyKarmaStatEffects(p: Player): void {
+  const alignment = getAlignment(p.karma ?? 0);
+  if (alignment === 'righteous') {
+    p.def += Math.max(1, Math.floor(p.def * 0.03));
+  } else if (alignment === 'evil') {
+    p.atk += Math.max(1, Math.floor(p.atk * 0.03));
+    p.critDmgMultiplier = +(p.critDmgMultiplier + 0.1).toFixed(2);
+  }
+}
+
+function applyStatDelta(p: Player, key: DestinyTalentStatKey, value: number): void {
+  const record = p as unknown as Record<string, number>;
+  record[key] = (record[key] ?? 0) + value;
+}
 
 export function getRealmInfo(player: Player) { return REALMS[player.realmIndex] || REALMS[0]; }
 export function getNextRealm(player: Player) {
@@ -131,3 +209,4 @@ export function getNextRealm(player: Player) {
   if (next?.ascensionRequired) return null;
   return next;
 }
+

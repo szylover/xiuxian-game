@@ -1,0 +1,102 @@
+[
+  {
+    "id": "exp-01:red_dot_spirit",
+    "name": "红点小灵",
+    "emoji": "🔴",
+    "realmIndex": 0,
+    "hp": 55,
+    "atk": 6,
+    "def": 1,
+    "speed": 16,
+    "moveSpeed": 12,
+    "critRate": 4,
+    "critResist": 0,
+    "critDmgMultiplier": 1.4,
+    "expReward": 10,
+    "goldReward": 4,
+    "regionTags": [
+      "safe",
+      "town"
+    ]
+  },
+  {
+    "id": "exp-01:calendar_beast",
+    "name": "日历兽",
+    "emoji": "📆",
+    "realmIndex": 1,
+    "hp": 210,
+    "atk": 18,
+    "def": 10,
+    "speed": 10,
+    "moveSpeed": 8,
+    "critRate": 5,
+    "critResist": 4,
+    "critDmgMultiplier": 1.4,
+    "expReward": 45,
+    "goldReward": 18,
+    "regionTags": [
+      "wilderness",
+      "safe"
+    ]
+  },
+  {
+    "id": "exp-01:missed_sign_wraith",
+    "name": "漏签怨影",
+    "emoji": "👻",
+    "realmIndex": 2,
+    "hp": 520,
+    "atk": 48,
+    "def": 22,
+    "speed": 20,
+    "moveSpeed": 16,
+    "critRate": 9,
+    "critResist": 6,
+    "critDmgMultiplier": 1.5,
+    "expReward": 140,
+    "goldReward": 55,
+    "regionTags": [
+      "mystic",
+      "dangerous"
+    ]
+  },
+  {
+    "id": "exp-01:reward_box_mimic",
+    "name": "宝匣拟怪",
+    "emoji": "🎁",
+    "realmIndex": 3,
+    "hp": 1200,
+    "atk": 110,
+    "def": 55,
+    "speed": 14,
+    "moveSpeed": 9,
+    "critRate": 8,
+    "critResist": 10,
+    "critDmgMultiplier": 1.6,
+    "expReward": 380,
+    "goldReward": 150,
+    "regionTags": [
+      "mystic",
+      "trade"
+    ]
+  },
+  {
+    "id": "exp-01:golden_streak_dragon",
+    "name": "连签金龙",
+    "emoji": "🐉",
+    "realmIndex": 4,
+    "hp": 3600,
+    "atk": 260,
+    "def": 120,
+    "speed": 28,
+    "moveSpeed": 22,
+    "critRate": 14,
+    "critResist": 14,
+    "critDmgMultiplier": 1.7,
+    "expReward": 1250,
+    "goldReward": 520,
+    "regionTags": [
+      "celestial",
+      "mystic"
+    ]
+  }
+]

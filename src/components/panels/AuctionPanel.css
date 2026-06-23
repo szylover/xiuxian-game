@@ -1,0 +1,84 @@
+.auction-panel,
+.auction-list,
+.auction-history,
+.auction-consignments {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.auction-intro,
+.auction-empty,
+.auction-desc,
+.auction-meta,
+.auction-time,
+.auction-consignment-row,
+.auction-history {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+}
+
+.auction-gold,
+.auction-section-title {
+  color: var(--color-text-gold);
+  font-weight: 700;
+}
+
+.auction-actions,
+.auction-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.auction-card {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-medium);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.auction-card-title {
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+
+.auction-action {
+  border: var(--border-width) solid var(--color-border-gold);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-warm-medium);
+  color: var(--color-text-gold);
+  padding: var(--spacing-md) var(--spacing-lg);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.auction-action:hover:not(:disabled) {
+  box-shadow: var(--shadow-gold);
+}
+
+.auction-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.auction-inputs label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.auction-inputs input {
+  width: var(--size-label-md);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-dark);
+  color: var(--color-text-primary);
+  padding: var(--spacing-sm);
+}

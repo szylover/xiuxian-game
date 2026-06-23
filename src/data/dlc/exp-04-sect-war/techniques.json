@@ -1,0 +1,183 @@
+[
+  {
+    "id": "exp-04:battle_banner_spear",
+    "name": "战旗枪诀",
+    "type": "spear",
+    "rarity": "rare",
+    "description": "枪随战旗起落，适合阵前冲锋。",
+    "minRealm": 1,
+    "maxLevel": 18,
+    "expPerLevel": 95,
+    "statBonusPerLevel": {
+      "atk": 4,
+      "hp": 10,
+      "speed": 1
+    },
+    "aptitudeKey": "spear",
+    "spiritRootElement": "metal",
+    "activeSkill": {
+      "name": "旗影突阵",
+      "description": "枪影裹挟战旗灵光突入敌阵。",
+      "mpCost": 22,
+      "staminaCost": 8,
+      "dmgMultiplier": 1.55,
+      "hitCount": 1,
+      "cooldown": 2,
+      "triggerRate": 0.3
+    },
+    "passiveEffects": [
+      {
+        "minLevel": 5,
+        "stat": "atk",
+        "value": 22,
+        "description": "旗起冲锋：攻击 +22"
+      },
+      {
+        "minLevel": 12,
+        "stat": "hp",
+        "value": 130,
+        "description": "阵前血勇：体力 +130"
+      }
+    ],
+    "bodyExpRate": 0.8
+  },
+  {
+    "id": "exp-04:fortress_body_art",
+    "name": "镇山体诀",
+    "type": "fist",
+    "rarity": "epic",
+    "description": "立身如山门，万军难撼。",
+    "minRealm": 2,
+    "maxLevel": 24,
+    "expPerLevel": 135,
+    "statBonusPerLevel": {
+      "hp": 22,
+      "def": 5
+    },
+    "aptitudeKey": "fist",
+    "spiritRootElement": "earth",
+    "activeSkill": {
+      "name": "镇山反震",
+      "description": "以山门守势承击反震。",
+      "mpCost": 30,
+      "staminaCost": 10,
+      "dmgMultiplier": 1.35,
+      "hitCount": 1,
+      "cooldown": 3,
+      "triggerRate": 0.25,
+      "effect": {
+        "type": "debuff_atk",
+        "value": 12,
+        "duration": 2
+      }
+    },
+    "passiveEffects": [
+      {
+        "minLevel": 6,
+        "stat": "def",
+        "value": 32,
+        "description": "山门不动：防御 +32"
+      },
+      {
+        "minLevel": 16,
+        "stat": "physiqueDmgReduce",
+        "value": 5,
+        "description": "镇山卸力：物理减伤 +5%"
+      }
+    ],
+    "bodyExpRate": 1.3
+  },
+  {
+    "id": "exp-04:thousand_army_blade",
+    "name": "千军刀谱",
+    "type": "blade",
+    "rarity": "epic",
+    "description": "刀势如军阵推进，越战越烈。",
+    "minRealm": 3,
+    "maxLevel": 25,
+    "expPerLevel": 150,
+    "statBonusPerLevel": {
+      "atk": 6,
+      "speed": 1,
+      "critRate": 1
+    },
+    "aptitudeKey": "blade",
+    "spiritRootElement": "fire",
+    "activeSkill": {
+      "name": "千军横扫",
+      "description": "刀光横压敌阵。",
+      "mpCost": 40,
+      "staminaCost": 13,
+      "dmgMultiplier": 1.4,
+      "hitCount": 2,
+      "cooldown": 3,
+      "triggerRate": 0.25,
+      "effect": {
+        "type": "debuff_def",
+        "value": 12,
+        "duration": 2
+      }
+    },
+    "passiveEffects": [
+      {
+        "minLevel": 7,
+        "stat": "atk",
+        "value": 42,
+        "description": "军势加身：攻击 +42"
+      },
+      {
+        "minLevel": 18,
+        "stat": "critRate",
+        "value": 5,
+        "description": "破阵刀眼：暴击率 +5%"
+      }
+    ]
+  },
+  {
+    "id": "exp-04:dominion_sword_record",
+    "name": "霸域剑录",
+    "type": "sword",
+    "rarity": "legendary",
+    "description": "以疆域气运入剑，剑落如夺城。",
+    "minRealm": 4,
+    "maxLevel": 30,
+    "expPerLevel": 200,
+    "statBonusPerLevel": {
+      "atk": 8,
+      "def": 3,
+      "mp": 8,
+      "critRate": 1
+    },
+    "aptitudeKey": "sword",
+    "spiritRootElement": "metal",
+    "activeSkill": {
+      "name": "一剑夺城",
+      "description": "剑光压下，如城门崩塌。",
+      "mpCost": 56,
+      "staminaCost": 16,
+      "dmgMultiplier": 2.35,
+      "hitCount": 1,
+      "cooldown": 4,
+      "triggerRate": 0.22,
+      "effect": {
+        "type": "debuff_def",
+        "value": 22,
+        "duration": 2
+      }
+    },
+    "passiveEffects": [
+      {
+        "minLevel": 10,
+        "stat": "atk",
+        "value": 70,
+        "description": "霸域剑势：攻击 +70"
+      },
+      {
+        "minLevel": 22,
+        "stat": "critDmgMultiplier",
+        "value": 0.35,
+        "description": "夺城一击：暴击伤害 +35%"
+      }
+    ]
+  }
+]
