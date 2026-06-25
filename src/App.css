@@ -989,25 +989,26 @@ body {
 }
 
 .panel-btn-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
   gap: 0.3rem;
-  flex-wrap: wrap;
 }
 
 .panel-btn {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  justify-content: center;
+  gap: 0.25rem;
   background: #0e1020;
   border: 1px solid #1e2235;
   border-radius: 6px;
-  padding: 0.4rem 0.6rem;
+  padding: 0.4rem 0.45rem;
   color: #aaa;
   font-size: 0.78rem;
   cursor: pointer;
   transition: all 0.15s;
-  flex: 1;
   min-width: 0;
+  overflow: hidden;
 }
 
 .panel-btn:hover {
@@ -1025,10 +1026,14 @@ body {
 
 .panel-btn-icon {
   font-size: 1rem;
+  flex-shrink: 0;
 }
 
 .panel-btn-label {
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 /* 右栏面板内容 */

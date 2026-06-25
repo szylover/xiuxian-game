@@ -43,3 +43,20 @@
 .sound-volume input {
   width: calc(var(--spacing-3xl) * 3);
 }
+
+/* 窄屏:右侧面板变为底部抽屉,音效条改停靠左上角避免遮挡按钮 */
+@media (max-width: 959px) {
+  .sound-controls {
+    top: var(--spacing-lg);
+    left: var(--spacing-lg);
+    right: auto;
+    bottom: auto;
+    flex-wrap: wrap;
+    max-width: 60vw;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  .sound-volume input {
+    width: calc(var(--spacing-3xl) * 2);
+  }
+}
